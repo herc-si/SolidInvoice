@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace SolidInvoice\UserBundle\Form\Type;
 
+use SolidInvoice\CoreBundle\Form\Type\LocaleType;
 use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -35,6 +36,13 @@ class ProfileType extends AbstractType
             ->add('lastName')
             ->add('email', EmailType::class)
             ->add('mobile')
+            ->add('locale', LocaleType::class, [
+                'label' => 'profile.edit.locale.label',
+                'help' => 'profile.edit.locale.help',
+                'placeholder' => 'profile.edit.locale.placeholder',
+                'required' => false,
+                'mapped' => false,
+            ])
             ->add('current_password', PasswordType::class, [
                 'label' => 'change_password.form.current_password',
                 'mapped' => false,

@@ -26,6 +26,8 @@ class SystemConfig
 {
     final public const string CURRENCY_CONFIG_PATH = 'system/company/currency';
 
+    final public const string LOCALE_CONFIG_PATH = 'system/company/locale';
+
     /**
      * @var array<string, string>
      */

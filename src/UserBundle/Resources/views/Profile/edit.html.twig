@@ -71,6 +71,26 @@
                         </div>
                     </div>
                 </section>
+
+                <section class="form-page-section" id="profile-preferences">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            {{ ux_icon('tabler:language', {width: 20, height: 20}) }}
+                        </div>
+                        <div class="section-header-text">
+                            <h2 class="section-title">{{ 'profile.edit.section.preferences.title'|trans }}</h2>
+                            <p class="section-description">{{ 'profile.edit.section.preferences.description'|trans }}</p>
+                        </div>
+                    </div>
+
+                    <div class="section-content">
+                        <div class="form-grid">
+                            <div class="form-field form-field-wide">
+                                {{ form_row(form.locale) }}
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
 
             {{ form_rest(form) }}

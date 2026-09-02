@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace SolidInvoice\CoreBundle\Config;
 
 use SolidInvoice\CoreBundle\Form\Type\ImageUploadType;
+use SolidInvoice\CoreBundle\Form\Type\LocaleType;
 use SolidInvoice\MoneyBundle\Form\Type\CurrencyType;
 use SolidInvoice\SettingsBundle\Config\ProviderInterface;
 use SolidInvoice\SettingsBundle\DTO\Config;
@@ -35,6 +36,7 @@ final class SystemConfigProvider implements ProviderInterface
             new Config('system/company/contact_details/email', null, null, EmailType::class),
             new Config('system/company/contact_details/phone_number', null, null, TextType::class),
             new Config('system/company/currency', $data['currency'] ?? null, null, CurrencyType::class),
+            new Config('system/company/locale', $data['locale'] ?? 'en', null, LocaleType::class),
         ];
     }
 }

@@ -92,6 +92,14 @@
                                     }) }}
                                 </div>
                             {% endif %}
+                            {% if form.company.locale is defined %}
+                                <div class="col-md-6">
+                                    {{ form_row(form.company.locale, {
+                                        label: 'settings.page.company.locale'|trans,
+                                        help: 'settings.page.company.locale_help'|trans
+                                    }) }}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
 

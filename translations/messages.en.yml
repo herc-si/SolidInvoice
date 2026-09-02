@@ -1660,10 +1660,17 @@ profile:
                 text: '%date% from %ip%'
     edit:
         cancel: Cancel
+        locale:
+            help: 'Choose the language SolidInvoice is displayed in for you. Leave blank to use the company default.'
+            label: Language
+            placeholder: 'Use company default'
         section:
             personal:
                 description: 'Your name and contact information'
                 title: 'Personal Details'
+            preferences:
+                description: 'Choose the language you see SolidInvoice in'
+                title: Preferences
         submit: Save
         subtitle: 'Update your personal information and contact details'
         success: 'Your profile has been updated'
@@ -2249,6 +2256,8 @@ settings:
             contact_help: 'This information will appear on your invoices and quotes.'
             currency: 'Default Currency'
             currency_help: 'The default currency used for new invoices and quotes.'
+            locale: 'Default Language'
+            locale_help: 'The default language for new users and the client portal, unless a user picks their own.'
             logo: 'Company Logo'
             name: 'Company Name'
             name_placeholder: 'Your company name'

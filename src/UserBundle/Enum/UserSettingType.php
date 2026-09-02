@@ -17,6 +17,7 @@ enum UserSettingType: string
 {
     case Timezone = 'timezone';
     case Location = 'location';
+    case Locale = 'locale';
     case OnboardComplete = 'onboard_complete';
     case OnboardingStep = 'onboarding_step';
     case OnboardingSkipped = 'onboarding_skipped';

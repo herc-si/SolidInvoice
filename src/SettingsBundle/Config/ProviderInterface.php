@@ -18,7 +18,7 @@ use SolidInvoice\SettingsBundle\DTO\Config;
 interface ProviderInterface
 {
     /**
-     * @param array{company_name?: string|null, currency?: string|null} $data
+     * @param array{company_name?: string|null, currency?: string|null, locale?: string|null} $data
      *
      * @return Config[]
      */

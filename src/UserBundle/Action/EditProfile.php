@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace SolidInvoice\UserBundle\Action;
 
 use SolidInvoice\UserBundle\Entity\User;
+use SolidInvoice\UserBundle\Enum\UserSettingType;
 use SolidInvoice\UserBundle\Form\Type\ProfileType;
 use SolidInvoice\UserBundle\Repository\UserRepositoryInterface;
+use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -33,6 +35,7 @@ final readonly class EditProfile
     public function __construct(
         private FormFactoryInterface $formFactory,
         private UserRepositoryInterface $userRepository,
+        private UserSettingRepositoryInterface $userSettingRepository,
         private TokenStorageInterface $tokenStorage,
         private RouterInterface $router
     ) {
@@ -50,14 +53,24 @@ final readonly class EditProfile
         }
 
         $form = $this->formFactory->create(ProfileType::class, $user);
+
+        $form->get('locale')->setData($this->userSettingRepository->getSetting($user, UserSettingType::Locale)?->getValue());
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->userRepository->save($user);
 
+            /** @var string|null $locale */
+            $locale = $form->get('locale')->getData();
+            $this->userSettingRepository->saveSetting($user, UserSettingType::Locale, $locale);
+
             $session = $request->getSession();
             assert($session instanceof Session);
             $session->getFlashBag()->add('success', 'profile.edit.success');
+            // Seed the session locale immediately, so the redirect below already
+            // renders in the new language instead of lagging by one request.
+            $session->set('_locale', $locale ?? $request->getDefaultLocale());
 
             return new RedirectResponse($this->router->generate('_profile'));
         }

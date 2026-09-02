@@ -1,0 +1,322 @@
+client:
+    create:
+        contacts:
+            heading: Contacts
+            name: Nom
+        details:
+            email: E-mail
+            id: ID
+            name: 'Nom du client'
+            vat_number: 'Numéro de TVA'
+            website: 'Site web'
+        heading: 'Un nouveau client a été créé.'
+        message: 'Un nouveau client a été ajouté.'
+        subject: 'Un nouveau client a été créé'
+        view_client: 'Voir le client'
+email:
+    confirmation:
+        alternative: "Si le bouton ci-dessus ne fonctionne pas, copiez-collez ce lien dans votre navigateur :"
+        button: 'Confirmer l''adresse e-mail'
+        message: 'Veuillez confirmer votre adresse e-mail en cliquant sur le bouton ci-dessous. Cela nous permet de garantir la sécurité de votre compte.'
+        security: "Si vous n'avez pas créé de compte, vous pouvez ignorer cet e-mail en toute sécurité."
+        title: 'Veuillez confirmer votre adresse e-mail'
+invitation:
+    accept: 'Accepter l''invitation'
+    alternative: "Si le bouton ci-dessus ne fonctionne pas, copiez-collez ce lien dans votre navigateur :"
+    company: Société
+    email: 'Votre e-mail'
+    info: "Si vous ne vous attendiez pas à cette invitation, vous pouvez ignorer cet e-mail en toute sécurité."
+    instructions: 'Cliquez sur le bouton ci-dessous pour définir votre mot de passe et rejoindre l''équipe.'
+    message: 'Vous avez été invité(e) à rejoindre %company% sur SolidInvoice.'
+    reminder:
+        expires: Expire
+        info: 'Si vous ne souhaitez plus rejoindre cette société, vous pouvez ignorer cet e-mail en toute sécurité et l''invitation expirera automatiquement.'
+        instructions: 'Cliquez sur le bouton ci-dessous pour accepter votre invitation avant qu''elle n''expire.'
+        message: 'Votre invitation à rejoindre %company% sur SolidInvoice expirera dans 2 jours.'
+        title: 'Votre invitation à rejoindre %company% est sur le point d''expirer'
+    title: 'Invitation à rejoindre %company%'
+invoice:
+    amount_payable: 'Montant à payer'
+    balance: 'Solde dû'
+    created: Créée
+    discount: Remise
+    due: 'Date d''échéance'
+    info: 'Vous avez reçu une facture de %company% générée le %created%'
+    line_tax: 'Taxes par ligne'
+    notification_overdue:
+        alert: 'Facture marquée en retard'
+        client: Client
+        due_date: 'Date d''échéance'
+        heading: 'Alerte de facture en retard'
+        invoice_number: 'Numéro de facture'
+        message: 'Une facture a été automatiquement marquée comme en retard car la date d''échéance est passée sans paiement intégral.'
+        outstanding_balance: 'Solde impayé'
+        status: Statut
+        view_invoice: 'Voir les détails de la facture'
+    number: 'Facture n°'
+    overdue:
+        action_required: 'Veuillez prendre les mesures nécessaires pour régler cette facture dans les meilleurs délais.'
+        alert: 'Paiement de facture en retard'
+        amount_due: 'Montant total'
+        contact_info: 'Si vous avez des questions ou pensez que cet avis a été envoyé par erreur, veuillez nous contacter immédiatement.'
+        due_date: 'Date d''échéance initiale'
+        heading: 'Avis de paiement en retard'
+        invoice_number: 'Numéro de facture'
+        message: 'Cette facture est désormais en retard. Veuillez organiser son paiement dès que possible afin d''éviter des frais de retard ou une interruption de service.'
+        outstanding_balance: 'Solde impayé'
+        view_and_pay: 'Voir la facture et payer'
+    pay_now: 'Payer maintenant'
+    payment_method: 'Paiement (%method%)'
+    status:
+        subject: 'Changement de statut de la facture'
+    status_change:
+        client: Client
+        heading: 'Le statut d''une facture a changé'
+        id: Facture
+        message: 'Le statut d''une facture a été mis à jour.'
+        new_status: 'Nouveau statut'
+        old_status: 'Statut d''origine'
+        status: Statut
+        view_invoice: 'Voir la facture'
+    subtotal: Sous-total
+    tax: Taxe
+    terms: 'Conditions générales'
+    title: 'Facture %id%'
+    total: Total
+    view:
+        online: 'Voir cette facture en ligne sur %url%'
+    withholding: Retenue
+notification:
+    preferences: 'Préférences de notification'
+    settings:
+        info: 'Vous pouvez mettre à jour vos paramètres de notification'
+        link: ici
+onboarding:
+    add_first_client:
+        cta: 'Ajoutez votre premier client'
+        eyebrow: 'Étape 1 · Votre premier client'
+        heading: "Pas de client, pas de facture. Réglons ça."
+        lede: 'Votre liste de clients est le point de départ de tout. Ajoutez un client et vous pourrez immédiatement créer des devis, des factures et suivre chaque paiement qu''il vous doit — le tout au même endroit.'
+        mock:
+            client1:
+                name: 'Northbeam Design Studio'
+                sub: 'hello@northbeam.co · 3 factures'
+            client2:
+                name: 'Maple & Knox LLC'
+                sub: 'billing@mapleknox.com · 1 facture'
+            empty:
+                name: 'Votre prochain client apparaîtra ici'
+                sub: 'nom, e-mail et adresse de facturation'
+            header: 'Vos clients'
+            url: solidinvoice.app/clients
+        needs:
+            1: 'Nom du client ou de la société'
+            2: 'Une adresse e-mail pour les factures'
+            3: 'Devise de facturation'
+        needs_heading: "Ce dont vous aurez besoin"
+        needs_intro: 'Trois champs pour démarrer. Vous pourrez compléter le reste plus tard.'
+        subject: 'Ajoutez votre premier client — 60 secondes pour démarrer'
+    customize_logo:
+        after_brand: 'Votre Studio'
+        after_label: Après
+        before_label: Avant
+        cta: 'Personnalisez vos factures'
+        eyebrow: 'Étape 5 · Faites-le vôtre'
+        heading: 'Votre logo. Votre marque. Vos factures.'
+        lede: 'Les clients jugent le professionnalisme avant même de lire une seule ligne. Une facture personnalisée — votre logo, votre nom — montre que vous dirigez une véritable entreprise.'
+        ps: 'avec le plan payant, vous pouvez désactiver la mention SolidInvoice dans les Paramètres — vos clients ne verront plus que votre nom.'
+        step:
+            1:
+                desc: 'PNG, SVG ou JPG. Apparaît sur chaque facture et devis que vous envoyez.'
+                title: 'Importez votre logo'
+            2:
+                desc: 'Personnalisez le nom que voient vos clients lorsque vos factures arrivent dans leur boîte de réception.'
+                title: 'Définissez le nom d''expéditeur'
+        steps_heading: 'Deux choses à personnaliser'
+        subject: 'Apposez votre marque sur vos factures'
+    footer:
+        reason: "Vous recevez cet e-mail car vous vous êtes inscrit(e) sur SolidInvoice."
+        tagline: 'La facturation pour freelances et petites entreprises.'
+    recurring_billing:
+        after:
+            1: 'Factures automatiques envoyées selon votre calendrier'
+            2: 'Le tableau de bord affiche chaque montant impayé'
+            3: 'Rappels envoyés automatiquement en votre nom'
+        after_heading: 'Avec SolidInvoice'
+        before:
+            1: 'Facturation manuelle à chaque cycle de facturation'
+            2: 'Suivi de qui vous doit quoi dans un tableur'
+            3: 'Relance des paiements en retard vous-même'
+        before_heading: 'Sans facturation récurrente'
+        compare_heading: 'Arrêtez de faire ça manuellement'
+        cta: 'Configurez la facturation récurrente'
+        eyebrow: 'Étape 4 · Facturation récurrente'
+        heading: 'Vos meilleurs clients vous paient chaque mois. Automatisez-le.'
+        how:
+            1: 'Créez une facture et marquez-la comme récurrente — définissez la fréquence et la date de début.'
+            2: 'SolidInvoice l''envoie automatiquement selon le calendrier prévu. Votre client la reçoit et la paie.'
+            3: 'Activez les rappels et les factures en retard sont suivies automatiquement — aucune relance nécessaire.'
+        how_heading: 'Comment ça marche'
+        lede: 'Créez une facture une seule fois et SolidInvoice l''envoie automatiquement selon votre calendrier. Configurez des rappels de paiement et les factures en retard sont relancées — sans que vous ayez à lever le petit doigt.'
+        ps: "même un seul client récurrent rend cela intéressant — vous gagnerez des heures chaque mois."
+        subject: 'Configurez une fois, soyez payé chaque mois'
+    send_first_invoice:
+        cta: 'Créez votre première facture'
+        eyebrow: 'Étape 2 · Votre première facture'
+        heading: 'Il est temps d''envoyer votre première facture.'
+        included_body: "Lignes de facturation, taxes, remises, échéanciers récurrents et dates d'échéance — tout est inclus. Ajoutez un moyen de paiement à l'étape suivante et votre client bénéficiera aussi d'un bouton « Payer maintenant »."
+        included_heading: 'Inclus sur chaque facture, rien à configurer en plus'
+        lede: 'Envoyer une facture professionnelle prend moins de cinq minutes. Choisissez votre client, ajoutez des lignes, définissez une date d''échéance — SolidInvoice se charge de la mise en forme, de l''envoi et du suivi.'
+        mock:
+            billed_to: 'Facturé à'
+            client_email: hello@northbeam.co
+            client_name: 'Northbeam Design Studio'
+            col_amount: Montant
+            col_desc: Description
+            col_qty: Qté
+            col_rate: Tarif
+            due: Échéance
+            due_date: '8 mai 2026'
+            due_terms: '14 jours net'
+            item1: 'Identité de marque · découverte'
+            item2: 'Conception de logo et révisions'
+            label: Facture
+            status_sent: Envoyée
+            total_due: 'Total dû'
+        ps: "astuce : connectez un moyen de paiement avant l'envoi et votre client verra un bouton « Payer maintenant ». Les factures en ligne sont payées bien plus vite."
+        subject: 'Votre première facture est à portée de clic'
+    signature:
+        greeting: 'À bientôt,'
+        team: '— L''équipe SolidInvoice'
+    trial_about_to_end:
+        body_intro: 'S''abonner prend environ 30 secondes. Votre espace de travail reprend exactement là où il s''est arrêté — rien n''est archivé, rien n''est masqué.'
+        cta:
+            upgrade: 'S''abonner et continuer'
+        days_label: 'Jours restants'
+        eyebrow: 'Attention · Fin de la période d''essai'
+        fine_print: 'Des questions sur la facturation ou ce qui vous attend ? Répondez à cet e-mail — nous les lisons tous.'
+        heading: 'Votre période d''essai se termine demain.|Votre période d''essai se termine dans %days% jours.'
+        if_not:
+            1: "Votre compte se verrouille — vous ne pourrez plus vous connecter ni accéder à vos données."
+            2: "Les factures en attente ne seront pas envoyées. La facturation récurrente sera suspendue."
+            3: 'Vos clients pourront toujours payer les factures existantes via leurs liens de paiement directs.'
+            4: 'Réactivez à tout moment — tout est restauré immédiatement dès l''abonnement.'
+        if_not_heading: 'Ce qui se passe à la fin de votre période d''essai'
+        lede: "À la fin de votre période d'essai, votre compte se verrouille. Vos données restent en sécurité — clients, factures, historique des paiements — mais vous ne pourrez plus rien consulter ni envoyer tant que vous ne vous serez pas abonné(e)."
+        ps: 'utilisez le code <b>%coupon_code%</b> lors du paiement pour bénéficier de %percent%% de réduction sur vos trois premiers mois. L''offre expire en même temps que votre période d''essai.'
+        subject: 'Votre période d''essai se termine demain|Votre période d''essai se termine dans %days% jours'
+        trial_ends: 'Fin de l''essai le <b style="color: #475569;">%date%</b>'
+        usage:
+            clients: 'Clients ajoutés'
+            collected: Encaissé
+            invoices: 'Factures envoyées'
+        usage_heading: 'Votre activité jusqu''à présent'
+    turn_invoices_into_payments:
+        callout:
+            sub: 'Quand payer est facile, les clients paient. Facilitez-leur la tâche.'
+            title: 'Les factures avec une option de paiement en ligne sont payées bien plus rapidement que les factures uniquement par virement bancaire'
+        cta: 'Connectez un moyen de paiement'
+        eyebrow: 'Étape 3 · Paiements en ligne'
+        heading: "Les factures ne se paient pas toutes seules."
+        how:
+            1: 'Allez dans Paramètres → Moyens de paiement et connectez Stripe ou PayPal (30 secondes).'
+            2: "Chaque facture que vous envoyez inclut automatiquement un bouton « Payer maintenant »."
+            3: 'Votre client paie. Vous êtes notifié(e) immédiatement. Le statut de la facture passe à <b style="color: #2e963a;">Payée</b>.'
+        how_heading: 'Comment ça marche'
+        lede: "Connectez Stripe ou PayPal une seule fois et chaque facture que vous envoyez obtient un bouton « Payer maintenant ». Votre client paie depuis n'importe quel appareil en quelques secondes — vous êtes notifié(e) dès que le paiement est effectué."
+        method:
+            bank: Banque
+            cards: Cartes
+            eu_bank: 'Banque UE'
+            wallet: Portefeuille
+        ps: 'SolidInvoice n''ajoute aucun frais en plus de votre prestataire de paiement. Vous ne payez que ce que Stripe ou PayPal facture.'
+        subject: 'Permettez à vos clients de payer en un clic'
+    upgrade_offer:
+        coupon_desc: '%percent%% de réduction sur vos trois premiers mois. Saisissez ce code lors du paiement.'
+        coupon_heading: 'Votre code de réduction'
+        cta: 'S''abonner maintenant'
+        eyebrow: 'Dernière chance'
+        feature:
+            1: 'Clients et factures illimités'
+            2: 'Facturation récurrente selon tout calendrier'
+            3: 'Rappels de paiement automatiques'
+            4: 'Paiements en ligne via votre propre compte Stripe ou PayPal'
+            5: 'Plusieurs membres d''équipe sur un même compte'
+            6: 'Sauvegardes, mises à jour, et suppression de la mention SolidInvoice sur vos factures'
+        fine_print: 'Annulable à tout moment. Aucuns frais surprises. Vos données sont restaurées immédiatement dès l''abonnement.'
+        heading: 'Une dernière chose avant la fin de votre période d''essai.'
+        lede: "À la fin de votre période d'essai, votre compte se verrouille. Avant que cela n'arrive — voici une offre pour faciliter votre décision de vous abonner."
+        per: '/ mois'
+        ps: 'votre compte se verrouille à la fin de la période d''essai. Abonnez-vous avant cela pour continuer à envoyer vos factures sans interruption.'
+        subject: 'Votre offre spéciale expire avec votre période d''essai'
+    welcome:
+        closing: 'Commencez par la première étape : ajoutez un client. Tout le reste en découle.'
+        cta: 'Ouvrir votre tableau de bord'
+        eyebrow: 'Votre période d''essai vient de commencer'
+        feature:
+            clients:
+                desc: 'La base. Nom, e-mail, devise — ça prend soixante secondes.'
+                title: 'Ajoutez votre premier client'
+            dashboard:
+                desc: 'Configurez la facturation récurrente et les rappels automatiques. Soyez payé chaque mois sans lever le petit doigt.'
+                title: 'Automatisez les tâches récurrentes'
+            invoices:
+                desc: 'Lignes de facturation, taxes, remises et une date d''échéance — tout est inclus.'
+                title: 'Envoyez une facture professionnelle'
+            payments:
+                desc: "Stripe ou PayPal — vos clients paient en deux clics, vous êtes notifié(e) instantanément."
+                title: 'Connectez les paiements en ligne'
+        heading: 'Ravis de vous avoir, %name%.'
+        intro: "Voici ce que nous allons voir ensemble :"
+        lede: "Votre période d'essai est active. Au fil des prochains e-mails, nous vous guiderons pas à pas pour obtenir le paiement de votre première facture, dès maintenant."
+        ps: 'des questions ? Répondez à cet e-mail — une vraie personne vous répondra.'
+        subject: "Bienvenue sur SolidInvoice — passons au paiement"
+payment:
+    capture:
+        subject: 'Un paiement a été effectué'
+    description: 'Un nouveau paiement a été effectué'
+    details:
+        amount: Montant
+        client: Client
+        currency: Devise
+        date: Date
+        invoice: Facture
+        method: 'Mode de paiement'
+        status: Statut
+    notification:
+        message: 'Un paiement a été reçu.'
+    view_invoice: 'Voir la facture'
+powered_by: 'Propulsé par'
+quote:
+    amount_payable: 'Montant à payer'
+    created: Créé
+    discount: Remise
+    expires: Expire
+    info: 'Vous avez reçu un devis de %company% généré le %created%'
+    number: 'Devis n°'
+    status:
+        subject: 'Changement de statut du devis'
+    status_change:
+        client: Client
+        heading: 'Le statut d''un devis a changé'
+        id: Devis
+        message: 'Le statut d''un devis a été mis à jour.'
+        new_status: 'Nouveau statut'
+        old_status: 'Statut d''origine'
+        status: Statut
+        view_quote: 'Voir le devis'
+    subtotal: Sous-total
+    tax: Taxe
+    terms: 'Conditions générales'
+    title: 'Devis %id%'
+    total: Total
+    view: 'Voir le devis'
+    withholding: Retenue
+reset_password:
+    alternative: "Si le bouton ci-dessus ne fonctionne pas, copiez-collez ce lien dans votre navigateur :"
+    button_text: 'Réinitialiser le mot de passe'
+    expires: 'Ce lien expirera dans %resetTimestamp%.'
+    message_html: "Une réinitialisation de mot de passe a été demandée pour l'utilisateur <strong>%username%</strong>.\n\nSi vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer ce message en toute sécurité.\n\nPour réinitialiser votre mot de passe, veuillez suivre le lien ci-dessous\n"
+    message_text: "Une réinitialisation de mot de passe a été demandée pour l'utilisateur %username%.\n\nSi vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer ce message en toute sécurité.\n\nPour réinitialiser votre mot de passe, veuillez copier-coller le lien ci-dessous dans votre navigateur\n\n%confirmationUrl%\n"
+    security: "Si vous n'avez pas demandé de réinitialisation de mot de passe, vous pouvez ignorer cet e-mail en toute sécurité. Votre mot de passe ne sera pas modifié."
+    subject: 'Réinitialisez votre mot de passe pour %username%'

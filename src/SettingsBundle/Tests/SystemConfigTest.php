@@ -70,6 +70,7 @@ final class SystemConfigTest extends KernelTestCase
             'system/company/contact_details/email' => null,
             'system/company/contact_details/phone_number' => null,
             'system/company/currency' => 'USD',
+            'system/company/locale' => 'en',
             'system/company/logo' => null,
         ], $config->getAll());
     }

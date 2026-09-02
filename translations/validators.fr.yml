@@ -1,0 +1,86 @@
+client:
+    constraint:
+        contacts:
+            min: 'Vous devez ajouter au moins un contact à ce client'
+        currency_code:
+            exact_length: 'Le code de devise doit comporter exactement {{ limit }} caractères.'
+        unique_name: 'Un client portant le nom « {{ value }} » existe déjà.'
+core:
+    constraint:
+        application_url_host: 'Ce domaine est réservé pour l''URL par défaut de l''application.'
+    custom_field:
+        field_key: 'La clé du champ doit commencer par une lettre minuscule et ne contenir que des lettres minuscules, des chiffres et des underscores.'
+        similar_label: 'Un champ personnalisé avec un libellé similaire existe déjà pour la cible sélectionnée.'
+        unique_label: 'Un champ personnalisé avec ce libellé existe déjà pour la cible sélectionnée.'
+install:
+    database:
+        driver:
+            not_blank: 'Veuillez sélectionner un pilote de base de données.'
+    requirements:
+        not_met: 'Votre système ne répond pas aux exigences minimales pour exécuter SolidInvoice. Veuillez corriger les problèmes listés ci-dessous.'
+    user_account:
+        email:
+            not_blank: 'Veuillez saisir un e-mail'
+        first_name:
+            not_blank: 'Veuillez saisir un prénom'
+        last_name:
+            not_blank: 'Veuillez saisir un nom'
+        locale:
+            not_blank: 'Veuillez sélectionner une langue'
+        password:
+            not_blank: 'Vous devez saisir un mot de passe sécurisé'
+invoice:
+    lines:
+        min: 'Vous devez ajouter au moins 1 ligne à la facture'
+    users:
+        min: 'Vous devez sélectionner au moins 1 utilisateur à associer à la facture'
+notification:
+    constraint:
+        transport_setting:
+            unique_name: 'Ce nom est déjà utilisé'
+quote:
+    lines:
+        min: 'Vous devez ajouter au moins 1 ligne au devis'
+    users:
+        min: 'Vous devez sélectionner au moins 1 utilisateur à associer au devis'
+recurring_invoice:
+    end_date:
+        future: 'La date de fin doit être dans le futur'
+    lines:
+        min: 'Vous devez ajouter au moins 1 ligne à la facture'
+    schedule:
+        days:
+            monthly_required: 'Vous devez sélectionner au moins un jour pour la récurrence mensuelle'
+            weekly_required: 'Vous devez sélectionner au moins un jour pour la récurrence hebdomadaire'
+            yearly_required: 'Vous devez sélectionner au moins un mois pour la récurrence annuelle'
+        end_date:
+            required: 'Vous devez indiquer une date de fin'
+        end_occurrence:
+            required: 'Vous devez indiquer le nombre d''occurrences'
+        end_type:
+            required: 'Vous devez sélectionner un type de fin'
+        type:
+            required: 'Vous devez sélectionner un type de récurrence'
+    users:
+        min: 'Vous devez sélectionner au moins 1 utilisateur à associer à la facture'
+tax:
+    constraint:
+        incompatible:
+            flat_rate_compound: 'Une taxe à taux fixe ne peut pas être composée.'
+            inclusive_compound: 'Une taxe ne peut pas être à la fois incluse et composée.'
+user:
+    email:
+        invalid: 'L''e-mail {{ value }} n''est pas une adresse e-mail valide.'
+        not_blank: 'Veuillez saisir votre e-mail'
+    password:
+        compromised: 'Ce mot de passe a été divulgué lors d''une fuite de données, veuillez utiliser un autre mot de passe.'
+        fields_match: 'Les champs du mot de passe doivent correspondre.'
+        min_length: 'Votre mot de passe doit contenir au moins {{ limit }} caractères'
+        min_length_long: 'Votre mot de passe doit contenir au moins {{ limit }} caractères'
+        mismatch: 'Les mots de passe ne correspondent pas.'
+        not_blank: 'Veuillez saisir un mot de passe'
+        weak: 'Votre mot de passe est trop faible. Veuillez utiliser un mot de passe plus robuste combinant lettres, chiffres et symboles.'
+    register:
+        accept_terms: 'Vous devez accepter les conditions générales pour vous inscrire'
+    turnstile:
+        failed: 'La vérification du captcha a échoué. Veuillez réessayer.'
