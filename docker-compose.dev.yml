@@ -1,0 +1,93 @@
+# Local development stack: runs the app FROM THE LOCAL SOURCE TREE (bind-mounted),
+# not the published `solidinvoice/solidinvoice` image. Use docker-compose.yml
+# instead if you just want to run a prebuilt release.
+#
+# Usage:
+#   docker compose -f docker-compose.dev.yml up --build
+#
+# First run installs Composer and frontend (Bun) dependencies automatically,
+# baked into named volumes so they survive restarts and don't get written
+# into your working tree. Nothing needs to be pre-installed on the host.
+#
+# By default the app uses SQLite (SolidInvoice's own default — see
+# config/services.php), so no separate database container is required. To use
+# MySQL instead, uncomment the `db` service and the `SOLIDINVOICE_DATABASE_URL`
+# line below.
+
+services:
+  assets:
+    image: "oven/bun:1.3.14"
+    working_dir: /app
+    volumes:
+      - .:/app
+      - dev_vendor:/app/vendor
+      - dev_node_modules:/app/node_modules
+    # A few JS packages (@solidworx/platform, @symfony/ux-*) are `file:vendor/...`
+    # deps that only exist once Composer has run in the `app` container, so wait
+    # for that instead of racing it.
+    command: >
+      sh -c "until [ -d vendor/solidworx/platform/assets ]; do sleep 1; done &&
+             bun install --frozen-lockfile && bun run watch"
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/dev.Dockerfile
+    ports:
+      - "8765:8765"
+    environment:
+      SOLIDINVOICE_ENV: dev
+      SOLIDINVOICE_DEBUG: 1
+      SERVER_NAME: ":8765"
+      APP_PATH: /app
+      # SOLIDINVOICE_DATABASE_URL: "mysql://root@db:3306/solidinvoice?serverVersion=8.0"
+    volumes:
+      - .:/app
+      - dev_vendor:/app/vendor
+      - dev_var:/app/var
+    command: >
+      sh -c "composer install --no-interaction --optimize-autoloader &&
+             frankenphp run --config /app/Caddyfile"
+    # depends_on:
+    #   - db
+
+  # Processes async messages (emails, recurring-invoice jobs, ...) — the
+  # equivalent of the managed `messenger_consume` worker that `symfony serve`
+  # starts automatically (see docs/docs/installation-guide/git.md). Not
+  # strictly required to browse the app, but without it queued messages just
+  # pile up unprocessed.
+  worker:
+    build:
+      context: .
+      dockerfile: docker/dev.Dockerfile
+    # Exits until the database exists (created by the /install wizard on
+    # first run), so keep restarting rather than staying crashed.
+    restart: on-failure
+    environment:
+      SOLIDINVOICE_ENV: dev
+      SOLIDINVOICE_DEBUG: 1
+      # SOLIDINVOICE_DATABASE_URL: "mysql://root@db:3306/solidinvoice?serverVersion=8.0"
+    volumes:
+      - .:/app
+      - dev_vendor:/app/vendor
+      - dev_var:/app/var
+    command: >
+      sh -c "until [ -f vendor/autoload.php ]; do sleep 1; done &&
+             bin/console messenger:consume async --time-limit=3600 --memory-limit=128M -vv"
+    # depends_on:
+    #   - db
+
+  # db:
+  #   image: "mysql:8.0"
+  #   restart: always
+  #   environment:
+  #     MYSQL_DATABASE: solidinvoice
+  #     MYSQL_ALLOW_EMPTY_PASSWORD: 1
+  #   volumes:
+  #     - dev_db_data:/var/lib/mysql
+
+volumes:
+  dev_vendor: {}
+  dev_var: {}
+  dev_node_modules: {}
+  # dev_db_data: {}
