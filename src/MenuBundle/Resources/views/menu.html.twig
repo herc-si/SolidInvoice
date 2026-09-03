@@ -85,6 +85,7 @@
                 {% set linkAttrs = linkAttrs|merge({
                     'data-bs-toggle': 'dropdown',
                     'data-bs-auto-close': 'false',
+                    'data-bs-display': 'static',
                     role: 'button',
                     'aria-expanded': isActive ? 'true' : 'false'
                 }) %}
@@ -94,7 +95,7 @@
             {% if item.getExtra('icon') %}
                 <span class="nav-link-icon d-md-none d-lg-inline-block">{{ item.getExtra('icon')|raw }}</span>
             {% endif %}
-            <span class="nav-link-title">{{ block('label') }}</span>
+            <span class="nav-link-title" title="{{ item.label|trans }}">{{ block('label') }}</span>
             </{{ tag }}>
 
             {{ block('list') }}
@@ -115,10 +116,11 @@
                     class: ( (isLink ? item.linkAttribute('class') : item.labelAttribute('class')) ~ ' ' ~ cls|join(' ') )|trim,
                     'data-bs-toggle': 'dropdown',
                     'data-bs-auto-close': 'false',
+                    'data-bs-display': 'static',
                     role: 'button',
                     'aria-expanded': isActive ? 'true' : 'false'
                 }) %}
-                <{{ tag }}{{ ui.attributes(attrs) }}>{{ block('label') }}</{{ tag }}>
+                <{{ tag }}{{ ui.attributes(attrs) }}><span class="dropdown-item-title" title="{{ item.label|trans }}">{{ block('label') }}</span></{{ tag }}>
                 {{ block('list') }}
                 </div>
             {% else %}
@@ -133,7 +135,7 @@
                     class: ( (isLink ? item.linkAttribute('class') : item.labelAttribute('class')) ~ ' ' ~ cls|join(' ') )|trim
                 }) %}
                 <{{ tag }}{{ ui.attributes(attrs) }}>
-                {{ block('label') }}
+                <span class="dropdown-item-title" title="{{ item.label|trans }}">{{ block('label') }}</span>
                 {% if item.getExtra('badge') %}
                     <span class="badge {{ item.getExtra('badge_class', 'badge-sm bg-green-lt text-uppercase ms-auto') }}">{{ item.getExtra('badge') }}</span>
                 {% endif %}

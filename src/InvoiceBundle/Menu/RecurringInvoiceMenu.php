@@ -32,7 +32,18 @@ final readonly class RecurringInvoiceMenu
     #[MenuBuilder(name: 'sidebar', priority: MenuPriority::PRIORITY_RECURRING_INVOICE->value)]
     public function sidebar(ItemInterface $menu): void
     {
-        $extras = ['icon' => Icon::RECURRING_INVOICE];
+        // Nested under the "Invoices" item (added by InvoiceMenu, which runs
+        // first: PRIORITY_INVOICE > PRIORITY_RECURRING_INVOICE) instead of
+        // being its own top-level sidebar entry - "Recurring" alone read as
+        // unclear out of context, and as a standalone dropdown its longer
+        // labels overflowed the fixed-width sidebar column.
+        $invoices = $menu->getChild('invoice.menu.main');
+
+        if (! $invoices instanceof ItemInterface) {
+            return;
+        }
+
+        $extras = [];
 
         if (! $this->featureGate->isEnabled(Feature::RecurringInvoices->value)) {
             $planLabel = $this->upgradePromptProvider->menuLabel(Feature::RecurringInvoices->value);
@@ -42,26 +53,18 @@ final readonly class RecurringInvoiceMenu
             }
         }
 
-        $recurringInvoices = $menu->addChild('invoice.menu.recurring.main', [
-            'extras' => $extras,
-        ]);
-
-        $recurringInvoices->addChild(
+        $invoices->addChild(
             'invoice.menu.recurring.list',
             [
                 'route' => '_invoices_index_recurring',
-                'extras' => [
-                    'icon' => Icon::RECURRING_INVOICE,
-                ],
+                'extras' => $extras + ['icon' => Icon::RECURRING_INVOICE],
             ],
         );
-        $recurringInvoices->addChild(
+        $invoices->addChild(
             'invoice.menu.recurring.create',
             [
-                'extras' => [
-                    'icon' => Icon::RECURRING_INVOICE_ADD,
-                ],
                 'route' => '_invoices_create_recurring',
+                'extras' => $extras + ['icon' => Icon::RECURRING_INVOICE_ADD],
             ],
         );
     }

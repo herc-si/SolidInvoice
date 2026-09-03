@@ -11,6 +11,23 @@
  * drawer, and dropdown rules continue to apply.
  */
 
+// Tabler hardcodes the vertical sidebar (and its content-area offset) to
+// 15rem at the lg breakpoint, with no CSS variable to hook into. A modest
+// bump gives longer French labels breathing room without the panel becoming
+// oversized; both the sidebar's own width and the page's matching left
+// offset need updating together, or content ends up misaligned.
+$swp-navbar-vertical-width: 17rem;
+
+@media (min-width: 992px) {
+    .navbar.navbar-vertical.navbar-expand-lg {
+        width: $swp-navbar-vertical-width;
+    }
+
+    .navbar.navbar-vertical.navbar-expand-lg ~ .page {
+        padding-left: $swp-navbar-vertical-width;
+    }
+}
+
 .navbar.navbar-vertical,
 .navbar.navbar-vertical.navbar-dark {
     background-color: var(--swp-gray-700);
@@ -36,10 +53,26 @@
         border-radius: var(--swp-radius-md);
         transition: background-color var(--swp-transition-fast),
                     color var(--swp-transition-fast);
+        // Flex items default to a min-width based on their content, so a long
+        // label (e.g. "Factures récurrentes") overflows the fixed-width
+        // sidebar instead of shrinking. Let the link itself shrink...
+        min-width: 0;
 
         .nav-link-icon,
         .nav-link-title {
             color: inherit;
+        }
+
+        .nav-link-icon {
+            // ...but never let the icon shrink alongside it.
+            flex-shrink: 0;
+        }
+
+        .nav-link-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 0;
         }
 
         // Hover: lift to a slightly lighter slate, brighter text.
@@ -116,6 +149,23 @@
             &.active {
                 background-color: var(--swp-primary-light);
                 color: var(--swp-primary-dark);
+            }
+
+            // At the desktop breakpoint Tabler renders these inline (not as a
+            // floating popover) as flex rows within the same fixed-width
+            // sidebar column, so a long label (e.g. "Liste des factures
+            // récurrentes") needs the same shrink-then-ellipsis treatment as
+            // the top-level .nav-link-title, or it overflows past the sidebar
+            // edge instead of truncating.
+            .dropdown-item-title {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                min-width: 0;
+            }
+
+            .badge {
+                flex-shrink: 0;
             }
         }
     }
