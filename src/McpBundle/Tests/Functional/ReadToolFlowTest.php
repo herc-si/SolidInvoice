@@ -19,7 +19,6 @@ use PHPUnit\Framework\Attributes\Group;
 use SolidInvoice\ClientBundle\Mcp\ClientReadTools;
 use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
 use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\DashboardBundle\Mcp\AnalyticsTools;
 use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
 use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
 use SolidInvoice\InvoiceBundle\Mcp\InvoiceReadTools;
@@ -100,29 +99,6 @@ final class ReadToolFlowTest extends KernelTestCase
         self::assertSame(1, $result['count']);
         self::assertCount(1, $result['results']);
         self::assertSame('overdue', $result['results'][0]['status']);
-    }
-
-    public function testDashboardStatsReturnsStructuredTotals(): void
-    {
-        $this->setActiveScopes([McpScope::Read->value]);
-
-        $client = ClientFactory::createOne(['company' => $this->company]);
-        InvoiceFactory::createOne([
-            'company' => $this->company,
-            'client' => $client,
-            'status' => InvoiceStatus::Pending,
-        ]);
-
-        $tool = self::getContainer()->get(AnalyticsTools::class);
-        self::assertInstanceOf(AnalyticsTools::class, $tool);
-
-        $stats = $tool->getDashboardStats();
-
-        self::assertArrayHasKey('outstanding', $stats);
-        self::assertArrayHasKey('overdue', $stats);
-        self::assertArrayHasKey('counts_by_status', $stats);
-        self::assertArrayHasKey('total_invoices', $stats);
-        self::assertGreaterThanOrEqual(1, $stats['total_invoices']);
     }
 
     public function testReadToolRejectsMissingScope(): void

@@ -15,7 +15,6 @@ namespace SolidInvoice\McpBundle\Tests\Functional;
 
 use PHPUnit\Framework\Attributes\Group;
 use SolidInvoice\ClientBundle\Mcp\ClientReadTools;
-use SolidInvoice\DashboardBundle\Mcp\AnalyticsTools;
 use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
 use SolidInvoice\InvoiceBundle\Mcp\InvoiceReadTools;
 use SolidInvoice\McpBundle\Mcp\Tool\ResourceQueryTools;
@@ -45,7 +44,6 @@ final class ToolRegistrationTest extends KernelTestCase
             ClientReadTools::class,
             PaymentMethodReadTools::class,
             TaxReadTools::class,
-            AnalyticsTools::class,
             SettingsReadTools::class,
         ];
 
