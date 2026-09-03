@@ -4,6 +4,8 @@ client:
             min: 'Vous devez ajouter au moins un contact à ce client'
         currency_code:
             exact_length: 'Le code de devise doit comporter exactement {{ limit }} caractères.'
+        tax_identifiers:
+            siret_required: 'La facturation électronique est activée : veuillez ajouter le numéro SIRET de ce client parmi ses identifiants fiscaux.'
         unique_name: 'Un client portant le nom « {{ value }} » existe déjà.'
 core:
     constraint:
@@ -84,3 +86,9 @@ user:
         accept_terms: 'Vous devez accepter les conditions générales pour vous inscrire'
     turnstile:
         failed: 'La vérification du captcha a échoué. Veuillez réessayer.'
+users:
+    invitation:
+        exists: 'Cet utilisateur a déjà été invité à rejoindre cette société.'
+'Disposable or temporary email addresses are not allowed. Please use a permanent email address.': 'Les adresses e-mail jetables ou temporaires ne sont pas autorisées. Veuillez utiliser une adresse e-mail permanente.'
+'The company name cannot be longer than {{ limit }} characters.': 'Le nom de la société ne peut pas dépasser {{ limit }} caractères.'
+'The uploaded file must be a JPEG, PNG, GIF or WebP image.': "Le fichier envoyé doit être une image au format JPEG, PNG, GIF ou WebP."

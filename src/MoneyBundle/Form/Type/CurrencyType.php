@@ -35,7 +35,14 @@ class CurrencyType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefault('choices', iterator_to_array($this->getCurrencyChoices()));
+        $resolver->setDefaults([
+            'choices' => iterator_to_array($this->getCurrencyChoices()),
+            // Choice labels are currency names from Symfony's Intl component,
+            // already localized via Currencies::getNames($this->locale) below —
+            // routing them through the app's own translator too would just
+            // look up the (already-translated) name as an id nothing defines.
+            'choice_translation_domain' => false,
+        ]);
     }
 
     #[Override]

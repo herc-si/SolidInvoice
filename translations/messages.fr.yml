@@ -118,7 +118,7 @@ client:
             label: Nom
             placeholder: 'Acme Corporation'
         subtitle: 'Ajoutez un nouveau client pour commencer à créer des factures et des devis'
-        tax_identifiers_description: "Les numéros d'identification fiscale du client (TVA, GSTIN, TIN, ABN, etc.). Ils apparaissent sur les factures et devis émis à ce client."
+        tax_identifiers_description: "Les numéros d'identification fiscale du client (SIRET, SIREN, TVA intracommunautaire, RCS, etc.). Ils apparaissent sur les factures et devis émis à ce client."
         website:
             label: 'Site web'
     grid:
@@ -190,7 +190,7 @@ client:
         archived: Archivés
     tax_identifiers:
         add: 'Ajouter un identifiant fiscal'
-        empty_hint: 'Aucun identifiant fiscal ajouté pour le moment. Ajoutez-en un si ce client possède un numéro de TVA, de TPS ou un autre numéro fiscal enregistré.'
+        empty_hint: 'Aucun identifiant fiscal ajouté pour le moment. Ajoutez-en un si ce client possède un numéro SIRET, TVA intracommunautaire ou un autre numéro fiscal enregistré.'
         info: 'Identifiants fiscaux'
         remove: 'Supprimer l''identifiant fiscal'
     view:
@@ -881,8 +881,8 @@ invoice:
         list: 'Liste des factures'
         main: Factures
         recurring:
-            create: 'Créer une facture récurrente'
-            list: 'Liste des factures récurrentes'
+            create: 'Créer une récurrente'
+            list: Récurrentes
             main: 'Factures récurrentes'
             view: 'Voir la facture récurrente'
         view: 'Voir la facture'
@@ -1725,6 +1725,7 @@ quote:
     action:
         create:
             success: 'Devis créé avec succès'
+            title: 'Créer un devis'
         edit:
             success: 'Devis mis à jour avec succès'
         pdf: PDF
@@ -2382,18 +2383,23 @@ success: Succès
 tax:
     company_identifiers:
         add: 'Ajouter un identifiant fiscal'
-        description: 'Ajoutez les identifiants fiscaux (TVA, GST, TIN, ABN, etc.) de votre propre société — ils apparaîtront sur les factures et devis que vous émettez.'
+        description: 'Ajoutez les identifiants fiscaux (SIRET, SIREN, TVA intracommunautaire, RCS, etc.) de votre propre société — ils apparaîtront sur les factures et devis que vous émettez.'
         empty: 'Aucun identifiant fiscal configuré. Ajoutez-en un pour l''afficher sur vos factures.'
         label: Type
         primary: Principal
         remove: 'Supprimer l''identifiant fiscal'
         save: 'Enregistrer les identifiants fiscaux'
+        siret_required: 'La facturation électronique est activée : ajoutez le numéro SIRET de votre société.'
         title: 'Identifiants fiscaux de la société'
         value: Numéro
+        vat_required: 'La facturation électronique est activée : ajoutez le numéro de TVA intracommunautaire de votre société.'
     direction:
         additive: Additive
         deductive: Déductive
         informational: Informative
+    electronic_invoicing:
+        description: 'Rend obligatoires le SIRET et le numéro de TVA intracommunautaire de votre société, ainsi que le SIRET de vos clients, tels que requis par la facturation électronique française.'
+        label: 'Facturation électronique (France)'
     exclusive: Exclusive
     form:
         input:
@@ -2475,5 +2481,197 @@ users:
         active_users: 'Utilisateurs actifs'
         pending_invitations: 'Invitations en attente'
     title: Utilisateurs
+# Below: literal English sentences used directly as translation ids — mostly
+# SolidWorx/PlatformUI vendor components (login, 2FA, generic action/label
+# strings) and DataGrid column/filter labels (Column::label(), enum
+# ->getLabel()/->name used as ChoiceFilter choice labels) — rather than the
+# app's own dot-namespaced keys above. Neither ships a French catalog for
+# these, so they were falling straight through to the raw English id
+# whenever the app locale is fr.
+"%": "%"
+'2-step verification': 'Vérification en 2 étapes'
+'2xx Success': '2xx Succès'
+'3xx Redirect': '3xx Redirection'
+'4xx Client Error': '4xx Erreur client'
+'5xx Server Error': '5xx Erreur serveur'
+Accepted: Accepté
+Active: Active
+Activate: Activer
+'After x occurrences': 'Après x occurrences'
+Add: Ajouter
+'API Token Created Successfully': 'Jeton API créé avec succès'
+"Ajouter un article": "Ajouter un article"
+Amount: Montant
+Archive: Archiver
+Archived: Archivée
+"Are you sure you want to delete the selected invitation(s)?": 'Êtes-vous sûr de vouloir supprimer les invitations sélectionnées ?'
+'Auto Increment': 'Incrémentation automatique'
+Authorized: Autorisé
+'Authenticator app': "Application d'authentification"
+Balance: Solde
+'Backup Codes': 'Codes de secours'
+'Browser Trusted': 'Navigateur de confiance'
+Cancelled: Annulée
+Captured: Enregistré
+Category: Catégorie
+'Checkbox': 'Case à cocher'
+'Choose a value': 'Choisir une valeur'
+Client: Client
+'Client mode': 'Mode client'
+'Client Notifications': 'Notifications clients'
+Close: Fermer
+Complete: Terminée
+'Completed Date': 'Date de règlement'
+'Completed End': 'Réglé (fin)'
+'Completed Start': 'Réglé (début)'
+Confirm: Confirmer
+Confirmer: Confirmer
+Contact: Contact
+Create: Créer
+'Create API Token': 'Créer un jeton API'
+'Create New API Token': 'Créer un nouveau jeton API'
+'Create Invoice': 'Créer une facture'
+'Create Quote': 'Créer un devis'
+Created: Créé
+'Created End': 'Créé (fin)'
+'Created Start': 'Créé (début)'
+Credit: Crédit
+Date: Date
+'Date Start': 'Date de début'
+'Date start End': 'Date de début (fin)'
+'Date start Start': 'Date de début (début)'
+Declined: Refusé
+Delete: Supprimer
+DELETE: DELETE
+Description: Description
+"Décrivez le service ou le produit...": "Décrivez le service ou le produit..."
+"Description facultative pour ce jeton...": "Description facultative pour ce jeton..."
+"Didn't receive it?": "Vous ne l'avez pas reçu ?"
+Disable: Désactiver
+Disabled: Désactivé
+Discount: Remise
+Draft: Brouillon
+'Due Date': 'Date d''échéance'
+'Due End': 'Échéance (fin)'
+'Due Start': 'Échéance (début)'
+Email: E-mail
+'Email Address': 'Adresse e-mail'
+'Email address': 'Adresse e-mail'
+Enable: Activer
+Enabled: Activé
+Endpoint: 'Point de terminaison'
+EUR: EUR
+'End Date': 'Date de fin'
+'End date End': 'Date de fin (fin)'
+'End date Start': 'Date de fin (début)'
+Exempt: Exonéré
+Existing: Existant
+Expired: Expiré
+Expires: 'Expire le'
+Failed: Échoué
+Frequency: Fréquence
+GET: GET
+'Get full access for %duration%, completely free. No credit card required.': 'Profitez d''un accès complet pendant %duration%, entièrement gratuit. Aucune carte bancaire requise.'
+'Internal only': 'Interne uniquement'
+Invited: 'Invité le'
+'Invited By': 'Invité par'
+Invoice: Facture
+'Invoice #': 'Facture n°'
+'Invoice Date': 'Date de facture'
+'Invoice date End': 'Date de facture (fin)'
+'Invoice date Start': 'Date de facture (début)'
+'Invoice Notifications': 'Notifications factures'
+'IP Address': 'Adresse IP'
+'Invalid CSRF token': 'Jeton CSRF invalide'
+Joined: 'Inscrit le'
+'Last Login': 'Dernière connexion'
+'Last Used': 'Dernière utilisation'
+'Login to your account': 'Connectez-vous à votre compte'
+'Long text': 'Texte long'
+Logout: 'Déconnexion'
+"Lost access to your authenticator app? You can use one of your backup codes.": "Vous n'avez plus accès à votre application d'authentification ? Vous pouvez utiliser l'un de vos codes de secours."
+Message: Message
+Method: Méthode
+Mobile: Mobile
+'Multi-select': 'Choix multiple'
+Name: Nom
+'Never': Jamais
+New: Nouvelle
+Notes: Notes
+NewClient: 'Nouveau client'
+'Next Run Date': 'Prochaine exécution'
+Number: Nombre
+'On the following date': 'À la date suivante'
+"Or use another method:": 'Ou utilisez une autre méthode :'
+'Other Notifications': 'Autres notifications'
+'Out of Scope': 'Hors champ'
+Overdue: 'En retard'
+Paid: Payée
+'Paid Date': 'Date de paiement'
+'Paid date End': 'Date de paiement (fin)'
+'Paid date Start': 'Date de paiement (début)'
+Password: 'Mot de passe'
+PATCH: PATCH
+'Payment Notifications': 'Notifications paiements'
+Payable: 'À payer'
+Paused: 'En pause'
+Pending: 'En attente'
+"Please enter the code from your authenticator app.": 'Veuillez saisir le code depuis votre application d''authentification.'
+"Please enter the code in the field below.": 'Veuillez saisir le code dans le champ ci-dessous.'
+POST: POST
+PUT: PUT
+'Quote #': 'Devis n°'
+'Quote id': 'Numéro de devis'
+'Quote Notifications': 'Notifications devis'
+Quote: Devis
+'Random Number': 'Nombre aléatoire'
+Rate: Taux
+Reactivate: Réactiver
+'Recovery Options': 'Options de récupération'
+Refunded: Remboursé
+Regenerate: 'Régénérer'
+'Remember me on this device': 'Se souvenir de moi sur cet appareil'
+'Resend code': 'Renvoyer le code'
+'Resend Invitation': "Renvoyer l'invitation"
+'Reverse Charge': Autoliquidation
+Revoke: Révoquer
+Save: Enregistrer
+'Sign in': 'Se connecter'
+'Single-select': 'Choix unique'
+Standard: Standard
+Status: Statut
+Suspended: Suspendu
+'System Default (%currency%)': 'Devise par défaut du système (%currency%)'
+Tax: Taxe
+"Are you sure you want to delete the selected tax rates?\n\nNote, deleting a tax rate will remove it from all invoices and quotes that are using it and affect the totals.": "Êtes-vous sûr de vouloir supprimer les taux de taxe sélectionnés ?\n\nNote : la suppression d'un taux de taxe le retirera de toutes les factures et devis qui l'utilisent et affectera les totaux."
+Terms: Conditions
+Text: Texte
+"This device is trusted and won't require a 2FA code.": 'Cet appareil est approuvé et ne nécessitera pas de code 2FA.'
+Timestamp: Horodatage
+Total: Total
+'Trust this device': 'Faire confiance à cet appareil'
+'Trusted Device': 'Appareil de confiance'
+Type: Type
+'Two-factor Authentication': 'Authentification à deux facteurs'
+Ulid: ULID
+Unknown: Inconnu
+'Upgrade to %plan%': 'Passer au plan %plan%'
+'Upgrade to %plan% to unlock': 'Passez au plan %plan% pour débloquer'
+URL: URL
+'Usage Count': "Nombre d'utilisations"
+'User Agent': 'Agent utilisateur'
+Uuid: UUID
+'View History': "Voir l'historique"
+'Visible to client': 'Visible par le client'
+View: Voir
+Website: 'Site web'
+'Zero-Rated': 'Taux zéro'
+"We sent a verification code to your email.": 'Nous avons envoyé un code de vérification à votre adresse e-mail.'
+'{1} %count% day|]1,Inf[ %count% days': '{1} %count% jour|]1,Inf[ %count% jours'
+'{1} %count% month|]1,Inf[ %count% months': '{1} %count% mois|]1,Inf[ %count% mois'
+'{1} %count% year|]1,Inf[ %count% years': '{1} %count% an|]1,Inf[ %count% ans'
+or: ou
+paid: payées
+pending: 'en attente'
 view: Voir
 website: 'Site web'

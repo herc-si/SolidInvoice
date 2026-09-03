@@ -118,7 +118,7 @@ client:
             label: Name
             placeholder: 'Acme Corporation'
         subtitle: 'Add a new client to start creating invoices and quotes'
-        tax_identifiers_description: "The client's tax registration numbers (VAT, GSTIN, TIN, ABN, etc.). These appear on invoices and quotes issued to this client."
+        tax_identifiers_description: "The client's tax registration numbers (SIRET, SIREN, TVA intracommunautaire, RCS, etc.). These appear on invoices and quotes issued to this client."
         website:
             label: Website
     grid:
@@ -190,7 +190,7 @@ client:
         archived: Archived
     tax_identifiers:
         add: 'Add tax identifier'
-        empty_hint: 'No tax identifiers added yet. Add one if this client has a VAT, GST or other registered tax number.'
+        empty_hint: 'No tax identifiers added yet. Add one if this client has a SIRET, TVA intracommunautaire or other registered tax number.'
         info: 'Tax Identifiers'
         remove: 'Remove tax identifier'
     view:
@@ -1725,6 +1725,7 @@ quote:
     action:
         create:
             success: 'Quote created successfully'
+            title: 'Create Quote'
         edit:
             success: 'Quote updated successfully'
         pdf: PDF
@@ -2382,18 +2383,23 @@ success: Success
 tax:
     company_identifiers:
         add: 'Add tax identifier'
-        description: 'Add the tax identifiers (VAT, GST, TIN, ABN, etc.) for your own business — these will appear on the invoices and quotes you issue.'
+        description: 'Add the tax identifiers (SIRET, SIREN, TVA intracommunautaire, RCS, etc.) for your own business — these will appear on the invoices and quotes you issue.'
         empty: 'No tax identifiers configured. Add one to display it on your invoices.'
         label: Type
         primary: Primary
         remove: 'Remove tax identifier'
         save: 'Save tax identifiers'
+        siret_required: 'Electronic invoicing is enabled: add your company''s SIRET number.'
         title: 'Company Tax Identifiers'
         value: Number
+        vat_required: 'Electronic invoicing is enabled: add your company''s intra-community VAT number.'
     direction:
         additive: Additive
         deductive: Deductive
         informational: Informational
+    electronic_invoicing:
+        description: 'Requires your company''s SIRET and intra-community VAT number, and your clients'' SIRET, as mandated by French electronic invoicing rules.'
+        label: 'Electronic invoicing (France)'
     exclusive: Exclusive
     form:
         input:
