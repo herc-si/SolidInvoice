@@ -72,6 +72,7 @@ final class SystemConfigTest extends KernelTestCase
             'system/company/currency' => 'USD',
             'system/company/locale' => 'en',
             'system/company/logo' => null,
+            'tax/electronic_invoicing/enabled' => '0',
         ], $config->getAll());
     }
 

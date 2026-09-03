@@ -30,7 +30,7 @@ final class TaxIdentifierType extends AbstractType
     /**
      * @var list<string>
      */
-    public const array PRESET_LABELS = ['VAT', 'GSTIN', 'TIN', 'ABN', 'CNPJ', 'TRN', 'Other'];
+    public const array PRESET_LABELS = ['SIRET', 'SIREN', 'TVA intracommunautaire', 'RCS', 'Code APE/NAF', 'Autre'];
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

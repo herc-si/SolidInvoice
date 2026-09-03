@@ -80,16 +80,16 @@ final readonly class ClientWriteTools
     }
 
     /**
-     * Add a tax identifier (e.g. VAT, GSTIN, TIN, ABN, CNPJ, TRN) to a client.
+     * Add a tax identifier (e.g. SIRET, SIREN, TVA intracommunautaire, RCS) to a client.
      *
      * @param string $client_id Client ULID
-     * @param string $label     Identifier label (e.g. "VAT", "GSTIN", "TIN", "ABN", "CNPJ", "TRN", "Other")
+     * @param string $label     Identifier label (e.g. "SIRET", "SIREN", "TVA intracommunautaire", "RCS", "Code APE/NAF", "Autre")
      * @param string $value     Identifier value
      * @param bool   $primary   Whether this is the primary identifier for the client
      *
      * @return array<string, mixed>
      */
-    #[McpTool(name: 'add_client_tax_identifier', description: 'Add a tax identifier (VAT, GSTIN, TIN, ABN, CNPJ, TRN, Other) to a client.')]
+    #[McpTool(name: 'add_client_tax_identifier', description: 'Add a tax identifier (SIRET, SIREN, TVA intracommunautaire, RCS, Code APE/NAF, Autre) to a client.')]
     #[McpScopeRequired(McpScope::Write)]
     public function addTaxIdentifier(string $client_id, string $label, string $value, bool $primary = false): array
     {

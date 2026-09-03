@@ -32,8 +32,8 @@ final class TaxIdentifierTest extends ApiTestCase
     public function testCreate(): void
     {
         $data = [
-            'label' => 'VAT',
-            'value' => 'GB123456789',
+            'label' => 'SIRET',
+            'value' => '73282932000074',
             'primary' => true,
         ];
 
@@ -41,8 +41,8 @@ final class TaxIdentifierTest extends ApiTestCase
 
         self::assertArrayHasKey('id', $result);
         self::assertTrue(Ulid::isValid($result['id'], Ulid::FORMAT_BASE_32));
-        self::assertSame('VAT', $result['label']);
-        self::assertSame('GB123456789', $result['value']);
+        self::assertSame('SIRET', $result['label']);
+        self::assertSame('73282932000074', $result['value']);
         self::assertTrue($result['primary']);
     }
 

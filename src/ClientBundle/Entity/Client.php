@@ -40,6 +40,7 @@ use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
 use SolidInvoice\PaymentBundle\Entity\Payment;
 use SolidInvoice\QuoteBundle\Entity\Quote;
 use SolidInvoice\TaxBundle\Entity\TaxIdentifier;
+use SolidInvoice\TaxBundle\Validator\Constraints\RequiredFiscalIdentifierForElectronicInvoicing;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
@@ -80,6 +81,7 @@ use function in_array;
 #[UniqueEntity('name')]
 #[ORM\AssociationOverrides([new ORM\AssociationOverride(name: 'company', inversedBy: 'clients')])]
 #[WithinPlanClientLimit]
+#[RequiredFiscalIdentifierForElectronicInvoicing]
 class Client implements Stringable
 {
     final public const string TABLE_NAME = 'clients';

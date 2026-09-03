@@ -122,7 +122,7 @@ final readonly class ClientReadTools
      *
      * @return list<array<string, mixed>>
      */
-    #[McpTool(name: 'list_client_tax_identifiers', description: 'List the tax identifiers (e.g. VAT, GSTIN, TIN) configured for a client.')]
+    #[McpTool(name: 'list_client_tax_identifiers', description: 'List the tax identifiers (e.g. SIRET, SIREN, TVA intracommunautaire) configured for a client.')]
     #[McpScopeRequired(McpScope::Read)]
     public function listTaxIdentifiers(string $client_id): array
     {
