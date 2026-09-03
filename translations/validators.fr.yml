@@ -14,6 +14,10 @@ core:
         field_key: 'La clé du champ doit commencer par une lettre minuscule et ne contenir que des lettres minuscules, des chiffres et des underscores.'
         similar_label: 'Un champ personnalisé avec un libellé similaire existe déjà pour la cible sélectionnée.'
         unique_label: 'Un champ personnalisé avec ce libellé existe déjà pour la cible sélectionnée.'
+einvoicing:
+    constraint:
+        provider_setting:
+            unique_name: 'Ce nom est déjà utilisé'
 install:
     database:
         driver:

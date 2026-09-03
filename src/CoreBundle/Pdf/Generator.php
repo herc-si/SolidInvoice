@@ -30,9 +30,15 @@ class Generator
     }
 
     /**
+     * @param bool $protect Encrypts the PDF, restricting it to printing only.
+     *                       Must be disabled when the output will be read back by
+     *                       a third-party tool that can't handle encrypted PDFs —
+     *                       e.g. FPDI, used by horstoeko/zugferd to merge a Factur-X
+     *                       XML into an invoice PDF (see FacturXInvoiceBuilder).
+     *
      * @throws MpdfException
      */
-    public function generate(string $html): string
+    public function generate(string $html, bool $protect = true): string
     {
         $mpdf = new Mpdf([
             'tempDir' => $this->cacheDir . '/pdf',
@@ -48,7 +54,11 @@ class Generator
         $mpdf->allow_charset_conversion = false;
         $mpdf->showWatermarkText = true;
         $mpdf->SetDisplayMode('fullpage');
-        $mpdf->SetProtection(['print']);
+
+        if ($protect) {
+            $mpdf->SetProtection(['print']);
+        }
+
         $mpdf->setLogger($this->logger);
         $mpdf->WriteHTML($html);
 

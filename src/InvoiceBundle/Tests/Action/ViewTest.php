@@ -21,6 +21,8 @@ use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
 use SolidInvoice\CoreBundle\Entity\Discount;
 use SolidInvoice\CoreBundle\Pdf\Generator;
 use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
+use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManager;
 use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
 use SolidInvoice\InvoiceBundle\Action\View;
 use SolidInvoice\InvoiceBundle\Entity\Invoice;
@@ -65,6 +67,7 @@ final class ViewTest extends KernelTestCase
             new Generator('', new NullLogger()),
             $twig,
             self::getContainer()->get(BillingTemplateResolver::class),
+            self::getContainer()->get(ElectronicInvoiceManager::class),
         );
 
         $client = ClientFactory::createOne([
@@ -129,6 +132,7 @@ final class ViewTest extends KernelTestCase
             new Generator('', new NullLogger()),
             $twig,
             self::getContainer()->get(BillingTemplateResolver::class),
+            self::getContainer()->get(ElectronicInvoiceManager::class),
         );
 
         $client = ClientFactory::createOne([
@@ -187,6 +191,88 @@ final class ViewTest extends KernelTestCase
         $this->assertMatchesHtmlSnapshot($response);
     }
 
+    public function testViewWithElectronicInvoiceSubmissions(): void
+    {
+        $request = Request::createFromGlobals();
+        $requestStack = self::getContainer()->get('request_stack');
+        $requestStack->push($request);
+
+        $twig = self::getContainer()->get('twig');
+
+        $action = new View(
+            self::getContainer()->get('doctrine')->getRepository(Payment::class),
+            new Generator('', new NullLogger()),
+            $twig,
+            self::getContainer()->get(BillingTemplateResolver::class),
+            self::getContainer()->get(ElectronicInvoiceManager::class),
+        );
+
+        $client = ClientFactory::createOne([
+            'currencyCode' => 'USD',
+            'name' => 'Johnston PLC',
+            'website' => 'https://www.example.com',
+        ]);
+        $client->setId(Ulid::fromString(self::CLIENT_ID));
+
+        /** @var Invoice $invoice */
+        $invoice = InvoiceFactory::new()
+            ->withoutPersisting()
+            ->create([
+                'client' => $client,
+                'status' => InvoiceStatus::Pending,
+                'total' => 100,
+                'balance' => 100,
+                'baseTotal' => 100,
+                'created' => CarbonImmutable::parse('2021-09-01'),
+                'lines' => [
+                    new Line()
+                        ->setDescription('Test Item')
+                        ->setPrice(100)
+                        ->setQty(1)
+                        ->updateTotal(),
+                ],
+                'terms' => 'Test Terms',
+                'notes' => 'Test Notes',
+                'discount' => new Discount(),
+                'due' => CarbonImmutable::parse('2021-09-30'),
+                'invoiceDate' => CarbonImmutable::parse('2021-09-30'),
+                'paidDate' => null,
+                'tax' => 0,
+            ]);
+
+        $failedSubmission = new ElectronicInvoiceSubmission();
+        $failedSubmission->setInvoice($invoice)
+            ->setProvider('test_provider')
+            ->setSuccess(false)
+            ->setMessage('einvoicing.provider.test.simulated_failure')
+            ->setCreated(CarbonImmutable::parse('2021-09-02T10:00:00'));
+        $invoice->getElectronicInvoiceSubmissions()->add($failedSubmission);
+
+        $successfulSubmission = new ElectronicInvoiceSubmission();
+        $successfulSubmission->setInvoice($invoice)
+            ->setProvider('test_provider')
+            ->setSuccess(true)
+            ->setExternalReference('TEST-abc123')
+            ->setCreated(CarbonImmutable::parse('2021-09-02T11:00:00'));
+        $invoice->getElectronicInvoiceSubmissions()->add($successfulSubmission);
+
+        $uuid = Ulid::fromString(self::INVOICE_ID);
+        $invoice->setId($uuid)
+            ->setUuid(Uuid::fromString(self::INVOICE_ID))
+            ->setInvoiceId('INV-2021-0001')
+        ;
+
+        $params = $action($request, $invoice);
+
+        $response = $twig->resolveTemplate('@SolidInvoiceInvoice/Default/view.html.twig')
+            ->renderBlock('content', $params);
+
+        self::assertStringContainsString('Sent', $response);
+        self::assertStringContainsString('Failed', $response);
+        self::assertStringContainsString('TEST-abc123', $response);
+        self::assertStringContainsString('Simulated failure (test provider)', $response);
+    }
+
     /**
      * @return iterable<array{0: InvoiceStatus}>
      */
@@ -212,6 +298,7 @@ final class ViewTest extends KernelTestCase
             new Generator('', new NullLogger()),
             $twig,
             self::getContainer()->get(BillingTemplateResolver::class),
+            self::getContainer()->get(ElectronicInvoiceManager::class),
         );
 
         $client = ClientFactory::createOne([
@@ -278,6 +365,7 @@ final class ViewTest extends KernelTestCase
             new Generator('', new NullLogger()),
             $twig,
             self::getContainer()->get(BillingTemplateResolver::class),
+            self::getContainer()->get(ElectronicInvoiceManager::class),
         );
 
         $client = ClientFactory::createOne([
@@ -340,6 +428,7 @@ final class ViewTest extends KernelTestCase
             new Generator('', new NullLogger()),
             $twig,
             self::getContainer()->get(BillingTemplateResolver::class),
+            self::getContainer()->get(ElectronicInvoiceManager::class),
         );
 
         $client = ClientFactory::createOne([
@@ -424,6 +513,7 @@ final class ViewTest extends KernelTestCase
             new Generator('', new NullLogger()),
             $twig,
             self::getContainer()->get(BillingTemplateResolver::class),
+            self::getContainer()->get(ElectronicInvoiceManager::class),
         );
 
         $contact = new Contact();
@@ -492,6 +582,7 @@ final class ViewTest extends KernelTestCase
             new Generator('', new NullLogger()),
             $twig,
             self::getContainer()->get(BillingTemplateResolver::class),
+            self::getContainer()->get(ElectronicInvoiceManager::class),
         );
 
         $client = ClientFactory::createOne([

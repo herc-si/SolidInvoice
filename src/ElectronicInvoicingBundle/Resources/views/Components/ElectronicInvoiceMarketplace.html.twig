@@ -1,0 +1,136 @@
+{#
+# This file is part of SolidInvoice package.
+#
+# (c) Pierre du Plessis <open-source@solidworx.co>
+#
+# This source file is subject to the MIT license that is bundled
+# with this source code in the file LICENSE.
+#}
+
+<div {{ attributes }}>
+    {% include "@SolidInvoiceCore/flash.html.twig" %}
+
+    <div class="row g-4">
+        <div class="col-md-5 col-lg-4">
+            <h5 class="mb-2 d-flex align-items-center gap-2">
+                {{ ux_icon('tabler:building-broadcast-tower', {width: 20, height: 20, class: 'text-primary'}) }}
+                {{ 'einvoicing.marketplace.heading'|trans }}
+            </h5>
+            <p class="text-muted small mb-3">{{ 'einvoicing.marketplace.subtitle'|trans }}</p>
+
+            <div class="input-group mb-4">
+                <span class="input-group-text bg-white">{{ ux_icon('tabler:search', {width: 18, height: 18}) }}</span>
+                <input type="text"
+                       class="form-control"
+                       placeholder="{{ 'einvoicing.marketplace.search_placeholder'|trans }}"
+                       data-model="searchQuery"
+                       aria-label="{{ 'einvoicing.marketplace.search_placeholder'|trans }}">
+                {% if searchQuery %}
+                    <button type="button" class="btn btn-outline-secondary" data-action="live#action" data-live-action-param="clearSearch">
+                        {{ ux_icon('tabler:x', {width: 16, height: 16}) }}
+                    </button>
+                {% endif %}
+            </div>
+
+            {% if filteredProviders|length > 0 %}
+                <div class="d-flex flex-column gap-3">
+                    {% for provider in filteredProviders %}
+                        <div class="card">
+                            <div class="card-body d-flex align-items-start gap-3">
+                                {{ ux_icon(provider.icon, {width: 28, height: 28, class: 'text-primary flex-shrink-0'}) }}
+                                <div class="flex-grow-1 min-w-0">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <h6 class="mb-0">{{ provider.displayName|trans }}</h6>
+                                        {% if provider.recommended %}
+                                            <span class="badge bg-primary-lt">{{ 'einvoicing.marketplace.recommended'|trans }}</span>
+                                        {% endif %}
+                                        {% if provider.isConfigured %}
+                                            <span class="badge bg-success-lt">{{ ux_icon('tabler:check', {width: 12, height: 12}) }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <p class="text-muted small mb-2">{{ provider.tagline|trans }}</p>
+                                    <a href="{{ path('_einvoicing_providers', {selectedProvider: provider.name}) }}" class="btn btn-sm btn-outline-primary">
+                                        {{ ux_icon('tabler:plus', {width: 14, height: 14}) }}
+                                        {{ 'einvoicing.marketplace.configure'|trans }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty">
+                    <div class="empty-icon">{{ ux_icon('tabler:search-off', {width: 40, height: 40}) }}</div>
+                    <p class="empty-title">{{ 'einvoicing.marketplace.no_results'|trans }}</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-md-7 col-lg-8">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h5 class="mb-0 d-flex align-items-center gap-2">
+                    {{ ux_icon('tabler:list-check', {width: 20, height: 20, class: 'text-primary'}) }}
+                    {{ 'einvoicing.marketplace.configured_title'|trans }}
+                </h5>
+                <span class="badge bg-secondary-lt">{{ configuredProviders|length }}</span>
+            </div>
+
+            {% if configuredProviders|length > 0 %}
+                <div class="d-flex flex-column gap-3">
+                    {% for setting in configuredProviders %}
+                        <div class="card">
+                            <div class="card-body d-flex align-items-start justify-content-between gap-3">
+                                <div class="flex-grow-1 min-w-0">
+                                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                                        <h6 class="mb-0">{{ setting.name }}</h6>
+                                        {% if setting.active %}
+                                            <span class="badge bg-success-lt">{{ 'einvoicing.marketplace.active'|trans }}</span>
+                                        {% endif %}
+                                        <span class="badge bg-secondary-lt">{{ setting.provider }}</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2 flex-shrink-0">
+                                    {% if not setting.active %}
+                                        <button type="button"
+                                                class="btn btn-ghost btn-sm"
+                                                data-action="live#action"
+                                                data-live-action-param="setActive"
+                                                data-live-setting-param="{{ setting.id }}">
+                                            {{ 'einvoicing.marketplace.set_active'|trans }}
+                                        </button>
+                                    {% endif %}
+                                    <a href="{{ path('_einvoicing_providers', {selectedSetting: setting.id.toString()}) }}" class="btn btn-outline-secondary btn-sm" aria-label="{{ 'action.edit'|trans }}">
+                                        {{ ux_icon('tabler:edit', {width: 16, height: 16}) }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty">
+                    <div class="empty-icon">{{ ux_icon('tabler:building-broadcast-tower', {width: 48, height: 48}) }}</div>
+                    <p class="empty-title">{{ 'einvoicing.marketplace.empty_title'|trans }}</p>
+                    <p class="empty-subtitle text-secondary">{{ 'einvoicing.marketplace.empty_subtitle'|trans }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if selectedProvider is not empty or selectedSetting is not empty %}
+        <div class="modal modal-blur fade show d-block" tabindex="-1" role="dialog" aria-modal="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ 'einvoicing.marketplace.modal_title'|trans }}</h5>
+                        <a href="{{ path('_einvoicing_providers') }}" class="btn-close" aria-label="{{ 'action.close'|trans }}"></a>
+                    </div>
+                    <div class="modal-body">
+                        <twig:ElectronicInvoiceProviderConfiguration setting="{{ selectedSetting }}" provider="{{ selectedProvider }}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-backdrop fade show"></div>
+    {% endif %}
+</div>

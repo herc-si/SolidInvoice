@@ -463,6 +463,30 @@ parameters:
 			path: src/DataGridBundle/Tests/GridBuilder/QueryTest.php
 
 		-
+			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceProviderSetting\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/ElectronicInvoicingBundle/Entity/ElectronicInvoiceProviderSetting.php
+
+		-
+			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceProviderSetting\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/ElectronicInvoicingBundle/Entity/ElectronicInvoiceProviderSetting.php
+
+		-
+			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceSubmission\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/ElectronicInvoicingBundle/Entity/ElectronicInvoiceSubmission.php
+
+		-
+			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceSubmission\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/ElectronicInvoicingBundle/Entity/ElectronicInvoiceSubmission.php
+
+		-
 			message: '#^Call to function is_a\(\) with arguments ''SolidInvoice\\\\InstallBundle\\\\Step\\\\CreateDatabaseStep'', ''SolidInvoice\\\\InstallBundle\\\\Step\\\\InstallationStepInterface'' and true will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1

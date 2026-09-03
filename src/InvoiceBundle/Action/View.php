@@ -18,6 +18,7 @@ use SolidInvoice\CoreBundle\Pdf\Generator;
 use SolidInvoice\CoreBundle\Response\PdfResponse;
 use SolidInvoice\CoreBundle\Templates\BillingTemplateChannel;
 use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
+use SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManagerInterface;
 use SolidInvoice\InvoiceBundle\Entity\Invoice;
 use SolidInvoice\PaymentBundle\Repository\PaymentRepository;
 use Symfony\Bridge\Twig\Attribute\Template;
@@ -38,11 +39,12 @@ final readonly class View
         private Generator $pdfGenerator,
         private Environment $twig,
         private BillingTemplateResolver $templateResolver,
+        private ElectronicInvoiceManagerInterface $electronicInvoiceManager,
     ) {
     }
 
     /**
-     * @return array{invoice: Invoice, payments: array<string, mixed>, documentTemplate: string|null}|Response
+     * @return array{invoice: Invoice, payments: array<string, mixed>, documentTemplate: string|null, showElectronicInvoiceAction: bool}|Response
      * @throws LoaderError
      * @throws MpdfException
      * @throws RuntimeError
@@ -59,6 +61,7 @@ final readonly class View
             'invoice' => $invoice,
             'payments' => $this->paymentRepository->getPaymentsForInvoice($invoice),
             'documentTemplate' => $this->templateResolver->customTemplate($invoice, BillingTemplateChannel::View),
+            'showElectronicInvoiceAction' => $this->electronicInvoiceManager->isEligible($invoice),
         ];
     }
 }

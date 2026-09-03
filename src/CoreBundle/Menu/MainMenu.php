@@ -43,6 +43,7 @@ class MainMenu
 
         self::integrations($section);
         self::tax($section);
+        self::einvoicing($section);
         self::api($section);
         self::users($section);
         self::settings($section);
@@ -138,6 +139,17 @@ class MainMenu
             [
                 'route' => '_tax_rates',
                 'extras' => ['icon' => 'tax'],
+            ],
+        );
+    }
+
+    public static function einvoicing(ItemInterface $item): ItemInterface
+    {
+        return $item->addChild(
+            'menu.top.einvoicing',
+            [
+                'route' => '_einvoicing_providers',
+                'extras' => ['icon' => 'building-broadcast-tower'],
             ],
         );
     }

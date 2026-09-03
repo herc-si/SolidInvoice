@@ -101,6 +101,16 @@
                             </li>
                         {% endif %}
 
+                        {% if showElectronicInvoiceAction %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('_einvoicing_send', {'id' : invoice.id}) }}">
+                                    {{ ux_icon('tabler:building-broadcast-tower', {width: 16, height: 16}) }}
+                                    {{ "invoice.view.toolbar.send_electronic"|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+
                         {% if workflow_can(invoice, 'edit') %}
                             <li>
                                 <a class="dropdown-item" href="{{ path('_invoices_edit', {'id' : invoice.id}) }}">
@@ -518,6 +528,41 @@
                                             <div class="payment-message">{{ payment.message }}</div>
                                         {% endif %}
                                     </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            {# Electronic Invoice Submissions Card (if any) #}
+            {% if invoice.electronicInvoiceSubmissions|length > 0 %}
+                <div class="doc-sidebar-card">
+                    <div class="doc-sidebar-card-header">
+                        <div class="doc-sidebar-card-icon">
+                            {{ ux_icon('tabler:building-broadcast-tower', {width: 18, height: 18}) }}
+                        </div>
+                        <h3 class="doc-sidebar-card-title">{{ 'einvoicing.view.title'|trans }}</h3>
+                    </div>
+                    <div class="doc-sidebar-card-body">
+                        <div class="d-flex flex-column gap-3">
+                            {% for submission in invoice.electronicInvoiceSubmissions %}
+                                <div class="d-flex align-items-start justify-content-between gap-2">
+                                    <div class="min-w-0">
+                                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                                            <span class="badge {{ submission.success ? 'bg-success-lt' : 'bg-danger-lt' }}">
+                                                {{ (submission.success ? 'einvoicing.view.status_success' : 'einvoicing.view.status_failed')|trans }}
+                                            </span>
+                                            <span class="text-muted small">{{ submission.provider|replace({'_': ' '})|capitalize }}</span>
+                                        </div>
+                                        {% if submission.externalReference is not empty %}
+                                            <div class="text-muted small mt-1">{{ submission.externalReference }}</div>
+                                        {% endif %}
+                                        {% if not submission.success and submission.message is not empty %}
+                                            <div class="text-danger small mt-1">{{ submission.message|trans }}</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="text-muted small text-nowrap">{{ submission.created|date('M d, Y H:i') }}</div>
                                 </div>
                             {% endfor %}
                         </div>

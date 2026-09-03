@@ -20,6 +20,7 @@ return App::config([
             'SolidInvoice\\ClientBundle\\Twig\\Components\\' => '@SolidInvoiceClient/Components',
             'SolidInvoice\\CoreBundle\\Twig\\Components\\' => '@SolidInvoiceCore/Components',
             'SolidInvoice\\DataGridBundle\\Twig\\Components\\' => '@SolidInvoiceDataGrid/Components',
+            'SolidInvoice\\ElectronicInvoicingBundle\\Twig\\Components\\' => '@SolidInvoiceElectronicInvoicing/Components',
             'SolidInvoice\\InstallBundle\\Twig\\Components\\' => '@SolidInvoiceInstall/Components',
             'SolidInvoice\\InvoiceBundle\\Twig\\Components\\' => '@SolidInvoiceInvoice/Components',
             'SolidInvoice\\NotificationBundle\\Twig\\Components\\' => '@SolidInvoiceNotification/Components',

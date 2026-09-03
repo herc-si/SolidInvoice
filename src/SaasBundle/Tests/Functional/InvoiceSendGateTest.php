@@ -19,6 +19,7 @@ use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
 use SolidInvoice\ClientBundle\Test\Factory\ContactFactory;
 use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
 use SolidInvoice\CoreBundle\Response\FlashResponse;
+use SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManager;
 use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
 use SolidInvoice\InvoiceBundle\Action\Transition\Send;
 use SolidInvoice\InvoiceBundle\Entity\Invoice;
@@ -97,7 +98,7 @@ final class InvoiceSendGateTest extends KernelTestCase
         $workflow = $container->get('state_machine.invoice');
         self::assertInstanceOf(WorkflowInterface::class, $workflow);
 
-        $action = new Send($workflow, $mailer, $router, $gate, new NullLogger());
+        $action = new Send($workflow, $mailer, $router, $gate, new NullLogger(), $container->get(ElectronicInvoiceManager::class));
         $action->setDoctrine($container->get('doctrine'));
 
         return $action;

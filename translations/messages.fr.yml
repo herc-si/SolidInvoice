@@ -531,6 +531,56 @@ datagrid:
     selected: sélectionné(s)
 delete_client: 'Supprimer le client'
 edit_client: 'Modifier le client'
+einvoicing:
+    marketplace:
+        active: Actif
+        configure: Configurer
+        configured_title: 'Fournisseurs configurés'
+        empty_subtitle: 'Configurez votre premier fournisseur de facturation électronique pour commencer à envoyer des factures électroniques.'
+        empty_title: 'Aucun fournisseur configuré'
+        heading: 'Facturation électronique'
+        modal_title: 'Configurer le fournisseur de facturation électronique'
+        no_results: 'Aucun fournisseur ne correspond à votre recherche'
+        recommended: Recommandé
+        search_placeholder: 'Rechercher des fournisseurs...'
+        set_active: Activer
+        subtitle: 'Envoyez des factures électroniques via une plateforme de facturation électronique conforme'
+        title: 'Facturation électronique'
+    provider:
+        add: 'Ajouter un fournisseur'
+        delete_confirm: 'Êtes-vous sûr de vouloir supprimer'
+        delete_title: 'Supprimer le fournisseur'
+        delete_warning: 'Cela supprimera le fournisseur de facturation électronique de manière irréversible.'
+        _fallback:
+            tagline: 'Fournisseur de facturation électronique'
+        flash:
+            added: 'Fournisseur ajouté'
+            deleted: 'Fournisseur supprimé'
+            not_exist: "Le fournisseur n'existe pas"
+            updated: 'Fournisseur mis à jour'
+            validation_errors: 'Veuillez corriger les erreurs de validation'
+        super_pdp:
+            build_failed: "Impossible de générer ou d'envoyer le document Factur-X. Veuillez vérifier les données de la facture et réessayer."
+            client_id: 'Identifiant client (Client ID)'
+            client_secret: 'Clé secrète (Client secret)'
+            display_name: 'SUPER PDP'
+            missing_credentials: "L'identifiant client et la clé secrète SUPER PDP doivent être configurés."
+            tagline: 'Envoyez des factures Factur-X via SUPER PDP, une Plateforme Agréée (PA/PDP) française.'
+        test:
+            display_name: 'Fournisseur de test'
+            reference_prefix: 'Préfixe de référence'
+            reference_prefix_help: "Préfixe utilisé pour générer une référence de soumission factice. Aucune facture n'est réellement envoyée."
+            simulate_failure: 'Simuler un échec de soumission'
+            simulated_failure: 'Échec simulé (fournisseur de test)'
+            tagline: "Simule l'envoi de factures électroniques sans appel externe réel, pour les tests."
+    send:
+        failed: "Échec de l'envoi de la facture électronique. Veuillez vérifier la configuration du fournisseur."
+        no_active_provider: "Aucun fournisseur de facturation électronique actif n'est configuré."
+        success: "La facture électronique a été envoyée avec succès."
+    view:
+        status_failed: Échec
+        status_success: Envoyée
+        title: 'Facturation électronique'
 email: E-mail
 email_verification:
     banner:
@@ -1090,6 +1140,7 @@ invoice:
             publish_and_send: 'Publier et envoyer'
             reopen: Rouvrir
             send: Envoyer
+            send_electronic: 'Envoyer la facture électronique'
             send_reminder: 'Envoyer un rappel'
             toggle_dropdown: 'Basculer le menu déroulant'
             view_quote: 'Voir le devis'
@@ -1154,6 +1205,7 @@ menu:
         api: 'Jetons API'
         custom_fields: 'Champs personnalisés'
         dashboard: 'Tableau de bord'
+        einvoicing: 'Facturation électronique'
         integrations: Intégrations
         logout: Déconnexion
         profile: Profil

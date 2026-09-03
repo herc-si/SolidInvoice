@@ -70,9 +70,9 @@ final class SystemConfigTest extends KernelTestCase
             'system/company/contact_details/email' => null,
             'system/company/contact_details/phone_number' => null,
             'system/company/currency' => 'USD',
+            'system/company/electronic_invoicing_enabled' => '0',
             'system/company/locale' => 'en',
             'system/company/logo' => null,
-            'tax/electronic_invoicing/enabled' => '0',
         ], $config->getAll());
     }
 

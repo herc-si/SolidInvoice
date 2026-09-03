@@ -23,6 +23,8 @@ use SolidInvoice\ClientBundle\Entity\Client;
 use SolidInvoice\ClientBundle\Entity\Contact;
 use SolidInvoice\ClientBundle\Entity\Credit;
 use SolidInvoice\CoreBundle\Repository\CompanyRepository;
+use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
+use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
 use SolidInvoice\InvoiceBundle\Entity\Invoice;
 use SolidInvoice\InvoiceBundle\Entity\InvoiceReminder;
 use SolidInvoice\InvoiceBundle\Entity\Line as InvoieLine;
@@ -203,6 +205,18 @@ class Company implements Stringable, SubscribableInterface
     #[ORM\OneToMany(targetEntity: InvoiceReminder::class, mappedBy: 'company', cascade: ['persist'], orphanRemoval: true)]
     public Collection $invoiceReminders;
 
+    /**
+     * @var Collection<int, ElectronicInvoiceProviderSetting>
+     */
+    #[ORM\OneToMany(targetEntity: ElectronicInvoiceProviderSetting::class, mappedBy: 'company', cascade: ['persist'], orphanRemoval: true)]
+    public Collection $electronicInvoiceProviderSettings;
+
+    /**
+     * @var Collection<int, ElectronicInvoiceSubmission>
+     */
+    #[ORM\OneToMany(targetEntity: ElectronicInvoiceSubmission::class, mappedBy: 'company', cascade: ['persist'], orphanRemoval: true)]
+    public Collection $electronicInvoiceSubmissions;
+
     public function __construct()
     {
         $this->apiTokenHistories = new ArrayCollection();
@@ -225,6 +239,8 @@ class Company implements Stringable, SubscribableInterface
         $this->invoiceLines = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->invoiceReminders = new ArrayCollection();
+        $this->electronicInvoiceProviderSettings = new ArrayCollection();
+        $this->electronicInvoiceSubmissions = new ArrayCollection();
         $this->id = new Ulid();
     }
 

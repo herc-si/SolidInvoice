@@ -44,6 +44,7 @@ use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
 use SolidInvoice\CoreBundle\Entity\LineInterface;
 use SolidInvoice\CoreBundle\Traits\Entity\Archivable;
 use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
+use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
 use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
 use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
 use SolidInvoice\InvoiceBundle\Traits\InvoiceStatusTrait;
@@ -224,6 +225,13 @@ class Invoice extends BaseInvoice implements Stringable
     #[Groups(['invoice_api:read', 'invoice_api:write'])]
     private Collection $invoiceTaxes;
 
+    /**
+     * @var Collection<int, ElectronicInvoiceSubmission>
+     */
+    #[ORM\OneToMany(targetEntity: ElectronicInvoiceSubmission::class, mappedBy: 'invoice', cascade: ['persist'], orphanRemoval: true)]
+    #[ORM\OrderBy(['created' => 'DESC'])]
+    private Collection $electronicInvoiceSubmissions;
+
     public function __construct()
     {
         parent::__construct();
@@ -232,6 +240,7 @@ class Invoice extends BaseInvoice implements Stringable
         $this->lines = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->invoiceTaxes = new ArrayCollection();
+        $this->electronicInvoiceSubmissions = new ArrayCollection();
         $this->balance = BigInteger::zero();
         $this->invoiceDate = CarbonImmutable::now();
         $this->setUuid(Uuid::v7());
@@ -380,6 +389,14 @@ class Invoice extends BaseInvoice implements Stringable
     public function getPayments(): Collection
     {
         return $this->payments;
+    }
+
+    /**
+     * @return Collection<int, ElectronicInvoiceSubmission>
+     */
+    public function getElectronicInvoiceSubmissions(): Collection
+    {
+        return $this->electronicInvoiceSubmissions;
     }
 
     public function getQuote(): ?Quote

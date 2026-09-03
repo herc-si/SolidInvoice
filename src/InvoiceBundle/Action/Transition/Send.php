@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace SolidInvoice\InvoiceBundle\Action\Transition;
 
 use Generator;
+use LogicException;
 use Psr\Log\LoggerInterface;
 use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
 use SolidInvoice\CoreBundle\Response\FlashResponse;
 use SolidInvoice\CoreBundle\Traits\SaveableTrait;
+use SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManagerInterface;
 use SolidInvoice\InvoiceBundle\Email\InvoiceEmail;
 use SolidInvoice\InvoiceBundle\Entity\Invoice;
 use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
@@ -42,6 +44,7 @@ final class Send
         private readonly RouterInterface $router,
         private readonly EmailVerificationGateInterface $emailVerificationGate,
         private readonly LoggerInterface $logger,
+        private readonly ElectronicInvoiceManagerInterface $electronicInvoiceManager,
     ) {
     }
 
@@ -86,11 +89,54 @@ final class Send
             };
         }
 
-        return new class($route) extends RedirectResponse implements FlashResponse {
+        $electronicInvoiceFlash = $this->sendElectronicInvoiceIfEligible($invoice);
+
+        return new class($route, $electronicInvoiceFlash) extends RedirectResponse implements FlashResponse {
+            /**
+             * @param array{string, string}|null $electronicInvoiceFlash
+             */
+            public function __construct(
+                string $url,
+                private readonly ?array $electronicInvoiceFlash,
+            ) {
+                parent::__construct($url);
+            }
+
             public function getFlash(): Generator
             {
                 yield FlashResponse::FLASH_SUCCESS => 'invoice.transition.action.sent';
+
+                if ($this->electronicInvoiceFlash !== null) {
+                    yield $this->electronicInvoiceFlash[0] => $this->electronicInvoiceFlash[1];
+                }
             }
         };
+    }
+
+    /**
+     * Electronic invoicing only applies to eligible clients (setting enabled, an active
+     * provider, client has a SIRET) — publishing an invoice for anyone else is unaffected.
+     * A failure here must not undo the invoice having already been published and emailed,
+     * so it only adds a second flash rather than changing the response.
+     *
+     * @return array{string, string}|null
+     */
+    private function sendElectronicInvoiceIfEligible(Invoice $invoice): ?array
+    {
+        if (! $this->electronicInvoiceManager->isEligible($invoice)) {
+            return null;
+        }
+
+        try {
+            $submission = $this->electronicInvoiceManager->send($invoice);
+        } catch (LogicException $e) {
+            $this->logger->error('Failed to send electronic invoice: ' . $e->getMessage(), ['exception' => $e]);
+
+            return [FlashResponse::FLASH_ERROR, 'einvoicing.send.failed'];
+        }
+
+        return $submission->isSuccess()
+            ? [FlashResponse::FLASH_SUCCESS, 'einvoicing.send.success']
+            : [FlashResponse::FLASH_ERROR, 'einvoicing.send.failed'];
     }
 }

@@ -14,6 +14,10 @@ core:
         field_key: 'Field key must start with a lowercase letter and contain only lowercase letters, digits, and underscores.'
         similar_label: 'A custom field with a similar label already exists for the selected target.'
         unique_label: 'A custom field with this label already exists for the selected target.'
+einvoicing:
+    constraint:
+        provider_setting:
+            unique_name: 'The name is already in use'
 install:
     database:
         driver:

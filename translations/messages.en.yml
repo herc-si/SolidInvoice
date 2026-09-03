@@ -531,6 +531,56 @@ datagrid:
     selected: selected
 delete_client: 'Delete Client'
 edit_client: 'Edit Client'
+einvoicing:
+    marketplace:
+        active: Active
+        configure: Configure
+        configured_title: 'Configured Providers'
+        empty_subtitle: 'Configure your first electronic-invoicing provider to start sending electronic invoices.'
+        empty_title: 'No providers configured'
+        heading: 'Electronic Invoicing'
+        modal_title: 'Configure Electronic Invoicing Provider'
+        no_results: 'No providers found matching your search'
+        recommended: Recommended
+        search_placeholder: 'Search providers...'
+        set_active: 'Set active'
+        subtitle: 'Send electronic invoices via a compliant e-invoicing platform'
+        title: 'Electronic Invoicing'
+    provider:
+        add: 'Add Provider'
+        delete_confirm: 'Are you sure you want to delete'
+        delete_title: 'Delete Provider'
+        delete_warning: 'This will remove the electronic-invoicing provider and cannot be reversed.'
+        _fallback:
+            tagline: 'Electronic invoicing provider'
+        flash:
+            added: 'Provider added'
+            deleted: 'Provider deleted'
+            not_exist: 'Provider does not exist'
+            updated: 'Provider updated'
+            validation_errors: 'Please correct the validation errors'
+        super_pdp:
+            build_failed: 'Could not build or send the Factur-X document. Please check the invoice data and try again.'
+            client_id: 'Client ID'
+            client_secret: 'Client secret'
+            display_name: 'SUPER PDP'
+            missing_credentials: 'The SUPER PDP client ID and client secret must be configured.'
+            tagline: 'Send Factur-X invoices through SUPER PDP, a French Plateforme Agréée (PA/PDP).'
+        test:
+            display_name: 'Test Provider'
+            reference_prefix: 'Reference prefix'
+            reference_prefix_help: 'Prefix used to generate a fake submission reference. No real invoice is sent anywhere.'
+            simulate_failure: 'Simulate a failed submission'
+            simulated_failure: 'Simulated failure (test provider)'
+            tagline: 'Simulate electronic-invoice submissions without any external call, for testing.'
+    send:
+        failed: 'Failed to send the electronic invoice. Please check the provider configuration.'
+        no_active_provider: 'No active electronic-invoicing provider is configured.'
+        success: 'The electronic invoice was sent successfully.'
+    view:
+        status_failed: Failed
+        status_success: Sent
+        title: 'Electronic Invoicing'
 email: Email
 email_verification:
     banner:
@@ -1090,6 +1140,7 @@ invoice:
             publish_and_send: 'Publish and Send'
             reopen: Re-Open
             send: Send
+            send_electronic: 'Send Electronic Invoice'
             send_reminder: 'Send Reminder'
             toggle_dropdown: 'Toggle Dropdown'
             view_quote: 'View Quote'
@@ -1154,6 +1205,7 @@ menu:
         api: 'API Tokens'
         custom_fields: 'Custom Fields'
         dashboard: Dashboard
+        einvoicing: 'Electronic Invoicing'
         integrations: Integrations
         logout: Logout
         profile: Profile

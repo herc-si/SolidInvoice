@@ -28,7 +28,7 @@ class SystemConfig
 
     final public const string LOCALE_CONFIG_PATH = 'system/company/locale';
 
-    final public const string ELECTRONIC_INVOICING_CONFIG_PATH = 'tax/electronic_invoicing/enabled';
+    final public const string ELECTRONIC_INVOICING_CONFIG_PATH = 'system/company/electronic_invoicing_enabled';
 
     /**
      * @var array<string, string>
