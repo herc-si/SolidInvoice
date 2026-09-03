@@ -21,6 +21,7 @@ use SolidInvoice\CoreBundle\Company\CompanySelector;
 use SolidInvoice\CoreBundle\Company\DefaultData;
 use SolidInvoice\CoreBundle\Entity\Company;
 use SolidInvoice\CoreBundle\Event\CompanyCreatedEvent;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 #[AsEntityListener(Events::postPersist, entity: Company::class)]
 final readonly class CompanyCreatedListener
@@ -29,6 +30,7 @@ final readonly class CompanyCreatedListener
         private EventDispatcherInterface $eventDispatcher,
         private DefaultData $defaultData,
         private CompanySelector $companySelector,
+        private RequestStack $requestStack,
     ) {
     }
 
@@ -42,6 +44,12 @@ final readonly class CompanyCreatedListener
         $this->companySelector->switchCompany($company->getId());
 
         /** @TODO: Need a different way to specify the currency and not add it to the company entity */
-        ($this->defaultData)($company, ['currency' => $company->currency]);
+        ($this->defaultData)($company, [
+            'currency' => $company->currency,
+            // Carries the install-time (or the creating user's own) locale choice
+            // onto the new company's default locale setting, instead of always
+            // seeding it as English - see SystemConfigProvider::provide().
+            'locale' => $this->requestStack->getCurrentRequest()?->getLocale(),
+        ]);
     }
 }

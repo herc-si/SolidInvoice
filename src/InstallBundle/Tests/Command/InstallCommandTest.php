@@ -30,6 +30,7 @@ use SolidInvoice\InstallBundle\DTO\Installation;
 use SolidInvoice\InstallBundle\Step\InstallationStepInterface;
 use SolidInvoice\UserBundle\Entity\User;
 use SolidInvoice\UserBundle\Repository\UserRepository;
+use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Secrets\AbstractVault;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -72,6 +73,9 @@ final class InstallCommandTest extends TestCase
         $input->shouldReceive('getOption')
             ->with('admin-email')
             ->andReturn($email);
+        $input->shouldReceive('getOption')
+            ->with('locale')
+            ->andReturn('en');
 
         $output = M::mock(OutputInterface::class);
         $output->shouldReceive('writeln')
@@ -129,6 +133,9 @@ final class InstallCommandTest extends TestCase
         $input->shouldReceive('getOption')
             ->with('admin-password')
             ->andReturn($password);
+        $input->shouldReceive('getOption')
+            ->with('locale')
+            ->andReturn('en');
 
         $output = M::mock(OutputInterface::class);
         $output->shouldReceive('writeln')
@@ -182,6 +189,9 @@ final class InstallCommandTest extends TestCase
         $input->shouldReceive('getOption')
             ->with('admin-password')
             ->andReturn($password);
+        $input->shouldReceive('getOption')
+            ->with('locale')
+            ->andReturn('en');
 
         $output = M::mock(OutputInterface::class);
         $output->shouldReceive('writeln')
@@ -362,6 +372,7 @@ final class InstallCommandTest extends TestCase
             $steps ?? new ServiceLocator([]),
             $this->createStub(KernelInterface::class),
             $telemetry,
+            $this->createStub(UserSettingRepositoryInterface::class),
             $configDir,
             null
         );

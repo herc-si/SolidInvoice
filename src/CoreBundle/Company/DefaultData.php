@@ -48,7 +48,7 @@ final readonly class DefaultData
     }
 
     /**
-     * @param array{currency: string} $data
+     * @param array{currency: string, locale?: string|null} $data
      * @throws JsonException
      */
     public function __invoke(Company $company, array $data): void
@@ -81,7 +81,7 @@ final readonly class DefaultData
     }
 
     /**
-     * @param array{currency: string} $data
+     * @param array{currency: string, locale?: string|null} $data
      * @throws JsonException
      */
     private function createAppConfig(Company $company, array $data): void

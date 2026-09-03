@@ -23,7 +23,9 @@ use SolidInvoice\InstallBundle\DTO\Installation;
 use SolidInvoice\InstallBundle\Form\Type\InstallationType;
 use SolidInvoice\InstallBundle\Step\InstallationStepInterface;
 use SolidInvoice\UserBundle\Entity\User;
+use SolidInvoice\UserBundle\Enum\UserSettingType;
 use SolidInvoice\UserBundle\Repository\UserRepository;
+use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
@@ -54,6 +56,7 @@ final class Install extends AbstractController
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
         private readonly ConfigWriter $configWriter,
         private readonly UserRepository $userRepository,
+        private readonly UserSettingRepositoryInterface $userSettingRepository,
         private readonly Security $security,
         private readonly Telemetry $telemetry,
         private readonly ?string $installed,
@@ -94,6 +97,12 @@ final class Install extends AbstractController
 
             $user = $this->userRepository->findOneBy(['email' => $formData->userAccount->emailAddress]);
             if ($user instanceof User) {
+                $this->userSettingRepository->saveSetting($user, UserSettingType::Locale, $formData->userAccount->locale);
+                // Seed the session locale immediately, so the login redirect below
+                // already renders in the chosen language instead of lagging by one
+                // request (same reasoning as EditProfile::__invoke).
+                $request->getSession()->set('_locale', $formData->userAccount->locale);
+
                 return $this->security->login($user, authenticatorName: 'security.authenticator.form_login.main', firewallName: 'main');
             }
 

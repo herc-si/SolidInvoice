@@ -38,7 +38,9 @@ use SolidInvoice\InstallBundle\Exception\ApplicationInstalledException;
 use SolidInvoice\InstallBundle\Step\CreateUserStep;
 use SolidInvoice\InstallBundle\Step\InstallationStepInterface;
 use SolidInvoice\UserBundle\Entity\User;
+use SolidInvoice\UserBundle\Enum\UserSettingType;
 use SolidInvoice\UserBundle\Repository\UserRepository;
+use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\FormatterHelper;
@@ -82,6 +84,7 @@ class InstallCommand extends Command
         private readonly ServiceLocator $installationSteps,
         private readonly KernelInterface $kernel,
         private readonly Telemetry $telemetry,
+        private readonly UserSettingRepositoryInterface $userSettingRepository,
         #[Autowire(env: 'SOLIDINVOICE_CONFIG_DIR')]
         private readonly string $configDir,
         private readonly ?string $installed
@@ -234,6 +237,9 @@ class InstallCommand extends Command
             throw new RuntimeException(sprintf('No object manager found for class "%s".', User::class));
         }
 
+        /** @var string $locale */
+        $locale = $input->getOption('locale');
+
         if ($existingUser !== null) {
             if ($existingUser->isEnabled()) {
                 $output->writeln(sprintf('<comment>User %s already exists, skipping creation</comment>', $email));
@@ -248,6 +254,7 @@ class InstallCommand extends Command
                 ->setVerified(true);
 
             $em->flush();
+            $this->userSettingRepository->saveSetting($existingUser, UserSettingType::Locale, $locale);
 
             return;
         }
@@ -261,6 +268,7 @@ class InstallCommand extends Command
 
         $em->persist($user);
         $em->flush();
+        $this->userSettingRepository->saveSetting($user, UserSettingType::Locale, $locale);
     }
 
     /**
