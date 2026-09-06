@@ -426,14 +426,14 @@ jobs:
           # Strip leading 'v' — Helm versions must not have a 'v' prefix
           CHART_VERSION="${VERSION#v}"
           echo "CHART_VERSION=${CHART_VERSION}" >> "$GITHUB_ENV"
-          sed -i "s/^version: .*/version: ${CHART_VERSION}/" helm/solidinvoice/Chart.yaml
-          sed -i "s/^appVersion: .*/appVersion: \"${CHART_VERSION}\"/" helm/solidinvoice/Chart.yaml
+          sed -i "s/^version: .*/version: ${CHART_VERSION}/" helm/augias/Chart.yaml
+          sed -i "s/^appVersion: .*/appVersion: \"${CHART_VERSION}\"/" helm/augias/Chart.yaml
 
       - name: Update Helm dependencies
-        run: helm dep update helm/solidinvoice
+        run: helm dep update helm/augias
 
       - name: Package chart
-        run: helm package helm/solidinvoice --destination /tmp/helm-packages
+        run: helm package helm/augias --destination /tmp/helm-packages
 
       - name: Upload chart to GitHub release
         env:

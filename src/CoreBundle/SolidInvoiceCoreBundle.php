@@ -22,7 +22,7 @@ final class SolidInvoiceCoreBundle extends Bundle
 {
     public const string VERSION = '4.0.0-dev';
 
-    public const string APP_NAME = 'SolidInvoice';
+    public const string APP_NAME = 'Augias';
 
     public const NAMESPACE = __NAMESPACE__;
 

@@ -1,11 +1,11 @@
 {
-    "name": "solidinvoice",
-    "description": "SolidInvoice Billing Application",
+    "name": "augias",
+    "description": "Augias Billing Application",
     "type": "module",
     "version": "4.0.0-dev",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/SolidInvoice/SolidInvoice.git"
+        "url": "git+https://github.com/herc-si/SolidInvoice.git"
     },
     "keywords": [
         "billing"
@@ -13,9 +13,8 @@
     "author": "Pierre du Plessis",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/SolidInvoice/SolidInvoice/issues"
+        "url": "https://github.com/herc-si/SolidInvoice/issues"
     },
-    "homepage": "https://solidinvoice.co",
     "scripts": {
         "dev": "encore dev",
         "watch": "encore dev --watch",

@@ -587,7 +587,7 @@ dashboard:
         success_message: "Tout est configuré. Vos informations sont enregistrées, il ne reste plus qu'à facturer."
         success_title: 'Vous êtes prêt'
         tasks_remaining: '{1} il reste %count% étape, quand vous aurez un moment|]1,Inf] il reste %count% étapes, quand vous aurez un moment'
-        title: 'Bien démarrer avec SolidInvoice'
+        title: 'Bien démarrer avec Augias'
         upload_logo:
             description: 'Ajoutez votre logo sur les factures et devis'
             name: 'Importez le logo de votre société'
@@ -1025,7 +1025,7 @@ installation:
     finish:
         login: 'Se connecter maintenant'
         success: Succès
-        success_message: 'Vous avez installé SolidInvoice avec succès !'
+        success_message: 'Vous avez installé Augias avec succès !'
     finish_page:
         add_clients:
             description: 'Commencez par ajouter vos clients et leurs coordonnées'
@@ -1037,8 +1037,8 @@ installation:
         create_invoice:
             description: 'Générez votre première facture professionnelle en quelques secondes'
             title: 'Créer une facture'
-        launch: 'Lancer SolidInvoice'
-        subtitle: 'Félicitations ! SolidInvoice a été installé et configuré avec succès.'
+        launch: 'Lancer Augias'
+        subtitle: 'Félicitations ! Augias a été installé et configuré avec succès.'
         summary:
             admin: 'Votre compte administrateur est prêt à l''emploi'
             database: 'La base de données a été créée et configurée'
@@ -1119,10 +1119,10 @@ installation:
         screenshot_placeholder: '[Emplacement de capture d''écran - Aperçu du tableau de bord]'
         setup:
             line1: 'Cet assistant d''installation va vous guider tout au long du processus de configuration.'
-            line2: 'Il ne faudra que quelques minutes pour configurer votre base de données, créer votre compte et démarrer avec SolidInvoice.'
+            line2: 'Il ne faudra que quelques minutes pour configurer votre base de données, créer votre compte et démarrer avec Augias.'
             title: 'Configuration rapide et simple'
         tagline: 'Votre solution complète de facturation'
-        thank_you: 'Merci d''avoir choisi SolidInvoice !'
+        thank_you: 'Merci d''avoir choisi Augias !'
         welcome: 'Bienvenue sur'
     step:
         database_configuration: 'Configuration de la base de données'
@@ -1135,11 +1135,11 @@ installation:
     title: 'Installation de %app_name%'
     user_account:
         application_url: 'URL de l''application'
-        application_url_help: 'L''URL à laquelle cette instance de SolidInvoice est accessible. Incluez le protocole (http:// ou https://).'
+        application_url_help: 'L''URL à laquelle cette instance de Augias est accessible. Incluez le protocole (http:// ou https://).'
         locale_help: 'La seule langue actuellement prise en charge est « en ». Pour choisir une autre langue, veuillez installer l''extension « intl »'
         locale_placeholder: 'Veuillez sélectionner une langue'
         telemetry: 'Envoyer des statistiques d''utilisation anonymes'
-        telemetry_help: 'Aidez-nous à améliorer SolidInvoice en partageant des données d''utilisation anonymes. Aucune information personnelle ou professionnelle n''est jamais collectée.'
+        telemetry_help: 'Aidez-nous à améliorer Augias en partageant des données d''utilisation anonymes. Aucune information personnelle ou professionnelle n''est jamais collectée.'
 invalid_file: 'Fichier invalide'
 invoice:
     action:
@@ -1189,9 +1189,7 @@ invoice:
     external:
         footer:
             description: 'Logiciel de facturation open source pour freelances et petites entreprises'
-            github: GitHub
             powered_by: 'Propulsé par'
-            visit_website: 'Visiter SolidInvoice.co'
         tagline: 'La facturation professionnelle en toute simplicité'
     from: De
     grid:
@@ -1523,7 +1521,7 @@ mcp:
         authorize: Autoriser
         cancel: Annuler
         company: Société
-        heading: '%client% souhaite accéder à votre compte SolidInvoice'
+        heading: '%client% souhaite accéder à votre compte Augias'
         permissions: 'Autorisations demandées'
         redirect: 'Rappel : %uri%'
         remember: 'Ne plus me demander pour cette application + société'
@@ -1703,7 +1701,7 @@ onboarding:
         title: 'Tout est prêt !'
     flash:
         invoice_created: '🎉 Votre première facture est prête ! Vous pouvez la modifier, l''envoyer à votre client ou télécharger un PDF.'
-        onboarding_complete: 'Bienvenue sur SolidInvoice ! Tout est configuré et prêt à l''emploi.'
+        onboarding_complete: 'Bienvenue sur Augias ! Tout est configuré et prêt à l''emploi.'
     invoice:
         aha_title: 'Envoyez votre première facture :'
         benefits: "Voyez exactement à quoi ressembleront vos factures\nEnvoyez-la immédiatement ou enregistrez-la comme brouillon\nSuivez son paiement\nSoyez payé plus vite grâce aux paiements en ligne\n"
@@ -1812,14 +1810,14 @@ payment:
             title: 'Vous ne savez pas lequel choisir ?'
         custom:
             display_name: 'Méthode personnalisée'
-            overview: "Configurez votre propre moyen de paiement - par exemple un portefeuille local ou une passerelle non répertoriée par SolidInvoice. Les paiements sont enregistrés manuellement."
+            overview: "Configurez votre propre moyen de paiement - par exemple un portefeuille local ou une passerelle non répertoriée par Augias. Les paiements sont enregistrés manuellement."
             tagline: 'Créez votre propre moyen de paiement enregistré manuellement.'
         field:
             enabled:
                 help: 'Activez cette option pour rendre le moyen de paiement disponible. Laissez-la désactivée pendant que vous finalisez la configuration.'
                 label: Activé
             name:
-                help: 'Un libellé pour vous aider à reconnaître ce moyen dans SolidInvoice - seul vous le voyez, pas vos clients. Par exemple « Stripe - compte principal ».'
+                help: 'Un libellé pour vous aider à reconnaître ce moyen dans Augias - seul vous le voyez, pas vos clients. Par exemple « Stripe - compte principal ».'
                 label: 'Nom affiché'
                 placeholder: 'ex. Stripe - compte principal'
             paypal:
@@ -1859,7 +1857,7 @@ payment:
         offline:
             display_name: 'Paiement hors ligne'
             overview: 'Utilisez ceci pour enregistrer les paiements reçus en dehors de l''application - un chèque, une carte prise en personne ou tout autre moyen. Rien n''est facturé automatiquement ; vous marquez simplement la facture comme payée.'
-            tagline: 'Enregistrez un paiement effectué en dehors de SolidInvoice.'
+            tagline: 'Enregistrez un paiement effectué en dehors de Augias.'
         payex:
             display_name: PayEx
             tagline: 'Intégration historique PayEx.'
@@ -1868,7 +1866,7 @@ payment:
             setup_label: 'Obtenir vos identifiants API PayPal'
         paypal_express_checkout:
             display_name: 'PayPal Express Checkout'
-            overview: 'PayPal Express Checkout envoie votre client vers PayPal pour approuver le paiement, puis le ramène vers SolidInvoice. Les clients peuvent payer avec leur solde PayPal ou une carte de crédit/débit - aucun compte PayPal requis pour les paiements par carte.'
+            overview: 'PayPal Express Checkout envoie votre client vers PayPal pour approuver le paiement, puis le ramène vers Augias. Les clients peuvent payer avec leur solde PayPal ou une carte de crédit/débit - aucun compte PayPal requis pour les paiements par carte.'
             tagline: 'Permettez à vos clients de payer avec leur compte PayPal ou une carte.'
         paypal_pro_checkout:
             display_name: 'PayPal Pro (Payflow)'
@@ -1879,13 +1877,13 @@ payment:
                 subtitle: "Connectez votre compte. Vous trouverez ces clés dans le tableau de bord de votre fournisseur."
                 title: Identifiants
             details:
-                subtitle: 'Comment ce moyen de paiement est identifié dans SolidInvoice.'
+                subtitle: 'Comment ce moyen de paiement est identifié dans Augias.'
                 title: Détails
             more:
                 subtitle: 'Processeurs supplémentaires et historiques. À utiliser uniquement si vous avez déjà un compte chez eux.'
                 title: 'Plus de passerelles'
             offline:
-                subtitle: 'Enregistrez les paiements reçus en dehors de SolidInvoice, comme les espèces ou un virement bancaire.'
+                subtitle: 'Enregistrez les paiements reçus en dehors de Augias, comme les espèces ou un virement bancaire.'
                 title: 'Méthodes hors ligne et manuelles'
             online:
                 subtitle: 'Prélevez automatiquement les cartes - votre client paie via un paiement sécurisé.'
@@ -1893,7 +1891,7 @@ payment:
         setup:
             default_label: 'Comment obtenir vos clés API'
         stripe:
-            comparison: "Stripe Checkout (recommandé) : Stripe héberge la page de paiement - c'est le plus simple à configurer et le plus sécurisé, sans travail de conformité supplémentaire pour vous. Stripe.js : les champs de carte sont intégrés directement dans SolidInvoice pour une expérience plus fluide, mais vous assumez une plus grande responsabilité en matière de conformité PCI. En cas de doute, choisissez Stripe Checkout."
+            comparison: "Stripe Checkout (recommandé) : Stripe héberge la page de paiement - c'est le plus simple à configurer et le plus sécurisé, sans travail de conformité supplémentaire pour vous. Stripe.js : les champs de carte sont intégrés directement dans Augias pour une expérience plus fluide, mais vous assumez une plus grande responsabilité en matière de conformité PCI. En cas de doute, choisissez Stripe Checkout."
             setup_label: 'Obtenir vos clés API Stripe'
         stripe_checkout:
             display_name: 'Stripe Checkout'
@@ -1901,8 +1899,8 @@ payment:
             tagline: 'Acceptez les cartes sur une page de paiement sécurisée hébergée par Stripe.'
         stripe_js:
             display_name: Stripe.js
-            overview: 'Stripe.js intègre les champs de saisie de carte directement dans SolidInvoice au lieu de rediriger vers Stripe. Cela offre un paiement plus fluide, mais vous assumez davantage de responsabilité en matière de conformité PCI. La plupart des entreprises devraient utiliser Stripe Checkout à la place.'
-            tagline: 'Intégrez les champs de carte directement dans SolidInvoice (avancé).'
+            overview: 'Stripe.js intègre les champs de saisie de carte directement dans Augias au lieu de rediriger vers Stripe. Cela offre un paiement plus fluide, mais vous assumez davantage de responsabilité en matière de conformité PCI. La plupart des entreprises devraient utiliser Stripe Checkout à la place.'
+            tagline: 'Intégrez les champs de carte directement dans Augias (avancé).'
     grid:
         amount: "Montant"
         client: "Client"
@@ -2065,7 +2063,7 @@ profile:
     edit:
         cancel: Annuler
         locale:
-            help: 'Choisissez la langue dans laquelle SolidInvoice vous est affiché. Laissez vide pour utiliser la langue par défaut de la société.'
+            help: 'Choisissez la langue dans laquelle Augias vous est affiché. Laissez vide pour utiliser la langue par défaut de la société.'
             label: Langue
             placeholder: 'Utiliser la langue par défaut de la société'
         section:
@@ -2073,7 +2071,7 @@ profile:
                 description: 'Votre nom et vos coordonnées'
                 title: 'Informations personnelles'
             preferences:
-                description: 'Choisissez la langue dans laquelle vous voyez SolidInvoice'
+                description: 'Choisissez la langue dans laquelle vous voyez Augias'
                 title: Préférences
         submit: Enregistrer
         subtitle: 'Mettez à jour vos informations personnelles et coordonnées'
@@ -2169,9 +2167,7 @@ quote:
     external:
         footer:
             description: 'Logiciel de facturation open source pour freelances et petites entreprises'
-            github: GitHub
             powered_by: 'Propulsé par'
-            visit_website: 'Visiter SolidInvoice.co'
         tagline: 'La facturation professionnelle en toute simplicité'
     from: De
     grid:
@@ -2421,7 +2417,7 @@ saas:
         just_completed_title: 'Vous venez de finaliser le paiement ?'
         need_help: 'Besoin d''aide ?'
         secure_checkout: 'Paiement sécurisé · Annulable à tout moment · Aucuns frais cachés'
-        subtitle: 'Choisissez un plan et commencez à gérer votre activité avec SolidInvoice en quelques minutes.'
+        subtitle: 'Choisissez un plan et commencez à gérer votre activité avec Augias en quelques minutes.'
         switch_company: 'Basculer vers une autre société'
         title: 'Activez votre abonnement'
     plan:
@@ -2470,7 +2466,7 @@ saas:
         promo_code: 'Code promo'
         promo_heading: "Ne partez pas tout de suite — voici %percent%% de réduction"
         promo_message: 'Activez votre abonnement maintenant et utilisez le code <strong>%code%</strong> lors du paiement pour obtenir <strong>%percent%% de réduction sur vos 3 premiers mois</strong>. Continuez à facturer sans interruption.'
-        subtitle: 'Votre essai de %days% jours s''est terminé le %date%. Activez votre abonnement à %price%/mois pour continuer à utiliser SolidInvoice.'
+        subtitle: 'Votre essai de %days% jours s''est terminé le %date%. Activez votre abonnement à %price%/mois pour continuer à utiliser Augias.'
         title: 'Votre essai est terminé'
 save: Enregistrer
 search:
@@ -2529,7 +2525,7 @@ security:
             payments:
                 description: 'Acceptez les paiements en ligne et suivez chaque transaction'
                 title: 'Suivi des paiements'
-            subtitle: 'Rejoignez des milliers de freelances et petites entreprises qui gèrent leurs finances avec SolidInvoice'
+            subtitle: 'Rejoignez des milliers de freelances et petites entreprises qui gèrent leurs finances avec Augias'
             tax:
                 description: 'Calculs de taxes automatiques et rapports détaillés'
                 title: 'Gestion des taxes'
@@ -2551,7 +2547,7 @@ security:
             medium: 'Force moyenne'
             strong: 'Mot de passe fort'
             weak: 'Mot de passe faible'
-        subheading: 'Démarrez avec SolidInvoice dès aujourd''hui'
+        subheading: 'Démarrez avec Augias dès aujourd''hui'
         submit: "S'inscrire"
         success: 'Votre compte a été créé. Veuillez vérifier votre adresse e-mail avant de vous connecter.'
         terms_agreement: 'J''accepte les conditions générales et la politique de confidentialité'
@@ -2698,13 +2694,13 @@ settings:
             watermark: 'Afficher le filigrane de statut'
         domain:
             custom_domain: 'Domaine personnalisé'
-            dns_footer: 'Une fois le CNAME en place, votre domaine personnalisé pointera automatiquement vers SolidInvoice — aucune autre action requise.'
-            dns_help: 'Après l''enregistrement, ajoutez un enregistrement CNAME chez votre fournisseur DNS pour que votre domaine pointe vers SolidInvoice. Les modifications DNS peuvent prendre jusqu''à 24 heures pour se propager.'
+            dns_footer: 'Une fois le CNAME en place, votre domaine personnalisé pointera automatiquement vers Augias — aucune autre action requise.'
+            dns_help: 'Après l''enregistrement, ajoutez un enregistrement CNAME chez votre fournisseur DNS pour que votre domaine pointe vers Augias. Les modifications DNS peuvent prendre jusqu''à 24 heures pour se propager.'
             dns_name: 'Nom / Hôte'
             dns_title: 'Configuration DNS requise'
             dns_type: Type
             dns_value: 'Valeur / Cible'
-            subtitle: 'Servez SolidInvoice depuis votre propre domaine (ex. factures.votresociete.com) au lieu de l''URL par défaut.'
+            subtitle: 'Servez Augias depuis votre propre domaine (ex. factures.votresociete.com) au lieu de l''URL par défaut.'
             title: Domaine
         email:
             bcc: 'Adresse e-mail en copie cachée (CCI)'

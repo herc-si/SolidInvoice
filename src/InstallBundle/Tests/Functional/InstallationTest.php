@@ -193,7 +193,7 @@ final class InstallationTest extends PantherTestCase
                 static fn (Client $client) => $client->waitFor('button[name="installation[navigator][next]"]')
             )
             ->assertSee('Welcome to')
-            ->assertSee('SolidInvoice')
+            ->assertSee('Augias')
             ->assertSee('Begin Installation')
             ->assertSee('Professional Invoicing')
             ->assertSee('Online Payments')
@@ -550,7 +550,7 @@ final class InstallationTest extends PantherTestCase
             ->waitUntilSeeIn('h1', 'Installation Complete!')
             ->assertSee('Installation Complete!')
             ->assertSee("What's Next?")
-            ->assertSee('Launch SolidInvoice');
+            ->assertSee('Launch Augias');
     }
 
     public function testInstallationStepDisplaysProgress(): void

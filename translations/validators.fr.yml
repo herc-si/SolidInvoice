@@ -27,7 +27,7 @@ install:
         driver:
             not_blank: 'Veuillez sélectionner un pilote de base de données.'
     requirements:
-        not_met: 'Votre système ne répond pas aux exigences minimales pour exécuter SolidInvoice. Veuillez corriger les problèmes listés ci-dessous.'
+        not_met: 'Votre système ne répond pas aux exigences minimales pour exécuter Augias. Veuillez corriger les problèmes listés ci-dessous.'
     user_account:
         email:
             not_blank: 'Veuillez saisir un e-mail'

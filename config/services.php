@@ -48,7 +48,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set('env(SOLIDINVOICE_SENTRY_HTTP_TIMEOUT)', '2');
     $parameters->set('env(SOLIDINVOICE_SENTRY_HTTP_CONNECT_TIMEOUT)', '2');
     $parameters->set('env(SOLIDINVOICE_MAILER_DSN)', 'null://null');
-    $parameters->set('env(SOLIDINVOICE_MAILER_SENDER)', 'SolidInvoice <no-reply@solidinvoice.co>');
+    $parameters->set('env(SOLIDINVOICE_MAILER_SENDER)', 'Augias <no-reply@localhost>');
 
     // Translation provider DSN (e.g. crowdin://PROJECT_ID:API_TOKEN@default). Empty by
     // default: the provider is only contacted by the translation:push / translation:pull

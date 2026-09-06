@@ -10,7 +10,7 @@ SolidInvoice Pro — $12.00 / month
 * Automatic payment reminders
 * Online payments via your own Stripe or PayPal account
 * Multiple team members on one account
-* Backups, updates, and SolidInvoice branding removed from your invoices
+* Backups, updates, and Augias branding removed from your invoices
 
 Your discount code: SOLID30
 30% off your first three months. Enter this code at checkout.
@@ -22,4 +22,4 @@ Cancel anytime. No surprise fees. Your data restores immediately on subscription
 P.S. your account locks when the trial ends. Subscribe before that happens to keep sending without interruption.
 
 See you inside,
-— The SolidInvoice team
+— The Augias team

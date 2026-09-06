@@ -1,5 +1,5 @@
 variable "IMAGE_NAME" {
-    default = "solidinvoice/solidinvoice"
+    default = "herc-si/augias"
 }
 
 variable "SOLIDINVOICE_VERSION" {

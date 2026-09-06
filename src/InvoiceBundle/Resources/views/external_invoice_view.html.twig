@@ -306,8 +306,8 @@
                         <div class="card">
                             <div class="card-body py-4">
                                 <div class="row align-items-center">
-                                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                                        <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2">
+                                    <div class="col-12 text-center">
+                                        <div class="d-flex align-items-center justify-content-center gap-2">
                                             {{ app_logo(24, showDefault: true, showOnlyAppIcon: true) }}
                                             <span class="text-muted">
                                                 {{ 'invoice.external.footer.powered_by'|trans }} <strong class="text-primary">{{ constant('SolidInvoice\\CoreBundle\\SolidInvoiceCoreBundle::APP_NAME') }}</strong>
@@ -316,16 +316,6 @@
                                         <div class="mt-2 small text-muted">
                                             {{ 'invoice.external.footer.description'|trans }}
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 text-center text-md-end">
-                                        <a href="https://solidinvoice.co" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
-                                            {{ ux_icon('tabler:world', {width: 16, height: 16}) }}
-                                            {{ 'invoice.external.footer.visit_website'|trans }}
-                                        </a>
-                                        <a href="https://github.com/SolidInvoice/SolidInvoice" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm ms-2">
-                                            {{ ux_icon('tabler:brand-github', {width: 16, height: 16}) }}
-                                            {{ 'invoice.external.footer.github'|trans }}
-                                        </a>
                                     </div>
                                 </div>
                             </div>

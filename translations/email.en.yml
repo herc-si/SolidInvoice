@@ -37,12 +37,12 @@ invitation:
     email: 'Your Email'
     info: "If you weren't expecting this invitation, you can safely ignore this email."
     instructions: 'Click the button below to set your password and join the team.'
-    message: 'You have been invited to join %company% on SolidInvoice.'
+    message: 'You have been invited to join %company% on Augias.'
     reminder:
         expires: Expires
         info: 'If you no longer wish to join, you can safely ignore this email and the invitation will expire automatically.'
         instructions: 'Click the button below to accept your invitation before it expires.'
-        message: 'Your invitation to join %company% on SolidInvoice will expire in 2 days.'
+        message: 'Your invitation to join %company% on Augias will expire in 2 days.'
         title: 'Your invitation to join %company% is about to expire'
     title: 'Invitation to join %company%'
 invoice:
@@ -134,7 +134,7 @@ onboarding:
         eyebrow: 'Step 5 · Make it yours'
         heading: 'Your logo. Your brand. Your invoices.'
         lede: 'Clients judge professionalism before they read a single line item. A branded invoice — your logo, your name — signals that you run a real business.'
-        ps: 'on the paid plan, you can disable SolidInvoice branding in Settings — your clients will see only your name.'
+        ps: 'on the paid plan, you can disable Augias branding in Settings — your clients will see only your name.'
         step:
             1:
                 desc: 'PNG, SVG, or JPG. Appears on every invoice and quote you send.'
@@ -145,14 +145,14 @@ onboarding:
         steps_heading: 'Two things to customize'
         subject: 'Put your brand on your invoices'
     footer:
-        reason: "You're receiving this because you signed up for SolidInvoice."
+        reason: "You're receiving this because you signed up for Augias."
         tagline: 'Invoicing for freelancers and small businesses.'
     recurring_billing:
         after:
             1: 'Automatic invoices sent on your schedule'
             2: 'Dashboard shows every outstanding amount'
             3: 'Reminders sent automatically on your behalf'
-        after_heading: 'With SolidInvoice'
+        after_heading: 'With Augias'
         before:
             1: 'Manual invoicing every billing cycle'
             2: 'Tracking who owes what in a spreadsheet'
@@ -164,10 +164,10 @@ onboarding:
         heading: 'Your best clients pay you every month. Automate it.'
         how:
             1: 'Create an invoice and mark it as recurring — set the frequency and start date.'
-            2: 'SolidInvoice sends it automatically on schedule. Your client receives it and pays it.'
+            2: 'Augias sends it automatically on schedule. Your client receives it and pays it.'
             3: 'Enable reminders and overdue invoices get followed up automatically — no chasing required.'
         how_heading: 'How it works'
-        lede: 'Create an invoice once and SolidInvoice sends it automatically on your schedule. Set up payment reminders and overdue invoices get followed up — without you lifting a finger.'
+        lede: 'Create an invoice once and Augias sends it automatically on your schedule. Set up payment reminders and overdue invoices get followed up — without you lifting a finger.'
         ps: "even one recurring client makes this worth doing — you'll save hours every month."
         subject: 'Set up once, get paid every month'
     send_first_invoice:
@@ -176,7 +176,7 @@ onboarding:
         heading: 'Time to send your first invoice.'
         included_body: "Line items, taxes, discounts, recurring schedules, and due dates — built in. Add a payment method in the next step and your client gets a 'Pay now' button too."
         included_heading: 'Included on every invoice, nothing extra to configure'
-        lede: 'Sending a professional invoice takes under five minutes. Pick your client, add line items, set a due date — SolidInvoice handles the formatting, delivery, and tracking.'
+        lede: 'Sending a professional invoice takes under five minutes. Pick your client, add line items, set a due date — Augias handles the formatting, delivery, and tracking.'
         mock:
             billed_to: 'Billed to'
             client_email: hello@northbeam.co
@@ -197,7 +197,7 @@ onboarding:
         subject: 'Your first invoice is one click away'
     signature:
         greeting: 'See you inside,'
-        team: '— The SolidInvoice team'
+        team: '— The Augias team'
     trial_about_to_end:
         body_intro: 'Subscribing takes about 30 seconds. Your workspace picks up exactly where it left off — nothing is archived, nothing is hidden.'
         cta:
@@ -239,7 +239,7 @@ onboarding:
             cards: Cards
             eu_bank: 'EU bank'
             wallet: Wallet
-        ps: 'SolidInvoice adds zero fees on top of your payment provider. You pay only what Stripe or PayPal charge.'
+        ps: 'Augias adds zero fees on top of your payment provider. You pay only what Stripe or PayPal charge.'
         subject: 'Let your clients pay with one click'
     upgrade_offer:
         coupon_desc: '%percent%% off your first three months. Enter this code at checkout.'
@@ -252,7 +252,7 @@ onboarding:
             3: 'Automatic payment reminders'
             4: 'Online payments via your own Stripe or PayPal account'
             5: 'Multiple team members on one account'
-            6: 'Backups, updates, and SolidInvoice branding removed from your invoices'
+            6: 'Backups, updates, and Augias branding removed from your invoices'
         fine_print: 'Cancel anytime. No surprise fees. Your data restores immediately on subscription.'
         heading: 'One last thing before your trial closes.'
         lede: "When your trial ends, your account locks. Before that happens — here's an offer to make subscribing an easy decision."
@@ -280,7 +280,7 @@ onboarding:
         intro: "Here's what we'll cover together:"
         lede: "Your trial is live. Over the next few emails we'll walk you through getting your first invoice paid — step by step, starting now."
         ps: 'questions? Hit reply — a real person answers.'
-        subject: "Welcome to SolidInvoice — let's get you paid"
+        subject: "Welcome to Augias — let's get you paid"
 payment:
     capture:
         subject: 'A Payment has been made'

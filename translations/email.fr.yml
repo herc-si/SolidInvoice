@@ -37,12 +37,12 @@ invitation:
     email: 'Votre e-mail'
     info: "Si vous ne vous attendiez pas à cette invitation, vous pouvez ignorer cet e-mail en toute sécurité."
     instructions: 'Cliquez sur le bouton ci-dessous pour définir votre mot de passe et rejoindre l''équipe.'
-    message: 'Vous avez été invité(e) à rejoindre %company% sur SolidInvoice.'
+    message: 'Vous avez été invité(e) à rejoindre %company% sur Augias.'
     reminder:
         expires: Expire
         info: 'Si vous ne souhaitez plus rejoindre cette société, vous pouvez ignorer cet e-mail en toute sécurité et l''invitation expirera automatiquement.'
         instructions: 'Cliquez sur le bouton ci-dessous pour accepter votre invitation avant qu''elle n''expire.'
-        message: 'Votre invitation à rejoindre %company% sur SolidInvoice expirera dans 2 jours.'
+        message: 'Votre invitation à rejoindre %company% sur Augias expirera dans 2 jours.'
         title: 'Votre invitation à rejoindre %company% est sur le point d''expirer'
     title: 'Invitation à rejoindre %company%'
 invoice:
@@ -134,7 +134,7 @@ onboarding:
         eyebrow: 'Étape 5 · Faites-le vôtre'
         heading: 'Votre logo. Votre marque. Vos factures.'
         lede: 'Les clients jugent le professionnalisme avant même de lire une seule ligne. Une facture personnalisée — votre logo, votre nom — montre que vous dirigez une véritable entreprise.'
-        ps: 'avec le plan payant, vous pouvez désactiver la mention SolidInvoice dans les Paramètres — vos clients ne verront plus que votre nom.'
+        ps: 'avec le plan payant, vous pouvez désactiver la mention Augias dans les Paramètres — vos clients ne verront plus que votre nom.'
         step:
             1:
                 desc: 'PNG, SVG ou JPG. Apparaît sur chaque facture et devis que vous envoyez.'
@@ -145,14 +145,14 @@ onboarding:
         steps_heading: 'Deux choses à personnaliser'
         subject: 'Apposez votre marque sur vos factures'
     footer:
-        reason: "Vous recevez cet e-mail car vous vous êtes inscrit(e) sur SolidInvoice."
+        reason: "Vous recevez cet e-mail car vous vous êtes inscrit(e) sur Augias."
         tagline: 'La facturation pour freelances et petites entreprises.'
     recurring_billing:
         after:
             1: 'Factures automatiques envoyées selon votre calendrier'
             2: 'Le tableau de bord affiche chaque montant impayé'
             3: 'Rappels envoyés automatiquement en votre nom'
-        after_heading: 'Avec SolidInvoice'
+        after_heading: 'Avec Augias'
         before:
             1: 'Facturation manuelle à chaque cycle de facturation'
             2: 'Suivi de qui vous doit quoi dans un tableur'
@@ -164,10 +164,10 @@ onboarding:
         heading: 'Vos meilleurs clients vous paient chaque mois. Automatisez-le.'
         how:
             1: 'Créez une facture et marquez-la comme récurrente — définissez la fréquence et la date de début.'
-            2: 'SolidInvoice l''envoie automatiquement selon le calendrier prévu. Votre client la reçoit et la paie.'
+            2: 'Augias l''envoie automatiquement selon le calendrier prévu. Votre client la reçoit et la paie.'
             3: 'Activez les rappels et les factures en retard sont suivies automatiquement — aucune relance nécessaire.'
         how_heading: 'Comment ça marche'
-        lede: 'Créez une facture une seule fois et SolidInvoice l''envoie automatiquement selon votre calendrier. Configurez des rappels de paiement et les factures en retard sont relancées — sans que vous ayez à lever le petit doigt.'
+        lede: 'Créez une facture une seule fois et Augias l''envoie automatiquement selon votre calendrier. Configurez des rappels de paiement et les factures en retard sont relancées — sans que vous ayez à lever le petit doigt.'
         ps: "même un seul client récurrent rend cela intéressant — vous gagnerez des heures chaque mois."
         subject: 'Configurez une fois, soyez payé chaque mois'
     send_first_invoice:
@@ -176,7 +176,7 @@ onboarding:
         heading: 'Il est temps d''envoyer votre première facture.'
         included_body: "Lignes de facturation, taxes, remises, échéanciers récurrents et dates d'échéance — tout est inclus. Ajoutez un moyen de paiement à l'étape suivante et votre client bénéficiera aussi d'un bouton « Payer maintenant »."
         included_heading: 'Inclus sur chaque facture, rien à configurer en plus'
-        lede: 'Envoyer une facture professionnelle prend moins de cinq minutes. Choisissez votre client, ajoutez des lignes, définissez une date d''échéance — SolidInvoice se charge de la mise en forme, de l''envoi et du suivi.'
+        lede: 'Envoyer une facture professionnelle prend moins de cinq minutes. Choisissez votre client, ajoutez des lignes, définissez une date d''échéance — Augias se charge de la mise en forme, de l''envoi et du suivi.'
         mock:
             billed_to: 'Facturé à'
             client_email: hello@northbeam.co
@@ -197,7 +197,7 @@ onboarding:
         subject: 'Votre première facture est à portée de clic'
     signature:
         greeting: 'À bientôt,'
-        team: '— L''équipe SolidInvoice'
+        team: '— L''équipe Augias'
     trial_about_to_end:
         body_intro: 'S''abonner prend environ 30 secondes. Votre espace de travail reprend exactement là où il s''est arrêté — rien n''est archivé, rien n''est masqué.'
         cta:
@@ -239,7 +239,7 @@ onboarding:
             cards: Cartes
             eu_bank: 'Banque UE'
             wallet: Portefeuille
-        ps: 'SolidInvoice n''ajoute aucun frais en plus de votre prestataire de paiement. Vous ne payez que ce que Stripe ou PayPal facture.'
+        ps: 'Augias n''ajoute aucun frais en plus de votre prestataire de paiement. Vous ne payez que ce que Stripe ou PayPal facture.'
         subject: 'Permettez à vos clients de payer en un clic'
     upgrade_offer:
         coupon_desc: '%percent%% de réduction sur vos trois premiers mois. Saisissez ce code lors du paiement.'
@@ -252,7 +252,7 @@ onboarding:
             3: 'Rappels de paiement automatiques'
             4: 'Paiements en ligne via votre propre compte Stripe ou PayPal'
             5: 'Plusieurs membres d''équipe sur un même compte'
-            6: 'Sauvegardes, mises à jour, et suppression de la mention SolidInvoice sur vos factures'
+            6: 'Sauvegardes, mises à jour, et suppression de la mention Augias sur vos factures'
         fine_print: 'Annulable à tout moment. Aucuns frais surprises. Vos données sont restaurées immédiatement dès l''abonnement.'
         heading: 'Une dernière chose avant la fin de votre période d''essai.'
         lede: "À la fin de votre période d'essai, votre compte se verrouille. Avant que cela n'arrive — voici une offre pour faciliter votre décision de vous abonner."
@@ -280,7 +280,7 @@ onboarding:
         intro: "Voici ce que nous allons voir ensemble :"
         lede: "Votre période d'essai est active. Au fil des prochains e-mails, nous vous guiderons pas à pas pour obtenir le paiement de votre première facture, dès maintenant."
         ps: 'des questions ? Répondez à cet e-mail — une vraie personne vous répondra.'
-        subject: "Bienvenue sur SolidInvoice — passons au paiement"
+        subject: "Bienvenue sur Augias — passons au paiement"
 payment:
     capture:
         subject: 'Un paiement a été effectué'

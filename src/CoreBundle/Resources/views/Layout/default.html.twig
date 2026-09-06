@@ -24,7 +24,7 @@
 {% endblock header %}
 
 {% block footer %}
-    <small>{{ "powered_by"|trans }} <a href="https://solidinvoice.co">{{ constant('SolidInvoice\\CoreBundle\\SolidInvoiceCoreBundle::APP_NAME') }}</a>{% if app_version %} - {{ app_version }}{% endif %}</small>
+    <small>{{ "powered_by"|trans }} {{ constant('SolidInvoice\\CoreBundle\\SolidInvoiceCoreBundle::APP_NAME') }}{% if app_version %} - {{ app_version }}{% endif %}</small>
 {% endblock footer %}
 
 {% block body_bottom %}

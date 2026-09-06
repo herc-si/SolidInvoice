@@ -1,8 +1,7 @@
 apiVersion: v2
-name: solidinvoice
-description: Simple and elegant open-source invoicing application
+name: augias
+description: Billing and invoicing application for small businesses
 type: application
-icon: https://solidinvoice.co/logo.png
 version: 1.0.0
 appVersion: "3.0.0"
 
@@ -12,12 +11,8 @@ annotations:
     - name: Pierre du Plessis
       email: open-source@solidworx.co
   artifacthub.io/links: |
-    - name: Website
-      url: https://solidinvoice.co
-    - name: Documentation
-      url: https://solidinvoice.co/docs
     - name: Source Code
-      url: https://github.com/SolidInvoice/SolidInvoice
+      url: https://github.com/herc-si/SolidInvoice
 
 dependencies:
   - name: mysql

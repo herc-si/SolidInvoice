@@ -40,22 +40,22 @@ jobs:
         run: helm repo add meilisearch https://meilisearch.github.io/meilisearch-kubernetes
 
       - name: Update Helm dependencies
-        run: helm dep update helm/solidinvoice
+        run: helm dep update helm/augias
 
       - name: Lint chart (defaults)
-        run: helm lint helm/solidinvoice
+        run: helm lint helm/augias
 
       - name: Lint chart (minimal values)
-        run: helm lint helm/solidinvoice --values helm/solidinvoice/ci/minimal-values.yaml
+        run: helm lint helm/augias --values helm/augias/ci/minimal-values.yaml
 
       - name: Lint chart (MySQL values)
-        run: helm lint helm/solidinvoice --values helm/solidinvoice/ci/mysql-values.yaml
+        run: helm lint helm/augias --values helm/augias/ci/mysql-values.yaml
 
       - name: Lint chart (PostgreSQL values)
-        run: helm lint helm/solidinvoice --values helm/solidinvoice/ci/postgresql-values.yaml
+        run: helm lint helm/augias --values helm/augias/ci/postgresql-values.yaml
 
       - name: Template chart (MySQL values)
-        run: helm template solidinvoice helm/solidinvoice --values helm/solidinvoice/ci/mysql-values.yaml
+        run: helm template solidinvoice helm/augias --values helm/augias/ci/mysql-values.yaml
 
       - name: Template chart (PostgreSQL values)
-        run: helm template solidinvoice helm/solidinvoice --values helm/solidinvoice/ci/postgresql-values.yaml
+        run: helm template solidinvoice helm/augias --values helm/augias/ci/postgresql-values.yaml

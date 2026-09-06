@@ -587,7 +587,7 @@ dashboard:
         success_message: "That's everything set up. Your details are saved, so from here it's just invoicing."
         success_title: "You're all set"
         tasks_remaining: '{1} %count% step left, whenever you have a minute|]1,Inf] %count% steps left, whenever you have a minute'
-        title: 'Get Started with SolidInvoice'
+        title: 'Get Started with Augias'
         upload_logo:
             description: 'Add your logo to invoices and quotes'
             name: 'Upload Company Logo'
@@ -1025,7 +1025,7 @@ installation:
     finish:
         login: 'Log In Now'
         success: Success
-        success_message: 'You have successfully installed SolidInvoice!'
+        success_message: 'You have successfully installed Augias!'
     finish_page:
         add_clients:
             description: 'Start by adding your clients and their contact information'
@@ -1037,8 +1037,8 @@ installation:
         create_invoice:
             description: 'Generate your first professional invoice in seconds'
             title: 'Create Invoice'
-        launch: 'Launch SolidInvoice'
-        subtitle: 'Congratulations! SolidInvoice has been successfully installed and configured.'
+        launch: 'Launch Augias'
+        subtitle: 'Congratulations! Augias has been successfully installed and configured.'
         summary:
             admin: 'Your administrator account is ready to use'
             database: 'Database has been created and configured'
@@ -1119,10 +1119,10 @@ installation:
         screenshot_placeholder: '[Screenshot Placeholder - Dashboard Preview]'
         setup:
             line1: 'This installation wizard will guide you through the setup process.'
-            line2: 'It will only take a few minutes to configure your database, set up your account, and get started with SolidInvoice.'
+            line2: 'It will only take a few minutes to configure your database, set up your account, and get started with Augias.'
             title: 'Quick & Easy Setup'
         tagline: 'Your complete invoicing and billing solution'
-        thank_you: 'Thank you for choosing SolidInvoice!'
+        thank_you: 'Thank you for choosing Augias!'
         welcome: 'Welcome to'
     step:
         database_configuration: 'Database Configuration'
@@ -1135,11 +1135,11 @@ installation:
     title: '%app_name% Installation'
     user_account:
         application_url: 'Application URL'
-        application_url_help: 'The URL where this SolidInvoice instance is accessible. Include the protocol (http:// or https://).'
+        application_url_help: 'The URL where this Augias instance is accessible. Include the protocol (http:// or https://).'
         locale_help: 'The only currently supported locale is "en". To choose a different locale, please install the ''intl'' extension'
         locale_placeholder: 'Please select a locale'
         telemetry: 'Send anonymous usage statistics'
-        telemetry_help: 'Help us improve SolidInvoice by sharing anonymous usage data. No personal or business information is ever collected.'
+        telemetry_help: 'Help us improve Augias by sharing anonymous usage data. No personal or business information is ever collected.'
 invalid_file: 'Invalid File'
 invoice:
     action:
@@ -1189,9 +1189,7 @@ invoice:
     external:
         footer:
             description: 'Open-source invoicing software for freelancers and small businesses'
-            github: GitHub
             powered_by: 'Powered by'
-            visit_website: 'Visit SolidInvoice.co'
         tagline: 'Professional Invoicing Made Simple'
     from: From
     grid:
@@ -1523,7 +1521,7 @@ mcp:
         authorize: Authorize
         cancel: Cancel
         company: Company
-        heading: '%client% wants to access your SolidInvoice account'
+        heading: '%client% wants to access your Augias account'
         permissions: 'Permissions requested'
         redirect: 'Callback: %uri%'
         remember: "Don't ask me again for this app + company"
@@ -1703,7 +1701,7 @@ onboarding:
         title: "You're all set!"
     flash:
         invoice_created: '🎉 Your first invoice is ready! You can edit it, send it to your client, or download a PDF.'
-        onboarding_complete: "Welcome to SolidInvoice! You're all set up and ready to go."
+        onboarding_complete: "Welcome to Augias! You're all set up and ready to go."
     invoice:
         aha_title: 'Send your first invoice:'
         benefits: "See exactly what your invoices will look like\nSend it immediately or save as draft\nTrack when it's paid\nGet paid faster with online payments\n"
@@ -1812,14 +1810,14 @@ payment:
             title: 'Not sure which one to choose?'
         custom:
             display_name: 'Custom Method'
-            overview: "Set up a payment method of your own - for example a local wallet or a gateway SolidInvoice doesn't list. Payments are recorded manually."
+            overview: "Set up a payment method of your own - for example a local wallet or a gateway Augias doesn't list. Payments are recorded manually."
             tagline: 'Create your own manually-recorded payment method.'
         field:
             enabled:
                 help: 'Turn this on to make the payment method available. Leave it off while you finish setting it up.'
                 label: Enabled
             name:
-                help: 'A label to help you recognise this method inside SolidInvoice - only you see it, not your clients. For example "Stripe - main account".'
+                help: 'A label to help you recognise this method inside Augias - only you see it, not your clients. For example "Stripe - main account".'
                 label: 'Display name'
                 placeholder: 'e.g. Stripe - main account'
             paypal:
@@ -1859,7 +1857,7 @@ payment:
         offline:
             display_name: 'Offline Payment'
             overview: 'Use this to record payments you receive outside the app - a cheque, a card taken in person, or any other method. Nothing is charged automatically; you simply mark the invoice as paid.'
-            tagline: 'Record a payment made outside SolidInvoice.'
+            tagline: 'Record a payment made outside Augias.'
         payex:
             display_name: PayEx
             tagline: 'Legacy PayEx integration.'
@@ -1868,7 +1866,7 @@ payment:
             setup_label: 'Get your PayPal API credentials'
         paypal_express_checkout:
             display_name: 'PayPal Express Checkout'
-            overview: 'PayPal Express Checkout sends your client to PayPal to approve the payment, then returns them to SolidInvoice. Clients can pay with their PayPal balance or a credit/debit card - no PayPal account required for card payments.'
+            overview: 'PayPal Express Checkout sends your client to PayPal to approve the payment, then returns them to Augias. Clients can pay with their PayPal balance or a credit/debit card - no PayPal account required for card payments.'
             tagline: 'Let clients pay with their PayPal account or a card.'
         paypal_pro_checkout:
             display_name: 'PayPal Pro (Payflow)'
@@ -1879,13 +1877,13 @@ payment:
                 subtitle: "Connect your account. You'll find these keys in your provider's dashboard."
                 title: Credentials
             details:
-                subtitle: 'How this payment method is identified inside SolidInvoice.'
+                subtitle: 'How this payment method is identified inside Augias.'
                 title: Details
             more:
                 subtitle: 'Additional and legacy processors. Only use these if you already have an account with them.'
                 title: 'More gateways'
             offline:
-                subtitle: 'Record payments you receive outside SolidInvoice, such as cash or a bank transfer.'
+                subtitle: 'Record payments you receive outside Augias, such as cash or a bank transfer.'
                 title: 'Offline & manual methods'
             online:
                 subtitle: 'Charge cards automatically - your client pays through a secure checkout.'
@@ -1893,7 +1891,7 @@ payment:
         setup:
             default_label: 'How to get your API keys'
         stripe:
-            comparison: "Stripe Checkout (recommended): Stripe hosts the payment page - it's the simplest to set up and the most secure, with no extra compliance work for you. Stripe.js: the card fields are embedded directly in SolidInvoice for a more seamless look, but you take on more PCI-compliance responsibility. If you're unsure, choose Stripe Checkout."
+            comparison: "Stripe Checkout (recommended): Stripe hosts the payment page - it's the simplest to set up and the most secure, with no extra compliance work for you. Stripe.js: the card fields are embedded directly in Augias for a more seamless look, but you take on more PCI-compliance responsibility. If you're unsure, choose Stripe Checkout."
             setup_label: 'Get your Stripe API keys'
         stripe_checkout:
             display_name: 'Stripe Checkout'
@@ -1901,8 +1899,8 @@ payment:
             tagline: 'Accept cards on a secure, Stripe-hosted payment page.'
         stripe_js:
             display_name: Stripe.js
-            overview: 'Stripe.js embeds the card input fields directly inside SolidInvoice instead of redirecting to Stripe. It gives a more seamless checkout, but you take on more responsibility for PCI compliance. Most businesses should use Stripe Checkout instead.'
-            tagline: 'Embed card fields directly in SolidInvoice (advanced).'
+            overview: 'Stripe.js embeds the card input fields directly inside Augias instead of redirecting to Stripe. It gives a more seamless checkout, but you take on more responsibility for PCI compliance. Most businesses should use Stripe Checkout instead.'
+            tagline: 'Embed card fields directly in Augias (advanced).'
     grid:
         amount: "Amount"
         client: "Client"
@@ -2065,7 +2063,7 @@ profile:
     edit:
         cancel: Cancel
         locale:
-            help: 'Choose the language SolidInvoice is displayed in for you. Leave blank to use the company default.'
+            help: 'Choose the language Augias is displayed in for you. Leave blank to use the company default.'
             label: Language
             placeholder: 'Use company default'
         section:
@@ -2073,7 +2071,7 @@ profile:
                 description: 'Your name and contact information'
                 title: 'Personal Details'
             preferences:
-                description: 'Choose the language you see SolidInvoice in'
+                description: 'Choose the language you see Augias in'
                 title: Preferences
         submit: Save
         subtitle: 'Update your personal information and contact details'
@@ -2169,9 +2167,7 @@ quote:
     external:
         footer:
             description: 'Open-source invoicing software for freelancers and small businesses'
-            github: GitHub
             powered_by: 'Powered by'
-            visit_website: 'Visit SolidInvoice.co'
         tagline: 'Professional Invoicing Made Simple'
     from: From
     grid:
@@ -2421,7 +2417,7 @@ saas:
         just_completed_title: 'Just completed checkout?'
         need_help: 'Need a hand?'
         secure_checkout: 'Secure checkout · Cancel anytime · No hidden fees'
-        subtitle: 'Pick a plan and start running your business with SolidInvoice in minutes.'
+        subtitle: 'Pick a plan and start running your business with Augias in minutes.'
         switch_company: 'Switch to another company'
         title: 'Activate Your Subscription'
     plan:
@@ -2470,7 +2466,7 @@ saas:
         promo_code: 'Promo code'
         promo_heading: "Don't go just yet — here's %percent%% off"
         promo_message: 'Activate your subscription now and use code <strong>%code%</strong> at checkout to get <strong>%percent%% off your first 3 months</strong>. Keep your invoices flowing without missing a beat.'
-        subtitle: 'Your %days%-day trial ended on %date%. Activate your subscription at %price%/month to continue using SolidInvoice.'
+        subtitle: 'Your %days%-day trial ended on %date%. Activate your subscription at %price%/month to continue using Augias.'
         title: 'Your trial has ended'
 save: Save
 search:
@@ -2529,7 +2525,7 @@ security:
             payments:
                 description: 'Accept payments online and track every transaction'
                 title: 'Payment Tracking'
-            subtitle: 'Join thousands of freelancers and small businesses managing their finances with SolidInvoice'
+            subtitle: 'Join thousands of freelancers and small businesses managing their finances with Augias'
             tax:
                 description: 'Automatic tax calculations and detailed reporting'
                 title: 'Tax Management'
@@ -2551,7 +2547,7 @@ security:
             medium: 'Medium strength'
             strong: 'Strong password'
             weak: 'Weak password'
-        subheading: 'Get started with SolidInvoice today'
+        subheading: 'Get started with Augias today'
         submit: Register
         success: 'Your account has been created. Please verify your email address before logging in.'
         terms_agreement: 'I agree to the Terms & Conditions and Privacy Policy'
@@ -2698,13 +2694,13 @@ settings:
             watermark: 'Show Status Watermark'
         domain:
             custom_domain: 'Custom Domain'
-            dns_footer: 'Once the CNAME is in place, your custom domain will resolve to SolidInvoice automatically — no further action required.'
-            dns_help: 'After saving, add a CNAME record at your DNS provider so your domain points to SolidInvoice. DNS changes can take up to 24 hours to propagate.'
+            dns_footer: 'Once the CNAME is in place, your custom domain will resolve to Augias automatically — no further action required.'
+            dns_help: 'After saving, add a CNAME record at your DNS provider so your domain points to Augias. DNS changes can take up to 24 hours to propagate.'
             dns_name: 'Name / Host'
             dns_title: 'DNS setup required'
             dns_type: Type
             dns_value: 'Value / Target'
-            subtitle: 'Serve SolidInvoice from your own domain (e.g. invoices.yourcompany.com) instead of the default URL.'
+            subtitle: 'Serve Augias from your own domain (e.g. invoices.yourcompany.com) instead of the default URL.'
             title: Domain
         email:
             bcc: 'BCC Email Address'

@@ -15,7 +15,7 @@ How it works
 
 Connect a payment method: http://localhost/payments/methods
 
-P.S. SolidInvoice adds zero fees on top of your payment provider. You pay only what Stripe or PayPal charge.
+P.S. Augias adds zero fees on top of your payment provider. You pay only what Stripe or PayPal charge.
 
 See you inside,
-— The SolidInvoice team
+— The Augias team

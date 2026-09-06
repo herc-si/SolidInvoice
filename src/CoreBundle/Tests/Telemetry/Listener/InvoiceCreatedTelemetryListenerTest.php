@@ -55,7 +55,7 @@ final class InvoiceCreatedTelemetryListenerTest extends TestCase
         self::assertCount(1, $bus->messages);
         self::assertSame('event', $bus->messages[0]->type);
         self::assertSame('invoice_created', $bus->messages[0]->payload['event']);
-        self::assertSame('solidinvoice', $bus->messages[0]->payload['app']);
+        self::assertSame('augias', $bus->messages[0]->payload['app']);
         self::assertSame('build-123', $bus->messages[0]->payload['build_id']);
     }
 

@@ -17,4 +17,4 @@ Open your dashboard: http://localhost/dashboard
 P.S. questions? Hit reply — a real person answers.
 
 See you inside,
-— The SolidInvoice team
+— The Augias team

@@ -81,7 +81,7 @@ final class WellKnownTest extends WebTestCase
         $data = json_decode((string) $client->getResponse()->getContent(), true);
 
         self::assertIsArray($data);
-        self::assertSame('SolidInvoice', $data['serverInfo']['name']);
+        self::assertSame('Augias', $data['serverInfo']['name']);
         self::assertArrayHasKey('version', $data['serverInfo']);
         self::assertSame('http', $data['transport']['type']);
         self::assertStringEndsWith('/_mcp', $data['transport']['endpoint']);

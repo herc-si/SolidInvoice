@@ -31,7 +31,7 @@ final class SystemConfigTest extends KernelTestCase
     {
         $config = new SystemConfig(date(DATE_ATOM), $this->em->getRepository(Setting::class));
 
-        self::assertSame('SolidInvoice', $config->get('email/from_name'));
+        self::assertSame('Augias', $config->get('email/from_name'));
     }
 
     public function testGetCurrency(): void
@@ -48,7 +48,7 @@ final class SystemConfigTest extends KernelTestCase
 
         self::assertSame([
             'email/from_address' => 'no-reply@solidinvoice.co',
-            'email/from_name' => 'SolidInvoice',
+            'email/from_name' => 'Augias',
             'email/sending_options/provider' => null,
             'invoice/bcc_address' => null,
             'invoice/email_subject' => 'New Invoice - #{id}',
@@ -65,7 +65,7 @@ final class SystemConfigTest extends KernelTestCase
             'quote/id_generation/id_suffix' => '',
             'quote/id_generation/strategy' => 'auto_increment',
             'quote/watermark' => '1',
-            'system/company/company_name' => 'SolidInvoice',
+            'system/company/company_name' => 'Augias',
             'system/company/contact_details/address' => null,
             'system/company/contact_details/email' => null,
             'system/company/contact_details/phone_number' => null,

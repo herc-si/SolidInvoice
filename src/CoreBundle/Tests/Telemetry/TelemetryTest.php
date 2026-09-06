@@ -64,7 +64,7 @@ final class TelemetryTest extends TestCase
         self::assertSame('event', $message->type);
         self::assertSame([
             'build_id' => 'build-123',
-            'app' => 'solidinvoice',
+            'app' => 'augias',
             'event' => 'payment_received',
             'properties' => ['gateway' => 'stripe'],
         ], $message->payload);
@@ -80,7 +80,7 @@ final class TelemetryTest extends TestCase
 
         self::assertSame('ping', $message->type);
         self::assertSame('build-123', $message->payload['build_id']);
-        self::assertSame('solidinvoice', $message->payload['app']);
+        self::assertSame('augias', $message->payload['app']);
         self::assertSame(SolidInvoiceCoreBundle::VERSION, $message->payload['version']);
         self::assertArrayHasKey('os', $message->payload);
         self::assertArrayHasKey('os_version', $message->payload);

@@ -121,7 +121,7 @@ final class OnboardingFlowTest extends WebTestCase
             ->click('Go to Dashboard')
             ->assertRedirectedTo('/dashboard')
             ->followRedirect()
-            ->assertSeeIn('.alert-success', 'Welcome to SolidInvoice!')
+            ->assertSeeIn('.alert-success', 'Welcome to Augias!')
         ;
 
         // Verify both client and invoice were skipped
@@ -163,7 +163,7 @@ final class OnboardingFlowTest extends WebTestCase
             ->click('Go to Dashboard')
             ->assertRedirectedTo('/dashboard')
             ->followRedirect()
-            ->assertSeeIn('.alert-success', 'Welcome to SolidInvoice!')
+            ->assertSeeIn('.alert-success', 'Welcome to Augias!')
         ;
 
         // Verify only invoice was skipped

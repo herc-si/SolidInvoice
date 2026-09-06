@@ -14,4 +14,4 @@ Three fields to get started. You can fill in the rest later.
 Add your first client: http://localhost/clients/add
 
 See you inside,
-— The SolidInvoice team
+— The Augias team

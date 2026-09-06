@@ -1,7 +1,7 @@
 Time to send your first invoice.
 ============================================================
 
-Sending a professional invoice takes under five minutes. Pick your client, add line items, set a due date — SolidInvoice handles the formatting, delivery, and tracking.
+Sending a professional invoice takes under five minutes. Pick your client, add line items, set a due date — Augias handles the formatting, delivery, and tracking.
 
 Included on every invoice, nothing extra to configure
 ------------------------------------------------------------
@@ -12,4 +12,4 @@ Create your first invoice: http://localhost/invoices/create
 P.S. tip: connect a payment method before sending and your client will see a 'Pay now' button. Online invoices get paid much faster.
 
 See you inside,
-— The SolidInvoice team
+— The Augias team
