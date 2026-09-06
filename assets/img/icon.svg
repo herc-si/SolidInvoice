@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 348 320" role="img" aria-label="Augias">
+  <title>Augias</title>
+  <!-- The same confluence on a filled tile: the silhouette survives favicon sizes. -->
+  <rect x="8" y="8" width="332" height="304" rx="72" fill="#1e4976"/>
+  <path d="M 66 104 C 130 104 148 152 194 156" fill="none" stroke="#c9713f" stroke-width="24" stroke-linecap="round"/>
+  <path d="M 66 226 C 130 226 150 162 194 156" fill="none" stroke="#e4edf6" stroke-width="32" stroke-linecap="round"/>
+  <path d="M 184 156 C 232 156 244 200 292 196" fill="none" stroke="#e4edf6" stroke-width="42" stroke-linecap="round"/>
+</svg>

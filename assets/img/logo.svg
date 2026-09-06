@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Augias">
+  <title>Augias</title>
+  <!--
+    Two tributaries joining into a single wider stream: the two rivers Heracles
+    diverted through the stables of Augeas. The tributaries run at markedly
+    different weights and meet at a visible junction, and the trunk is wider than
+    either of them — without that widening the mark reads as one line changing
+    colour rather than as a confluence.
+  -->
+  <path d="M 22 44 C 78 44 96 88 140 96" fill="none" stroke="#a94e28" stroke-width="26" stroke-linecap="round"/>
+  <path d="M 22 156 C 78 156 98 106 140 100" fill="none" stroke="#1e4976" stroke-width="34" stroke-linecap="round"/>
+  <path d="M 132 98 C 196 98 214 128 298 122" fill="none" stroke="#1e4976" stroke-width="48" stroke-linecap="round"/>
+</svg>
