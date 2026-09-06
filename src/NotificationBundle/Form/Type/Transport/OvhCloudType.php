@@ -31,6 +31,7 @@ final class OvhCloudType extends AbstractType
             'application_key',
             null,
             [
+                'label' => 'form.field.application_key',
                 'constraints' => new NotBlank(groups: ['ovhcloud']),
             ]
         );
@@ -39,6 +40,7 @@ final class OvhCloudType extends AbstractType
             'application_secret',
             null,
             [
+                'label' => 'form.field.application_secret',
                 'constraints' => new NotBlank(groups: ['ovhcloud']),
             ]
         );
@@ -47,6 +49,7 @@ final class OvhCloudType extends AbstractType
             'consumer_key',
             null,
             [
+                'label' => 'form.field.consumer_key',
                 'constraints' => new NotBlank(groups: ['ovhcloud']),
             ]
         );
@@ -55,6 +58,7 @@ final class OvhCloudType extends AbstractType
             'service_name',
             null,
             [
+                'label' => 'form.field.service_name',
                 'constraints' => new NotBlank(groups: ['ovhcloud']),
             ]
         );

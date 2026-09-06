@@ -31,6 +31,7 @@ final class MobytType extends AbstractType
             'user_key',
             null,
             [
+                'label' => 'form.field.user_key',
                 'constraints' => new NotBlank(groups: ['mobyt']),
             ]
         );
@@ -39,6 +40,7 @@ final class MobytType extends AbstractType
             'access_token',
             null,
             [
+                'label' => 'form.field.access_token',
                 'constraints' => new NotBlank(groups: ['mobyt']),
             ]
         );
@@ -47,6 +49,7 @@ final class MobytType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['mobyt']),
             ]
         );

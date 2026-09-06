@@ -38,17 +38,17 @@ final class UserGrid extends Grid
     {
         return [
             StringColumn::new('email')
-                ->label('Email Address'),
+                ->label('user.grid.email'),
             StringColumn::new('mobile')
-                ->label('Mobile')
+                ->label('user.grid.mobile')
                 ->formatValue(fn ($value) => $value ?: '—'),
             RelativeDateColumn::new('created')
-                ->label('Joined'),
+                ->label('user.grid.joined'),
             RelativeDateColumn::new('lastLogin')
-                ->label('Last Login')
+                ->label('user.grid.last_login')
                 ->formatValue(fn ($value) => $value ?: 'Never'),
             StatusColumn::new('enabled')
-                ->label('Status')
+                ->label('user.grid.status')
                 ->formatValue(fn ($value) => $value ? 'active' : 'disabled')
                 ->statusMap([
                     'active' => 'success',

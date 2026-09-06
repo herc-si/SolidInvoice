@@ -13,6 +13,16 @@ client:
         message: 'Un nouveau client a été ajouté.'
         subject: 'Un nouveau client a été créé'
         view_client: 'Voir le client'
+einvoicing:
+    notification_rejected:
+        alert: 'Facture électronique rejetée'
+        client: Client
+        heading: 'Facture électronique rejetée'
+        invoice_number: 'Numéro de facture'
+        message: "Une plateforme de facturation électronique a rejeté une facture qui lui avait été soumise. Veuillez vérifier les données de la facture et du client, puis la renvoyer."
+        provider: Fournisseur
+        status_code: 'Code de statut'
+        view_invoice: 'Voir les détails de la facture'
 email:
     confirmation:
         alternative: "Si le bouton ci-dessus ne fonctionne pas, copiez-collez ce lien dans votre navigateur :"

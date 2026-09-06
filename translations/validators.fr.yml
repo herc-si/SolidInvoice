@@ -1,9 +1,13 @@
+bill:
+    constraint:
+        supplier_required: 'Choisissez un fournisseur existant, ou saisissez un nom ci-dessous pour en créer un nouveau.'
 client:
     constraint:
         contacts:
             min: 'Vous devez ajouter au moins un contact à ce client'
         currency_code:
             exact_length: 'Le code de devise doit comporter exactement {{ limit }} caractères.'
+        role_required: 'Une fiche doit être au moins un client ou un fournisseur.'
         tax_identifiers:
             siret_required: 'La facturation électronique est activée : veuillez ajouter le numéro SIRET de ce client parmi ses identifiants fiscaux.'
         unique_name: 'Un client portant le nom « {{ value }} » existe déjà.'

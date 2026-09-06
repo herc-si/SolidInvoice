@@ -42,29 +42,11 @@ final readonly class QuoteMenu
             }
         }
 
-        $section = $menu->addChild(
+        $menu->addChild(
             'quote.menu.main',
             [
-                'extras' => $extras,
-            ],
-        );
-        $section->addChild(
-            'quote.menu.list',
-            [
                 'route' => '_quotes_index',
-                'extras' => [
-                    'icon' => Icon::QUOTE,
-                ],
-            ],
-        );
-
-        $section->addChild(
-            'client.menu.create.quote',
-            [
-                'extras' => [
-                    'icon' => Icon::QUOTE_ADD,
-                ],
-                'route' => '_quotes_create',
+                'extras' => $extras,
             ],
         );
     }

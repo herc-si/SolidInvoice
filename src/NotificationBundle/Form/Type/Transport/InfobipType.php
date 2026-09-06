@@ -31,6 +31,7 @@ final class InfobipType extends AbstractType
             'auth_token',
             null,
             [
+                'label' => 'form.field.auth_token',
                 'constraints' => new NotBlank(groups: ['infobip']),
             ]
         );
@@ -39,6 +40,7 @@ final class InfobipType extends AbstractType
             'host',
             null,
             [
+                'label' => 'form.field.host',
                 'constraints' => new NotBlank(groups: ['infobip']),
             ]
         );
@@ -47,6 +49,7 @@ final class InfobipType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['infobip']),
             ]
         );

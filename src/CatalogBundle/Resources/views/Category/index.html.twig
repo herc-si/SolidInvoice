@@ -1,0 +1,27 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+
+{% block title %}
+    {{ ux_icon('tabler:category', {width: 24, height: 24, class: 'me-2'}) }}{{ 'catalog.category.list.title'|trans }}
+{% endblock title %}
+
+{% block heading %}
+    <a class="btn btn-primary" href="{{ path('_catalog_categories_add') }}">
+        {{ ux_icon('tabler:plus', {width: 18, height: 18}) }}
+        {{ 'catalog.category.action.add'|trans }}
+    </a>
+{% endblock %}
+
+{% block content %}
+    <twig:Ui:Card>
+        <twig:DataGrid name="catalog_category_grid" />
+    </twig:Ui:Card>
+{% endblock %}

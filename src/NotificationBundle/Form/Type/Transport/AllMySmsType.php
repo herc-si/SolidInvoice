@@ -31,6 +31,7 @@ final class AllMySmsType extends AbstractType
             'login',
             null,
             [
+                'label' => 'form.field.login',
                 'constraints' => new NotBlank(groups: ['allmysms']),
             ]
         );
@@ -39,6 +40,7 @@ final class AllMySmsType extends AbstractType
             'apikey',
             null,
             [
+                'label' => 'form.field.apikey',
                 'constraints' => new NotBlank(groups: ['allmysms']),
             ]
         );
@@ -47,6 +49,7 @@ final class AllMySmsType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['allmysms']),
             ]
         );

@@ -83,4 +83,55 @@ final class SuperPdpClientTest extends TestCase
 
         self::assertSame('fr:200', $response['events'][0]['status_code']);
     }
+
+    /**
+     * Regression test: `expand[]=en_invoice` alone leaves `en_invoice.seller`
+     * null on a real received invoice (confirmed against SUPER PDP's sandbox
+     * API) — `en_invoice.seller` must also be requested explicitly.
+     */
+    public function testListIncomingInvoicesRequestsTheSellerExpansion(): void
+    {
+        $httpClient = new MockHttpClient(function (string $method, string $url) {
+            self::assertStringContainsString('direction=in', $url);
+            self::assertStringContainsString('expand[0]=en_invoice', $url);
+            self::assertStringContainsString('expand[1]=en_invoice.seller', $url);
+
+            return new MockResponse((string) json_encode(['data' => [], 'count' => 0, 'has_before' => false, 'has_after' => false]));
+        });
+
+        $client = new SuperPdpClient($httpClient);
+
+        $response = $client->listIncomingInvoices('a-token');
+
+        self::assertSame([], $response['data']);
+    }
+
+    public function testListIncomingInvoicesPassesTheStartingAfterIdCursor(): void
+    {
+        $httpClient = new MockHttpClient(function (string $method, string $url) {
+            self::assertStringContainsString('starting_after_id=42', $url);
+
+            return new MockResponse((string) json_encode(['data' => [], 'count' => 0, 'has_before' => false, 'has_after' => false]));
+        });
+
+        $client = new SuperPdpClient($httpClient);
+
+        $client->listIncomingInvoices('a-token', 42);
+    }
+
+    public function testDownloadInvoiceDocumentReturnsTheRawContentAndContentType(): void
+    {
+        $httpClient = new MockHttpClient(function (string $method, string $url) {
+            self::assertStringContainsString('format=factur-x', $url);
+
+            return new MockResponse('%PDF-1.7 ...', ['response_headers' => ['content-type' => 'application/pdf']]);
+        });
+
+        $client = new SuperPdpClient($httpClient);
+
+        $document = $client->downloadInvoiceDocument('a-token', '42');
+
+        self::assertSame('%PDF-1.7 ...', $document['content']);
+        self::assertSame('application/pdf', $document['content_type']);
+    }
 }

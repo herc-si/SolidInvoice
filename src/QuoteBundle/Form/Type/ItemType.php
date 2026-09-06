@@ -45,6 +45,7 @@ class ItemType extends AbstractType
             'description',
             TextareaType::class,
             [
+                'label' => 'form.field.description',
                 'attr' => [
                     'class' => 'input-medium quote-item-name',
                 ],
@@ -55,6 +56,7 @@ class ItemType extends AbstractType
             'price',
             MoneyType::class,
             [
+                'label' => 'form.field.price',
                 'attr' => [
                     'class' => 'input-small quote-item-price',
                 ],
@@ -66,6 +68,7 @@ class ItemType extends AbstractType
             'qty',
             NumberType::class,
             [
+                'label' => 'form.field.qty',
                 'empty_data' => '1',
                 'attr' => [
                     'class' => 'input-mini quote-item-qty',

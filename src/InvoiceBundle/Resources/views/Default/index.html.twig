@@ -153,6 +153,14 @@
                             </a>
                         </li>
                     </ul>
+
+                    {# Outside the tab list: this switches which kind of invoice is
+                     # listed, it is not a filter of the current one. Sits on the
+                     # right through the row's justify-content-between. #}
+                    <a href="{{ path('_invoices_index') }}" class="btn btn-sm btn-outline-primary flex-shrink-0 ms-3">
+                        {{ ux_icon('tabler:file-invoice', {width: 16, height: 16}) }}
+                        {{ 'invoice.tabs.one_off'|trans }}
+                    </a>
                 </div>
             </twig:block>
 
@@ -287,6 +295,14 @@
                             </a>
                         </li>
                     </ul>
+
+                    {# Recurring invoices have no sidebar entry; they are reached
+                     # from here. Kept out of the tab list because it switches the
+                     # kind of invoice rather than filtering the current list. #}
+                    <a href="{{ path('_invoices_index_recurring') }}" class="btn btn-sm btn-outline-primary flex-shrink-0 ms-3">
+                        {{ ux_icon('tabler:repeat', {width: 16, height: 16}) }}
+                        {{ 'invoice.tabs.recurring'|trans }}
+                    </a>
                 </div>
             </twig:block>
 

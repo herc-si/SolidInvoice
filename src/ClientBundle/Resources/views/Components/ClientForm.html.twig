@@ -39,6 +39,26 @@
         {# Main Form Content - Single Column Flow #}
         <div class="form-page-sections">
 
+            {# Section 0: Role — the first decision, so it comes before anything else #}
+            <section class="form-page-section" id="client-role">
+                <div class="section-header">
+                    <div class="section-icon">
+                        {{ ux_icon('tabler:switch-horizontal', {width: 20, height: 20}) }}
+                    </div>
+                    <div class="section-header-text">
+                        <h2 class="section-title">{{ 'client.form.role_title'|trans }}</h2>
+                        <p class="section-description">{{ 'client.form.role_description'|trans }}</p>
+                    </div>
+                </div>
+
+                <div class="section-content">
+                    <div class="role-picker">
+                        {{ form_row(form.isClient) }}
+                        {{ form_row(form.isSupplier) }}
+                    </div>
+                </div>
+            </section>
+
             {# Section 1: Business Details #}
             <section class="form-page-section" id="client-info">
                 <div class="section-header">
@@ -126,9 +146,10 @@
                 </div>
             </section>
 
-            {# Section: Tax Identifiers (Optional) #}
+            {# Section: Tax Identifiers (Optional, collapsed unless it already has data) #}
+            {% set taxIdentifiersOpen = form.taxIdentifiers|length > 0 %}
             <section class="form-page-section client-form-section-optional" id="client-tax-identifiers-collection">
-                <div class="section-header">
+                <div class="section-header section-header-toggle" role="button" tabindex="0" data-bs-toggle="collapse" data-bs-target="#client-tax-identifiers-content" aria-expanded="{{ taxIdentifiersOpen ? 'true' : 'false' }}" aria-controls="client-tax-identifiers-content">
                     <div class="section-icon">
                         {{ ux_icon('tabler:receipt-tax', {width: 20, height: 20}) }}
                     </div>
@@ -139,31 +160,37 @@
                         </h2>
                         <p class="section-description">{{ 'client.form.tax_identifiers_description'|trans }}</p>
                     </div>
+                    <div class="section-toggle-icon">
+                        {{ ux_icon('tabler:chevron-down', {width: 20, height: 20}) }}
+                    </div>
                 </div>
 
-                <div class="section-content">
-                    <div class="tax-identifiers-list">
-                        {% for taxIdentifier in form.taxIdentifiers %}
-                            {{ form_row(taxIdentifier) }}
-                        {% endfor %}
-                    </div>
+                <div class="collapse{{ taxIdentifiersOpen ? ' show' : '' }}" id="client-tax-identifiers-content">
+                    <div class="section-content">
+                        <div class="tax-identifiers-list">
+                            {% for taxIdentifier in form.taxIdentifiers %}
+                                {{ form_row(taxIdentifier) }}
+                            {% endfor %}
+                        </div>
 
-                    {{ form_errors(form.taxIdentifiers) }}
+                        {{ form_errors(form.taxIdentifiers) }}
 
-                    <div class="add-item-action">
-                        {{ form_widget(form.taxIdentifiers.vars.button_add, {
-                            label: 'client.tax_identifiers.add'|trans,
-                            attr: {
-                                class: 'btn btn-outline-primary add-item-btn'
-                            }
-                        }) }}
+                        <div class="add-item-action">
+                            {{ form_widget(form.taxIdentifiers.vars.button_add, {
+                                label: 'client.tax_identifiers.add'|trans,
+                                attr: {
+                                    class: 'btn btn-outline-primary add-item-btn'
+                                }
+                            }) }}
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {# Section 3: Addresses (Optional) #}
+            {# Section 3: Addresses (Optional, collapsed unless it already has data) #}
+            {% set addressesOpen = form.addresses|length > 0 %}
             <section class="form-page-section client-form-section-optional" id="client-address-collection">
-                <div class="section-header">
+                <div class="section-header section-header-toggle" role="button" tabindex="0" data-bs-toggle="collapse" data-bs-target="#client-address-content" aria-expanded="{{ addressesOpen ? 'true' : 'false' }}" aria-controls="client-address-content">
                     <div class="section-icon">
                         {{ ux_icon('tabler:map-pin', {width: 20, height: 20}) }}
                     </div>
@@ -174,45 +201,55 @@
                         </h2>
                         <p class="section-description">{{ 'client.form.address_description'|trans }}</p>
                     </div>
+                    <div class="section-toggle-icon">
+                        {{ ux_icon('tabler:chevron-down', {width: 20, height: 20}) }}
+                    </div>
                 </div>
 
-                <div class="section-content">
-                    <div class="addresses-list">
-                        {% for address in form.addresses %}
-                            {{ form_row(address) }}
-                        {% else %}
-                            <div class="empty-addresses-hint">
-                                <p class="text-muted mb-0">{{ 'client.address.empty_hint'|trans }}</p>
-                            </div>
-                        {% endfor %}
-                    </div>
+                <div class="collapse{{ addressesOpen ? ' show' : '' }}" id="client-address-content">
+                    <div class="section-content">
+                        <div class="addresses-list">
+                            {% for address in form.addresses %}
+                                {{ form_row(address) }}
+                            {% else %}
+                                <div class="empty-addresses-hint">
+                                    <p class="text-muted mb-0">{{ 'client.address.empty_hint'|trans }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
 
-                    {{ form_errors(form.addresses) }}
+                        {{ form_errors(form.addresses) }}
 
-                    <div class="add-item-action">
-                        {{ form_widget(form.addresses.vars.button_add, {
-                            label: 'client.address.add'|trans,
-                            attr: {
-                                class: 'btn btn-outline-primary add-item-btn'
-                            }
-                        }) }}
+                        <div class="add-item-action">
+                            {{ form_widget(form.addresses.vars.button_add, {
+                                label: 'client.address.add'|trans,
+                                attr: {
+                                    class: 'btn btn-outline-primary add-item-btn'
+                                }
+                            }) }}
+                        </div>
                     </div>
                 </div>
             </section>
-            {# Section 4: Custom Fields (Optional) #}
+            {# Section 4: Custom Fields (Optional, collapsed by default) #}
             {% if form.customFields is defined and form.customFields|length > 0 %}
             <section class="form-page-section client-form-section-optional" id="client-custom-fields">
-                <div class="section-header">
+                <div class="section-header section-header-toggle" role="button" tabindex="0" data-bs-toggle="collapse" data-bs-target="#client-custom-fields-content" aria-expanded="false" aria-controls="client-custom-fields-content">
                     <div class="section-icon">
                         {{ ux_icon('tabler:forms', {width: 20, height: 20}) }}
                     </div>
                     <div class="section-header-text">
                         <h2 class="section-title">{{ 'client.custom_fields'|trans }}</h2>
                     </div>
+                    <div class="section-toggle-icon">
+                        {{ ux_icon('tabler:chevron-down', {width: 20, height: 20}) }}
+                    </div>
                 </div>
 
-                <div class="section-content">
-                    {{ form_widget(form.customFields) }}
+                <div class="collapse" id="client-custom-fields-content">
+                    <div class="section-content">
+                        {{ form_widget(form.customFields) }}
+                    </div>
                 </div>
             </section>
             {% endif %}

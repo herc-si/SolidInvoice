@@ -31,6 +31,7 @@ final class MattermostType extends AbstractType
             'access_token',
             null,
             [
+                'label' => 'form.field.access_token',
                 'constraints' => new NotBlank(groups: ['mattermost']),
             ]
         );
@@ -39,6 +40,7 @@ final class MattermostType extends AbstractType
             'host',
             null,
             [
+                'label' => 'form.field.host',
                 'constraints' => new NotBlank(groups: ['mattermost']),
             ]
         );
@@ -47,6 +49,7 @@ final class MattermostType extends AbstractType
             'path',
             null,
             [
+                'label' => 'form.field.path',
                 'constraints' => new NotBlank(groups: ['mattermost']),
             ]
         );
@@ -55,6 +58,7 @@ final class MattermostType extends AbstractType
             'channel',
             null,
             [
+                'label' => 'form.field.channel',
                 'constraints' => new NotBlank(groups: ['mattermost']),
             ]
         );

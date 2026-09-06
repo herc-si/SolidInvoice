@@ -229,11 +229,27 @@
                     {% endif %}
 
                     {# Add Item Button #}
-                    <div class="add-item-action">
+                    <div class="add-item-action d-flex align-items-center gap-2 flex-wrap">
                         {{ form_widget(form.lines.vars.button_add, {
                             label: 'quote.item.add'|trans,
                             attr: {class: 'add-item-btn btn-sm'}
                         }) }}
+                    
+                        {% set catalogProducts = this.catalogProducts %}
+                        {% if catalogProducts is not empty %}
+                            <select
+                                class="form-select form-select-sm w-auto"
+                                data-model="catalogProductId"
+                                data-action="live#action"
+                                data-live-action-param="addFromCatalog"
+                                aria-label="{{ 'catalog.picker.label'|trans }}"
+                            >
+                                <option value="">{{ 'catalog.picker.placeholder'|trans }}</option>
+                                {% for product in catalogProducts %}
+                                    <option value="{{ product.id }}">{{ product.name }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -287,6 +303,12 @@
                             }) }}
                         </div>
                     </div>
+                {% else -%}
+                    {# Nothing above renders the collection when the company has no tax
+                       rates, and form_end() below would then dump its raw "Add" button
+                       at the very bottom of the page, outside the layout. The tags trim
+                       their own whitespace so this branch adds nothing to the output. #}
+                    {%- do form.invoiceTaxes.setRendered() -%}
                 {% endif %}
             </div>
 

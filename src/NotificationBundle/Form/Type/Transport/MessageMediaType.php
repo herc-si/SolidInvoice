@@ -31,6 +31,7 @@ final class MessageMediaType extends AbstractType
             'api_key',
             null,
             [
+                'label' => 'form.field.api_key',
                 'constraints' => new NotBlank(groups: ['messagemedia']),
             ]
         );
@@ -39,6 +40,7 @@ final class MessageMediaType extends AbstractType
             'api_secret',
             null,
             [
+                'label' => 'form.field.api_secret',
                 'constraints' => new NotBlank(groups: ['messagemedia']),
             ]
         );
@@ -47,6 +49,7 @@ final class MessageMediaType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['messagemedia']),
             ]
         );

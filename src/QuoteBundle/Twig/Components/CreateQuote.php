@@ -13,9 +13,12 @@ declare(strict_types=1);
 
 namespace SolidInvoice\QuoteBundle\Twig\Components;
 
+use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
+use SolidInvoice\CatalogBundle\Entity\Product;
+use SolidInvoice\CatalogBundle\Repository\ProductRepository;
 use SolidInvoice\ClientBundle\Entity\Client;
 use SolidInvoice\ClientBundle\Repository\ClientRepository;
 use SolidInvoice\CoreBundle\Billing\TotalCalculator;
@@ -31,11 +34,13 @@ use SolidInvoice\QuoteBundle\Form\Type\QuoteType;
 use SolidInvoice\QuoteBundle\Manager\QuoteFormManager;
 use SolidInvoice\QuoteBundle\Model\Graph;
 use SolidInvoice\SaasBundle\Feature\Feature;
+use SolidInvoice\TaxBundle\Entity\Tax;
 use SolidInvoice\TaxBundle\Repository\TaxRepository;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Workflow\WorkflowInterface;
@@ -68,10 +73,18 @@ final class CreateQuote extends AbstractController
     #[LiveProp(writable: true)]
     public ?string $previousClientId = null;
 
+    /**
+     * Bound to the catalogue picker. Reset after each insert so picking the
+     * same entry twice in a row still fires a change.
+     */
+    #[LiveProp(writable: true)]
+    public ?string $catalogProductId = null;
+
     public function __construct(
         private readonly ClientRepository $clientRepository,
         private readonly TotalCalculator $totalCalculator,
         private readonly TaxRepository $taxRepository,
+        private readonly ProductRepository $productRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly WorkflowInterface $quoteStateMachine,
         private readonly RouterInterface $router,
@@ -164,6 +177,80 @@ final class CreateQuote extends AbstractController
         }
 
         return $this->createForm(QuoteType::class, $this->dto, $options);
+    }
+
+    /**
+     * @return list<Product>
+     */
+    public function getCatalogProducts(): array
+    {
+        return $this->productRepository->findActiveForPicker();
+    }
+
+    /**
+     * Appends a line pre-filled from a catalogue entry.
+     *
+     * Writes into $formValues rather than the DTO: the DTO is not a LiveProp,
+     * so it is rebuilt from the submitted form on every render and any object
+     * mutated here would be discarded. This mirrors what LiveCollectionTrait
+     * does for an empty row, only with the catalogue's values already in place.
+     *
+     * The values are copied, not referenced: editing the line afterwards, or
+     * the catalogue later, must never rewrite the other.
+     */
+    #[LiveAction]
+    public function addFromCatalog(PropertyAccessorInterface $propertyAccessor): void
+    {
+        $productId = $this->catalogProductId;
+        $this->catalogProductId = null;
+
+        if ($productId === null || $productId === '') {
+            return;
+        }
+
+        $product = $this->productRepository->find($productId);
+
+        if (! $product instanceof Product) {
+            return;
+        }
+
+        $lines = $propertyAccessor->getValue($this->formValues, '[lines]');
+
+        if (! is_array($lines)) {
+            $lines = [];
+            $propertyAccessor->setValue($this->formValues, '[lines]', $lines);
+        }
+
+        $index = $lines === [] ? 0 : max(array_keys($lines)) + 1;
+
+        $line = [
+            'description' => $this->catalogLineDescription($product),
+            'price' => (string) ($product->getSalePrice() ?? BigInteger::zero()),
+            'qty' => '1',
+        ];
+
+        $tax = $product->getTax();
+
+        if ($tax instanceof Tax) {
+            $line['taxes'] = [['tax' => (string) $tax->getId()]];
+        }
+
+        $propertyAccessor->setValue($this->formValues, sprintf('[lines][%d]', $index), $line);
+    }
+
+    /**
+     * The catalogue keeps name and description apart so the list stays readable;
+     * a document line has one text field, so they are joined here.
+     */
+    private function catalogLineDescription(Product $product): string
+    {
+        $description = trim((string) $product->getDescription());
+
+        if ($description === '') {
+            return (string) $product->getName();
+        }
+
+        return $product->getName() . "\n" . $description;
     }
 
     #[LiveAction]

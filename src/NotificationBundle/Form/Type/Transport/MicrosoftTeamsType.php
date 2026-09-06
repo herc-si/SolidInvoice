@@ -31,6 +31,7 @@ final class MicrosoftTeamsType extends AbstractType
             'path',
             null,
             [
+                'label' => 'form.field.path',
                 'constraints' => new NotBlank(groups: ['microsoftteams']),
             ]
         );

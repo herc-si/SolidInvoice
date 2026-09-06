@@ -56,21 +56,21 @@ final class ApiTokenGrid extends Grid
     {
         return [
             StringColumn::new('name')
-                ->label('Name')
+                ->label('user.api_token.grid.name')
                 ->searchable(true)
                 ->sortable(true),
             StringColumn::new('description')
-                ->label('Description')
+                ->label('user.api_token.grid.description')
                 ->searchable(true)
                 ->sortable(false)
                 ->formatValue(static fn (?string $value) => $value ? (strlen($value) > 50 ? substr($value, 0, 50) . '...' : $value) : '-'),
             StringColumn::new('usageCount')
-                ->label('Usage Count')
+                ->label('user.api_token.grid.usage_count')
                 ->searchable(false)
                 ->sortable(false)
                 ->formatValue(static fn ($value, #[SensitiveParameter] ApiToken $token) => $token->getUsageCount()),
             RelativeDateColumn::new('lastUsed')
-                ->label('Last Used')
+                ->label('user.api_token.grid.last_used')
                 ->searchable(false)
                 ->sortable(false)
                 ->formatValue(static function ($value, #[SensitiveParameter] ApiToken $token) {
@@ -78,7 +78,7 @@ final class ApiTokenGrid extends Grid
                     return $history->count() > 0 ? $history->first()->getCreated() : null;
                 }),
             RelativeDateColumn::new('created')
-                ->label('Created')
+                ->label('user.api_token.grid.created')
                 ->sortable(true),
         ];
     }

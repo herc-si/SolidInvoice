@@ -1,0 +1,27 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{{ 'einvoicing.notification_rejected.heading'|trans({}, 'email') }}
+{{ '='|repeat(60) }}
+
+⚠️  {{ 'einvoicing.notification_rejected.alert'|trans({}, 'email') }}
+
+{{ 'einvoicing.notification_rejected.message'|trans({}, 'email') }}
+
+{{ 'einvoicing.notification_rejected.invoice_number'|trans({}, 'email') }}: {{ invoice.invoiceId ?? invoice.id }}
+{% if client -%}
+{{ 'einvoicing.notification_rejected.client'|trans({}, 'email') }}: {{ client.name }}
+{% elseif invoice.client -%}
+{{ 'einvoicing.notification_rejected.client'|trans({}, 'email') }}: {{ invoice.client.name }}
+{% endif -%}
+{{ 'einvoicing.notification_rejected.provider'|trans({}, 'email') }}: {{ submission.provider|replace({'_': ' '})|capitalize }}
+{{ 'einvoicing.notification_rejected.status_code'|trans({}, 'email') }}: {{ statusCode }}
+
+{{ '-'|repeat(60) }}
+{{ 'einvoicing.notification_rejected.view_invoice'|trans({}, 'email') }}: {{ url('_invoices_view', {'id': invoice.id}) }}

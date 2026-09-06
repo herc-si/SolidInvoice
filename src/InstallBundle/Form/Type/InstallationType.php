@@ -93,7 +93,7 @@ final class InstallationType extends AbstractFlowType
         $builder->addStep('install', options: ['inherit_data' => true]);
         $builder->addStep('finish', options: ['mapped' => false]);
 
-        $builder->add('navigator', InstallNavigatorType::class);
+        $builder->add('navigator', InstallNavigatorType::class, ['label' => 'form.field.navigator']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

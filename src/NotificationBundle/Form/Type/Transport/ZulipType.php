@@ -31,6 +31,7 @@ final class ZulipType extends AbstractType
             'email',
             null,
             [
+                'label' => 'form.field.email',
                 'constraints' => new NotBlank(groups: ['zulip']),
             ]
         );
@@ -39,6 +40,7 @@ final class ZulipType extends AbstractType
             'token',
             null,
             [
+                'label' => 'form.field.token',
                 'constraints' => new NotBlank(groups: ['zulip']),
             ]
         );
@@ -47,6 +49,7 @@ final class ZulipType extends AbstractType
             'host',
             null,
             [
+                'label' => 'form.field.host',
                 'constraints' => new NotBlank(groups: ['zulip']),
             ]
         );
@@ -55,6 +58,7 @@ final class ZulipType extends AbstractType
             'channel',
             null,
             [
+                'label' => 'form.field.channel',
                 'constraints' => new NotBlank(groups: ['zulip']),
             ]
         );

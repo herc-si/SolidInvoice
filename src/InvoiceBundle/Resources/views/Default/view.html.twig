@@ -550,9 +550,7 @@
                                 <div class="d-flex align-items-start justify-content-between gap-2">
                                     <div class="min-w-0">
                                         <div class="d-flex align-items-center gap-2 flex-wrap">
-                                            <span class="badge {{ submission.success ? 'bg-success-lt' : 'bg-danger-lt' }}">
-                                                {{ (submission.success ? 'einvoicing.view.status_success' : 'einvoicing.view.status_failed')|trans }}
-                                            </span>
+                                            {{ einvoicing_status_label(einvoicing_processing_status(submission)) }}
                                             <span class="text-muted small">{{ submission.provider|replace({'_': ' '})|capitalize }}</span>
                                         </div>
                                         {% if submission.externalReference is not empty %}

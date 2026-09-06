@@ -31,6 +31,7 @@ final class ClickatellType extends AbstractType
             'access_token',
             null,
             [
+                'label' => 'form.field.access_token',
                 'constraints' => new NotBlank(groups: ['clickatell']),
             ]
         );
@@ -39,6 +40,7 @@ final class ClickatellType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['clickatell']),
             ]
         );

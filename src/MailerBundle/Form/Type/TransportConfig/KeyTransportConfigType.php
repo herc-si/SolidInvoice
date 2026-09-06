@@ -29,6 +29,7 @@ final class KeyTransportConfigType extends AbstractType
             'key',
             null,
             [
+                'label' => 'form.field.key',
                 'constraints' => new NotBlank(groups: ['key']),
             ]
         );

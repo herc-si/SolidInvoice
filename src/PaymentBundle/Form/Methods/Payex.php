@@ -32,6 +32,7 @@ class Payex extends AbstractType
             'account_number',
             TextType::class,
             [
+                'label' => 'form.field.account_number',
                 'constraints' => new NotBlank(),
             ]
         );
@@ -40,6 +41,7 @@ class Payex extends AbstractType
             'encryption_key',
             PasswordType::class,
             [
+                'label' => 'form.field.encryption_key',
                 'constraints' => new NotBlank(),
                 'always_empty' => false,
             ]
@@ -49,6 +51,7 @@ class Payex extends AbstractType
             'sandbox',
             CheckboxType::class,
             [
+                'label' => 'form.field.sandbox',
                 'required' => false,
             ]
         );

@@ -31,13 +31,14 @@ class TaxType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('name', null, ['sanitize_html' => true, 'allow_single_quotes' => true]);
-        $builder->add('rate', PercentType::class, ['scale' => 2, 'type' => 'integer']);
+        $builder->add('name', null, ['label' => 'tax.form.name.label', 'sanitize_html' => true, 'allow_single_quotes' => true]);
+        $builder->add('rate', PercentType::class, ['label' => 'tax.form.rate.label', 'scale' => 2, 'type' => 'integer']);
 
         $builder->add(
             'type',
             ChoiceType::class,
             [
+                'label' => 'tax.form.type.label',
                 'choices' => array_map(ucwords(...), Tax::getTypes()),
                 'help' => 'tax.rates.explanation',
                 'help_html' => true,
@@ -49,6 +50,7 @@ class TaxType extends AbstractType
             'category',
             EnumType::class,
             [
+                'label' => 'tax.form.category.label',
                 'class' => TaxCategory::class,
                 'choice_label' => static fn (TaxCategory $c) => $c->getLabel(),
                 'placeholder' => false,
@@ -59,6 +61,8 @@ class TaxType extends AbstractType
             'compound',
             CheckboxType::class,
             [
+                'label' => 'tax.form.compound.label',
+                'help' => 'tax.form.compound.help',
                 'required' => false,
             ]
         );

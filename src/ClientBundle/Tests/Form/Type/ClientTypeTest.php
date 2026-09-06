@@ -64,6 +64,26 @@ final class ClientTypeTest extends FormTestCase
         $this->assertFormData(ClientType::class, $formData, $object);
     }
 
+    public function testSubmitFillsNameFromThePrimaryContactWhenLeftEmptyForAnIndividual(): void
+    {
+        $this->disabledFeatures = ['custom_fields'];
+
+        $formData = [
+            'name' => '',
+            'currencyCode' => 'USD',
+            'contacts' => [
+                ['firstName' => 'Jane', 'lastName' => 'Doe', 'email' => 'jane@example.com'],
+            ],
+            'addresses' => [],
+        ];
+
+        $form = $this->factory->create(ClientType::class, new Client());
+        $form->submit($formData);
+
+        self::assertTrue($form->isSynchronized());
+        self::assertSame('Jane Doe', $form->getData()->getName());
+    }
+
     public function testSubmitWithMultiCurrencyGatedOverridesEntityCurrency(): void
     {
         $this->disabledFeatures = ['multi_currency'];

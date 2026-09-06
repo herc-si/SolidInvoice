@@ -31,6 +31,7 @@ final class SmsBiurasType extends AbstractType
             'uid',
             null,
             [
+                'label' => 'form.field.uid',
                 'constraints' => new NotBlank(groups: ['smsbiuras']),
             ]
         );
@@ -39,6 +40,7 @@ final class SmsBiurasType extends AbstractType
             'api_key',
             null,
             [
+                'label' => 'form.field.api_key',
                 'constraints' => new NotBlank(groups: ['smsbiuras']),
             ]
         );
@@ -47,6 +49,7 @@ final class SmsBiurasType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['smsbiuras']),
             ]
         );
@@ -55,6 +58,7 @@ final class SmsBiurasType extends AbstractType
             'test_mode',
             null,
             [
+                'label' => 'form.field.test_mode',
                 'constraints' => new NotBlank(groups: ['smsbiuras']),
             ]
         );

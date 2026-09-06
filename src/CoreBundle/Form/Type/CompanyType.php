@@ -27,11 +27,12 @@ final class CompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('name', null, ['label' => 'form.field.name'])
             ->add(
                 'currency',
                 CurrencyType::class,
                 [
+                'label' => 'form.field.currency',
                     'placeholder' => 'form.placeholder.choose_currency',
                 ]
             );

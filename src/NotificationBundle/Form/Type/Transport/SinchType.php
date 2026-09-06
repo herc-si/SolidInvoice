@@ -31,6 +31,7 @@ final class SinchType extends AbstractType
             'account_id',
             null,
             [
+                'label' => 'form.field.account_id',
                 'constraints' => new NotBlank(groups: ['sinch']),
             ]
         );
@@ -39,6 +40,7 @@ final class SinchType extends AbstractType
             'auth_token',
             null,
             [
+                'label' => 'form.field.auth_token',
                 'constraints' => new NotBlank(groups: ['sinch']),
             ]
         );
@@ -47,6 +49,7 @@ final class SinchType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['sinch']),
             ]
         );

@@ -31,6 +31,7 @@ final class FakeChatType extends AbstractType
             'to',
             null,
             [
+                'label' => 'form.field.to',
                 'constraints' => new NotBlank(groups: ['fakechat']),
             ]
         );
@@ -39,6 +40,7 @@ final class FakeChatType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['fakechat']),
             ]
         );

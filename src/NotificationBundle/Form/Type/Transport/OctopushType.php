@@ -31,6 +31,7 @@ final class OctopushType extends AbstractType
             'userlogin',
             null,
             [
+                'label' => 'form.field.userlogin',
                 'constraints' => new NotBlank(groups: ['octopush']),
             ]
         );
@@ -39,6 +40,7 @@ final class OctopushType extends AbstractType
             'apikey',
             null,
             [
+                'label' => 'form.field.apikey',
                 'constraints' => new NotBlank(groups: ['octopush']),
             ]
         );
@@ -47,6 +49,7 @@ final class OctopushType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['octopush']),
             ]
         );
@@ -55,6 +58,7 @@ final class OctopushType extends AbstractType
             'type',
             null,
             [
+                'label' => 'form.field.type',
                 'constraints' => new NotBlank(groups: ['octopush']),
             ]
         );

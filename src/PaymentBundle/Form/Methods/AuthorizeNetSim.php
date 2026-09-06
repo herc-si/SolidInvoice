@@ -32,6 +32,7 @@ class AuthorizeNetSim extends AbstractType
             'login_id',
             TextType::class,
             [
+                'label' => 'form.field.login_id',
                 'constraints' => new NotBlank(),
             ]
         );
@@ -40,6 +41,7 @@ class AuthorizeNetSim extends AbstractType
             'transaction_key',
             TextType::class,
             [
+                'label' => 'form.field.transaction_key',
                 'constraints' => new NotBlank(),
             ]
         );
@@ -48,6 +50,7 @@ class AuthorizeNetSim extends AbstractType
             'hash_secret',
             PasswordType::class,
             [
+                'label' => 'form.field.hash_secret',
                 'constraints' => new NotBlank(),
                 'always_empty' => false,
             ]
@@ -57,6 +60,7 @@ class AuthorizeNetSim extends AbstractType
             'test_mode',
             CheckboxType::class,
             [
+                'label' => 'form.field.test_mode',
                 'required' => false,
             ]
         );

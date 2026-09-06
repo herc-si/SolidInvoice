@@ -97,6 +97,17 @@
     @media (width <= 768px) {
         width: 100%;
         justify-content: flex-end;
+
+        // Transition buttons ("Refuser", "Accepter", "Envoyer") carry real
+        // words, not icons: let the row wrap rather than squeeze them to icon
+        // width, which pushed their labels out over each other.
+        flex-wrap: wrap;
+
+        .btn,
+        .btn-group,
+        .doc-view-utility-actions {
+            flex-shrink: 0;
+        }
     }
 }
 
@@ -163,6 +174,20 @@
 
     &:active {
         transform: translateY(0);
+    }
+}
+
+// btn-hero is meant to stand alone: its glow and its 1px hover lift make it
+// overlap and drift out of line with the neighbouring split-dropdown when it
+// sits inside a .btn-group, which joins its buttons with negative margins.
+
+.btn-group > .btn-hero {
+    box-shadow: none;
+
+    &:hover,
+    &:active {
+        transform: none;
+        box-shadow: none;
     }
 }
 

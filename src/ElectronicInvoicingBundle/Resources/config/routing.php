@@ -11,6 +11,8 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
+use SolidInvoice\ElectronicInvoicingBundle\Action\DownloadIncomingInvoice;
+use SolidInvoice\ElectronicInvoicingBundle\Action\IncomingInvoices;
 use SolidInvoice\ElectronicInvoicingBundle\Action\Providers;
 use SolidInvoice\ElectronicInvoicingBundle\Action\SendElectronicInvoice;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
@@ -24,4 +26,14 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     $routingConfigurator
         ->add('_einvoicing_send', '/send/{id}')
         ->controller(SendElectronicInvoice::class);
+
+    $routingConfigurator
+        ->add('_einvoicing_incoming', '/incoming')
+        ->controller(IncomingInvoices::class)
+        ->methods(['GET']);
+
+    $routingConfigurator
+        ->add('_einvoicing_incoming_download', '/incoming/download/{id}')
+        ->controller(DownloadIncomingInvoice::class)
+        ->methods(['GET']);
 };

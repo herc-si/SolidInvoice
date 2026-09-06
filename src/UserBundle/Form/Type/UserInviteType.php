@@ -26,7 +26,8 @@ final class UserInviteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('email', EmailType::class, ['required' => true]);
+        $builder->add('email', EmailType::class, [
+                'label' => 'form.field.email', 'required' => true]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

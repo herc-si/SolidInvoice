@@ -31,6 +31,7 @@ final class SlackType extends AbstractType
             'token',
             null,
             [
+                'label' => 'form.field.token',
                 'constraints' => new NotBlank(groups: ['slack']),
             ]
         );
@@ -39,6 +40,7 @@ final class SlackType extends AbstractType
             'channel',
             null,
             [
+                'label' => 'form.field.channel',
                 'constraints' => new NotBlank(groups: ['slack']),
             ]
         );

@@ -31,6 +31,7 @@ final class BrevoType extends AbstractType
             'api_key',
             null,
             [
+                'label' => 'form.field.api_key',
                 'constraints' => new NotBlank(groups: ['brevo']),
             ]
         );
@@ -39,6 +40,7 @@ final class BrevoType extends AbstractType
             'phone',
             null,
             [
+                'label' => 'form.field.phone',
                 'constraints' => new NotBlank(groups: ['brevo']),
             ]
         );

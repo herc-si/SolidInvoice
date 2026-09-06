@@ -52,20 +52,24 @@ abstract class BaseQuoteGrid extends Grid
     {
         return [
             StringColumn::new('quoteId')
-                ->label('Quote #')
+                ->label('quote.grid.quote_number')
                 ->cellClass('col-id'),
             StringColumn::new('client')
+                ->label('quote.grid.client')
                 ->searchable(false)
                 ->linkToRoute('_clients_view', ['id' => 'client.id']),
             MoneyColumn::new('total')
+                ->label('quote.grid.total')
                 ->formatValue(fn (BigNumber $value, Quote $quote) => new Money((string) $value, $quote->getClient()?->getCurrency())),
             StringColumn::new('status')
+                ->label('quote.grid.status')
                 ->twigFunction('quote_label')
                 ->filter(ChoiceFilter::new('status', array_column(array_map(static fn (QuoteStatus $s) => [$s->value, $s->name], QuoteStatus::cases()), 1, 0))->multiple()),
             MoneyColumn::new('tax')
+                ->label('quote.grid.tax')
                 ->formatValue(fn (BigNumber $value, Quote $quote) => new Money((string) $value, $quote->getClient()?->getCurrency())),
             MoneyColumn::new('discount.value')
-                ->label('Discount')
+                ->label('quote.grid.discount')
                 ->searchable(false)
                 ->formatValue(function (float | BigNumber $value, Quote $quote): Money {
                     $discountAmount = $this->calculator->calculateDiscount($quote);
@@ -73,6 +77,7 @@ abstract class BaseQuoteGrid extends Grid
                     return new Money((string) $discountAmount, $quote->getClient()?->getCurrency());
                 }),
             DateTimeColumn::new('created')
+                ->label('quote.grid.created')
                 ->format('d F Y')
                 ->filter(new DateRangeFilter('created'))
         ];

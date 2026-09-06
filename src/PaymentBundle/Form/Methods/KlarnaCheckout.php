@@ -30,6 +30,7 @@ class KlarnaCheckout extends AbstractType
             'merchant_id',
             TextType::class,
             [
+                'label' => 'form.field.merchant_id',
                 'constraints' => new NotBlank(),
             ]
         );
@@ -38,6 +39,7 @@ class KlarnaCheckout extends AbstractType
             'secret',
             TextType::class,
             [
+                'label' => 'form.field.secret',
                 'constraints' => new NotBlank(),
             ]
         );

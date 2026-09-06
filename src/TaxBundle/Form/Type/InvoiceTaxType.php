@@ -37,6 +37,7 @@ final class InvoiceTaxType extends AbstractType
     {
         $builder
             ->add('tax', EntityType::class, [
+                'label' => 'form.field.tax',
                 'class' => Tax::class,
                 'placeholder' => 'tax.invoice_tax.tax.placeholder',
                 'required' => true,
@@ -60,6 +61,7 @@ final class InvoiceTaxType extends AbstractType
                 ],
             ])
             ->add('direction', EnumType::class, [
+                'label' => 'form.field.direction',
                 'class' => TaxDirection::class,
                 'required' => true,
                 'placeholder' => false,

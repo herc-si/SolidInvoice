@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use SolidInvoice\BillBundle\Entity\Bill;
+use SolidInvoice\BillBundle\Enum\BillStatus;
+use SolidInvoice\BillBundle\Model\Graph as BillGraph;
 use SolidInvoice\InvoiceBundle\Entity\Invoice;
 use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
 use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
@@ -217,6 +220,64 @@ return App::config([
                             'name' => QuoteGraph::TRANSITION_ARCHIVE,
                             'from' => [QuoteStatus::New->value, QuoteStatus::Draft->value, QuoteStatus::Cancelled->value, QuoteStatus::Accepted->value, QuoteStatus::Declined->value, QuoteStatus::Pending->value],
                             'to' => [QuoteStatus::Archived->value],
+                        ],
+                    ],
+                ],
+                'bill' => [
+                    'type' => 'state_machine',
+                    'marking_store' => [
+                        'type' => 'method',
+                        'property' => 'statusValue',
+                    ],
+                    'audit_trail' => [
+                        'enabled' => true,
+                    ],
+                    'supports' => [
+                        Bill::class,
+                    ],
+                    'places' => [
+                        BillStatus::Draft->value,
+                        BillStatus::Pending->value,
+                        BillStatus::Paid->value,
+                        BillStatus::Overdue->value,
+                        BillStatus::Cancelled->value,
+                        BillStatus::Archived->value,
+                    ],
+                    'transitions' => [
+                        [
+                            'name' => BillGraph::TRANSITION_CONFIRM,
+                            'from' => [BillStatus::Draft->value],
+                            'to' => [BillStatus::Pending->value],
+                        ],
+                        [
+                            'name' => BillGraph::TRANSITION_PAY,
+                            'from' => [BillStatus::Pending->value, BillStatus::Overdue->value],
+                            'to' => [BillStatus::Paid->value],
+                        ],
+                        [
+                            'name' => BillGraph::TRANSITION_OVERDUE,
+                            'from' => [BillStatus::Pending->value],
+                            'to' => [BillStatus::Overdue->value],
+                        ],
+                        [
+                            'name' => BillGraph::TRANSITION_CANCEL,
+                            'from' => [BillStatus::Draft->value, BillStatus::Pending->value, BillStatus::Overdue->value],
+                            'to' => [BillStatus::Cancelled->value],
+                        ],
+                        [
+                            'name' => BillGraph::TRANSITION_REOPEN,
+                            'from' => [BillStatus::Cancelled->value],
+                            'to' => [BillStatus::Draft->value],
+                        ],
+                        [
+                            'name' => BillGraph::TRANSITION_ARCHIVE,
+                            'from' => [BillStatus::Draft->value, BillStatus::Cancelled->value, BillStatus::Paid->value],
+                            'to' => [BillStatus::Archived->value],
+                        ],
+                        [
+                            'name' => BillGraph::TRANSITION_EDIT,
+                            'from' => [BillStatus::Cancelled->value, BillStatus::Pending->value, BillStatus::Overdue->value],
+                            'to' => [BillStatus::Draft->value],
                         ],
                     ],
                 ],

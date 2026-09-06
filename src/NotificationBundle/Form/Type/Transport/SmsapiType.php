@@ -31,6 +31,7 @@ final class SmsapiType extends AbstractType
             'token',
             null,
             [
+                'label' => 'form.field.token',
                 'constraints' => new NotBlank(groups: ['smsapi']),
             ]
         );
@@ -39,6 +40,7 @@ final class SmsapiType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['smsapi']),
             ]
         );

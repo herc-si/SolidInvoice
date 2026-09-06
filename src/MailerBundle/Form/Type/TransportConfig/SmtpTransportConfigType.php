@@ -32,6 +32,7 @@ final class SmtpTransportConfigType extends AbstractType
             'host',
             null,
             [
+                'label' => 'form.field.host',
                 'constraints' => new NotBlank(groups: ['smtp']),
             ]
         );
@@ -40,6 +41,7 @@ final class SmtpTransportConfigType extends AbstractType
             'port',
             IntegerType::class,
             [
+                'label' => 'form.field.port',
                 'constraints' => new Type(type: 'integer', groups: ['smtp']),
                 'required' => false,
             ]
@@ -49,6 +51,7 @@ final class SmtpTransportConfigType extends AbstractType
             'user',
             null,
             [
+                'label' => 'form.field.user',
                 'required' => false,
             ]
         );
@@ -57,6 +60,7 @@ final class SmtpTransportConfigType extends AbstractType
             'password',
             PasswordType::class,
             [
+                'label' => 'form.field.password',
                 'required' => false,
             ]
         );

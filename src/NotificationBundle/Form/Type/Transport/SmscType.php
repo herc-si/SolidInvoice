@@ -31,6 +31,7 @@ final class SmscType extends AbstractType
             'login',
             null,
             [
+                'label' => 'form.field.login',
                 'constraints' => new NotBlank(groups: ['smsc']),
             ]
         );
@@ -39,6 +40,7 @@ final class SmscType extends AbstractType
             'password',
             null,
             [
+                'label' => 'form.field.password',
                 'constraints' => new NotBlank(groups: ['smsc']),
             ]
         );
@@ -47,6 +49,7 @@ final class SmscType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['smsc']),
             ]
         );

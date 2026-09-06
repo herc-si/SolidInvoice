@@ -42,13 +42,13 @@ final class UserInvitationsGrid extends Grid
     {
         return [
             StringColumn::new('email')
-                ->label('Email Address'),
+                ->label('user.invitation.grid.email'),
             RelativeDateColumn::new('created')
-                ->label('Invited'),
+                ->label('user.invitation.grid.invited'),
             RelativeDateColumn::new('expiresAt')
-                ->label('Expires'),
+                ->label('user.invitation.grid.expires'),
             StatusColumn::new('status')
-                ->label('Status')
+                ->label('user.invitation.grid.status')
                 ->statusMap([
                     InvitationStatus::Pending->value => 'warning',
                     InvitationStatus::Expired->value => 'danger',
@@ -57,7 +57,7 @@ final class UserInvitationsGrid extends Grid
                     ? InvitationStatus::Expired->value
                     : $invitation->getStatus()->value),
             StringColumn::new('invitedBy.email')
-                ->label('Invited By'),
+                ->label('user.invitation.grid.invited_by'),
         ];
     }
 

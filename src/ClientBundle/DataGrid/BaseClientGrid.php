@@ -51,8 +51,21 @@ abstract class BaseClientGrid extends Grid
     public function columns(): array
     {
         return [
-            StringColumn::new('name'),
-            UrlColumn::new('website'),
+            StringColumn::new('name')
+                ->label('client.grid.name'),
+            StringColumn::new('role')
+                ->label(new TranslatableMessage('client.grid.role'))
+                ->searchable(false)
+                ->sortable(false)
+                ->formatValue(static function (mixed $value, Client $client): TranslatableMessage {
+                    return match (true) {
+                        $client->isClient() && $client->isSupplier() => new TranslatableMessage('client.grid.role_both'),
+                        $client->isSupplier() => new TranslatableMessage('client.grid.role_supplier'),
+                        default => new TranslatableMessage('client.grid.role_client'),
+                    };
+                }),
+            UrlColumn::new('website')
+                ->label('client.grid.website'),
             CurrencyColumn::new('currencyCode')
                 ->label(new TranslatableMessage('client.grid.currency'))
                 ->filter(new ChoiceFilter('currencyCode', Currencies::getNames($this->locale))),
@@ -87,6 +100,7 @@ abstract class BaseClientGrid extends Grid
                     return $totalOutstanding;
                 }),
             DateTimeColumn::new('created')
+                ->label('client.grid.created')
                 ->format('d F Y')
                 ->filter(new DateRangeFilter('created')),
         ];

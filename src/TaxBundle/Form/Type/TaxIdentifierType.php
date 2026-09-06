@@ -42,10 +42,12 @@ final class TaxIdentifierType extends AbstractType
         ]);
 
         $builder->add('value', TextType::class, [
+                'label' => 'form.field.value',
             'required' => true,
         ]);
 
         $builder->add('primary', CheckboxType::class, [
+                'label' => 'form.field.primary',
             'required' => false,
         ]);
     }

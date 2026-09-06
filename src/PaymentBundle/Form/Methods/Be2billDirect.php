@@ -32,6 +32,7 @@ class Be2billDirect extends AbstractType
             'identifier',
             TextType::class,
             [
+                'label' => 'form.field.identifier',
                 'constraints' => new NotBlank(),
             ]
         );
@@ -40,6 +41,7 @@ class Be2billDirect extends AbstractType
             'password',
             PasswordType::class,
             [
+                'label' => 'form.field.password',
                 'constraints' => new NotBlank(),
                 'always_empty' => false,
             ]
@@ -49,6 +51,7 @@ class Be2billDirect extends AbstractType
             'sandbox',
             CheckboxType::class,
             [
+                'label' => 'form.field.sandbox',
                 'required' => false,
             ]
         );

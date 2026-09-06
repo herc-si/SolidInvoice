@@ -16,6 +16,7 @@ namespace SolidInvoice\PaymentBundle\Menu;
 use Knp\Menu\ItemInterface;
 use SolidInvoice\CoreBundle\Enum\Menu\MenuPriority;
 use SolidInvoice\CoreBundle\Feature\UpgradePromptProvider;
+use SolidInvoice\CoreBundle\Icon;
 use SolidInvoice\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Attributes\Menu\MenuBuilder;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
@@ -31,7 +32,10 @@ final readonly class PaymentMenu
     #[MenuBuilder(name: 'sidebar', priority: MenuPriority::PRIORITY_PAYMENT->value)]
     public function sidebar(ItemInterface $menu): void
     {
-        $extras = ['icon' => 'credit-card'];
+        // "Payment methods" is configuration, not a daily task, so it moved to
+        // the System section (see CoreBundle\Menu\MainMenu::paymentMethods).
+        // That leaves a single destination here, so no dropdown is needed.
+        $extras = ['icon' => Icon::PAYMENT];
 
         if (! $this->featureGate->isEnabled(Feature::OnlinePayments->value)) {
             $planLabel = $this->upgradePromptProvider->menuLabel(Feature::OnlinePayments->value);
@@ -41,29 +45,11 @@ final readonly class PaymentMenu
             }
         }
 
-        $section = $menu->addChild(
-            'payment.menu.main',
-            [
-                'extras' => $extras,
-            ],
-        );
-        $section->addChild(
+        $menu->addChild(
             'payment.menu.main',
             [
                 'route' => '_payments_index',
-                'extras' => [
-                    'icon' => 'cash',
-                ],
-            ],
-        );
-
-        $section->addChild(
-            'payment.menu.methods',
-            [
-                'route' => '_payment_settings_index',
-                'extras' => [
-                    'icon' => 'receipt',
-                ],
+                'extras' => $extras,
             ],
         );
     }

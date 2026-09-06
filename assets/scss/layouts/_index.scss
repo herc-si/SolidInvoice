@@ -11,3 +11,7 @@
 // Vertical sidebar recolor — converts Tabler's dark slate sidebar into
 // the quiet light panel prescribed by DESIGN.md (gray-100 behind the body).
 @import 'navbar-vertical';
+
+// Page header — stack the title above its action buttons on small screens,
+// where Tabler's side-by-side columns squeeze long document titles.
+@import 'page-header';

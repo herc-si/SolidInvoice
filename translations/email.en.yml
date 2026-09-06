@@ -13,6 +13,16 @@ client:
         message: 'A new client has been added.'
         subject: 'A new client has been created'
         view_client: 'View Client'
+einvoicing:
+    notification_rejected:
+        alert: 'Electronic Invoice Rejected'
+        client: Client
+        heading: 'Electronic Invoice Rejected'
+        invoice_number: 'Invoice Number'
+        message: 'An electronic-invoicing platform rejected an invoice that was submitted to it. Please review the invoice and client data and resend it.'
+        provider: Provider
+        status_code: 'Status Code'
+        view_invoice: 'View Invoice Details'
 email:
     confirmation:
         alternative: "If the button above doesn't work, copy and paste this link into your browser:"

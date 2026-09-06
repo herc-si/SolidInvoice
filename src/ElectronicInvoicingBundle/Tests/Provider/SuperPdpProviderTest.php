@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace SolidInvoice\ElectronicInvoicingBundle\Tests\Provider;
 
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
+use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use SolidInvoice\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
 use SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdpProvider;
 use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
 use SolidInvoice\InvoiceBundle\Entity\Invoice;
@@ -80,6 +83,156 @@ final class SuperPdpProviderTest extends KernelTestCase
 
         self::assertFalse($result->success);
         self::assertStringContainsString('Invalid document', (string) $result->message);
+    }
+
+    public function testResolveProcessingStatusReturnsRejectedWhenTheInitialSendFailed(): void
+    {
+        $submission = new ElectronicInvoiceSubmission()->setSuccess(false);
+
+        $status = self::getContainer()->get(SuperPdpProvider::class)->resolveProcessingStatus($submission);
+
+        self::assertSame(ElectronicInvoiceProcessingStatus::Rejected, $status);
+    }
+
+    public function testResolveProcessingStatusReturnsPendingWhenNotYetPolled(): void
+    {
+        $submission = new ElectronicInvoiceSubmission()->setSuccess(true);
+
+        $status = self::getContainer()->get(SuperPdpProvider::class)->resolveProcessingStatus($submission);
+
+        self::assertSame(ElectronicInvoiceProcessingStatus::Pending, $status);
+    }
+
+    /**
+     * @return iterable<string, array{string, ElectronicInvoiceProcessingStatus}>
+     */
+    public static function statusCodeProvider(): iterable
+    {
+        yield 'fr:205 Accepted' => ['fr:205', ElectronicInvoiceProcessingStatus::Accepted];
+        yield 'fr:206 Partly accepted' => ['fr:206', ElectronicInvoiceProcessingStatus::Accepted];
+        yield 'fr:209 Completed' => ['fr:209', ElectronicInvoiceProcessingStatus::Accepted];
+        yield 'fr:210 Refused' => ['fr:210', ElectronicInvoiceProcessingStatus::Rejected];
+        yield 'fr:213 Rejected' => ['fr:213', ElectronicInvoiceProcessingStatus::Rejected];
+        yield 'fr:501 Inadmissible' => ['fr:501', ElectronicInvoiceProcessingStatus::Rejected];
+        yield 'api:rejected' => ['api:rejected', ElectronicInvoiceProcessingStatus::Rejected];
+        yield 'api:invalid' => ['api:invalid', ElectronicInvoiceProcessingStatus::Rejected];
+        yield 'fr:201 Sent (non-terminal)' => ['fr:201', ElectronicInvoiceProcessingStatus::Pending];
+        yield 'fr:208 On hold (non-terminal)' => ['fr:208', ElectronicInvoiceProcessingStatus::Pending];
+    }
+
+    #[DataProvider('statusCodeProvider')]
+    public function testResolveProcessingStatusClassifiesKnownStatusCodes(string $statusCode, ElectronicInvoiceProcessingStatus $expected): void
+    {
+        $submission = new ElectronicInvoiceSubmission()->setSuccess(true)->setStatusCode($statusCode);
+
+        $status = self::getContainer()->get(SuperPdpProvider::class)->resolveProcessingStatus($submission);
+
+        self::assertSame($expected, $status);
+    }
+
+    public function testFetchIncomingMapsListedInvoicesToReceivedData(): void
+    {
+        self::getContainer()->set(HttpClientInterface::class, new MockHttpClient([
+            static fn (): MockResponse => new MockResponse((string) json_encode(['access_token' => 'a-token', 'expires_in' => 3600])),
+            static fn (): MockResponse => new MockResponse((string) json_encode([
+                'count' => 1,
+                'has_after' => false,
+                'has_before' => false,
+                'data' => [
+                    [
+                        'id' => 555,
+                        'company_id' => 1,
+                        'created_at' => '2026-01-01T10:00:00Z',
+                        'direction' => 'in',
+                        'events' => [
+                            ['status_code' => 'fr:200', 'created_at' => '2026-01-01T10:00:00Z'],
+                            ['status_code' => 'fr:205', 'created_at' => '2026-01-02T10:00:00Z'],
+                        ],
+                        'en_invoice' => [
+                            'number' => 'SUP-0042',
+                            'issue_date' => '2026-01-01',
+                            'currency_code' => 'EUR',
+                            'seller' => [
+                                'name' => 'Acme Supplies',
+                                'identifiers' => [
+                                    ['scheme' => '0002', 'value' => '11122233300045'],
+                                ],
+                            ],
+                            'totals' => [
+                                'amount_due_for_payment' => '199.90',
+                            ],
+                        ],
+                    ],
+                ],
+            ])),
+        ]));
+
+        $results = self::getContainer()->get(SuperPdpProvider::class)->fetchIncoming(
+            ['client_id' => 'id', 'client_secret' => 'secret'],
+            null,
+        );
+
+        self::assertCount(1, $results);
+        $data = $results[0];
+        self::assertSame('555', $data->externalReference);
+        self::assertSame('SUP-0042', $data->invoiceNumber);
+        self::assertSame('Acme Supplies', $data->sellerName);
+        self::assertSame('11122233300045', $data->sellerIdentifier);
+        self::assertSame('2026-01-01', $data->issueDate?->format('Y-m-d'));
+        self::assertNotNull($data->totalAmount);
+        self::assertSame('19990', (string) $data->totalAmount);
+        self::assertSame('EUR', $data->currencyCode);
+        self::assertSame('fr:205', $data->statusCode);
+    }
+
+    public function testFetchIncomingReturnsEmptyWhenCredentialsAreMissing(): void
+    {
+        $results = self::getContainer()->get(SuperPdpProvider::class)->fetchIncoming([], null);
+
+        self::assertSame([], $results);
+    }
+
+    /**
+     * Regression test for a real SUPER PDP response observed in production
+     * testing: two events created microseconds apart can carry timestamp
+     * strings with a *different number of fractional-second digits* (here
+     * ".43454Z" vs ".434541Z") — comparing those as plain strings sorts the
+     * shorter one after the longer one regardless of which actually happened
+     * first, so latestStatusCode() must order by `id` instead.
+     */
+    public function testLatestStatusCodeOrdersByIdNotByAmbiguousTimestampStrings(): void
+    {
+        $events = [
+            ['id' => 1290543, 'status_code' => 'api:uploaded', 'created_at' => '2026-09-04T10:00:39.834002Z'],
+            ['id' => 1290544, 'status_code' => 'fr:200', 'created_at' => '2026-09-04T10:00:40.43454Z'],
+            ['id' => 1290545, 'status_code' => 'fr:201', 'created_at' => '2026-09-04T10:00:40.434541Z'],
+        ];
+
+        self::assertSame('fr:201', SuperPdpProvider::latestStatusCode($events));
+    }
+
+    public function testLatestStatusCodeReturnsNullForEmptyOrInvalidInput(): void
+    {
+        self::assertNull(SuperPdpProvider::latestStatusCode(null));
+        self::assertNull(SuperPdpProvider::latestStatusCode([]));
+        self::assertNull(SuperPdpProvider::latestStatusCode('not an array'));
+    }
+
+    public function testDownloadIncomingDocumentReturnsTheRawContentAndMimeType(): void
+    {
+        self::getContainer()->set(HttpClientInterface::class, new MockHttpClient([
+            static fn (): MockResponse => new MockResponse((string) json_encode(['access_token' => 'a-token', 'expires_in' => 3600])),
+            static fn (): MockResponse => new MockResponse('%PDF-1.7 fake content', ['response_headers' => ['content-type' => 'application/pdf']]),
+        ]));
+
+        $document = self::getContainer()->get(SuperPdpProvider::class)->downloadIncomingDocument(
+            ['client_id' => 'id', 'client_secret' => 'secret'],
+            '555',
+        );
+
+        self::assertSame('%PDF-1.7 fake content', $document->content);
+        self::assertSame('application/pdf', $document->mimeType);
+        self::assertSame('pdf', $document->fileExtension);
     }
 
     private function createEligibleInvoice(): Invoice

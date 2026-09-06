@@ -22,6 +22,8 @@ use SolidInvoice\ClientBundle\Entity\Client;
 use SolidInvoice\ClientBundle\Enum\ClientStatus;
 use SolidInvoice\CoreBundle\Util\ArrayUtil;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
+use Symfony\Bridge\Doctrine\Types\UlidType;
+use Symfony\Component\Uid\Ulid;
 
 /**
  * @extends EntityRepository<Client>
@@ -37,10 +39,13 @@ class ClientRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('c');
 
-        $qb->select('COUNT(c.id)');
+        $qb->select('COUNT(c.id)')
+            // A pure supplier (isClient = false) isn't a real client and shouldn't
+            // count towards client-facing stats or the plan's client limit.
+            ->where('c.isClient = true');
 
         if ($status instanceof ClientStatus) {
-            $qb->where('c.status = :status')
+            $qb->andWhere('c.status = :status')
                 ->setParameter('status', $status->value);
         }
 
@@ -51,6 +56,43 @@ class ClientRepository extends EntityRepository
         } catch (NoResultException | NonUniqueResultException) {
             return 0;
         }
+    }
+
+    /**
+     * Matches an existing client/supplier by one of its tax identifiers'
+     * value (e.g. a SIRET from a received electronic invoice), scoped to the
+     * given company since tax identifier values aren't globally unique.
+     */
+    /**
+     * Company-scoped on purpose: the incoming-invoice poll runs with the
+     * Doctrine company filter disabled so it can walk every company, which
+     * means an unscoped lookup here would happily match another tenant's
+     * client and attach it as this company's supplier.
+     */
+    public function findOneByName(Ulid $companyId, string $name): ?Client
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.company = :companyId')
+            ->andWhere('c.name = :name')
+            ->setParameter('companyId', $companyId, UlidType::NAME)
+            ->setParameter('name', $name)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findOneByTaxIdentifierValue(Ulid $companyId, string $value): ?Client
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        $qb->join('c.taxIdentifiers', 't')
+            ->where('c.company = :companyId')
+            ->andWhere('t.value = :value')
+            ->setParameter('companyId', $companyId, UlidType::NAME)
+            ->setParameter('value', $value)
+            ->setMaxResults(1);
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
@@ -182,6 +224,26 @@ class ClientRepository extends EntityRepository
         $em->flush();
 
         $em->getFilters()->enable('archivable');
+    }
+
+    /**
+     * @param list<int> $ids
+     */
+    public function removeSupplierRole(array $ids): void
+    {
+        $em = $this->getEntityManager();
+
+        foreach ($ids as $id) {
+            $client = $this->find($id);
+
+            if (! $client instanceof Client) {
+                continue;
+            }
+
+            $client->setIsSupplier(false);
+        }
+
+        $em->flush();
     }
 
     public function findOneByNameIncludingArchived(string $name): ?Client

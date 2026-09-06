@@ -13,16 +13,24 @@ declare(strict_types=1);
 
 namespace SolidInvoice\ElectronicInvoicingBundle\Tests\Command;
 
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Mockery as M;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
+use Psr\Log\NullLogger;
 use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
 use SolidInvoice\CoreBundle\Test\Traits\ConsoleTesterTrait;
 use SolidInvoice\ElectronicInvoicingBundle\Command\PollSuperPdpInvoiceStatusCommand;
 use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
 use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use SolidInvoice\ElectronicInvoicingBundle\Notification\ElectronicInvoiceRejectedNotification;
+use SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpClient;
+use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
+use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceSubmissionRepository;
 use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
 use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
+use SolidInvoice\NotificationBundle\Notification\NotificationManager;
 use SolidWorx\Platform\PlatformBundle\Console\IO;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -43,6 +51,7 @@ final class PollSuperPdpInvoiceStatusCommandTest extends KernelTestCase
 {
     use EnsureApplicationInstalled;
     use ConsoleTesterTrait;
+    use MockeryPHPUnitIntegration;
 
     public function testCommandRefreshesTheStatusOfAPendingSubmission(): void
     {
@@ -88,6 +97,75 @@ final class PollSuperPdpInvoiceStatusCommandTest extends KernelTestCase
         $refreshed = $repository->find($submission->getId());
 
         self::assertSame('fr:205', $refreshed?->getStatusCode());
+    }
+
+    public function testCommandNotifiesUsersWhenASubmissionIsRejected(): void
+    {
+        $entityManager = self::getContainer()->get('doctrine')->getManager();
+
+        $setting = new ElectronicInvoiceProviderSetting();
+        $setting->setCompany($this->company)
+            ->setName('SUPER PDP')
+            ->setProvider('super_pdp')
+            ->setSettings(['client_id' => 'id', 'client_secret' => 'secret'])
+            ->setActive(true);
+        $entityManager->persist($setting);
+
+        $client = ClientFactory::createOne(['company' => $this->company]);
+        $invoice = InvoiceFactory::createOne(['company' => $this->company, 'client' => $client]);
+
+        $submission = new ElectronicInvoiceSubmission();
+        $submission->setCompany($this->company)
+            ->setInvoice($invoice)
+            ->setProvider('super_pdp')
+            ->setSuccess(true)
+            ->setExternalReference('4242');
+        $entityManager->persist($submission);
+        $entityManager->flush();
+
+        self::getContainer()->set(HttpClientInterface::class, new MockHttpClient([
+            static fn (): MockResponse => new MockResponse((string) json_encode(['access_token' => 'a-token', 'expires_in' => 3600])),
+            static fn (): MockResponse => new MockResponse((string) json_encode([
+                'id' => 4242,
+                'events' => [
+                    ['status_code' => 'fr:213', 'created_at' => '2026-01-02T10:00:00Z'],
+                ],
+            ])),
+        ]));
+
+        // The kernel is booted once per class (see EnsureApplicationInstalled), so by
+        // the time this test runs, the container's own NotificationManager has already
+        // been eagerly initialized during install — too late to self::getContainer()->set()
+        // it. Build the command by hand instead, supplying a mocked NotificationManager
+        // directly, the way WorkFlowSubscriberTest does for the same reason.
+        $notificationManager = M::mock(NotificationManager::class);
+        $notificationManager->shouldReceive('sendNotification')
+            ->once()
+            ->with(M::type(ElectronicInvoiceRejectedNotification::class));
+
+        $command = new PollSuperPdpInvoiceStatusCommand(
+            self::getContainer()->get('doctrine'),
+            self::getContainer()->get(ElectronicInvoiceSubmissionRepository::class),
+            self::getContainer()->get(ElectronicInvoiceProviderSettingRepository::class),
+            self::getContainer()->get(SuperPdpClient::class),
+            $notificationManager,
+            new NullLogger(),
+        );
+
+        $this->initOutput([]);
+        $this->input = new ArrayInput([]);
+        $this->input->setStream(self::createStream([]));
+        $command->setIo(new IO($this->input, $this->output));
+
+        $this->statusCode = $command->run($this->input, $this->output);
+
+        Assert::assertThat($this->statusCode, new CommandIsSuccessful());
+
+        $entityManager->clear();
+        $repository = self::getContainer()->get('doctrine')->getRepository(ElectronicInvoiceSubmission::class);
+        $refreshed = $repository->find($submission->getId());
+
+        self::assertSame('fr:213', $refreshed?->getStatusCode());
     }
 
     private function runTestCommand(): string

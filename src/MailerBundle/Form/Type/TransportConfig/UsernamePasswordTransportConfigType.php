@@ -30,6 +30,7 @@ final class UsernamePasswordTransportConfigType extends AbstractType
             'username',
             null,
             [
+                'label' => 'form.field.username',
                 'constraints' => new NotBlank(groups: ['userpass']),
             ]
         );
@@ -38,6 +39,7 @@ final class UsernamePasswordTransportConfigType extends AbstractType
             'password',
             PasswordType::class,
             [
+                'label' => 'form.field.password',
                 'constraints' => new NotBlank(groups: ['userpass']),
             ]
         );

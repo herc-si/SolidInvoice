@@ -31,6 +31,7 @@ final class TelegramType extends AbstractType
             'token',
             null,
             [
+                'label' => 'form.field.token',
                 'constraints' => new NotBlank(groups: ['telegram']),
             ]
         );
@@ -39,6 +40,7 @@ final class TelegramType extends AbstractType
             'chat_id',
             null,
             [
+                'label' => 'form.field.chat_id',
                 'constraints' => new NotBlank(groups: ['telegram']),
             ]
         );

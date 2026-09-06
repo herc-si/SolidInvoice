@@ -26,6 +26,7 @@ use SolidInvoice\TaxBundle\Entity\LineTax;
 use SolidInvoice\TaxBundle\Test\Factory\TaxIdentifierFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use function json_encode;
+use function substr_count;
 
 #[CoversClass(FacturXInvoiceBuilder::class)]
 final class FacturXInvoiceBuilderTest extends KernelTestCase
@@ -92,35 +93,41 @@ final class FacturXInvoiceBuilderTest extends KernelTestCase
 
         self::assertStringContainsString('INV-0001', $xml);
         self::assertStringContainsString('Acme Corp', $xml);
-        self::assertStringContainsString('11111111100011', $xml);
-        self::assertStringContainsString('22222222200022', $xml);
         self::assertStringContainsString('Consulting services', $xml);
         self::assertStringContainsString('EUR', $xml);
 
         // The SIRET must be a scheme-qualified GlobalID (ISO 6523 ICD "0002", the
         // French SIRENE registry) — not a plain tax-registration number — otherwise
         // SUPER PDP cannot compute the processing_rule (B2B/B2C/B2G) from the document.
+        // BR-FR-32 requires exactly 9 digits under this scheme, so it's the SIREN
+        // (the 14-digit SIRET's leading 9 digits), not the full SIRET.
         self::assertMatchesRegularExpression(
-            '/<ram:GlobalID schemeID="0002">11111111100011<\/ram:GlobalID>/',
+            '/<ram:GlobalID schemeID="0002">111111111<\/ram:GlobalID>/',
             $xml,
         );
         self::assertMatchesRegularExpression(
-            '/<ram:GlobalID schemeID="0002">22222222200022<\/ram:GlobalID>/',
+            '/<ram:GlobalID schemeID="0002">222222222<\/ram:GlobalID>/',
             $xml,
         );
 
-        // BT-34 Seller electronic address: AFNOR/Peppol routing for France uses the
-        // SIREN/SIRET, not an email — providers like SUPER PDP report it "missing"
-        // otherwise.
+        // BT-34 Seller electronic address: this is the actual Peppol routing/delivery
+        // address, not just an identity field — SUPER PDP's directory only resolves
+        // French recipients under scheme "0225", keyed on the 9-digit SIREN (the
+        // SIRET's first 9 digits), never "0002" (SIRENE is a valid EN16931 identity
+        // scheme but isn't a routable address on their network).
         self::assertMatchesRegularExpression(
-            '/<ram:URIID schemeID="0002">11111111100011<\/ram:URIID>/',
+            '/<ram:URIID schemeID="0225">111111111<\/ram:URIID>/',
+            $xml,
+        );
+        self::assertMatchesRegularExpression(
+            '/<ram:URIID schemeID="0225">222222222<\/ram:URIID>/',
             $xml,
         );
 
         // BT-30 Seller legal registration identifier: a separate field from GlobalID
         // and the electronic address — SUPER PDP reports it missing independently.
         self::assertMatchesRegularExpression(
-            '/<ram:SpecifiedLegalOrganization>\s*<ram:ID schemeID="0002">11111111100011<\/ram:ID>/',
+            '/<ram:SpecifiedLegalOrganization>\s*<ram:ID schemeID="0002">111111111<\/ram:ID>/',
             $xml,
         );
 
@@ -145,6 +152,124 @@ final class FacturXInvoiceBuilderTest extends KernelTestCase
         self::assertStringContainsString('<ram:ChargeAmount>100.00</ram:ChargeAmount>', $xml);
         self::assertStringContainsString('<ram:LineTotalAmount>200.00</ram:LineTotalAmount>', $xml);
         self::assertStringContainsString('<ram:TaxBasisTotalAmount>200.00</ram:TaxBasisTotalAmount>', $xml);
+    }
+
+    /**
+     * SUPER PDP's own sandbox test addresses (e.g. "315143296_92569") aren't
+     * 14-digit SIRETs — buildDocument() must pass a value like that through to
+     * the routing address unchanged rather than truncating it to 9 characters,
+     * since only an unambiguous 14-digit numeric SIRET should be shortened to
+     * its SIREN.
+     */
+    public function testBuyerElectronicAddressIsNotTruncatedWhenTheIdentifierIsNotAFourteenDigitSiret(): void
+    {
+        TaxIdentifierFactory::createOne([
+            'company' => $this->company,
+            'client' => null,
+            'label' => 'SIRET',
+            'value' => '11111111100011',
+        ]);
+
+        $client = ClientFactory::createOne(['company' => $this->company, 'currencyCode' => 'EUR']);
+
+        TaxIdentifierFactory::createOne([
+            'company' => $this->company,
+            'client' => $client,
+            'label' => 'SIRET',
+            'value' => '315143296_92569',
+        ]);
+
+        $invoice = new Invoice();
+        $invoice->setCompany($this->company);
+        $invoice->setClient($client);
+        $invoice->setInvoiceId('INV-0003');
+        $invoice->setStatus(InvoiceStatus::Draft);
+
+        $line = new Line();
+        $line->setDescription('Consulting services');
+        $line->setPrice(10000);
+        $line->setQty(1);
+        $line->updateTotal();
+        $invoice->addLine($line);
+
+        $entityManager = self::getContainer()->get('doctrine')->getManager();
+        $entityManager->persist($invoice);
+        $entityManager->flush();
+
+        $xml = self::getContainer()->get(FacturXInvoiceBuilder::class)->buildDocument($invoice)->getContent();
+
+        // BT-49 electronic address: the full value, untouched.
+        self::assertMatchesRegularExpression(
+            '/<ram:URIID schemeID="0225">315143296_92569<\/ram:URIID>/',
+            $xml,
+        );
+
+        // BT-46/BT-47 GlobalID/LegalOrganisation: BR-FR-32 requires exactly 9
+        // digits under scheme 0002 — derived here from the identifier's
+        // all-numeric leading 9 characters, not the full compound value.
+        self::assertMatchesRegularExpression(
+            '/<ram:GlobalID schemeID="0002">315143296<\/ram:GlobalID>/',
+            $xml,
+        );
+        self::assertMatchesRegularExpression(
+            '/<ram:SpecifiedLegalOrganization>\s*<ram:ID schemeID="0002">315143296<\/ram:ID>/',
+            $xml,
+        );
+    }
+
+    /**
+     * BR-FR-32 (scheme 0002 identifiers must be exactly 9 digits) can't be
+     * satisfied by an identifier with no 9-digit numeric prefix at all — the
+     * field must be omitted rather than emit a value that would fail schema
+     * validation, even though the routing address (BT-49, which has no such
+     * digit-count rule) still gets the raw value.
+     */
+    public function testGlobalIdIsOmittedWhenNoCompliantSirenCanBeDerived(): void
+    {
+        TaxIdentifierFactory::createOne([
+            'company' => $this->company,
+            'client' => null,
+            'label' => 'SIRET',
+            'value' => '11111111100011',
+        ]);
+
+        $client = ClientFactory::createOne(['company' => $this->company, 'currencyCode' => 'EUR']);
+
+        TaxIdentifierFactory::createOne([
+            'company' => $this->company,
+            'client' => $client,
+            'label' => 'SIRET',
+            'value' => 'not-a-siren-at-all',
+        ]);
+
+        $invoice = new Invoice();
+        $invoice->setCompany($this->company);
+        $invoice->setClient($client);
+        $invoice->setInvoiceId('INV-0004');
+        $invoice->setStatus(InvoiceStatus::Draft);
+
+        $line = new Line();
+        $line->setDescription('Consulting services');
+        $line->setPrice(10000);
+        $line->setQty(1);
+        $line->updateTotal();
+        $invoice->addLine($line);
+
+        $entityManager = self::getContainer()->get('doctrine')->getManager();
+        $entityManager->persist($invoice);
+        $entityManager->flush();
+
+        $xml = self::getContainer()->get(FacturXInvoiceBuilder::class)->buildDocument($invoice)->getContent();
+
+        // BT-49 electronic address still gets the raw value — no digit-count rule applies here.
+        self::assertMatchesRegularExpression(
+            '/<ram:URIID schemeID="0225">not-a-siren-at-all<\/ram:URIID>/',
+            $xml,
+        );
+
+        // The value appears exactly once — as that electronic address — never as a
+        // scheme-0002 GlobalID or SpecifiedLegalOrganization identifier.
+        self::assertSame(1, substr_count($xml, 'not-a-siren-at-all'));
     }
 
     public function testBuildProducesAFacturXPdfWithTheXmlEmbedded(): void

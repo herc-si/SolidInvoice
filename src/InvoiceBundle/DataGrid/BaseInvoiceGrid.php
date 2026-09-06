@@ -55,32 +55,49 @@ abstract class BaseInvoiceGrid extends Grid
     public function columns(): array
     {
         return [
+            // Default-visible: the columns needed to scan and act on a list of
+            // invoices without scrolling. Everything below stays reachable via
+            // the column-visibility picker, just not shown until asked for —
+            // with all 11 columns visible at once the row actions were only
+            // reachable after scrolling the table horizontally.
             StringColumn::new('invoiceId')
-                ->label('Invoice #'),
-            RelativeDateColumn::new('invoiceDate')
-                ->format('d F Y')
-                ->filter(new DateRangeFilter('invoiceDate')),
+                ->label('invoice.grid.invoice_number'),
             StringColumn::new('client')
+                ->label('invoice.grid.client')
                 ->searchable(false)
                 ->linkToRoute('_clients_view', ['id' => 'client.id']),
-            MoneyColumn::new('balance')
-                ->formatValue(fn (BigNumber $value, Invoice $invoice) => new Money((string) $value, $invoice->getClient()?->getCurrency())),
-            RelativeDateColumn::new('due')
-                ->label('Due Date')
-                ->format('d F Y')
-                ->filter(new DateRangeFilter('due')),
-            RelativeDateColumn::new('paidDate')
-                ->format('d F Y')
-                ->filter(new DateRangeFilter('paidDate')),
             StringColumn::new('status')
+                ->label('invoice.grid.status')
                 ->twigFunction('invoice_label')
                 ->filter(ChoiceFilter::new('status', array_column(array_map(static fn (InvoiceStatus $s) => [$s->value, $s->getLabel()], InvoiceStatus::cases()), 1, 0))->multiple()),
             MoneyColumn::new('total')
+                ->label('invoice.grid.total')
                 ->formatValue(fn (BigNumber $value, Invoice $invoice) => new Money((string) $value, $invoice->getClient()?->getCurrency())),
+            MoneyColumn::new('balance')
+                ->label('invoice.grid.balance')
+                ->formatValue(fn (BigNumber $value, Invoice $invoice) => new Money((string) $value, $invoice->getClient()?->getCurrency())),
+            RelativeDateColumn::new('due')
+                ->label('invoice.grid.due_date')
+                ->format('d F Y')
+                ->filter(new DateRangeFilter('due')),
+
+            // Hidden by default: secondary detail, one toggle away.
+            RelativeDateColumn::new('invoiceDate')
+                ->label('invoice.grid.invoice_date')
+                ->format('d F Y')
+                ->filter(new DateRangeFilter('invoiceDate'))
+                ->hiddenByDefault(),
+            RelativeDateColumn::new('paidDate')
+                ->label('invoice.grid.paid_date')
+                ->format('d F Y')
+                ->filter(new DateRangeFilter('paidDate'))
+                ->hiddenByDefault(),
             MoneyColumn::new('tax')
-                ->formatValue(fn (BigNumber $value, Invoice $invoice) => new Money((string) $value, $invoice->getClient()?->getCurrency())),
+                ->label('invoice.grid.tax')
+                ->formatValue(fn (BigNumber $value, Invoice $invoice) => new Money((string) $value, $invoice->getClient()?->getCurrency()))
+                ->hiddenByDefault(),
             MoneyColumn::new('payableAmount')
-                ->label('Payable')
+                ->label('invoice.grid.payable')
                 ->searchable(false)
                 ->formatValue(function (BigNumber $value, Invoice $invoice): Money {
                     $client = $invoice->getClient();
@@ -91,15 +108,17 @@ abstract class BaseInvoiceGrid extends Grid
                     $amount = $withholding->isPositive() ? $value : $invoice->getTotal();
 
                     return new Money((string) $amount, $client?->getCurrency());
-                }),
+                })
+                ->hiddenByDefault(),
             MoneyColumn::new('discount.value')
-                ->label('Discount')
+                ->label('invoice.grid.discount')
                 ->searchable(false)
                 ->formatValue(function (float | BigNumber $value, Invoice $invoice): Money {
                     $discountAmount = $this->calculator->calculateDiscount($invoice);
 
                     return new Money((string) $discountAmount->toScale(0, RoundingMode::HalfUp), $invoice->getClient()?->getCurrency());
-                }),
+                })
+                ->hiddenByDefault(),
         ];
     }
 

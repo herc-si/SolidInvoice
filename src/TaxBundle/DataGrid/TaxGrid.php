@@ -41,14 +41,19 @@ final class TaxGrid extends Grid
     public function columns(): array
     {
         return [
-            StringColumn::new('name'),
+            StringColumn::new('name')
+                ->label('tax.grid.name'),
             StringColumn::new('rate')
+                ->label('tax.grid.rate')
                 ->formatValue(static fn (string | float $value) => (string) $value . '%'),
-            StringColumn::new('type'),
+            StringColumn::new('type')
+                ->label('tax.grid.type'),
             StringColumn::new('category')
+                ->label('tax.grid.category')
                 ->formatValue(static fn (mixed $value) => $value instanceof TaxCategory ? $value->getLabel() : (string) $value)
                 ->filter(ChoiceFilter::new('category', array_column(array_map(static fn (TaxCategory $c) => [$c->value, $c->getLabel()], TaxCategory::cases()), 1, 0))->multiple()),
             DateTimeColumn::new('created')
+                ->label('tax.grid.created')
                 ->format('d F Y'),
         ];
     }

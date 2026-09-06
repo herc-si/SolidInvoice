@@ -32,6 +32,7 @@ class AuthorizeNetAim extends AbstractType
             'login_id',
             TextType::class,
             [
+                'label' => 'form.field.login_id',
                 'constraints' => new NotBlank(),
             ]
         );
@@ -40,6 +41,7 @@ class AuthorizeNetAim extends AbstractType
             'transaction_key',
             PasswordType::class,
             [
+                'label' => 'form.field.transaction_key',
                 'constraints' => new NotBlank(),
                 'always_empty' => false,
             ]
@@ -49,6 +51,7 @@ class AuthorizeNetAim extends AbstractType
             'sandbox',
             CheckboxType::class,
             [
+                'label' => 'form.field.sandbox',
                 'required' => false,
             ]
         );

@@ -1,5 +1,5 @@
 <html><body>
-<div class="form-page" id="in-a-real-scenario-it-would-already-have-one---provide-one-yourself-if-needed" data-controller="live" data-live-name-value="ClientForm" data-live-url-value="/_components/ClientForm" data-live-props-value='{"formData":null,"formName":"client","client":{"name":"Foo Bar","website":"https:\/\/example.com","currencyCode":"SBD","contacts":[],"addresses":[],"taxIdentifiers":[],"customFields":[],"_token":""},"isValidated":false,"validatedFields":[],"@attributes":{"id":"in-a-real-scenario-it-would-already-have-one---provide-one-yourself-if-needed"},"@checksum":"REPLACED_CHECKSUM"}'>
+<div class="form-page" id="in-a-real-scenario-it-would-already-have-one---provide-one-yourself-if-needed" data-controller="live" data-live-name-value="ClientForm" data-live-url-value="/_components/ClientForm" data-live-props-value='{"formData":null,"formName":"client","client":{"name":"Foo Bar","isClient":"1","isSupplier":null,"website":"https:\/\/example.com","currencyCode":"SBD","contacts":[],"addresses":[],"taxIdentifiers":[],"customFields":[],"_token":""},"isValidated":false,"validatedFields":[],"@attributes":{"id":"in-a-real-scenario-it-would-already-have-one---provide-one-yourself-if-needed"},"@checksum":"REPLACED_CHECKSUM"}'>
     <form name="client" method="post" data-model="on(change)|*" data-action="live#action:prevent" data-live-action-param="save" class="client-form">
 
     
@@ -11,13 +11,44 @@
                     <svg viewbox="0 0 24 24" fill="currentColor" width="28" height="28" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4M5 21V10.85M19 21V10.85M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"></path></svg>
                 </div>
                 <div>
-                                            <h1 class="form-page-title">Add Client</h1>
-                        <p class="form-page-subtitle">Add a new client to start creating invoices and quotes</p>
+                                            <h1 class="form-page-title">Add Party</h1>
+                        <p class="form-page-subtitle">Add a new party, then mark them as a client, a supplier, or both.</p>
                                     </div>
             </div>
         </div>
 
                 <div class="form-page-sections">
+
+                        <section class="form-page-section" id="client-role">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 3l4 4l-4 4m-6-4h10M8 13l-4 4l4 4m-4-4h9"></path></svg>
+                    </div>
+                    <div class="section-header-text">
+                        <h2 class="section-title">What is this party?</h2>
+                        <p class="section-description">Check either or both, you can change this later.</p>
+                    </div>
+                </div>
+
+                <div class="section-content">
+                    <div class="role-picker">
+                                                        <div class="form-switch-field">
+            <div class="form-switch-wrapper"><div class="form-check form-switch">
+<input type="checkbox" id="client_isClient" name="client[isClient]" class="form-check-input" value="1" checked>
+        <label class="form-check-label checkbox-switch" for="client_isClient">Client</label>
+</div></div>
+</div>
+    
+                                                        <div class="form-switch-field">
+            <div class="form-switch-wrapper"><div class="form-check form-switch">
+<input type="checkbox" id="client_isSupplier" name="client[isSupplier]" class="form-check-input" value="1">
+        <label class="form-check-label checkbox-switch" for="client_isSupplier">Supplier</label>
+</div></div>
+</div>
+    
+                    </div>
+                </div>
+            </section>
 
                         <section class="form-page-section" id="client-info">
                 <div class="section-header">
@@ -25,8 +56,8 @@
                         <svg viewbox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21h18M9 8h1m-1 4h1m-1 4h1m4-8h1m-1 4h1m-1 4h1M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path></svg>
                     </div>
                     <div class="section-header-text">
-                        <h2 class="section-title">Client Info</h2>
-                        <p class="section-description">Basic information about your client's business</p>
+                        <h2 class="section-title">General Info</h2>
+                        <p class="section-description">Basic information about this party</p>
                     </div>
                 </div>
 
@@ -34,7 +65,7 @@
                     <div class="form-grid">
                         <div class="form-field form-field-wide">
                             <div class="mb-3">    
-                                <label class="control-label required form-label required" for="client_name">Name</label><input type="text" id="client_name" name="client[name]" data-required="required" maxlength="125" placeholder="Acme Corporation" class="form-control" value="Foo Bar">
+            <label class="control-label form-label" for="client_name">Name</label><input type="text" id="client_name" name="client[name]" maxlength="125" placeholder="Acme Corporation" aria-describedby="client_name_help" class="form-control" value="Foo Bar"><div class="form-text text-muted mb-0" id="client_name_help">For an individual, leave this empty: it'll be filled in from the contact's name below.</div>
 </div>
                         </div>
 
@@ -233,7 +264,7 @@
                             Contact Info
                             <span class="badge bg-primary-lt ms-1">Required</span>
                         </h2>
-                        <p class="section-description">Add at least one contact person for this client</p>
+                        <p class="section-description">Add at least one contact person</p>
                     </div>
                 </div>
 
@@ -252,8 +283,8 @@
                 </div>
             </section>
 
-                        <section class="form-page-section client-form-section-optional" id="client-tax-identifiers-collection">
-                <div class="section-header">
+                                    <section class="form-page-section client-form-section-optional" id="client-tax-identifiers-collection">
+                <div class="section-header section-header-toggle" role="button" tabindex="0" data-bs-toggle="collapse" data-bs-target="#client-tax-identifiers-content" aria-expanded="false" aria-controls="client-tax-identifiers-content">
                     <div class="section-icon">
                         <svg viewbox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m9 14l6-6"></path><path fill="currentColor" d="M9 8.5a.5.5 0 1 0 1 0a.5.5 0 1 0-1 0m5 5a.5.5 0 1 0 1 0a.5.5 0 1 0-1 0"></path><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16l-3-2l-2 2l-2-2l-2 2l-2-2z"></path></g></svg>
                     </div>
@@ -262,24 +293,29 @@
                             Tax Identifiers
                             <span class="badge bg-secondary-lt ms-1">Optional</span>
                         </h2>
-                        <p class="section-description">The client's tax registration numbers (SIRET, SIREN, TVA intracommunautaire, RCS, etc.). These appear on invoices and quotes issued to this client.</p>
+                        <p class="section-description">Tax registration numbers (SIRET, SIREN, TVA intracommunautaire, RCS, etc.). These appear on invoices and quotes issued to this party.</p>
+                    </div>
+                    <div class="section-toggle-icon">
+                        <svg viewbox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6"></path></svg>
                     </div>
                 </div>
 
-                <div class="section-content">
-                    <div class="tax-identifiers-list">
-                                            </div>
+                <div class="collapse" id="client-tax-identifiers-content">
+                    <div class="section-content">
+                        <div class="tax-identifiers-list">
+                                                    </div>
 
-                    
+                        
 
-                    <div class="add-item-action">
-                        <button type="button" id="client_taxIdentifiers_add" name="client[taxIdentifiers][add]" data-action="live#action" data-live-action-param="addCollectionItem" data-live-name-param="client[taxIdentifiers]" class="btn btn-outline-primary add-item-btn btn">Add tax identifier</button>
+                        <div class="add-item-action">
+                            <button type="button" id="client_taxIdentifiers_add" name="client[taxIdentifiers][add]" data-action="live#action" data-live-action-param="addCollectionItem" data-live-name-param="client[taxIdentifiers]" class="btn btn-outline-primary add-item-btn btn">Add tax identifier</button>
+                        </div>
                     </div>
                 </div>
             </section>
 
-                        <section class="form-page-section client-form-section-optional" id="client-address-collection">
-                <div class="section-header">
+                                    <section class="form-page-section client-form-section-optional" id="client-address-collection">
+                <div class="section-header section-header-toggle" role="button" tabindex="0" data-bs-toggle="collapse" data-bs-target="#client-address-content" aria-expanded="false" aria-controls="client-address-content">
                     <div class="section-icon">
                         <svg viewbox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0-6 0"></path><path d="M17.657 16.657L13.414 20.9a2 2 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0"></path></g></svg>
                     </div>
@@ -288,21 +324,26 @@
                             Address Info
                             <span class="badge bg-secondary-lt ms-1">Optional</span>
                         </h2>
-                        <p class="section-description">Add billing or shipping addresses for this client</p>
+                        <p class="section-description">Add billing or shipping addresses</p>
+                    </div>
+                    <div class="section-toggle-icon">
+                        <svg viewbox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m6 9l6 6l6-6"></path></svg>
                     </div>
                 </div>
 
-                <div class="section-content">
-                    <div class="addresses-list">
-                                                    <div class="empty-addresses-hint">
-                                <p class="text-muted mb-0">No addresses added yet. Click the button below to add one.</p>
-                            </div>
-                                            </div>
+                <div class="collapse" id="client-address-content">
+                    <div class="section-content">
+                        <div class="addresses-list">
+                                                            <div class="empty-addresses-hint">
+                                    <p class="text-muted mb-0">No addresses added yet. Click the button below to add one.</p>
+                                </div>
+                                                    </div>
 
-                    
+                        
 
-                    <div class="add-item-action">
-                        <button type="button" id="client_addresses_add" name="client[addresses][add]" data-action="live#action" data-live-action-param="addCollectionItem" data-live-name-param="client[addresses]" class="btn btn-outline-primary add-item-btn btn">Add Address</button>
+                        <div class="add-item-action">
+                            <button type="button" id="client_addresses_add" name="client[addresses][add]" data-action="live#action" data-live-action-param="addCollectionItem" data-live-name-param="client[addresses]" class="btn btn-outline-primary add-item-btn btn">Add Address</button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -330,7 +371,7 @@
                 </button>
                 <button type="submit" class="btn btn-primary btn-save">
                     <svg viewbox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M6 4h10l4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2"></path><path d="M10 14a2 2 0 1 0 4 0a2 2 0 1 0-4 0m4-10v4H8V4"></path></g></svg>
-                    Save Client
+                    Save
                 </button>
             </div>
         </div>

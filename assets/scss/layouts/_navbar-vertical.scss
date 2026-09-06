@@ -18,13 +18,21 @@
 // offset need updating together, or content ends up misaligned.
 $swp-navbar-vertical-width: 17rem;
 
-@media (min-width: 992px) {
+@media (width >= 992px) {
+
     .navbar.navbar-vertical.navbar-expand-lg {
         width: $swp-navbar-vertical-width;
     }
 
-    .navbar.navbar-vertical.navbar-expand-lg ~ .page {
-        padding-left: $swp-navbar-vertical-width;
+    // The offset lives on .page-wrapper and the top header as a margin, not on
+    // `.page` — that class only appears on the sidebar-less page-center layouts
+    // (login, error, two-factor), so the original selector matched nothing and
+    // the sidebar grew to 17rem while content stayed at Tabler's 15rem, leaving
+    // 2rem of every page underneath the fixed panel.
+
+    .navbar.navbar-vertical.navbar-expand-lg ~ .page-wrapper,
+    .navbar.navbar-vertical.navbar-expand-lg ~ header.navbar {
+        margin-left: $swp-navbar-vertical-width;
     }
 }
 
@@ -53,6 +61,7 @@ $swp-navbar-vertical-width: 17rem;
         border-radius: var(--swp-radius-md);
         transition: background-color var(--swp-transition-fast),
                     color var(--swp-transition-fast);
+
         // Flex items default to a min-width based on their content, so a long
         // label (e.g. "Factures récurrentes") overflows the fixed-width
         // sidebar instead of shrinking. Let the link itself shrink...
@@ -157,6 +166,7 @@ $swp-navbar-vertical-width: 17rem;
             // récurrentes") needs the same shrink-then-ellipsis treatment as
             // the top-level .nav-link-title, or it overflows past the sidebar
             // edge instead of truncating.
+
             .dropdown-item-title {
                 overflow: hidden;
                 text-overflow: ellipsis;

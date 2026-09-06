@@ -31,6 +31,7 @@ final class YunpianType extends AbstractType
             'apikey',
             null,
             [
+                'label' => 'form.field.apikey',
                 'constraints' => new NotBlank(groups: ['yunpian']),
             ]
         );

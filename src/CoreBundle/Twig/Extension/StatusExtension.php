@@ -15,8 +15,10 @@ namespace SolidInvoice\CoreBundle\Twig\Extension;
 
 use BackedEnum;
 use Override;
+use SolidInvoice\BillBundle\Enum\BillStatus;
 use SolidInvoice\ClientBundle\Enum\ClientStatus;
 use SolidInvoice\CoreBundle\Enum\HasStatusLabel;
+use SolidInvoice\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
 use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
 use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
 use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
@@ -58,6 +60,16 @@ class StatusExtension extends AbstractExtension
             new TwigFunction(
                 'client_label',
                 fn (Environment $environment, ClientStatus | null $status = null, ?string $tooltip = null) => $this->renderStatusOrAll($environment, $status, ClientStatus::class, $tooltip),
+                ['is_safe' => ['html'], 'needs_environment' => true]
+            ),
+            new TwigFunction(
+                'einvoicing_status_label',
+                fn (Environment $environment, ElectronicInvoiceProcessingStatus | null $status = null, ?string $tooltip = null) => $this->renderStatusOrAll($environment, $status, ElectronicInvoiceProcessingStatus::class, $tooltip),
+                ['is_safe' => ['html'], 'needs_environment' => true]
+            ),
+            new TwigFunction(
+                'bill_label',
+                fn (Environment $environment, BillStatus | null $status = null, ?string $tooltip = null) => $this->renderStatusOrAll($environment, $status, BillStatus::class, $tooltip),
                 ['is_safe' => ['html'], 'needs_environment' => true]
             ),
         ];

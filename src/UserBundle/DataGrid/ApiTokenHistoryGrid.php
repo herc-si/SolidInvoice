@@ -28,7 +28,6 @@ use SolidInvoice\UserBundle\Entity\ApiTokenHistory;
 use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\Translation\TranslatableMessage;
 
 /**
  * @see \SolidInvoice\UserBundle\Tests\DataGrid\ApiTokenHistoryGridTest
@@ -54,12 +53,12 @@ final class ApiTokenHistoryGrid extends Grid
     {
         return [
             DateTimeColumn::new('created')
-                ->label(new TranslatableMessage('Date'))
+                ->label('user.api_token.history.grid.date')
                 ->format('d M Y H:i')
                 ->sortable(true)
                 ->filter(new DateRangeFilter('created')),
             StringColumn::new('method')
-                ->label(new TranslatableMessage('Method'))
+                ->label('user.api_token.history.grid.method')
                 ->sortable(false)
                 ->filter(new ChoiceFilter('method', [
                     'GET' => 'GET',
@@ -69,11 +68,11 @@ final class ApiTokenHistoryGrid extends Grid
                     'DELETE' => 'DELETE',
                 ])),
             StringColumn::new('resource')
-                ->label(new TranslatableMessage('Endpoint'))
+                ->label('user.api_token.history.grid.endpoint')
                 ->sortable(false)
                 ->formatValue(static fn (?string $value) => $value ? (strlen($value) > 40 ? substr($value, 0, 40) . '...' : $value) : '-'),
             StringColumn::new('statusCode')
-                ->label(new TranslatableMessage('Status'))
+                ->label('user.api_token.history.grid.status')
                 ->sortable(false)
                 ->formatValue(static fn ($value, ApiTokenHistory $history) => $history->getStatusCode() ?? '-')
                 ->filter(new ChoiceFilter('statusCode', [
@@ -83,10 +82,10 @@ final class ApiTokenHistoryGrid extends Grid
                     '5xx' => '5xx Server Error',
                 ])),
             StringColumn::new('ip')
-                ->label(new TranslatableMessage('IP Address'))
+                ->label('user.api_token.history.grid.ip')
                 ->sortable(false),
             StringColumn::new('userAgent')
-                ->label(new TranslatableMessage('User Agent'))
+                ->label('user.api_token.history.grid.user_agent')
                 ->sortable(false)
                 ->formatValue(static fn (?string $value) => $value ? (strlen($value) > 30 ? substr($value, 0, 30) . '...' : $value) : '-'),
         ];

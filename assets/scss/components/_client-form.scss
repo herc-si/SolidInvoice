@@ -26,6 +26,67 @@
     background: linear-gradient(135deg, var(--swp-primary-light) 0%, rgba(var(--swp-primary-rgb), 0.2) 100%);
 }
 
+// ============================================================================
+// COLLAPSIBLE SECTION HEADER (optional sections: tax IDs, addresses, custom
+// fields — collapsed by default so a quick "just a name and a contact" entry
+// isn't buried under fields most people skip). Stays a plain <div> (role=
+// "button") rather than a real <button> — a <button> needs several UA-default
+// resets (border/background/font/appearance) fought back one by one, whereas
+// a div inherits .section-header's existing, already-correct styling as-is.
+// ============================================================================
+
+.section-header-toggle {
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        background: var(--swp-gray-100);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--swp-primary);
+        outline-offset: -2px;
+    }
+
+    .section-toggle-icon {
+        display: flex;
+        align-items: center;
+        color: var(--swp-text-muted);
+        margin-left: auto;
+        align-self: center;
+        transition: transform var(--swp-transition-fast);
+        flex-shrink: 0;
+    }
+
+    &[aria-expanded='true'] .section-toggle-icon {
+        transform: rotate(180deg);
+    }
+}
+
+// ============================================================================
+// PARTY ROLE PICKER (Client / Supplier — the first decision on the form).
+// Each checkbox already renders as a `.form-switch-field` card (the shared
+// toggle-switch component, see _forms.scss) — laid out side by side here
+// instead of its usual full-width stack; no separate card styling of our
+// own needed, that would just double up on top of it.
+// ============================================================================
+
+.role-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--swp-space-3);
+}
+
+.role-picker .form-switch-field {
+    flex: 1 1 200px;
+    margin-top: 0 !important;
+
+    &:has(.form-check-input:checked) {
+        border-color: var(--swp-primary);
+        box-shadow: var(--swp-ring-primary);
+    }
+}
+
 
 // ============================================================================
 // CONTACT CARD

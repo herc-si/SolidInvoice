@@ -43,7 +43,10 @@ use SolidInvoice\TaxBundle\Enum\TaxCategory;
 use SolidInvoice\TaxBundle\Repository\TaxIdentifierRepository;
 use Twig\Environment;
 use function array_values;
+use function ctype_digit;
 use function json_decode;
+use function strlen;
+use function substr;
 
 /**
  * Builds a Factur-X document (a PDF/A-3 with an embedded CII XML, EN16931
@@ -62,6 +65,18 @@ use function json_decode;
  */
 final readonly class FacturXInvoiceBuilder
 {
+    /**
+     * BT-34/BT-49 (seller/buyer electronic address): SUPER PDP's directory only
+     * resolves French recipients under Peppol scheme 0225 ("FRCTC electronic
+     * address"), keyed on the 9-digit SIREN — confirmed against their API, which
+     * rejects any other scheme for a directory entry ("Seulement 0225:, 0208: et
+     * 9925: sont supportés"). ISO 6523 0002 (SIRENE, used below for the GlobalId
+     * and LegalOrganisation identity fields) is a valid EN16931 identifier but is
+     * not a routable Peppol address on their network — using it here silently
+     * misroutes every submission.
+     */
+    private const string PEPPOL_FRANCE_SCHEME = '0225';
+
     public function __construct(
         private SystemConfig $systemConfig,
         private TaxIdentifierRepository $taxIdentifierRepository,
@@ -220,9 +235,14 @@ final readonly class FacturXInvoiceBuilder
         foreach ($this->taxIdentifierRepository->findCompanyIdentifiers($company->getId()) as $identifier) {
             if ($this->isFrenchCompanyNumber($identifier)) {
                 $siret = $identifier->getValue();
-                $documentBuilder->addDocumentSellerGlobalId($siret, ZugferdSchemeIdentifiers::ISO_6523_0002);
-                $documentBuilder->setDocumentSellerLegalOrganisation($siret, ZugferdSchemeIdentifiers::ISO_6523_0002, null);
-                $documentBuilder->setDocumentSellerCommunication(ZugferdSchemeIdentifiers::ISO_6523_0002, $siret);
+                $globalSiren = $this->sirenForScheme0002($siret);
+
+                if ($globalSiren !== null) {
+                    $documentBuilder->addDocumentSellerGlobalId($globalSiren, ZugferdSchemeIdentifiers::ISO_6523_0002);
+                    $documentBuilder->setDocumentSellerLegalOrganisation($globalSiren, ZugferdSchemeIdentifiers::ISO_6523_0002, null);
+                }
+
+                $documentBuilder->setDocumentSellerCommunication(self::PEPPOL_FRANCE_SCHEME, $this->siren($siret));
 
                 continue;
             }
@@ -252,9 +272,14 @@ final readonly class FacturXInvoiceBuilder
         foreach ($client->getTaxIdentifiers() as $identifier) {
             if ($this->isFrenchCompanyNumber($identifier)) {
                 $siret = $identifier->getValue();
-                $documentBuilder->addDocumentBuyerGlobalId($siret, ZugferdSchemeIdentifiers::ISO_6523_0002);
-                $documentBuilder->setDocumentBuyerLegalOrganisation($siret, ZugferdSchemeIdentifiers::ISO_6523_0002, null);
-                $documentBuilder->setDocumentBuyerCommunication(ZugferdSchemeIdentifiers::ISO_6523_0002, $siret);
+                $globalSiren = $this->sirenForScheme0002($siret);
+
+                if ($globalSiren !== null) {
+                    $documentBuilder->addDocumentBuyerGlobalId($globalSiren, ZugferdSchemeIdentifiers::ISO_6523_0002);
+                    $documentBuilder->setDocumentBuyerLegalOrganisation($globalSiren, ZugferdSchemeIdentifiers::ISO_6523_0002, null);
+                }
+
+                $documentBuilder->setDocumentBuyerCommunication(self::PEPPOL_FRANCE_SCHEME, $this->siren($siret));
 
                 continue;
             }
@@ -307,15 +332,60 @@ final readonly class FacturXInvoiceBuilder
     }
 
     /**
-     * A French SIREN/SIRET is used, unchanged, in three different EN16931 fields:
-     * the party identifier (BT-29/46, GlobalID), the legal registration identifier
-     * (BT-30/47, SpecifiedLegalOrganization) and the electronic/routing address
-     * (BT-34/49) — all under ISO 6523 ICD "0002" (the French SIRENE registry).
-     * SUPER PDP reports each of these as missing independently if only some are set.
+     * A French SIREN/SIRET feeds three different EN16931 fields: the party
+     * identifier (BT-29/46, GlobalID) and the legal registration identifier
+     * (BT-30/47, SpecifiedLegalOrganization) under ISO 6523 ICD "0002" (the
+     * French SIRENE registry) unchanged, and the electronic/routing address
+     * (BT-34/49) under scheme "0225" via {@see siren()} — SUPER PDP reports
+     * each of these as missing independently if only some are set.
      */
     private function isFrenchCompanyNumber(TaxIdentifier $identifier): bool
     {
         return $identifier->getLabel() === 'SIRET' || $identifier->getLabel() === 'SIREN';
+    }
+
+    /**
+     * A Peppol scheme-0225 address is keyed on the 9-digit SIREN, not the
+     * 14-digit SIRET (SIREN + 5-digit NIC establishment code) — SolidInvoice's
+     * "SIRET"/"SIREN" tax identifier labels don't distinguish the two, so the
+     * SIREN is extracted only when the value is unambiguously a full SIRET
+     * (14 numeric digits). Anything else — already a bare SIREN, a malformed
+     * value, or a provider-specific non-numeric test address — is passed
+     * through unchanged rather than blindly cut to 9 characters, since a
+     * SIRET is the only shape this can reliably recognise.
+     */
+    private function siren(?string $identifierValue): ?string
+    {
+        if ($identifierValue === null) {
+            return null;
+        }
+
+        return strlen($identifierValue) === 14 && ctype_digit($identifierValue)
+            ? substr($identifierValue, 0, 9)
+            : $identifierValue;
+    }
+
+    /**
+     * BR-FR-32: any Party identifier under ISO 6523 scheme "0002" (the GlobalID
+     * and SpecifiedLegalOrganization fields this feeds) must be composed of
+     * exactly 9 digits — a full 14-digit SIRET fails this rule outright, so
+     * unlike siren() (used for the routing address, which has no such
+     * digit-count constraint) this always needs a 9-digit result or nothing:
+     * a real SIRET's leading 9 digits, a bare 9-digit SIREN passed through, or
+     * — for a compound identifier not shaped like either — its leading 9
+     * characters only if they happen to be all-numeric. Anything else can't be
+     * made compliant, so the field is left unset rather than submit a value
+     * that fails schema validation.
+     */
+    private function sirenForScheme0002(?string $identifierValue): ?string
+    {
+        if ($identifierValue === null || strlen($identifierValue) < 9) {
+            return null;
+        }
+
+        $candidate = substr($identifierValue, 0, 9);
+
+        return ctype_digit($candidate) ? $candidate : null;
     }
 
     /**

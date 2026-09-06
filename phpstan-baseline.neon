@@ -67,6 +67,60 @@ parameters:
 			path: src/ApiBundle/Tests/ApiTokenManagerTest.php
 
 		-
+			message: '#^Method SolidInvoice\\BillBundle\\DataGrid\\BillCategoryGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/BillBundle/DataGrid/BillCategoryGrid.php
+
+		-
+			message: '#^Method SolidInvoice\\BillBundle\\DataGrid\\BillCategoryGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/BillBundle/DataGrid/BillCategoryGrid.php
+
+		-
+			message: '#^Method SolidInvoice\\BillBundle\\DataGrid\\BillGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/BillBundle/DataGrid/BillGrid.php
+
+		-
+			message: '#^Method SolidInvoice\\BillBundle\\DataGrid\\BillGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/BillBundle/DataGrid/BillGrid.php
+
+		-
+			message: '#^Property SolidInvoice\\BillBundle\\Entity\\Bill\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
+			message: '#^Property SolidInvoice\\BillBundle\\Entity\\Bill\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
+			message: '#^Property SolidInvoice\\BillBundle\\Entity\\BillCategory\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/BillBundle/Entity/BillCategory.php
+
+		-
+			message: '#^Property SolidInvoice\\BillBundle\\Entity\\BillPayment\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
+			message: '#^Property SolidInvoice\\BillBundle\\Entity\\BillPayment\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
 			message: '#^Method SolidInvoice\\ClientBundle\\DataGrid\\ClientGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
@@ -355,6 +409,12 @@ parameters:
 			path: src/CoreBundle/Tests/FormTestCase.php
 
 		-
+			message: '#^Cannot unset property SolidInvoice\\CoreBundle\\Tests\\FormTestCase\:\:\$company because it might have hooks in a subclass\.$#'
+			identifier: unset.possiblyHookedProperty
+			count: 1
+			path: src/InstallBundle/Test/EnsureApplicationInstalled.php
+
+		-
 			message: '#^Method SolidInvoice\\CoreBundle\\Tests\\FormTestCase\:\:assertFormData\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
@@ -473,6 +533,18 @@ parameters:
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ElectronicInvoicingBundle/Entity/ElectronicInvoiceProviderSetting.php
+
+		-
+			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceReceipt\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
+			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceReceipt\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
 
 		-
 			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceSubmission\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
@@ -1063,6 +1135,18 @@ parameters:
 			path: src/SettingsBundle/Tests/SystemConfigTest.php
 
 		-
+			message: '#^Method SolidInvoice\\SupplierBundle\\DataGrid\\SupplierGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/SupplierBundle/DataGrid/SupplierGrid.php
+
+		-
+			message: '#^Method SolidInvoice\\SupplierBundle\\DataGrid\\SupplierGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/SupplierBundle/DataGrid/SupplierGrid.php
+
+		-
 			message: '#^Method SolidInvoice\\TaxBundle\\DataGrid\\TaxGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
@@ -1415,3 +1499,27 @@ parameters:
 			identifier: nullsafe.neverNull
 			count: 1
 			path: src/UserBundle/Twig/Components/UserNotification.php
+
+		-
+			message: '#^Property SolidInvoice\\CatalogBundle\\Entity\\Product\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CatalogBundle/Entity/Product.php
+
+		-
+			message: '#^Property SolidInvoice\\CatalogBundle\\Entity\\ProductCategory\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CatalogBundle/Entity/ProductCategory.php
+
+		-
+			message: '#^Property SolidInvoice\\CatalogBundle\\Entity\\Product\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
+			message: '#^Property SolidInvoice\\CatalogBundle\\Entity\\Product\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php

@@ -43,6 +43,9 @@ class MainMenu
 
         self::integrations($section);
         self::tax($section);
+        self::paymentMethods($section);
+        self::billCategories($section);
+        self::catalogCategories($section);
         self::einvoicing($section);
         self::api($section);
         self::users($section);
@@ -132,6 +135,17 @@ class MainMenu
         );
     }
 
+    public static function paymentMethods(ItemInterface $item): ItemInterface
+    {
+        return $item->addChild(
+            'payment.menu.methods',
+            [
+                'route' => '_payment_settings_index',
+                'extras' => ['icon' => 'receipt'],
+            ],
+        );
+    }
+
     public static function tax(ItemInterface $item): ItemInterface
     {
         return $item->addChild(
@@ -143,8 +157,33 @@ class MainMenu
         );
     }
 
+    public static function billCategories(ItemInterface $item): ItemInterface
+    {
+        return $item->addChild(
+            'menu.top.bill_categories',
+            [
+                'route' => '_bill_categories_index',
+                'extras' => ['icon' => 'category'],
+            ],
+        );
+    }
+
+    public static function catalogCategories(ItemInterface $item): ItemInterface
+    {
+        return $item->addChild(
+            'menu.top.catalog_categories',
+            [
+                'route' => '_catalog_categories_index',
+                'extras' => ['icon' => 'category'],
+            ],
+        );
+    }
+
     public static function einvoicing(ItemInterface $item): ItemInterface
     {
+        // Configures how outgoing invoices are sent. Received invoices are a
+        // separate concern reached from the purchase-invoices page, via
+        // ElectronicInvoicingBundle\Twig\Components\PendingReceipts.
         return $item->addChild(
             'menu.top.einvoicing',
             [

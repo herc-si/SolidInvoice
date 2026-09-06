@@ -15,22 +15,24 @@ namespace SolidInvoice\ElectronicInvoicingBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Log\LoggerInterface;
 use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
 use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use SolidInvoice\ElectronicInvoicingBundle\Notification\ElectronicInvoiceRejectedNotification;
 use SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpApiException;
 use SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpClient;
 use SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdpProvider;
 use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
 use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceSubmissionRepository;
+use SolidInvoice\NotificationBundle\Notification\NotificationManager;
 use SolidWorx\Platform\PlatformBundle\Console\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Scheduler\Attribute\AsCronTask;
-use function array_key_last;
+use Throwable;
 use function assert;
-use function is_array;
+use function in_array;
 use function is_string;
 use function sprintf;
-use function usort;
 
 /**
  * SUPER PDP exposes no webhooks (see
@@ -49,13 +51,14 @@ use function usort;
 final class PollSuperPdpInvoiceStatusCommand extends Command
 {
     /**
-     * `fr:*` codes per https://api.superpdp.tech/openapi/superpdp.json,
-     * plus the `api:*` codes that mean SUPER PDP itself will not process the
-     * invoice any further.
+     * A submission stops being polled once it reaches one of these — the union
+     * of {@see SuperPdpProvider::ACCEPTED_STATUS_CODES} and
+     * {@see SuperPdpProvider::REJECTED_STATUS_CODES}, SuperPdpProvider being the
+     * single source of truth for what each status code means.
      */
     private const array TERMINAL_STATUS_CODES = [
-        'fr:205', 'fr:206', 'fr:209', 'fr:210', 'fr:213', 'fr:501',
-        'api:rejected', 'api:invalid',
+        ...SuperPdpProvider::ACCEPTED_STATUS_CODES,
+        ...SuperPdpProvider::REJECTED_STATUS_CODES,
     ];
 
     public function __construct(
@@ -63,6 +66,8 @@ final class PollSuperPdpInvoiceStatusCommand extends Command
         private readonly ElectronicInvoiceSubmissionRepository $submissionRepository,
         private readonly ElectronicInvoiceProviderSettingRepository $settingRepository,
         private readonly SuperPdpClient $client,
+        private readonly NotificationManager $notificationManager,
+        private readonly LoggerInterface $logger,
     ) {
         parent::__construct();
     }
@@ -136,7 +141,7 @@ final class PollSuperPdpInvoiceStatusCommand extends Command
         $accessToken = $this->client->getAccessToken($clientId, $clientSecret);
         $invoice = $this->client->getInvoice($accessToken, $externalReference);
 
-        $statusCode = $this->latestStatusCode($invoice);
+        $statusCode = SuperPdpProvider::latestStatusCode($invoice['events'] ?? null);
 
         if ($statusCode === null || $statusCode === $submission->getStatusCode()) {
             return false;
@@ -144,25 +149,35 @@ final class PollSuperPdpInvoiceStatusCommand extends Command
 
         $submission->setStatusCode($statusCode);
 
+        if (in_array($statusCode, SuperPdpProvider::REJECTED_STATUS_CODES, true)) {
+            $this->notifyRejection($submission, $statusCode);
+        }
+
         return true;
     }
 
     /**
-     * @param array<string, mixed> $invoice
+     * Alerts internal users once a submission reaches a rejected terminal status
+     * — this is the one outcome that needs a human to act on it (fix the
+     * invoice/client data and resend); an accepted submission needs no action,
+     * so it stays silent beyond the status shown on the invoice itself.
      */
-    private function latestStatusCode(array $invoice): ?string
+    private function notifyRejection(ElectronicInvoiceSubmission $submission, string $statusCode): void
     {
-        $events = $invoice['events'] ?? null;
-
-        if (! is_array($events) || $events === []) {
-            return null;
+        try {
+            $this->notificationManager->sendNotification(
+                new ElectronicInvoiceRejectedNotification([
+                    'invoice' => $submission->getInvoice(),
+                    'client' => $submission->getInvoice()->getClient(),
+                    'submission' => $submission,
+                    'statusCode' => $statusCode,
+                ])
+            );
+        } catch (Throwable $e) {
+            $this->logger->error('Failed to send electronic invoice rejection notification', [
+                'submission_id' => (string) $submission->getId(),
+                'exception' => $e->getMessage(),
+            ]);
         }
-
-        usort($events, static fn (mixed $a, mixed $b): int => ($a['created_at'] ?? '') <=> ($b['created_at'] ?? ''));
-
-        $latest = $events[array_key_last($events)];
-        $statusCode = is_array($latest) ? $latest['status_code'] ?? null : null;
-
-        return is_string($statusCode) ? $statusCode : null;
     }
 }

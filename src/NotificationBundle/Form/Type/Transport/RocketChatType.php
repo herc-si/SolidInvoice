@@ -31,6 +31,7 @@ final class RocketChatType extends AbstractType
             'token',
             null,
             [
+                'label' => 'form.field.token',
                 'constraints' => new NotBlank(groups: ['rocketchat']),
             ]
         );
@@ -39,6 +40,7 @@ final class RocketChatType extends AbstractType
             'endpoint',
             null,
             [
+                'label' => 'form.field.endpoint',
                 'constraints' => new NotBlank(groups: ['rocketchat']),
             ]
         );
@@ -47,6 +49,7 @@ final class RocketChatType extends AbstractType
             'channel',
             null,
             [
+                'label' => 'form.field.channel',
                 'constraints' => new NotBlank(groups: ['rocketchat']),
             ]
         );

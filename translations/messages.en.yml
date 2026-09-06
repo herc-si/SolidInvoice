@@ -1,5 +1,6 @@
 action:
     add: Add
+    archive: Archive
     back: 'Go back'
     cancel: Cancel
     close: Close
@@ -7,14 +8,117 @@ action:
     create: Create
     delete: Delete
     edit: Edit
+    reopen: Reopen
     save: Save
     submit: Submit
     update: Update
 active_clients: 'Active Clients'
-add_client: 'Add Client'
+add_client: 'Add Party'
 add_info: 'Add Info'
 address: Address
 all_clients: 'All Clients'
+bill:
+    category:
+        create:
+            success: 'Bill category created successfully'
+        edit:
+            success: 'Bill category updated successfully'
+        form:
+            add_title: 'Add Bill Category'
+            edit_title: 'Edit Bill Category'
+            name:
+                label: Name
+        grid:
+            create: 'Add Category'
+            name: "Name"
+        menu:
+            list: 'Bill Categories'
+    create:
+        success: 'Bill created successfully'
+    delete_success: 'Bill deleted successfully'
+    edit:
+        success: 'Bill updated successfully'
+    form:
+        add_title: 'Add Bill'
+        bill_number:
+            label: 'Bill #'
+        category:
+            label: Category
+            placeholder: 'No category'
+        currency:
+            label: Currency
+        due_date:
+            label: 'Due Date'
+        edit_title: 'Edit Bill'
+        issue_date:
+            label: 'Issue Date'
+        new_supplier_name:
+            help: "Leave the field above empty and fill this in instead to create a new supplier."
+            label: 'Or create a new supplier'
+        notes:
+            label: Notes
+        subtitle: 'Enter a bill received from a supplier.'
+        supplier:
+            label: Supplier
+            placeholder: 'Choose an existing supplier'
+        total_amount:
+            label: 'Total Amount'
+    grid:
+        balance: "Balance"
+        bill_number: "Bill #"
+        category: "Category"
+        create: 'Add Bill'
+        due_date: "Due Date"
+        issue_date: "Issue Date"
+        status: "Status"
+        supplier: "Supplier"
+        total: "Total"
+    menu:
+        add: 'Add Bill'
+        list: Bills
+        main: 'Purchase Invoices'
+    payment:
+        create:
+            success: 'Payment recorded successfully'
+        form:
+            add_title: 'Record Payment'
+            amount:
+                label: Amount
+                positive: 'This value should be greater than 0.'
+            method:
+                label: 'Payment Method'
+            notes:
+                label: Notes
+            paid_date:
+                label: 'Paid On'
+            reference:
+                label: Reference
+            submit: 'Record Payment'
+        menu:
+            list: Payments
+        view:
+            empty: 'No payments recorded yet.'
+    transition:
+        action:
+            archive: 'Bill has been archived'
+            cancel: 'Bill has been cancelled'
+            confirm: 'Bill has been confirmed'
+            edit: 'Bill has been moved back to draft'
+            overdue: 'Bill has been marked overdue'
+            pay: 'Bill has been paid'
+            reopen: 'Bill has been re-opened'
+        exception:
+            archive: 'Bill cannot be archived'
+            cancel: 'Bill cannot be cancelled'
+            confirm: 'Bill cannot be confirmed'
+            edit: 'Bill cannot be edited'
+            overdue: 'Bill cannot be marked overdue'
+            pay: 'Bill cannot be paid'
+            reopen: 'Bill cannot be re-opened'
+    view:
+        balance: Balance
+        details: 'Bill Details'
+        total: Total
 billing:
     discount: Discount
     due_date: 'Due Date'
@@ -23,6 +127,90 @@ billing:
     tax: Tax
     total: Total
     withholding: 'Withholding & adjustments'
+catalog:
+    action:
+        add: "Add an item"
+        created: "Item successfully created"
+        updated: "Item successfully updated"
+    category:
+        action:
+            add: "Add a category"
+            created: "Category successfully created"
+            updated: "Category successfully updated"
+        form:
+            add_title: "Add a category"
+            edit_title: "Edit category"
+            name:
+                label: "Name"
+        grid:
+            name: "Name"
+            title: "Catalogue categories"
+        list:
+            title: "Catalogue categories"
+    form:
+        active:
+            help: "An inactive item drops out of the picker without erasing document history."
+            label: "Active"
+        add_title: "Add to the catalogue"
+        category:
+            label: "Category"
+            placeholder: "No category"
+        description:
+            help: "Copied onto the document line, where it stays editable."
+            label: "Description"
+        edit_title: "Edit item"
+        name:
+            label: "Name"
+        purchase_price:
+            help: "Optional, used to work out the margin."
+            label: "Purchase price"
+        reference:
+            help: "Optional. Must be unique when set."
+            label: "Internal reference"
+        sale_price:
+            label: "Unit sale price"
+        section:
+            identity: "Identification"
+            pricing: "Pricing"
+        subtitle: "Save a product or service once and reuse it in one click on quotes and invoices."
+        tax:
+            help: "Applied to the line automatically, still editable case by case."
+            label: "Default tax"
+            placeholder: "No tax"
+        type:
+            label: "Type"
+        unit:
+            label: "Sold by"
+    grid:
+        active: "Active"
+        category: "Category"
+        name: "Name"
+        purchase_price: "Purchase price"
+        reference: "Reference"
+        sale_price: "Sale price"
+        tax: "Tax"
+        title: "Catalogue"
+        type: "Type"
+        unit: "Unit"
+    list:
+        title: "Catalogue"
+    menu:
+        main: "Catalogue"
+    picker:
+        label: "Add from the catalogue"
+        placeholder: "From the catalogue…"
+    type:
+        product: "Product"
+        service: "Service"
+    unit:
+        day: "Day"
+        flat_rate: "Flat rate"
+        hour: "Hour"
+        kilogram: "Kilogram"
+        litre: "Litre"
+        metre: "Metre"
+        month: "Month"
+        unit: "Unit"
 change: Change
 change_password:
     form:
@@ -103,8 +291,8 @@ client:
             title: 'Delete %name%?'
     delete_success: 'The client was deleted successfully'
     form:
-        address_description: 'Add billing or shipping addresses for this client'
-        contact_description: 'Add at least one contact person for this client'
+        address_description: 'Add billing or shipping addresses'
+        contact_description: 'Add at least one contact person'
         currency:
             empty_value: 'System Default'
         currency_code:
@@ -113,12 +301,19 @@ client:
             generic: 'This feature requires a higher plan. Upgrade now to unlock it.'
             upgrade: 'Upgrade Now'
             with_plan: 'This feature is available on the %plan% plan. Upgrade to unlock it.'
-        info_description: "Basic information about your client's business"
+        info_description: 'Basic information about this party'
+        is_client:
+            label: Client
+        is_supplier:
+            label: Supplier
         name:
+            help: "For an individual, leave this empty: it'll be filled in from the contact's name below."
             label: Name
             placeholder: 'Acme Corporation'
-        subtitle: 'Add a new client to start creating invoices and quotes'
-        tax_identifiers_description: "The client's tax registration numbers (SIRET, SIREN, TVA intracommunautaire, RCS, etc.). These appear on invoices and quotes issued to this client."
+        role_description: 'Check either or both, you can change this later.'
+        role_title: 'What is this party?'
+        subtitle: 'Add a new party, then mark them as a client, a supplier, or both.'
+        tax_identifiers_description: 'Tax registration numbers (SIRET, SIREN, TVA intracommunautaire, RCS, etc.). These appear on invoices and quotes issued to this party.'
         website:
             label: Website
     grid:
@@ -127,14 +322,21 @@ client:
             edit: Edit
             view: View
         create: 'Create Client'
+        created: "Created"
         currency: Currency
+        name: "Name"
         outstanding_balance: 'Outstanding Balance'
+        role: Role
+        role_both: 'Client, Supplier'
+        role_client: Client
+        role_supplier: Supplier
         total_balance: 'Total Balance'
+        website: "Website"
     heading:
         addresses: Addresses
         contacts: Contacts
         payments: Payments
-    info: 'Client Info'
+    info: 'General Info'
     invoices:
         empty:
             description: "Create an invoice when you're ready to bill this client."
@@ -145,7 +347,7 @@ client:
             invoice: 'Create Invoice'
             quote: 'Create Quote'
         list: 'List Clients'
-        main: Clients
+        main: Parties
         view: 'View Client'
     modal:
         action:
@@ -165,7 +367,7 @@ client:
             title: 'No quotes yet'
     restore:
         success: 'Client Successfully Restored'
-    save: 'Save Client'
+    save: Save
     stats:
         active_clients: 'Active Clients'
         archived_clients: 'Archived Clients'
@@ -208,8 +410,8 @@ client:
             invoices: Invoices
             payments: Payments
             quotes: Quotes
-client_create: 'Create Client'
-clients: Clients
+client_create: 'Create Party'
+clients: Parties
 close: Close
 company:
     create:
@@ -464,6 +666,22 @@ dashboard:
         view_all: 'View All Quotes'
     title: Dashboard
 datagrid:
+    action:
+        create_bill: "Create purchase invoice"
+        delete: "Delete"
+        download: "Download"
+        edit: "Edit"
+        record_payment: "Record payment"
+        resend_invitation: "Resend invitation"
+        view: "View"
+        view_history: "View history"
+    batch:
+        activate: "Activate"
+        archive: "Archive"
+        delete: "Delete"
+        reactivate: "Reactivate"
+        remove_supplier_role: "Remove supplier role"
+        revoke: "Revoke"
     actions: Actions
     all: All
     apply: Apply
@@ -501,9 +719,18 @@ datagrid:
         select_one: 'Please select at least one item.'
         success: Success
     empty:
+        bill:
+            title: 'No bills yet'
+            description: 'Add a bill you received from a supplier, or create one from an imported electronic invoice, to start tracking what you owe.'
+        bill_category:
+            title: 'No categories yet'
+            description: 'Add categories to group your bills by expense type.'
         client:
             title: 'No clients yet'
             description: 'Add the people and companies you bill. Once a client exists, you can send them an invoice or quote in seconds.'
+        einvoicing_incoming:
+            title: 'No received invoices yet'
+            description: 'Invoices sent to you by suppliers through your electronic-invoicing provider will appear here automatically.'
         invoice:
             title: 'No invoices yet'
             description: 'Create your first invoice and send it in under a minute. Turn on online payments and clients can pay you straight from it.'
@@ -514,6 +741,9 @@ datagrid:
             title: 'No payments yet'
             description: 'Payments land here once a client pays an invoice. Send an invoice to start getting paid.'
             create: 'Create an invoice'
+        supplier:
+            title: 'No suppliers yet'
+            description: 'Add the companies and people who bill you. Once a supplier exists, you can log bills against them.'
     footer:
         showing: 'Showing %start% - %end% of %total% results'
     items_per_page: 'Items per page'
@@ -530,8 +760,19 @@ datagrid:
     select_row: 'Select row'
     selected: selected
 delete_client: 'Delete Client'
-edit_client: 'Edit Client'
+edit_client: 'Edit Party'
 einvoicing:
+    grid:
+        amount: "Amount"
+        invoice_number: "Invoice #"
+        issue_date: "Issue Date"
+        provider: "Provider"
+        received: "Received"
+        seller_name: "Supplier"
+    incoming:
+        menu: 'Received Invoices'
+        pending: "{0}All received invoices have been filed|{1}1 received invoice could not be filed automatically|]1,Inf[%count% received invoices could not be filed automatically"
+        title: 'Received Invoices'
     marketplace:
         active: Active
         configure: Configure
@@ -578,8 +819,6 @@ einvoicing:
         no_active_provider: 'No active electronic-invoicing provider is configured.'
         success: 'The electronic invoice was sent successfully.'
     view:
-        status_failed: Failed
-        status_success: Sent
         title: 'Electronic Invoicing'
 email: Email
 email_verification:
@@ -666,6 +905,91 @@ forgot_password:
         title: 'Reset Password'
 form:
     address: Address
+    field:
+        access_key: "Access key"
+        access_secret: "Access secret"
+        access_token: "Access token"
+        account_id: "Account ID"
+        account_number: "Account number"
+        account_reference: "Account reference"
+        amount: "Amount"
+        api_key: "API key"
+        api_secret: "API secret"
+        apikey: "API key"
+        application_key: "Application key"
+        application_secret: "Application secret"
+        auth_token: "Auth token"
+        capture_online: "Capture online"
+        channel: "Channel"
+        chat_id: "Chat ID"
+        client: "Client"
+        consumer_key: "Consumer key"
+        currency: "Currency"
+        description: "Description"
+        direction: "Direction"
+        domain: "Domain"
+        eid: "EID"
+        email: "Email"
+        email_address: "Email address"
+        encryption_key: "Encryption key"
+        endpoint: "Endpoint"
+        first_name: "First name"
+        from: "From"
+        hash_secret: "Hash secret"
+        host: "Host"
+        hub_id: "Hub ID"
+        id: "ID"
+        identifier: "Identifier"
+        invoice_id: "Invoice #"
+        key: "Key"
+        last_name: "Last name"
+        locale: "Language"
+        login: "Login"
+        login_id: "Login ID"
+        mailer_service_id: "Mailer service"
+        merchant_id: "Merchant ID"
+        messaging_profile_id: "Messaging profile ID"
+        name: "Name"
+        navigator: "Navigation"
+        next: "Next"
+        notes: "Notes"
+        password: "Password"
+        path: "Path"
+        payment_method: "Payment method"
+        phone: "Phone"
+        plain_password: "Password"
+        port: "Port"
+        previous: "Previous"
+        price: "Price"
+        primary: "Primary"
+        qty: "Qty"
+        quote_id: "Quote #"
+        reference: "Reference"
+        region: "Region"
+        sandbox: "Sandbox"
+        secret: "Secret"
+        secret_key: "Secret key"
+        service_name: "Service name"
+        sid: "SID"
+        sms: "SMS"
+        space: "Space"
+        tax: "Tax"
+        terms: "Terms"
+        test_mode: "Test mode"
+        thread_key: "Thread key"
+        to: "To"
+        token: "Token"
+        topic: "Topic"
+        transaction_key: "Transaction key"
+        type: "Type"
+        uid: "UID"
+        user: "User"
+        user_id: "User ID"
+        user_key: "User key"
+        user_name: "Username"
+        userlogin: "User login"
+        username: "Username"
+        value: "Value"
     placeholder:
         address_line: 'Apartment, suite, unit, etc.'
         choose: Choose...
@@ -875,6 +1199,21 @@ invoice:
             delete: Delete
             edit: Edit
             view: View
+        balance: "Balance"
+        client: "Client"
+        date_start: "Start Date"
+        discount: "Discount"
+        due_date: "Due Date"
+        end_date: "End Date"
+        frequency: "Frequency"
+        invoice_date: "Invoice Date"
+        invoice_number: "Invoice #"
+        next_run_date: "Next Run Date"
+        paid_date: "Paid Date"
+        payable: "Payable"
+        status: "Status"
+        tax: "Tax"
+        total: "Total"
     id:
         cancel: 'Cancel editing invoice ID'
         edit: 'Edit invoice ID'
@@ -929,7 +1268,7 @@ invoice:
     menu:
         create: 'Create Invoice'
         list: 'List Invoices'
-        main: Invoices
+        main: 'Sales Invoices'
         recurring:
             create: 'Create Recurring Invoice'
             list: 'List Recurring Invoices'
@@ -1069,6 +1408,8 @@ invoice:
         active: Active
         archived: Archived
         label: 'Invoice list navigation'
+        one_off: 'One-off'
+        recurring: 'Recurring'
         recurring_active: Active
         recurring_archived: Archived
         recurring_completed: Completed
@@ -1203,6 +1544,8 @@ menu:
         create: Create
     top:
         api: 'API Tokens'
+        bill_categories: "Purchase Categories"
+        catalog_categories: "Catalogue categories"
         custom_fields: 'Custom Fields'
         dashboard: Dashboard
         einvoicing: 'Electronic Invoicing'
@@ -1560,6 +1903,15 @@ payment:
             display_name: Stripe.js
             overview: 'Stripe.js embeds the card input fields directly inside SolidInvoice instead of redirecting to Stripe. It gives a more seamless checkout, but you take on more responsibility for PCI compliance. Most businesses should use Stripe Checkout instead.'
             tagline: 'Embed card fields directly in SolidInvoice (advanced).'
+    grid:
+        amount: "Amount"
+        client: "Client"
+        completed_date: "Completed Date"
+        created: "Created"
+        invoice_number: "Invoice #"
+        message: "Message"
+        method: "Method"
+        status: "Status"
     history:
         title: 'Payment History'
     invoice_details: 'Invoice Details'
@@ -1827,6 +2179,13 @@ quote:
             delete: Delete
             edit: Edit
             view: View
+        client: "Client"
+        created: "Created"
+        discount: "Discount"
+        quote_number: "Quote #"
+        status: "Status"
+        tax: "Tax"
+        total: "Total"
     id:
         cancel: 'Cancel editing quote ID'
         edit: 'Edit quote ID'
@@ -2409,6 +2768,27 @@ settings:
         tooltip_plan: 'Upgrade to %plan% to unlock this feature'
     watermark:
         help: 'Display a visual watermark (e.g., PAID, DRAFT) on the %type% document.'
+supplier:
+    create:
+        success: 'Supplier created successfully'
+    delete_success: 'Supplier deleted successfully'
+    edit:
+        success: 'Supplier updated successfully'
+    form:
+        email:
+            label: Email
+        tax_identifier:
+            label: 'Tax Identifier'
+    grid:
+        create: 'Add Supplier'
+    menu:
+        add: 'Add Supplier'
+        list: Suppliers
+        main: Suppliers
+    remove_role_success: 'Supplier role removed'
+    view:
+        address: Address
+        details: 'Supplier Details'
 status:
     accepted: Accepted
     active: Active
@@ -2429,6 +2809,7 @@ status:
     paused: Paused
     pending: Pending
     refunded: Refunded
+    rejected: Rejected
     suspended: Suspended
     unknown: Unknown
 success: Success
@@ -2454,11 +2835,27 @@ tax:
         label: 'Electronic invoicing (France)'
     exclusive: Exclusive
     form:
+        category:
+            label: "Category"
+        compound:
+            help: "Calculated on the subtotal plus the other taxes, not on the subtotal alone."
+            label: "Compound tax"
         input:
             validate: Validate
+        name:
+            label: "Name"
+        rate:
+            label: "Rate"
+        type:
+            label: "Type"
     grid:
         actions:
             edit: Edit
+        category: "Category"
+        created: "Created"
+        name: "Name"
+        rate: "Rate"
+        type: "Type"
     inclusive: Inclusive
     invoice_tax:
         note:
@@ -2485,6 +2882,35 @@ tax:
     vat_number: 'Vat Number:'
 title: messages
 type: Type
+user:
+    api_token:
+        grid:
+            created: "Created"
+            description: "Description"
+            last_used: "Last Used"
+            name: "Name"
+            usage_count: "Usage Count"
+        history:
+            grid:
+                date: "Date"
+                endpoint: "Endpoint"
+                ip: "IP Address"
+                method: "Method"
+                status: "Status"
+                user_agent: "User Agent"
+    grid:
+        email: "Email Address"
+        joined: "Joined"
+        last_login: "Last Login"
+        mobile: "Mobile"
+        status: "Status"
+    invitation:
+        grid:
+            email: "Email Address"
+            expires: "Expires"
+            invited: "Invited"
+            invited_by: "Invited By"
+            status: "Status"
 users:
     add: 'Add User'
     create:

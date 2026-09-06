@@ -54,6 +54,7 @@ class PaymentType extends AbstractType
             'payment_method',
             EntityType::class,
             [
+                'label' => 'form.field.payment_method',
                 'class' => PaymentMethod::class,
                 'choices' => $paymentMethodRepository->getAvailablePaymentMethods($options['user'] !== null),
                 'required' => true,
@@ -69,6 +70,7 @@ class PaymentType extends AbstractType
             'amount',
             MoneyType::class,
             [
+                'label' => 'form.field.amount',
                 'currency' => $options['currency'],
                 'constraints' => [
                     new Assert\NotBlank(),
@@ -88,9 +90,12 @@ class PaymentType extends AbstractType
             $attributes = $this->stimulusHelper->createStimulusAttributes();
             $attributes->addTarget(self::STIMULUS_CONTROLLER, 'captureOnline');
 
-            $builder->add('capture_online', CheckboxType::class, ['data' => true, 'row_attr' => $attributes->toArray()]);
-            $builder->add('reference', null, ['required' => false]);
-            $builder->add('notes', TextareaType::class, ['required' => false]);
+            $builder->add('capture_online', CheckboxType::class, [
+                'label' => 'form.field.capture_online', 'data' => true, 'row_attr' => $attributes->toArray()]);
+            $builder->add('reference', null, [
+                'label' => 'form.field.reference', 'required' => false]);
+            $builder->add('notes', TextareaType::class, [
+                'label' => 'form.field.notes', 'required' => false]);
         }
     }
 

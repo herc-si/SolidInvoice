@@ -31,6 +31,7 @@ final class VonageType extends AbstractType
             'key',
             null,
             [
+                'label' => 'form.field.key',
                 'constraints' => new NotBlank(groups: ['vonage']),
             ]
         );
@@ -39,6 +40,7 @@ final class VonageType extends AbstractType
             'secret',
             null,
             [
+                'label' => 'form.field.secret',
                 'constraints' => new NotBlank(groups: ['vonage']),
             ]
         );
@@ -47,6 +49,7 @@ final class VonageType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['vonage']),
             ]
         );

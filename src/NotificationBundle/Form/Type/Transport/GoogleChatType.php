@@ -31,6 +31,7 @@ final class GoogleChatType extends AbstractType
             'access_key',
             null,
             [
+                'label' => 'form.field.access_key',
                 'constraints' => new NotBlank(groups: ['googlechat']),
             ]
         );
@@ -39,6 +40,7 @@ final class GoogleChatType extends AbstractType
             'access_token',
             null,
             [
+                'label' => 'form.field.access_token',
                 'constraints' => new NotBlank(groups: ['googlechat']),
             ]
         );
@@ -47,6 +49,7 @@ final class GoogleChatType extends AbstractType
             'space',
             null,
             [
+                'label' => 'form.field.space',
                 'constraints' => new NotBlank(groups: ['googlechat']),
             ]
         );
@@ -55,6 +58,7 @@ final class GoogleChatType extends AbstractType
             'thread_key',
             null,
             [
+                'label' => 'form.field.thread_key',
                 'constraints' => new NotBlank(groups: ['googlechat']),
             ]
         );

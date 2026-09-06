@@ -267,8 +267,8 @@ final class ViewTest extends KernelTestCase
         $response = $twig->resolveTemplate('@SolidInvoiceInvoice/Default/view.html.twig')
             ->renderBlock('content', $params);
 
-        self::assertStringContainsString('Sent', $response);
-        self::assertStringContainsString('Failed', $response);
+        self::assertStringContainsString('Rejected', $response);
+        self::assertStringContainsString('Pending', $response);
         self::assertStringContainsString('TEST-abc123', $response);
         self::assertStringContainsString('Simulated failure (test provider)', $response);
     }

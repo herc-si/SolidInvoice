@@ -26,8 +26,9 @@ class ApiTokenType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('name');
+        $builder->add('name', null, ['label' => 'form.field.name']);
         $builder->add('description', TextareaType::class, [
+                'label' => 'form.field.description',
             'required' => false,
             'attr' => ['rows' => 3, 'placeholder' => 'profile.api.form.description_placeholder'],
         ]);

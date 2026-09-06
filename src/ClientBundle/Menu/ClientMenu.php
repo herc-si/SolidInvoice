@@ -24,20 +24,15 @@ final class ClientMenu
     #[MenuBuilder(name: 'sidebar', priority: MenuPriority::PRIORITY_CLIENT->value)]
     public function sidebar(ItemInterface $menu): void
     {
-        $section = $menu->addChild('client.menu.main', Options::create()->icon(Icon::CLIENT)->build());
-
-        $section->addChild(
-            'client.menu.list',
+        // Single click, straight to the list — a "Tiers" record covers both
+        // clients and suppliers (see Client::$isClient / $isSupplier), so
+        // this is the only entry point needed; SupplierBundle no longer adds
+        // its own sidebar item.
+        $menu->addChild(
+            'client.menu.main',
             Options::create()
                 ->icon(Icon::CLIENT)
                 ->route('_clients_index')
-                ->build(),
-        );
-        $section->addChild(
-            'client.menu.add',
-            Options::create()
-                ->icon(Icon::CLIENT_ADD)
-                ->route('_clients_add')
                 ->build(),
         );
     }

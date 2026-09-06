@@ -105,6 +105,55 @@ final readonly class SuperPdpClient
     }
 
     /**
+     * Lists invoices received BY this company (`direction: in`), oldest first, with
+     * their `en_invoice` data expanded so the caller doesn't need a second request
+     * per invoice. $startingAfterId (SUPER PDP's own incrementing invoice id, not
+     * our external_reference) resumes a previous listing — null starts from the
+     * beginning.
+     *
+     * @return array<string, mixed> the decoded list_invoices response
+     *
+     * @throws SuperPdpApiException
+     */
+    public function listIncomingInvoices(string $accessToken, ?int $startingAfterId = null): array
+    {
+        $query = [
+            'direction' => 'in',
+            'order' => 'asc',
+            // en_invoice's `seller` (unlike `totals`, always included) is one of
+            // the fields the API docs call out as optional on the overview shape
+            // and comes back null unless separately expanded — confirmed against
+            // a real received invoice during testing: `expand[]=en_invoice` alone
+            // silently omitted the seller identity entirely.
+            'expand' => ['en_invoice', 'en_invoice.seller'],
+        ];
+
+        if ($startingAfterId !== null) {
+            $query['starting_after_id'] = $startingAfterId;
+        }
+
+        return $this->request('GET', '/v1.beta/invoices', [
+            'auth_bearer' => $accessToken,
+            'query' => $query,
+        ]);
+    }
+
+    /**
+     * Downloads the human-readable Factur-X PDF for a received invoice.
+     *
+     * @return array{content: string, content_type: string}
+     *
+     * @throws SuperPdpApiException
+     */
+    public function downloadInvoiceDocument(string $accessToken, string $superPdpInvoiceId): array
+    {
+        return $this->requestRaw('GET', '/v1.beta/invoices/' . $superPdpInvoiceId, [
+            'auth_bearer' => $accessToken,
+            'query' => ['format' => 'factur-x'],
+        ]);
+    }
+
+    /**
      * @param array<string, mixed> $options
      *
      * @return array<string, mixed>
@@ -120,6 +169,34 @@ final readonly class SuperPdpClient
             // extractError() below can surface the API's http_ko message, instead of
             // silently returning its error body as if it were a successful response.
             return $response->toArray();
+        } catch (TransportException $e) {
+            throw new SuperPdpApiException('Could not reach the SUPER PDP API: ' . $e->getMessage(), previous: $e);
+        } catch (ExceptionInterface $e) {
+            [$message, $code] = $this->extractError($e);
+
+            throw new SuperPdpApiException($message, $code, $e);
+        }
+    }
+
+    /**
+     * Same error handling as request(), for endpoints returning a raw binary
+     * body (a PDF/XML document) rather than JSON.
+     *
+     * @param array<string, mixed> $options
+     *
+     * @return array{content: string, content_type: string}
+     *
+     * @throws SuperPdpApiException
+     */
+    private function requestRaw(string $method, string $path, array $options): array
+    {
+        try {
+            $response = $this->httpClient->request($method, self::BASE_URL . $path, $options);
+
+            return [
+                'content' => $response->getContent(),
+                'content_type' => $response->getHeaders()['content-type'][0] ?? 'application/octet-stream',
+            ];
         } catch (TransportException $e) {
             throw new SuperPdpApiException('Could not reach the SUPER PDP API: ' . $e->getMessage(), previous: $e);
         } catch (ExceptionInterface $e) {

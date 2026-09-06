@@ -190,9 +190,10 @@ class QuoteType extends AbstractType
         // Generate quote ID if not set (for new quotes)
         $data = $dto->quoteId !== '' ? $dto->quoteId : $this->billingIdGenerator->generate(new Quote(), ['field' => 'quoteId']);
 
-        $builder->add('quoteId', null, ['data' => $data]);
+        $builder->add('quoteId', null, [
+                'label' => 'form.field.quote_id', 'data' => $data]);
 
-        $builder->add('terms');
+        $builder->add('terms', null, ['label' => 'form.field.terms']);
         $builder->add('notes', null, ['help' => 'billing.notes_help']);
         $builder->add('total', HiddenMoneyType::class, ['currency' => $options['currency']]);
         $builder->add('baseTotal', HiddenMoneyType::class, ['currency' => $options['currency']]);

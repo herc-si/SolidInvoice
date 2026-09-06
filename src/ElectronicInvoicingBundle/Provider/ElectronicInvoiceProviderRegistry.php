@@ -42,6 +42,33 @@ final readonly class ElectronicInvoiceProviderRegistry
         return $this->settingRepository->findActive() instanceof ElectronicInvoiceProviderSetting;
     }
 
+    /**
+     * Resolves a provider by its machine name regardless of whether it is the
+     * company's currently active one — a submission keeps referencing the
+     * provider it was sent through even after the active provider changes.
+     */
+    public function get(string $name): ?ElectronicInvoiceProviderInterface
+    {
+        if (! $this->providers->has($name)) {
+            return null;
+        }
+
+        /** @var ElectronicInvoiceProviderInterface */
+        return $this->providers->get($name);
+    }
+
+    /**
+     * Resolves $name to its {@see ElectronicInvoiceReceiverInterface} — null both
+     * when the provider doesn't exist and when it exists but doesn't support
+     * receiving invoices, so callers don't need two separate checks.
+     */
+    public function getReceiver(string $name): ?ElectronicInvoiceReceiverInterface
+    {
+        $provider = $this->get($name);
+
+        return $provider instanceof ElectronicInvoiceReceiverInterface ? $provider : null;
+    }
+
     public function send(Invoice $invoice): ElectronicInvoiceSubmissionResult
     {
         $setting = $this->settingRepository->findActive();

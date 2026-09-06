@@ -1050,9 +1050,31 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: var(--swp-space-3);
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 var(--swp-space-4);
+
+    // Without this the row keeps both buttons side by side on a phone and
+    // shrinks them past their own labels, so "Enregistrer comme brouillon"
+    // spills out of its button and over "Annuler".
+    @media (width <= 576px) {
+        flex-direction: column-reverse;
+        align-items: stretch;
+
+        .btn,
+        .save-button-group {
+            width: 100%;
+        }
+
+        .save-button-group {
+            display: flex;
+
+            .btn-save-primary {
+                flex: 1 1 auto;
+            }
+        }
+    }
 }
 
 // Split button group for save actions

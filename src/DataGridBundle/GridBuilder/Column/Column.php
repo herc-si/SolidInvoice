@@ -50,6 +50,8 @@ abstract class Column
 
     private ?string $cellClass = null;
 
+    private bool $hiddenByDefault = false;
+
     final public function __construct(
         protected string $field
     ) {
@@ -137,6 +139,20 @@ abstract class Column
         return $this;
     }
 
+    /**
+     * Excluded from the table on first load for a grid with many columns, so
+     * the row actions are reachable without horizontal scrolling — still
+     * reachable any time via the column-visibility picker. Use for secondary
+     * detail that's useful sometimes but not needed to scan the list (e.g. a
+     * date only relevant once a record reaches a particular status).
+     */
+    public function hiddenByDefault(bool $hidden = true): static
+    {
+        $this->hiddenByDefault = $hidden;
+
+        return $this;
+    }
+
     /* ============================ GETTERS ============================ */
 
     public function getField(): string
@@ -195,5 +211,10 @@ abstract class Column
     public function getCellClass(): ?string
     {
         return $this->cellClass;
+    }
+
+    public function isHiddenByDefault(): bool
+    {
+        return $this->hiddenByDefault;
     }
 }

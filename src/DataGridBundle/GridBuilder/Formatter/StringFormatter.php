@@ -54,6 +54,13 @@ final readonly class StringFormatter implements FormatterInterface
         }
 
         if (is_object($value)) {
+            // TranslatableMessage is neither Stringable nor has __toString, so it would
+            // otherwise fall through to spl_object_hash(). GridFieldRenderer translates
+            // it once it gets back a TranslatableInterface.
+            if ($value instanceof TranslatableMessage) {
+                return $value;
+            }
+
             if ($value instanceof Stringable || method_exists($value, '__toString')) {
                 return $value->__toString();
             }

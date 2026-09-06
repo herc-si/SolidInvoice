@@ -120,6 +120,30 @@ class DataGrid extends AbstractController
         }
     }
 
+    /**
+     * Seeds $hiddenColumns from the grid's own hiddenByDefault() columns on a
+     * fresh visit — $hiddenColumns is still at its `[]` PHP default here only
+     * when the request/URL carried no explicit value (hydration from the URL,
+     * which runs before PostMount, would already have overwritten it
+     * otherwise), so this never fights a user's own column choices, including
+     * a deliberate "show everything" that happens to also be `[]`.
+     */
+    #[PostMount(priority: 10)]
+    public function initializeHiddenColumnsFromGridDefaults(): void
+    {
+        if ($this->hiddenColumns !== []) {
+            return;
+        }
+
+        $this->hiddenColumns = array_values(array_map(
+            static fn (Column $column) => $column->getField(),
+            array_filter(
+                $this->getGrid()->columns(),
+                static fn (Column $column) => $column->isHiddenByDefault(),
+            ),
+        ));
+    }
+
     public function selectAll(): void
     {
         if ($this->selectedAll) {

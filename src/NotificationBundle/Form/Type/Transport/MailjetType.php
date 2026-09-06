@@ -31,6 +31,7 @@ final class MailjetType extends AbstractType
             'token',
             null,
             [
+                'label' => 'form.field.token',
                 'constraints' => new NotBlank(groups: ['mailjet']),
             ]
         );
@@ -39,6 +40,7 @@ final class MailjetType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['mailjet']),
             ]
         );

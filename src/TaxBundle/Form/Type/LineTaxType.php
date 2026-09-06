@@ -34,6 +34,7 @@ final class LineTaxType extends AbstractType
     {
         $builder
             ->add('tax', EntityType::class, [
+                'label' => 'form.field.tax',
                 'class' => Tax::class,
                 'placeholder' => 'tax.line_tax.tax.placeholder',
                 'required' => false,

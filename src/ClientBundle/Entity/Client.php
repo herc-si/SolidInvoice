@@ -49,6 +49,7 @@ use Symfony\Component\Serializer\Attribute as Serialize;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use function in_array;
 
 #[ApiFilter(SearchFilter::class, properties: ['name' => 'partial', 'status' => 'exact'])]
@@ -115,6 +116,40 @@ class Client implements Stringable
     #[ORM\Column(name: 'status', type: Types::STRING, length: 25, enumType: ClientStatus::class)]
     #[Serialize\Groups(['client_api:read', 'searchable'])]
     private ?ClientStatus $status = ClientStatus::Active;
+
+    /**
+     * Whether this party is billed BY this company (i.e. a normal client, the
+     * original and still-default meaning of this entity). A record can be a
+     * client, a supplier, or both — see {@see $isSupplier} — rather than
+     * needing two separate records for the same real-world company.
+     */
+    #[ORM\Column(name: 'is_client', type: Types::BOOLEAN, options: ['default' => true])]
+    #[Serialize\Groups(['client_api:read', 'client_api:write', 'searchable'])]
+    private bool $isClient = true;
+
+    /**
+     * Whether this party bills THIS company — the accounts-payable role, see
+     * {@see \SolidInvoice\BillBundle\Entity\Bill::$supplier}. Independent of
+     * {@see $isClient}: a pure supplier (never invoiced) has this true and
+     * `isClient` false.
+     */
+    #[ORM\Column(name: 'is_supplier', type: Types::BOOLEAN, options: ['default' => false])]
+    #[Serialize\Groups(['client_api:read', 'client_api:write', 'searchable'])]
+    private bool $isSupplier = false;
+
+    /**
+     * Whether this party is a registered business (has a SIRET/company
+     * registration) rather than a private individual. Kept in sync with
+     * whether `name` was typed in directly or left blank for {@see ClientType}
+     * to fill in from the primary contact — see its SUBMIT listener. Drives
+     * {@see \SolidInvoice\TaxBundle\Validator\Constraints\RequiredFiscalIdentifierForElectronicInvoicingValidator}:
+     * an individual is never required to provide a SIRET, since the French
+     * mandatory e-invoicing rules this validates against only apply
+     * between VAT-registered businesses, not to private consumers.
+     */
+    #[ORM\Column(name: 'is_company', type: Types::BOOLEAN, options: ['default' => true])]
+    #[Serialize\Groups(['client_api:read', 'client_api:write', 'searchable'])]
+    private bool $isCompany = true;
 
     #[ORM\Column(name: 'currency', type: Types::STRING, length: 3, nullable: true)]
     #[Serialize\Groups(['client_api:read', 'client_api:write', 'searchable'])]
@@ -272,6 +307,52 @@ class Client implements Stringable
         $this->status = $status;
 
         return $this;
+    }
+
+    public function isClient(): bool
+    {
+        return $this->isClient;
+    }
+
+    public function setIsClient(bool $isClient): self
+    {
+        $this->isClient = $isClient;
+
+        return $this;
+    }
+
+    public function isSupplier(): bool
+    {
+        return $this->isSupplier;
+    }
+
+    public function setIsSupplier(bool $isSupplier): self
+    {
+        $this->isSupplier = $isSupplier;
+
+        return $this;
+    }
+
+    public function isCompany(): bool
+    {
+        return $this->isCompany;
+    }
+
+    public function setIsCompany(bool $isCompany): self
+    {
+        $this->isCompany = $isCompany;
+
+        return $this;
+    }
+
+    #[Assert\Callback]
+    public function validateHasARole(ExecutionContextInterface $context): void
+    {
+        if (! $this->isClient && ! $this->isSupplier) {
+            $context->buildViolation('client.constraint.role_required')
+                ->atPath('isClient')
+                ->addViolation();
+        }
     }
 
     public function getWebsite(): ?string

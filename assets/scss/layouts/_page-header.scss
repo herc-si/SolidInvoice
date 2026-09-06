@@ -1,0 +1,29 @@
+/**
+ * SolidInvoice — Page Header
+ *
+ * Tabler's page header puts the title in a `.col` and the action buttons in a
+ * `.col-auto`, side by side at every width. That holds while titles are short,
+ * but our document views title themselves with a party's full company name —
+ * "Fournitures Industrielles du Nord" — next to two or three transition
+ * buttons. On a phone the button column takes what it needs and leaves the
+ * title a column barely wider than one word, whose text then spills sideways
+ * across the buttons instead of wrapping inside its own box.
+ *
+ * Below the tablet breakpoint the buttons therefore take a full line of their
+ * own under the title. Their `ms-auto` margin then has no free space left to
+ * consume, so it resolves to zero and the row stays left-aligned. The title
+ * also gets `overflow-wrap`, since a company name can carry a word longer than
+ * the column and this row is not a scroll container — such a word would run
+ * off the viewport rather than off the box.
+ */
+
+@media (width <= 768px) {
+
+    .page-header .row > .col-auto {
+        flex: 0 0 100%;
+    }
+
+    .page-title {
+        overflow-wrap: anywhere;
+    }
+}

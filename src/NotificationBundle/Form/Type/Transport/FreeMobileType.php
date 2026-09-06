@@ -31,6 +31,7 @@ final class FreeMobileType extends AbstractType
             'login',
             null,
             [
+                'label' => 'form.field.login',
                 'constraints' => new NotBlank(groups: ['freemobile']),
             ]
         );
@@ -39,6 +40,7 @@ final class FreeMobileType extends AbstractType
             'api_key',
             null,
             [
+                'label' => 'form.field.api_key',
                 'constraints' => new NotBlank(groups: ['freemobile']),
             ]
         );
@@ -47,6 +49,7 @@ final class FreeMobileType extends AbstractType
             'phone',
             null,
             [
+                'label' => 'form.field.phone',
                 'constraints' => new NotBlank(groups: ['freemobile']),
             ]
         );

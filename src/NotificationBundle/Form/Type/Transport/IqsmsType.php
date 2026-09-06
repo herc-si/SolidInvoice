@@ -31,6 +31,7 @@ final class IqsmsType extends AbstractType
             'login',
             null,
             [
+                'label' => 'form.field.login',
                 'constraints' => new NotBlank(groups: ['iqsms']),
             ]
         );
@@ -39,6 +40,7 @@ final class IqsmsType extends AbstractType
             'password',
             null,
             [
+                'label' => 'form.field.password',
                 'constraints' => new NotBlank(groups: ['iqsms']),
             ]
         );
@@ -47,6 +49,7 @@ final class IqsmsType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['iqsms']),
             ]
         );

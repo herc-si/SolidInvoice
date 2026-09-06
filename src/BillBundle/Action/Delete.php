@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of SolidInvoice project.
+ *
+ * (c) Pierre du Plessis <open-source@solidworx.co>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace SolidInvoice\BillBundle\Action;
+
+use SolidInvoice\BillBundle\Entity\Bill;
+use SolidInvoice\BillBundle\Repository\BillRepository;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
+final readonly class Delete
+{
+    public function __construct(
+        private BillRepository $billRepository,
+        private TranslatorInterface $translator,
+        private CsrfTokenManagerInterface $csrfTokenManager,
+        private RouterInterface $router,
+    ) {
+    }
+
+    public function __invoke(Bill $bill, Request $request, Session $session): Response
+    {
+        $token = $request->request->get('_token');
+
+        if (! $this->csrfTokenManager->isTokenValid(new CsrfToken('delete' . $bill->getId(), $token))) {
+            $session->getFlashBag()->add('danger', $this->translator->trans('Invalid CSRF token'));
+
+            return new RedirectResponse($this->router->generate('_bills_view', ['id' => $bill->getId()]));
+        }
+
+        $this->billRepository->delete($bill);
+
+        $session->getFlashBag()->add('success', $this->translator->trans('bill.delete_success'));
+
+        return new RedirectResponse($this->router->generate('_bills_index'));
+    }
+}

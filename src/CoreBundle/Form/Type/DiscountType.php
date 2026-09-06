@@ -63,6 +63,7 @@ class DiscountType extends AbstractType
             'type',
             ChoiceType::class,
             [
+                'label' => 'form.field.type',
                 'attr' => [
                     'class' => 'discount-type'
                 ],
@@ -77,6 +78,7 @@ class DiscountType extends AbstractType
             'value',
             TextType::class,
             [
+                'label' => 'form.field.value',
                 'attr' => [
                     'class' => 'discount-value',
                 ],

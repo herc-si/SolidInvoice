@@ -31,6 +31,7 @@ class KlarnaInvoice extends AbstractType
             'secret',
             TextType::class,
             [
+                'label' => 'form.field.secret',
                 'constraints' => new NotBlank(),
             ]
         );
@@ -39,6 +40,7 @@ class KlarnaInvoice extends AbstractType
             'eid',
             TextType::class,
             [
+                'label' => 'form.field.eid',
                 'constraints' => new NotBlank(),
             ]
         );
@@ -47,6 +49,7 @@ class KlarnaInvoice extends AbstractType
             'sandbox',
             CheckboxType::class,
             [
+                'label' => 'form.field.sandbox',
                 'required' => false,
             ]
         );

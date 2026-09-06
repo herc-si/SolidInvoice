@@ -31,6 +31,7 @@ final class DiscordType extends AbstractType
             'token',
             null,
             [
+                'label' => 'form.field.token',
                 'constraints' => new NotBlank(groups: ['discord']),
             ]
         );
@@ -39,6 +40,7 @@ final class DiscordType extends AbstractType
             'id',
             null,
             [
+                'label' => 'form.field.id',
                 'constraints' => new NotBlank(groups: ['discord']),
             ]
         );

@@ -31,6 +31,7 @@ final class LinkedInType extends AbstractType
             'token',
             null,
             [
+                'label' => 'form.field.token',
                 'constraints' => new NotBlank(groups: ['linkedin']),
             ]
         );
@@ -39,6 +40,7 @@ final class LinkedInType extends AbstractType
             'user_id',
             null,
             [
+                'label' => 'form.field.user_id',
                 'constraints' => new NotBlank(groups: ['linkedin']),
             ]
         );

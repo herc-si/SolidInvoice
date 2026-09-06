@@ -1,5 +1,6 @@
 action:
     add: Ajouter
+    archive: Archiver
     back: Retour
     cancel: Annuler
     close: Fermer
@@ -7,14 +8,117 @@ action:
     create: Créer
     delete: Supprimer
     edit: Modifier
+    reopen: Rouvrir
     save: Enregistrer
     submit: Valider
     update: Mettre à jour
 active_clients: 'Clients actifs'
-add_client: 'Ajouter un client'
+add_client: 'Ajouter un tiers'
 add_info: 'Ajouter des informations'
 address: Adresse
 all_clients: 'Tous les clients'
+bill:
+    category:
+        create:
+            success: 'Catégorie de facture créée avec succès'
+        edit:
+            success: 'Catégorie de facture mise à jour avec succès'
+        form:
+            add_title: 'Ajouter une catégorie'
+            edit_title: 'Modifier la catégorie'
+            name:
+                label: Nom
+        grid:
+            create: 'Ajouter une catégorie'
+            name: "Nom"
+        menu:
+            list: 'Catégories de factures'
+    create:
+        success: 'Facture créée avec succès'
+    delete_success: 'Facture supprimée avec succès'
+    edit:
+        success: 'Facture mise à jour avec succès'
+    form:
+        add_title: 'Ajouter une facture'
+        bill_number:
+            label: 'N° de facture'
+        category:
+            label: Catégorie
+            placeholder: 'Aucune catégorie'
+        currency:
+            label: Devise
+        due_date:
+            label: 'Date d''échéance'
+        edit_title: 'Modifier la facture'
+        issue_date:
+            label: "Date d'émission"
+        new_supplier_name:
+            help: 'Laissez le champ ci-dessus vide et remplissez celui-ci pour créer un nouveau fournisseur.'
+            label: 'Ou créer un nouveau fournisseur'
+        notes:
+            label: Notes
+        subtitle: "Saisissez une facture reçue d'un fournisseur."
+        supplier:
+            label: Fournisseur
+            placeholder: 'Choisir un fournisseur existant'
+        total_amount:
+            label: 'Montant total'
+    grid:
+        balance: "Solde"
+        bill_number: "N° de facture"
+        category: "Catégorie"
+        create: 'Ajouter une facture'
+        due_date: "Date d'échéance"
+        issue_date: "Date d'émission"
+        status: "Statut"
+        supplier: "Fournisseur"
+        total: "Total"
+    menu:
+        add: 'Ajouter une facture'
+        list: Factures
+        main: "Factures d'achat"
+    payment:
+        create:
+            success: 'Paiement enregistré avec succès'
+        form:
+            add_title: 'Enregistrer un paiement'
+            amount:
+                label: Montant
+                positive: 'Cette valeur doit être supérieure à 0.'
+            method:
+                label: 'Mode de paiement'
+            notes:
+                label: Notes
+            paid_date:
+                label: 'Payé le'
+            reference:
+                label: Référence
+            submit: 'Enregistrer le paiement'
+        menu:
+            list: Paiements
+        view:
+            empty: 'Aucun paiement enregistré pour le moment.'
+    transition:
+        action:
+            archive: 'La facture a été archivée'
+            cancel: 'La facture a été annulée'
+            confirm: 'La facture a été confirmée'
+            edit: 'La facture est repassée en brouillon'
+            overdue: 'La facture a été marquée en retard'
+            pay: 'La facture a été payée'
+            reopen: 'La facture a été réouverte'
+        exception:
+            archive: "La facture ne peut pas être archivée"
+            cancel: "La facture ne peut pas être annulée"
+            confirm: "La facture ne peut pas être confirmée"
+            edit: "La facture ne peut pas être modifiée"
+            overdue: "La facture ne peut pas être marquée en retard"
+            pay: "La facture ne peut pas être payée"
+            reopen: "La facture ne peut pas être réouverte"
+    view:
+        balance: Solde
+        details: 'Détails de la facture'
+        total: Total
 billing:
     discount: Remise
     due_date: 'Date d''échéance'
@@ -23,6 +127,90 @@ billing:
     tax: Taxe
     total: Total
     withholding: 'Retenues et ajustements'
+catalog:
+    action:
+        add: "Ajouter une prestation"
+        created: "Fiche créée avec succès"
+        updated: "Fiche mise à jour avec succès"
+    category:
+        action:
+            add: "Ajouter une catégorie"
+            created: "Catégorie créée avec succès"
+            updated: "Catégorie mise à jour avec succès"
+        form:
+            add_title: "Ajouter une catégorie"
+            edit_title: "Modifier la catégorie"
+            name:
+                label: "Nom"
+        grid:
+            name: "Nom"
+            title: "Catégories du catalogue"
+        list:
+            title: "Catégories du catalogue"
+    form:
+        active:
+            help: "Une fiche inactive disparaît du sélecteur sans effacer l'historique des documents."
+            label: "Fiche active"
+        add_title: "Ajouter au catalogue"
+        category:
+            label: "Catégorie"
+            placeholder: "Aucune catégorie"
+        description:
+            help: "Reprise sur la ligne du document, où elle reste modifiable."
+            label: "Description"
+        edit_title: "Modifier la fiche"
+        name:
+            label: "Désignation"
+        purchase_price:
+            help: "Facultatif, sert à calculer la marge."
+            label: "Prix d'achat"
+        reference:
+            help: "Facultative. Doit être unique si renseignée."
+            label: "Référence interne"
+        sale_price:
+            label: "Prix de vente unitaire"
+        section:
+            identity: "Identification"
+            pricing: "Tarification"
+        subtitle: "Enregistrez une prestation ou un produit une fois, réutilisez-le en un clic sur vos devis et factures."
+        tax:
+            help: "Appliquée automatiquement à la ligne, modifiable au cas par cas."
+            label: "Taxe par défaut"
+            placeholder: "Aucune taxe"
+        type:
+            label: "Type"
+        unit:
+            label: "Unité de vente"
+    grid:
+        active: "Active"
+        category: "Catégorie"
+        name: "Désignation"
+        purchase_price: "Prix d'achat"
+        reference: "Référence"
+        sale_price: "Prix de vente"
+        tax: "Taxe"
+        title: "Catalogue"
+        type: "Type"
+        unit: "Unité"
+    list:
+        title: "Catalogue"
+    menu:
+        main: "Catalogue"
+    picker:
+        label: "Ajouter depuis le catalogue"
+        placeholder: "Depuis le catalogue…"
+    type:
+        product: "Produit"
+        service: "Prestation"
+    unit:
+        day: "Jour"
+        flat_rate: "Forfait"
+        hour: "Heure"
+        kilogram: "Kilogramme"
+        litre: "Litre"
+        metre: "Mètre"
+        month: "Mois"
+        unit: "Unité"
 change: Modifier
 change_password:
     form:
@@ -103,8 +291,8 @@ client:
             title: 'Supprimer %name% ?'
     delete_success: 'Le client a été supprimé avec succès'
     form:
-        address_description: 'Ajoutez des adresses de facturation ou de livraison pour ce client'
-        contact_description: 'Ajoutez au moins un contact pour ce client'
+        address_description: 'Ajoutez des adresses de facturation ou de livraison'
+        contact_description: 'Ajoutez au moins un contact'
         currency:
             empty_value: 'Par défaut du système'
         currency_code:
@@ -113,12 +301,19 @@ client:
             generic: 'Cette fonctionnalité nécessite un plan supérieur. Passez à un plan supérieur pour la débloquer.'
             upgrade: 'Passer à un plan supérieur'
             with_plan: 'Cette fonctionnalité est disponible avec le plan %plan%. Passez à un plan supérieur pour la débloquer.'
-        info_description: "Informations de base sur l'entreprise de votre client"
+        info_description: 'Informations de base sur ce tiers'
+        is_client:
+            label: Client
+        is_supplier:
+            label: Fournisseur
         name:
+            help: 'Pour un particulier, laissez ce champ vide : il sera rempli avec le nom du contact ci-dessous.'
             label: Nom
             placeholder: 'Acme Corporation'
-        subtitle: 'Ajoutez un nouveau client pour commencer à créer des factures et des devis'
-        tax_identifiers_description: "Les numéros d'identification fiscale du client (SIRET, SIREN, TVA intracommunautaire, RCS, etc.). Ils apparaissent sur les factures et devis émis à ce client."
+        role_description: 'Cochez l''une ou les deux, vous pourrez changer plus tard.'
+        role_title: 'Qu''est-ce que ce tiers ?'
+        subtitle: 'Ajoutez un nouveau tiers, puis définissez-le comme client, fournisseur, ou les deux.'
+        tax_identifiers_description: "Numéros d'identification fiscale (SIRET, SIREN, TVA intracommunautaire, RCS, etc.). Ils apparaissent sur les factures et devis émis à ce tiers."
         website:
             label: 'Site web'
     grid:
@@ -127,14 +322,21 @@ client:
             edit: Modifier
             view: Voir
         create: 'Créer un client'
+        created: "Créé le"
         currency: Devise
+        name: "Nom"
         outstanding_balance: 'Solde impayé'
+        role: Rôle
+        role_both: 'Client, Fournisseur'
+        role_client: Client
+        role_supplier: Fournisseur
         total_balance: 'Solde total'
+        website: "Site web"
     heading:
         addresses: Adresses
         contacts: Contacts
         payments: Paiements
-    info: 'Informations du client'
+    info: 'Informations générales'
     invoices:
         empty:
             description: "Créez une facture lorsque vous êtes prêt à facturer ce client."
@@ -145,7 +347,7 @@ client:
             invoice: 'Créer une facture'
             quote: 'Créer un devis'
         list: 'Liste des clients'
-        main: Clients
+        main: Tiers
         view: 'Voir le client'
     modal:
         action:
@@ -165,7 +367,7 @@ client:
             title: 'Aucun devis pour le moment'
     restore:
         success: 'Client restauré avec succès'
-    save: 'Enregistrer le client'
+    save: Enregistrer
     stats:
         active_clients: 'Clients actifs'
         archived_clients: 'Clients archivés'
@@ -208,8 +410,8 @@ client:
             invoices: Factures
             payments: Paiements
             quotes: Devis
-client_create: 'Créer un client'
-clients: Clients
+client_create: 'Créer un tiers'
+clients: Tiers
 close: Fermer
 company:
     create:
@@ -464,6 +666,22 @@ dashboard:
         view_all: 'Voir tous les devis'
     title: 'Tableau de bord'
 datagrid:
+    action:
+        create_bill: "Créer la facture d'achat"
+        delete: "Supprimer"
+        download: "Télécharger"
+        edit: "Modifier"
+        record_payment: "Enregistrer un paiement"
+        resend_invitation: "Renvoyer l'invitation"
+        view: "Voir"
+        view_history: "Voir l'historique"
+    batch:
+        activate: "Activer"
+        archive: "Archiver"
+        delete: "Supprimer"
+        reactivate: "Réactiver"
+        remove_supplier_role: "Retirer le rôle fournisseur"
+        revoke: "Révoquer"
     actions: Actions
     all: Tous
     apply: Appliquer
@@ -501,9 +719,18 @@ datagrid:
         select_one: 'Veuillez sélectionner au moins un élément.'
         success: Succès
     empty:
+        bill:
+            title: 'Aucune facture fournisseur pour le moment'
+            description: 'Ajoutez une facture reçue d''un fournisseur, ou créez-en une à partir d''une facture électronique importée, pour commencer à suivre ce que vous devez.'
+        bill_category:
+            title: 'Aucune catégorie pour le moment'
+            description: 'Ajoutez des catégories pour regrouper vos factures par type de dépense.'
         client:
             title: 'Aucun client pour le moment'
             description: 'Ajoutez les personnes et sociétés que vous facturez. Une fois un client créé, vous pouvez lui envoyer une facture ou un devis en quelques secondes.'
+        einvoicing_incoming:
+            title: 'Aucune facture reçue pour le moment'
+            description: 'Les factures qui vous sont envoyées par vos fournisseurs via votre plateforme de facturation électronique apparaîtront ici automatiquement.'
         invoice:
             title: 'Aucune facture pour le moment'
             description: 'Créez votre première facture et envoyez-la en moins d''une minute. Activez les paiements en ligne et vos clients pourront payer directement depuis celle-ci.'
@@ -514,6 +741,9 @@ datagrid:
             title: 'Aucun paiement pour le moment'
             description: 'Les paiements apparaissent ici dès qu''un client règle une facture. Envoyez une facture pour commencer à être payé.'
             create: 'Créer une facture'
+        supplier:
+            title: 'Aucun fournisseur pour le moment'
+            description: 'Ajoutez les sociétés et personnes qui vous facturent. Une fois un fournisseur créé, vous pouvez enregistrer des factures pour lui.'
     footer:
         showing: 'Affichage de %start% à %end% sur %total% résultats'
     items_per_page: 'Éléments par page'
@@ -530,8 +760,19 @@ datagrid:
     select_row: 'Sélectionner la ligne'
     selected: sélectionné(s)
 delete_client: 'Supprimer le client'
-edit_client: 'Modifier le client'
+edit_client: 'Modifier le tiers'
 einvoicing:
+    grid:
+        amount: "Montant"
+        invoice_number: "N° de facture"
+        issue_date: "Date d'émission"
+        provider: "Plateforme"
+        received: "Reçue le"
+        seller_name: "Fournisseur"
+    incoming:
+        menu: 'Factures reçues'
+        pending: "{0}Toutes les factures reçues ont été enregistrées|{1}1 facture reçue n'a pas pu être enregistrée automatiquement|]1,Inf[%count% factures reçues n'ont pas pu être enregistrées automatiquement"
+        title: 'Factures reçues'
     marketplace:
         active: Actif
         configure: Configurer
@@ -578,8 +819,6 @@ einvoicing:
         no_active_provider: "Aucun fournisseur de facturation électronique actif n'est configuré."
         success: "La facture électronique a été envoyée avec succès."
     view:
-        status_failed: Échec
-        status_success: Envoyée
         title: 'Facturation électronique'
 email: E-mail
 email_verification:
@@ -666,6 +905,91 @@ forgot_password:
         title: 'Réinitialiser le mot de passe'
 form:
     address: Adresse
+    field:
+        access_key: "Clé d'accès"
+        access_secret: "Secret d'accès"
+        access_token: "Jeton d'accès"
+        account_id: "Identifiant du compte"
+        account_number: "Numéro de compte"
+        account_reference: "Référence du compte"
+        amount: "Montant"
+        api_key: "Clé API"
+        api_secret: "Secret API"
+        apikey: "Clé API"
+        application_key: "Clé d'application"
+        application_secret: "Secret d'application"
+        auth_token: "Jeton d'authentification"
+        capture_online: "Capture en ligne"
+        channel: "Canal"
+        chat_id: "Identifiant de conversation"
+        client: "Client"
+        consumer_key: "Clé consommateur"
+        currency: "Devise"
+        description: "Description"
+        direction: "Sens"
+        domain: "Domaine"
+        eid: "EID"
+        email: "E-mail"
+        email_address: "Adresse e-mail"
+        encryption_key: "Clé de chiffrement"
+        endpoint: "Point de terminaison"
+        first_name: "Prénom"
+        from: "Expéditeur"
+        hash_secret: "Secret de hachage"
+        host: "Hôte"
+        hub_id: "Identifiant du hub"
+        id: "Identifiant"
+        identifier: "Identifiant"
+        invoice_id: "N° de facture"
+        key: "Clé"
+        last_name: "Nom"
+        locale: "Langue"
+        login: "Identifiant"
+        login_id: "Identifiant de connexion"
+        mailer_service_id: "Service d'envoi"
+        merchant_id: "Identifiant marchand"
+        messaging_profile_id: "Identifiant du profil de messagerie"
+        name: "Nom"
+        navigator: "Navigation"
+        next: "Suivant"
+        notes: "Notes"
+        password: "Mot de passe"
+        path: "Chemin"
+        payment_method: "Moyen de paiement"
+        phone: "Téléphone"
+        plain_password: "Mot de passe"
+        port: "Port"
+        previous: "Précédent"
+        price: "Prix"
+        primary: "Principal"
+        qty: "Quantité"
+        quote_id: "N° de devis"
+        reference: "Référence"
+        region: "Région"
+        sandbox: "Environnement de test"
+        secret: "Secret"
+        secret_key: "Clé secrète"
+        service_name: "Nom du service"
+        sid: "SID"
+        sms: "SMS"
+        space: "Espace"
+        tax: "Taxe"
+        terms: "Conditions"
+        test_mode: "Mode test"
+        thread_key: "Clé de fil"
+        to: "Destinataire"
+        token: "Jeton"
+        topic: "Sujet"
+        transaction_key: "Clé de transaction"
+        type: "Type"
+        uid: "UID"
+        user: "Utilisateur"
+        user_id: "Identifiant utilisateur"
+        user_key: "Clé utilisateur"
+        user_name: "Nom d'utilisateur"
+        userlogin: "Identifiant utilisateur"
+        username: "Nom d'utilisateur"
+        value: "Valeur"
     placeholder:
         address_line: 'Appartement, suite, unité, etc.'
         choose: Choisir...
@@ -875,6 +1199,21 @@ invoice:
             delete: Supprimer
             edit: Modifier
             view: Voir
+        balance: "Solde"
+        client: "Client"
+        date_start: "Date de début"
+        discount: "Remise"
+        due_date: "Date d'échéance"
+        end_date: "Date de fin"
+        frequency: "Fréquence"
+        invoice_date: "Date de facture"
+        invoice_number: "N° de facture"
+        next_run_date: "Prochaine exécution"
+        paid_date: "Date de paiement"
+        payable: "À payer"
+        status: "Statut"
+        tax: "Taxe"
+        total: "Total"
     id:
         cancel: 'Annuler la modification de l''ID de facture'
         edit: 'Modifier l''ID de facture'
@@ -929,7 +1268,7 @@ invoice:
     menu:
         create: 'Créer une facture'
         list: 'Liste des factures'
-        main: Factures
+        main: 'Factures de vente'
         recurring:
             create: 'Créer une récurrente'
             list: Récurrentes
@@ -1069,6 +1408,8 @@ invoice:
         active: Actives
         archived: Archivées
         label: 'Navigation de la liste des factures'
+        one_off: 'Ponctuelles'
+        recurring: 'Récurrentes'
         recurring_active: Actives
         recurring_archived: Archivées
         recurring_completed: Terminées
@@ -1203,6 +1544,8 @@ menu:
         create: Créer
     top:
         api: 'Jetons API'
+        bill_categories: "Catégories d'achat"
+        catalog_categories: "Catégories du catalogue"
         custom_fields: 'Champs personnalisés'
         dashboard: 'Tableau de bord'
         einvoicing: 'Facturation électronique'
@@ -1560,6 +1903,15 @@ payment:
             display_name: Stripe.js
             overview: 'Stripe.js intègre les champs de saisie de carte directement dans SolidInvoice au lieu de rediriger vers Stripe. Cela offre un paiement plus fluide, mais vous assumez davantage de responsabilité en matière de conformité PCI. La plupart des entreprises devraient utiliser Stripe Checkout à la place.'
             tagline: 'Intégrez les champs de carte directement dans SolidInvoice (avancé).'
+    grid:
+        amount: "Montant"
+        client: "Client"
+        completed_date: "Date de règlement"
+        created: "Créé le"
+        invoice_number: "N° de facture"
+        message: "Message"
+        method: "Moyen"
+        status: "Statut"
     history:
         title: 'Historique des paiements'
     invoice_details: 'Détails de la facture'
@@ -1827,6 +2179,13 @@ quote:
             delete: Supprimer
             edit: Modifier
             view: Voir
+        client: "Client"
+        created: "Créé le"
+        discount: "Remise"
+        quote_number: "N° de devis"
+        status: "Statut"
+        tax: "Taxe"
+        total: "Total"
     id:
         cancel: 'Annuler la modification de l''ID du devis'
         edit: 'Modifier l''ID du devis'
@@ -2409,6 +2768,27 @@ settings:
         tooltip_plan: 'Passez au plan %plan% pour débloquer cette fonctionnalité'
     watermark:
         help: 'Affiche un filigrane visuel (ex. PAYÉ, BROUILLON) sur le document %type%.'
+supplier:
+    create:
+        success: 'Fournisseur créé avec succès'
+    delete_success: 'Fournisseur supprimé avec succès'
+    edit:
+        success: 'Fournisseur mis à jour avec succès'
+    form:
+        email:
+            label: E-mail
+        tax_identifier:
+            label: 'Identifiant fiscal'
+    grid:
+        create: 'Ajouter un fournisseur'
+    menu:
+        add: 'Ajouter un fournisseur'
+        list: Fournisseurs
+        main: Fournisseurs
+    remove_role_success: 'Rôle fournisseur retiré'
+    view:
+        address: Adresse
+        details: 'Détails du fournisseur'
 status:
     accepted: Accepté
     active: Actif
@@ -2429,6 +2809,7 @@ status:
     paused: 'En pause'
     pending: 'En attente'
     refunded: Remboursé
+    rejected: Rejeté
     suspended: Suspendu
     unknown: Inconnu
 success: Succès
@@ -2454,11 +2835,27 @@ tax:
         label: 'Facturation électronique (France)'
     exclusive: Exclusive
     form:
+        category:
+            label: "Catégorie"
+        compound:
+            help: "Calculée sur le sous-total majoré des autres taxes, et non sur le sous-total seul."
+            label: "Taxe composée"
         input:
             validate: Valider
+        name:
+            label: "Nom"
+        rate:
+            label: "Taux"
+        type:
+            label: "Type"
     grid:
         actions:
             edit: Modifier
+        category: "Catégorie"
+        created: "Créé le"
+        name: "Nom"
+        rate: "Taux"
+        type: "Type"
     inclusive: Incluse
     invoice_tax:
         note:
@@ -2485,6 +2882,35 @@ tax:
     vat_number: 'Numéro de TVA :'
 title: messages
 type: Type
+user:
+    api_token:
+        grid:
+            created: "Créé le"
+            description: "Description"
+            last_used: "Dernière utilisation"
+            name: "Nom"
+            usage_count: "Nombre d'utilisations"
+        history:
+            grid:
+                date: "Date"
+                endpoint: "Point de terminaison"
+                ip: "Adresse IP"
+                method: "Méthode"
+                status: "Statut"
+                user_agent: "Agent utilisateur"
+    grid:
+        email: "Adresse e-mail"
+        joined: "Inscrit le"
+        last_login: "Dernière connexion"
+        mobile: "Mobile"
+        status: "Statut"
+    invitation:
+        grid:
+            email: "Adresse e-mail"
+            expires: "Expire le"
+            invited: "Invité le"
+            invited_by: "Invité par"
+            status: "Statut"
 users:
     add: 'Ajouter un utilisateur'
     create:

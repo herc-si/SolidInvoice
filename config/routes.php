@@ -49,6 +49,15 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     $routingConfigurator->import('@SolidInvoiceElectronicInvoicingBundle/Resources/config/routing.php')
         ->prefix('/electronic-invoicing');
 
+    $routingConfigurator->import('@SolidInvoiceSupplierBundle/Resources/config/routing.php')
+        ->prefix('/suppliers');
+
+    $routingConfigurator->import('@SolidInvoiceBillBundle/Resources/config/routing.php')
+        ->prefix('/bills');
+
+    $routingConfigurator->import('@SolidInvoiceCatalogBundle/Resources/config/routing.php')
+        ->prefix('/catalog');
+
     $routingConfigurator->import('@SolidInvoiceMcpBundle/Resources/config/routing.php')
         ->prefix('/');
 

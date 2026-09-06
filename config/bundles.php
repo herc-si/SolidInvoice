@@ -23,6 +23,8 @@ use Meilisearch\Bundle\MeilisearchBundle;
 use Payum\Bundle\PayumBundle\PayumBundle;
 use Sentry\SentryBundle\SentryBundle;
 use SolidInvoice\ApiBundle\SolidInvoiceApiBundle;
+use SolidInvoice\BillBundle\SolidInvoiceBillBundle;
+use SolidInvoice\CatalogBundle\SolidInvoiceCatalogBundle;
 use SolidInvoice\ClientBundle\SolidInvoiceClientBundle;
 use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
 use SolidInvoice\CronBundle\SolidInvoiceCronBundle;
@@ -39,6 +41,7 @@ use SolidInvoice\NotificationBundle\SolidInvoiceNotificationBundle;
 use SolidInvoice\PaymentBundle\SolidInvoicePaymentBundle;
 use SolidInvoice\QuoteBundle\SolidInvoiceQuoteBundle;
 use SolidInvoice\SettingsBundle\SolidInvoiceSettingsBundle;
+use SolidInvoice\SupplierBundle\SolidInvoiceSupplierBundle;
 use SolidInvoice\TaxBundle\SolidInvoiceTaxBundle;
 use SolidInvoice\UserBundle\SolidInvoiceUserBundle;
 use SolidWorx\Platform\UiBundle\SolidWorxPlatformUiBundle;
@@ -77,6 +80,8 @@ return [
     StofDoctrineExtensionsBundle::class => ['all' => true],
     ApiPlatformBundle::class => ['all' => true],
     SolidInvoiceApiBundle::class => ['all' => true],
+    SolidInvoiceBillBundle::class => ['all' => true],
+    SolidInvoiceCatalogBundle::class => ['all' => true],
     SolidInvoiceClientBundle::class => ['all' => true],
     SolidInvoiceCoreBundle::class => ['all' => true],
     SolidInvoiceCronBundle::class => ['all' => true],
@@ -93,6 +98,7 @@ return [
     SolidInvoicePaymentBundle::class => ['all' => true],
     SolidInvoiceQuoteBundle::class => ['all' => true],
     SolidInvoiceSettingsBundle::class => ['all' => true],
+    SolidInvoiceSupplierBundle::class => ['all' => true],
     SolidInvoiceTaxBundle::class => ['all' => true],
     SolidInvoiceUserBundle::class => ['all' => true],
     DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],

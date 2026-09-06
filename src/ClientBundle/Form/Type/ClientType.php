@@ -17,6 +17,7 @@ use Override;
 use RuntimeException;
 use SolidInvoice\ClientBundle\Entity\Address;
 use SolidInvoice\ClientBundle\Entity\Client;
+use SolidInvoice\ClientBundle\Entity\Contact;
 use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
 use SolidInvoice\CoreBundle\Form\Type\CustomFieldValueCollectionType;
 use SolidInvoice\MoneyBundle\Form\Type\CurrencyType;
@@ -25,6 +26,7 @@ use SolidInvoice\SettingsBundle\SystemConfig;
 use SolidInvoice\TaxBundle\Form\Type\TaxIdentifierType;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -46,7 +48,9 @@ class ClientType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('name', null, ['label' => 'client.form.name.label', 'sanitize_html' => true, 'allow_single_quotes' => true]);
+        $builder->add('name', null, ['label' => 'client.form.name.label', 'help' => 'client.form.name.help', 'required' => false, 'sanitize_html' => true, 'allow_single_quotes' => true]);
+        $builder->add('isClient', CheckboxType::class, ['label' => 'client.form.is_client.label', 'required' => false]);
+        $builder->add('isSupplier', CheckboxType::class, ['label' => 'client.form.is_supplier.label', 'required' => false]);
         $builder->add('website', UrlType::class, ['label' => 'client.form.website.label', 'required' => false, 'default_protocol' => 'http']);
 
         if ($this->featureGate->isEnabled(Feature::MultiCurrency->value)) {
@@ -132,6 +136,33 @@ class ClientType extends AbstractType
                 'manage_persistence' => false,
             ]);
         }
+
+        // Not every client is a company — an individual can be added without
+        // typing a name twice: leave "Name" empty and it's filled in from the
+        // first contact's own name instead. Whichever branch fires also sets
+        // isCompany, since that's the only signal we have for it — driving
+        // RequiredFiscalIdentifierForElectronicInvoicingValidator, which
+        // shouldn't demand a SIRET from a private individual.
+        $builder->addEventListener(FormEvents::SUBMIT, static function (FormEvent $event): void {
+            $client = $event->getData();
+
+            if (! $client instanceof Client) {
+                return;
+            }
+
+            if (trim((string) $client->getName()) !== '') {
+                $client->setIsCompany(true);
+
+                return;
+            }
+
+            $primaryContact = $client->getContacts()->first();
+
+            if ($primaryContact instanceof Contact) {
+                $client->setName(trim($primaryContact->getFirstName() . ' ' . $primaryContact->getLastName()));
+                $client->setIsCompany(false);
+            }
+        });
     }
 
     public function configureOptions(OptionsResolver $resolver): void

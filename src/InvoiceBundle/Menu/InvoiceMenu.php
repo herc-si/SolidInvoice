@@ -23,28 +23,15 @@ final class InvoiceMenu
     #[MenuBuilder(name: 'sidebar', priority: MenuPriority::PRIORITY_INVOICE->value)]
     public function sidebar(ItemInterface $menu): void
     {
-        $invoices = $menu->addChild('invoice.menu.main', [
-            'extras' => [
-                'icon' => Icon::INVOICE,
-            ],
-        ]);
-
-        $invoices->addChild(
-            'invoice.menu.list',
+        // Flat link rather than a dropdown: the list page already carries a
+        // primary "create" button, so a submenu only added a click to reach
+        // the list, which is the far more frequent destination.
+        $menu->addChild(
+            'invoice.menu.main',
             [
                 'route' => '_invoices_index',
                 'extras' => [
                     'icon' => Icon::INVOICE,
-                ],
-            ],
-        );
-
-        $invoices->addChild(
-            'client.menu.create.invoice',
-            [
-                'route' => '_invoices_create',
-                'extras' => [
-                    'icon' => Icon::INVOICE_ADD,
                 ],
             ],
         );

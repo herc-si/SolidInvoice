@@ -104,7 +104,9 @@
                                                     <div class="form-check">
                                                         {{ form_widget(choice, {attr: {class: 'form-check-input'}}) }}
                                                         <label class="form-check-label" for="{{ choice.vars.id }}">
-                                                            {{ choice.vars.label }}
+                                                            {# Enum labels may be translation keys; a plain string simply
+                                                               passes through when no matching key exists. #}
+                                                            {{ choice.vars.label|trans }}
                                                         </label>
                                                     </div>
                                                 {% endfor %}
@@ -377,8 +379,8 @@
                                                     <a
                                                         href="{{ path(action.getRoute, params) }}"
                                                         class="datagrid-action-btn action-{{ action.getLabel|lower|replace({' ': '-'}) }}"
-                                                        title="{{ action.getLabel|trans }}"
-                                                        aria-label="{{ action.getLabel|trans }}"
+                                                        title="{{ ('datagrid.action.' ~ action.getLabel|u.snake)|trans }}"
+                                                        aria-label="{{ ('datagrid.action.' ~ action.getLabel|u.snake)|trans }}"
                                                     >
                                                         {{ ux_icon('tabler:' ~ action.getIcon, {width: 18, height: 18}) }}
                                                     </a>
@@ -413,7 +415,7 @@
                                                                     {% if action.getIcon %}
                                                                         {{ ux_icon('tabler:' ~ action.getIcon, {width: 16, height: 16}) }}
                                                                     {% endif %}
-                                                                    {{ action.getLabel|trans }}
+                                                                    {{ ('datagrid.action.' ~ action.getLabel|u.snake)|trans }}
                                                                 </a>
                                                             </li>
                                                         {% endfor %}
@@ -437,7 +439,7 @@
                                                                         {% if action.getIcon %}
                                                                             {{ ux_icon('tabler:' ~ action.getIcon, {width: 16, height: 16}) }}
                                                                         {% endif %}
-                                                                        {{ action.getLabel|trans }}
+                                                                        {{ ('datagrid.batch.' ~ action.getLabel|u.snake)|trans }}
                                                                     </button>
                                                                 {% else %}
                                                                     <button
@@ -451,7 +453,7 @@
                                                                         {% if action.getIcon %}
                                                                             {{ ux_icon('tabler:' ~ action.getIcon, {width: 16, height: 16}) }}
                                                                         {% endif %}
-                                                                        {{ action.getLabel|trans }}
+                                                                        {{ ('datagrid.batch.' ~ action.getLabel|u.snake)|trans }}
                                                                     </button>
                                                                 {% endif %}
                                                             </li>
@@ -541,7 +543,7 @@
                                 {% if action.getIcon is not empty %}
                                     {{ ux_icon('tabler:' ~ action.getIcon, {width: 16, height: 16}) }}
                                 {% endif %}
-                                {{ action.getLabel|trans }}
+                                {{ ('datagrid.batch.' ~ action.getLabel|u.snake)|trans }}
                             </button>
                         {% else %}
                             <button
@@ -554,7 +556,7 @@
                                 {% if action.getIcon is not empty %}
                                     {{ ux_icon('tabler:' ~ action.getIcon, {width: 16, height: 16}) }}
                                 {% endif %}
-                                {{ action.getLabel|trans }}
+                                {{ ('datagrid.batch.' ~ action.getLabel|u.snake)|trans }}
                             </button>
                         {% endif %}
                     {% endfor %}

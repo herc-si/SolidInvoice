@@ -54,7 +54,7 @@ final class PaymentsGrid extends Grid
     {
         return [
             StringColumn::new('invoice')
-                ->label('Invoice #')
+                ->label('payment.grid.invoice_number')
                 ->searchable(false)
                 ->formatValue(static function (Invoice $invoice) {
                     try {
@@ -65,9 +65,11 @@ final class PaymentsGrid extends Grid
                 })
                 ->linkToRoute('_invoices_view', ['id' => 'invoice.id']),
             StringColumn::new('client')
+                ->label('payment.grid.client')
                 ->searchable(false)
                 ->linkToRoute('_clients_view', ['id' => 'client.id']),
             StringColumn::new('method')
+                ->label('payment.grid.method')
                 ->searchable(false)
                 ->linkToRoute('_payment_settings_index', ['method' => 'method.gatewayName'])
                 ->filter(
@@ -75,17 +77,21 @@ final class PaymentsGrid extends Grid
                         ->multiple()
                 ),
             StringColumn::new('status')
+                ->label('payment.grid.status')
                 ->twigFunction('payment_label')
                 ->filter(ChoiceFilter::new('status', array_column(array_map(static fn (PaymentStatus $s) => [$s->value, $s->getLabel()], PaymentStatus::cases()), 1, 0))->multiple()),
             DateTimeColumn::new('completed')
-                ->label('Completed Date')
+                ->label('payment.grid.completed_date')
                 ->format('d F Y')
                 ->filter(new DateRangeFilter('completed')),
-            StringColumn::new('message'),
+            StringColumn::new('message')
+                ->label('payment.grid.message'),
             MoneyColumn::new('amount')
+                ->label('payment.grid.amount')
                 ->searchable(false)
                 ->sortableField('totalAmount'),
             DateTimeColumn::new('created')
+                ->label('payment.grid.created')
                 ->format('d F Y')
                 ->filter(new DateRangeFilter('created')),
         ];

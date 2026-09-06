@@ -36,6 +36,7 @@ final class InstallNavigatorType extends AbstractType
             'previous',
             PreviousFlowType::class,
             [
+                'label' => 'form.field.previous',
                 'include_if' => fn (FormFlowCursor $cursor) => ! $cursor->isLastStep() && $cursor->canMoveBack(),
             ]
         );
@@ -43,6 +44,7 @@ final class InstallNavigatorType extends AbstractType
             'next',
             NextFlowType::class,
             [
+                'label' => 'form.field.next',
                 'include_if' => fn (FormFlowCursor $cursor): bool => $cursor->getCurrentStep() !== 'review' && $cursor->canMoveNext(),
             ]
         );

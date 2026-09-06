@@ -220,4 +220,24 @@ final class ColumnTest extends TestCase
         // The snake() function converts camelCase to snake_case first
         self::assertSame('Created At', $label->getMessage());
     }
+
+    public function testIsNotHiddenByDefault(): void
+    {
+        self::assertFalse($this->column->isHiddenByDefault());
+    }
+
+    public function testHiddenByDefaultCanBeEnabled(): void
+    {
+        $this->column->hiddenByDefault();
+
+        self::assertTrue($this->column->isHiddenByDefault());
+    }
+
+    public function testHiddenByDefaultCanBeExplicitlyDisabled(): void
+    {
+        $this->column->hiddenByDefault(true);
+        $this->column->hiddenByDefault(false);
+
+        self::assertFalse($this->column->isHiddenByDefault());
+    }
 }

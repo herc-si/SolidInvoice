@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace SolidInvoice\ClientBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Override;
 use SolidInvoice\ClientBundle\Entity\Client;
 use Symfony\Component\Form\AbstractType;
@@ -32,6 +33,10 @@ final class ClientAutocompleteType extends AbstractType
             'class' => Client::class,
             'searchable_fields' => ['name'],
             'choice_label' => 'name',
+            // A pure supplier (isClient false) is never meant to be invoiced,
+            // so it doesn't belong in the "choose a client" picker.
+            'query_builder' => static fn (EntityRepository $repository) => $repository->createQueryBuilder('c')
+                ->andWhere('c.isClient = true'),
         ]);
     }
 

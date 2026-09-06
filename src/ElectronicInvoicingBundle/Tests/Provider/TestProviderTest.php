@@ -15,6 +15,8 @@ namespace SolidInvoice\ElectronicInvoicingBundle\Tests\Provider;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use SolidInvoice\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
 use SolidInvoice\ElectronicInvoicingBundle\Form\Type\Provider\TestProviderConfigType;
 use SolidInvoice\ElectronicInvoicingBundle\Provider\TestProvider;
 use SolidInvoice\InvoiceBundle\Entity\Invoice;
@@ -64,5 +66,19 @@ final class TestProviderTest extends TestCase
         self::assertFalse($result->success);
         self::assertNull($result->externalReference);
         self::assertSame('einvoicing.provider.test.simulated_failure', $result->message);
+    }
+
+    public function testResolveProcessingStatusReturnsPendingForASuccessfulSubmission(): void
+    {
+        $submission = new ElectronicInvoiceSubmission()->setSuccess(true);
+
+        self::assertSame(ElectronicInvoiceProcessingStatus::Pending, $this->provider->resolveProcessingStatus($submission));
+    }
+
+    public function testResolveProcessingStatusReturnsRejectedForAFailedSubmission(): void
+    {
+        $submission = new ElectronicInvoiceSubmission()->setSuccess(false);
+
+        self::assertSame(ElectronicInvoiceProcessingStatus::Rejected, $this->provider->resolveProcessingStatus($submission));
     }
 }

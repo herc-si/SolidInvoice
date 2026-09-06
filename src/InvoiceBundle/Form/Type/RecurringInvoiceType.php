@@ -60,6 +60,7 @@ class RecurringInvoiceType extends AbstractType
             'client',
             null,
             [
+                'label' => 'form.field.client',
                 'attr' => [
                     'class' => 'client-select',
                 ],
@@ -100,7 +101,7 @@ class RecurringInvoiceType extends AbstractType
             ]
         );
 
-        $builder->add('terms');
+        $builder->add('terms', null, ['label' => 'form.field.terms']);
         $builder->add('notes', null, ['help' => 'billing.notes_help']);
         $builder->add('total', HiddenMoneyType::class, ['currency' => $options['currency']]);
         $builder->add('baseTotal', HiddenMoneyType::class, ['currency' => $options['currency']]);

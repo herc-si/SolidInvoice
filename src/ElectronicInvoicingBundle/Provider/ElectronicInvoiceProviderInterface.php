@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace SolidInvoice\ElectronicInvoicingBundle\Provider;
 
+use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use SolidInvoice\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
 use SolidInvoice\InvoiceBundle\Entity\Invoice;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
@@ -50,4 +52,12 @@ interface ElectronicInvoiceProviderInterface
      * @param array<string, mixed> $config
      */
     public function send(Invoice $invoice, array $config): ElectronicInvoiceSubmissionResult;
+
+    /**
+     * Classify $submission's provider-reported outcome (its `success` flag and,
+     * once polled, its raw `statusCode`) into SolidInvoice's own normalized
+     * outcome — used to display a consistent status alongside the invoice and
+     * to decide when to alert users, regardless of which provider sent it.
+     */
+    public function resolveProcessingStatus(ElectronicInvoiceSubmission $submission): ElectronicInvoiceProcessingStatus;
 }

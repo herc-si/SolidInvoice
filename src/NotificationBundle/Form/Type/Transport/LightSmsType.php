@@ -31,6 +31,7 @@ final class LightSmsType extends AbstractType
             'login',
             null,
             [
+                'label' => 'form.field.login',
                 'constraints' => new NotBlank(groups: ['lightsms']),
             ]
         );
@@ -39,6 +40,7 @@ final class LightSmsType extends AbstractType
             'token',
             null,
             [
+                'label' => 'form.field.token',
                 'constraints' => new NotBlank(groups: ['lightsms']),
             ]
         );
@@ -47,6 +49,7 @@ final class LightSmsType extends AbstractType
             'phone',
             null,
             [
+                'label' => 'form.field.phone',
                 'constraints' => new NotBlank(groups: ['lightsms']),
             ]
         );

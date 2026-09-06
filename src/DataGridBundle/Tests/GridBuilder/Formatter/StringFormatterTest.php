@@ -19,6 +19,7 @@ use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
 use SolidInvoice\DataGridBundle\GridBuilder\Formatter\StringFormatter;
 use stdClass;
 use Stringable;
+use Symfony\Component\Translation\TranslatableMessage;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 use function spl_object_hash;
@@ -65,6 +66,14 @@ final class StringFormatterTest extends TestCase
         };
 
         self::assertSame('value', $this->formatter->format($column, $object));
+    }
+
+    public function testFormatReturnsTranslatableMessageUntouched(): void
+    {
+        $column = StringColumn::new('column');
+        $message = new TranslatableMessage('client.grid.role_client');
+
+        self::assertSame($message, $this->formatter->format($column, $message));
     }
 
     public function testFormatReturnsObjectHashForObjectWithoutToString(): void

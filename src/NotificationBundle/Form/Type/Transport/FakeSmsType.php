@@ -31,6 +31,7 @@ final class FakeSmsType extends AbstractType
             'mailer_service_id',
             null,
             [
+                'label' => 'form.field.mailer_service_id',
                 'constraints' => new NotBlank(groups: ['fakesms']),
             ]
         );
@@ -39,6 +40,7 @@ final class FakeSmsType extends AbstractType
             'to',
             null,
             [
+                'label' => 'form.field.to',
                 'constraints' => new NotBlank(groups: ['fakesms']),
             ]
         );
@@ -47,6 +49,7 @@ final class FakeSmsType extends AbstractType
             'from',
             null,
             [
+                'label' => 'form.field.from',
                 'constraints' => new NotBlank(groups: ['fakesms']),
             ]
         );

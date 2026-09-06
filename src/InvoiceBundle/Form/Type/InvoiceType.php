@@ -187,9 +187,10 @@ class InvoiceType extends AbstractType
         // Generate invoice ID if not set (for new invoices)
         $data = $dto->invoiceId !== '' ? $dto->invoiceId : $this->billingIdGenerator->generate(new Invoice(), ['field' => 'invoiceId']);
 
-        $builder->add('invoiceId', null, ['data' => $data, 'empty_data' => '', 'attr' => ['maxlength' => 255]]);
+        $builder->add('invoiceId', null, [
+                'label' => 'form.field.invoice_id', 'data' => $data, 'empty_data' => '', 'attr' => ['maxlength' => 255]]);
 
-        $builder->add('terms');
+        $builder->add('terms', null, ['label' => 'form.field.terms']);
         $builder->add('notes', null, ['help' => 'billing.notes_help']);
         $builder->add('total', HiddenMoneyType::class, ['currency' => $options['currency']]);
         $builder->add('baseTotal', HiddenMoneyType::class, ['currency' => $options['currency']]);

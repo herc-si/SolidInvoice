@@ -1,0 +1,21 @@
+{#
+ # This file is part of SolidInvoice package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% set pending = this.count %}
+
+{# Rendered even at zero: this panel is the only remaining route to the received
+ # invoices list now that it has no sidebar entry of its own. #}
+<twig:Ui:Alert
+    type="{{ pending > 0 ? 'info' : 'secondary' }}"
+    icon="tabler:inbox"
+    title="{{ 'einvoicing.incoming.title'|trans }}"
+    link="{{ path('_einvoicing_incoming') }}"
+>
+    {{ 'einvoicing.incoming.pending'|trans({'%count%': pending}) }}
+</twig:Ui:Alert>

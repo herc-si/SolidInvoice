@@ -30,6 +30,7 @@ final class SesTransportConfigType extends AbstractType
             'accessKey',
             null,
             [
+                'label' => 'form.field.access_key',
                 'constraints' => new NotBlank(groups: ['amazon_ses']),
             ]
         );
@@ -38,6 +39,7 @@ final class SesTransportConfigType extends AbstractType
             'accessSecret',
             PasswordType::class,
             [
+                'label' => 'form.field.access_secret',
                 'constraints' => new NotBlank(groups: ['amazon_ses']),
             ]
         );
@@ -46,6 +48,7 @@ final class SesTransportConfigType extends AbstractType
             'region',
             null,
             [
+                'label' => 'form.field.region',
                 'attr' => [
                     'placeholder' => 'eu-west-1',
                 ],
