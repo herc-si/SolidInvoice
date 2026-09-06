@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Config;
+namespace Augias\UserBundle\Config;
 
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Entity\UserSetting;
-use SolidInvoice\UserBundle\Enum\UserSettingType;
-use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\UserSetting;
+use Augias\UserBundle\Enum\UserSettingType;
+use Augias\UserBundle\Repository\UserSettingRepositoryInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\Config\UserConfigTest
+ * @see \Augias\UserBundle\Tests\Config\UserConfigTest
  */
 readonly class UserConfig
 {

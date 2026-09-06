@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Repository;
+namespace Augias\CoreBundle\Tests\Repository;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\CoreBundle\Test\Traits\DoctrineTestTrait;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Entity\SecurityToken;
+use Augias\PaymentBundle\Test\Factory\PaymentFactory;
 use Payum\Core\Model\Identity;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\CoreBundle\Test\Traits\DoctrineTestTrait;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Entity\SecurityToken;
-use SolidInvoice\PaymentBundle\Test\Factory\PaymentFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(CompanyRepository::class)]

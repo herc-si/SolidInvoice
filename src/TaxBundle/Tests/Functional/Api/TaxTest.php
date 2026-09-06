@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Tests\Functional\Api;
+namespace Augias\TaxBundle\Tests\Functional\Api;
 
+use Augias\ApiBundle\Test\ApiTestCase;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\TaxBundle\Entity\Tax;
+use Augias\TaxBundle\Test\Factory\TaxFactory;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ApiBundle\Test\ApiTestCase;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\TaxBundle\Test\Factory\TaxFactory;
 use Symfony\Component\Uid\Ulid;
 
 #[Group('functional')]

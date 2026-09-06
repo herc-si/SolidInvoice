@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Security;
+namespace Augias\UserBundle\Security;
 
+use Augias\UserBundle\Entity\User;
 use SensitiveParameter;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\DisabledException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
@@ -27,7 +27,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * self-hosted) and every channel (web, REST API, MCP), since Symfony's default
  * user checker does not test {@see User::isEnabled()}.
  *
- * @see \SolidInvoice\UserBundle\Tests\Security\UserCheckerTest
+ * @see \Augias\UserBundle\Tests\Security\UserCheckerTest
  */
 class UserChecker implements UserCheckerInterface
 {

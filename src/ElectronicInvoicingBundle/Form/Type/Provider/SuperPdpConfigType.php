@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Form\Type\Provider;
+namespace Augias\ElectronicInvoicingBundle\Form\Type\Provider;
 
 use Override;
 use Symfony\Component\Form\AbstractType;
@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * OAuth2 client_credentials for the SUPER PDP API (https://www.superpdp.tech)
- * — the company itself is enrolled on the platform outside SolidInvoice.
+ * — the company itself is enrolled on the platform outside Augias.
  *
  * @extends AbstractType<array{client_id: string, client_secret: string}>
  */

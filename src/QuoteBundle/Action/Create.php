@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Action;
+namespace Augias\QuoteBundle\Action;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\QuoteBundle\DTO\QuoteFormDTO;
+use Augias\QuoteBundle\Entity\Line;
+use Augias\QuoteBundle\Enum\QuoteClientMode;
+use Augias\QuoteBundle\Form\Type\QuoteType;
+use Augias\QuoteBundle\Manager\QuoteFormManager;
+use Augias\QuoteBundle\Model\Graph;
+use Augias\SaasBundle\Feature\Feature;
 use Brick\Math\Exception\MathException;
 use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\QuoteBundle\DTO\QuoteFormDTO;
-use SolidInvoice\QuoteBundle\Entity\Line;
-use SolidInvoice\QuoteBundle\Enum\QuoteClientMode;
-use SolidInvoice\QuoteBundle\Form\Type\QuoteType;
-use SolidInvoice\QuoteBundle\Manager\QuoteFormManager;
-use SolidInvoice\QuoteBundle\Model\Graph;
-use SolidInvoice\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -56,7 +56,7 @@ final class Create extends AbstractController
     public function __invoke(Request $request, ?Client $client = null): Response
     {
         if (! $this->featureGate->isEnabled(Feature::Quotes->value)) {
-            return $this->render('@SolidInvoiceQuote/Default/gated.html.twig');
+            return $this->render('@AugiasQuote/Default/gated.html.twig');
         }
 
         $totalClientsCount = $this->repository->getTotalClients();
@@ -128,7 +128,7 @@ final class Create extends AbstractController
             }
         }
 
-        return $this->render('@SolidInvoiceQuote/Default/create.html.twig', [
+        return $this->render('@AugiasQuote/Default/create.html.twig', [
             'dto' => $dto,
             'form' => $form,
         ]);

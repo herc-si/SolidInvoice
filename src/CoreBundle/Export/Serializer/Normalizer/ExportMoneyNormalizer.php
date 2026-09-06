@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Export\Serializer\Normalizer;
+namespace Augias\CoreBundle\Export\Serializer\Normalizer;
 
 use Brick\Math\BigNumber;
 use Brick\Math\RoundingMode;
@@ -27,7 +27,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  * USD, /1 for JPY, /1000 for KWD). BigNumber values lack currency context and assume
  * the project's default 2-decimal subunit — this matches how the rest of the app
  * stores amounts as integer cents.
- * @see \SolidInvoice\CoreBundle\Tests\Export\Serializer\Normalizer\ExportMoneyNormalizerTest
+ * @see \Augias\CoreBundle\Tests\Export\Serializer\Normalizer\ExportMoneyNormalizerTest
  */
 final readonly class ExportMoneyNormalizer implements NormalizerInterface
 {

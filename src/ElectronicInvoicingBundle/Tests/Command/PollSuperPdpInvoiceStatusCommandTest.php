@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,26 +11,26 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Tests\Command;
+namespace Augias\ElectronicInvoicingBundle\Tests\Command;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Test\Traits\ConsoleTesterTrait;
+use Augias\ElectronicInvoicingBundle\Command\PollSuperPdpInvoiceStatusCommand;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use Augias\ElectronicInvoicingBundle\Notification\ElectronicInvoiceRejectedNotification;
+use Augias\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpClient;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceSubmissionRepository;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\NotificationBundle\Notification\NotificationManager;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\NullLogger;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Test\Traits\ConsoleTesterTrait;
-use SolidInvoice\ElectronicInvoicingBundle\Command\PollSuperPdpInvoiceStatusCommand;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
-use SolidInvoice\ElectronicInvoicingBundle\Notification\ElectronicInvoiceRejectedNotification;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpClient;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceSubmissionRepository;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
 use SolidWorx\Platform\PlatformBundle\Console\IO;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

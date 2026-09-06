@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Entity;
+namespace Augias\McpBundle\Entity;
 
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\McpBundle\Repository\ConsentGrantRepository;
+use Augias\UserBundle\Entity\User;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\McpBundle\Repository\ConsentGrantRepository;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid\Ulid;

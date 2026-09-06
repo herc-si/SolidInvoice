@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Entity;
+namespace Augias\ElectronicInvoicingBundle\Entity;
 
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceSubmissionRepository;
+use Augias\InvoiceBundle\Entity\Invoice;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceSubmissionRepository;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid\Ulid;
@@ -28,7 +28,7 @@ use Symfony\Component\Uid\Ulid;
  * provider (success or failure) — the equivalent of a Payment attempt, but
  * for e-invoice transmission rather than money capture.
  *
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Entity\ElectronicInvoiceSubmissionTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Entity\ElectronicInvoiceSubmissionTest
  */
 #[ORM\Entity(repositoryClass: ElectronicInvoiceSubmissionRepository::class)]
 #[ORM\Table(name: ElectronicInvoiceSubmission::TABLE_NAME)]

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Action;
+namespace Augias\DashboardBundle\Action;
 
-use SolidInvoice\DashboardBundle\Checklist\ChecklistManager;
-use SolidInvoice\UserBundle\Entity\User;
+use Augias\DashboardBundle\Checklist\ChecklistManager;
+use Augias\UserBundle\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /**
- * @see \SolidInvoice\DashboardBundle\Tests\Action\DismissOnboardingChecklistTest
+ * @see \Augias\DashboardBundle\Tests\Action\DismissOnboardingChecklistTest
  */
 #[IsGranted('IS_AUTHENTICATED_FULLY')]
 final readonly class DismissOnboardingChecklist

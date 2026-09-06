@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Listener;
+namespace Augias\CoreBundle\Listener;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Repository\CustomFieldValueRepository;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\QuoteBundle\Entity\Quote;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\PreRemoveEventArgs;
 use Doctrine\ORM\Events;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Repository\CustomFieldValueRepository;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\QuoteBundle\Entity\Quote;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Listener\CustomFieldValueCleanupListenerTest
+ * @see \Augias\CoreBundle\Tests\Listener\CustomFieldValueCleanupListenerTest
  */
 #[AsDoctrineListener(event: Events::preRemove)]
 final readonly class CustomFieldValueCleanupListener

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Export;
+namespace Augias\CoreBundle\Export;
 
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\CoreBundle\Entity\ExportJob;
 use DateTimeInterface;
-use SolidInvoice\CoreBundle\Entity\ExportJob;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
 
 final class ManifestGenerator
 {
@@ -26,7 +26,7 @@ final class ManifestGenerator
     public function generate(ExportJob $job, array $entityCounts): array
     {
         return [
-            'solidinvoice_version' => SolidInvoiceCoreBundle::VERSION,
+            'solidinvoice_version' => AugiasCoreBundle::VERSION,
             'export_id' => $job->getId()->toBase58(),
             'company_id' => $job->getCompany()->getId()->toBase58(),
             'requested_by' => $job->getRequestedBy()->toBase58(),

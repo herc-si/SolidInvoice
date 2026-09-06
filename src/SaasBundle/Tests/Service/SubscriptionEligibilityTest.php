@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Service;
+namespace Augias\SaasBundle\Tests\Service;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\SaasBundle\Service\EligibilityResult;
+use Augias\SaasBundle\Service\SubscriptionEligibility;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -21,9 +24,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\SaasBundle\Service\EligibilityResult;
-use SolidInvoice\SaasBundle\Service\SubscriptionEligibility;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use SolidWorx\Platform\SaasBundle\Enum\SubscriptionStatus;
 use SolidWorx\Platform\SaasBundle\Subscription\SubscriptionProviderInterface;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Twig\Extension;
+namespace Augias\TaxBundle\Twig\Extension;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\Company;
+use Augias\InvoiceBundle\Entity\BaseInvoice;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\TaxBundle\Calculator\Result\CalculationResult;
+use Augias\TaxBundle\Calculator\Result\TaxSummaryRow;
+use Augias\TaxBundle\Calculator\TaxCalculatorInterface;
+use Augias\TaxBundle\Entity\TaxIdentifier;
+use Augias\TaxBundle\Enum\TaxDirection;
+use Augias\TaxBundle\Repository\TaxIdentifierRepository;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\InvoiceBundle\Entity\BaseInvoice;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\TaxBundle\Calculator\Result\CalculationResult;
-use SolidInvoice\TaxBundle\Calculator\Result\TaxSummaryRow;
-use SolidInvoice\TaxBundle\Calculator\TaxCalculatorInterface;
-use SolidInvoice\TaxBundle\Entity\TaxIdentifier;
-use SolidInvoice\TaxBundle\Enum\TaxDirection;
-use SolidInvoice\TaxBundle\Repository\TaxIdentifierRepository;
 use Symfony\Component\Uid\Ulid;
 use Twig\Attribute\AsTwigFunction;
 use WeakMap;

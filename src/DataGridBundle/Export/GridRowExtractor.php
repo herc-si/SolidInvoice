@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Export;
+namespace Augias\DataGridBundle\Export;
 
+use Augias\CoreBundle\Export\Serializer\Normalizer\ExportMoneyNormalizer;
+use Augias\CoreBundle\Export\ValueFormatter;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Column\MoneyColumn;
 use Brick\Math\BigNumber;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Money\Currencies\ISOCurrencies;
 use Money\Money;
-use SolidInvoice\CoreBundle\Export\Serializer\Normalizer\ExportMoneyNormalizer;
-use SolidInvoice\CoreBundle\Export\ValueFormatter;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\MoneyColumn;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Uid\Ulid;
@@ -46,7 +46,7 @@ use function strstr;
  *   - `{field}_currency`  the ISO currency code
  *
  * All formats (CSV / JSON / XML) receive the same flat key shape for consistency.
- * @see \SolidInvoice\DataGridBundle\Tests\Export\GridRowExtractorTest
+ * @see \Augias\DataGridBundle\Tests\Export\GridRowExtractorTest
  */
 final readonly class GridRowExtractor
 {

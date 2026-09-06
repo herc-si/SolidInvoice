@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Menu;
+namespace Augias\BillBundle\Menu;
 
+use Augias\CoreBundle\Enum\Menu\MenuPriority;
+use Augias\CoreBundle\Icon;
 use Knp\Menu\ItemInterface;
-use SolidInvoice\CoreBundle\Enum\Menu\MenuPriority;
-use SolidInvoice\CoreBundle\Icon;
 use SolidWorx\Platform\PlatformBundle\Attributes\Menu\MenuBuilder;
 
 final class BillMenu

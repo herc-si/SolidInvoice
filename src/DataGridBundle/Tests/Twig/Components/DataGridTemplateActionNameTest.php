@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Tests\Twig\Components;
+namespace Augias\DataGridBundle\Tests\Twig\Components;
 
+use Augias\DataGridBundle\Twig\Components\DataGrid;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use SolidInvoice\DataGridBundle\Twig\Components\DataGrid;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 
 /**
- * Regression test for https://github.com/SolidInvoice/SolidInvoice/issues/2428:
+ * Regression test for https://github.com/Augias/Augias/issues/2428:
  * The DataGrid template was referencing "executeSingleAction" which does not exist —
  * the correct LiveAction method name is "executeSingle".
  */
@@ -78,7 +78,7 @@ final class DataGridTemplateActionNameTest extends TestCase
     }
 
     /**
-     * Regression tests for https://github.com/SolidInvoice/SolidInvoice/issues/2430:
+     * Regression tests for https://github.com/Augias/Augias/issues/2430:
      * The DataGrid template was referencing "executeBatchAction" which does not exist —
      * the correct LiveAction method name is "executeBatch".
      */

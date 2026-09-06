@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,23 +11,23 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Onboarding;
+namespace Augias\SaasBundle\Tests\Onboarding;
 
+use Augias\SaasBundle\Message\SendOnboardingEmailMessage;
+use Augias\SaasBundle\Onboarding\OnboardingDispatcher;
+use Augias\SaasBundle\Onboarding\OnboardingScheduleCalculator;
+use Augias\SaasBundle\Onboarding\OnboardingStepRegistry;
+use Augias\SaasBundle\Tests\Onboarding\Fixtures\StepFirst;
+use Augias\SaasBundle\Tests\Onboarding\Fixtures\StepSecond;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\UserSetting;
+use Augias\UserBundle\Enum\UserSettingType;
+use Augias\UserBundle\Repository\UserSettingRepositoryInterface;
 use Carbon\CarbonImmutable;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use ReflectionProperty;
-use SolidInvoice\SaasBundle\Message\SendOnboardingEmailMessage;
-use SolidInvoice\SaasBundle\Onboarding\OnboardingDispatcher;
-use SolidInvoice\SaasBundle\Onboarding\OnboardingScheduleCalculator;
-use SolidInvoice\SaasBundle\Onboarding\OnboardingStepRegistry;
-use SolidInvoice\SaasBundle\Tests\Onboarding\Fixtures\StepFirst;
-use SolidInvoice\SaasBundle\Tests\Onboarding\Fixtures\StepSecond;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Entity\UserSetting;
-use SolidInvoice\UserBundle\Enum\UserSettingType;
-use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use Symfony\Component\Clock\MockClock;
 use Symfony\Component\Messenger\Envelope;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Command;
+namespace Augias\UserBundle\Command;
 
+use Augias\UserBundle\Entity\UserInvitation;
+use Augias\UserBundle\Repository\UserInvitationRepository;
 use Carbon\CarbonImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\UserBundle\Entity\UserInvitation;
-use SolidInvoice\UserBundle\Repository\UserInvitationRepository;
 use SolidWorx\Platform\PlatformBundle\Console\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Scheduler\Attribute\AsCronTask;
@@ -25,7 +25,7 @@ use function assert;
 use function sprintf;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\Command\MarkExpiredInvitationsCommandTest
+ * @see \Augias\UserBundle\Tests\Command\MarkExpiredInvitationsCommandTest
  */
 #[AsCommand(
     name: 'solidinvoice:invitations:mark-expired',

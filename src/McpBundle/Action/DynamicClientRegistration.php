@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Action;
+namespace Augias\McpBundle\Action;
 
+use Augias\McpBundle\Entity\OAuthClient;
+use Augias\McpBundle\Repository\OAuthClientRepository;
+use Augias\McpBundle\Security\McpScope;
 use Carbon\Carbon;
 use JsonException;
 use League\Uri\Exceptions\SyntaxError;
 use League\Uri\Uri;
-use SolidInvoice\McpBundle\Entity\OAuthClient;
-use SolidInvoice\McpBundle\Repository\OAuthClientRepository;
-use SolidInvoice\McpBundle\Security\McpScope;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

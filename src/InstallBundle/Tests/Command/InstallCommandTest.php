@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Tests\Command;
+namespace Augias\InstallBundle\Tests\Command;
 
+use Augias\CoreBundle\ConfigWriter;
+use Augias\CoreBundle\Entity\Version;
+use Augias\CoreBundle\Repository\VersionRepository;
+use Augias\CoreBundle\Telemetry\Telemetry;
+use Augias\InstallBundle\Command\InstallCommand;
+use Augias\InstallBundle\DTO\Installation;
+use Augias\InstallBundle\Step\InstallationStepInterface;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Repository\UserRepository;
+use Augias\UserBundle\Repository\UserSettingRepositoryInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
@@ -21,16 +31,6 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
-use SolidInvoice\CoreBundle\ConfigWriter;
-use SolidInvoice\CoreBundle\Entity\Version;
-use SolidInvoice\CoreBundle\Repository\VersionRepository;
-use SolidInvoice\CoreBundle\Telemetry\Telemetry;
-use SolidInvoice\InstallBundle\Command\InstallCommand;
-use SolidInvoice\InstallBundle\DTO\Installation;
-use SolidInvoice\InstallBundle\Step\InstallationStepInterface;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Repository\UserRepository;
-use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Secrets\AbstractVault;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

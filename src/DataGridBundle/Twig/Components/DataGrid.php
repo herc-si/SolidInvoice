@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Twig\Components;
+namespace Augias\DataGridBundle\Twig\Components;
 
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\Exception\InvalidGridException;
+use Augias\DataGridBundle\Export\GridQueryService;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Query;
+use Augias\DataGridBundle\GridInterface;
+use Augias\DataGridBundle\Paginator\Adapter\QueryAdapter;
+use Augias\DataGridBundle\Render\GridFieldRenderer;
+use Augias\DataGridBundle\Source\SourceInterface;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
@@ -23,15 +32,6 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use ReflectionObject;
 use RuntimeException;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\Exception\InvalidGridException;
-use SolidInvoice\DataGridBundle\Export\GridQueryService;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
-use SolidInvoice\DataGridBundle\GridInterface;
-use SolidInvoice\DataGridBundle\Paginator\Adapter\QueryAdapter;
-use SolidInvoice\DataGridBundle\Render\GridFieldRenderer;
-use SolidInvoice\DataGridBundle\Source\SourceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
@@ -52,7 +52,7 @@ use function explode;
 
 /**
  * @template T of object
- * @see \SolidInvoice\DataGridBundle\Tests\Twig\Components\DataGridTest
+ * @see \Augias\DataGridBundle\Tests\Twig\Components\DataGridTest
  */
 #[AsLiveComponent]
 class DataGrid extends AbstractController

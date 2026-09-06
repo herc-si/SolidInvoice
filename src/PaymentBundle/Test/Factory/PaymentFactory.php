@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Test\Factory;
+namespace Augias\PaymentBundle\Test\Factory;
 
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
-use SolidInvoice\PaymentBundle\Repository\PaymentRepository;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Enum\PaymentStatus;
+use Augias\PaymentBundle\Repository\PaymentRepository;
 use Zenstruck\Foundry\FactoryCollection;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 use Zenstruck\Foundry\Persistence\RepositoryDecorator;

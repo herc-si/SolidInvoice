@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\SaasBundle\Action\CancelDowngradeAction;
-use SolidInvoice\SaasBundle\Action\ChangePlanAction;
-use SolidInvoice\SaasBundle\Action\ChoosePlanAction;
-use SolidInvoice\SaasBundle\Action\ConfirmPlanChangeAction;
-use SolidInvoice\SaasBundle\Action\SelectPlanAction;
-use SolidInvoice\SaasBundle\Action\SubscriptionOverviewAction;
-use SolidInvoice\SaasBundle\Action\TemplatePreviewAction;
-use SolidInvoice\SaasBundle\Controller\PaymentSuccess;
-use SolidInvoice\SaasBundle\Controller\SubscribeController;
+use Augias\SaasBundle\Action\CancelDowngradeAction;
+use Augias\SaasBundle\Action\ChangePlanAction;
+use Augias\SaasBundle\Action\ChoosePlanAction;
+use Augias\SaasBundle\Action\ConfirmPlanChangeAction;
+use Augias\SaasBundle\Action\SelectPlanAction;
+use Augias\SaasBundle\Action\SubscriptionOverviewAction;
+use Augias\SaasBundle\Action\TemplatePreviewAction;
+use Augias\SaasBundle\Controller\PaymentSuccess;
+use Augias\SaasBundle\Controller\SubscribeController;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {

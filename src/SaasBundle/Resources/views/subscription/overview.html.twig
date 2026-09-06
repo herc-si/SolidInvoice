@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -13,7 +13,7 @@
  #   - trialDaysRemaining: int|null
  #}
 
-{% extends '@SolidInvoiceCore/Layout/default.html.twig' %}
+{% extends '@AugiasCore/Layout/default.html.twig' %}
 
 {% set status = subscription.status.value %}
 {% set statusBadge = {
@@ -146,7 +146,7 @@
                     <h3 class="card-title mb-0">{{ 'saas.overview.plan_features'|trans }}</h3>
                 </div>
                 <div class="card-body">
-                    {% from '@SolidInvoiceSaas/subscription/_plans_grid.html.twig' import feature_list %}
+                    {% from '@AugiasSaas/subscription/_plans_grid.html.twig' import feature_list %}
                     {{ feature_list(plan.features) }}
                 </div>
             </div>

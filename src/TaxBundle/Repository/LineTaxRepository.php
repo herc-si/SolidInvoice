@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Repository;
+namespace Augias\TaxBundle\Repository;
 
+use Augias\TaxBundle\Entity\LineTax;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\TaxBundle\Entity\LineTax;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 
 /**
  * @extends EntityRepository<LineTax>
- * @see \SolidInvoice\TaxBundle\Tests\Repository\LineTaxRepositoryTest
+ * @see \Augias\TaxBundle\Tests\Repository\LineTaxRepositoryTest
  */
 final class LineTaxRepository extends EntityRepository
 {

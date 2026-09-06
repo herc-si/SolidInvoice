@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Listener\Mailer;
+namespace Augias\InvoiceBundle\Listener\Mailer;
 
-use SolidInvoice\CoreBundle\Templates\BillingTemplateChannel;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
-use SolidInvoice\InvoiceBundle\Email\InvoiceEmail;
+use Augias\CoreBundle\Templates\BillingTemplateChannel;
+use Augias\CoreBundle\Templates\BillingTemplateResolver;
+use Augias\InvoiceBundle\Email\InvoiceEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mailer\Event\MessageEvent;
 
@@ -24,7 +24,7 @@ use Symfony\Component\Mailer\Event\MessageEvent;
  * Runs at a positive priority so the template is set before the mailer's
  * body renderer (priority 0) turns it into HTML.
  *
- * @see \SolidInvoice\InvoiceBundle\Tests\Listener\Mailer\InvoiceEmailTemplateListenerTest
+ * @see \Augias\InvoiceBundle\Tests\Listener\Mailer\InvoiceEmailTemplateListenerTest
  */
 readonly class InvoiceEmailTemplateListener implements EventSubscriberInterface
 {

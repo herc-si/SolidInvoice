@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Notification;
+namespace Augias\InvoiceBundle\Notification;
 
+use Augias\NotificationBundle\Attribute\AsNotification;
+use Augias\NotificationBundle\Enum\NotificationCategory;
+use Augias\NotificationBundle\Notification\NotificationMessage;
 use BackedEnum;
 use Override;
-use SolidInvoice\NotificationBundle\Attribute\AsNotification;
-use SolidInvoice\NotificationBundle\Enum\NotificationCategory;
-use SolidInvoice\NotificationBundle\Notification\NotificationMessage;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\Notifier\Message\EmailMessage;
 use Symfony\Component\Notifier\Recipient\EmailRecipientInterface;
 use Twig\Environment;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Notification\InvoiceReminderNotificationTest
+ * @see \Augias\InvoiceBundle\Tests\Notification\InvoiceReminderNotificationTest
  */
 #[AsNotification(
     name: self::EVENT,
@@ -37,9 +37,9 @@ class InvoiceReminderNotification extends NotificationMessage
 {
     public const EVENT = 'invoice_reminder';
 
-    final public const string HTML_TEMPLATE = '@SolidInvoiceInvoice/Email/reminder.html.twig';
+    final public const string HTML_TEMPLATE = '@AugiasInvoice/Email/reminder.html.twig';
 
-    final public const string TEXT_TEMPLATE = '@SolidInvoiceInvoice/Email/reminder.text.twig';
+    final public const string TEXT_TEMPLATE = '@AugiasInvoice/Email/reminder.text.twig';
 
     /**
      * Returns parameters with 'reminder_type' normalized to string value.

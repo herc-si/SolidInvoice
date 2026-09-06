@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -16,6 +16,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 return App::config([
     'babdev_pagerfanta' => [
         'default_view' => 'twig',
-        'default_twig_template' => '@SolidInvoiceDataGrid/pagination.html.twig',
+        'default_twig_template' => '@AugiasDataGrid/pagination.html.twig',
     ],
 ]);

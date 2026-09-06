@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Tests\Notification;
+namespace Augias\NotificationBundle\Tests\Notification;
 
+use Augias\ClientBundle\Notification\ClientCreateNotification;
+use Augias\InvoiceBundle\Notification\InvoiceStatusNotification;
+use Augias\NotificationBundle\Attribute\AsNotification;
+use Augias\NotificationBundle\Enum\NotificationCategory;
+use Augias\PaymentBundle\Notification\PaymentReceivedNotification;
+use Augias\QuoteBundle\Notification\QuoteStatusNotification;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use SolidInvoice\ClientBundle\Notification\ClientCreateNotification;
-use SolidInvoice\InvoiceBundle\Notification\InvoiceStatusNotification;
-use SolidInvoice\NotificationBundle\Attribute\AsNotification;
-use SolidInvoice\NotificationBundle\Enum\NotificationCategory;
-use SolidInvoice\PaymentBundle\Notification\PaymentReceivedNotification;
-use SolidInvoice\QuoteBundle\Notification\QuoteStatusNotification;
 
 #[CoversClass(ClientCreateNotification::class)]
 #[CoversClass(InvoiceStatusNotification::class)]

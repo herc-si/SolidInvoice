@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Config\Loader;
+namespace Augias\CoreBundle\Tests\Config\Loader;
 
+use Augias\CoreBundle\Config\Loader\BuildIdLoader;
+use Augias\CoreBundle\ConfigWriter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Config\Loader\BuildIdLoader;
-use SolidInvoice\CoreBundle\ConfigWriter;
 use Symfony\Bundle\FrameworkBundle\Secrets\DotenvVault;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Uid\Uuid;
@@ -30,7 +30,7 @@ final class BuildIdLoaderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->tempDir = sys_get_temp_dir() . '/solid_invoice_build_id_test_' . uniqid(more_entropy: true);
+        $this->tempDir = sys_get_temp_dir() . '/augias_build_id_test_' . uniqid(more_entropy: true);
         mkdir($this->tempDir, 0777, true);
     }
 

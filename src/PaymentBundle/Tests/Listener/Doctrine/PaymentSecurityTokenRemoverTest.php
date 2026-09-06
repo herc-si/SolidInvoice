@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Tests\Listener\Doctrine;
+namespace Augias\PaymentBundle\Tests\Listener\Doctrine;
 
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Entity\SecurityToken;
+use Augias\PaymentBundle\Listener\Doctrine\PaymentSecurityTokenRemover;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Event\PreRemoveEventArgs;
@@ -20,9 +23,6 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Entity\SecurityToken;
-use SolidInvoice\PaymentBundle\Listener\Doctrine\PaymentSecurityTokenRemover;
 
 #[CoversClass(PaymentSecurityTokenRemover::class)]
 final class PaymentSecurityTokenRemoverTest extends TestCase

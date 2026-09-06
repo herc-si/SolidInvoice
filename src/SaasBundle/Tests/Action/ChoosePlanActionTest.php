@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Action;
+namespace Augias\SaasBundle\Tests\Action;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\ConfigWriter;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\CoreBundle\Telemetry\Telemetry;
+use Augias\CoreBundle\Tests\Telemetry\CollectingMessageBus;
+use Augias\SaasBundle\Action\ChoosePlanAction;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\ConfigWriter;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\CoreBundle\Telemetry\Telemetry;
-use SolidInvoice\CoreBundle\Tests\Telemetry\CollectingMessageBus;
-use SolidInvoice\SaasBundle\Action\ChoosePlanAction;
 use SolidWorx\Platform\SaasBundle\Entity\Plan;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use SolidWorx\Platform\SaasBundle\Integration\PaymentIntegrationInterface;

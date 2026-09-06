@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Action\CustomField;
+namespace Augias\SettingsBundle\Action\CustomField;
 
 use const JSON_THROW_ON_ERROR;
+use Augias\CoreBundle\Entity\CustomField\CustomField;
+use Augias\SaasBundle\Feature\Feature;
 use Doctrine\ORM\EntityManagerInterface;
 use JsonException;
-use SolidInvoice\CoreBundle\Entity\CustomField\CustomField;
-use SolidInvoice\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

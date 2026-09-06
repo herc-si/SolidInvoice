@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Listener;
+namespace Augias\CoreBundle\Tests\Listener;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Company\HostType;
+use Augias\CoreBundle\Company\ResolvedHost;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Listener\CompanyEventSubscriber;
+use Augias\CoreBundle\Listener\HostRoutingListener;
+use Augias\UserBundle\Entity\User;
 use Carbon\Carbon;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\SQLitePlatform;
@@ -26,13 +33,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Company\HostType;
-use SolidInvoice\CoreBundle\Company\ResolvedHost;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Listener\CompanyEventSubscriber;
-use SolidInvoice\CoreBundle\Listener\HostRoutingListener;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

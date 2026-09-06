@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Command;
+namespace Augias\UserBundle\Tests\Command;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Test\Traits\ConsoleTesterTrait;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\UserBundle\Command\SendInvitationExpiryRemindersCommand;
+use Augias\UserBundle\DataFixtures\ORM\LoadData;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\UserInvitation;
+use Augias\UserBundle\Enum\InvitationStatus;
+use Augias\UserBundle\Repository\UserInvitationRepository;
 use Carbon\CarbonImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
@@ -20,15 +29,6 @@ use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Test\Traits\ConsoleTesterTrait;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\UserBundle\Command\SendInvitationExpiryRemindersCommand;
-use SolidInvoice\UserBundle\DataFixtures\ORM\LoadData;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Entity\UserInvitation;
-use SolidInvoice\UserBundle\Enum\InvitationStatus;
-use SolidInvoice\UserBundle\Repository\UserInvitationRepository;
 use SolidWorx\Platform\PlatformBundle\Console\IO;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

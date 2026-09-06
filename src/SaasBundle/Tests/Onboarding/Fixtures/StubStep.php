@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Onboarding\Fixtures;
+namespace Augias\SaasBundle\Tests\Onboarding\Fixtures;
 
-use SolidInvoice\SaasBundle\Onboarding\OnboardingContext;
-use SolidInvoice\SaasBundle\Onboarding\OnboardingEmailStepInterface;
+use Augias\SaasBundle\Onboarding\OnboardingContext;
+use Augias\SaasBundle\Onboarding\OnboardingEmailStepInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 /**

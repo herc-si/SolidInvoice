@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Action;
+namespace Augias\InvoiceBundle\Action;
 
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\CoreBundle\Traits\SaveableTrait;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Exception\InvalidTransitionException;
 use Generator;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\CoreBundle\Traits\SaveableTrait;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Exception\InvalidTransitionException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;

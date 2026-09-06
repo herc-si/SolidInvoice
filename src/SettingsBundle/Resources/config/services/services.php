@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\SettingsBundle\Form\Type\MailTransportType;
-use SolidInvoice\SettingsBundle\SolidInvoiceSettingsBundle;
-use SolidInvoice\SettingsBundle\SystemConfig;
+use Augias\SettingsBundle\AugiasSettingsBundle;
+use Augias\SettingsBundle\Form\Type\MailTransportType;
+use Augias\SettingsBundle\SystemConfig;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
@@ -32,11 +32,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ;
 
     $services
-        ->load(SolidInvoiceSettingsBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
+        ->load(AugiasSettingsBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
         ->exclude(dirname(__DIR__, 3) . '/{DependencyInjection,Entity,Resources,Tests}');
 
     $services
-        ->load(SolidInvoiceSettingsBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
+        ->load(AugiasSettingsBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
         ->tag('controller.service_arguments');
 
     $services

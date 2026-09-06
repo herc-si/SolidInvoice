@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Email;
+namespace Augias\InvoiceBundle\Email;
 
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Invoice;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 final class InvoiceEmail extends TemplatedEmail
@@ -23,7 +23,7 @@ final class InvoiceEmail extends TemplatedEmail
     ) {
         parent::__construct();
 
-        $this->htmlTemplate('@SolidInvoiceInvoice/Email/invoice.html.twig');
+        $this->htmlTemplate('@AugiasInvoice/Email/invoice.html.twig');
         $this->context(['invoice' => $this->invoice]);
     }
 

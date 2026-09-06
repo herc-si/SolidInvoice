@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Api;
+namespace Augias\InvoiceBundle\Tests\Api;
 
 use ApiPlatform\Metadata\IriConverterInterface;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\InvoiceBundle\Api\BillingUserNormalizer;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\QuoteBundle\Entity\Quote;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\InvoiceBundle\Api\BillingUserNormalizer;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\QuoteBundle\Entity\Quote;
 use stdClass;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Telemetry\Message\Handler;
+namespace Augias\CoreBundle\Tests\Telemetry\Message\Handler;
 
 use const JSON_THROW_ON_ERROR;
+use Augias\CoreBundle\Telemetry\Message\Handler\SendTelemetryHandler;
+use Augias\CoreBundle\Telemetry\Message\SendTelemetryMessage;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
-use SolidInvoice\CoreBundle\Telemetry\Message\Handler\SendTelemetryHandler;
-use SolidInvoice\CoreBundle\Telemetry\Message\SendTelemetryMessage;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use function json_decode;

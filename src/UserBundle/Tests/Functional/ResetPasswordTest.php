@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Functional;
+namespace Augias\UserBundle\Tests\Functional;
 
+use Augias\CoreBundle\Test\Traits\DoctrineTestTrait;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Repository\UserRepository;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\CoreBundle\Test\Traits\DoctrineTestTrait;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Browser\Test\HasBrowser;

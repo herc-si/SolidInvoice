@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Repository;
+namespace Augias\ElectronicInvoicingBundle\Repository;
 
+use Augias\BillBundle\Entity\Bill;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid\Ulid;
@@ -55,7 +55,7 @@ final class ElectronicInvoiceReceiptRepository extends EntityRepository
 
     /**
      * The most recent external_reference already imported for $provider/$companyId,
-     * used as the cursor for {@see \SolidInvoice\ElectronicInvoicingBundle\Provider\ElectronicInvoiceReceiverInterface::fetchIncoming()}
+     * used as the cursor for {@see \Augias\ElectronicInvoicingBundle\Provider\ElectronicInvoiceReceiverInterface::fetchIncoming()}
      * so each poll only asks the provider for invoices newer than what's already
      * been imported. Meant to be called with the company filter disabled, the
      * same way {@see ElectronicInvoiceSubmissionRepository::findPendingByProvider()} is.

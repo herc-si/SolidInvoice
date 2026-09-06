@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Functional;
+namespace Augias\SaasBundle\Tests\Functional;
 
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\SettingsBundle\Entity\Setting;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\Test\SaasKernel;
 use Doctrine\DBAL\Connection;
 use Override;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\SettingsBundle\Entity\Setting;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\Test\SaasKernel;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 

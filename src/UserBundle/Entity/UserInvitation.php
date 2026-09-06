@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Entity;
+namespace Augias\UserBundle\Entity;
 
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\UserBundle\Enum\InvitationStatus;
+use Augias\UserBundle\Repository\UserInvitationRepository;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\UserBundle\Enum\InvitationStatus;
-use SolidInvoice\UserBundle\Repository\UserInvitationRepository;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;

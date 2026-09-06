@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\CatalogBundle\Action\Add;
-use SolidInvoice\CatalogBundle\Action\Category\Add as CategoryAdd;
-use SolidInvoice\CatalogBundle\Action\Category\Edit as CategoryEdit;
-use SolidInvoice\CatalogBundle\Action\Category\Index as CategoryIndex;
-use SolidInvoice\CatalogBundle\Action\Edit;
-use SolidInvoice\CatalogBundle\Action\Index;
+use Augias\CatalogBundle\Action\Add;
+use Augias\CatalogBundle\Action\Category\Add as CategoryAdd;
+use Augias\CatalogBundle\Action\Category\Edit as CategoryEdit;
+use Augias\CatalogBundle\Action\Category\Index as CategoryIndex;
+use Augias\CatalogBundle\Action\Edit;
+use Augias\CatalogBundle\Action\Index;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {

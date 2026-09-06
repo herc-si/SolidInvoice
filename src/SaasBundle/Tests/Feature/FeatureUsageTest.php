@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Feature;
+namespace Augias\SaasBundle\Tests\Feature;
 
+use Augias\SaasBundle\Feature\FeatureUsage;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\SaasBundle\Feature\FeatureUsage;
 
 /**
  * Edge cases pinned by US-002 acceptance criteria:

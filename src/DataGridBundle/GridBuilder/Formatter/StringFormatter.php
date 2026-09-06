@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\GridBuilder\Formatter;
+namespace Augias\DataGridBundle\GridBuilder\Formatter;
 
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
 use Stringable;
 use Symfony\Component\Translation\TranslatableMessage;
 use Twig\Environment;
@@ -29,7 +29,7 @@ use function spl_object_hash;
 use function sprintf;
 
 /**
- * @see \SolidInvoice\DataGridBundle\Tests\GridBuilder\Formatter\StringFormatterTest
+ * @see \Augias\DataGridBundle\Tests\GridBuilder\Formatter\StringFormatterTest
  */
 final readonly class StringFormatter implements FormatterInterface
 {

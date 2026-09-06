@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MailerBundle\Config;
+namespace Augias\MailerBundle\Config;
 
-use SolidInvoice\SettingsBundle\Config\ProviderInterface;
-use SolidInvoice\SettingsBundle\DTO\Config;
-use SolidInvoice\SettingsBundle\Form\Type\MailTransportType;
+use Augias\SettingsBundle\Config\ProviderInterface;
+use Augias\SettingsBundle\DTO\Config;
+use Augias\SettingsBundle\Form\Type\MailTransportType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Tests\Widgets;
+namespace Augias\DashboardBundle\Tests\Widgets;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\DashboardBundle\Widgets\HeroStatsWidget;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\PaymentBundle\Enum\PaymentStatus;
+use Augias\PaymentBundle\Test\Factory\PaymentFactory;
+use Augias\PaymentBundle\Test\Factory\PaymentMethodFactory;
 use Brick\Math\BigInteger;
 use Carbon\Carbon;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\DashboardBundle\Widgets\HeroStatsWidget;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
-use SolidInvoice\PaymentBundle\Test\Factory\PaymentFactory;
-use SolidInvoice\PaymentBundle\Test\Factory\PaymentMethodFactory;
 
 final class HeroStatsWidgetTest extends WidgetTestCase
 {
@@ -154,7 +154,7 @@ final class HeroStatsWidgetTest extends WidgetTestCase
     {
         $widget = self::getContainer()->get(HeroStatsWidget::class);
 
-        self::assertSame('@SolidInvoiceDashboard/Widget/hero_stats.html.twig', $widget->getTemplate());
+        self::assertSame('@AugiasDashboard/Widget/hero_stats.html.twig', $widget->getTemplate());
     }
 
     public function testRenderWidgetWithNoData(): void

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Action;
+namespace Augias\InstallBundle\Action;
 
 use const JSON_THROW_ON_ERROR;
+use Augias\CoreBundle\ConfigWriter;
+use Augias\CoreBundle\Telemetry\Telemetry;
+use Augias\CoreBundle\Telemetry\TelemetryEvent;
+use Augias\InstallBundle\DTO\Installation;
+use Augias\InstallBundle\Form\Type\InstallationType;
+use Augias\InstallBundle\Step\InstallationStepInterface;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Enum\UserSettingType;
+use Augias\UserBundle\Repository\UserRepository;
+use Augias\UserBundle\Repository\UserSettingRepositoryInterface;
 use DateTimeInterface;
 use Generator;
-use SolidInvoice\CoreBundle\ConfigWriter;
-use SolidInvoice\CoreBundle\Telemetry\Telemetry;
-use SolidInvoice\CoreBundle\Telemetry\TelemetryEvent;
-use SolidInvoice\InstallBundle\DTO\Installation;
-use SolidInvoice\InstallBundle\Form\Type\InstallationType;
-use SolidInvoice\InstallBundle\Step\InstallationStepInterface;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Enum\UserSettingType;
-use SolidInvoice\UserBundle\Repository\UserRepository;
-use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
@@ -109,7 +109,7 @@ final class Install extends AbstractController
             return $this->redirectToRoute('_login_main');
         }
 
-        return $this->render('@SolidInvoiceInstall/install.html.twig', [
+        return $this->render('@AugiasInstall/install.html.twig', [
             'form' => $form->getStepForm(),
         ]);
     }

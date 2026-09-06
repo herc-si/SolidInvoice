@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Tests\Checklist;
+namespace Augias\DashboardBundle\Tests\Checklist;
 
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\DashboardBundle\Checklist\ChecklistItemInterface;
-use SolidInvoice\DashboardBundle\Checklist\ChecklistManager;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\UserBundle\Repository\UserSettingRepository;
-use SolidInvoice\UserBundle\Test\Factory\UserFactory;
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\DashboardBundle\Checklist\ChecklistItemInterface;
+use Augias\DashboardBundle\Checklist\ChecklistManager;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\UserBundle\Repository\UserSettingRepository;
+use Augias\UserBundle\Test\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class ChecklistManagerTest extends KernelTestCase

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Tests\Validator\Constraints;
+namespace Augias\TaxBundle\Tests\Validator\Constraints;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\TaxBundle\Entity\TaxIdentifier;
+use Augias\TaxBundle\Validator\Constraints\RequiredFiscalIdentifierForElectronicInvoicing;
+use Augias\TaxBundle\Validator\Constraints\RequiredFiscalIdentifierForElectronicInvoicingValidator;
 use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\TaxBundle\Entity\TaxIdentifier;
-use SolidInvoice\TaxBundle\Validator\Constraints\RequiredFiscalIdentifierForElectronicInvoicing;
-use SolidInvoice\TaxBundle\Validator\Constraints\RequiredFiscalIdentifierForElectronicInvoicingValidator;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;

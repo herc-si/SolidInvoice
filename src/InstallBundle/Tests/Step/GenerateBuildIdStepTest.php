@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Tests\Step;
+namespace Augias\InstallBundle\Tests\Step;
 
+use Augias\CoreBundle\ConfigWriter;
+use Augias\InstallBundle\DTO\Installation;
+use Augias\InstallBundle\Step\GenerateBuildIdStep;
 use Generator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\ConfigWriter;
-use SolidInvoice\InstallBundle\DTO\Installation;
-use SolidInvoice\InstallBundle\Step\GenerateBuildIdStep;
 use Symfony\Bundle\FrameworkBundle\Secrets\DotenvVault;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Uid\Uuid;
@@ -32,7 +32,7 @@ final class GenerateBuildIdStepTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->tempDir = sys_get_temp_dir() . '/solid_invoice_build_id_step_test_' . uniqid(more_entropy: true);
+        $this->tempDir = sys_get_temp_dir() . '/augias_build_id_step_test_' . uniqid(more_entropy: true);
         mkdir($this->tempDir, 0777, true);
     }
 

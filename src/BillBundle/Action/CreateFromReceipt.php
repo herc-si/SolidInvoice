@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Action;
+namespace Augias\BillBundle\Action;
 
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\BillBundle\Manager\BillManager;
-use SolidInvoice\BillBundle\Repository\BillRepository;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
+use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Manager\BillManager;
+use Augias\BillBundle\Repository\BillRepository;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 

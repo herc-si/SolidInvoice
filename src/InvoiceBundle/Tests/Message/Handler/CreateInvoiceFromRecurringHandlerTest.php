@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Message\Handler;
+namespace Augias\InvoiceBundle\Tests\Message\Handler;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Doctrine\Filter\CompanyFilter;
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Manager\InvoiceManager;
+use Augias\InvoiceBundle\Message\CreateInvoiceFromRecurring;
+use Augias\InvoiceBundle\Message\Handler\CreateInvoiceFromRecurringHandler;
+use Augias\InvoiceBundle\Model\Graph;
+use Augias\InvoiceBundle\Repository\RecurringInvoiceRepository;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Registry;
@@ -25,17 +36,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Clock\ClockInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Doctrine\Filter\CompanyFilter;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Manager\InvoiceManager;
-use SolidInvoice\InvoiceBundle\Message\CreateInvoiceFromRecurring;
-use SolidInvoice\InvoiceBundle\Message\Handler\CreateInvoiceFromRecurringHandler;
-use SolidInvoice\InvoiceBundle\Model\Graph;
-use SolidInvoice\InvoiceBundle\Repository\RecurringInvoiceRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Workflow\StateMachine;

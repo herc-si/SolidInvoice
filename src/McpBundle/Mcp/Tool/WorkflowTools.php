@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Mcp\Tool;
+namespace Augias\McpBundle\Mcp\Tool;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\McpBundle\Mcp\Attribute\McpScopeRequired;
+use Augias\McpBundle\Mcp\McpScopeGuard;
+use Augias\McpBundle\Security\McpScope;
+use Augias\QuoteBundle\Entity\Quote;
 use BackedEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Mcp\Capability\Attribute\McpTool;
 use Mcp\Exception\ToolCallException;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\McpBundle\Mcp\Attribute\McpScopeRequired;
-use SolidInvoice\McpBundle\Mcp\McpScopeGuard;
-use SolidInvoice\McpBundle\Security\McpScope;
-use SolidInvoice\QuoteBundle\Entity\Quote;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Workflow\WorkflowInterface;
 

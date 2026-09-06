@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,23 +11,23 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Mcp\Tool;
+namespace Augias\McpBundle\Mcp\Tool;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\McpBundle\Mcp\Attribute\McpScopeRequired;
+use Augias\McpBundle\Mcp\McpScopeGuard;
+use Augias\McpBundle\Security\McpScope;
+use Augias\TaxBundle\Entity\Tax;
 use BackedEnum;
 use Doctrine\ORM\EntityManagerInterface;
 use Mcp\Capability\Attribute\McpTool;
 use Mcp\Exception\ToolCallException;
 use ReflectionClass;
 use ReflectionNamedType;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\McpBundle\Mcp\Attribute\McpScopeRequired;
-use SolidInvoice\McpBundle\Mcp\McpScopeGuard;
-use SolidInvoice\McpBundle\Security\McpScope;
-use SolidInvoice\TaxBundle\Entity\Tax;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Uid\Ulid;

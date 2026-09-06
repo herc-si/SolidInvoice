@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Tests\Service;
+namespace Augias\TaxBundle\Tests\Service;
 
+use Augias\TaxBundle\Entity\InvoiceTax;
+use Augias\TaxBundle\Entity\LineTax;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Enum\TaxDirection;
+use Augias\TaxBundle\Enum\TaxType;
+use Augias\TaxBundle\Service\TaxSnapshotCopier;
 use Brick\Math\BigInteger;
 use Carbon\CarbonImmutable;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
-use SolidInvoice\TaxBundle\Entity\LineTax;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Enum\TaxDirection;
-use SolidInvoice\TaxBundle\Enum\TaxType;
-use SolidInvoice\TaxBundle\Service\TaxSnapshotCopier;
 
 final class TaxSnapshotCopierTest extends TestCase
 {

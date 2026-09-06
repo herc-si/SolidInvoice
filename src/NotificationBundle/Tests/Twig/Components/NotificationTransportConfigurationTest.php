@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Tests\Twig\Components;
+namespace Augias\NotificationBundle\Tests\Twig\Components;
 
+use Augias\CoreBundle\Test\LiveComponentTest;
+use Augias\NotificationBundle\Entity\TransportSetting;
+use Augias\NotificationBundle\Repository\TransportSettingRepository;
+use Augias\NotificationBundle\Twig\Components\NotificationTransportConfiguration;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use PHPUnit\Framework\Attributes\DataProvider;
-use SolidInvoice\CoreBundle\Test\LiveComponentTest;
-use SolidInvoice\NotificationBundle\Entity\TransportSetting;
-use SolidInvoice\NotificationBundle\Repository\TransportSettingRepository;
-use SolidInvoice\NotificationBundle\Twig\Components\NotificationTransportConfiguration;
 use Symfony\Component\Uid\Ulid;
 
 final class NotificationTransportConfigurationTest extends LiveComponentTest

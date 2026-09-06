@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Action;
+namespace Augias\InvoiceBundle\Tests\Action;
 
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\InvoiceBundle\Action\CreateRecurring;
+use Augias\InvoiceBundle\Model\Graph;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
 use Carbon\CarbonImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\TestCase;
 use Psr\Clock\ClockInterface;
 use Psr\Container\ContainerInterface;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\InvoiceBundle\Action\CreateRecurring;
-use SolidInvoice\InvoiceBundle\Model\Graph;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;

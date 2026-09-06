@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\ElectronicInvoicingBundle\SolidInvoiceElectronicInvoicingBundle;
+use Augias\ElectronicInvoicingBundle\AugiasElectronicInvoicingBundle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 
@@ -27,10 +27,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ;
 
     $services
-        ->load(SolidInvoiceElectronicInvoicingBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
+        ->load(AugiasElectronicInvoicingBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
         ->exclude(dirname(__DIR__, 3) . '/{DependencyInjection,Entity,Resources,Tests,Test}');
 
     $services
-        ->load(SolidInvoiceElectronicInvoicingBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
+        ->load(AugiasElectronicInvoicingBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
         ->tag('controller.service_arguments');
 };

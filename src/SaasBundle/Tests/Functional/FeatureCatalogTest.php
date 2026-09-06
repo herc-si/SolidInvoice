@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Functional;
+namespace Augias\SaasBundle\Tests\Functional;
 
+use Augias\SaasBundle\Feature\Feature;
+use Augias\Test\SaasKernel;
 use Override;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\Test\SaasKernel;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Platform\SaasBundle\Feature\FeatureConfigRegistry;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

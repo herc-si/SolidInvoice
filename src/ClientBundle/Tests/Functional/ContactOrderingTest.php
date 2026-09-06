@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Tests\Functional;
+namespace Augias\ClientBundle\Tests\Functional;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\ClientBundle\Test\Factory\ContactFactory;
+use Augias\CoreBundle\Test\Traits\DoctrineTestTrait;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\ClientBundle\Test\Factory\ContactFactory;
-use SolidInvoice\CoreBundle\Test\Traits\DoctrineTestTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**

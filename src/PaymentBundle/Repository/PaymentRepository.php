@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Repository;
+namespace Augias\PaymentBundle\Repository;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Enum\PaymentStatus;
 use Brick\Math\BigInteger;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
@@ -27,10 +31,6 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid\Ulid;
@@ -38,7 +38,7 @@ use function array_map;
 
 /**
  * @extends EntityRepository<Payment>
- * @see \SolidInvoice\PaymentBundle\Tests\Repository\PaymentRepositoryTest
+ * @see \Augias\PaymentBundle\Tests\Repository\PaymentRepositoryTest
  */
 class PaymentRepository extends EntityRepository
 {

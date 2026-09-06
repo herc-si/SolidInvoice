@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Security\Turnstile;
+namespace Augias\UserBundle\Tests\Security\Turnstile;
 
+use Augias\UserBundle\Security\Turnstile\TurnstileVerifier;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\UserBundle\Security\Turnstile\TurnstileVerifier;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\HttpClient\MockHttpClient;

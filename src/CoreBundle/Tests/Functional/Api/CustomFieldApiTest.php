@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Functional\Api;
+namespace Augias\CoreBundle\Tests\Functional\Api;
 
+use Augias\ApiBundle\Test\ApiTestCase;
+use Augias\CoreBundle\Entity\CustomField\CustomField;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ApiBundle\Test\ApiTestCase;
-use SolidInvoice\CoreBundle\Entity\CustomField\CustomField;
 
 #[Group('functional')]
 final class CustomFieldApiTest extends ApiTestCase

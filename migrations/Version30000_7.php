@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Augias\SaasBundle\Form\Type\CustomDomainType;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\OraclePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use SolidInvoice\SaasBundle\Form\Type\CustomDomainType;
 use Symfony\Component\Uid\Ulid;
 use function getenv;
 

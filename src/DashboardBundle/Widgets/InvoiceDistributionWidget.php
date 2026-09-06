@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,22 +11,22 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Widgets;
+namespace Augias\DashboardBundle\Widgets;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
 use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 
 /**
- * @see \SolidInvoice\DashboardBundle\Tests\Widgets\InvoiceDistributionWidgetTest
+ * @see \Augias\DashboardBundle\Tests\Widgets\InvoiceDistributionWidgetTest
  */
 final readonly class InvoiceDistributionWidget implements WidgetInterface
 {
@@ -151,6 +151,6 @@ final readonly class InvoiceDistributionWidget implements WidgetInterface
 
     public function getTemplate(): string
     {
-        return '@SolidInvoiceDashboard/Widget/invoice_distribution.html.twig';
+        return '@AugiasDashboard/Widget/invoice_distribution.html.twig';
     }
 }

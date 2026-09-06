@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Security;
+namespace Augias\UserBundle\Security;
 
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Repository\UserRepository;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Repository\UserRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -22,7 +22,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\Security\EmailVerifierTest
+ * @see \Augias\UserBundle\Tests\Security\EmailVerifierTest
  */
 final readonly class EmailVerifier
 {

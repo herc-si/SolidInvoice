@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Form\Type\BillingIdConfigurationType;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\OraclePlatform;
@@ -25,8 +27,6 @@ use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Migrations\AbstractMigration;
 use Ramsey\Uuid\Doctrine\UuidBinaryOrderedTimeType;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
-use SolidInvoice\CoreBundle\Form\Type\BillingIdConfigurationType;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Uid\Ulid;

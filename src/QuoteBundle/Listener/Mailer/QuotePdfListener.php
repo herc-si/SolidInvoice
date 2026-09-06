@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Listener\Mailer;
+namespace Augias\QuoteBundle\Listener\Mailer;
 
+use Augias\CoreBundle\Pdf\Generator;
+use Augias\CoreBundle\Templates\BillingTemplateChannel;
+use Augias\CoreBundle\Templates\BillingTemplateResolver;
+use Augias\QuoteBundle\Email\QuoteEmail;
 use Mpdf\MpdfException;
-use SolidInvoice\CoreBundle\Pdf\Generator;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateChannel;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
-use SolidInvoice\QuoteBundle\Email\QuoteEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mailer\Event\MessageEvent;
 use Twig\Environment;
@@ -26,7 +26,7 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 /**
- * @see \SolidInvoice\QuoteBundle\Tests\Listener\Mailer\QuotePdfListenerTest
+ * @see \Augias\QuoteBundle\Tests\Listener\Mailer\QuotePdfListenerTest
  */
 readonly class QuotePdfListener implements EventSubscriberInterface
 {

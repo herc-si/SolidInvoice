@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Tests\GridBuilder\Filter;
+namespace Augias\DataGridBundle\Tests\GridBuilder\Filter;
 
+use Augias\DataGridBundle\Form\Type\DateRangeFormType;
+use Augias\DataGridBundle\GridBuilder\Filter\DateRangeFilter;
 use Doctrine\ORM\QueryBuilder;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\DataGridBundle\Form\Type\DateRangeFormType;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\DateRangeFilter;
 
 final class DateRangeFilterTest extends TestCase
 {

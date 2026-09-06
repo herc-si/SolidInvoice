@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Tests\Step;
+namespace Augias\InstallBundle\Tests\Step;
 
+use Augias\InstallBundle\Step\InstallationStepInterface;
+use Augias\InstallBundle\Step\RunMigrationsStep;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\InstallBundle\Step\InstallationStepInterface;
-use SolidInvoice\InstallBundle\Step\RunMigrationsStep;
 
 #[CoversClass(RunMigrationsStep::class)]
 final class RunMigrationsStepTest extends TestCase

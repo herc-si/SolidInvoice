@@ -1844,7 +1844,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     },
  *     ...<string, mixed>
  * }
- * @psalm-type SolidInvoicePaymentConfig = array{
+ * @psalm-type AugiasPaymentConfig = array{
  *     gateways?: list<array{ // Default: []
  *         name?: scalar|Param|null,
  *         factory?: scalar|Param|null,
@@ -2263,7 +2263,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     payum?: PayumConfig,
  *     stof_doctrine_extensions?: StofDoctrineExtensionsConfig,
  *     api_platform?: ApiPlatformConfig,
- *     solid_invoice_payment?: SolidInvoicePaymentConfig,
+ *     augias_payment?: AugiasPaymentConfig,
  *     liip_test_fixtures?: LiipTestFixturesConfig,
  *     web_profiler?: WebProfilerConfig,
  *     toggler?: TogglerConfig,
@@ -2297,7 +2297,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         payum?: PayumConfig,
  *         stof_doctrine_extensions?: StofDoctrineExtensionsConfig,
  *         api_platform?: ApiPlatformConfig,
- *         solid_invoice_payment?: SolidInvoicePaymentConfig,
+ *         augias_payment?: AugiasPaymentConfig,
  *         liip_test_fixtures?: LiipTestFixturesConfig,
  *         debug?: DebugConfig,
  *         maker?: MakerConfig,
@@ -2332,7 +2332,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         payum?: PayumConfig,
  *         stof_doctrine_extensions?: StofDoctrineExtensionsConfig,
  *         api_platform?: ApiPlatformConfig,
- *         solid_invoice_payment?: SolidInvoicePaymentConfig,
+ *         augias_payment?: AugiasPaymentConfig,
  *         liip_test_fixtures?: LiipTestFixturesConfig,
  *         web_profiler?: WebProfilerConfig,
  *         toggler?: TogglerConfig,

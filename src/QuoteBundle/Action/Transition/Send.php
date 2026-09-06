@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Action\Transition;
+namespace Augias\QuoteBundle\Action\Transition;
 
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Exception\InvalidTransitionException;
+use Augias\QuoteBundle\Mailer\QuoteMailer;
 use Generator;
 use JsonException;
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Exception\InvalidTransitionException;
-use SolidInvoice\QuoteBundle\Mailer\QuoteMailer;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Tests\Validator\Constraints;
+namespace Augias\TaxBundle\Tests\Validator\Constraints;
 
-use SolidInvoice\TaxBundle\Entity\LineTax;
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\TaxBundle\Enum\TaxType;
-use SolidInvoice\TaxBundle\Validator\Constraints\IncompatibleTaxConfiguration;
-use SolidInvoice\TaxBundle\Validator\Constraints\IncompatibleTaxConfigurationValidator;
+use Augias\TaxBundle\Entity\LineTax;
+use Augias\TaxBundle\Entity\Tax;
+use Augias\TaxBundle\Enum\TaxType;
+use Augias\TaxBundle\Validator\Constraints\IncompatibleTaxConfiguration;
+use Augias\TaxBundle\Validator\Constraints\IncompatibleTaxConfigurationValidator;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 /**

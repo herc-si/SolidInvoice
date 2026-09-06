@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Command;
+namespace Augias\McpBundle\Command;
 
-use SolidInvoice\McpBundle\OAuth\KeyManager;
+use Augias\McpBundle\OAuth\KeyManager;
 use SolidWorx\Platform\PlatformBundle\Console\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputOption;

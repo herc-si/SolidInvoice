@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Form\Type;
+namespace Augias\PaymentBundle\Form\Type;
 
 use Override;
 use Symfony\Component\Form\AbstractType;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @see \SolidInvoice\PaymentBundle\Tests\Form\Type\PaymentMethodSettingsTypeTest
+ * @see \Augias\PaymentBundle\Tests\Form\Type\PaymentMethodSettingsTypeTest
  * @extends AbstractType<mixed>
  */
 class PaymentMethodSettingsType extends AbstractType

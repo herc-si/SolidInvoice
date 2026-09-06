@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\Test;
+namespace Augias\Test;
 
-use SolidInvoice\AppMode;
+use Augias\AppMode;
 
-final class Kernel extends \SolidInvoice\Kernel
+final class Kernel extends \Augias\Kernel
 {
     public function __construct(string $environment, bool $debug)
     {

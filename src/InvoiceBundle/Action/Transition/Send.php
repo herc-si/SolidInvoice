@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Action\Transition;
+namespace Augias\InvoiceBundle\Action\Transition;
 
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\CoreBundle\Traits\SaveableTrait;
+use Augias\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManagerInterface;
+use Augias\InvoiceBundle\Email\InvoiceEmail;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Model\Graph;
 use Generator;
 use LogicException;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\CoreBundle\Traits\SaveableTrait;
-use SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManagerInterface;
-use SolidInvoice\InvoiceBundle\Email\InvoiceEmail;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Model\Graph;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -32,7 +32,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Workflow\WorkflowInterface;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Action\Transition\SendTest
+ * @see \Augias\InvoiceBundle\Tests\Action\Transition\SendTest
  */
 final class Send
 {

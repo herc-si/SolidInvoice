@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Functional\Api;
+namespace Augias\InvoiceBundle\Tests\Functional\Api;
 
+use Augias\ApiBundle\Test\ApiTestCase;
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\ClientBundle\Test\Factory\ContactFactory;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ApiBundle\Test\ApiTestCase;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\ClientBundle\Test\Factory\ContactFactory;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
 use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Uid\Uuid;
 use function array_map;

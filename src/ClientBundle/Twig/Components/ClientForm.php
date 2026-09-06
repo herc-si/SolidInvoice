@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Twig\Components;
+namespace Augias\ClientBundle\Twig\Components;
 
+use Augias\ClientBundle\Entity\Address;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Form\Type\ClientType;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Service\CustomField\CustomFieldFormWriter;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\ClientBundle\Entity\Address;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Form\Type\ClientType;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldFormWriter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -30,7 +30,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
 /**
- * @see \SolidInvoice\ClientBundle\Tests\Twig\Components\ClientFormTest
+ * @see \Augias\ClientBundle\Tests\Twig\Components\ClientFormTest
  */
 #[AsLiveComponent]
 class ClientForm extends AbstractController

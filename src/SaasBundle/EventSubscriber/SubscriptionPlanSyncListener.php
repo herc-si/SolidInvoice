@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\EventSubscriber;
+namespace Augias\SaasBundle\EventSubscriber;
 
+use Augias\CoreBundle\Telemetry\Telemetry;
+use Augias\CoreBundle\Telemetry\TelemetryEvent;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\CoreBundle\Telemetry\Telemetry;
-use SolidInvoice\CoreBundle\Telemetry\TelemetryEvent;
 use SolidWorx\Platform\SaasBundle\Dto\LemonSqueezy\Subscription as LemonSqueezySubscription;
 use SolidWorx\Platform\SaasBundle\Entity\Plan;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
@@ -45,7 +45,7 @@ use function strtolower;
  * — they never round-trip through LS — and active-billed plan changes go
  * through `SubscriptionManager::changeActivePlan()` which is already
  * LS-confirmed before the local update.
- * @see \SolidInvoice\SaasBundle\Tests\EventSubscriber\SubscriptionPlanSyncListenerTest
+ * @see \Augias\SaasBundle\Tests\EventSubscriber\SubscriptionPlanSyncListenerTest
  */
 final readonly class SubscriptionPlanSyncListener
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Functional;
+namespace Augias\UserBundle\Tests\Functional;
 
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\UserBundle\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\Attributes\After;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;

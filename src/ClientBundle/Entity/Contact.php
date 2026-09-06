@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Entity;
+namespace Augias\ClientBundle\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
@@ -21,19 +21,19 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use Augias\ClientBundle\Api\Processor\ContactPersistProcessor;
+use Augias\ClientBundle\Repository\ContactRepository;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\QuoteBundle\Entity\Quote;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
-use SolidInvoice\ClientBundle\Api\Processor\ContactPersistProcessor;
-use SolidInvoice\ClientBundle\Repository\ContactRepository;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\QuoteBundle\Entity\Quote;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;

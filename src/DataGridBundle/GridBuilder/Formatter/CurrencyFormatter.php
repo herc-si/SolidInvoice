@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\GridBuilder\Formatter;
+namespace Augias\DataGridBundle\GridBuilder\Formatter;
 
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\SettingsBundle\SystemConfig;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\SettingsBundle\SystemConfig;
 use Symfony\Component\Intl\Currencies;
 use Symfony\Component\Translation\TranslatableMessage;
 use function is_string;
 
 /**
- * @see \SolidInvoice\DataGridBundle\Tests\GridBuilder\Formatter\CurrencyFormatterTest
+ * @see \Augias\DataGridBundle\Tests\GridBuilder\Formatter\CurrencyFormatterTest
  */
 final class CurrencyFormatter implements FormatterInterface
 {

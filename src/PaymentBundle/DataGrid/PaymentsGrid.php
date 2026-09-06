@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,32 +11,32 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\DataGrid;
+namespace Augias\PaymentBundle\DataGrid;
 
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\Grid;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Column\DateTimeColumn;
+use Augias\DataGridBundle\GridBuilder\Column\MoneyColumn;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
+use Augias\DataGridBundle\GridBuilder\Filter\ChoiceFilter;
+use Augias\DataGridBundle\GridBuilder\Filter\DateRangeFilter;
+use Augias\DataGridBundle\GridBuilder\Filter\EntityFilter;
+use Augias\DataGridBundle\GridBuilder\Query;
+use Augias\DataGridBundle\Source\ORMSource;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Entity\PaymentMethod;
+use Augias\PaymentBundle\Enum\PaymentStatus;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use Override;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\Grid;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\DateTimeColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\MoneyColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\ChoiceFilter;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\DateRangeFilter;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\EntityFilter;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
-use SolidInvoice\DataGridBundle\Source\ORMSource;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Entity\PaymentMethod;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Translation\TranslatableMessage;
 use function array_key_exists;
 
 /**
- * @see \SolidInvoice\PaymentBundle\Tests\DataGrid\PaymentsGridTest
+ * @see \Augias\PaymentBundle\Tests\DataGrid\PaymentsGridTest
  */
 #[AsDataGrid(name: 'payments_grid', title: 'Payments')]
 final class PaymentsGrid extends Grid

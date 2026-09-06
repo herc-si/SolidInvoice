@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\DataGrid;
+namespace Augias\InvoiceBundle\DataGrid;
 
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\GridBuilder\Query;
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
 use Doctrine\ORM\EntityManagerInterface;
 use Override;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
 
 #[AsDataGrid(name: self::GRID_NAME, title: 'Recurring Invoices')]
 class RecurringInvoiceGrid extends BaseRecurringInvoiceGrid

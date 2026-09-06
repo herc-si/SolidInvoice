@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Tests\GridBuilder\Filter;
+namespace Augias\DataGridBundle\Tests\GridBuilder\Filter;
 
+use Augias\DataGridBundle\GridBuilder\Filter\EntityFilter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\EntityFilter;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 #[CoversClass(EntityFilter::class)]

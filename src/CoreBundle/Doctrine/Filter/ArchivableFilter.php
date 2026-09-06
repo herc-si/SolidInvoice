@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Doctrine\Filter;
+namespace Augias\CoreBundle\Doctrine\Filter;
 
+use Augias\CoreBundle\Traits\Entity\Archivable;
+use Augias\DataGridBundle\GridBuilder\Query;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Filter\SQLFilter;
-use SolidInvoice\CoreBundle\Traits\Entity\Archivable;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
 use function sprintf;
 
 class ArchivableFilter extends SQLFilter

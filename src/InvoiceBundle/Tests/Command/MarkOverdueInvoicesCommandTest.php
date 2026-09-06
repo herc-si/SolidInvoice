@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Command;
+namespace Augias\InvoiceBundle\Tests\Command;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\CoreBundle\Test\Traits\ConsoleTesterTrait;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Command\MarkOverdueInvoicesCommand;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
 use Carbon\CarbonImmutable;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\CoreBundle\Test\Traits\ConsoleTesterTrait;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Command\MarkOverdueInvoicesCommand;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
 use SolidWorx\Platform\PlatformBundle\Console\IO;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -133,7 +133,7 @@ final class MarkOverdueInvoicesCommandTest extends KernelTestCase
     }
 
     /**
-     * Regression test for https://github.com/SolidInvoice/SolidInvoice/issues/2380
+     * Regression test for https://github.com/Augias/Augias/issues/2380
      *
      * When invoice lines are lazy-loaded into the Doctrine identity map during a
      * workflow transition flush (e.g. by a postUpdate listener), a subsequent

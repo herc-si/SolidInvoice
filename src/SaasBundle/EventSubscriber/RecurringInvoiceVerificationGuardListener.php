@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\EventSubscriber;
+namespace Augias\SaasBundle\EventSubscriber;
 
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\TransitionBlocker;
 
 /**
- * @see \SolidInvoice\SaasBundle\Tests\EventSubscriber\RecurringInvoiceVerificationGuardListenerTest
+ * @see \Augias\SaasBundle\Tests\EventSubscriber\RecurringInvoiceVerificationGuardListenerTest
  */
 final readonly class RecurringInvoiceVerificationGuardListener
 {

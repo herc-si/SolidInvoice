@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Doctrine\Listener;
+namespace Augias\CoreBundle\Tests\Doctrine\Listener;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Doctrine\Listener\CompanyListener;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Event\PrePersistEventArgs;
@@ -24,10 +28,6 @@ use Mockery as M;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Doctrine\Listener\CompanyListener;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
 use stdClass;
 use Symfony\Component\Uid\Ulid;
 

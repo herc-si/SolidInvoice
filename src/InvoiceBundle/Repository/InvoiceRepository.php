@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Repository;
+namespace Augias\InvoiceBundle\Repository;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\InvoiceReminder;
+use Augias\InvoiceBundle\Entity\ReminderType;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\SettingsBundle\Entity\Setting;
 use Brick\Math\BigInteger;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
@@ -29,13 +36,6 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Generator;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\InvoiceReminder;
-use SolidInvoice\InvoiceBundle\Entity\ReminderType;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\SettingsBundle\Entity\Setting;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid\Ulid;
@@ -46,7 +46,7 @@ use function intval;
 
 /**
  * @extends EntityRepository<Invoice>
- * @see \SolidInvoice\InvoiceBundle\Tests\Repository\InvoiceRepositoryTest
+ * @see \Augias\InvoiceBundle\Tests\Repository\InvoiceRepositoryTest
  */
 class InvoiceRepository extends EntityRepository
 {

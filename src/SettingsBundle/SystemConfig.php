@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle;
+namespace Augias\SettingsBundle;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\SettingsBundle\Repository\SettingsRepository;
 use Money\Currency;
 use RuntimeException;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\SettingsBundle\Repository\SettingsRepository;
 use Throwable;
 
 /**
- * @see \SolidInvoice\SettingsBundle\Tests\SystemConfigTest
+ * @see \Augias\SettingsBundle\Tests\SystemConfigTest
  */
 class SystemConfig
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Config\Loader;
+namespace Augias\CoreBundle\Config\Loader;
 
+use Augias\CoreBundle\ConfigWriter;
 use Exception;
-use SolidInvoice\CoreBundle\ConfigWriter;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\EnvVarLoaderInterface;
 use Symfony\Component\Uid\Uuid;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Config\Loader\BuildIdLoaderTest
+ * @see \Augias\CoreBundle\Tests\Config\Loader\BuildIdLoaderTest
  */
 final readonly class BuildIdLoader implements EnvVarLoaderInterface
 {

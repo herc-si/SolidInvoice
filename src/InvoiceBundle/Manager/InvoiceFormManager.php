@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Manager;
+namespace Augias\InvoiceBundle\Manager;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\InvoiceBundle\DTO\InvoiceFormDTO;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Enum\InvoiceClientMode;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\TaxBundle\Entity\InvoiceTax;
+use Augias\TaxBundle\Entity\Tax;
 use Carbon\CarbonImmutable;
 use InvalidArgumentException;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\InvoiceBundle\DTO\InvoiceFormDTO;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceClientMode;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
-use SolidInvoice\TaxBundle\Entity\Tax;
 
 /**
  * Manager for handling Invoice form DTO transformations

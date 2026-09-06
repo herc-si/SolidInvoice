@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Export\Message\Handler;
+namespace Augias\CoreBundle\Export\Message\Handler;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\ExportJob;
+use Augias\CoreBundle\Export\CompanyExporter;
+use Augias\CoreBundle\Export\Email\ExportReadyEmail;
+use Augias\CoreBundle\Export\Enum\ExportStatus;
+use Augias\CoreBundle\Export\Message\RequestCompanyExport;
+use Augias\CoreBundle\Repository\ExportJobRepository;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\ExportJob;
-use SolidInvoice\CoreBundle\Export\CompanyExporter;
-use SolidInvoice\CoreBundle\Export\Email\ExportReadyEmail;
-use SolidInvoice\CoreBundle\Export\Enum\ExportStatus;
-use SolidInvoice\CoreBundle\Export\Message\RequestCompanyExport;
-use SolidInvoice\CoreBundle\Repository\ExportJobRepository;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Repository\UserRepository;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -42,7 +42,7 @@ use Throwable;
  *   Processing forever and the idempotency guard prevents recovery. Add a CronBundle
  *   command that finds jobs in Processing older than ~30 minutes, marks them Failed
  *   with reason "worker timed out" so the user can request a fresh export.
- * @see \SolidInvoice\CoreBundle\Tests\Export\Message\Handler\ProcessCompanyExportHandlerTest
+ * @see \Augias\CoreBundle\Tests\Export\Message\Handler\ProcessCompanyExportHandlerTest
  */
 #[AsMessageHandler]
 final readonly class ProcessCompanyExportHandler

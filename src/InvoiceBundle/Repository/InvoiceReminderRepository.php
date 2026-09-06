@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Repository;
+namespace Augias\InvoiceBundle\Repository;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\InvoiceReminder;
+use Augias\InvoiceBundle\Entity\ReminderType;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\InvoiceReminder;
-use SolidInvoice\InvoiceBundle\Entity\ReminderType;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 
 /**
  * @extends EntityRepository<InvoiceReminder>
- * @see \SolidInvoice\InvoiceBundle\Tests\Repository\InvoiceReminderRepositoryTest
+ * @see \Augias\InvoiceBundle\Tests\Repository\InvoiceReminderRepositoryTest
  */
 class InvoiceReminderRepository extends EntityRepository
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Generator\BillingIdGenerator;
+namespace Augias\CoreBundle\Tests\Generator\BillingIdGenerator;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Generator\BillingIdGenerator\AutoIncrementIdGenerator;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\QuoteBundle\Entity\Quote;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator\AutoIncrementIdGenerator;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\QuoteBundle\Entity\Quote;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(AutoIncrementIdGenerator::class)]

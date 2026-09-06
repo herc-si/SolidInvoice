@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Billing;
+namespace Augias\CoreBundle\Tests\Billing;
 
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Doctrine\Type\QuantityType;
+use Augias\CoreBundle\Tests\Fixtures\LineQuantityCorpus;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\QuoteBundle\Entity\Line as QuoteLine;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigRational;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
-use SolidInvoice\CoreBundle\Doctrine\Type\QuantityType;
-use SolidInvoice\CoreBundle\Tests\Fixtures\LineQuantityCorpus;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\QuoteBundle\Entity\Line as QuoteLine;
 use function sprintf;
 
 /**

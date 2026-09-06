@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Security;
+namespace Augias\ApiBundle\Security;
 
+use Augias\ApiBundle\Security\Provider\ApiTokenUserProvider;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Company\ResolvedHost;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Listener\HostRoutingListener;
+use Augias\UserBundle\Entity\ApiToken;
+use Augias\UserBundle\Entity\ApiTokenHistory;
+use Augias\UserBundle\Repository\ApiTokenHistoryRepository;
+use Augias\UserBundle\Repository\ApiTokenRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use SensitiveParameter;
-use SolidInvoice\ApiBundle\Security\Provider\ApiTokenUserProvider;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Company\ResolvedHost;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Listener\HostRoutingListener;
-use SolidInvoice\UserBundle\Entity\ApiToken;
-use SolidInvoice\UserBundle\Entity\ApiTokenHistory;
-use SolidInvoice\UserBundle\Repository\ApiTokenHistoryRepository;
-use SolidInvoice\UserBundle\Repository\ApiTokenRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,7 +39,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPasspor
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @see \SolidInvoice\ApiBundle\Tests\Security\ApiTokenAuthenticatorTest
+ * @see \Augias\ApiBundle\Tests\Security\ApiTokenAuthenticatorTest
  */
 class ApiTokenAuthenticator extends AbstractAuthenticator
 {

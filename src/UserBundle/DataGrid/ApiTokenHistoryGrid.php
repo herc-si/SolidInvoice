@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,26 +11,26 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\DataGrid;
+namespace Augias\UserBundle\DataGrid;
 
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\Grid;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Column\DateTimeColumn;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
+use Augias\DataGridBundle\GridBuilder\Filter\ChoiceFilter;
+use Augias\DataGridBundle\GridBuilder\Filter\DateRangeFilter;
+use Augias\DataGridBundle\GridBuilder\Query;
+use Augias\DataGridBundle\Source\ORMSource;
+use Augias\UserBundle\Entity\ApiTokenHistory;
+use Augias\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Override;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\Grid;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\DateTimeColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\ChoiceFilter;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\DateRangeFilter;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
-use SolidInvoice\DataGridBundle\Source\ORMSource;
-use SolidInvoice\UserBundle\Entity\ApiTokenHistory;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Bundle\SecurityBundle\Security;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\DataGrid\ApiTokenHistoryGridTest
+ * @see \Augias\UserBundle\Tests\DataGrid\ApiTokenHistoryGridTest
  */
 #[AsDataGrid(name: 'api_token_history_grid', title: 'Request History')]
 final class ApiTokenHistoryGrid extends Grid

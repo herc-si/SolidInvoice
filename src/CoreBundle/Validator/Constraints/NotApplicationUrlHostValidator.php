@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Validator\Constraints;
+namespace Augias\CoreBundle\Validator\Constraints;
 
 use const PHP_URL_HOST;
-use SolidInvoice\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Entity\Company;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -25,7 +25,7 @@ use function rtrim;
 use function strtolower;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Validator\Constraints\NotApplicationUrlHostValidatorTest
+ * @see \Augias\CoreBundle\Tests\Validator\Constraints\NotApplicationUrlHostValidatorTest
  */
 final class NotApplicationUrlHostValidator extends ConstraintValidator
 {

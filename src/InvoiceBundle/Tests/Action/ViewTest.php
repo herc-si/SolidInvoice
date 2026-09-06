@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,29 +11,29 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Action;
+namespace Augias\InvoiceBundle\Tests\Action;
 
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Pdf\Generator;
+use Augias\CoreBundle\Templates\BillingTemplateResolver;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use Augias\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManager;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Action\View;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Entity\PaymentMethod;
+use Augias\PaymentBundle\Enum\PaymentStatus;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Enum\QuoteStatus;
 use Carbon\CarbonImmutable;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Log\NullLogger;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Pdf\Generator;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
-use SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManager;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Action\View;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Entity\PaymentMethod;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
 use Spatie\Snapshots\MatchesSnapshots;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -111,7 +111,7 @@ final class ViewTest extends KernelTestCase
 
         $params = $action($request, $invoice);
 
-        $response = $twig->resolveTemplate('@SolidInvoiceInvoice/Default/view.html.twig')
+        $response = $twig->resolveTemplate('@AugiasInvoice/Default/view.html.twig')
             ->renderBlock('content', $params);
 
         $this->assertMatchesHtmlSnapshot($response);
@@ -185,7 +185,7 @@ final class ViewTest extends KernelTestCase
 
         $params = $action($request, $invoice);
 
-        $response = $twig->resolveTemplate('@SolidInvoiceInvoice/Default/view.html.twig')
+        $response = $twig->resolveTemplate('@AugiasInvoice/Default/view.html.twig')
             ->renderBlock('content', $params);
 
         $this->assertMatchesHtmlSnapshot($response);
@@ -264,7 +264,7 @@ final class ViewTest extends KernelTestCase
 
         $params = $action($request, $invoice);
 
-        $response = $twig->resolveTemplate('@SolidInvoiceInvoice/Default/view.html.twig')
+        $response = $twig->resolveTemplate('@AugiasInvoice/Default/view.html.twig')
             ->renderBlock('content', $params);
 
         self::assertStringContainsString('Rejected', $response);
@@ -346,7 +346,7 @@ final class ViewTest extends KernelTestCase
 
         $params = $action($request, $invoice);
 
-        $response = $twig->resolveTemplate('@SolidInvoiceInvoice/Default/view.html.twig')
+        $response = $twig->resolveTemplate('@AugiasInvoice/Default/view.html.twig')
             ->renderBlock('content', $params);
 
         $this->assertMatchesHtmlSnapshot($response);
@@ -409,7 +409,7 @@ final class ViewTest extends KernelTestCase
 
         $params = $action($request, $invoice);
 
-        $response = $twig->resolveTemplate('@SolidInvoiceInvoice/Default/view.html.twig')
+        $response = $twig->resolveTemplate('@AugiasInvoice/Default/view.html.twig')
             ->renderBlock('content', $params);
 
         $this->assertMatchesHtmlSnapshot($response);
@@ -481,7 +481,7 @@ final class ViewTest extends KernelTestCase
 
         $params = $action($request, $invoice);
 
-        $response = $twig->resolveTemplate('@SolidInvoiceInvoice/Default/view.html.twig')
+        $response = $twig->resolveTemplate('@AugiasInvoice/Default/view.html.twig')
             ->renderBlock('content', $params);
 
         $this->assertMatchesHtmlSnapshot($response);
@@ -563,7 +563,7 @@ final class ViewTest extends KernelTestCase
 
         $params = $action($request, $invoice);
 
-        $response = $twig->resolveTemplate('@SolidInvoiceInvoice/Default/view.html.twig')
+        $response = $twig->resolveTemplate('@AugiasInvoice/Default/view.html.twig')
             ->renderBlock('content', $params);
 
         $this->assertMatchesHtmlSnapshot($response);
@@ -635,7 +635,7 @@ final class ViewTest extends KernelTestCase
 
         $params = $action($request, $invoice);
 
-        $response = $twig->resolveTemplate('@SolidInvoiceInvoice/Default/view.html.twig')
+        $response = $twig->resolveTemplate('@AugiasInvoice/Default/view.html.twig')
             ->renderBlock('content', $params);
 
         $this->assertMatchesHtmlSnapshot($response);

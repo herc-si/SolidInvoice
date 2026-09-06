@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Company;
+namespace Augias\CoreBundle\Tests\Company;
 
+use Augias\CoreBundle\Company\DefaultData;
+use Augias\CoreBundle\Config\SystemConfigProvider;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Entity\CustomField\CustomField;
+use Augias\InvoiceBundle\Config\ConfigProvider as InvoiceConfigProvider;
+use Augias\MailerBundle\Config\ConfigProvider as MailerConfigProvider;
+use Augias\PaymentBundle\Entity\PaymentMethod;
+use Augias\QuoteBundle\Config\ConfigProvider as QuoteConfigProvider;
+use Augias\SettingsBundle\Entity\Setting;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Company\DefaultData;
-use SolidInvoice\CoreBundle\Config\SystemConfigProvider;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Entity\CustomField\CustomField;
-use SolidInvoice\InvoiceBundle\Config\ConfigProvider as InvoiceConfigProvider;
-use SolidInvoice\MailerBundle\Config\ConfigProvider as MailerConfigProvider;
-use SolidInvoice\PaymentBundle\Entity\PaymentMethod;
-use SolidInvoice\QuoteBundle\Config\ConfigProvider as QuoteConfigProvider;
-use SolidInvoice\SettingsBundle\Entity\Setting;
 
 final class DefaultDataTest extends TestCase
 {

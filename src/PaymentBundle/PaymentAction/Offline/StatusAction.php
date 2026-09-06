@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\PaymentAction\Offline;
+namespace Augias\PaymentBundle\PaymentAction\Offline;
 
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\PaymentAction\Request\StatusRequest;
 use Exception;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Bridge\Spl\ArrayObject;
@@ -20,8 +22,6 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\GatewayAwareInterface;
 use Payum\Core\GatewayAwareTrait;
 use Payum\Offline\Constants;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\PaymentAction\Request\StatusRequest;
 
 class StatusAction implements ActionInterface, GatewayAwareInterface
 {

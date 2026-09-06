@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Action\Grid;
+namespace Augias\TaxBundle\Action\Grid;
 
-use SolidInvoice\CoreBundle\Response\AjaxResponse;
-use SolidInvoice\CoreBundle\Traits\JsonTrait;
-use SolidInvoice\TaxBundle\Repository\TaxRepository;
+use Augias\CoreBundle\Response\AjaxResponse;
+use Augias\CoreBundle\Traits\JsonTrait;
+use Augias\TaxBundle\Repository\TaxRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 

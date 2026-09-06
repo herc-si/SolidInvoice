@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use SolidInvoice\UserBundle\Repository\ResetPasswordRequestRepository;
+use Augias\UserBundle\Repository\ResetPasswordRequestRepository;
 
 return App::config([
     'symfonycasts_reset_password' => [

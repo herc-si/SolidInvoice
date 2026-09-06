@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,6 +11,6 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-if (file_exists(dirname(__DIR__) . '/var/cache/prod/SolidInvoice_KernelProdDebugContainer.preload.php')) {
-    require dirname(__DIR__) . '/var/cache/prod/SolidInvoice_KernelProdDebugContainer.preload.php';
+if (file_exists(dirname(__DIR__) . '/var/cache/prod/Augias_KernelProdDebugContainer.preload.php')) {
+    require dirname(__DIR__) . '/var/cache/prod/Augias_KernelProdDebugContainer.preload.php';
 }

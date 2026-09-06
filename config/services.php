@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
+use Augias\AppRequirements;
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\CoreBundle\Search\DoctrineEventSubscriberDecorator;
 use Monolog\Level;
 use Monolog\Processor\PsrLogMessageProcessor;
 use Sentry\SentryBundle\Monolog\LogsHandler;
-use SolidInvoice\AppRequirements;
-use SolidInvoice\CoreBundle\Search\DoctrineEventSubscriberDecorator;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\UX\StimulusBundle\Helper\StimulusHelper;
@@ -75,7 +75,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         $parameters->set('env(SOLIDINVOICE_CONFIG_DIR)', param('kernel.project_dir') . '/config/env');
     }
 
-    $parameters->set('application_version', SolidInvoiceCoreBundle::VERSION);
+    $parameters->set('application_version', AugiasCoreBundle::VERSION);
 
     $services = $containerConfigurator->services();
 

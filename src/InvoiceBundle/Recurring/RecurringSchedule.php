@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Recurring;
+namespace Augias\InvoiceBundle\Recurring;
 
+use Augias\CronBundle\Enum\ScheduleRecurringType;
+use Augias\InvoiceBundle\Entity\RecurringOptions;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Carbon\Unit;
@@ -23,13 +25,11 @@ use Exception;
 use Illuminate\Support\Arr;
 use NumberFormatter;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\CronBundle\Enum\ScheduleRecurringType;
-use SolidInvoice\InvoiceBundle\Entity\RecurringOptions;
 use function array_slice;
 use function array_sum;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Recurring\RecurringScheduleTest
+ * @see \Augias\InvoiceBundle\Tests\Recurring\RecurringScheduleTest
  */
 readonly class RecurringSchedule
 {

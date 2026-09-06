@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Email;
+namespace Augias\UserBundle\Email;
 
+use Augias\UserBundle\Entity\User;
 use SensitiveParameter;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
 
@@ -28,8 +28,8 @@ final class ResetPasswordEmail extends TemplatedEmail
         parent::__construct();
         $this->to($user->getEmail());
         $this->subject('Your password reset request');
-        $this->htmlTemplate('@SolidInvoiceUser/Email/reset_password.html.twig');
-        $this->textTemplate('@SolidInvoiceUser/Email/reset_password.txt.twig');
+        $this->htmlTemplate('@AugiasUser/Email/reset_password.html.twig');
+        $this->textTemplate('@AugiasUser/Email/reset_password.txt.twig');
         $this->context([
             'user' => $user,
             'resetToken' => $resetToken,

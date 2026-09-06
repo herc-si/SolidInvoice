@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MoneyBundle\Formatter;
+namespace Augias\MoneyBundle\Formatter;
 
+use Augias\SettingsBundle\SystemConfig;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
 use Money\Currencies\ISOCurrencies;
@@ -20,7 +21,6 @@ use Money\Currency;
 use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
 use NumberFormatter;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\Component\Intl\Currencies;
 use Symfony\Polyfill\Intl\Icu\Exception\MethodArgumentNotImplementedException;
 use Symfony\Polyfill\Intl\Icu\Exception\MethodArgumentValueNotImplementedException;
@@ -28,7 +28,7 @@ use Throwable;
 use function is_string;
 
 /**
- * @see \SolidInvoice\MoneyBundle\Tests\Formatter\MoneyFormatterTest
+ * @see \Augias\MoneyBundle\Tests\Formatter\MoneyFormatterTest
  */
 final class MoneyFormatter implements MoneyFormatterInterface
 {

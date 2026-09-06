@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Form\Type;
+namespace Augias\UserBundle\Form\Type;
 
-use SolidInvoice\UserBundle\DTO\Registration;
-use SolidInvoice\UserBundle\Validator\Constraints\Turnstile;
+use Augias\UserBundle\DTO\Registration;
+use Augias\UserBundle\Validator\Constraints\Turnstile;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Form\Type;
+namespace Augias\SaasBundle\Form\Type;
 
+use Augias\CoreBundle\Templates\BillingTemplateRegistry;
 use Override;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateRegistry;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +28,7 @@ use function array_merge;
  * previews by the `invoice_template_widget` block in the settings form theme.
  *
  * @extends AbstractType<mixed>
- * @see \SolidInvoice\SaasBundle\Tests\Form\Type\InvoiceTemplateTypeTest
+ * @see \Augias\SaasBundle\Tests\Form\Type\InvoiceTemplateTypeTest
  */
 final class InvoiceTemplateType extends AbstractType
 {

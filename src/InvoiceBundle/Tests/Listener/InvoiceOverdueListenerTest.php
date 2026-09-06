@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Listener;
+namespace Augias\InvoiceBundle\Tests\Listener;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Listener\InvoiceOverdueListener;
+use Augias\InvoiceBundle\Model\Graph;
+use Augias\NotificationBundle\Notification\NotificationManager;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Listener\InvoiceOverdueListener;
-use SolidInvoice\InvoiceBundle\Model\Graph;
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
 use stdClass;
 use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\Marking;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Filter;
+namespace Augias\DataGridBundle\Filter;
 
+use Augias\DataGridBundle\Source\ORMSource;
 use Doctrine\ORM\QueryBuilder;
-use SolidInvoice\DataGridBundle\Source\ORMSource;
 
 /**
- * @see \SolidInvoice\DataGridBundle\Tests\Filter\SearchFilterTest
+ * @see \Augias\DataGridBundle\Tests\Filter\SearchFilterTest
  */
 final readonly class SearchFilter implements FilterInterface
 {

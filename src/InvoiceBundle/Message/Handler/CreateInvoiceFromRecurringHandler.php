@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,23 +11,23 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Message\Handler;
+namespace Augias\InvoiceBundle\Message\Handler;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\InvoiceBundle\Exception\InvalidTransitionException;
+use Augias\InvoiceBundle\Manager\InvoiceManager;
+use Augias\InvoiceBundle\Message\CreateInvoiceFromRecurring;
+use Augias\InvoiceBundle\Model\Graph;
+use Augias\InvoiceBundle\Repository\RecurringInvoiceRepository;
 use Brick\Math\Exception\MathException;
 use JsonException;
 use Psr\Clock\ClockInterface;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\InvoiceBundle\Exception\InvalidTransitionException;
-use SolidInvoice\InvoiceBundle\Manager\InvoiceManager;
-use SolidInvoice\InvoiceBundle\Message\CreateInvoiceFromRecurring;
-use SolidInvoice\InvoiceBundle\Model\Graph;
-use SolidInvoice\InvoiceBundle\Repository\RecurringInvoiceRepository;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Workflow\WorkflowInterface;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Message\Handler\CreateInvoiceFromRecurringHandlerTest
+ * @see \Augias\InvoiceBundle\Tests\Message\Handler\CreateInvoiceFromRecurringHandlerTest
  */
 #[AsMessageHandler(fromTransport: 'sync')]
 final readonly class CreateInvoiceFromRecurringHandler

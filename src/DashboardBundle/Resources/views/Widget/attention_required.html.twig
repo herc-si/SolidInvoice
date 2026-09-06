@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -21,8 +21,8 @@
          # twig:Ui:Card compiles as its own template, so a top-level import is out
          # of scope by the time the sections below render.
          #}
-        {% import '@SolidInvoiceDashboard/money.html.twig' as money %}
-        {% import '@SolidInvoiceDashboard/Widget/_attention_sections.html.twig' as section %}
+        {% import '@AugiasDashboard/money.html.twig' as money %}
+        {% import '@AugiasDashboard/Widget/_attention_sections.html.twig' as section %}
 
         {% if not hasItems %}
             <div class="attention-empty">

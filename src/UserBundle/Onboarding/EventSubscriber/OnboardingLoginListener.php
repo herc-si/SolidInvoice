@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Onboarding\EventSubscriber;
+namespace Augias\UserBundle\Onboarding\EventSubscriber;
 
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Onboarding\Manager\OnboardingManager;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Onboarding\Manager\OnboardingManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;

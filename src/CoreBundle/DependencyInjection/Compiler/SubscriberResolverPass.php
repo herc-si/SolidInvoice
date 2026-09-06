@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\DependencyInjection\Compiler;
+namespace Augias\CoreBundle\DependencyInjection\Compiler;
 
+use Augias\CoreBundle\Company\CompanySubscriberResolver;
 use Override;
-use SolidInvoice\CoreBundle\Company\CompanySubscriberResolver;
 use SolidWorx\Platform\PlatformBundle\Feature\SubscriberResolver;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

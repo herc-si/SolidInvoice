@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Tests\GridBuilder\Formatter;
+namespace Augias\DataGridBundle\Tests\GridBuilder\Formatter;
 
+use Augias\DataGridBundle\GridBuilder\Column\StatusColumn;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
+use Augias\DataGridBundle\GridBuilder\Formatter\StatusFormatter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StatusColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Formatter\StatusFormatter;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[CoversClass(StatusFormatter::class)]

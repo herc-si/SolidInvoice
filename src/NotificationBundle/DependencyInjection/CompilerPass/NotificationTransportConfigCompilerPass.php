@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\DependencyInjection\CompilerPass;
+namespace Augias\NotificationBundle\DependencyInjection\CompilerPass;
 
-use SolidInvoice\NotificationBundle\Factory\NotificationTransportFactory;
+use Augias\NotificationBundle\Factory\NotificationTransportFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

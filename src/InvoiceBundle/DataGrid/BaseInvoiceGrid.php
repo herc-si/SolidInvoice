@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,30 +11,30 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\DataGrid;
+namespace Augias\InvoiceBundle\DataGrid;
 
+use Augias\DataGridBundle\Grid;
+use Augias\DataGridBundle\GridBuilder\Action\Action;
+use Augias\DataGridBundle\GridBuilder\Action\EditAction;
+use Augias\DataGridBundle\GridBuilder\Action\ViewAction;
+use Augias\DataGridBundle\GridBuilder\Batch\BatchAction;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Column\MoneyColumn;
+use Augias\DataGridBundle\GridBuilder\Column\RelativeDateColumn;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
+use Augias\DataGridBundle\GridBuilder\Filter\ChoiceFilter;
+use Augias\DataGridBundle\GridBuilder\Filter\DateRangeFilter;
+use Augias\DataGridBundle\GridBuilder\Query;
+use Augias\DataGridBundle\Source\ORMSource;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\MoneyBundle\Calculator;
 use Brick\Math\BigNumber;
 use Brick\Math\RoundingMode;
 use Doctrine\ORM\EntityManagerInterface;
 use Money\Money;
 use Override;
-use SolidInvoice\DataGridBundle\Grid;
-use SolidInvoice\DataGridBundle\GridBuilder\Action\Action;
-use SolidInvoice\DataGridBundle\GridBuilder\Action\EditAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Action\ViewAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Batch\BatchAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\MoneyColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\RelativeDateColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\ChoiceFilter;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\DateRangeFilter;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
-use SolidInvoice\DataGridBundle\Source\ORMSource;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\MoneyBundle\Calculator;
 
 abstract class BaseInvoiceGrid extends Grid
 {

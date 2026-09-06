@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Twig\Components;
+namespace Augias\UserBundle\Twig\Components;
 
+use Augias\NotificationBundle\Attribute\AsNotification;
+use Augias\NotificationBundle\Entity\TransportSetting;
+use Augias\NotificationBundle\Entity\UserNotification as UserNotificationEntity;
+use Augias\NotificationBundle\Enum\NotificationCategory;
+use Augias\NotificationBundle\Notification\NotificationMessage;
+use Augias\NotificationBundle\Repository\TransportSettingRepository;
+use Augias\NotificationBundle\Repository\UserNotificationRepository;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Form\Type\NotificationSettingType;
+use Augias\UserBundle\Form\Type\NotificationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use ReflectionClass;
-use SolidInvoice\NotificationBundle\Attribute\AsNotification;
-use SolidInvoice\NotificationBundle\Entity\TransportSetting;
-use SolidInvoice\NotificationBundle\Entity\UserNotification as UserNotificationEntity;
-use SolidInvoice\NotificationBundle\Enum\NotificationCategory;
-use SolidInvoice\NotificationBundle\Notification\NotificationMessage;
-use SolidInvoice\NotificationBundle\Repository\TransportSettingRepository;
-use SolidInvoice\NotificationBundle\Repository\UserNotificationRepository;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Form\Type\NotificationSettingType;
-use SolidInvoice\UserBundle\Form\Type\NotificationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
@@ -41,7 +41,7 @@ use function str_replace;
 use function ucwords;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\Twig\Components\UserNotificationTest
+ * @see \Augias\UserBundle\Tests\Twig\Components\UserNotificationTest
  */
 #[AsLiveComponent]
 final class UserNotification extends AbstractController
@@ -63,7 +63,7 @@ final class UserNotification extends AbstractController
     public function __construct(
         private readonly UserNotificationRepository $userNotificationRepository,
         private readonly TransportSettingRepository $transportSettingRepository,
-        #[AutowireLocator('solid_invoice_notification.notification', 'name')]
+        #[AutowireLocator('augias_notification.notification', 'name')]
         private readonly ServiceLocator $notificationLocator,
         private readonly ManagerRegistry $registry,
     ) {

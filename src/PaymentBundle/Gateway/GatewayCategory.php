@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Gateway;
+namespace Augias\PaymentBundle\Gateway;
 
 /**
  * Presentation grouping for a payment gateway on the setup/marketplace screen.
@@ -25,7 +25,7 @@ enum GatewayCategory: string
     case Online = 'online';
 
     /**
-     * Manual methods where the payment happens outside SolidInvoice and is only
+     * Manual methods where the payment happens outside Augias and is only
      * recorded here (cash, bank transfer, …).
      */
     case Offline = 'offline';

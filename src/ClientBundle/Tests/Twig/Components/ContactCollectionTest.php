@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Tests\Twig\Components;
+namespace Augias\ClientBundle\Tests\Twig\Components;
 
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\ClientBundle\Twig\Components\ContactCollection;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Repository\CustomFieldValueRepository;
+use Augias\CoreBundle\Test\LiveComponentTest;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\ClientBundle\Twig\Components\ContactCollection;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Repository\CustomFieldValueRepository;
-use SolidInvoice\CoreBundle\Test\LiveComponentTest;
 
 #[CoversClass(ContactCollection::class)]
 final class ContactCollectionTest extends LiveComponentTest

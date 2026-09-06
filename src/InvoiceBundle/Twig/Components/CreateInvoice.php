@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,33 +11,33 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Twig\Components;
+namespace Augias\InvoiceBundle\Twig\Components;
 
+use Augias\CatalogBundle\Entity\Product;
+use Augias\CatalogBundle\Repository\ProductRepository;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Service\CustomField\CustomFieldFormWriter;
+use Augias\InvoiceBundle\DTO\InvoiceFormDTO;
+use Augias\InvoiceBundle\Email\InvoiceEmail;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Enum\InvoiceClientMode;
+use Augias\InvoiceBundle\Form\Type\InvoiceType;
+use Augias\InvoiceBundle\Manager\InvoiceFormManager;
+use Augias\InvoiceBundle\Model\Graph;
+use Augias\MoneyBundle\Calculator;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\TaxBundle\Entity\Tax;
+use Augias\TaxBundle\Repository\TaxRepository;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
-use SolidInvoice\CatalogBundle\Entity\Product;
-use SolidInvoice\CatalogBundle\Repository\ProductRepository;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldFormWriter;
-use SolidInvoice\InvoiceBundle\DTO\InvoiceFormDTO;
-use SolidInvoice\InvoiceBundle\Email\InvoiceEmail;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceClientMode;
-use SolidInvoice\InvoiceBundle\Form\Type\InvoiceType;
-use SolidInvoice\InvoiceBundle\Manager\InvoiceFormManager;
-use SolidInvoice\InvoiceBundle\Model\Graph;
-use SolidInvoice\MoneyBundle\Calculator;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\TaxBundle\Repository\TaxRepository;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -57,7 +57,7 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Twig\Components\CreateInvoiceTest
+ * @see \Augias\InvoiceBundle\Tests\Twig\Components\CreateInvoiceTest
  */
 #[AsLiveComponent]
 final class CreateInvoice extends AbstractController

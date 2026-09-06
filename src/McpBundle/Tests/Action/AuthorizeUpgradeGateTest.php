@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Tests\Action;
+namespace Augias\McpBundle\Tests\Action;
 
 use PHPUnit\Framework\TestCase;
 
 /**
  * The upgrade-gate path through the MCP Authorize action is exercised end-to-end
- * by `\SolidInvoice\SaasBundle\Tests\Functional\McpAuthorizeGateTest`, which
+ * by `\Augias\SaasBundle\Tests\Functional\McpAuthorizeGateTest`, which
  * boots the full MCP stack with a seeded OAuth client and overrides the
  * FeatureGate / UpgradePromptProvider services to verify the rendered upgrade
  * page. Unit-level mocking is impractical because both `ConsentService` and

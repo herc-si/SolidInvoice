@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Telemetry;
+namespace Augias\CoreBundle\Tests\Telemetry;
 
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\CoreBundle\ConfigWriter;
+use Augias\CoreBundle\Telemetry\Telemetry;
+use Augias\CoreBundle\Telemetry\TelemetryEvent;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
@@ -23,10 +27,6 @@ use Doctrine\DBAL\Platforms\SQLitePlatform;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\ConfigWriter;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\CoreBundle\Telemetry\Telemetry;
-use SolidInvoice\CoreBundle\Telemetry\TelemetryEvent;
 use Symfony\Bundle\FrameworkBundle\Secrets\AbstractVault;
 
 #[CoversClass(Telemetry::class)]
@@ -81,7 +81,7 @@ final class TelemetryTest extends TestCase
         self::assertSame('ping', $message->type);
         self::assertSame('build-123', $message->payload['build_id']);
         self::assertSame('augias', $message->payload['app']);
-        self::assertSame(SolidInvoiceCoreBundle::VERSION, $message->payload['version']);
+        self::assertSame(AugiasCoreBundle::VERSION, $message->payload['version']);
         self::assertArrayHasKey('os', $message->payload);
         self::assertArrayHasKey('os_version', $message->payload);
         self::assertArrayHasKey('php_version', $message->payload);
@@ -154,7 +154,7 @@ final class TelemetryTest extends TestCase
         self::assertSame('update', $update->payload['event']);
         self::assertSame([
             'from_version' => '2.9.0',
-            'to_version' => SolidInvoiceCoreBundle::VERSION,
+            'to_version' => AugiasCoreBundle::VERSION,
         ], $update->payload['properties']);
 
         self::assertSame('ping', $ping->type);
@@ -162,7 +162,7 @@ final class TelemetryTest extends TestCase
 
     public function testPingDoesNotEmitUpdateEventWhenVersionIsUnchanged(): void
     {
-        $this->createTelemetry(lastVersion: SolidInvoiceCoreBundle::VERSION)->ping();
+        $this->createTelemetry(lastVersion: AugiasCoreBundle::VERSION)->ping();
 
         self::assertCount(1, $this->bus->messages);
         self::assertSame('ping', $this->bus->messages[0]->type);

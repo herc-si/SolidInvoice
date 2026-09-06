@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\EventSubscriber;
+namespace Augias\SaasBundle\EventSubscriber;
 
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -21,7 +21,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 /**
- * @see \SolidInvoice\SaasBundle\Tests\EventSubscriber\EmailVerificationBannerListenerTest
+ * @see \Augias\SaasBundle\Tests\EventSubscriber\EmailVerificationBannerListenerTest
  */
 final readonly class EmailVerificationBannerListener implements EventSubscriberInterface
 {
@@ -60,7 +60,7 @@ final readonly class EmailVerificationBannerListener implements EventSubscriberI
             return;
         }
 
-        $banner = $this->twig->render('@SolidInvoiceSaas/_alert_banner.html.twig', [
+        $banner = $this->twig->render('@AugiasSaas/_alert_banner.html.twig', [
             'type' => 'warning',
             'icon' => 'tabler:mail-exclamation',
             'title' => $this->translator->trans('email_verification.banner.title', [], 'messages'),

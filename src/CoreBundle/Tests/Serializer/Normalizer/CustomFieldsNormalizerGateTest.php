@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Serializer\Normalizer;
+namespace Augias\CoreBundle\Tests\Serializer\Normalizer;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Company\CompanySelectorInterface;
+use Augias\CoreBundle\Repository\CustomFieldRepository;
+use Augias\CoreBundle\Repository\CustomFieldValueRepository;
+use Augias\CoreBundle\Serializer\Normalizer\CustomFieldsDenormalizer;
+use Augias\CoreBundle\Serializer\Normalizer\CustomFieldsNormalizer;
+use Augias\CoreBundle\Service\CustomField\CustomFieldStagingStore;
+use Augias\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CoreBundle\Company\CompanySelectorInterface;
-use SolidInvoice\CoreBundle\Repository\CustomFieldRepository;
-use SolidInvoice\CoreBundle\Repository\CustomFieldValueRepository;
-use SolidInvoice\CoreBundle\Serializer\Normalizer\CustomFieldsDenormalizer;
-use SolidInvoice\CoreBundle\Serializer\Normalizer\CustomFieldsNormalizer;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldStagingStore;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Search;
+namespace Augias\CoreBundle\Tests\Search;
 
+use Augias\CoreBundle\Search\QualifiedResultFormatterInterface;
+use Augias\CoreBundle\Search\ResultFormatterInterface;
+use Augias\CoreBundle\Search\SearchQueryParser;
+use Augias\CoreBundle\Search\SearchResult;
 use Iterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Search\QualifiedResultFormatterInterface;
-use SolidInvoice\CoreBundle\Search\ResultFormatterInterface;
-use SolidInvoice\CoreBundle\Search\SearchQueryParser;
-use SolidInvoice\CoreBundle\Search\SearchResult;
 
 final class SearchQueryParserTest extends TestCase
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Notification;
+namespace Augias\ClientBundle\Notification;
 
+use Augias\NotificationBundle\Attribute\AsNotification;
+use Augias\NotificationBundle\Enum\NotificationCategory;
+use Augias\NotificationBundle\Notification\NotificationMessage;
+use Augias\NotificationBundle\Notification\Options\Reference\TemplateReference;
+use Augias\NotificationBundle\Notification\Options\Reference\TranslationReference;
+use Augias\NotificationBundle\Notification\Options\Reference\UrlRouteReference;
+use Augias\NotificationBundle\Notification\Options\SimpleMessageOptions;
 use Override;
-use SolidInvoice\NotificationBundle\Attribute\AsNotification;
-use SolidInvoice\NotificationBundle\Enum\NotificationCategory;
-use SolidInvoice\NotificationBundle\Notification\NotificationMessage;
-use SolidInvoice\NotificationBundle\Notification\Options\Reference\TemplateReference;
-use SolidInvoice\NotificationBundle\Notification\Options\Reference\TranslationReference;
-use SolidInvoice\NotificationBundle\Notification\Options\Reference\UrlRouteReference;
-use SolidInvoice\NotificationBundle\Notification\Options\SimpleMessageOptions;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\Notifier\Bridge\Slack\SlackOptions;
 use Symfony\Component\Notifier\Message\ChatMessage;
@@ -40,9 +40,9 @@ class ClientCreateNotification extends NotificationMessage
 {
     public const EVENT = 'client_create';
 
-    final public const string HTML_TEMPLATE = '@SolidInvoiceClient/Email/client_create.html.twig';
+    final public const string HTML_TEMPLATE = '@AugiasClient/Email/client_create.html.twig';
 
-    final public const string TEXT_TEMPLATE = '@SolidInvoiceClient/Email/client_create.text.twig';
+    final public const string TEXT_TEMPLATE = '@AugiasClient/Email/client_create.text.twig';
 
     public function getTextContent(Environment $twig): string
     {

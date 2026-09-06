@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,27 +11,27 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SupplierBundle\DataGrid;
+namespace Augias\SupplierBundle\DataGrid;
 
+use Augias\ClientBundle\DataGrid\BaseClientGrid;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\GridBuilder\Action\EditAction;
+use Augias\DataGridBundle\GridBuilder\Action\ViewAction;
+use Augias\DataGridBundle\GridBuilder\Batch\BatchAction;
+use Augias\DataGridBundle\GridBuilder\Query;
+use Augias\DataGridBundle\Source\ORMSource;
 use Doctrine\ORM\EntityManagerInterface;
 use Override;
-use SolidInvoice\ClientBundle\DataGrid\BaseClientGrid;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\GridBuilder\Action\EditAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Action\ViewAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Batch\BatchAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
-use SolidInvoice\DataGridBundle\Source\ORMSource;
 use Symfony\Component\Translation\TranslatableMessage;
 
 /**
- * A filtered view of {@see \SolidInvoice\ClientBundle\Entity\Client} — every
- * row with {@see \SolidInvoice\ClientBundle\Entity\Client::isSupplier()} true
+ * A filtered view of {@see \Augias\ClientBundle\Entity\Client} — every
+ * row with {@see \Augias\ClientBundle\Entity\Client::isSupplier()} true
  * — rather than a separate table: a party is a client, a supplier, or both,
  * on the same record.
  *
- * @see \SolidInvoice\SupplierBundle\Tests\DataGrid\SupplierGridTest
+ * @see \Augias\SupplierBundle\Tests\DataGrid\SupplierGridTest
  */
 #[AsDataGrid(name: 'supplier_grid', title: 'Suppliers')]
 final class SupplierGrid extends BaseClientGrid

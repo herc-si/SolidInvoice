@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Tests\Listener\Mailer;
+namespace Augias\QuoteBundle\Tests\Listener\Mailer;
 
+use Augias\CoreBundle\Contracts\PaidSubscriptionGateInterface;
+use Augias\CoreBundle\Pdf\Generator;
+use Augias\CoreBundle\Templates\BillingTemplateRegistry;
+use Augias\CoreBundle\Templates\BillingTemplateResolver;
+use Augias\QuoteBundle\Email\QuoteEmail;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Listener\Mailer\QuotePdfListener;
+use Augias\SettingsBundle\SystemConfig;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Contracts\PaidSubscriptionGateInterface;
-use SolidInvoice\CoreBundle\Pdf\Generator;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateRegistry;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
-use SolidInvoice\QuoteBundle\Email\QuoteEmail;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Listener\Mailer\QuotePdfListener;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\Mailer\Envelope;
@@ -46,7 +46,7 @@ final class QuotePdfListenerTest extends TestCase
         $twig = M::mock(Environment::class);
         $twig->shouldReceive('render')
             ->once()
-            ->with('@SolidInvoiceQuote/Pdf/quote.html.twig', ['quote' => $quote])
+            ->with('@AugiasQuote/Pdf/quote.html.twig', ['quote' => $quote])
             ->andReturn('<p>Quote #1</p>');
 
         $pdf = M::mock(Generator::class);

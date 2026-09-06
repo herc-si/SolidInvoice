@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Entity;
+namespace Augias\BillBundle\Entity;
 
+use Augias\BillBundle\Repository\BillCategoryRepository;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\BillBundle\Repository\BillCategoryRepository;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
@@ -27,9 +27,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * A user-managed expense category (e.g. "Supplies", "Rent"), for grouping
  * {@see Bill} records by spend type — the structured data a future
  * accounting/FEC export would read from. Deliberately simple, mirroring
- * {@see \SolidInvoice\TaxBundle\Entity\Tax}'s flat-list-of-records shape.
+ * {@see \Augias\TaxBundle\Entity\Tax}'s flat-list-of-records shape.
  *
- * @see \SolidInvoice\BillBundle\Tests\Entity\BillCategoryTest
+ * @see \Augias\BillBundle\Tests\Entity\BillCategoryTest
  */
 #[ORM\Table(name: BillCategory::TABLE_NAME)]
 #[ORM\UniqueConstraint(columns: ['name', 'company_id'])]

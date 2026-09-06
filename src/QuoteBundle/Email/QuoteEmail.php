@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Email;
+namespace Augias\QuoteBundle\Email;
 
-use SolidInvoice\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Entity\Quote;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 final class QuoteEmail extends TemplatedEmail
@@ -23,7 +23,7 @@ final class QuoteEmail extends TemplatedEmail
     ) {
         parent::__construct();
 
-        $this->htmlTemplate('@SolidInvoiceQuote/Email/quote.html.twig');
+        $this->htmlTemplate('@AugiasQuote/Email/quote.html.twig');
         $this->context(['quote' => $this->quote]);
     }
 

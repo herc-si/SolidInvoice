@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Command;
+namespace Augias\InvoiceBundle\Command;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Message\MarkInvoiceOverdue;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Message\MarkInvoiceOverdue;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
 use SolidWorx\Platform\PlatformBundle\Console\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
@@ -27,7 +27,7 @@ use function assert;
 use function sprintf;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Command\MarkOverdueInvoicesCommandTest
+ * @see \Augias\InvoiceBundle\Tests\Command\MarkOverdueInvoicesCommandTest
  */
 #[AsCommand(
     name: 'solidinvoice:invoices:mark-overdue',

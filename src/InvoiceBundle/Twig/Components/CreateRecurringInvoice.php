@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Twig\Components;
+namespace Augias\InvoiceBundle\Twig\Components;
 
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Form\Type\RecurringInvoiceType;
+use Augias\TaxBundle\Repository\TaxRepository;
 use Brick\Math\Exception\MathException;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Form\Type\RecurringInvoiceType;
-use SolidInvoice\TaxBundle\Repository\TaxRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;

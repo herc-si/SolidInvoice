@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\InvoiceBundle\Action\CloneInvoice;
-use SolidInvoice\InvoiceBundle\Action\CloneRecurringInvoice;
-use SolidInvoice\InvoiceBundle\Action\Create;
-use SolidInvoice\InvoiceBundle\Action\CreateRecurring;
-use SolidInvoice\InvoiceBundle\Action\Edit;
-use SolidInvoice\InvoiceBundle\Action\EditRecurring;
-use SolidInvoice\InvoiceBundle\Action\Fields;
-use SolidInvoice\InvoiceBundle\Action\Index;
-use SolidInvoice\InvoiceBundle\Action\RecurringIndex;
-use SolidInvoice\InvoiceBundle\Action\RecurringTransition;
-use SolidInvoice\InvoiceBundle\Action\SendManualReminder;
-use SolidInvoice\InvoiceBundle\Action\Transition;
-use SolidInvoice\InvoiceBundle\Action\Transition\Send;
-use SolidInvoice\InvoiceBundle\Action\View;
-use SolidInvoice\InvoiceBundle\Action\ViewRecurring;
+use Augias\InvoiceBundle\Action\CloneInvoice;
+use Augias\InvoiceBundle\Action\CloneRecurringInvoice;
+use Augias\InvoiceBundle\Action\Create;
+use Augias\InvoiceBundle\Action\CreateRecurring;
+use Augias\InvoiceBundle\Action\Edit;
+use Augias\InvoiceBundle\Action\EditRecurring;
+use Augias\InvoiceBundle\Action\Fields;
+use Augias\InvoiceBundle\Action\Index;
+use Augias\InvoiceBundle\Action\RecurringIndex;
+use Augias\InvoiceBundle\Action\RecurringTransition;
+use Augias\InvoiceBundle\Action\SendManualReminder;
+use Augias\InvoiceBundle\Action\Transition;
+use Augias\InvoiceBundle\Action\Transition\Send;
+use Augias\InvoiceBundle\Action\View;
+use Augias\InvoiceBundle\Action\ViewRecurring;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {

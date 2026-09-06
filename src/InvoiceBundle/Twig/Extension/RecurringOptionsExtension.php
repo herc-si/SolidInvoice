@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Twig\Extension;
+namespace Augias\InvoiceBundle\Twig\Extension;
 
+use Augias\CronBundle\Enum\ScheduleEndType;
+use Augias\CronBundle\Enum\ScheduleRecurringType;
+use Augias\InvoiceBundle\Entity\RecurringOptions;
+use Augias\InvoiceBundle\Recurring\RecurringSchedule;
 use Override;
-use SolidInvoice\CronBundle\Enum\ScheduleEndType;
-use SolidInvoice\CronBundle\Enum\ScheduleRecurringType;
-use SolidInvoice\InvoiceBundle\Entity\RecurringOptions;
-use SolidInvoice\InvoiceBundle\Recurring\RecurringSchedule;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 

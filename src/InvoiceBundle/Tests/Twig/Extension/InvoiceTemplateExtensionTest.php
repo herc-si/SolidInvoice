@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Twig\Extension;
+namespace Augias\InvoiceBundle\Tests\Twig\Extension;
 
+use Augias\ClientBundle\Entity\Contact;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Twig\Extension\InvoiceTemplateExtension;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Enum\PaymentStatus;
 use Brick\Math\BigInteger;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Twig\Extension\InvoiceTemplateExtension;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
 
 #[CoversClass(InvoiceTemplateExtension::class)]
 final class InvoiceTemplateExtensionTest extends TestCase

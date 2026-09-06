@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,24 +11,24 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Tests\Functional;
+namespace Augias\BillBundle\Tests\Functional;
 
+use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Enum\BillPaymentMethod;
+use Augias\BillBundle\Enum\BillStatus;
+use Augias\BillBundle\Exception\InvalidTransitionException;
+use Augias\BillBundle\Manager\BillManager;
+use Augias\BillBundle\Manager\BillPaymentManager;
+use Augias\BillBundle\Model\Graph;
+use Augias\BillBundle\Repository\BillRepository;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\TaxBundle\Entity\TaxIdentifier;
 use Brick\Math\BigInteger;
 use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\BillBundle\Enum\BillPaymentMethod;
-use SolidInvoice\BillBundle\Enum\BillStatus;
-use SolidInvoice\BillBundle\Exception\InvalidTransitionException;
-use SolidInvoice\BillBundle\Manager\BillManager;
-use SolidInvoice\BillBundle\Manager\BillPaymentManager;
-use SolidInvoice\BillBundle\Model\Graph;
-use SolidInvoice\BillBundle\Repository\BillRepository;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\TaxBundle\Entity\TaxIdentifier;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Workflow\WorkflowInterface;
 

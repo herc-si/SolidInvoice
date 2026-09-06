@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Action;
+namespace Augias\CoreBundle\Tests\Action;
 
+use Augias\CoreBundle\Action\Search;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Search\MultiSearchService;
+use Augias\CoreBundle\Search\ResultFormatterInterface;
+use Augias\CoreBundle\Search\SearchQueryParser;
+use Augias\CoreBundle\Search\SearchResult;
 use Doctrine\Persistence\ManagerRegistry;
 use Meilisearch\Client;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
-use SolidInvoice\CoreBundle\Action\Search;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Search\MultiSearchService;
-use SolidInvoice\CoreBundle\Search\ResultFormatterInterface;
-use SolidInvoice\CoreBundle\Search\SearchQueryParser;
-use SolidInvoice\CoreBundle\Search\SearchResult;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Uid\Ulid;
 

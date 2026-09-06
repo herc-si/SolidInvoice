@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Twig\Components;
+namespace Augias\UserBundle\Tests\Twig\Components;
 
+use Augias\UserBundle\Entity\ApiToken;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Repository\ApiTokenRepository;
+use Augias\UserBundle\Twig\Components\ApiTokenHistoryModal;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\UserBundle\Entity\ApiToken;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Repository\ApiTokenRepository;
-use SolidInvoice\UserBundle\Twig\Components\ApiTokenHistoryModal;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Uid\Ulid;
 

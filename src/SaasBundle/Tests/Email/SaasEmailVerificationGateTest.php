@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Email;
+namespace Augias\SaasBundle\Tests\Email;
 
+use Augias\CoreBundle\Company\CompanySelectorInterface;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\SaasBundle\Email\SaasEmailVerificationGate;
+use Augias\UserBundle\Entity\User;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Company\CompanySelectorInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\SaasBundle\Email\SaasEmailVerificationGate;
-use SolidInvoice\UserBundle\Entity\User;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use SolidWorx\Platform\SaasBundle\Subscription\SubscriptionProviderInterface;
 use Symfony\Bundle\SecurityBundle\Security;

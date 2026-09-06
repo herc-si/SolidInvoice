@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Action\Security;
+namespace Augias\UserBundle\Action\Security;
 
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +24,7 @@ final class Login
     /**
      * @return array{last_username: ?string, error: ?AuthenticationException, csrf_token: string}
      */
-    #[Template('@SolidInvoiceUser/Security/login.html.twig')]
+    #[Template('@AugiasUser/Security/login.html.twig')]
     public function __invoke(Request $request, CsrfTokenManagerInterface $csrfTokenManager): array
     {
         $session = $request->getSession();

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\DataGrid;
+namespace Augias\InvoiceBundle\DataGrid;
 
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\GridBuilder\Batch\BatchAction;
+use Augias\DataGridBundle\GridBuilder\Query;
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
+use Augias\InvoiceBundle\Repository\RecurringInvoiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Override;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\GridBuilder\Batch\BatchAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
-use SolidInvoice\InvoiceBundle\Repository\RecurringInvoiceRepository;
 
 #[AsDataGrid(name: 'completed_recurring_invoice_grid', title: 'Completed Recurring Invoices')]
 final class CompletedRecurringInvoiceGrid extends BaseRecurringInvoiceGrid

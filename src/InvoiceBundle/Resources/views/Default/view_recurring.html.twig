@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -7,7 +7,7 @@
  # with this source code in the file LICENSE.
  #}
 
-{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+{% extends "@AugiasCore/Layout/default.html.twig" %}
 
 {% block page_title %}
     {{ 'invoice.list.recurring_title'|trans }} - {{ invoice.client }}
@@ -71,7 +71,7 @@
                             </li>
                         {% endif %}
 
-                        {% if invoice.status == enum('SolidInvoice\\InvoiceBundle\\Enum\\RecurringInvoiceStatus').Active %}
+                        {% if invoice.status == enum('Augias\\InvoiceBundle\\Enum\\RecurringInvoiceStatus').Active %}
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item" href="{{ path('_action_recurring_invoice', {'action' : 'pause', 'id' : invoice.id}) }}">
@@ -81,7 +81,7 @@
                             </li>
                         {% endif %}
 
-                        {% if invoice.status == enum('SolidInvoice\\InvoiceBundle\\Enum\\RecurringInvoiceStatus').Paused %}
+                        {% if invoice.status == enum('Augias\\InvoiceBundle\\Enum\\RecurringInvoiceStatus').Paused %}
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item" href="{{ path('_action_recurring_invoice', {'action' : 'resume', 'id' : invoice.id}) }}">
@@ -120,7 +120,7 @@
                     {{ ux_icon('tabler:check', {width: 18, height: 18}) }}
                     {{ "invoice.recurring.activate"|trans }}
                 </a>
-            {% elseif invoice.status == enum('SolidInvoice\\InvoiceBundle\\Enum\\RecurringInvoiceStatus').Paused %}
+            {% elseif invoice.status == enum('Augias\\InvoiceBundle\\Enum\\RecurringInvoiceStatus').Paused %}
                 <a href="{{ path('_action_recurring_invoice', {'action' : 'resume', 'id' : invoice.id}) }}" class="btn btn-success btn-hero">
                     {{ ux_icon('tabler:player-play', {width: 18, height: 18}) }}
                     {{ "invoice.recurring.resume"|trans }}
@@ -296,7 +296,7 @@
                 </div>
 
                 {# Custom Fields (admin view shows ALL fields; recurring uses INVOICE target) #}
-                <twig:CustomFieldsList :target="enum('SolidInvoice\\CoreBundle\\Enum\\CustomFieldTarget').INVOICE" :recordId="invoice.id" />
+                <twig:CustomFieldsList :target="enum('Augias\\CoreBundle\\Enum\\CustomFieldTarget').INVOICE" :recordId="invoice.id" />
 
                 {# Footer - Terms & Notes #}
                 {% if invoice.terms is not empty or invoice.notes is not empty %}
@@ -388,7 +388,7 @@
             {% endif %}
 
             {# Upcoming Occurrences Card - Only for Active Invoices #}
-            {% if invoice.status == enum('SolidInvoice\\InvoiceBundle\\Enum\\RecurringInvoiceStatus').Active and nextOccurrences is defined and nextOccurrences|length > 0 %}
+            {% if invoice.status == enum('Augias\\InvoiceBundle\\Enum\\RecurringInvoiceStatus').Active and nextOccurrences is defined and nextOccurrences|length > 0 %}
                 <div class="doc-sidebar-card">
                     <div class="doc-sidebar-card-header">
                         <div class="doc-sidebar-card-icon">

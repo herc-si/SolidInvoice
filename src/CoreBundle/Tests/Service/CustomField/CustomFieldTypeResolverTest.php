@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Service\CustomField;
+namespace Augias\CoreBundle\Tests\Service\CustomField;
 
+use Augias\CoreBundle\Entity\CustomField\CustomField;
+use Augias\CoreBundle\Enum\CustomFieldType;
+use Augias\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
 use Carbon\CarbonImmutable;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Entity\CustomField\CustomField;
-use SolidInvoice\CoreBundle\Enum\CustomFieldType;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
 
 final class CustomFieldTypeResolverTest extends TestCase
 {

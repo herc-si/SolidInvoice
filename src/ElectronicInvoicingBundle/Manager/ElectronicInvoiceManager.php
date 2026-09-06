@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Manager;
+namespace Augias\ElectronicInvoicingBundle\Manager;
 
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use Augias\ElectronicInvoicingBundle\Provider\ElectronicInvoiceProviderRegistry;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\SettingsBundle\SystemConfig;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\ElectronicInvoiceProviderRegistry;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\SettingsBundle\SystemConfig;
 
 /**
  * Central place for "can this invoice be sent electronically, and doing so" —
@@ -27,7 +27,7 @@ use SolidInvoice\SettingsBundle\SystemConfig;
  * trigger fired when an invoice is published (see InvoiceBundle\Action\Transition\Send),
  * so eligibility and submission bookkeeping stay in one place.
  *
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Manager\ElectronicInvoiceManagerTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Manager\ElectronicInvoiceManagerTest
  */
 final readonly class ElectronicInvoiceManager implements ElectronicInvoiceManagerInterface
 {

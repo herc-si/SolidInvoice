@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Form\Type;
+namespace Augias\CoreBundle\Form\Type;
 
+use Augias\SettingsBundle\Entity\Setting;
 use Override;
-use SolidInvoice\SettingsBundle\Entity\Setting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\UX\Dropzone\Form\DropzoneType;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Form\Type\ImageUploadTypeTest
+ * @see \Augias\CoreBundle\Tests\Form\Type\ImageUploadTypeTest
  * @extends AbstractType<mixed>
  */
 class ImageUploadType extends AbstractType

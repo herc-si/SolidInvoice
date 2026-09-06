@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Listener\Doctrine;
+namespace Augias\InvoiceBundle\Tests\Listener\Doctrine;
 
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Listener\Doctrine\InvoiceSaveListener;
+use Augias\QuoteBundle\Entity\Quote;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Listener\Doctrine\InvoiceSaveListener;
-use SolidInvoice\QuoteBundle\Entity\Quote;
 
 final class InvoiceSaveListenerTest extends TestCase
 {

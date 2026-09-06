@@ -1,6 +1,6 @@
 # Email Styles - SCSS Source Files
 
-This directory contains SCSS source files for email styles using the SolidInvoice design system.
+This directory contains SCSS source files for email styles using the Augias design system.
 
 ## Files
 
@@ -96,4 +96,4 @@ bun run build
 
 - [Foundation for Emails](https://get.foundation/emails.html)
 - [Email Client CSS Support](https://www.campaignmonitor.com/css/)
-- [SolidInvoice Design System](../design-system/)
+- [Augias Design System](../design-system/)

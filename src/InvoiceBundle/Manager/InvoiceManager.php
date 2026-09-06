@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,36 +11,36 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Manager;
+namespace Augias\InvoiceBundle\Manager;
 
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Generator\BillingIdGenerator;
+use Augias\CoreBundle\Service\CustomField\CustomFieldValueCopier;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Event\InvoiceEvent;
+use Augias\InvoiceBundle\Event\InvoiceEvents;
+use Augias\InvoiceBundle\Exception\InvalidTransitionException;
+use Augias\InvoiceBundle\Model\Graph;
+use Augias\InvoiceBundle\Notification\InvoiceStatusNotification;
+use Augias\NotificationBundle\Notification\NotificationManager;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\TaxBundle\Service\TaxSnapshotCopier;
 use Brick\Math\Exception\MathException;
 use Carbon\CarbonImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use Psr\Clock\ClockInterface;
 use Psr\Container\ContainerExceptionInterface;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldValueCopier;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Event\InvoiceEvent;
-use SolidInvoice\InvoiceBundle\Event\InvoiceEvents;
-use SolidInvoice\InvoiceBundle\Exception\InvalidTransitionException;
-use SolidInvoice\InvoiceBundle\Model\Graph;
-use SolidInvoice\InvoiceBundle\Notification\InvoiceStatusNotification;
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\TaxBundle\Service\TaxSnapshotCopier;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Workflow\WorkflowInterface;
 use function str_replace;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Manager\InvoiceManagerTest
+ * @see \Augias\InvoiceBundle\Tests\Manager\InvoiceManagerTest
  */
 class InvoiceManager
 {
@@ -133,7 +133,7 @@ class InvoiceManager
 
         $invoice->setTax($object->getTax());
 
-        /** @var \SolidInvoice\QuoteBundle\Entity\Line $item */
+        /** @var \Augias\QuoteBundle\Entity\Line $item */
         foreach ($object->getLines() as $item) {
             $invoiceItem = new Line();
             $invoiceItem->setCreated($now);

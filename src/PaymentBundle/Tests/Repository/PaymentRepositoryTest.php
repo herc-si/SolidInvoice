@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Tests\Repository;
+namespace Augias\PaymentBundle\Tests\Repository;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Test\Traits\DoctrineTestTrait;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Enum\PaymentStatus;
+use Augias\PaymentBundle\Repository\PaymentRepository;
+use Augias\PaymentBundle\Test\Factory\PaymentFactory;
+use Augias\PaymentBundle\Test\Factory\PaymentMethodFactory;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use Carbon\Carbon;
@@ -20,16 +30,6 @@ use Carbon\CarbonImmutable;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Test\Traits\DoctrineTestTrait;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
-use SolidInvoice\PaymentBundle\Repository\PaymentRepository;
-use SolidInvoice\PaymentBundle\Test\Factory\PaymentFactory;
-use SolidInvoice\PaymentBundle\Test\Factory\PaymentMethodFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(PaymentRepository::class)]

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Validator\Constraints;
+namespace Augias\ClientBundle\Validator\Constraints;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\SaasBundle\Feature\Feature;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\Validator\Constraint;
@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 /**
- * @see \SolidInvoice\ClientBundle\Tests\Validator\Constraints\WithinPlanClientLimitValidatorTest
+ * @see \Augias\ClientBundle\Tests\Validator\Constraints\WithinPlanClientLimitValidatorTest
  */
 final class WithinPlanClientLimitValidator extends ConstraintValidator
 {

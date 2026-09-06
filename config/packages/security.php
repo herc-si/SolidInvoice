@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,15 +13,15 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use SolidInvoice\ApiBundle\Event\Listener\AuthenticationFailHandler;
-use SolidInvoice\ApiBundle\Event\Listener\AuthenticationSuccessHandler;
-use SolidInvoice\ApiBundle\Security\ApiTokenAuthenticator;
-use SolidInvoice\ApiBundle\Security\Provider\ApiTokenUserProvider;
-use SolidInvoice\McpBundle\Security\McpOAuthAuthenticator;
-use SolidInvoice\McpBundle\Security\McpOAuthUserProvider;
-use SolidInvoice\UserBundle\Security\OAuth\OAuthAuthenticator;
-use SolidInvoice\UserBundle\Security\UserChecker;
-use SolidInvoice\UserBundle\Security\VerifiedUserChecker;
+use Augias\ApiBundle\Event\Listener\AuthenticationFailHandler;
+use Augias\ApiBundle\Event\Listener\AuthenticationSuccessHandler;
+use Augias\ApiBundle\Security\ApiTokenAuthenticator;
+use Augias\ApiBundle\Security\Provider\ApiTokenUserProvider;
+use Augias\McpBundle\Security\McpOAuthAuthenticator;
+use Augias\McpBundle\Security\McpOAuthUserProvider;
+use Augias\UserBundle\Security\OAuth\OAuthAuthenticator;
+use Augias\UserBundle\Security\UserChecker;
+use Augias\UserBundle\Security\VerifiedUserChecker;
 use SolidWorx\Platform\PlatformBundle\DependencyInjection\Extension\LoginExtension;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 

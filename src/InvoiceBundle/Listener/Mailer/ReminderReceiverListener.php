@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Listener\Mailer;
+namespace Augias\InvoiceBundle\Listener\Mailer;
 
-use SolidInvoice\InvoiceBundle\Email\InvoiceReminderEmail;
-use SolidInvoice\SettingsBundle\SystemConfig;
+use Augias\InvoiceBundle\Email\InvoiceReminderEmail;
+use Augias\SettingsBundle\SystemConfig;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mailer\Event\MessageEvent;
 use Symfony\Component\Mime\Address;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Listener\Mailer\ReminderReceiverListenerTest
+ * @see \Augias\InvoiceBundle\Tests\Listener\Mailer\ReminderReceiverListenerTest
  */
 readonly class ReminderReceiverListener implements EventSubscriberInterface
 {

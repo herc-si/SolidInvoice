@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\MailerBundle\SolidInvoiceMailerBundle;
+use Augias\MailerBundle\AugiasMailerBundle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -25,6 +25,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ;
 
     $services
-        ->load(SolidInvoiceMailerBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
+        ->load(AugiasMailerBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
         ->exclude(dirname(__DIR__, 3) . '/{DependencyInjection,Entity,Resources,Tests}');
 };

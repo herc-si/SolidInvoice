@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Listener;
+namespace Augias\QuoteBundle\Listener;
 
+use Augias\InvoiceBundle\Manager\InvoiceManager;
+use Augias\InvoiceBundle\Model\Graph as InvoiceGraph;
+use Augias\NotificationBundle\Notification\NotificationManager;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Enum\QuoteStatus;
+use Augias\QuoteBundle\Exception\InvalidTransitionException;
+use Augias\QuoteBundle\Mailer\QuoteMailer;
+use Augias\QuoteBundle\Model\Graph as QuoteGraph;
+use Augias\QuoteBundle\Notification\QuoteStatusNotification;
 use Doctrine\Persistence\ManagerRegistry;
 use JsonException;
-use SolidInvoice\InvoiceBundle\Manager\InvoiceManager;
-use SolidInvoice\InvoiceBundle\Model\Graph as InvoiceGraph;
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
-use SolidInvoice\QuoteBundle\Exception\InvalidTransitionException;
-use SolidInvoice\QuoteBundle\Mailer\QuoteMailer;
-use SolidInvoice\QuoteBundle\Model\Graph as QuoteGraph;
-use SolidInvoice\QuoteBundle\Notification\QuoteStatusNotification;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Workflow\Event\Event;
@@ -31,7 +31,7 @@ use Symfony\Component\Workflow\Transition;
 use Symfony\Component\Workflow\WorkflowInterface;
 
 /**
- * @see \SolidInvoice\QuoteBundle\Tests\Listener\WorkFlowSubscriberTest
+ * @see \Augias\QuoteBundle\Tests\Listener\WorkFlowSubscriberTest
  */
 final readonly class WorkFlowSubscriber implements EventSubscriberInterface
 {

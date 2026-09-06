@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Tests\Twig\Components;
+namespace Augias\SettingsBundle\Tests\Twig\Components;
 
+use Augias\CoreBundle\Test\LiveComponentTest;
+use Augias\SettingsBundle\Entity\Setting;
+use Augias\SettingsBundle\Twig\Components\Settings;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\CoreBundle\Test\LiveComponentTest;
-use SolidInvoice\SettingsBundle\Entity\Setting;
-use SolidInvoice\SettingsBundle\Twig\Components\Settings;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\UX\LiveComponent\Test\TestLiveComponent;
 use function preg_replace;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Tests;
+namespace Augias\ApiBundle\Tests;
 
+use Augias\ApiBundle\ApiTokenManager;
+use Augias\ApiBundle\GeneratedApiToken;
+use Augias\ApiBundle\Security\ApiTokenHasher;
+use Augias\UserBundle\Entity\ApiToken;
+use Augias\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,11 +25,6 @@ use Doctrine\Persistence\ObjectManager;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\ApiBundle\ApiTokenManager;
-use SolidInvoice\ApiBundle\GeneratedApiToken;
-use SolidInvoice\ApiBundle\Security\ApiTokenHasher;
-use SolidInvoice\UserBundle\Entity\ApiToken;
-use SolidInvoice\UserBundle\Entity\User;
 
 final class ApiTokenManagerTest extends TestCase
 {

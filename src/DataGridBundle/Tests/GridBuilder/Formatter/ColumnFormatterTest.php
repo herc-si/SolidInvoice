@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,29 +11,29 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Tests\GridBuilder\Formatter;
+namespace Augias\DataGridBundle\Tests\GridBuilder\Formatter;
 
+use Augias\DataGridBundle\GridBuilder\Column\CurrencyColumn;
+use Augias\DataGridBundle\GridBuilder\Column\DateTimeColumn;
+use Augias\DataGridBundle\GridBuilder\Column\MoneyColumn;
+use Augias\DataGridBundle\GridBuilder\Column\RelativeDateColumn;
+use Augias\DataGridBundle\GridBuilder\Column\StatusColumn;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
+use Augias\DataGridBundle\GridBuilder\Column\UrlColumn;
+use Augias\DataGridBundle\GridBuilder\Formatter\ColumnFormatter;
+use Augias\DataGridBundle\GridBuilder\Formatter\CurrencyFormatter;
+use Augias\DataGridBundle\GridBuilder\Formatter\DateTimeFormatter;
+use Augias\DataGridBundle\GridBuilder\Formatter\MoneyFormatter;
+use Augias\DataGridBundle\GridBuilder\Formatter\RelativeDateFormatter;
+use Augias\DataGridBundle\GridBuilder\Formatter\StatusFormatter;
+use Augias\DataGridBundle\GridBuilder\Formatter\StringFormatter;
+use Augias\DataGridBundle\GridBuilder\Formatter\UrlFormatter;
+use Augias\SettingsBundle\SystemConfig;
 use Mockery as M;
 use Money\Currency;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\CurrencyColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\DateTimeColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\MoneyColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\RelativeDateColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StatusColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\UrlColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Formatter\ColumnFormatter;
-use SolidInvoice\DataGridBundle\GridBuilder\Formatter\CurrencyFormatter;
-use SolidInvoice\DataGridBundle\GridBuilder\Formatter\DateTimeFormatter;
-use SolidInvoice\DataGridBundle\GridBuilder\Formatter\MoneyFormatter;
-use SolidInvoice\DataGridBundle\GridBuilder\Formatter\RelativeDateFormatter;
-use SolidInvoice\DataGridBundle\GridBuilder\Formatter\StatusFormatter;
-use SolidInvoice\DataGridBundle\GridBuilder\Formatter\StringFormatter;
-use SolidInvoice\DataGridBundle\GridBuilder\Formatter\UrlFormatter;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Provider;
+namespace Augias\ElectronicInvoicingBundle\Provider;
 
 /**
  * Immutable presentation metadata for a single electronic-invoicing provider.
  *
  * String properties are translation keys, resolved with `|trans` in templates
- * — see SolidInvoice\PaymentBundle\Gateway\GatewayInfo, which this mirrors.
+ * — see Augias\PaymentBundle\Gateway\GatewayInfo, which this mirrors.
  */
 final readonly class ProviderInfo
 {

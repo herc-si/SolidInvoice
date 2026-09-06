@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Tests\Form\Type;
+namespace Augias\InstallBundle\Tests\Form\Type;
 
+use Augias\CoreBundle\Tests\FormTestCase;
+use Augias\InstallBundle\DTO\DatabaseConfig;
+use Augias\InstallBundle\Form\Step\DatabaseConfigStep;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
-use SolidInvoice\InstallBundle\DTO\DatabaseConfig;
-use SolidInvoice\InstallBundle\Form\Step\DatabaseConfigStep;
 
 #[CoversClass(DatabaseConfigStep::class)]
 final class DatabaseConfigTypeTest extends FormTestCase

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Calculator;
+namespace Augias\TaxBundle\Calculator;
 
-use SolidInvoice\InvoiceBundle\Entity\BaseInvoice;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\TaxBundle\Calculator\Result\CalculationResult;
+use Augias\InvoiceBundle\Entity\BaseInvoice;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\TaxBundle\Calculator\Result\CalculationResult;
 
 interface TaxCalculatorInterface
 {

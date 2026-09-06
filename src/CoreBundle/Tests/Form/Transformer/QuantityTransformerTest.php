@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Form\Transformer;
+namespace Augias\CoreBundle\Tests\Form\Transformer;
 
+use Augias\CoreBundle\Doctrine\Type\QuantityType;
+use Augias\CoreBundle\Form\Transformer\QuantityTransformer;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigInteger;
 use Brick\Math\BigNumber;
 use Locale;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Doctrine\Type\QuantityType;
-use SolidInvoice\CoreBundle\Form\Transformer\QuantityTransformer;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 final class QuantityTransformerTest extends TestCase

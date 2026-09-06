@@ -5,5 +5,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    SolidInvoice\TaxBundle\Repository\TaxRepository: ~
+    Augias\TaxBundle\Repository\TaxRepository: ~
 

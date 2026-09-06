@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Action;
+namespace Augias\CoreBundle\Action;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -36,7 +36,7 @@ final readonly class SelectCompany
     /**
      * @return array{companies: Collection<int, Company>}|Response
      */
-    #[Template('@SolidInvoiceCore/Company/select.html.twig')]
+    #[Template('@AugiasCore/Company/select.html.twig')]
     public function __invoke(Request $request): array | Response
     {
         $user = $this->security->getUser();

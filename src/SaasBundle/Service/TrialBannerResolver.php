@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Service;
+namespace Augias\SaasBundle\Service;
 
 use Carbon\CarbonInterval;
 use DateInterval;
@@ -27,7 +27,7 @@ use function ceil;
  * subscription and, for trials, which variant. Pure: no translator, no Twig,
  * no URL generation — returns translation keys/params for the listener to render.
  *
- * @see \SolidInvoice\SaasBundle\Tests\Service\TrialBannerResolverTest
+ * @see \Augias\SaasBundle\Tests\Service\TrialBannerResolverTest
  */
 final readonly class TrialBannerResolver
 {

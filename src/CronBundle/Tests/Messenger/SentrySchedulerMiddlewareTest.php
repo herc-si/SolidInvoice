@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CronBundle\Tests\Messenger;
+namespace Augias\CronBundle\Tests\Messenger;
 
+use Augias\CronBundle\Messenger\SentrySchedulerMiddleware;
 use Carbon\CarbonImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -27,7 +28,6 @@ use Sentry\Options;
 use Sentry\SentrySdk;
 use Sentry\State\Hub;
 use Sentry\State\Scope;
-use SolidInvoice\CronBundle\Messenger\SentrySchedulerMiddleware;
 use Symfony\Component\Console\Messenger\RunCommandMessage;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;

@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -214,7 +214,7 @@
                             {% endif %}
                             {% set paid = 0 %}
                             {% if (isRecurring is not defined or isRecurring is same as(false)) and invoice.payments|length > 0 and not invoice.balance.isZero %}
-                                {% for payment in invoice.payments|filter((v) => v.status == enum('SolidInvoice\\PaymentBundle\\Enum\\PaymentStatus').Captured) %}
+                                {% for payment in invoice.payments|filter((v) => v.status == enum('Augias\\PaymentBundle\\Enum\\PaymentStatus').Captured) %}
                                     <tr>
                                         <td colspan="{{ footerSpan }}" class="no-line text-right">
                                             <strong>

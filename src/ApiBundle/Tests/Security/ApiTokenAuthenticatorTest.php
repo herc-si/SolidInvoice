@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Tests\Security;
+namespace Augias\ApiBundle\Tests\Security;
 
+use Augias\ApiBundle\Security\ApiTokenAuthenticator;
+use Augias\ApiBundle\Security\Provider\ApiTokenUserProvider;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Company\HostType;
+use Augias\CoreBundle\Company\ResolvedHost;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Listener\HostRoutingListener;
+use Augias\UserBundle\Entity\ApiToken;
+use Augias\UserBundle\Entity\ApiTokenHistory;
+use Augias\UserBundle\Repository\ApiTokenHistoryRepository;
+use Augias\UserBundle\Repository\ApiTokenRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\SQLitePlatform;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,17 +37,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use SensitiveParameter;
-use SolidInvoice\ApiBundle\Security\ApiTokenAuthenticator;
-use SolidInvoice\ApiBundle\Security\Provider\ApiTokenUserProvider;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Company\HostType;
-use SolidInvoice\CoreBundle\Company\ResolvedHost;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Listener\HostRoutingListener;
-use SolidInvoice\UserBundle\Entity\ApiToken;
-use SolidInvoice\UserBundle\Entity\ApiTokenHistory;
-use SolidInvoice\UserBundle\Repository\ApiTokenHistoryRepository;
-use SolidInvoice\UserBundle\Repository\ApiTokenRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;

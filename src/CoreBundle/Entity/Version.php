@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Entity;
+namespace Augias\CoreBundle\Entity;
 
+use Augias\CoreBundle\Repository\VersionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Repository\VersionRepository;
 use Stringable;
 
 #[ORM\Table(name: Version::TABLE_NAME)]

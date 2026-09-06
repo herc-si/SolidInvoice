@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Traits\Entity;
+namespace Augias\CoreBundle\Traits\Entity;
 
+use Augias\CoreBundle\Entity\Company;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Entity\Company;
 use Symfony\Component\Serializer\Attribute as Serialize;
 use Symfony\Component\Serializer\Attribute\Groups;
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Company;
+namespace Augias\CoreBundle\Tests\Company;
 
+use Augias\CoreBundle\Company\CompanySelectorInterface;
+use Augias\CoreBundle\Company\CompanySubscriberResolver;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Company\CompanySelectorInterface;
-use SolidInvoice\CoreBundle\Company\CompanySubscriberResolver;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
 use Symfony\Component\Uid\Ulid;
 
 #[CoversClass(CompanySubscriberResolver::class)]

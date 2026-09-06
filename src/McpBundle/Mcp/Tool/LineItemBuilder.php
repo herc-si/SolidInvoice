@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Mcp\Tool;
+namespace Augias\McpBundle\Mcp\Tool;
 
+use Augias\CoreBundle\Entity\Discount;
+use Augias\InvoiceBundle\Entity\Line as InvoiceLine;
+use Augias\InvoiceBundle\Entity\RecurringInvoiceLine;
+use Augias\QuoteBundle\Entity\Line as QuoteLine;
+use Augias\TaxBundle\Entity\LineTax;
+use Augias\TaxBundle\Entity\Tax;
 use Brick\Math\BigDecimal;
 use Doctrine\ORM\EntityManagerInterface;
 use Mcp\Exception\ToolCallException;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\InvoiceBundle\Entity\Line as InvoiceLine;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoiceLine;
-use SolidInvoice\QuoteBundle\Entity\Line as QuoteLine;
-use SolidInvoice\TaxBundle\Entity\LineTax;
-use SolidInvoice\TaxBundle\Entity\Tax;
 use Throwable;
 
 /**
@@ -172,7 +172,7 @@ final readonly class LineItemBuilder
      * A JSON number reaches a tool as a float. `(string)` would serialise it at the host's
      * `precision` ini setting, so the same tool call could resolve to different digits from
      * one host to the next; %.14G pins that, matching
-     * {@see \SolidInvoice\ApiBundle\Serializer\Normalizer\BigIntegerNormalizer}.
+     * {@see \Augias\ApiBundle\Serializer\Normalizer\BigIntegerNormalizer}.
      *
      * Anything that is not a number is handed to BigDecimal untouched, so that malformed
      * input fails there and is reported as a ToolCallException.

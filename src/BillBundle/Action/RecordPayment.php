@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Action;
+namespace Augias\BillBundle\Action;
 
+use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Entity\BillPayment;
+use Augias\BillBundle\Form\Type\BillPaymentType;
+use Augias\BillBundle\Manager\BillPaymentManager;
 use Money\Currency;
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\BillBundle\Entity\BillPayment;
-use SolidInvoice\BillBundle\Form\Type\BillPaymentType;
-use SolidInvoice\BillBundle\Manager\BillPaymentManager;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -40,7 +40,7 @@ final readonly class RecordPayment
     /**
      * @return array{bill: Bill, payment_form: FormView}|Response
      */
-    #[Template('@SolidInvoiceBill/Default/view.html.twig')]
+    #[Template('@AugiasBill/Default/view.html.twig')]
     public function __invoke(Request $request, Bill $bill): array | Response
     {
         $payment = new BillPayment();

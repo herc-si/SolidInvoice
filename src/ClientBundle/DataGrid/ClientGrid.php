@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\DataGrid;
+namespace Augias\ClientBundle\DataGrid;
 
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\GridBuilder\Batch\BatchAction;
 use Override;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\GridBuilder\Batch\BatchAction;
 use Symfony\Component\Translation\TranslatableMessage;
 
 #[AsDataGrid(name: 'client_grid', title: 'Clients')]

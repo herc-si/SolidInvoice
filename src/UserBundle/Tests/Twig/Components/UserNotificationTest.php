@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Twig\Components;
+namespace Augias\UserBundle\Tests\Twig\Components;
 
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\NotificationBundle\Attribute\AsNotification;
+use Augias\NotificationBundle\Enum\NotificationCategory;
+use Augias\NotificationBundle\Notification\NotificationMessage;
+use Augias\NotificationBundle\Repository\TransportSettingRepository;
+use Augias\NotificationBundle\Repository\UserNotificationRepository;
+use Augias\UserBundle\Twig\Components\UserNotification;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\NotificationBundle\Attribute\AsNotification;
-use SolidInvoice\NotificationBundle\Enum\NotificationCategory;
-use SolidInvoice\NotificationBundle\Notification\NotificationMessage;
-use SolidInvoice\NotificationBundle\Repository\TransportSettingRepository;
-use SolidInvoice\NotificationBundle\Repository\UserNotificationRepository;
-use SolidInvoice\UserBundle\Twig\Components\UserNotification;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 use Twig\Environment;

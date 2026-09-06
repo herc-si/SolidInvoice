@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,22 +11,22 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Action;
+namespace Augias\UserBundle\Action;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\UserInvitation;
+use Augias\UserBundle\Enum\InvitationStatus;
+use Augias\UserBundle\Form\Type\UserInviteType;
+use Augias\UserBundle\Repository\UserInvitationRepository;
+use Augias\UserBundle\Repository\UserRepository;
+use Augias\UserBundle\UserInvitation\UserInvitation as SendUserInvitation;
 use Exception;
 use Generator;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Entity\UserInvitation;
-use SolidInvoice\UserBundle\Enum\InvitationStatus;
-use SolidInvoice\UserBundle\Form\Type\UserInviteType;
-use SolidInvoice\UserBundle\Repository\UserInvitationRepository;
-use SolidInvoice\UserBundle\Repository\UserRepository;
-use SolidInvoice\UserBundle\UserInvitation\UserInvitation as SendUserInvitation;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -65,7 +65,7 @@ final class InviteUser extends AbstractController
             $this->userRepository->getUserCountForCompany($company)
                 + $this->userInvitationRepository->countPending($company),
         )) {
-            return $this->render('@SolidInvoiceUser/Users/invite_gated.html.twig');
+            return $this->render('@AugiasUser/Users/invite_gated.html.twig');
         }
 
         $form = $this->createForm(UserInviteType::class);
@@ -110,7 +110,7 @@ final class InviteUser extends AbstractController
         }
 
         return $this->render(
-            '@SolidInvoiceUser/Users/invite.html.twig',
+            '@AugiasUser/Users/invite.html.twig',
             [
                 'form' => $form,
             ]

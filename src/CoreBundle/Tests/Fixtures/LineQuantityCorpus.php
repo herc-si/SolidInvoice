@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Fixtures;
+namespace Augias\CoreBundle\Tests\Fixtures;
 
 use function count;
 use function mt_rand;
@@ -27,8 +27,8 @@ use function number_format;
  * pre-migration database contains. The value the migration lands in the new column is
  * whatever the database rounds that double to at the column scale — {@see self::migrated()}.
  *
- * @see \SolidInvoice\CoreBundle\Tests\Billing\LineQuantityRegressionTest
- * @see \SolidInvoice\CoreBundle\Tests\Functional\LineQuantityPersistenceTest
+ * @see \Augias\CoreBundle\Tests\Billing\LineQuantityRegressionTest
+ * @see \Augias\CoreBundle\Tests\Functional\LineQuantityPersistenceTest
  *
  * @codeCoverageIgnore
  */

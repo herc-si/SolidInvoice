@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Repository;
+namespace Augias\InvoiceBundle\Tests\Repository;
 
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Entity\InvoiceReminder;
+use Augias\InvoiceBundle\Entity\ReminderType;
+use Augias\InvoiceBundle\Repository\InvoiceReminderRepository;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\InvoiceBundle\Test\Factory\InvoiceReminderFactory;
 use Carbon\CarbonImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Entity\InvoiceReminder;
-use SolidInvoice\InvoiceBundle\Entity\ReminderType;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceReminderRepository;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceReminderFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(InvoiceReminderRepository::class)]

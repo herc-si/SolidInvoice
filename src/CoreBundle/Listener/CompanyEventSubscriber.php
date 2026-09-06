@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Listener;
+namespace Augias\CoreBundle\Listener;
 
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Company\ResolvedHost;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\UserBundle\Entity\User;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Company\ResolvedHost;
+use Augias\CoreBundle\Entity\Company;
+use Augias\UserBundle\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -33,7 +33,7 @@ use function count;
 use function in_array;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Listener\CompanyEventSubscriberTest
+ * @see \Augias\CoreBundle\Tests\Listener\CompanyEventSubscriberTest
  */
 final readonly class CompanyEventSubscriber implements EventSubscriberInterface
 {

@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -9,7 +9,7 @@
 
 {% set currency = client.currency %}
 
-{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+{% extends "@AugiasCore/Layout/default.html.twig" %}
 
 {% block page_title %}
     {{ client.name }}
@@ -190,25 +190,25 @@
             <div class="tab-content">
                 {# Info Tab #}
                 <div class="tab-pane fade show active" id="client-info" role="tabpanel" aria-labelledby="info-tab">
-                    <twig:CustomFieldsList :target="enum('SolidInvoice\\CoreBundle\\Enum\\CustomFieldTarget').CLIENT" :recordId="client.id" />
+                    <twig:CustomFieldsList :target="enum('Augias\\CoreBundle\\Enum\\CustomFieldTarget').CLIENT" :recordId="client.id" />
                     <twig:ContactCollection :client="client" count="{{ client.contacts|length }}" />
                     <twig:AddressCollection :client="client" count="{{ client.addresses|length }}" />
                 </div>
 
                 {# Quotes Tab #}
                 <div class="tab-pane fade" id="quotes" role="tabpanel" aria-labelledby="quotes-tab">
-                    {% include "@SolidInvoiceClient/quote_list.html.twig" %}
+                    {% include "@AugiasClient/quote_list.html.twig" %}
                 </div>
 
                 {# Invoices Tab #}
                 <div class="tab-pane fade" id="invoices" role="tabpanel" aria-labelledby="invoices-tab">
-                    {% include "@SolidInvoiceClient/invoice_list.html.twig" %}
+                    {% include "@AugiasClient/invoice_list.html.twig" %}
                 </div>
 
                 {# Payments Tab #}
                 {% if payments|length > 0 %}
                     <div class="tab-pane fade" id="payments" role="tabpanel" aria-labelledby="payments-tab">
-                        {% include "@SolidInvoicePayment/Payment/list.html.twig" with {"data": {'client': client.id}} only %}
+                        {% include "@AugiasPayment/Payment/list.html.twig" with {"data": {'client': client.id}} only %}
                     </div>
                 {% endif %}
             </div>

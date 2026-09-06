@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Action;
+namespace Augias\UserBundle\Action;
 
-use SolidInvoice\ApiBundle\Security\Attribute as ApiAttribute;
+use Augias\ApiBundle\Security\Attribute as ApiAttribute;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -24,9 +24,9 @@ final class ApiIndex extends AbstractController
         // Delegates to the API access voter: SubscriptionVoter (paid-only) on SaaS,
         // ApiAccessVoter (feature-only) on self-hosted.
         if (! $this->isGranted(ApiAttribute::ACCESS)) {
-            return $this->render('@SolidInvoiceUser/Api/gated.html.twig');
+            return $this->render('@AugiasUser/Api/gated.html.twig');
         }
 
-        return $this->render('@SolidInvoiceUser/Api/index.html.twig');
+        return $this->render('@AugiasUser/Api/index.html.twig');
     }
 }

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\GridBuilder\Column;
+namespace Augias\DataGridBundle\GridBuilder\Column;
 
 use Override;
 
@@ -25,7 +25,7 @@ use Override;
  *   RelativeDateColumn::new('created')
  *       ->threshold(7)  // Show relative for dates within 7 days
  *       ->absoluteFormat('d M Y')  // Format for absolute date tooltip
- * @see \SolidInvoice\DataGridBundle\Tests\GridBuilder\Column\RelativeDateColumnTest
+ * @see \Augias\DataGridBundle\Tests\GridBuilder\Column\RelativeDateColumnTest
  */
 final class RelativeDateColumn extends DateTimeColumn
 {

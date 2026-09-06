@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Security;
+namespace Augias\UserBundle\Security;
 
+use Augias\UserBundle\Entity\User;
 use Override;
 use SensitiveParameter;
-use SolidInvoice\UserBundle\Entity\User;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
@@ -28,10 +28,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * (`saas_enabled`) deployments, an unverified user is hard-blocked from those
  * channels regardless of a valid token. Unverified web users are NOT blocked —
  * they keep full login and are nudged by the email-verification banner while the
- * verification gate ({@see \SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface})
+ * verification gate ({@see \Augias\CoreBundle\Contracts\EmailVerificationGateInterface})
  * limits sensitive actions such as sending invoices.
  *
- * @see \SolidInvoice\UserBundle\Tests\Security\VerifiedUserCheckerTest
+ * @see \Augias\UserBundle\Tests\Security\VerifiedUserCheckerTest
  */
 final class VerifiedUserChecker extends UserChecker
 {

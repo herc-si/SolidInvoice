@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Tests\Widgets;
+namespace Augias\DashboardBundle\Tests\Widgets;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\DashboardBundle\Widgets\InvoiceDistributionWidget;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
 use Brick\Math\BigInteger;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\DashboardBundle\Widgets\InvoiceDistributionWidget;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
 use Symfony\UX\Chartjs\Model\Chart;
 
 final class InvoiceDistributionWidgetTest extends WidgetTestCase
@@ -150,7 +150,7 @@ final class InvoiceDistributionWidgetTest extends WidgetTestCase
     {
         $widget = self::getContainer()->get(InvoiceDistributionWidget::class);
 
-        self::assertSame('@SolidInvoiceDashboard/Widget/invoice_distribution.html.twig', $widget->getTemplate());
+        self::assertSame('@AugiasDashboard/Widget/invoice_distribution.html.twig', $widget->getTemplate());
     }
 
     public function testRenderWidgetWithNoData(): void

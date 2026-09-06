@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\DataGrid;
+namespace Augias\BillBundle\DataGrid;
 
+use Augias\BillBundle\Entity\BillCategory;
+use Augias\BillBundle\Repository\BillCategoryRepository;
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\Grid;
+use Augias\DataGridBundle\GridBuilder\Action\EditAction;
+use Augias\DataGridBundle\GridBuilder\Batch\BatchAction;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
 use Override;
-use SolidInvoice\BillBundle\Entity\BillCategory;
-use SolidInvoice\BillBundle\Repository\BillCategoryRepository;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\Grid;
-use SolidInvoice\DataGridBundle\GridBuilder\Action\EditAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Batch\BatchAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
 use Symfony\Component\Translation\TranslatableMessage;
 
 /**
- * @see \SolidInvoice\BillBundle\Tests\DataGrid\BillCategoryGridTest
+ * @see \Augias\BillBundle\Tests\DataGrid\BillCategoryGridTest
  */
 #[AsDataGrid(name: 'bill_category_grid', title: 'Bill Categories')]
 final class BillCategoryGrid extends Grid

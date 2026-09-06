@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CatalogBundle\Tests\Twig\Components;
+namespace Augias\CatalogBundle\Tests\Twig\Components;
 
+use Augias\CatalogBundle\Entity\Product;
+use Augias\CoreBundle\Test\LiveComponentTest;
+use Augias\InvoiceBundle\Twig\Components\CreateInvoice;
+use Augias\QuoteBundle\Twig\Components\CreateQuote;
+use Augias\TaxBundle\Entity\Tax;
 use Brick\Math\BigInteger;
 use PHPUnit\Framework\Attributes\DataProvider;
-use SolidInvoice\CatalogBundle\Entity\Product;
-use SolidInvoice\CoreBundle\Test\LiveComponentTest;
-use SolidInvoice\InvoiceBundle\Twig\Components\CreateInvoice;
-use SolidInvoice\QuoteBundle\Twig\Components\CreateQuote;
-use SolidInvoice\TaxBundle\Entity\Tax;
 
 /**
  * The catalogue only pays for itself if picking an entry fills the line in

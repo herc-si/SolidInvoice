@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\GridBuilder\Column;
+namespace Augias\DataGridBundle\GridBuilder\Column;
 
 /**
  * StatusColumn renders values as styled status badges.
@@ -27,7 +27,7 @@ namespace SolidInvoice\DataGridBundle\GridBuilder\Column;
  *
  * Or use a single variant for all values:
  *   StatusColumn::new('status')->variant('success')
- * @see \SolidInvoice\DataGridBundle\Tests\GridBuilder\Column\StatusColumnTest
+ * @see \Augias\DataGridBundle\Tests\GridBuilder\Column\StatusColumnTest
  */
 final class StatusColumn extends Column
 {

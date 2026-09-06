@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Search;
+namespace Augias\CoreBundle\Search;
 
 use DateTimeImmutable;
 use DateTimeZone;
@@ -32,7 +32,7 @@ use function substr;
 use function trim;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Search\SearchQueryParserTest
+ * @see \Augias\CoreBundle\Tests\Search\SearchQueryParserTest
  */
 final class SearchQueryParser
 {

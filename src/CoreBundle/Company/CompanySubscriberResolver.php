@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Company;
+namespace Augias\CoreBundle\Company;
 
+use Augias\CoreBundle\Repository\CompanyRepository;
 use Override;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
 use SolidWorx\Platform\PlatformBundle\Feature\SubscribableInterface;
 use SolidWorx\Platform\PlatformBundle\Feature\SubscriberResolver;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Company\CompanySubscriberResolverTest
+ * @see \Augias\CoreBundle\Tests\Company\CompanySubscriberResolverTest
  */
 final readonly class CompanySubscriberResolver implements SubscriberResolver
 {

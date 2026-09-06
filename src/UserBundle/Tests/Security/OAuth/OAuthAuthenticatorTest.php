@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Security\OAuth;
+namespace Augias\UserBundle\Tests\Security\OAuth;
 
+use Augias\UserBundle\Action\Security\OAuthConnectCheck;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Repository\UserRepository;
+use Augias\UserBundle\Security\OAuth\OAuthAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
@@ -21,10 +25,6 @@ use League\OAuth2\Client\Token\AccessToken;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\UserBundle\Action\Security\OAuthConnectCheck;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Repository\UserRepository;
-use SolidInvoice\UserBundle\Security\OAuth\OAuthAuthenticator;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;

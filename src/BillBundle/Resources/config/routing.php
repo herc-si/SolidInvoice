@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\BillBundle\Action\Add;
-use SolidInvoice\BillBundle\Action\Category\Add as CategoryAdd;
-use SolidInvoice\BillBundle\Action\Category\Edit as CategoryEdit;
-use SolidInvoice\BillBundle\Action\Category\Index as CategoryIndex;
-use SolidInvoice\BillBundle\Action\CreateFromReceipt;
-use SolidInvoice\BillBundle\Action\Delete;
-use SolidInvoice\BillBundle\Action\Edit;
-use SolidInvoice\BillBundle\Action\Index;
-use SolidInvoice\BillBundle\Action\RecordPayment;
-use SolidInvoice\BillBundle\Action\Transition;
-use SolidInvoice\BillBundle\Action\View;
+use Augias\BillBundle\Action\Add;
+use Augias\BillBundle\Action\Category\Add as CategoryAdd;
+use Augias\BillBundle\Action\Category\Edit as CategoryEdit;
+use Augias\BillBundle\Action\Category\Index as CategoryIndex;
+use Augias\BillBundle\Action\CreateFromReceipt;
+use Augias\BillBundle\Action\Delete;
+use Augias\BillBundle\Action\Edit;
+use Augias\BillBundle\Action\Index;
+use Augias\BillBundle\Action\RecordPayment;
+use Augias\BillBundle\Action\Transition;
+use Augias\BillBundle\Action\View;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Tests\Functional;
+namespace Augias\ElectronicInvoicingBundle\Tests\Functional;
 
+use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Enum\BillStatus;
+use Augias\BillBundle\Repository\BillRepository;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
+use Augias\ElectronicInvoicingBundle\Manager\ElectronicInvoiceReceiptManager;
+use Augias\ElectronicInvoicingBundle\Provider\ElectronicInvoiceProviderRegistry;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceReceiptRepository;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\BillBundle\Enum\BillStatus;
-use SolidInvoice\BillBundle\Repository\BillRepository;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
-use SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceReceiptManager;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\ElectronicInvoiceProviderRegistry;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceReceiptRepository;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use function file_get_contents;

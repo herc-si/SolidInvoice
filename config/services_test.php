@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\CoreBundle\Feature\UpgradePromptProvider;
-use SolidInvoice\InstallBundle\Listener\UpgradeListener;
-use SolidInvoice\SaasBundle\Feature\RequiredPlanLabelProvider;
-use SolidInvoice\SaasBundle\Form\Extension\FeatureRestrictedExtension as SaasFeatureRestrictedExtension;
+use Augias\CoreBundle\Feature\UpgradePromptProvider;
+use Augias\InstallBundle\Listener\UpgradeListener;
+use Augias\SaasBundle\Feature\RequiredPlanLabelProvider;
+use Augias\SaasBundle\Form\Extension\FeatureRestrictedExtension as SaasFeatureRestrictedExtension;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Platform\PlatformBundle\Feature\SubscriberResolver;
 use SolidWorx\Platform\SaasBundle\Feature\FeatureConfigRegistry;

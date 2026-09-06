@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Augias\CoreBundle\Doctrine\Filter\ArchivableFilter;
+use Augias\CoreBundle\Doctrine\Filter\CompanyFilter;
+use Augias\CoreBundle\Doctrine\Function\ToNumberFunction;
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Doctrine\Type\QuantityType;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
-use SolidInvoice\CoreBundle\Doctrine\Filter\ArchivableFilter;
-use SolidInvoice\CoreBundle\Doctrine\Filter\CompanyFilter;
-use SolidInvoice\CoreBundle\Doctrine\Function\ToNumberFunction;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
-use SolidInvoice\CoreBundle\Doctrine\Type\QuantityType;
 
 return App::config([
     'doctrine' => [

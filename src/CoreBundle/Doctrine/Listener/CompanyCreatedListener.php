@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Doctrine\Listener;
+namespace Augias\CoreBundle\Doctrine\Listener;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Company\DefaultData;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Event\CompanyCreatedEvent;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
 use JsonException;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Company\DefaultData;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Event\CompanyCreatedEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 #[AsEntityListener(Events::postPersist, entity: Company::class)]

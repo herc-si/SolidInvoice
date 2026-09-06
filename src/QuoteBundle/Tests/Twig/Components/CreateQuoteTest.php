@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Tests\Twig\Components;
+namespace Augias\QuoteBundle\Tests\Twig\Components;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\ClientBundle\Test\Factory\ContactFactory;
+use Augias\CoreBundle\Test\LiveComponentTest;
+use Augias\QuoteBundle\DTO\QuoteFormDTO;
+use Augias\QuoteBundle\Entity\Line;
+use Augias\QuoteBundle\Twig\Components\CreateQuote;
+use Augias\TaxBundle\Entity\Tax;
 use Brick\Math\Exception\MathException;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\ClientBundle\Test\Factory\ContactFactory;
-use SolidInvoice\CoreBundle\Test\LiveComponentTest;
-use SolidInvoice\QuoteBundle\DTO\QuoteFormDTO;
-use SolidInvoice\QuoteBundle\Entity\Line;
-use SolidInvoice\QuoteBundle\Twig\Components\CreateQuote;
-use SolidInvoice\TaxBundle\Entity\Tax;
 
 final class CreateQuoteTest extends LiveComponentTest
 {

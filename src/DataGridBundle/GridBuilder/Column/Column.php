@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\GridBuilder\Column;
+namespace Augias\DataGridBundle\GridBuilder\Column;
 
+use Augias\DataGridBundle\Filter\ColumnFilterInterface;
 use Closure;
 use InvalidArgumentException;
-use SolidInvoice\DataGridBundle\Filter\ColumnFilterInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatableInterface;
 use function sprintf;
@@ -23,7 +23,7 @@ use function Symfony\Component\String\u;
 
 /**
  * @phpstan-consistent-constructor
- * @see \SolidInvoice\DataGridBundle\Tests\GridBuilder\Column\ColumnTest
+ * @see \Augias\DataGridBundle\Tests\GridBuilder\Column\ColumnTest
  */
 abstract class Column
 {

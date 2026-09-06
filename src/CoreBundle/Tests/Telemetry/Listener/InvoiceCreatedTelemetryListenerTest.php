@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Telemetry\Listener;
+namespace Augias\CoreBundle\Tests\Telemetry\Listener;
 
+use Augias\CoreBundle\ConfigWriter;
+use Augias\CoreBundle\Telemetry\Listener\InvoiceCreatedTelemetryListener;
+use Augias\CoreBundle\Telemetry\Telemetry;
+use Augias\CoreBundle\Tests\Telemetry\CollectingMessageBus;
+use Augias\InvoiceBundle\Event\InvoiceEvent;
+use Augias\InvoiceBundle\Event\InvoiceEvents;
 use Doctrine\DBAL\DriverManager;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\ConfigWriter;
-use SolidInvoice\CoreBundle\Telemetry\Listener\InvoiceCreatedTelemetryListener;
-use SolidInvoice\CoreBundle\Telemetry\Telemetry;
-use SolidInvoice\CoreBundle\Tests\Telemetry\CollectingMessageBus;
-use SolidInvoice\InvoiceBundle\Event\InvoiceEvent;
-use SolidInvoice\InvoiceBundle\Event\InvoiceEvents;
 use Symfony\Bundle\FrameworkBundle\Secrets\AbstractVault;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 

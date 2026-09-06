@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CronBundle\Messenger;
+namespace Augias\CronBundle\Messenger;
 
 use Sentry\CheckInStatus;
 use Sentry\ClientInterface;
@@ -36,7 +36,7 @@ use function Sentry\startTransaction;
 use function Sentry\withScope;
 
 /**
- * @see \SolidInvoice\CronBundle\Tests\Messenger\SentrySchedulerMiddlewareTest
+ * @see \Augias\CronBundle\Tests\Messenger\SentrySchedulerMiddlewareTest
  */
 final class SentrySchedulerMiddleware implements MiddlewareInterface
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,31 +11,31 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Onboarding\Manager;
+namespace Augias\UserBundle\Onboarding\Manager;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\UserSetting;
+use Augias\UserBundle\Enum\UserSettingType;
+use Augias\UserBundle\Onboarding\DTO\OnboardingData;
+use Augias\UserBundle\Repository\UserSettingRepository;
 use Brick\Math\BigNumber;
 use Carbon\CarbonImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use JsonException;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Entity\UserSetting;
-use SolidInvoice\UserBundle\Enum\UserSettingType;
-use SolidInvoice\UserBundle\Onboarding\DTO\OnboardingData;
-use SolidInvoice\UserBundle\Repository\UserSettingRepository;
 use function json_decode;
 use function json_encode;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\Onboarding\Manager\OnboardingManagerTest
+ * @see \Augias\UserBundle\Tests\Onboarding\Manager\OnboardingManagerTest
  */
 final readonly class OnboardingManager
 {

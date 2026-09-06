@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\OAuth;
+namespace Augias\McpBundle\OAuth;
 
+use Augias\McpBundle\Repository\McpAccessTokenRepository;
+use Augias\McpBundle\Repository\McpRefreshTokenRepository;
+use Augias\McpBundle\Repository\McpScopeRepository;
+use Augias\McpBundle\Repository\OAuthAuthCodeRepository;
+use Augias\McpBundle\Repository\OAuthClientRepository;
 use DateInterval;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Grant\RefreshTokenGrant;
 use League\OAuth2\Server\ResourceServer;
-use SolidInvoice\McpBundle\Repository\McpAccessTokenRepository;
-use SolidInvoice\McpBundle\Repository\McpRefreshTokenRepository;
-use SolidInvoice\McpBundle\Repository\McpScopeRepository;
-use SolidInvoice\McpBundle\Repository\OAuthAuthCodeRepository;
-use SolidInvoice\McpBundle\Repository\OAuthClientRepository;
 
 final readonly class ServerFactory implements ServerFactoryInterface
 {

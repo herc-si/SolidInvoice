@@ -1,12 +1,12 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
  # This source file is subject to the MIT license that is bundled
  # with this source code in the file LICENSE.
  #}
-{% extends '@SolidInvoiceSaas/Email/Onboarding/_layout.html.twig' %}
+{% extends '@AugiasSaas/Email/Onboarding/_layout.html.twig' %}
 
 {% block title %}{{ 'onboarding.trial_about_to_end.subject'|trans({'%days%': days_remaining, '%count%': days_remaining}, 'email') }}{% endblock %}
 

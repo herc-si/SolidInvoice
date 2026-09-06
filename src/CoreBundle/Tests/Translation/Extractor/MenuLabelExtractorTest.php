@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Translation\Extractor;
+namespace Augias\CoreBundle\Tests\Translation\Extractor;
 
+use Augias\CoreBundle\Translation\Extractor\MenuLabelExtractor;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Translation\Extractor\MenuLabelExtractor;
 use Symfony\Component\Translation\MessageCatalogue;
 
 final class MenuLabelExtractorTest extends TestCase

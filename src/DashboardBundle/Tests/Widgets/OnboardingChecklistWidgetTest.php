@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Tests\Widgets;
+namespace Augias\DashboardBundle\Tests\Widgets;
 
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\DashboardBundle\Checklist\ChecklistManager;
+use Augias\DashboardBundle\Widgets\OnboardingChecklistWidget;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\UserBundle\Test\Factory\UserFactory;
 use Psr\Log\NullLogger;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\DashboardBundle\Checklist\ChecklistManager;
-use SolidInvoice\DashboardBundle\Widgets\OnboardingChecklistWidget;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\UserBundle\Test\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\SecurityBundle\Security;
 
@@ -87,6 +87,6 @@ final class OnboardingChecklistWidgetTest extends KernelTestCase
 
         $widget = new OnboardingChecklistWidget($manager, $security, new NullLogger());
 
-        self::assertSame('@SolidInvoiceDashboard/Widget/onboarding_checklist.html.twig', $widget->getTemplate());
+        self::assertSame('@AugiasDashboard/Widget/onboarding_checklist.html.twig', $widget->getTemplate());
     }
 }

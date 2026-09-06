@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\QuoteBundle\Action\CloneQuote;
-use SolidInvoice\QuoteBundle\Action\Create;
-use SolidInvoice\QuoteBundle\Action\Edit;
-use SolidInvoice\QuoteBundle\Action\Fields;
-use SolidInvoice\QuoteBundle\Action\Index;
-use SolidInvoice\QuoteBundle\Action\Transition;
-use SolidInvoice\QuoteBundle\Action\Transition\Send;
-use SolidInvoice\QuoteBundle\Action\View;
+use Augias\QuoteBundle\Action\CloneQuote;
+use Augias\QuoteBundle\Action\Create;
+use Augias\QuoteBundle\Action\Edit;
+use Augias\QuoteBundle\Action\Fields;
+use Augias\QuoteBundle\Action\Index;
+use Augias\QuoteBundle\Action\Transition;
+use Augias\QuoteBundle\Action\Transition\Send;
+use Augias\QuoteBundle\Action\View;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {

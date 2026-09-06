@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Notification;
+namespace Augias\InvoiceBundle\Notification;
 
+use Augias\NotificationBundle\Attribute\AsNotification;
+use Augias\NotificationBundle\Enum\NotificationCategory;
+use Augias\NotificationBundle\Notification\NotificationMessage;
 use Override;
-use SolidInvoice\NotificationBundle\Attribute\AsNotification;
-use SolidInvoice\NotificationBundle\Enum\NotificationCategory;
-use SolidInvoice\NotificationBundle\Notification\NotificationMessage;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\Notifier\Message\EmailMessage;
 use Symfony\Component\Notifier\Recipient\EmailRecipientInterface;
@@ -33,9 +33,9 @@ class InvoiceOverdueNotification extends NotificationMessage
 {
     public const EVENT = 'invoice_overdue';
 
-    final public const string HTML_TEMPLATE = '@SolidInvoiceInvoice/Email/notification_overdue.html.twig';
+    final public const string HTML_TEMPLATE = '@AugiasInvoice/Email/notification_overdue.html.twig';
 
-    final public const string TEXT_TEMPLATE = '@SolidInvoiceInvoice/Email/notification_overdue.text.twig';
+    final public const string TEXT_TEMPLATE = '@AugiasInvoice/Email/notification_overdue.text.twig';
 
     public function getTextContent(Environment $twig): string
     {

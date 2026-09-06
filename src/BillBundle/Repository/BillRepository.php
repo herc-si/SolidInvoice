@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Repository;
+namespace Augias\BillBundle\Repository;
 
+use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Enum\BillStatus;
 use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\BillBundle\Enum\BillStatus;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 
 /**
@@ -32,7 +32,7 @@ class BillRepository extends EntityRepository
     /**
      * Pending bills whose due date has passed — candidates for the overdue
      * cron, meant to run with the company filter disabled, the same as
-     * {@see \SolidInvoice\InvoiceBundle\Repository\InvoiceRepository::getPendingOverdueInvoices()}.
+     * {@see \Augias\InvoiceBundle\Repository\InvoiceRepository::getPendingOverdueInvoices()}.
      *
      * @return list<Bill>
      */

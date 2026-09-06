@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Service\CustomField;
+namespace Augias\CoreBundle\Service\CustomField;
 
 use const JSON_THROW_ON_ERROR;
+use Augias\CoreBundle\Entity\CustomField\CustomField;
+use Augias\CoreBundle\Enum\CustomFieldType;
 use DateTimeImmutable;
 use DateTimeInterface;
 use LogicException;
-use SolidInvoice\CoreBundle\Entity\CustomField\CustomField;
-use SolidInvoice\CoreBundle\Enum\CustomFieldType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -40,7 +40,7 @@ use function json_encode;
 use function str_contains;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Service\CustomField\CustomFieldTypeResolverTest
+ * @see \Augias\CoreBundle\Tests\Service\CustomField\CustomFieldTypeResolverTest
  */
 final class CustomFieldTypeResolver
 {

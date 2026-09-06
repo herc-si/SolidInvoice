@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Telemetry\Message\Handler;
+namespace Augias\CoreBundle\Telemetry\Message\Handler;
 
+use Augias\CoreBundle\Telemetry\Message\SendTelemetryMessage;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\CoreBundle\Telemetry\Message\SendTelemetryMessage;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -23,7 +23,7 @@ use function rtrim;
 use function Sentry\captureException;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Telemetry\Message\Handler\SendTelemetryHandlerTest
+ * @see \Augias\CoreBundle\Tests\Telemetry\Message\Handler\SendTelemetryHandlerTest
  */
 #[AsMessageHandler]
 final readonly class SendTelemetryHandler

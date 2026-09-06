@@ -1,5 +1,5 @@
 /**
- * SolidInvoice — Vertical Navbar (Sidebar)
+ * Augias — Vertical Navbar (Sidebar)
  *
  * Tabler ships `.navbar-vertical.navbar-dark` as a heavy slate panel (gray-800)
  * that PRODUCT.md names as the AdminLTE anti-reference the rewrite is escaping.
@@ -206,7 +206,7 @@ $swp-navbar-vertical-width: 17rem;
 @media (prefers-color-scheme: dark) {
 
     [data-bs-theme="dark"] .navbar.navbar-vertical.navbar-dark {
-        // Intentionally empty: defer to Tabler dark defaults until SolidInvoice
+        // Intentionally empty: defer to Tabler dark defaults until Augias
         // ships a documented dark theme.
     }
 }

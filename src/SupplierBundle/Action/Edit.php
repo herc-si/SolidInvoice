@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SupplierBundle\Action;
+namespace Augias\SupplierBundle\Action;
 
-use SolidInvoice\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Client;
 use Symfony\Bridge\Twig\Attribute\Template;
 
 /**
@@ -26,7 +26,7 @@ final class Edit
     /**
      * @return array{client: Client}
      */
-    #[Template('@SolidInvoiceClient/Default/edit.html.twig')]
+    #[Template('@AugiasClient/Default/edit.html.twig')]
     public function __invoke(Client $client): array
     {
         return [

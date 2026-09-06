@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Action;
+namespace Augias\PaymentBundle\Action;
 
-use SolidInvoice\SaasBundle\Feature\Feature;
+use Augias\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,9 +28,9 @@ final class Settings extends AbstractController
     public function __invoke(): Response
     {
         if (! $this->featureGate->isEnabled(Feature::OnlinePayments->value)) {
-            return $this->render('@SolidInvoicePayment/Settings/gated.html.twig');
+            return $this->render('@AugiasPayment/Settings/gated.html.twig');
         }
 
-        return $this->render('@SolidInvoicePayment/Settings/index.html.twig');
+        return $this->render('@AugiasPayment/Settings/index.html.twig');
     }
 }

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Repository;
+namespace Augias\McpBundle\Repository;
 
+use Augias\McpBundle\OAuth\ScopeEntity;
+use Augias\McpBundle\Security\McpScope;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Entities\ScopeEntityInterface;
 use League\OAuth2\Server\Repositories\ScopeRepositoryInterface;
-use SolidInvoice\McpBundle\OAuth\ScopeEntity;
-use SolidInvoice\McpBundle\Security\McpScope;
 
 final class McpScopeRepository implements ScopeRepositoryInterface
 {

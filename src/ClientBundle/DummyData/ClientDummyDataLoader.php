@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\DummyData;
+namespace Augias\ClientBundle\DummyData;
 
+use Augias\ClientBundle\Entity\Address;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Enum\ClientStatus;
+use Augias\CoreBundle\DummyData\DummyDataLoaderInterface;
+use Augias\CoreBundle\Entity\Company;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Faker\Factory;
 use Faker\Generator;
-use SolidInvoice\ClientBundle\Entity\Address;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Enum\ClientStatus;
-use SolidInvoice\CoreBundle\DummyData\DummyDataLoaderInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use function assert;
 use function random_int;

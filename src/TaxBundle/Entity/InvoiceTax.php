@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Entity;
+namespace Augias\TaxBundle\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Enum\TaxDirection;
+use Augias\TaxBundle\Enum\TaxType;
+use Augias\TaxBundle\Repository\InvoiceTaxRepository;
+use Augias\TaxBundle\Validator\Constraints\ExactlyOneDocument;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigInteger;
 use Brick\Math\BigNumber;
@@ -23,17 +34,6 @@ use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Enum\TaxDirection;
-use SolidInvoice\TaxBundle\Enum\TaxType;
-use SolidInvoice\TaxBundle\Repository\InvoiceTaxRepository;
-use SolidInvoice\TaxBundle\Validator\Constraints\ExactlyOneDocument;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Serializer\Attribute\Groups;
@@ -41,7 +41,7 @@ use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @see \SolidInvoice\TaxBundle\Tests\Entity\InvoiceTaxTest
+ * @see \Augias\TaxBundle\Tests\Entity\InvoiceTaxTest
  */
 #[ORM\Table(name: InvoiceTax::TABLE_NAME)]
 #[ORM\Entity(repositoryClass: InvoiceTaxRepository::class)]

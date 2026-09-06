@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Tests\Form\Type;
+namespace Augias\BillBundle\Tests\Form\Type;
 
+use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Form\Type\BillType;
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Tests\FormTestCase;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
 use Money\Currency;
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\BillBundle\Form\Type\BillType;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
 
 /**
- * @see \SolidInvoice\BillBundle\Form\Type\BillType
+ * @see \Augias\BillBundle\Form\Type\BillType
  */
 final class BillTypeTest extends FormTestCase
 {

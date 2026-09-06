@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Onboarding;
+namespace Augias\SaasBundle\Onboarding;
 
+use Augias\SaasBundle\Message\SendOnboardingEmailMessage;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Enum\UserSettingType;
+use Augias\UserBundle\Repository\UserSettingRepositoryInterface;
 use LogicException;
 use Psr\Clock\ClockInterface;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\SaasBundle\Message\SendOnboardingEmailMessage;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Enum\UserSettingType;
-use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -35,7 +35,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
  * retries internally. Messenger's 3-retry exponential backoff covers
  * transient failures; truly permanent failures move to the failed queue and
  * the sequence moves on.
- * @see \SolidInvoice\SaasBundle\Tests\Onboarding\OnboardingDispatcherTest
+ * @see \Augias\SaasBundle\Tests\Onboarding\OnboardingDispatcherTest
  */
 final readonly class OnboardingDispatcher
 {

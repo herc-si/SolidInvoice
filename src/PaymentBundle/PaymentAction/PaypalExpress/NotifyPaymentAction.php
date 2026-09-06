@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\PaymentAction\PaypalExpress;
+namespace Augias\PaymentBundle\PaymentAction\PaypalExpress;
 
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\PaymentAction\Request\StatusRequest;
 use Doctrine\Persistence\ObjectManager;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
@@ -20,8 +22,6 @@ use Payum\Core\GatewayAwareInterface;
 use Payum\Core\GatewayAwareTrait;
 use Payum\Core\Request\Notify;
 use Payum\Core\Request\Sync;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\PaymentAction\Request\StatusRequest;
 
 /**
  * @deprecated This action is not used anymore and will be removed in a future version

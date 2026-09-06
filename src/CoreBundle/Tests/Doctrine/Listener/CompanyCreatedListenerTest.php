@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Doctrine\Listener;
+namespace Augias\CoreBundle\Tests\Doctrine\Listener;
 
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\SettingsBundle\SystemConfig;
 use DateTimeInterface;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use function date;
 use function putenv;
@@ -27,7 +27,7 @@ use function putenv;
  * created company still defaults its locale setting to English rather than
  * erroring or leaving it unset.
  *
- * @see \SolidInvoice\CoreBundle\Doctrine\Listener\CompanyCreatedListener
+ * @see \Augias\CoreBundle\Doctrine\Listener\CompanyCreatedListener
  */
 final class CompanyCreatedListenerTest extends KernelTestCase
 {

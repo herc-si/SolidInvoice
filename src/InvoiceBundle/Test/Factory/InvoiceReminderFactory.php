@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Test\Factory;
+namespace Augias\InvoiceBundle\Test\Factory;
 
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\InvoiceBundle\Entity\InvoiceReminder;
+use Augias\InvoiceBundle\Entity\ReminderType;
+use Augias\InvoiceBundle\Repository\InvoiceReminderRepository;
 use Carbon\CarbonImmutable;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\InvoiceBundle\Entity\InvoiceReminder;
-use SolidInvoice\InvoiceBundle\Entity\ReminderType;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceReminderRepository;
 use Zenstruck\Foundry\FactoryCollection;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 use Zenstruck\Foundry\Persistence\RepositoryDecorator;

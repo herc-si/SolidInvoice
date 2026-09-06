@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,25 +11,25 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests;
+namespace Augias\CoreBundle\Tests;
 
+use Augias\CoreBundle\Form\Extension\FeatureRestrictedExtension as NoopFeatureRestrictedExtension;
+use Augias\CoreBundle\Form\Extension\FormHelpExtension;
+use Augias\CoreBundle\Form\Type\ImageUploadType;
+use Augias\CoreBundle\Form\TypeExtension\UnsanitizeSingleQuotesTypeExtension;
+use Augias\CoreBundle\Test\Traits\DoctrineTestTrait;
+use Augias\MoneyBundle\Currency\CurrencyScale;
+use Augias\MoneyBundle\Form\Extension\MoneyExtension;
+use Augias\MoneyBundle\Form\Type\CurrencyType;
+use Augias\MoneyBundle\Form\Type\HiddenMoneyType;
+use Augias\SettingsBundle\Form\Extension\TrialRestrictedExtension;
+use Augias\SettingsBundle\SystemConfig;
 use Doctrine\DBAL\Exception;
 use Faker\Factory;
 use Faker\Generator;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use Money\Currency;
-use SolidInvoice\CoreBundle\Form\Extension\FeatureRestrictedExtension as NoopFeatureRestrictedExtension;
-use SolidInvoice\CoreBundle\Form\Extension\FormHelpExtension;
-use SolidInvoice\CoreBundle\Form\Type\ImageUploadType;
-use SolidInvoice\CoreBundle\Form\TypeExtension\UnsanitizeSingleQuotesTypeExtension;
-use SolidInvoice\CoreBundle\Test\Traits\DoctrineTestTrait;
-use SolidInvoice\MoneyBundle\Currency\CurrencyScale;
-use SolidInvoice\MoneyBundle\Form\Extension\MoneyExtension;
-use SolidInvoice\MoneyBundle\Form\Type\CurrencyType;
-use SolidInvoice\MoneyBundle\Form\Type\HiddenMoneyType;
-use SolidInvoice\SettingsBundle\Form\Extension\TrialRestrictedExtension;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

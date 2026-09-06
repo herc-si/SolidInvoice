@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\MoneyBundle\Formatter\MoneyFormatter;
-use SolidInvoice\MoneyBundle\Formatter\MoneyFormatterInterface;
-use SolidInvoice\MoneyBundle\SolidInvoiceMoneyBundle;
+use Augias\MoneyBundle\AugiasMoneyBundle;
+use Augias\MoneyBundle\Formatter\MoneyFormatter;
+use Augias\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
@@ -31,7 +31,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ;
 
     $services
-        ->load(SolidInvoiceMoneyBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
+        ->load(AugiasMoneyBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
         ->exclude(dirname(__DIR__, 3) . '/{DependencyInjection,Entity,Resources,Tests}');
 
     $services->alias(MoneyFormatterInterface::class, MoneyFormatter::class);

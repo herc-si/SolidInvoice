@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Security\Voter;
+namespace Augias\SaasBundle\Tests\Security\Voter;
 
+use Augias\ApiBundle\Security\Attribute as ApiAttribute;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\McpBundle\Security\Attribute as McpAttribute;
+use Augias\SaasBundle\Security\Voter\SubscriptionVoter;
+use Augias\SaasBundle\Service\SubscriptionEligibility;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
 use Mockery as M;
@@ -21,13 +28,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Clock\ClockInterface;
 use RuntimeException;
-use SolidInvoice\ApiBundle\Security\Attribute as ApiAttribute;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\McpBundle\Security\Attribute as McpAttribute;
-use SolidInvoice\SaasBundle\Security\Voter\SubscriptionVoter;
-use SolidInvoice\SaasBundle\Service\SubscriptionEligibility;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Platform\PlatformBundle\Feature\NoopFeatureGate;
 use SolidWorx\Platform\SaasBundle\Entity\Plan;

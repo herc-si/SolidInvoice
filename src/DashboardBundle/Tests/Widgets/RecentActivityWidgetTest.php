@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,22 +11,22 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Tests\Widgets;
+namespace Augias\DashboardBundle\Tests\Widgets;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\DashboardBundle\Widgets\RecentActivityWidget;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\InvoiceBundle\Test\Factory\RecurringInvoiceFactory;
+use Augias\PaymentBundle\Enum\PaymentStatus;
+use Augias\PaymentBundle\Test\Factory\PaymentFactory;
+use Augias\PaymentBundle\Test\Factory\PaymentMethodFactory;
+use Augias\QuoteBundle\Enum\QuoteStatus;
+use Augias\QuoteBundle\Test\Factory\QuoteFactory;
 use Brick\Math\BigInteger;
 use Carbon\Carbon;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\DashboardBundle\Widgets\RecentActivityWidget;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\InvoiceBundle\Test\Factory\RecurringInvoiceFactory;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
-use SolidInvoice\PaymentBundle\Test\Factory\PaymentFactory;
-use SolidInvoice\PaymentBundle\Test\Factory\PaymentMethodFactory;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
-use SolidInvoice\QuoteBundle\Test\Factory\QuoteFactory;
 
 final class RecentActivityWidgetTest extends WidgetTestCase
 {
@@ -323,7 +323,7 @@ final class RecentActivityWidgetTest extends WidgetTestCase
     {
         $widget = self::getContainer()->get(RecentActivityWidget::class);
 
-        self::assertSame('@SolidInvoiceDashboard/Widget/recent_activity.html.twig', $widget->getTemplate());
+        self::assertSame('@AugiasDashboard/Widget/recent_activity.html.twig', $widget->getTemplate());
     }
 
     public function testRenderWidgetWithNoData(): void

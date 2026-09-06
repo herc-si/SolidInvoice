@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Command;
+namespace Augias\InvoiceBundle\Tests\Command;
 
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\CoreBundle\Test\Traits\ConsoleTesterTrait;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Command\SendRecurringInvoicesCommand;
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
+use Augias\InvoiceBundle\Test\Factory\RecurringInvoiceFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\CoreBundle\Test\Traits\ConsoleTesterTrait;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Command\SendRecurringInvoicesCommand;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
-use SolidInvoice\InvoiceBundle\Test\Factory\RecurringInvoiceFactory;
 use SolidWorx\Platform\PlatformBundle\Console\IO;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

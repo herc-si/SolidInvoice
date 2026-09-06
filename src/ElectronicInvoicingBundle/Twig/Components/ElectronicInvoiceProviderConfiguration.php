@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Twig\Components;
+namespace Augias\ElectronicInvoicingBundle\Twig\Components;
 
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
+use Augias\ElectronicInvoicingBundle\Form\Type\ElectronicInvoiceProviderSettingType;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
-use SolidInvoice\ElectronicInvoicingBundle\Form\Type\ElectronicInvoiceProviderSettingType;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -33,7 +33,7 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 use function assert;
 
 /**
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Twig\Components\ElectronicInvoiceProviderConfigurationTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Twig\Components\ElectronicInvoiceProviderConfigurationTest
  */
 #[AsLiveComponent]
 final class ElectronicInvoiceProviderConfiguration extends AbstractController

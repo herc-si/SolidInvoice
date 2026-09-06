@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MoneyBundle;
+namespace Augias\MoneyBundle;
 
+use Augias\CoreBundle\Entity\Discount;
+use Augias\InvoiceBundle\Entity\BaseInvoice;
+use Augias\MoneyBundle\Formatter\MoneyFormatter;
+use Augias\QuoteBundle\Entity\Quote;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
 use Brick\Math\RoundingMode;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\InvoiceBundle\Entity\BaseInvoice;
-use SolidInvoice\MoneyBundle\Formatter\MoneyFormatter;
-use SolidInvoice\QuoteBundle\Entity\Quote;
 
 /**
- * @see \SolidInvoice\MoneyBundle\Tests\CalculatorTest
+ * @see \Augias\MoneyBundle\Tests\CalculatorTest
  */
 final class Calculator
 {

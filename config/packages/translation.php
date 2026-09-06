@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-// Locales SolidInvoice can be translated into. English is the source/reference locale;
+// Locales Augias can be translated into. English is the source/reference locale;
 // everything else falls back to it. This single list is what the translation provider
 // pushes/pulls, so adding a language is a one-line change here.
 $locales = [

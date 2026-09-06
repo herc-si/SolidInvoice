@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MailerBundle\Form\Type\TransportConfig;
+namespace Augias\MailerBundle\Form\Type\TransportConfig;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * @see \SolidInvoice\MailerBundle\Tests\Form\Type\TransportConfig\SmtpTransportConfigTypeTest
+ * @see \Augias\MailerBundle\Tests\Form\Type\TransportConfig\SmtpTransportConfigTypeTest
  * @extends AbstractType<array{host: mixed, port: int, user: mixed, password: string}>
  */
 final class SmtpTransportConfigType extends AbstractType

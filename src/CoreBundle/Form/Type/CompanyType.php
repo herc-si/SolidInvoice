@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Form\Type;
+namespace Augias\CoreBundle\Form\Type;
 
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\MoneyBundle\Form\Type\CurrencyType;
+use Augias\CoreBundle\Entity\Company;
+use Augias\MoneyBundle\Form\Type\CurrencyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

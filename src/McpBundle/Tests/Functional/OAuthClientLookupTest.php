@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Tests\Functional;
+namespace Augias\McpBundle\Tests\Functional;
 
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\McpBundle\Entity\OAuthClient;
+use Augias\McpBundle\Repository\OAuthClientRepository;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\McpBundle\Entity\OAuthClient;
-use SolidInvoice\McpBundle\Repository\OAuthClientRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**

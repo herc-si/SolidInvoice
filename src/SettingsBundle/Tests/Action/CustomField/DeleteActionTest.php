@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Tests\Action\CustomField;
+namespace Augias\SettingsBundle\Tests\Action\CustomField;
 
+use Augias\SettingsBundle\Action\CustomField\DeleteAction;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\SettingsBundle\Action\CustomField\DeleteAction;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\RedirectResponse;

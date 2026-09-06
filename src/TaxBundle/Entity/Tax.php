@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Entity;
+namespace Augias\TaxBundle\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
@@ -20,13 +20,13 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Repository\TaxRepository;
+use Augias\TaxBundle\Validator\Constraints\IncompatibleTaxConfiguration;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Repository\TaxRepository;
-use SolidInvoice\TaxBundle\Validator\Constraints\IncompatibleTaxConfiguration;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;

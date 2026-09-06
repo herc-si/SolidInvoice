@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Twig\Extension;
+namespace Augias\DashboardBundle\Twig\Extension;
 
+use Augias\DashboardBundle\WidgetFactory;
+use Augias\DashboardBundle\Widgets\WidgetInterface;
 use Override;
-use SolidInvoice\DashboardBundle\WidgetFactory;
-use SolidInvoice\DashboardBundle\Widgets\WidgetInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 /**
- * @see \SolidInvoice\DashboardBundle\Tests\Twig\Extension\WidgetExtensionTest
+ * @see \Augias\DashboardBundle\Tests\Twig\Extension\WidgetExtensionTest
  */
 class WidgetExtension extends AbstractExtension
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Manager;
+namespace Augias\ElectronicInvoicingBundle\Manager;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
+use Augias\ElectronicInvoicingBundle\Event\ElectronicInvoiceReceiptImportedEvent;
+use Augias\ElectronicInvoicingBundle\Provider\ElectronicInvoiceProviderRegistry;
+use Augias\ElectronicInvoicingBundle\Provider\ReceivedElectronicInvoiceData;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceReceiptRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
-use SolidInvoice\ElectronicInvoicingBundle\Event\ElectronicInvoiceReceiptImportedEvent;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\ElectronicInvoiceProviderRegistry;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\ReceivedElectronicInvoiceData;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceReceiptRepository;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Throwable;
@@ -30,12 +30,12 @@ use function sprintf;
 
 /**
  * Central place for "can this company receive electronic invoices, and doing
- * so" — the inbound counterpart of {@see \SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManager},
+ * so" — the inbound counterpart of {@see \Augias\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManager},
  * shared by the scheduled import command and (eventually) any manual
  * "check for new invoices now" action, so eligibility and import bookkeeping
  * stay in one place.
  *
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Manager\ElectronicInvoiceReceiptManagerTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Manager\ElectronicInvoiceReceiptManagerTest
  */
 final readonly class ElectronicInvoiceReceiptManager implements ElectronicInvoiceReceiptManagerInterface
 {

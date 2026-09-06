@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,22 +11,22 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Repository;
+namespace Augias\UserBundle\Tests\Repository;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Test\Traits\FakerTestTrait;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\UserBundle\DataFixtures\ORM\LoadData;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\UserInvitation;
+use Augias\UserBundle\Enum\InvitationStatus;
+use Augias\UserBundle\Repository\UserInvitationRepository;
 use Carbon\CarbonImmutable;
 use Doctrine\ORM\QueryBuilder;
 use Faker\Generator;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Test\Traits\FakerTestTrait;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\UserBundle\DataFixtures\ORM\LoadData;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Entity\UserInvitation;
-use SolidInvoice\UserBundle\Enum\InvitationStatus;
-use SolidInvoice\UserBundle\Repository\UserInvitationRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Uid\Ulid;
 

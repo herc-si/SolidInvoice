@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,22 +11,22 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Functional;
+namespace Augias\CoreBundle\Tests\Functional;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Doctrine\Type\QuantityType;
+use Augias\CoreBundle\Test\Traits\DoctrineTestTrait;
+use Augias\CoreBundle\Tests\Fixtures\LineQuantityCorpus;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\QuoteBundle\Entity\Line as QuoteLine;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Enum\QuoteStatus;
 use Brick\Math\BigDecimal;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Doctrine\Type\QuantityType;
-use SolidInvoice\CoreBundle\Test\Traits\DoctrineTestTrait;
-use SolidInvoice\CoreBundle\Tests\Fixtures\LineQuantityCorpus;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\QuoteBundle\Entity\Line as QuoteLine;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use function sprintf;
 

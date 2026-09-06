@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Migration;
+namespace Augias\CoreBundle\Tests\Migration;
 
+use Augias\CoreBundle\Doctrine\Type\QuantityType;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Schema\Schema;
@@ -22,7 +23,6 @@ use DoctrineMigrations\Version30100_2;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
-use SolidInvoice\CoreBundle\Doctrine\Type\QuantityType;
 
 final class LineQuantityDecimalMigrationTest extends TestCase
 {

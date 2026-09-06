@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Action;
+namespace Augias\InvoiceBundle\Action;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
+use Augias\InvoiceBundle\Recurring\RecurringSchedule;
 use Carbon\CarbonInterface;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
-use SolidInvoice\InvoiceBundle\Recurring\RecurringSchedule;
 use Symfony\Bridge\Twig\Attribute\Template;
 
 final readonly class ViewRecurring
@@ -30,7 +30,7 @@ final readonly class ViewRecurring
     /**
      * @return array{invoice: RecurringInvoice, nextOccurrences: array<CarbonInterface>, generatedInvoices: array<int, Invoice>, totalGenerated: int}
      */
-    #[Template('@SolidInvoiceInvoice/Default/view_recurring.html.twig')]
+    #[Template('@AugiasInvoice/Default/view_recurring.html.twig')]
     public function __invoke(RecurringInvoice $invoice): array
     {
         // Get next 5 upcoming occurrences for active invoices

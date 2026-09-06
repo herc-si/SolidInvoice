@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -7,7 +7,7 @@
  # with this source code in the file LICENSE.
  #}
 
-{% extends '@SolidInvoiceCore/Layout/' ~ (app.user is not empty ? 'default' : 'default_no_nav') ~ '.html.twig' %}
+{% extends '@AugiasCore/Layout/' ~ (app.user is not empty ? 'default' : 'default_no_nav') ~ '.html.twig' %}
 
 {% block content %}
     <div class="payment-page">
@@ -139,7 +139,7 @@
                                     </div>
                                 {% endif %}
                                 {% if invoice.payments|length > 0 and not invoice.balance.isZero %}
-                                    {% for payment in invoice.payments|filter((v) => v.status == enum('SolidInvoice\\PaymentBundle\\Enum\\PaymentStatus').Captured) %}
+                                    {% for payment in invoice.payments|filter((v) => v.status == enum('Augias\\PaymentBundle\\Enum\\PaymentStatus').Captured) %}
                                         <div class="totals-row totals-row-payment">
                                             <span class="totals-label">
                                                 {{ 'payment.create.payment_label'|trans }}: {{ payment.method.name }}
@@ -181,7 +181,7 @@
                             <div class="payment-history-body">
                                 <div class="payments-list">
                                     {% for payment in invoice.payments %}
-                                        <div class="payment-card {{ payment.status == enum('SolidInvoice\\PaymentBundle\\Enum\\PaymentStatus').Captured ? 'payment-card-captured' : (payment.status == enum('SolidInvoice\\PaymentBundle\\Enum\\PaymentStatus').Failed ? 'payment-card-failed' : '') }}">
+                                        <div class="payment-card {{ payment.status == enum('Augias\\PaymentBundle\\Enum\\PaymentStatus').Captured ? 'payment-card-captured' : (payment.status == enum('Augias\\PaymentBundle\\Enum\\PaymentStatus').Failed ? 'payment-card-failed' : '') }}">
                                             <div class="payment-card-header">
                                                 <div class="payment-amount">{{ payment.totalAmount|formatCurrency(invoice.client.currency) }}</div>
                                                 <div class="payment-status">{{ payment_label(payment.status) }}</div>

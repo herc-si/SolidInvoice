@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Twig\Components;
+namespace Augias\ClientBundle\Twig\Components;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Form\Type\ContactType;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Service\CustomField\CustomFieldFormWriter;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Form\Type\ContactType;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldFormWriter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -30,7 +30,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
 /**
- * @see \SolidInvoice\ClientBundle\Tests\Twig\Components\ContactCollectionTest
+ * @see \Augias\ClientBundle\Tests\Twig\Components\ContactCollectionTest
  */
 #[AsLiveComponent]
 final class ContactCollection extends AbstractController

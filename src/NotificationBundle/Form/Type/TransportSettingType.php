@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Form\Type;
+namespace Augias\NotificationBundle\Form\Type;
 
+use Augias\NotificationBundle\Configurator\ConfiguratorInterface;
+use Augias\NotificationBundle\Entity\TransportSetting;
 use Override;
-use SolidInvoice\NotificationBundle\Configurator\ConfiguratorInterface;
-use SolidInvoice\NotificationBundle\Entity\TransportSetting;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 use Symfony\Component\Form\AbstractType;

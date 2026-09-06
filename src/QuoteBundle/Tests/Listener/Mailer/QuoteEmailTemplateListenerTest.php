@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Tests\Listener\Mailer;
+namespace Augias\QuoteBundle\Tests\Listener\Mailer;
 
+use Augias\CoreBundle\Contracts\PaidSubscriptionGateInterface;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Templates\BillingDocumentType;
+use Augias\CoreBundle\Templates\BillingTemplateRegistry;
+use Augias\CoreBundle\Templates\BillingTemplateResolver;
+use Augias\QuoteBundle\Email\QuoteEmail;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Listener\Mailer\QuoteEmailTemplateListener;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\SettingsBundle\SystemConfig;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Contracts\PaidSubscriptionGateInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Templates\BillingDocumentType;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateRegistry;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
-use SolidInvoice\QuoteBundle\Email\QuoteEmail;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Listener\Mailer\QuoteEmailTemplateListener;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -65,7 +65,7 @@ final class QuoteEmailTemplateListenerTest extends TestCase
         $message = new QuoteEmail($quote);
         $listener(new MessageEvent($message, Envelope::create($message->to('test@example.com')->from('from@example.com')), 'smtp'));
 
-        self::assertSame('@SolidInvoiceQuote/Templates/sleek/email.html.twig', $message->getHtmlTemplate());
+        self::assertSame('@AugiasQuote/Templates/sleek/email.html.twig', $message->getHtmlTemplate());
     }
 
     public function testKeepsTheDefaultTemplateWhenNoCustomTemplateApplies(): void
@@ -78,7 +78,7 @@ final class QuoteEmailTemplateListenerTest extends TestCase
         $message = new QuoteEmail($quote);
         $listener(new MessageEvent($message, Envelope::create($message->to('test@example.com')->from('from@example.com')), 'smtp'));
 
-        self::assertSame('@SolidInvoiceQuote/Email/quote.html.twig', $message->getHtmlTemplate());
+        self::assertSame('@AugiasQuote/Email/quote.html.twig', $message->getHtmlTemplate());
     }
 
     public function testRunsBeforeTheBodyRenderer(): void

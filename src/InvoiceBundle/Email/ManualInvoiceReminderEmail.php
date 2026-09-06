@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Email;
+namespace Augias\InvoiceBundle\Email;
 
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\InvoiceBundle\Entity\Invoice;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Address;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Email\ManualInvoiceReminderEmailTest
+ * @see \Augias\InvoiceBundle\Tests\Email\ManualInvoiceReminderEmailTest
  */
 final class ManualInvoiceReminderEmail extends TemplatedEmail
 {
@@ -29,8 +29,8 @@ final class ManualInvoiceReminderEmail extends TemplatedEmail
         parent::__construct();
 
         $this->subject('Payment Reminder: Invoice ' . $invoice->getInvoiceId());
-        $this->htmlTemplate('@SolidInvoiceInvoice/Email/manual_reminder.html.twig');
-        $this->textTemplate('@SolidInvoiceInvoice/Email/manual_reminder.text.twig');
+        $this->htmlTemplate('@AugiasInvoice/Email/manual_reminder.html.twig');
+        $this->textTemplate('@AugiasInvoice/Email/manual_reminder.text.twig');
         $this->context(['invoice' => $this->invoice]);
         $this->to(...$this->invoice->getUsers()->map(fn (Contact $user) => Address::create(sprintf('%s %s <%s>', $user->getFirstName(), $user->getLastName(), $user->getEmail())))->toArray());
     }

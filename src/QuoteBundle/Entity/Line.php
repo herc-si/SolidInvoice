@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Entity;
+namespace Augias\QuoteBundle\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
@@ -21,6 +21,15 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use Augias\ApiBundle\Serializer\Normalizer\BigIntegerNormalizer;
+use Augias\ApiBundle\State\Processor\QuoteLinePersistProcessor;
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Doctrine\Type\QuantityType;
+use Augias\CoreBundle\Entity\LineInterface;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\QuoteBundle\Repository\LineRepository;
+use Augias\TaxBundle\Entity\LineTax;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
@@ -29,15 +38,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\ApiBundle\Serializer\Normalizer\BigIntegerNormalizer;
-use SolidInvoice\ApiBundle\State\Processor\QuoteLinePersistProcessor;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
-use SolidInvoice\CoreBundle\Doctrine\Type\QuantityType;
-use SolidInvoice\CoreBundle\Entity\LineInterface;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\QuoteBundle\Repository\LineRepository;
-use SolidInvoice\TaxBundle\Entity\LineTax;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;

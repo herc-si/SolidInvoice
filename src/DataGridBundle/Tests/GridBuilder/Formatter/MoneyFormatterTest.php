@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Tests\GridBuilder\Formatter;
+namespace Augias\DataGridBundle\Tests\GridBuilder\Formatter;
 
+use Augias\DataGridBundle\GridBuilder\Column\MoneyColumn;
+use Augias\DataGridBundle\GridBuilder\Formatter\MoneyFormatter;
+use Augias\MoneyBundle\Formatter\MoneyFormatterInterface;
+use Augias\SettingsBundle\SystemConfig;
 use Mockery as M;
 use Money\Currency;
 use Money\Money;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\MoneyColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Formatter\MoneyFormatter;
-use SolidInvoice\MoneyBundle\Formatter\MoneyFormatterInterface;
-use SolidInvoice\SettingsBundle\SystemConfig;
 
 #[CoversClass(MoneyFormatter::class)]
 final class MoneyFormatterTest extends TestCase

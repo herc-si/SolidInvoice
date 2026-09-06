@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\EventSubscriber;
+namespace Augias\SaasBundle\Tests\EventSubscriber;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\SaasBundle\EventSubscriber\RequestListener;
+use Augias\SaasBundle\Service\TrialBannerResolver;
+use Augias\Test\SaasKernel;
+use Augias\UserBundle\Entity\User;
 use Carbon\CarbonImmutable;
 use DateInterval;
 use DateTimeImmutable;
@@ -22,13 +29,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\SaasBundle\EventSubscriber\RequestListener;
-use SolidInvoice\SaasBundle\Service\TrialBannerResolver;
-use SolidInvoice\Test\SaasKernel;
-use SolidInvoice\UserBundle\Entity\User;
 use SolidWorx\Platform\SaasBundle\Entity\Plan;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use SolidWorx\Platform\SaasBundle\Enum\SubscriptionStatus;
@@ -442,16 +442,16 @@ final class RequestListenerTest extends KernelTestCase
         // Mock Twig to return simple HTML for testing
         $twig = M::mock(Environment::class);
         $twig->shouldReceive('render')
-            ->with(M::pattern('/@SolidInvoiceSaas\/subscription\/pending\.html\.twig/'), M::any())
+            ->with(M::pattern('/@AugiasSaas\/subscription\/pending\.html\.twig/'), M::any())
             ->andReturn('<html>Pending Page</html>');
         $twig->shouldReceive('render')
-            ->with(M::pattern('/@SolidInvoiceSaas\/subscription\/paused\.html\.twig/'), M::any())
+            ->with(M::pattern('/@AugiasSaas\/subscription\/paused\.html\.twig/'), M::any())
             ->andReturn('<html>Paused Page</html>');
         $twig->shouldReceive('render')
-            ->with(M::pattern('/@SolidInvoiceSaas\/subscription\/cancelled\.html\.twig/'), M::any())
+            ->with(M::pattern('/@AugiasSaas\/subscription\/cancelled\.html\.twig/'), M::any())
             ->andReturn('<html>Cancelled Page</html>');
         $twig->shouldReceive('render')
-            ->with(M::pattern('/@SolidInvoiceSaas\/subscription\/trial_expired\.html\.twig/'), M::on(static function (array $context) use ($onTrialExpiredRender): bool {
+            ->with(M::pattern('/@AugiasSaas\/subscription\/trial_expired\.html\.twig/'), M::on(static function (array $context) use ($onTrialExpiredRender): bool {
                 if ($onTrialExpiredRender !== null) {
                     $onTrialExpiredRender($context);
                 }
@@ -460,7 +460,7 @@ final class RequestListenerTest extends KernelTestCase
             }))
             ->andReturn('<html>Trial Expired Page</html>');
         $twig->shouldReceive('render')
-            ->with(M::pattern('/@SolidInvoiceSaas\/_alert_banner\.html\.twig/'), M::on(static function (array $context) use ($onBannerRender): bool {
+            ->with(M::pattern('/@AugiasSaas\/_alert_banner\.html\.twig/'), M::on(static function (array $context) use ($onBannerRender): bool {
                 if ($onBannerRender !== null) {
                     $onBannerRender($context);
                 }

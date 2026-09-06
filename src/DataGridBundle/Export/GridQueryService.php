@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Export;
+namespace Augias\DataGridBundle\Export;
 
+use Augias\DataGridBundle\Filter\SearchFilter;
+use Augias\DataGridBundle\Filter\SortFilter;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridInterface;
 use Doctrine\ORM\QueryBuilder;
-use SolidInvoice\DataGridBundle\Filter\SearchFilter;
-use SolidInvoice\DataGridBundle\Filter\SortFilter;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridInterface;
 use function array_filter;
 use function array_map;
 use function explode;

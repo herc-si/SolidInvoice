@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\AppMode;
-use SolidInvoice\Kernel;
-use SolidInvoice\Runtime;
+use Augias\AppMode;
+use Augias\Kernel;
+use Augias\Runtime;
 
 $_SERVER['APP_RUNTIME'] = Runtime::class;
 $_SERVER['APP_RUNTIME_OPTIONS'] = [

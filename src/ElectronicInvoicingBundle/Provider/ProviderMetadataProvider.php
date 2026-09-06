@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Provider;
+namespace Augias\ElectronicInvoicingBundle\Provider;
 
 use function preg_replace;
 use function str_replace;
@@ -21,7 +21,7 @@ use function ucwords;
  * Central registry of presentation metadata for electronic-invoicing
  * providers, so the marketplace and configuration screens read their
  * labels/icons from one place instead of duplicating it in the Live
- * Components — see SolidInvoice\PaymentBundle\Gateway\GatewayMetadataProvider,
+ * Components — see Augias\PaymentBundle\Gateway\GatewayMetadataProvider,
  * which this mirrors.
  */
 final class ProviderMetadataProvider

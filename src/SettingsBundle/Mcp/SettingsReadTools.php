@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Mcp;
+namespace Augias\SettingsBundle\Mcp;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\McpBundle\Mcp\Attribute\McpScopeRequired;
+use Augias\McpBundle\Mcp\McpScopeGuard;
+use Augias\McpBundle\Security\McpScope;
 use Mcp\Capability\Attribute\McpTool;
 use Mcp\Exception\ToolCallException;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\McpBundle\Mcp\Attribute\McpScopeRequired;
-use SolidInvoice\McpBundle\Mcp\McpScopeGuard;
-use SolidInvoice\McpBundle\Security\McpScope;
 use Symfony\Component\Uid\Ulid;
 
 final readonly class SettingsReadTools

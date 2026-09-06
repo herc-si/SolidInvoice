@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Listener;
+namespace Augias\InvoiceBundle\Listener;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Notification\InvoiceOverdueNotification;
+use Augias\NotificationBundle\Notification\NotificationManager;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Notification\InvoiceOverdueNotification;
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\Event;
 use Throwable;
@@ -26,7 +26,7 @@ use Throwable;
  * when an invoice becomes overdue. Client emails are handled by the invoice reminder
  * system (see SendInvoiceRemindersCommand).
  *
- * @see \SolidInvoice\InvoiceBundle\Tests\Listener\InvoiceOverdueListenerTest
+ * @see \Augias\InvoiceBundle\Tests\Listener\InvoiceOverdueListenerTest
  */
 final readonly class InvoiceOverdueListener implements EventSubscriberInterface
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Listener;
+namespace Augias\CoreBundle\Listener;
 
-use SolidInvoice\CoreBundle\Company\CompanyDomainResolver;
-use SolidInvoice\CoreBundle\Company\HostType;
-use SolidInvoice\CoreBundle\Company\ResolvedHost;
-use SolidInvoice\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Company\CompanyDomainResolver;
+use Augias\CoreBundle\Company\HostType;
+use Augias\CoreBundle\Company\ResolvedHost;
+use Augias\CoreBundle\Entity\Company;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +32,7 @@ use function str_starts_with;
  * `custom_domain` column so downstream listeners can short-circuit company selection, and so
  * unknown hosts return 404 instead of leaking the multi-tenant selector.
  *
- * @see \SolidInvoice\CoreBundle\Tests\Listener\HostRoutingListenerTest
+ * @see \Augias\CoreBundle\Tests\Listener\HostRoutingListenerTest
  */
 final readonly class HostRoutingListener implements EventSubscriberInterface
 {

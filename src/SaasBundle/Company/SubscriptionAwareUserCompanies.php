@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Company;
+namespace Augias\SaasBundle\Company;
 
-use SolidInvoice\CoreBundle\Company\UserEligibleCompanies;
-use SolidInvoice\SaasBundle\Service\SubscriptionEligibility;
-use SolidInvoice\UserBundle\Entity\User;
+use Augias\CoreBundle\Company\UserEligibleCompanies;
+use Augias\SaasBundle\Service\SubscriptionEligibility;
+use Augias\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 
 /**
  * Filters the user's company list down to those with an active (or in-grace)
  * subscription. Only registered when the SaaS bundle is loaded
  * (`SOLIDINVOICE_PLATFORM=saas`); self-hosted installs continue to use the
- * default {@see \SolidInvoice\CoreBundle\Company\AllUserCompanies}.
- * @see \SolidInvoice\SaasBundle\Tests\Company\SubscriptionAwareUserCompaniesTest
+ * default {@see \Augias\CoreBundle\Company\AllUserCompanies}.
+ * @see \Augias\SaasBundle\Tests\Company\SubscriptionAwareUserCompaniesTest
  */
 #[AsDecorator(decorates: UserEligibleCompanies::class)]
 final readonly class SubscriptionAwareUserCompanies implements UserEligibleCompanies

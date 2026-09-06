@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Command;
+namespace Augias\InvoiceBundle\Command;
 
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
+use Augias\InvoiceBundle\Message\CreateInvoiceFromRecurring;
+use Augias\InvoiceBundle\Recurring\RecurringSchedule;
+use Augias\InvoiceBundle\Repository\RecurringInvoiceRepository;
 use Carbon\CarbonInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
-use SolidInvoice\InvoiceBundle\Message\CreateInvoiceFromRecurring;
-use SolidInvoice\InvoiceBundle\Recurring\RecurringSchedule;
-use SolidInvoice\InvoiceBundle\Repository\RecurringInvoiceRepository;
 use SolidWorx\Platform\PlatformBundle\Console\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -32,7 +32,7 @@ use function Sentry\withMonitor;
 use function sprintf;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Command\SendRecurringInvoicesCommandTest
+ * @see \Augias\InvoiceBundle\Tests\Command\SendRecurringInvoicesCommandTest
  */
 #[AsCommand(
     name: 'solidinvoice:recurring:send-invoices',

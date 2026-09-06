@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Action;
+namespace Augias\UserBundle\Tests\Action;
 
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\UserInvitation;
+use Augias\UserBundle\Enum\InvitationStatus;
+use Augias\UserBundle\Test\Factory\UserFactory;
 use Carbon\CarbonImmutable;
 use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Entity\UserInvitation;
-use SolidInvoice\UserBundle\Enum\InvitationStatus;
-use SolidInvoice\UserBundle\Test\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 

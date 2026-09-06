@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Cloner;
+namespace Augias\QuoteBundle\Cloner;
 
+use Augias\CoreBundle\Generator\BillingIdGenerator;
+use Augias\QuoteBundle\Entity\Line;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Model\Graph;
+use Augias\TaxBundle\Service\TaxSnapshotCopier;
 use Brick\Math\Exception\MathException;
 use Carbon\Carbon;
 use Psr\Container\ContainerExceptionInterface;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
-use SolidInvoice\QuoteBundle\Entity\Line;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Model\Graph;
-use SolidInvoice\TaxBundle\Service\TaxSnapshotCopier;
 use Symfony\Component\Workflow\WorkflowInterface;
 use Traversable;
 
 /**
- * @see \SolidInvoice\QuoteBundle\Tests\Cloner\QuoteClonerTest
+ * @see \Augias\QuoteBundle\Tests\Cloner\QuoteClonerTest
  */
 final readonly class QuoteCloner
 {

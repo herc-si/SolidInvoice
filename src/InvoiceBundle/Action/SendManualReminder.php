@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Action;
+namespace Augias\InvoiceBundle\Action;
 
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\InvoiceBundle\Email\ManualInvoiceReminderEmail;
+use Augias\InvoiceBundle\Entity\Invoice;
 use Generator;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\InvoiceBundle\Email\ManualInvoiceReminderEmail;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +27,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Action\SendManualReminderTest
+ * @see \Augias\InvoiceBundle\Tests\Action\SendManualReminderTest
  */
 final class SendManualReminder extends AbstractController
 {

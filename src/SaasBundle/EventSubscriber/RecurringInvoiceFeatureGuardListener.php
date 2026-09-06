@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\EventSubscriber;
+namespace Augias\SaasBundle\EventSubscriber;
 
-use SolidInvoice\CoreBundle\Feature\UpgradePromptProvider;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\SaasBundle\Feature\Feature;
+use Augias\CoreBundle\Feature\UpgradePromptProvider;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Workflow\Event\GuardEvent;
@@ -29,7 +29,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * Parallel to {@see RecurringInvoiceVerificationGuardListener}, which handles
  * email-verification gating; both guard listeners can fire for the same
  * transition without interfering with each other.
- * @see \SolidInvoice\SaasBundle\Tests\EventSubscriber\RecurringInvoiceFeatureGuardListenerTest
+ * @see \Augias\SaasBundle\Tests\EventSubscriber\RecurringInvoiceFeatureGuardListenerTest
  */
 final readonly class RecurringInvoiceFeatureGuardListener
 {

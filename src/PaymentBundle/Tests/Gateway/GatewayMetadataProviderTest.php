@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Tests\Gateway;
+namespace Augias\PaymentBundle\Tests\Gateway;
 
+use Augias\PaymentBundle\Gateway\GatewayCategory;
+use Augias\PaymentBundle\Gateway\GatewayInfo;
+use Augias\PaymentBundle\Gateway\GatewayMetadataProvider;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\PaymentBundle\Gateway\GatewayCategory;
-use SolidInvoice\PaymentBundle\Gateway\GatewayInfo;
-use SolidInvoice\PaymentBundle\Gateway\GatewayMetadataProvider;
 
 final class GatewayMetadataProviderTest extends TestCase
 {

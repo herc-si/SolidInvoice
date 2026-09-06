@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Templates;
+namespace Augias\CoreBundle\Templates;
 
 enum BillingDocumentType: string
 {
@@ -21,8 +21,8 @@ enum BillingDocumentType: string
     public function twigNamespace(): string
     {
         return match ($this) {
-            self::Invoice => '@SolidInvoiceInvoice',
-            self::Quote => '@SolidInvoiceQuote',
+            self::Invoice => '@AugiasInvoice',
+            self::Quote => '@AugiasQuote',
         };
     }
 }

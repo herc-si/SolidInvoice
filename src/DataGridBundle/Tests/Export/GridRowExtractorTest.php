@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Tests\Export;
+namespace Augias\DataGridBundle\Tests\Export;
 
+use Augias\DataGridBundle\Export\GridRowExtractor;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
@@ -20,8 +22,6 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\DataGridBundle\Export\GridRowExtractor;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Uid\Ulid;
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Action;
+namespace Augias\ElectronicInvoicingBundle\Action;
 
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManagerInterface;
+use Augias\InvoiceBundle\Entity\Invoice;
 use Generator;
 use LogicException;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManagerInterface;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Action\SendElectronicInvoiceTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Action\SendElectronicInvoiceTest
  */
 final class SendElectronicInvoice
 {

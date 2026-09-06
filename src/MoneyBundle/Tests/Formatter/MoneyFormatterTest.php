@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MoneyBundle\Tests\Formatter;
+namespace Augias\MoneyBundle\Tests\Formatter;
 
+use Augias\MoneyBundle\Formatter\MoneyFormatter;
+use Augias\SettingsBundle\SystemConfig;
 use Iterator;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
@@ -20,8 +22,6 @@ use Money\Currency;
 use Money\Money;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\MoneyBundle\Formatter\MoneyFormatter;
-use SolidInvoice\SettingsBundle\SystemConfig;
 
 final class MoneyFormatterTest extends TestCase
 {

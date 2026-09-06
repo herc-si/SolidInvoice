@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Search;
+namespace Augias\QuoteBundle\Search;
 
+use Augias\CoreBundle\Search\QualifiedResultFormatterInterface;
+use Augias\CoreBundle\Search\SearchResult;
+use Augias\MoneyBundle\Formatter\MoneyFormatterInterface;
+use Augias\SettingsBundle\SystemConfig;
 use Brick\Math\BigDecimal;
 use Brick\Math\RoundingMode;
 use Money\Currency;
 use Money\Money;
-use SolidInvoice\CoreBundle\Search\QualifiedResultFormatterInterface;
-use SolidInvoice\CoreBundle\Search\SearchResult;
-use SolidInvoice\MoneyBundle\Formatter\MoneyFormatterInterface;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * @see \SolidInvoice\QuoteBundle\Tests\Search\QuoteResultFormatterTest
+ * @see \Augias\QuoteBundle\Tests\Search\QuoteResultFormatterTest
  */
 final readonly class QuoteResultFormatter implements QualifiedResultFormatterInterface
 {

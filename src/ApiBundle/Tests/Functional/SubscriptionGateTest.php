@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Tests\Functional;
+namespace Augias\ApiBundle\Tests\Functional;
 
+use Augias\ApiBundle\ApiTokenManager;
+use Augias\ApiBundle\GeneratedApiToken;
+use Augias\ApiBundle\Security\ApiTokenAuthenticator;
+use Augias\ApiBundle\Security\Attribute as ApiAttribute;
+use Augias\ApiBundle\Security\Provider\ApiTokenUserProvider;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\UserBundle\Repository\ApiTokenRepository;
+use Augias\UserBundle\Test\Factory\UserFactory;
 use Doctrine\Persistence\ManagerRegistry;
 use Mockery as M;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ApiBundle\ApiTokenManager;
-use SolidInvoice\ApiBundle\GeneratedApiToken;
-use SolidInvoice\ApiBundle\Security\ApiTokenAuthenticator;
-use SolidInvoice\ApiBundle\Security\Attribute as ApiAttribute;
-use SolidInvoice\ApiBundle\Security\Provider\ApiTokenUserProvider;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\UserBundle\Repository\ApiTokenRepository;
-use SolidInvoice\UserBundle\Test\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

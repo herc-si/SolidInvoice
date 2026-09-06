@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Listener;
+namespace Augias\InstallBundle\Listener;
 
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -26,7 +26,7 @@ use Symfony\Contracts\Service\ServiceSubscriberInterface;
 use function in_array;
 
 /**
- * @see \SolidInvoice\InstallBundle\Tests\Listener\RequestListenerTest
+ * @see \Augias\InstallBundle\Tests\Listener\RequestListenerTest
  */
 final class RequestListener implements EventSubscriberInterface, ServiceSubscriberInterface
 {

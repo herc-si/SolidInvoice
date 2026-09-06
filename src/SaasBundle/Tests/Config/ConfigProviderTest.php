@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Config;
+namespace Augias\SaasBundle\Tests\Config;
 
+use Augias\CoreBundle\Templates\BillingTemplateRegistry;
+use Augias\CoreBundle\Templates\BillingTemplateResolver;
+use Augias\SaasBundle\Config\ConfigProvider;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\SaasBundle\Form\Type\InvoiceTemplateType;
+use Augias\SettingsBundle\DTO\Config;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateRegistry;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
-use SolidInvoice\SaasBundle\Config\ConfigProvider;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\SaasBundle\Form\Type\InvoiceTemplateType;
-use SolidInvoice\SettingsBundle\DTO\Config;
 
 #[CoversClass(ConfigProvider::class)]
 final class ConfigProviderTest extends TestCase

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MailerBundle\Tests\Form\Type\TransportConfig;
+namespace Augias\MailerBundle\Tests\Form\Type\TransportConfig;
 
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
-use SolidInvoice\MailerBundle\Form\Type\TransportConfig\KeyTransportConfigType;
+use Augias\CoreBundle\Tests\FormTestCase;
+use Augias\MailerBundle\Form\Type\TransportConfig\KeyTransportConfigType;
 
 final class KeyTransportConfigTypeTest extends FormTestCase
 {

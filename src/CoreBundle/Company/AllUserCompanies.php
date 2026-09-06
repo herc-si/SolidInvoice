@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Company;
+namespace Augias\CoreBundle\Company;
 
-use SolidInvoice\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Company\AllUserCompaniesTest
+ * @see \Augias\CoreBundle\Tests\Company\AllUserCompaniesTest
  */
 #[AsAlias(id: UserEligibleCompanies::class)]
 final class AllUserCompanies implements UserEligibleCompanies

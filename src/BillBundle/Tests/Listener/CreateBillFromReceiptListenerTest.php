@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Tests\Listener;
+namespace Augias\BillBundle\Tests\Listener;
 
+use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Listener\CreateBillFromReceiptListener;
+use Augias\BillBundle\Manager\BillManager;
+use Augias\BillBundle\Repository\BillRepository;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
+use Augias\ElectronicInvoicingBundle\Event\ElectronicInvoiceReceiptImportedEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
@@ -20,13 +27,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\BillBundle\Listener\CreateBillFromReceiptListener;
-use SolidInvoice\BillBundle\Manager\BillManager;
-use SolidInvoice\BillBundle\Repository\BillRepository;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
-use SolidInvoice\ElectronicInvoicingBundle\Event\ElectronicInvoiceReceiptImportedEvent;
 
 #[CoversClass(CreateBillFromReceiptListener::class)]
 final class CreateBillFromReceiptListenerTest extends TestCase

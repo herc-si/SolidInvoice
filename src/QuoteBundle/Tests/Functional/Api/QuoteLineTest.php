@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Tests\Functional\Api;
+namespace Augias\QuoteBundle\Tests\Functional\Api;
 
+use Augias\ApiBundle\Test\ApiTestCase;
+use Augias\QuoteBundle\Entity\Line;
+use Augias\QuoteBundle\Test\Factory\QuoteFactory;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ApiBundle\Test\ApiTestCase;
-use SolidInvoice\QuoteBundle\Entity\Line;
-use SolidInvoice\QuoteBundle\Test\Factory\QuoteFactory;
 use Symfony\Component\Uid\Ulid;
 
 #[Group('functional')]

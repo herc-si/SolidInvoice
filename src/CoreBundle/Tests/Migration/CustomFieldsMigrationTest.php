@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Migration;
+namespace Augias\CoreBundle\Tests\Migration;
 
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
 use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[Group('functional')]

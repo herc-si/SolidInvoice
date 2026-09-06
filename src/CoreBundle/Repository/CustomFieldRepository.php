@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Repository;
+namespace Augias\CoreBundle\Repository;
 
+use Augias\CoreBundle\Entity\CustomField\CustomField;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\CoreBundle\Entity\CustomField\CustomField;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid\Ulid;

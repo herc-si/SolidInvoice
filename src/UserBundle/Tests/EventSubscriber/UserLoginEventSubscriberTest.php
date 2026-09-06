@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\EventSubscriber;
+namespace Augias\UserBundle\Tests\EventSubscriber;
 
+use Augias\CoreBundle\Company\HostType;
+use Augias\CoreBundle\Company\ResolvedHost;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Listener\HostRoutingListener;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\EventSubscriber\UserLoginEventSubscriber;
+use Augias\UserBundle\Repository\UserRepository;
 use DateTimeInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery as M;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
-use SolidInvoice\CoreBundle\Company\HostType;
-use SolidInvoice\CoreBundle\Company\ResolvedHost;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Listener\HostRoutingListener;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\EventSubscriber\UserLoginEventSubscriber;
-use SolidInvoice\UserBundle\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

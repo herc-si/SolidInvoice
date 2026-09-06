@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Widgets;
+namespace Augias\DashboardBundle\Widgets;
 
+use Augias\DashboardBundle\Checklist\ChecklistManager;
+use Augias\UserBundle\Entity\User;
 use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\ORM\Exception\ORMException;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\DashboardBundle\Checklist\ChecklistManager;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
 
 /**
- * @see \SolidInvoice\DashboardBundle\Tests\Widgets\OnboardingChecklistWidgetTest
+ * @see \Augias\DashboardBundle\Tests\Widgets\OnboardingChecklistWidgetTest
  */
 final readonly class OnboardingChecklistWidget implements WidgetInterface
 {
@@ -73,6 +73,6 @@ final readonly class OnboardingChecklistWidget implements WidgetInterface
 
     public function getTemplate(): string
     {
-        return '@SolidInvoiceDashboard/Widget/onboarding_checklist.html.twig';
+        return '@AugiasDashboard/Widget/onboarding_checklist.html.twig';
     }
 }

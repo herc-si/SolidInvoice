@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle;
+namespace Augias\DashboardBundle;
 
+use Augias\DashboardBundle\Widgets\WidgetInterface;
 use Exception;
-use SolidInvoice\DashboardBundle\Widgets\WidgetInterface;
 use SplPriorityQueue;
 
 /**
- * @see \SolidInvoice\DashboardBundle\Tests\WidgetFactoryTest
+ * @see \Augias\DashboardBundle\Tests\WidgetFactoryTest
  */
 class WidgetFactory
 {

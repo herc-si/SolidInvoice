@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Entity;
+namespace Augias\CoreBundle\Entity;
 
+use Augias\TaxBundle\Entity\LineTax;
 use Brick\Math\BigNumber;
 use Doctrine\Common\Collections\Collection;
-use SolidInvoice\TaxBundle\Entity\LineTax;
 use Symfony\Component\Uid\Ulid;
 
 interface LineInterface

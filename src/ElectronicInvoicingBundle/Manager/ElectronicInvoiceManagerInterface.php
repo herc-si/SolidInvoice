@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Manager;
+namespace Augias\ElectronicInvoicingBundle\Manager;
 
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use Augias\InvoiceBundle\Entity\Invoice;
 use LogicException;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
 
 interface ElectronicInvoiceManagerInterface
 {

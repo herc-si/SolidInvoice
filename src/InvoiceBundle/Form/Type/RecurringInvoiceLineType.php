@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Form\Type;
+namespace Augias\InvoiceBundle\Form\Type;
 
+use Augias\CoreBundle\Form\Transformer\QuantityTransformer;
+use Augias\InvoiceBundle\Entity\RecurringInvoiceLine;
+use Augias\TaxBundle\Entity\Tax;
+use Augias\TaxBundle\Form\Type\LineTaxType;
 use Doctrine\Persistence\ManagerRegistry;
 use Money\Currency;
 use Override;
-use SolidInvoice\CoreBundle\Form\Transformer\QuantityTransformer;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoiceLine;
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\TaxBundle\Form\Type\LineTaxType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Form\Type\ItemTypeTest
+ * @see \Augias\InvoiceBundle\Tests\Form\Type\ItemTypeTest
  * @extends AbstractType<RecurringInvoiceLine>
  */
 class RecurringInvoiceLineType extends AbstractType

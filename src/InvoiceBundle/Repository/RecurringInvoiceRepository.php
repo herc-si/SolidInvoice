@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Repository;
+namespace Augias\InvoiceBundle\Repository;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\CronBundle\Enum\ScheduleRecurringType;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
+use Augias\InvoiceBundle\Recurring\RecurringSchedule;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use Carbon\Carbon;
@@ -23,12 +29,6 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CronBundle\Enum\ScheduleRecurringType;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
-use SolidInvoice\InvoiceBundle\Recurring\RecurringSchedule;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 
 /**

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Onboarding\Form\Step;
+namespace Augias\UserBundle\Onboarding\Form\Step;
 
 use Money\Currency;
 use Symfony\Component\Form\AbstractType;
@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\Onboarding\Form\Step\InvoiceSetupStepTest
+ * @see \Augias\UserBundle\Tests\Onboarding\Form\Step\InvoiceSetupStepTest
  * @extends AbstractType<array{invoiceDescription: string, invoiceAmount: string}>
  */
 final class InvoiceSetupStep extends AbstractType

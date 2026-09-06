@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Onboarding\Form\Step;
+namespace Augias\UserBundle\Onboarding\Form\Step;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -19,7 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\Onboarding\Form\Step\ClientSetupStepTest
+ * @see \Augias\UserBundle\Tests\Onboarding\Form\Step\ClientSetupStepTest
  * @extends AbstractType<array{clientName: string, clientEmail: string}>
  */
 final class ClientSetupStep extends AbstractType

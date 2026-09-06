@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -52,7 +52,7 @@
                                 {% endif %}
                             </div>
                             {% if form.client is defined and form.client.vars.data %}
-                                {% include "@SolidInvoiceClient/Ajax/info.html.twig" with {'client': form.client.vars.data, 'form': form} %}
+                                {% include "@AugiasClient/Ajax/info.html.twig" with {'client': form.client.vars.data, 'form': form} %}
                             {% endif %}
                         {% else %}
                             {# New client inline form #}

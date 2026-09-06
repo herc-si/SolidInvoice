@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Action;
+namespace Augias\UserBundle\Action;
 
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\UserBundle\Repository\UserInvitationRepository;
-use SolidInvoice\UserBundle\Repository\UserRepository;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\UserBundle\Repository\UserInvitationRepository;
+use Augias\UserBundle\Repository\UserRepository;
 use Symfony\Bridge\Twig\Attribute\Template;
 
 final readonly class Users
@@ -33,7 +33,7 @@ final readonly class Users
     /**
      * @return array{totalActiveUsers: int, totalPendingInvitations: int, recentlyJoinedCount: int, seatsUsage: int}
      */
-    #[Template('@SolidInvoiceUser/Users/index.html.twig')]
+    #[Template('@AugiasUser/Users/index.html.twig')]
     public function __invoke(): array
     {
         $totalActiveUsers = $this->userRepository->getUserCount();

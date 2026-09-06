@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Form\Step;
+namespace Augias\InstallBundle\Form\Step;
 
-use SolidInvoice\InstallBundle\DTO\Installation;
+use Augias\InstallBundle\DTO\Installation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 /**
- * @see \SolidInvoice\InstallBundle\Tests\Form\Step\ReviewStepTest
+ * @see \Augias\InstallBundle\Tests\Form\Step\ReviewStepTest
  * @extends AbstractType<Installation>
  */
 final class ReviewStep extends AbstractType

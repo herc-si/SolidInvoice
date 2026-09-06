@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Action;
+namespace Augias\ClientBundle\Action;
 
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Enum\ClientStatus;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Enum\ClientStatus;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -33,7 +33,7 @@ final readonly class Index
     /**
      * @return array<string, mixed>
      */
-    #[Template('@SolidInvoiceClient/Default/index.html.twig')]
+    #[Template('@AugiasClient/Default/index.html.twig')]
     public function __invoke(Request $request): array
     {
         $isArchived = $request->query->get('archived', '0') === '1';

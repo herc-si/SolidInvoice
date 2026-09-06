@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Tests\Calculator;
+namespace Augias\TaxBundle\Tests\Calculator;
 
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\TaxBundle\Calculator\LineTaxCalculator;
+use Augias\TaxBundle\Calculator\Rounder;
+use Augias\TaxBundle\Entity\LineTax;
+use Augias\TaxBundle\Enum\RoundingStrategy;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Enum\TaxType;
 use Brick\Math\BigDecimal;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\TaxBundle\Calculator\LineTaxCalculator;
-use SolidInvoice\TaxBundle\Calculator\Rounder;
-use SolidInvoice\TaxBundle\Entity\LineTax;
-use SolidInvoice\TaxBundle\Enum\RoundingStrategy;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Enum\TaxType;
 
 final class LineTaxCalculatorTest extends TestCase
 {

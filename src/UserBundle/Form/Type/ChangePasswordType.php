@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Form\Type;
+namespace Augias\UserBundle\Form\Type;
 
-use SolidInvoice\UserBundle\DTO\ChangePassword;
+use Augias\UserBundle\DTO\ChangePassword;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\Form\Type\ChangePasswordTypeTest
+ * @see \Augias\UserBundle\Tests\Form\Type\ChangePasswordTypeTest
  * @extends AbstractType<ChangePassword>
  */
 class ChangePasswordType extends AbstractType

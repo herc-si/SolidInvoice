@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Export\Action;
+namespace Augias\CoreBundle\Export\Action;
 
-use SolidInvoice\CoreBundle\Entity\ExportJob;
-use SolidInvoice\CoreBundle\Export\Enum\ExportFormat;
-use SolidInvoice\CoreBundle\Repository\ExportJobRepository;
-use SolidInvoice\UserBundle\Entity\User;
+use Augias\CoreBundle\Entity\ExportJob;
+use Augias\CoreBundle\Export\Enum\ExportFormat;
+use Augias\CoreBundle\Repository\ExportJobRepository;
+use Augias\UserBundle\Entity\User;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -33,7 +33,7 @@ final readonly class ListExports
     /**
      * @return array{jobs: list<ExportJob>, formats: list<ExportFormat>}
      */
-    #[Template('@SolidInvoiceCore/Export/list.html.twig')]
+    #[Template('@AugiasCore/Export/list.html.twig')]
     public function __invoke(?UserInterface $user): array
     {
         if (! $user instanceof User) {

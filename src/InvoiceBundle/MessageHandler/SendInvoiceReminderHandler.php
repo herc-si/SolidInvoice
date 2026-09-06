@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,26 +11,26 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\MessageHandler;
+namespace Augias\InvoiceBundle\MessageHandler;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\InvoiceBundle\Email\InvoiceReminderEmail;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\InvoiceReminder;
+use Augias\InvoiceBundle\Entity\ReminderStatus;
+use Augias\InvoiceBundle\Entity\ReminderType;
+use Augias\InvoiceBundle\Message\SendInvoiceReminderMessage;
+use Augias\InvoiceBundle\Notification\InvoiceReminderNotification;
+use Augias\InvoiceBundle\Notification\InvoiceReminderStoppedNotification;
+use Augias\InvoiceBundle\Repository\InvoiceReminderRepository;
+use Augias\NotificationBundle\Notification\NotificationManager;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\SettingsBundle\SystemConfig;
 use DateTimeInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Clock\ClockInterface;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\InvoiceBundle\Email\InvoiceReminderEmail;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\InvoiceReminder;
-use SolidInvoice\InvoiceBundle\Entity\ReminderStatus;
-use SolidInvoice\InvoiceBundle\Entity\ReminderType;
-use SolidInvoice\InvoiceBundle\Message\SendInvoiceReminderMessage;
-use SolidInvoice\InvoiceBundle\Notification\InvoiceReminderNotification;
-use SolidInvoice\InvoiceBundle\Notification\InvoiceReminderStoppedNotification;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceReminderRepository;
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;

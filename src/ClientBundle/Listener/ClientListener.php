@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Listener;
+namespace Augias\ClientBundle\Listener;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Enum\ClientStatus;
+use Augias\ClientBundle\Notification\ClientCreateNotification;
+use Augias\NotificationBundle\Notification\NotificationManager;
+use Augias\SettingsBundle\SystemConfig;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Doctrine\Persistence\ObjectManager;
 use Money\Currency;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Enum\ClientStatus;
-use SolidInvoice\ClientBundle\Notification\ClientCreateNotification;
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
-use SolidInvoice\SettingsBundle\SystemConfig;
 
 #[AsDoctrineListener(Events::prePersist)]
 #[AsDoctrineListener(Events::postPersist)]

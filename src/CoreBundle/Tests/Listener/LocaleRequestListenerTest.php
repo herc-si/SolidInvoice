@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Listener;
+namespace Augias\CoreBundle\Tests\Listener;
 
+use Augias\CoreBundle\Listener\LocaleRequestListener;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\UserSetting;
+use Augias\UserBundle\Enum\UserSettingType;
+use Augias\UserBundle\Repository\UserSettingRepositoryInterface;
 use Mockery as M;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Listener\LocaleRequestListener;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Entity\UserSetting;
-use SolidInvoice\UserBundle\Enum\UserSettingType;
-use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Form\Type;
+namespace Augias\ClientBundle\Form\Type;
 
 use Override;
 use Symfony\Component\Form\AbstractType;
@@ -19,7 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @see \SolidInvoice\ClientBundle\Tests\Form\Type\AddressTypeTest
+ * @see \Augias\ClientBundle\Tests\Form\Type\AddressTypeTest
  * @extends AbstractType<array{street1: mixed, street2: mixed, city: mixed, state: mixed, zip: mixed, country: mixed}>
  */
 class AddressType extends AbstractType

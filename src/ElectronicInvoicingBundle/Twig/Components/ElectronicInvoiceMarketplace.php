@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Twig\Components;
+namespace Augias\ElectronicInvoicingBundle\Twig\Components;
 
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
+use Augias\ElectronicInvoicingBundle\Provider\ElectronicInvoiceProviderInterface;
+use Augias\ElectronicInvoicingBundle\Provider\ProviderMetadataProvider;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\ElectronicInvoiceProviderInterface;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\ProviderMetadataProvider;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
@@ -36,7 +36,7 @@ use function strtolower;
 use function usort;
 
 /**
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Twig\Components\ElectronicInvoiceMarketplaceTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Twig\Components\ElectronicInvoiceMarketplaceTest
  */
 #[AsLiveComponent]
 final class ElectronicInvoiceMarketplace extends AbstractController

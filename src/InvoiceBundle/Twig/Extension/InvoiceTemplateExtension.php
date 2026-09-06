@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Twig\Extension;
+namespace Augias\InvoiceBundle\Twig\Extension;
 
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Enum\PaymentStatus;
 use Twig\Attribute\AsTwigFunction;
 use function array_filter;
 use function array_values;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Twig\Extension\InvoiceTemplateExtensionTest
+ * @see \Augias\InvoiceBundle\Tests\Twig\Extension\InvoiceTemplateExtensionTest
  */
 final class InvoiceTemplateExtension
 {

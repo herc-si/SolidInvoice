@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Feature;
+namespace Augias\SaasBundle\Feature;
 
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureType;
 
 /**
- * Canonical catalogue of every gated feature in SolidInvoice's hosted SaaS plans.
+ * Canonical catalogue of every gated feature in Augias's hosted SaaS plans.
  *
  * The string values intentionally match the keys registered in
  * `solidworx_platform.saas.features` (platform.yaml) and stored in the

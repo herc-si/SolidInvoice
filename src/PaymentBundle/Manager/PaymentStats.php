@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Manager;
+namespace Augias\PaymentBundle\Manager;
 
+use Augias\PaymentBundle\Enum\PaymentStatus;
+use Augias\PaymentBundle\Repository\PaymentRepository;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use Carbon\Carbon;
 use DateMalformedStringException;
 use Money\Currency;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
-use SolidInvoice\PaymentBundle\Repository\PaymentRepository;
 
 /**
- * @see \SolidInvoice\PaymentBundle\Tests\Manager\PaymentStatsTest
+ * @see \Augias\PaymentBundle\Tests\Manager\PaymentStatsTest
  */
 final readonly class PaymentStats
 {

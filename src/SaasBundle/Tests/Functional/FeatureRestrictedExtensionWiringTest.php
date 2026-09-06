@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Functional;
+namespace Augias\SaasBundle\Tests\Functional;
 
+use Augias\SaasBundle\Feature\RequiredPlanLabelProvider;
+use Augias\SaasBundle\Feature\UpgradePromptRenderer;
+use Augias\SaasBundle\Form\Extension\FeatureRestrictedExtension;
+use Augias\Test\SaasKernel;
 use Override;
-use SolidInvoice\SaasBundle\Feature\RequiredPlanLabelProvider;
-use SolidInvoice\SaasBundle\Feature\UpgradePromptRenderer;
-use SolidInvoice\SaasBundle\Form\Extension\FeatureRestrictedExtension;
-use SolidInvoice\Test\SaasKernel;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**

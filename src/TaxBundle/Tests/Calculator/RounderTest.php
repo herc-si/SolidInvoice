@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Tests\Calculator;
+namespace Augias\TaxBundle\Tests\Calculator;
 
+use Augias\TaxBundle\Calculator\Rounder;
+use Augias\TaxBundle\Enum\RoundingStrategy;
 use Brick\Math\BigDecimal;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\TaxBundle\Calculator\Rounder;
-use SolidInvoice\TaxBundle\Enum\RoundingStrategy;
 
 final class RounderTest extends TestCase
 {

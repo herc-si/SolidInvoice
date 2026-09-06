@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Tests\Functional;
+namespace Augias\ApiBundle\Tests\Functional;
 
+use Augias\ApiBundle\Action\WellKnownApiCatalog;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ApiBundle\Action\WellKnownApiCatalog;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 

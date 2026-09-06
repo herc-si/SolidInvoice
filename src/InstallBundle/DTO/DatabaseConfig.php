@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\DTO;
+namespace Augias\InstallBundle\DTO;
 
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\InstallBundle\Doctrine\Drivers;
 use Doctrine\DBAL\DriverManager;
 use PDO;
 use SensitiveParameter;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\InstallBundle\Doctrine\Drivers;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
@@ -42,7 +42,7 @@ final class DatabaseConfig
         public ?string $password = null,
         public ?string $version = null,
         #[NotBlank(groups: ['database_config_mysql', 'database_config_mariadb', 'database_config_pgsql'])]
-        public ?string $name = SolidInvoiceCoreBundle::APP_NAME,
+        public ?string $name = AugiasCoreBundle::APP_NAME,
     ) {
     }
 

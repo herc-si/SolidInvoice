@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Action;
+namespace Augias\QuoteBundle\Action;
 
+use Augias\CoreBundle\Form\FieldRenderer;
+use Augias\CoreBundle\Traits\JsonTrait;
+use Augias\QuoteBundle\Form\Type\QuoteType;
 use Money\Currency;
-use SolidInvoice\CoreBundle\Form\FieldRenderer;
-use SolidInvoice\CoreBundle\Traits\JsonTrait;
-use SolidInvoice\QuoteBundle\Form\Type\QuoteType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

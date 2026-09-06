@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Repository;
+namespace Augias\UserBundle\Tests\Repository;
 
+use Augias\CoreBundle\Test\Traits\FakerTestTrait;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\UserSetting;
+use Augias\UserBundle\Enum\UserSettingType;
+use Augias\UserBundle\Repository\UserSettingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\CoreBundle\Test\Traits\FakerTestTrait;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Entity\UserSetting;
-use SolidInvoice\UserBundle\Enum\UserSettingType;
-use SolidInvoice\UserBundle\Repository\UserSettingRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(UserSettingRepository::class)]

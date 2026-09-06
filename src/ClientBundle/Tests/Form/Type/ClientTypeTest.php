@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,23 +11,23 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Tests\Form\Type;
+namespace Augias\ClientBundle\Tests\Form\Type;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Form\Type\ClientType;
+use Augias\ClientBundle\Form\Type\ContactType;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Form\Type\CustomFieldValueCollectionType;
+use Augias\CoreBundle\Repository\CustomFieldRepository;
+use Augias\CoreBundle\Repository\CustomFieldValueRepository;
+use Augias\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
+use Augias\CoreBundle\Tests\FormTestCase;
+use Augias\MoneyBundle\Form\Type\CurrencyType;
+use Augias\SettingsBundle\SystemConfig;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery as M;
 use Money\Currency;
 use Override;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Form\Type\ClientType;
-use SolidInvoice\ClientBundle\Form\Type\ContactType;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Form\Type\CustomFieldValueCollectionType;
-use SolidInvoice\CoreBundle\Repository\CustomFieldRepository;
-use SolidInvoice\CoreBundle\Repository\CustomFieldValueRepository;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
-use SolidInvoice\MoneyBundle\Form\Type\CurrencyType;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\Form\PreloadedExtension;
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Calculator;
+namespace Augias\TaxBundle\Calculator;
 
+use Augias\InvoiceBundle\Entity\BaseInvoice;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\TaxBundle\Calculator\Result\InvoiceLevelBreakdown;
+use Augias\TaxBundle\Calculator\Result\TaxSummaryRow;
+use Augias\TaxBundle\Entity\InvoiceTax;
+use Augias\TaxBundle\Enum\TaxDirection;
+use Augias\TaxBundle\Enum\TaxType;
 use Brick\Math\BigDecimal;
 use Brick\Math\Exception\MathException;
 use Brick\Math\RoundingMode;
-use SolidInvoice\InvoiceBundle\Entity\BaseInvoice;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\TaxBundle\Calculator\Result\InvoiceLevelBreakdown;
-use SolidInvoice\TaxBundle\Calculator\Result\TaxSummaryRow;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
-use SolidInvoice\TaxBundle\Enum\TaxDirection;
-use SolidInvoice\TaxBundle\Enum\TaxType;
 
 /**
  * Computes whole-document (invoice-level) tax breakdowns.
@@ -42,7 +42,7 @@ use SolidInvoice\TaxBundle\Enum\TaxType;
  * For percentage rates, the base is the document subtotal (line subtotals,
  * tax-exclusive). Flat-rate amounts are independent of base. Inclusive rates
  * extract from `subTotal + totalLineTax`.
- * @see \SolidInvoice\TaxBundle\Tests\Calculator\InvoiceTaxCalculatorTest
+ * @see \Augias\TaxBundle\Tests\Calculator\InvoiceTaxCalculatorTest
  */
 final class InvoiceTaxCalculator
 {

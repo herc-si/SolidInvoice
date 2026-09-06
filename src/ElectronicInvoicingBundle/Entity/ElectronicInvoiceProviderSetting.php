@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Entity;
+namespace Augias\ElectronicInvoicingBundle\Entity;
 
+use Augias\CoreBundle\Export\Attribute\ExportIgnore;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Export\Attribute\ExportIgnore;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
@@ -32,7 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * only one may be $active at a time — that is the one InvoiceBundle's "send
  * electronic invoice" action dispatches to.
  *
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Entity\ElectronicInvoiceProviderSettingTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Entity\ElectronicInvoiceProviderSettingTest
  */
 #[ORM\Entity(repositoryClass: ElectronicInvoiceProviderSettingRepository::class)]
 #[ORM\Table(name: ElectronicInvoiceProviderSetting::TABLE_NAME)]

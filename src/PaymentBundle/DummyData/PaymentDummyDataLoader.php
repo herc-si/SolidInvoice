@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\DummyData;
+namespace Augias\PaymentBundle\DummyData;
 
+use Augias\CoreBundle\DummyData\DummyDataLoaderInterface;
+use Augias\CoreBundle\Entity\Company;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Enum\PaymentStatus;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Faker\Factory;
 use Faker\Generator;
-use SolidInvoice\CoreBundle\DummyData\DummyDataLoaderInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use function assert;
 

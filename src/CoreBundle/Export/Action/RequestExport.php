@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Export\Action;
+namespace Augias\CoreBundle\Export\Action;
 
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\ExportJob;
-use SolidInvoice\CoreBundle\Export\Enum\ExportFormat;
-use SolidInvoice\CoreBundle\Export\Message\RequestCompanyExport;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\CoreBundle\Repository\ExportJobRepository;
-use SolidInvoice\UserBundle\Entity\User;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\ExportJob;
+use Augias\CoreBundle\Export\Enum\ExportFormat;
+use Augias\CoreBundle\Export\Message\RequestCompanyExport;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\CoreBundle\Repository\ExportJobRepository;
+use Augias\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;

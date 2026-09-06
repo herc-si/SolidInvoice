@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Export;
+namespace Augias\DataGridBundle\Export;
 
+use Augias\CoreBundle\Export\Enum\ExportFormat;
+use Augias\CoreBundle\Export\Serializer\ExportSerializer;
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\Exception\InvalidGridException;
+use Augias\DataGridBundle\GridBuilder\Query;
+use Augias\DataGridBundle\GridInterface;
+use Augias\DataGridBundle\Source\SourceInterface;
 use Closure;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use SolidInvoice\CoreBundle\Export\Enum\ExportFormat;
-use SolidInvoice\CoreBundle\Export\Serializer\ExportSerializer;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\Exception\InvalidGridException;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
-use SolidInvoice\DataGridBundle\GridInterface;
-use SolidInvoice\DataGridBundle\Source\SourceInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 

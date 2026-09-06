@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\DataGrid;
+namespace Augias\UserBundle\Tests\DataGrid;
 
+use Augias\DataGridBundle\GridBuilder\Query;
+use Augias\DataGridBundle\Source\ORMSource;
+use Augias\UserBundle\DataGrid\ApiTokenHistoryGrid;
+use Augias\UserBundle\Entity\ApiTokenHistory;
+use Augias\UserBundle\Entity\User;
 use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\ParameterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
-use SolidInvoice\DataGridBundle\Source\ORMSource;
-use SolidInvoice\UserBundle\DataGrid\ApiTokenHistoryGrid;
-use SolidInvoice\UserBundle\Entity\ApiTokenHistory;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Uid\Ulid;

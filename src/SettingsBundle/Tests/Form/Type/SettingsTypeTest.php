@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Tests\Form\Type;
+namespace Augias\SettingsBundle\Tests\Form\Type;
 
+use Augias\CoreBundle\Form\Type\ImageUploadType;
+use Augias\CoreBundle\Tests\FormTestCase;
+use Augias\NotificationBundle\Form\Type\NotificationType;
+use Augias\SettingsBundle\Entity\Setting;
+use Augias\SettingsBundle\Form\Type\MailTransportType;
+use Augias\SettingsBundle\Form\Type\SettingsType;
 use Override;
-use SolidInvoice\CoreBundle\Form\Type\ImageUploadType;
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
-use SolidInvoice\NotificationBundle\Form\Type\NotificationType;
-use SolidInvoice\SettingsBundle\Entity\Setting;
-use SolidInvoice\SettingsBundle\Form\Type\MailTransportType;
-use SolidInvoice\SettingsBundle\Form\Type\SettingsType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

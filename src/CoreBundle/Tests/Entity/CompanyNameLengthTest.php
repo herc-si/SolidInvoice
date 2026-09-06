@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Entity;
+namespace Augias\CoreBundle\Tests\Entity;
 
+use Augias\CoreBundle\Entity\Company;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Entity\Company;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use function str_repeat;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
+use Augias\PaymentBundle\AugiasPaymentBundle;
+use Augias\PaymentBundle\PaymentAction\Offline\StatusAction;
+use Augias\PaymentBundle\PaymentAction\PaypalExpress\PaymentDetailsStatusAction;
+use Augias\PaymentBundle\Payum\Extension\UpdatePaymentDetailsExtension;
 use Payum\Core\Registry\RegistryInterface;
-use SolidInvoice\PaymentBundle\PaymentAction\Offline\StatusAction;
-use SolidInvoice\PaymentBundle\PaymentAction\PaypalExpress\PaymentDetailsStatusAction;
-use SolidInvoice\PaymentBundle\Payum\Extension\UpdatePaymentDetailsExtension;
-use SolidInvoice\PaymentBundle\SolidInvoicePaymentBundle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
@@ -31,11 +31,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ;
 
     $services
-        ->load(SolidInvoicePaymentBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
+        ->load(AugiasPaymentBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
         ->exclude(dirname(__DIR__, 3) . '/{DependencyInjection,Entity,Resources,Tests}');
 
     $services
-        ->load('SolidInvoice\\PaymentBundle\\Action\\', dirname(__DIR__, 3) . '/Action')
+        ->load('Augias\\PaymentBundle\\Action\\', dirname(__DIR__, 3) . '/Action')
         ->tag('controller.service_arguments');
 
     $services

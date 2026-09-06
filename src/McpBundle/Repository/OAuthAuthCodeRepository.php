@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Repository;
+namespace Augias\McpBundle\Repository;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\McpBundle\Entity\OAuthAuthCode;
+use Augias\McpBundle\OAuth\PendingAuthorization;
+use Augias\UserBundle\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
 use League\OAuth2\Server\Entities\AuthCodeEntityInterface;
 use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
 use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
 use LogicException;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\McpBundle\Entity\OAuthAuthCode;
-use SolidInvoice\McpBundle\OAuth\PendingAuthorization;
-use SolidInvoice\UserBundle\Entity\User;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 
 /**

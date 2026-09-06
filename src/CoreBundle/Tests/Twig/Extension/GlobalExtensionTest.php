@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Twig\Extension;
+namespace Augias\CoreBundle\Tests\Twig\Extension;
 
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Pdf\Generator;
+use Augias\CoreBundle\Twig\Extension\GlobalExtension;
+use Augias\MoneyBundle\Calculator;
+use Augias\SettingsBundle\SystemConfig;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Pdf\Generator;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\CoreBundle\Twig\Extension\GlobalExtension;
-use SolidInvoice\MoneyBundle\Calculator;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -30,7 +30,7 @@ final class GlobalExtensionTest extends TestCase
     {
         $globals = $this->createExtension(saasEnabled: false)->getGlobals();
 
-        self::assertSame(SolidInvoiceCoreBundle::VERSION, $globals['app_version']);
+        self::assertSame(AugiasCoreBundle::VERSION, $globals['app_version']);
     }
 
     public function testAppVersionIsHiddenInSaasMode(): void

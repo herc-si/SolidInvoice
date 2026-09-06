@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Action;
+namespace Augias\ClientBundle\Action;
 
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\PaymentBundle\Repository\PaymentRepository;
+use Augias\ClientBundle\Entity\Client;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\PaymentBundle\Repository\PaymentRepository;
 use Symfony\Bridge\Twig\Attribute\Template;
 
 final readonly class View
@@ -30,7 +30,7 @@ final readonly class View
     /**
      * @return array{client: Client, payments: array<string, mixed>, total_invoices_pending: int, total_invoices_paid: int, total_income: mixed, total_outstanding: int}
      */
-    #[Template('@SolidInvoiceClient/Default/view.html.twig')]
+    #[Template('@AugiasClient/Default/view.html.twig')]
     public function __invoke(Client $client): array
     {
         return [

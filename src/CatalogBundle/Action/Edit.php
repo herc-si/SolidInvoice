@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CatalogBundle\Action;
+namespace Augias\CatalogBundle\Action;
 
+use Augias\CatalogBundle\Entity\Product;
+use Augias\CatalogBundle\Form\Type\ProductFormType;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\CatalogBundle\Entity\Product;
-use SolidInvoice\CatalogBundle\Form\Type\ProductFormType;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -38,7 +38,7 @@ final readonly class Edit
     /**
      * @return array{form: FormView, product: Product}|Response
      */
-    #[Template('@SolidInvoiceCatalog/Default/form.html.twig')]
+    #[Template('@AugiasCatalog/Default/form.html.twig')]
     public function __invoke(Request $request, Product $product): array | Response
     {
         $form = $this->formFactory->create(ProductFormType::class, $product);

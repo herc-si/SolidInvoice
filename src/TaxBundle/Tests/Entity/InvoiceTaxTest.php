@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,23 +11,23 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Tests\Entity;
+namespace Augias\TaxBundle\Tests\Entity;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Test\Factory\QuoteFactory;
+use Augias\TaxBundle\Entity\InvoiceTax;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Enum\TaxDirection;
+use Augias\TaxBundle\Validator\Constraints\ExactlyOneDocument;
+use Augias\TaxBundle\Validator\Constraints\ExactlyOneDocumentValidator;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionProperty;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Test\Factory\QuoteFactory;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Enum\TaxDirection;
-use SolidInvoice\TaxBundle\Validator\Constraints\ExactlyOneDocument;
-use SolidInvoice\TaxBundle\Validator\Constraints\ExactlyOneDocumentValidator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Validator\Validator\ValidatorInterface;

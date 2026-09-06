@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Twig\Components;
+namespace Augias\NotificationBundle\Twig\Components;
 
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\NotificationBundle\Configurator\ConfiguratorInterface;
+use Augias\NotificationBundle\Entity\TransportSetting;
+use Augias\NotificationBundle\Form\Type\TransportSettingType;
+use Augias\NotificationBundle\Repository\TransportSettingRepository;
+use Augias\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\NotificationBundle\Configurator\ConfiguratorInterface;
-use SolidInvoice\NotificationBundle\Entity\TransportSetting;
-use SolidInvoice\NotificationBundle\Form\Type\TransportSettingType;
-use SolidInvoice\NotificationBundle\Repository\TransportSettingRepository;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
@@ -39,7 +39,7 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 use function assert;
 
 /**
- * @see \SolidInvoice\NotificationBundle\Tests\Twig\Components\NotificationTransportConfigurationTest
+ * @see \Augias\NotificationBundle\Tests\Twig\Components\NotificationTransportConfigurationTest
  */
 #[AsLiveComponent]
 final class NotificationTransportConfiguration extends AbstractController

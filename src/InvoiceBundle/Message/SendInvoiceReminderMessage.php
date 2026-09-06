@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Message;
+namespace Augias\InvoiceBundle\Message;
 
-use SolidInvoice\InvoiceBundle\Entity\ReminderType;
+use Augias\InvoiceBundle\Entity\ReminderType;
 use Symfony\Component\Uid\Ulid;
 
 final readonly class SendInvoiceReminderMessage

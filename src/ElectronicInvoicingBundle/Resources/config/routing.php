@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\ElectronicInvoicingBundle\Action\DownloadIncomingInvoice;
-use SolidInvoice\ElectronicInvoicingBundle\Action\IncomingInvoices;
-use SolidInvoice\ElectronicInvoicingBundle\Action\Providers;
-use SolidInvoice\ElectronicInvoicingBundle\Action\SendElectronicInvoice;
+use Augias\ElectronicInvoicingBundle\Action\DownloadIncomingInvoice;
+use Augias\ElectronicInvoicingBundle\Action\IncomingInvoices;
+use Augias\ElectronicInvoicingBundle\Action\Providers;
+use Augias\ElectronicInvoicingBundle\Action\SendElectronicInvoice;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {

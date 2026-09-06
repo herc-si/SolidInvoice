@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,32 +11,32 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Mcp;
+namespace Augias\QuoteBundle\Mcp;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\CoreBundle\Generator\BillingIdGenerator;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Manager\InvoiceManager;
+use Augias\McpBundle\Mcp\Attribute\McpScopeRequired;
+use Augias\McpBundle\Mcp\McpScopeGuard;
+use Augias\McpBundle\Mcp\Tool\EntityNormalizer;
+use Augias\McpBundle\Mcp\Tool\InvoiceTaxBuilder;
+use Augias\McpBundle\Mcp\Tool\LineItemBuilder;
+use Augias\McpBundle\Mcp\Tool\UlidParser;
+use Augias\McpBundle\Security\McpScope;
+use Augias\QuoteBundle\Cloner\QuoteCloner;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Enum\QuoteStatus;
+use Augias\QuoteBundle\Model\Graph as QuoteGraph;
+use Augias\QuoteBundle\Repository\QuoteRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Mcp\Capability\Attribute\McpTool;
 use Mcp\Exception\ToolCallException;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Manager\InvoiceManager;
-use SolidInvoice\McpBundle\Mcp\Attribute\McpScopeRequired;
-use SolidInvoice\McpBundle\Mcp\McpScopeGuard;
-use SolidInvoice\McpBundle\Mcp\Tool\EntityNormalizer;
-use SolidInvoice\McpBundle\Mcp\Tool\InvoiceTaxBuilder;
-use SolidInvoice\McpBundle\Mcp\Tool\LineItemBuilder;
-use SolidInvoice\McpBundle\Mcp\Tool\UlidParser;
-use SolidInvoice\McpBundle\Security\McpScope;
-use SolidInvoice\QuoteBundle\Cloner\QuoteCloner;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
-use SolidInvoice\QuoteBundle\Model\Graph as QuoteGraph;
-use SolidInvoice\QuoteBundle\Repository\QuoteRepository;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Workflow\WorkflowInterface;
 

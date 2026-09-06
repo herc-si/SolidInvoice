@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,29 +11,29 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Cloner;
+namespace Augias\InvoiceBundle\Tests\Cloner;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Generator\BillingIdGenerator;
+use Augias\CoreBundle\Generator\BillingIdGenerator\RandomNumberGenerator;
+use Augias\CronBundle\Enum\ScheduleEndType;
+use Augias\CronBundle\Enum\ScheduleRecurringType;
+use Augias\InvoiceBundle\Cloner\InvoiceCloner;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoiceLine;
+use Augias\InvoiceBundle\Manager\InvoiceManager;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\TaxBundle\Entity\LineTax;
+use Augias\TaxBundle\Entity\Tax;
 use Brick\Math\Exception\MathException;
 use Carbon\Carbon;
 use DateTimeImmutable;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator\RandomNumberGenerator;
-use SolidInvoice\CronBundle\Enum\ScheduleEndType;
-use SolidInvoice\CronBundle\Enum\ScheduleRecurringType;
-use SolidInvoice\InvoiceBundle\Cloner\InvoiceCloner;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoiceLine;
-use SolidInvoice\InvoiceBundle\Manager\InvoiceManager;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\TaxBundle\Entity\LineTax;
-use SolidInvoice\TaxBundle\Entity\Tax;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
 final class InvoiceClonerTest extends TestCase

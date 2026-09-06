@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Form\Transformer;
+namespace Augias\CoreBundle\Form\Transformer;
 
+use Augias\CoreBundle\Doctrine\Type\QuantityType;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
 use Locale;
 use NumberFormatter;
-use SolidInvoice\CoreBundle\Doctrine\Type\QuantityType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use function is_string;
@@ -45,7 +45,7 @@ use function trim;
  * in this class would silently make the two entry points disagree.
  *
  * @implements DataTransformerInterface<BigNumber, string>
- * @see \SolidInvoice\CoreBundle\Tests\Form\Transformer\QuantityTransformerTest
+ * @see \Augias\CoreBundle\Tests\Form\Transformer\QuantityTransformerTest
  */
 final readonly class QuantityTransformer implements DataTransformerInterface
 {

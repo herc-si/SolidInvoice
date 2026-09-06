@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,23 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Command;
+namespace Augias\InstallBundle\Command;
 
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\CoreBundle\ConfigWriter;
+use Augias\CoreBundle\Entity\Version;
+use Augias\CoreBundle\Repository\VersionRepository;
+use Augias\CoreBundle\Telemetry\Telemetry;
+use Augias\CoreBundle\Telemetry\TelemetryEvent;
+use Augias\InstallBundle\Config\DatabaseConfig;
+use Augias\InstallBundle\DTO\Installation;
+use Augias\InstallBundle\Exception\ApplicationInstalledException;
+use Augias\InstallBundle\Step\CreateUserStep;
+use Augias\InstallBundle\Step\InstallationStepInterface;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Enum\UserSettingType;
+use Augias\UserBundle\Repository\UserRepository;
+use Augias\UserBundle\Repository\UserSettingRepositoryInterface;
 use Carbon\Carbon;
 use DateTimeInterface;
 use Defuse\Crypto\Exception\EnvironmentIsBrokenException;
@@ -26,21 +41,6 @@ use InvalidArgumentException;
 use Override;
 use PDO;
 use RuntimeException;
-use SolidInvoice\CoreBundle\ConfigWriter;
-use SolidInvoice\CoreBundle\Entity\Version;
-use SolidInvoice\CoreBundle\Repository\VersionRepository;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\CoreBundle\Telemetry\Telemetry;
-use SolidInvoice\CoreBundle\Telemetry\TelemetryEvent;
-use SolidInvoice\InstallBundle\Config\DatabaseConfig;
-use SolidInvoice\InstallBundle\DTO\Installation;
-use SolidInvoice\InstallBundle\Exception\ApplicationInstalledException;
-use SolidInvoice\InstallBundle\Step\CreateUserStep;
-use SolidInvoice\InstallBundle\Step\InstallationStepInterface;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Enum\UserSettingType;
-use SolidInvoice\UserBundle\Repository\UserRepository;
-use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\FormatterHelper;
@@ -68,7 +68,7 @@ use function in_array;
 use function Symfony\Component\String\u;
 
 /**
- * @see \SolidInvoice\InstallBundle\Tests\Command\InstallCommandTest
+ * @see \Augias\InstallBundle\Tests\Command\InstallCommandTest
  */
 #[AsCommand(name: 'solidinvoice:install', description: 'Installs the application')]
 class InstallCommand extends Command
@@ -210,7 +210,7 @@ class InstallCommand extends Command
             $this->createAdminUser($input, $output);
         }
 
-        $version = SolidInvoiceCoreBundle::VERSION;
+        $version = AugiasCoreBundle::VERSION;
         $entityManager = $this->registry->getManager();
 
         /** @var VersionRepository $repository */

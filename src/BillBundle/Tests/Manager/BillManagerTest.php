@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Tests\Manager;
+namespace Augias\BillBundle\Tests\Manager;
 
+use Augias\BillBundle\Enum\BillStatus;
+use Augias\BillBundle\Manager\BillManager;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Entity\Company;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
 use Brick\Math\BigInteger;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,12 +26,6 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\BillBundle\Enum\BillStatus;
-use SolidInvoice\BillBundle\Manager\BillManager;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
 
 #[CoversClass(BillManager::class)]
 final class BillManagerTest extends TestCase

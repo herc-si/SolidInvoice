@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MailerBundle\Configurator;
+namespace Augias\MailerBundle\Configurator;
 
-use SolidInvoice\MailerBundle\Form\Type\TransportConfig\KeyTransportConfigType;
+use Augias\MailerBundle\Form\Type\TransportConfig\KeyTransportConfigType;
 use Symfony\Component\Mailer\Transport\Dsn;
 
 /**
- * @see \SolidInvoice\MailerBundle\Tests\Configurator\MailchimpConfiguratorTest
+ * @see \Augias\MailerBundle\Tests\Configurator\MailchimpConfiguratorTest
  */
 final class MailchimpConfigurator implements ConfiguratorInterface
 {

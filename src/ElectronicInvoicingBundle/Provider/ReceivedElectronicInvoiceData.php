@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Provider;
+namespace Augias\ElectronicInvoicingBundle\Provider;
 
 use Brick\Math\BigNumber;
 use DateTimeImmutable;
@@ -21,7 +21,7 @@ use DateTimeImmutable;
  * counterpart of {@see ElectronicInvoiceSubmissionResult}. Providers map their
  * own wire format to this shape; nothing downstream needs to know which
  * provider it came from beyond the `provider` name already tracked on
- * {@see \SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt}.
+ * {@see \Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt}.
  */
 final readonly class ReceivedElectronicInvoiceData
 {

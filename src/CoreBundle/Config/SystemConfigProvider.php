@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Config;
+namespace Augias\CoreBundle\Config;
 
-use SolidInvoice\CoreBundle\Form\Type\ImageUploadType;
-use SolidInvoice\CoreBundle\Form\Type\LocaleType;
-use SolidInvoice\MoneyBundle\Form\Type\CurrencyType;
-use SolidInvoice\SettingsBundle\Config\ProviderInterface;
-use SolidInvoice\SettingsBundle\DTO\Config;
-use SolidInvoice\SettingsBundle\Form\Type\AddressType;
-use SolidInvoice\SettingsBundle\SystemConfig;
+use Augias\CoreBundle\Form\Type\ImageUploadType;
+use Augias\CoreBundle\Form\Type\LocaleType;
+use Augias\MoneyBundle\Form\Type\CurrencyType;
+use Augias\SettingsBundle\Config\ProviderInterface;
+use Augias\SettingsBundle\DTO\Config;
+use Augias\SettingsBundle\Form\Type\AddressType;
+use Augias\SettingsBundle\SystemConfig;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

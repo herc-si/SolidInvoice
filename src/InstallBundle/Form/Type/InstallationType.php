@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Form\Type;
+namespace Augias\InstallBundle\Form\Type;
 
-use SolidInvoice\AppRequirements;
-use SolidInvoice\InstallBundle\DTO\Installation;
-use SolidInvoice\InstallBundle\Form\FormFlow\InstallNavigatorType;
-use SolidInvoice\InstallBundle\Form\Step\DatabaseConfigStep;
-use SolidInvoice\InstallBundle\Form\Step\ReviewStep;
-use SolidInvoice\InstallBundle\Form\Step\StartStep;
-use SolidInvoice\InstallBundle\Form\Step\SystemRequirementsStep;
-use SolidInvoice\InstallBundle\Form\Step\UserAccountStep;
+use Augias\AppRequirements;
+use Augias\InstallBundle\DTO\Installation;
+use Augias\InstallBundle\Form\FormFlow\InstallNavigatorType;
+use Augias\InstallBundle\Form\Step\DatabaseConfigStep;
+use Augias\InstallBundle\Form\Step\ReviewStep;
+use Augias\InstallBundle\Form\Step\StartStep;
+use Augias\InstallBundle\Form\Step\SystemRequirementsStep;
+use Augias\InstallBundle\Form\Step\UserAccountStep;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\Flow\AbstractFlowType;
 use Symfony\Component\Form\Flow\DataStorage\SessionDataStorage;

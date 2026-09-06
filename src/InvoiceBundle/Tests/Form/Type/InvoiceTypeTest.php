@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,28 +11,28 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Form\Type;
+namespace Augias\InvoiceBundle\Tests\Form\Type;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Form\Type\CustomFieldValueCollectionType;
+use Augias\CoreBundle\Form\Type\DiscountType;
+use Augias\CoreBundle\Generator\BillingIdGenerator;
+use Augias\CoreBundle\Repository\CustomFieldRepository;
+use Augias\CoreBundle\Repository\CustomFieldValueRepository;
+use Augias\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
+use Augias\CoreBundle\Tests\FormTestCase;
+use Augias\InvoiceBundle\DTO\InvoiceFormDTO;
+use Augias\InvoiceBundle\Enum\InvoiceClientMode;
+use Augias\InvoiceBundle\Form\Type\InvoiceType;
+use Augias\InvoiceBundle\Form\Type\ItemType;
+use Augias\SettingsBundle\SystemConfig;
 use Brick\Math\BigDecimal;
 use Carbon\CarbonImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery as M;
 use Money\Currency;
 use Override;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Form\Type\CustomFieldValueCollectionType;
-use SolidInvoice\CoreBundle\Form\Type\DiscountType;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
-use SolidInvoice\CoreBundle\Repository\CustomFieldRepository;
-use SolidInvoice\CoreBundle\Repository\CustomFieldValueRepository;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
-use SolidInvoice\InvoiceBundle\DTO\InvoiceFormDTO;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceClientMode;
-use SolidInvoice\InvoiceBundle\Form\Type\InvoiceType;
-use SolidInvoice\InvoiceBundle\Form\Type\ItemType;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

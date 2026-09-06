@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Templates;
+namespace Augias\CoreBundle\Templates;
 
 use function array_keys;
 use function basename;
@@ -33,12 +33,12 @@ use function ucwords;
  * any code changes.
  *
  * Directories starting with an underscore are shared partials, not templates.
- * @see \SolidInvoice\CoreBundle\Tests\Templates\BillingTemplateRegistryTest
+ * @see \Augias\CoreBundle\Tests\Templates\BillingTemplateRegistryTest
  */
 final class BillingTemplateRegistry
 {
     /**
-     * Sentinel slug for the built-in templates that ship with SolidInvoice
+     * Sentinel slug for the built-in templates that ship with Augias
      * and are always used on self-hosted installs.
      */
     public const string DEFAULT_SLUG = 'default';

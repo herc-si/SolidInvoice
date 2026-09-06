@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,23 +11,23 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Action\Transition;
+namespace Augias\InvoiceBundle\Tests\Action\Transition;
 
+use Augias\ClientBundle\Entity\Contact;
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use Augias\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManagerInterface;
+use Augias\InvoiceBundle\Action\Transition\Send;
+use Augias\InvoiceBundle\Email\InvoiceEmail;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Model\Graph;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
-use SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceManagerInterface;
-use SolidInvoice\InvoiceBundle\Action\Transition\Send;
-use SolidInvoice\InvoiceBundle\Email\InvoiceEmail;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Model\Graph;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\MailerInterface;

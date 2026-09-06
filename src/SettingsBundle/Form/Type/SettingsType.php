@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Form\Type;
+namespace Augias\SettingsBundle\Form\Type;
 
+use Augias\SettingsBundle\Entity\Setting;
 use Override;
-use SolidInvoice\SettingsBundle\Entity\Setting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +23,7 @@ use function is_array;
 use function ksort;
 
 /**
- * @see \SolidInvoice\SettingsBundle\Tests\Form\Type\SettingsTypeTest
+ * @see \Augias\SettingsBundle\Tests\Form\Type\SettingsTypeTest
  * @extends AbstractType<mixed>
  */
 class SettingsType extends AbstractType

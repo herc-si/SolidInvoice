@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\EventListener;
+namespace Augias\NotificationBundle\EventListener;
 
-use SolidInvoice\NotificationBundle\Entity\TransportSetting;
-use SolidInvoice\NotificationBundle\Notification\NotificationMessage;
-use SolidInvoice\NotificationBundle\Notification\Options\Reference\TemplateReference;
-use SolidInvoice\NotificationBundle\Notification\Options\Reference\TranslationReference;
-use SolidInvoice\NotificationBundle\Notification\Options\Reference\UrlRouteReference;
-use SolidInvoice\NotificationBundle\Repository\TransportSettingRepository;
+use Augias\NotificationBundle\Entity\TransportSetting;
+use Augias\NotificationBundle\Notification\NotificationMessage;
+use Augias\NotificationBundle\Notification\Options\Reference\TemplateReference;
+use Augias\NotificationBundle\Notification\Options\Reference\TranslationReference;
+use Augias\NotificationBundle\Notification\Options\Reference\UrlRouteReference;
+use Augias\NotificationBundle\Repository\TransportSettingRepository;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Notifier\Event\MessageEvent;
 use Symfony\Component\Notifier\Message\ChatMessage;

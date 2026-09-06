@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Functional;
+namespace Augias\SaasBundle\Tests\Functional;
 
+use Augias\CoreBundle\Templates\BillingTemplateRegistry;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\SaasBundle\Action\TemplatePreviewAction;
+use Augias\SaasBundle\Templates\PreviewInvoiceFactory;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\Test\SaasKernel;
 use Override;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateRegistry;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\SaasBundle\Action\TemplatePreviewAction;
-use SolidInvoice\SaasBundle\Templates\PreviewInvoiceFactory;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\Test\SaasKernel;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Twig\Environment;

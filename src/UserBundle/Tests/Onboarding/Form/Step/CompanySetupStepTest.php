@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Onboarding\Form\Step;
+namespace Augias\UserBundle\Tests\Onboarding\Form\Step;
 
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
-use SolidInvoice\UserBundle\Onboarding\Form\Step\CompanySetupStep;
+use Augias\CoreBundle\Tests\FormTestCase;
+use Augias\UserBundle\Onboarding\Form\Step\CompanySetupStep;
 
 final class CompanySetupStepTest extends FormTestCase
 {

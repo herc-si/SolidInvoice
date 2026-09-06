@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Search;
+namespace Augias\CoreBundle\Search;
 
+use Augias\CoreBundle\Company\CompanySelector;
 use Meilisearch\Client;
 use Meilisearch\Contracts\SearchQuery;
 use Meilisearch\Exceptions\ApiException;
 use Meilisearch\Exceptions\CommunicationException;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
 use Symfony\Component\Uid\Ulid;
 use function array_filter;
 use function array_keys;
@@ -29,7 +29,7 @@ use function strlen;
 use function substr;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Search\MultiSearchServiceTest
+ * @see \Augias\CoreBundle\Tests\Search\MultiSearchServiceTest
  */
 final class MultiSearchService
 {

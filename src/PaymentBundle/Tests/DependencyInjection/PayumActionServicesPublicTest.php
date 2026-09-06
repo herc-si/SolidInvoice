@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Tests\DependencyInjection;
+namespace Augias\PaymentBundle\Tests\DependencyInjection;
 
+use Augias\PaymentBundle\PaymentAction\Offline\StatusAction;
+use Augias\PaymentBundle\PaymentAction\PaypalExpress\PaymentDetailsStatusAction;
+use Augias\PaymentBundle\Payum\Extension\UpdatePaymentDetailsExtension;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Extension\ExtensionInterface;
-use SolidInvoice\PaymentBundle\PaymentAction\Offline\StatusAction;
-use SolidInvoice\PaymentBundle\PaymentAction\PaypalExpress\PaymentDetailsStatusAction;
-use SolidInvoice\PaymentBundle\Payum\Extension\UpdatePaymentDetailsExtension;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
- * Regression test for https://github.com/SolidInvoice/SolidInvoice/issues/2436
+ * Regression test for https://github.com/Augias/Augias/issues/2436
  *
  * PayumBundle's ContainerAwareCoreGatewayFactory resolves "@serviceId" strings
  * to real service objects via $container->has() / $container->get(). In Symfony's

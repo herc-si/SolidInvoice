@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Action\Ajax;
+namespace Augias\ClientBundle\Action\Ajax;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Repository\CreditRepository;
+use Augias\CoreBundle\Response\AjaxResponse;
+use Augias\CoreBundle\Traits\JsonTrait;
+use Augias\MoneyBundle\Formatter\MoneyFormatter;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
 use JsonException;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Repository\CreditRepository;
-use SolidInvoice\CoreBundle\Response\AjaxResponse;
-use SolidInvoice\CoreBundle\Traits\JsonTrait;
-use SolidInvoice\MoneyBundle\Formatter\MoneyFormatter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 

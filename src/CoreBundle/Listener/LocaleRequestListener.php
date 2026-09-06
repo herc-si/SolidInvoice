@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Listener;
+namespace Augias\CoreBundle\Listener;
 
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Enum\UserSettingType;
-use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Enum\UserSettingType;
+use Augias\UserBundle\Repository\UserSettingRepositoryInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -37,7 +37,7 @@ use Throwable;
  * value directly, so a user changing their own preference sees it applied
  * immediately.
  *
- * @see \SolidInvoice\CoreBundle\Tests\Listener\LocaleRequestListenerTest
+ * @see \Augias\CoreBundle\Tests\Listener\LocaleRequestListenerTest
  */
 final readonly class LocaleRequestListener implements EventSubscriberInterface
 {

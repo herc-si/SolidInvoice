@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CronBundle\Command;
+namespace Augias\CronBundle\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -19,7 +19,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * @see \SolidInvoice\CronBundle\Tests\Command\CronRunCommandTest
+ * @see \Augias\CronBundle\Tests\Command\CronRunCommandTest
  */
 #[AsCommand(name: 'cron:run', description: 'Run scheduled tasks')]
 class CronRunCommand extends Command

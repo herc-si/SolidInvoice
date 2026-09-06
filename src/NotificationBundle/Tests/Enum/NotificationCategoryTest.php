@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Tests\Enum;
+namespace Augias\NotificationBundle\Tests\Enum;
 
+use Augias\NotificationBundle\Enum\NotificationCategory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\NotificationBundle\Enum\NotificationCategory;
 
 #[CoversClass(NotificationCategory::class)]
 final class NotificationCategoryTest extends TestCase

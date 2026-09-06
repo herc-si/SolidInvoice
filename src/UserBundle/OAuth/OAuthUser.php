@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\OAuth;
+namespace Augias\UserBundle\OAuth;
 
 use League\OAuth2\Client\Provider\GoogleUser;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\OAuth\OAuthUserTest
+ * @see \Augias\UserBundle\Tests\OAuth\OAuthUserTest
  */
 final readonly class OAuthUser
 {

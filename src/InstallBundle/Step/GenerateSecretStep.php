@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Step;
+namespace Augias\InstallBundle\Step;
 
+use Augias\CoreBundle\ConfigWriter;
+use Augias\InstallBundle\DTO\Installation;
 use Defuse\Crypto\Key;
 use Generator;
-use SolidInvoice\CoreBundle\ConfigWriter;
-use SolidInvoice\InstallBundle\DTO\Installation;
 use Symfony\Bundle\FrameworkBundle\Secrets\AbstractVault;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use function str_replace;
 
 /**
- * @see \SolidInvoice\InstallBundle\Tests\Step\GenerateSecretStepTest
+ * @see \Augias\InstallBundle\Tests\Step\GenerateSecretStepTest
  */
 #[AsTaggedItem('Generating secret', priority: 30)]
 final readonly class GenerateSecretStep implements InstallationStepInterface

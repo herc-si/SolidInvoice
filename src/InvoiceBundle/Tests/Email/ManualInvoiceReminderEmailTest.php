@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Email;
+namespace Augias\InvoiceBundle\Tests\Email;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Email\ManualInvoiceReminderEmail;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
 use Carbon\CarbonImmutable;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Email\ManualInvoiceReminderEmail;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
 use Spatie\Snapshots\MatchesSnapshots;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Uid\Ulid;
@@ -70,8 +70,8 @@ final class ManualInvoiceReminderEmailTest extends KernelTestCase
 
         $email = new ManualInvoiceReminderEmail($invoice);
 
-        self::assertSame('@SolidInvoiceInvoice/Email/manual_reminder.html.twig', $email->getHtmlTemplate());
-        self::assertSame('@SolidInvoiceInvoice/Email/manual_reminder.text.twig', $email->getTextTemplate());
+        self::assertSame('@AugiasInvoice/Email/manual_reminder.html.twig', $email->getHtmlTemplate());
+        self::assertSame('@AugiasInvoice/Email/manual_reminder.text.twig', $email->getTextTemplate());
     }
 
     public function testEmailContextIncludesInvoice(): void

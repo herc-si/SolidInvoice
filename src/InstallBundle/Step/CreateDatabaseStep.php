@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Step;
+namespace Augias\InstallBundle\Step;
 
+use Augias\InstallBundle\DTO\Installation;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Generator;
-use SolidInvoice\InstallBundle\DTO\Installation;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use function in_array;
 use function str_replace;
 
 /**
- * @see \SolidInvoice\InstallBundle\Tests\Step\CreateDatabaseStepTest
+ * @see \Augias\InstallBundle\Tests\Step\CreateDatabaseStepTest
  */
 #[AsTaggedItem('Creating database', priority: 20)]
 final readonly class CreateDatabaseStep implements InstallationStepInterface

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Twig\Components;
+namespace Augias\PaymentBundle\Twig\Components;
 
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\PaymentBundle\Entity\PaymentMethod;
+use Augias\PaymentBundle\Exception\InvalidGatewayException;
+use Augias\PaymentBundle\Factory\PaymentFactories;
+use Augias\PaymentBundle\Form\Type\PaymentMethodType;
+use Augias\PaymentBundle\Gateway\GatewayInfo;
+use Augias\PaymentBundle\Gateway\GatewayMetadataProvider;
+use Augias\PaymentBundle\Repository\PaymentMethodRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\PaymentBundle\Entity\PaymentMethod;
-use SolidInvoice\PaymentBundle\Exception\InvalidGatewayException;
-use SolidInvoice\PaymentBundle\Factory\PaymentFactories;
-use SolidInvoice\PaymentBundle\Form\Type\PaymentMethodType;
-use SolidInvoice\PaymentBundle\Gateway\GatewayInfo;
-use SolidInvoice\PaymentBundle\Gateway\GatewayMetadataProvider;
-use SolidInvoice\PaymentBundle\Repository\PaymentMethodRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -39,7 +39,7 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 use function assert;
 
 /**
- * @see \SolidInvoice\PaymentBundle\Tests\Twig\Components\PaymentSettingsTest
+ * @see \Augias\PaymentBundle\Tests\Twig\Components\PaymentSettingsTest
  */
 #[AsLiveComponent]
 final class PaymentSettings extends AbstractController

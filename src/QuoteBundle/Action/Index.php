@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Action;
+namespace Augias\QuoteBundle\Action;
 
+use Augias\QuoteBundle\Enum\QuoteStatus;
+use Augias\QuoteBundle\Repository\QuoteRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
-use SolidInvoice\QuoteBundle\Repository\QuoteRepository;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -30,7 +30,7 @@ final readonly class Index
     /**
      * @return array<string, mixed>
      */
-    #[Template('@SolidInvoiceQuote/Default/index.html.twig')]
+    #[Template('@AugiasQuote/Default/index.html.twig')]
     public function __invoke(Request $request): array
     {
         $isArchived = $request->query->get('archived', '0') === '1';

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\State\Processor;
+namespace Augias\ApiBundle\State\Processor;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
+use Augias\QuoteBundle\Entity\Line;
+use Augias\QuoteBundle\Repository\QuoteRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\QuoteBundle\Entity\Line;
-use SolidInvoice\QuoteBundle\Repository\QuoteRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /** @implements ProcessorInterface<Line, Line> */

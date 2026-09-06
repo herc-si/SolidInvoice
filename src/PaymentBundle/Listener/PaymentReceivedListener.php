@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Listener;
+namespace Augias\PaymentBundle\Listener;
 
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
-use SolidInvoice\PaymentBundle\Event\PaymentCompleteEvent;
-use SolidInvoice\PaymentBundle\Event\PaymentEvents;
-use SolidInvoice\PaymentBundle\Notification\PaymentReceivedNotification;
+use Augias\NotificationBundle\Notification\NotificationManager;
+use Augias\PaymentBundle\Event\PaymentCompleteEvent;
+use Augias\PaymentBundle\Event\PaymentEvents;
+use Augias\PaymentBundle\Notification\PaymentReceivedNotification;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class PaymentReceivedListener implements EventSubscriberInterface

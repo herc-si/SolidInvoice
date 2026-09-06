@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Listener;
+namespace Augias\CoreBundle\Tests\Listener;
 
+use Augias\CoreBundle\Listener\EmailFromListener;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\UserBundle\Entity\User;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Listener\EmailFromListener;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Envelope;
 use Symfony\Component\Mailer\Event\MessageEvent;
@@ -41,7 +41,7 @@ final class EmailFromListenerTest extends TestCase
 
         $systemConfig->shouldReceive('get')
             ->with('email/from_name')
-            ->andReturn('SolidInvoice');
+            ->andReturn('Augias');
 
         $tokenStorage = M::mock(TokenStorageInterface::class);
 
@@ -53,7 +53,7 @@ final class EmailFromListenerTest extends TestCase
         $envelope = Envelope::create($message);
         $listener(new MessageEvent($message, $envelope, 'smtp'));
 
-        self::assertEquals([new Address('info@example.com', 'SolidInvoice')], $message->getFrom());
+        self::assertEquals([new Address('info@example.com', 'Augias')], $message->getFrom());
         self::assertSame('info@example.com', $envelope->getSender()->getAddress());
     }
 

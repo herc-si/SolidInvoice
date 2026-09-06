@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Form\Type;
+namespace Augias\UserBundle\Form\Type;
 
-use SolidInvoice\NotificationBundle\Notification\NotificationMessage;
+use Augias\NotificationBundle\Notification\NotificationMessage;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 use Symfony\Component\Form\AbstractType;
@@ -28,7 +28,7 @@ final class NotificationType extends AbstractType
      * @param ServiceLocator<NotificationMessage> $notificationList
      */
     public function __construct(
-        #[AutowireLocator('solid_invoice_notification.notification', 'name')]
+        #[AutowireLocator('augias_notification.notification', 'name')]
         private readonly ServiceLocator $notificationList,
     ) {
     }

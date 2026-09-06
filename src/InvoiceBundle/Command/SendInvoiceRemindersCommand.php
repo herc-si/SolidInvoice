@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Command;
+namespace Augias\InvoiceBundle\Command;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\ReminderType;
+use Augias\InvoiceBundle\Message\SendInvoiceReminderMessage;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
 use Carbon\CarbonImmutable;
 use DateMalformedStringException;
 use DateTimeInterface;
@@ -21,10 +25,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
 use Psr\Clock\ClockInterface;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\ReminderType;
-use SolidInvoice\InvoiceBundle\Message\SendInvoiceReminderMessage;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
 use SolidWorx\Platform\PlatformBundle\Console\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -38,7 +38,7 @@ use function Sentry\withMonitor;
 use function sprintf;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Command\SendInvoiceRemindersCommandTest
+ * @see \Augias\InvoiceBundle\Tests\Command\SendInvoiceRemindersCommandTest
  */
 #[AsCommand(
     name: 'solidinvoice:invoices:send-reminders',

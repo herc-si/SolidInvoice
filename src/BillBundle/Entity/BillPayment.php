@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Entity;
+namespace Augias\BillBundle\Entity;
 
+use Augias\BillBundle\Enum\BillPaymentMethod;
+use Augias\BillBundle\Repository\BillPaymentRepository;
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
 use Brick\Math\BigNumber;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Money\Currency;
 use Money\Money;
-use SolidInvoice\BillBundle\Enum\BillPaymentMethod;
-use SolidInvoice\BillBundle\Repository\BillPaymentRepository;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid\Ulid;
@@ -31,11 +31,11 @@ use Symfony\Component\Uid\Ulid;
 /**
  * Money paid out against a {@see Bill} — recorded manually, not captured via a
  * payment gateway, so this deliberately does not extend
- * {@see \Payum\Core\Model\Payment} the way {@see \SolidInvoice\PaymentBundle\Entity\Payment}
+ * {@see \Payum\Core\Model\Payment} the way {@see \Augias\PaymentBundle\Entity\Payment}
  * does: there's no gateway state, client email, or capture callback here,
  * just "we paid this much, this way, on this date".
  *
- * @see \SolidInvoice\BillBundle\Tests\Entity\BillPaymentTest
+ * @see \Augias\BillBundle\Tests\Entity\BillPaymentTest
  */
 #[ORM\Table(name: BillPayment::TABLE_NAME)]
 #[ORM\Entity(repositoryClass: BillPaymentRepository::class)]

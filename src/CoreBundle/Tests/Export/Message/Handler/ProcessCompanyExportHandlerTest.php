@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Export\Message\Handler;
+namespace Augias\CoreBundle\Tests\Export\Message\Handler;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\ExportJob;
+use Augias\CoreBundle\Export\CompanyExporter;
+use Augias\CoreBundle\Export\Discovery\EntityDiscovery;
+use Augias\CoreBundle\Export\Enum\ExportFormat;
+use Augias\CoreBundle\Export\Enum\ExportStatus;
+use Augias\CoreBundle\Export\Message\Handler\ProcessCompanyExportHandler;
+use Augias\CoreBundle\Export\Message\RequestCompanyExport;
+use Augias\CoreBundle\Repository\ExportJobRepository;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\UserBundle\Test\Factory\UserFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\ExportJob;
-use SolidInvoice\CoreBundle\Export\CompanyExporter;
-use SolidInvoice\CoreBundle\Export\Discovery\EntityDiscovery;
-use SolidInvoice\CoreBundle\Export\Enum\ExportFormat;
-use SolidInvoice\CoreBundle\Export\Enum\ExportStatus;
-use SolidInvoice\CoreBundle\Export\Message\Handler\ProcessCompanyExportHandler;
-use SolidInvoice\CoreBundle\Export\Message\RequestCompanyExport;
-use SolidInvoice\CoreBundle\Repository\ExportJobRepository;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\UserBundle\Test\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Zenstruck\Mailer\Test\InteractsWithMailer;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Doctrine\Type;
+namespace Augias\CoreBundle\Doctrine\Type;
 
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
@@ -45,7 +45,7 @@ use function sprintf;
  *
  * It is also comfortably above what e-invoicing formats expect of a quantity: Peppol BIS
  * Billing 3.0 and Factur-X/ZUGFeRD both cap `InvoicedQuantity` at four decimals, so a
- * SolidInvoice line can always be represented in those formats without rounding.
+ * Augias line can always be represented in those formats without rounding.
  *
  * ### Why precision 20
  *
@@ -62,7 +62,7 @@ use function sprintf;
  * up to a double's ~15 significant digits — well beyond anything enterable, but not the
  * full 20 the column advertises. MySQL, MariaDB and PostgreSQL store the full precision.
  *
- * @see \SolidInvoice\CoreBundle\Tests\Doctrine\Type\QuantityTypeTest
+ * @see \Augias\CoreBundle\Tests\Doctrine\Type\QuantityTypeTest
  */
 final class QuantityType extends Type
 {

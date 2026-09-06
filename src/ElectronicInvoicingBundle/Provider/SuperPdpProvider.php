@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Provider;
+namespace Augias\ElectronicInvoicingBundle\Provider;
 
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use Augias\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
+use Augias\ElectronicInvoicingBundle\Form\Type\Provider\SuperPdpConfigType;
+use Augias\ElectronicInvoicingBundle\Provider\SuperPdp\FacturXInvoiceBuilder;
+use Augias\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpApiException;
+use Augias\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpClient;
+use Augias\InvoiceBundle\Entity\Invoice;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\RoundingMode;
 use DateTimeImmutable;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
-use SolidInvoice\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
-use SolidInvoice\ElectronicInvoicingBundle\Form\Type\Provider\SuperPdpConfigType;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdp\FacturXInvoiceBuilder;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpApiException;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpClient;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Throwable;
 use function array_key_last;
@@ -40,7 +40,7 @@ use function usort;
  * (https://www.superpdp.tech), a French Plateforme Agréée (PA/PDP) for the
  * electronic-invoicing reform, and, more generally, the Peppol network.
  *
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Provider\SuperPdpProviderTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Provider\SuperPdpProviderTest
  */
 #[AsTaggedItem('super_pdp')]
 final readonly class SuperPdpProvider implements ElectronicInvoiceProviderInterface, ElectronicInvoiceReceiverInterface
@@ -49,7 +49,7 @@ final readonly class SuperPdpProvider implements ElectronicInvoiceProviderInterf
      * `fr:*` codes per https://api.superpdp.tech/openapi/superpdp.json that mean
      * the invoice reached its recipient without being refused (fr:205 Accepted,
      * fr:206 Partly accepted, fr:209 Completed) — the single source of truth for
-     * this, also consumed by {@see \SolidInvoice\ElectronicInvoicingBundle\Command\PollSuperPdpInvoiceStatusCommand}.
+     * this, also consumed by {@see \Augias\ElectronicInvoicingBundle\Command\PollSuperPdpInvoiceStatusCommand}.
      */
     public const array ACCEPTED_STATUS_CODES = ['fr:205', 'fr:206', 'fr:209'];
 
@@ -197,7 +197,7 @@ final readonly class SuperPdpProvider implements ElectronicInvoiceProviderInterf
 
     /**
      * The `events` array of a raw `invoice_overview` API response — shared by
-     * fetchIncoming() and {@see \SolidInvoice\ElectronicInvoicingBundle\Command\PollSuperPdpInvoiceStatusCommand},
+     * fetchIncoming() and {@see \Augias\ElectronicInvoicingBundle\Command\PollSuperPdpInvoiceStatusCommand},
      * both of which only care about the most recently reported status code.
      *
      * Ordered by `id` (SUPER PDP's own auto-incrementing, always-monotonic
@@ -274,7 +274,7 @@ final readonly class SuperPdpProvider implements ElectronicInvoiceProviderInterf
     /**
      * EN16931 amounts are decimal strings in major units (e.g. "1234.56") — every
      * other amount in this app is minor units (cents), so this converts between
-     * the two the way {@see \SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdp\FacturXInvoiceBuilder::minorToFloat()}
+     * the two the way {@see \Augias\ElectronicInvoicingBundle\Provider\SuperPdp\FacturXInvoiceBuilder::minorToFloat()}
      * does in the opposite direction.
      */
     private function toMinorUnits(mixed $amount): ?BigNumber

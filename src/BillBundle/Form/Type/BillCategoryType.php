@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Form\Type;
+namespace Augias\BillBundle\Form\Type;
 
-use SolidInvoice\BillBundle\Entity\BillCategory;
+use Augias\BillBundle\Entity\BillCategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @see \SolidInvoice\BillBundle\Tests\Form\Type\BillCategoryTypeTest
+ * @see \Augias\BillBundle\Tests\Form\Type\BillCategoryTypeTest
  * @extends AbstractType<BillCategory>
  */
 final class BillCategoryType extends AbstractType

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Controller;
+namespace Augias\SaasBundle\Controller;
 
+use Augias\CoreBundle\Company\CompanySelectorInterface;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\CoreBundle\Telemetry\Telemetry;
+use Augias\CoreBundle\Telemetry\TelemetryEvent;
+use Augias\SaasBundle\Action\ChoosePlanAction;
+use Augias\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelectorInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\CoreBundle\Telemetry\Telemetry;
-use SolidInvoice\CoreBundle\Telemetry\TelemetryEvent;
-use SolidInvoice\SaasBundle\Action\ChoosePlanAction;
-use SolidInvoice\UserBundle\Entity\User;
 use SolidWorx\Platform\SaasBundle\Entity\Plan;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use SolidWorx\Platform\SaasBundle\Enum\SubscriptionStatus;
@@ -38,7 +38,7 @@ use function Sentry\captureException;
 use function strtolower;
 
 /**
- * @see \SolidInvoice\SaasBundle\Tests\Controller\SubscribeControllerTest
+ * @see \Augias\SaasBundle\Tests\Controller\SubscribeControllerTest
  */
 class SubscribeController extends AbstractController
 {

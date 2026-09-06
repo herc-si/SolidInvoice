@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,27 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Mcp;
+namespace Augias\InvoiceBundle\Mcp;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\CoreBundle\Generator\BillingIdGenerator;
+use Augias\InvoiceBundle\Cloner\InvoiceCloner;
+use Augias\InvoiceBundle\Email\ManualInvoiceReminderEmail;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Manager\InvoiceManager;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\InvoiceBundle\Repository\RecurringInvoiceRepository;
+use Augias\McpBundle\Mcp\Attribute\McpScopeRequired;
+use Augias\McpBundle\Mcp\McpScopeGuard;
+use Augias\McpBundle\Mcp\Tool\EntityNormalizer;
+use Augias\McpBundle\Mcp\Tool\InvoiceTaxBuilder;
+use Augias\McpBundle\Mcp\Tool\LineItemBuilder;
+use Augias\McpBundle\Mcp\Tool\UlidParser;
+use Augias\McpBundle\Security\McpScope;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,25 +39,6 @@ use Exception;
 use Mcp\Capability\Attribute\McpTool;
 use Mcp\Exception\ToolCallException;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
-use SolidInvoice\InvoiceBundle\Cloner\InvoiceCloner;
-use SolidInvoice\InvoiceBundle\Email\ManualInvoiceReminderEmail;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Manager\InvoiceManager;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\InvoiceBundle\Repository\RecurringInvoiceRepository;
-use SolidInvoice\McpBundle\Mcp\Attribute\McpScopeRequired;
-use SolidInvoice\McpBundle\Mcp\McpScopeGuard;
-use SolidInvoice\McpBundle\Mcp\Tool\EntityNormalizer;
-use SolidInvoice\McpBundle\Mcp\Tool\InvoiceTaxBuilder;
-use SolidInvoice\McpBundle\Mcp\Tool\LineItemBuilder;
-use SolidInvoice\McpBundle\Mcp\Tool\UlidParser;
-use SolidInvoice\McpBundle\Security\McpScope;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;

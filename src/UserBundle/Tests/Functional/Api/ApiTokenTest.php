@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Functional\Api;
+namespace Augias\UserBundle\Tests\Functional\Api;
 
+use Augias\ApiBundle\ApiTokenManager;
+use Augias\ApiBundle\Test\ApiTestCase;
+use Augias\UserBundle\Entity\ApiToken;
+use Augias\UserBundle\Test\Factory\UserFactory;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ApiBundle\ApiTokenManager;
-use SolidInvoice\ApiBundle\Test\ApiTestCase;
-use SolidInvoice\UserBundle\Entity\ApiToken;
-use SolidInvoice\UserBundle\Test\Factory\UserFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

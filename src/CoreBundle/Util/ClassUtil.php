@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Util;
+namespace Augias\CoreBundle\Util;
 
 use PhpToken;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Util\ClassUtilTest
+ * @see \Augias\CoreBundle\Tests\Util\ClassUtilTest
  */
 class ClassUtil
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Action;
+namespace Augias\ClientBundle\Action;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Form\Type\ClientType;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\SaasBundle\Feature\Feature;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Form\Type\ClientType;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -42,7 +42,7 @@ final class Add extends AbstractController
     public function __invoke(Request $request): Response
     {
         if (! $this->featureGate->canUse(Feature::TotalClients->value, $this->clientRepository->getTotalClients())) {
-            return $this->render('@SolidInvoiceClient/Default/gated.html.twig');
+            return $this->render('@AugiasClient/Default/gated.html.twig');
         }
 
         $client = new Client();
@@ -61,7 +61,7 @@ final class Add extends AbstractController
             return new RedirectResponse($this->router->generate('_clients_view', ['id' => $client->getId()]));
         }
 
-        return $this->render('@SolidInvoiceClient/Default/add.html.twig', [
+        return $this->render('@AugiasClient/Default/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }

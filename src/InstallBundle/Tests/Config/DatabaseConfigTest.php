@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Tests\Config;
+namespace Augias\InstallBundle\Tests\Config;
 
+use Augias\InstallBundle\Config\DatabaseConfig;
 use InvalidArgumentException;
 use Iterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\InstallBundle\Config\DatabaseConfig;
 
 final class DatabaseConfigTest extends TestCase
 {

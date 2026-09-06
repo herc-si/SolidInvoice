@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -40,7 +40,7 @@ return RectorConfig::configure()
         __DIR__ . '/config',
     ])
     ->withImportNames(removeUnusedImports: true)
-    ->withSymfonyContainerXml(__DIR__ . '/var/cache/dev/SolidInvoice_KernelDevDebugContainer.xml')
+    ->withSymfonyContainerXml(__DIR__ . '/var/cache/dev/Augias_KernelDevDebugContainer.xml')
     ->withPhpVersion(PhpVersion::PHP_84)
     ->withComposerBased(twig: true, doctrine: true, phpunit: true, symfony: true)
     ->withAttributesSets()

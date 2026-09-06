@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Enum;
+namespace Augias\CoreBundle\Tests\Enum;
 
+use Augias\CoreBundle\Enum\CustomFieldTarget;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
 
 final class CustomFieldTargetTest extends TestCase
 {

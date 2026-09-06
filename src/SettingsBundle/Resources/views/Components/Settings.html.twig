@@ -1,5 +1,5 @@
 {#
-# This file is part of SolidInvoice package.
+# This file is part of Augias package.
 #
 # (c) Pierre du Plessis <open-source@solidworx.co>
 #
@@ -7,7 +7,7 @@
 # with this source code in the file LICENSE.
 #}
 
-{% form_theme form '@SolidInvoiceSettings/Form/fields.html.twig' %}
+{% form_theme form '@AugiasSettings/Form/fields.html.twig' %}
 
 {# Tab metadata for navigation #}
 {% set tabMeta = {
@@ -458,7 +458,7 @@
                     </p>
 
                     {% if form.template.vars.feature_gated_active|default(false) %}
-                        {{ upgrade_prompt(constant('SolidInvoice\\SaasBundle\\Feature\\Feature::CustomTemplates').value) }}
+                        {{ upgrade_prompt(constant('Augias\\SaasBundle\\Feature\\Feature::CustomTemplates').value) }}
                     {% endif %}
 
                     {{ form_widget(form.template) }}

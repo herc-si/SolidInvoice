@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Enum;
+namespace Augias\ElectronicInvoicingBundle\Enum;
 
-use SolidInvoice\CoreBundle\Enum\HasStatusLabel;
+use Augias\CoreBundle\Enum\HasStatusLabel;
 
 /**
- * SolidInvoice's own normalization of a provider's raw, provider-specific
+ * Augias's own normalization of a provider's raw, provider-specific
  * submission/status-code vocabulary (e.g. SUPER PDP's `fr:205`/`api:rejected`
  * codes) into the three outcomes that matter for display and notifications.
  *
- * This is deliberately separate from {@see \SolidInvoice\InvoiceBundle\Enum\InvoiceStatus}:
+ * This is deliberately separate from {@see \Augias\InvoiceBundle\Enum\InvoiceStatus}:
  * the invoice's own workflow tracks the business document lifecycle (draft,
  * sent, paid, ...), while this tracks the transmission's own lifecycle on the
  * electronic-invoicing platform. Neither drives the other automatically.

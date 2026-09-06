@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Entity;
+namespace Augias\QuoteBundle\Entity;
 
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\NumericFilter;
@@ -26,6 +26,22 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use Augias\ApiBundle\State\Processor\QuoteToInvoiceProcessor;
+use Augias\ApiBundle\State\Processor\QuoteTransitionProcessor;
+use Augias\ApiBundle\State\Provider\QuoteItemProvider;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Entity\LineInterface;
+use Augias\CoreBundle\Traits\Entity\Archivable;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\QuoteBundle\Enum\QuoteStatus;
+use Augias\QuoteBundle\Repository\QuoteRepository;
+use Augias\QuoteBundle\Traits\QuoteStatusTrait;
+use Augias\TaxBundle\Entity\InvoiceTax;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigInteger;
 use Brick\Math\BigNumber;
@@ -36,22 +52,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\ApiBundle\State\Processor\QuoteToInvoiceProcessor;
-use SolidInvoice\ApiBundle\State\Processor\QuoteTransitionProcessor;
-use SolidInvoice\ApiBundle\State\Provider\QuoteItemProvider;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Entity\LineInterface;
-use SolidInvoice\CoreBundle\Traits\Entity\Archivable;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
-use SolidInvoice\QuoteBundle\Repository\QuoteRepository;
-use SolidInvoice\QuoteBundle\Traits\QuoteStatusTrait;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Serializer\Attribute\Groups;

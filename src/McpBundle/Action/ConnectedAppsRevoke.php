@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Action;
+namespace Augias\McpBundle\Action;
 
+use Augias\McpBundle\Entity\ConsentGrant;
+use Augias\McpBundle\Entity\McpAccessToken;
+use Augias\McpBundle\Entity\McpRefreshToken;
+use Augias\McpBundle\Entity\OAuthClient;
+use Augias\McpBundle\Repository\OAuthClientRepository;
+use Augias\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
-use SolidInvoice\McpBundle\Entity\ConsentGrant;
-use SolidInvoice\McpBundle\Entity\McpAccessToken;
-use SolidInvoice\McpBundle\Entity\McpRefreshToken;
-use SolidInvoice\McpBundle\Entity\OAuthClient;
-use SolidInvoice\McpBundle\Repository\OAuthClientRepository;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;

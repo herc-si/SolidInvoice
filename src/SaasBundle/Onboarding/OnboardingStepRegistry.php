@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Onboarding;
+namespace Augias\SaasBundle\Onboarding;
 
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use function array_values;
@@ -19,7 +19,7 @@ use function count;
 use function iterator_to_array;
 
 /**
- * @see \SolidInvoice\SaasBundle\Tests\Onboarding\OnboardingStepRegistryTest
+ * @see \Augias\SaasBundle\Tests\Onboarding\OnboardingStepRegistryTest
  */
 final readonly class OnboardingStepRegistry
 {

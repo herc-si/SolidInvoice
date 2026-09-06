@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -40,7 +40,7 @@
 {% set hide_powered_by = hide_powered_by_value and feature_enabled('custom_branding') %}
 <pagefooter
     name="footer"
-    content-left="{{ not hide_powered_by ? 'powered_by'|trans ~ ' ' ~ constant('SolidInvoice\\CoreBundle\\SolidInvoiceCoreBundle::APP_NAME') }}"
+    content-left="{{ not hide_powered_by ? 'powered_by'|trans ~ ' ' ~ constant('Augias\\CoreBundle\\AugiasCoreBundle::APP_NAME') }}"
     content-right="{{ 'pdf.page'|trans }} {PAGENO} {{ 'pdf.of'|trans }} {nb}"
     line="on"
     footer-style="border-top: 1px solid #e2e8f0; font-size: 8pt; color: #64748b; padding-top: 8px;"

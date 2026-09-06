@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Tests\Twig\Components;
+namespace Augias\DataGridBundle\Tests\Twig\Components;
 
-use SolidInvoice\CoreBundle\Test\LiveComponentTest;
-use SolidInvoice\DataGridBundle\Twig\Components\DataGrid;
+use Augias\CoreBundle\Test\LiveComponentTest;
+use Augias\DataGridBundle\Twig\Components\DataGrid;
 use Symfony\UX\LiveComponent\Test\TestLiveComponent;
 
 final class DataGridTest extends LiveComponentTest

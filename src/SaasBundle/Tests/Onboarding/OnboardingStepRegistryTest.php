@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Onboarding;
+namespace Augias\SaasBundle\Tests\Onboarding;
 
+use Augias\SaasBundle\Onboarding\OnboardingStepRegistry;
+use Augias\SaasBundle\Tests\Onboarding\Fixtures\StepFirst;
+use Augias\SaasBundle\Tests\Onboarding\Fixtures\StepSecond;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\SaasBundle\Onboarding\OnboardingStepRegistry;
-use SolidInvoice\SaasBundle\Tests\Onboarding\Fixtures\StepFirst;
-use SolidInvoice\SaasBundle\Tests\Onboarding\Fixtures\StepSecond;
 
 final class OnboardingStepRegistryTest extends TestCase
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle;
+namespace Augias\ApiBundle;
 
+use Augias\ApiBundle\Security\ApiTokenHasher;
+use Augias\UserBundle\Entity\ApiToken;
+use Augias\UserBundle\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\ApiBundle\Security\ApiTokenHasher;
-use SolidInvoice\UserBundle\Entity\ApiToken;
-use SolidInvoice\UserBundle\Entity\User;
 
 /**
- * @see \SolidInvoice\ApiBundle\Tests\ApiTokenManagerTest
+ * @see \Augias\ApiBundle\Tests\ApiTokenManagerTest
  */
 class ApiTokenManager
 {

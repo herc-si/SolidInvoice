@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Form\Type;
+namespace Augias\CoreBundle\Tests\Form\Type;
 
+use Augias\CoreBundle\Form\Type\ImageUploadType;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Form\Type\ImageUploadType;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\Forms;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Action\ForgotPassword;
+namespace Augias\UserBundle\Action\ForgotPassword;
 
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,7 +31,7 @@ final class Check extends AbstractController
     /**
      * @return array{resetToken: ResetPasswordToken}
      */
-    #[Template('@SolidInvoiceUser/ForgotPassword/check_email.html.twig')]
+    #[Template('@AugiasUser/ForgotPassword/check_email.html.twig')]
     public function __invoke(): array
     {
         // Generate a fake token if the user does not exist or someone hit this page directly.

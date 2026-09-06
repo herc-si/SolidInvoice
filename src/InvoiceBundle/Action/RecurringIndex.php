@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Action;
+namespace Augias\InvoiceBundle\Action;
 
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\InvoiceBundle\Repository\RecurringInvoiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\InvoiceBundle\Repository\RecurringInvoiceRepository;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -34,7 +34,7 @@ final readonly class RecurringIndex
     /**
      * @return array{recurring: bool, isArchived: bool, isCompleted: bool, totalActiveRecurring: int, totalArchivedRecurring: int, activeCount: int, draftCount: int, pausedCount: int, cancelledCount: int, completeCount: int, upcomingIn7Days: int, totalGeneratedInvoices: int, monthlyRecurringRevenue: array<string, mixed>, invoicesThisMonth: int, status_list_count: array{active: int, draft: int, paused: int, cancelled: int, complete: int}}
      */
-    #[Template('@SolidInvoiceInvoice/Default/index.html.twig')]
+    #[Template('@AugiasInvoice/Default/index.html.twig')]
     public function __invoke(Request $request): array
     {
         $isArchived = $request->query->get('archived', '0') === '1';

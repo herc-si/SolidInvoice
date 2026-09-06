@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Twig\Extension;
+namespace Augias\CoreBundle\Twig\Extension;
 
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Company\ResolvedHost;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Listener\HostRoutingListener;
+use Augias\CoreBundle\Pdf\Generator;
+use Augias\MoneyBundle\Calculator;
+use Augias\SettingsBundle\SystemConfig;
 use Carbon\Carbon;
 use DateTimeInterface;
 use Override;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Company\ResolvedHost;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Listener\HostRoutingListener;
-use SolidInvoice\CoreBundle\Pdf\Generator;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\MoneyBundle\Calculator;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException;
@@ -38,7 +38,7 @@ use Twig\TwigFunction;
 use function implode;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Twig\Extension\GlobalExtensionTest
+ * @see \Augias\CoreBundle\Tests\Twig\Extension\GlobalExtensionTest
  */
 class GlobalExtension extends AbstractExtension implements GlobalsInterface
 {
@@ -66,8 +66,8 @@ class GlobalExtension extends AbstractExtension implements GlobalsInterface
             'query' => $this->getQuery(),
             // Hide the version in SaaS mode: hosted deployments often run dev builds,
             // and exposing "3.1.x-dev" in footers/emails looks unprofessional
-            'app_version' => $this->toggler->isActive('saas_enabled') ? null : SolidInvoiceCoreBundle::VERSION,
-            'app_name' => SolidInvoiceCoreBundle::APP_NAME,
+            'app_version' => $this->toggler->isActive('saas_enabled') ? null : AugiasCoreBundle::VERSION,
+            'app_name' => AugiasCoreBundle::APP_NAME,
         ];
     }
 
@@ -125,10 +125,10 @@ class GlobalExtension extends AbstractExtension implements GlobalsInterface
 
             new TwigFunction('company_name', function (): string {
                 if ($this->companySelector->getCompany() instanceof Ulid) {
-                    return $this->systemConfig->get('system/company/company_name') ?? SolidInvoiceCoreBundle::APP_NAME;
+                    return $this->systemConfig->get('system/company/company_name') ?? AugiasCoreBundle::APP_NAME;
                 }
 
-                return SolidInvoiceCoreBundle::APP_NAME;
+                return AugiasCoreBundle::APP_NAME;
             }),
 
             new TwigFunction('company_id', $this->companySelector->getCompany(...)),

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Tests\Calculator;
+namespace Augias\TaxBundle\Tests\Calculator;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\TaxBundle\Calculator\InvoiceTaxCalculator;
+use Augias\TaxBundle\Calculator\Rounder;
+use Augias\TaxBundle\Entity\InvoiceTax;
+use Augias\TaxBundle\Entity\Tax;
+use Augias\TaxBundle\Enum\RoundingStrategy;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Enum\TaxDirection;
+use Augias\TaxBundle\Enum\TaxType;
 use Brick\Math\BigDecimal;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\TaxBundle\Calculator\InvoiceTaxCalculator;
-use SolidInvoice\TaxBundle\Calculator\Rounder;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\TaxBundle\Enum\RoundingStrategy;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Enum\TaxDirection;
-use SolidInvoice\TaxBundle\Enum\TaxType;
 
 final class InvoiceTaxCalculatorTest extends TestCase
 {

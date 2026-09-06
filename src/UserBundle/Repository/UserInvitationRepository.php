@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,23 +11,23 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Repository;
+namespace Augias\UserBundle\Repository;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\UserBundle\Entity\UserInvitation;
+use Augias\UserBundle\Enum\InvitationStatus;
 use DateTimeInterface;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\UserBundle\Entity\UserInvitation;
-use SolidInvoice\UserBundle\Enum\InvitationStatus;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 
 /**
  * @extends EntityRepository<UserInvitation>
- * @see \SolidInvoice\UserBundle\Tests\Repository\UserInvitationRepositoryTest
+ * @see \Augias\UserBundle\Tests\Repository\UserInvitationRepositoryTest
  */
 final class UserInvitationRepository extends EntityRepository
 {

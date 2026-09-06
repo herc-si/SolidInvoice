@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\DataGrid;
+namespace Augias\TaxBundle\DataGrid;
 
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\Grid;
+use Augias\DataGridBundle\GridBuilder\Action\EditAction;
+use Augias\DataGridBundle\GridBuilder\Batch\BatchAction;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Column\DateTimeColumn;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
+use Augias\DataGridBundle\GridBuilder\Filter\ChoiceFilter;
+use Augias\TaxBundle\Entity\Tax;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Repository\TaxRepository;
 use Override;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\Grid;
-use SolidInvoice\DataGridBundle\GridBuilder\Action\EditAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Batch\BatchAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\DateTimeColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\ChoiceFilter;
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Repository\TaxRepository;
 
 #[AsDataGrid(name: 'tax_grid', title: 'Tax Rates')]
 final class TaxGrid extends Grid

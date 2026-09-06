@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Validator\Constraints;
+namespace Augias\InvoiceBundle\Validator\Constraints;
 
 use Attribute;
 use Override;
@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraint;
  * on both the UI form submit and the API Platform POST, this single constraint
  * closes the limit on every channel.
  *
- * @see \SolidInvoice\InvoiceBundle\Tests\Validator\Constraints\WithinPlanInvoiceLimitValidatorTest
+ * @see \Augias\InvoiceBundle\Tests\Validator\Constraints\WithinPlanInvoiceLimitValidatorTest
  */
 #[Attribute(Attribute::TARGET_CLASS)]
 final class WithinPlanInvoiceLimit extends Constraint

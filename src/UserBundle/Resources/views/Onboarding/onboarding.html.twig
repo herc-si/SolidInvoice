@@ -1,5 +1,5 @@
 {#
-# This file is part of SolidInvoice package.
+# This file is part of Augias package.
 #
 # (c) Pierre du Plessis <open-source@solidworx.co>
 #
@@ -7,7 +7,7 @@
 # with this source code in the file LICENSE.
 #}
 
-{% extends '@SolidInvoiceCore/Layout/base.html.twig' %}
+{% extends '@AugiasCore/Layout/base.html.twig' %}
 
 {% block page_title %}Get Started - {{ app_name }}{% endblock %}
 
@@ -51,7 +51,7 @@
         <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8 col-xl-6">
-                    {% include '@SolidInvoiceUser/Onboarding/steps/step_' ~ currentStep ~ '.html.twig' %}
+                    {% include '@AugiasUser/Onboarding/steps/step_' ~ currentStep ~ '.html.twig' %}
                 </div>
             </div>
         </div>

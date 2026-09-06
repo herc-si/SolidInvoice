@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Action\CustomField;
+namespace Augias\SettingsBundle\Action\CustomField;
 
+use Augias\CoreBundle\Entity\CustomField\CustomField;
+use Augias\SaasBundle\Feature\Feature;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\CoreBundle\Entity\CustomField\CustomField;
-use SolidInvoice\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * @see \SolidInvoice\SettingsBundle\Tests\Action\CustomField\DeleteActionTest
+ * @see \Augias\SettingsBundle\Tests\Action\CustomField\DeleteActionTest
  */
 final class DeleteAction extends AbstractController
 {

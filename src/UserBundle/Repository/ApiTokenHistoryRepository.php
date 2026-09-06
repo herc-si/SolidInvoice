@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Repository;
+namespace Augias\UserBundle\Repository;
 
+use Augias\ApiBundle\Security\ApiTokenHasher;
+use Augias\UserBundle\Entity\ApiToken;
+use Augias\UserBundle\Entity\ApiTokenHistory;
 use Doctrine\Common\Collections\Order;
 use Doctrine\Persistence\ManagerRegistry;
 use SensitiveParameter;
-use SolidInvoice\ApiBundle\Security\ApiTokenHasher;
-use SolidInvoice\UserBundle\Entity\ApiToken;
-use SolidInvoice\UserBundle\Entity\ApiTokenHistory;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 

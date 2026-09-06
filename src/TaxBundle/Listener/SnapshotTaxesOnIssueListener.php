@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Listener;
+namespace Augias\TaxBundle\Listener;
 
+use Augias\InvoiceBundle\Entity\BaseInvoice;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Enum\QuoteStatus;
+use Augias\TaxBundle\Entity\InvoiceTax;
+use Augias\TaxBundle\Entity\LineTax;
 use Carbon\CarbonImmutable;
 use DateTimeInterface;
-use SolidInvoice\InvoiceBundle\Entity\BaseInvoice;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
-use SolidInvoice\TaxBundle\Entity\LineTax;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\Transition;
@@ -31,12 +31,12 @@ use Symfony\Component\Workflow\Transition;
  * document leaves a draft state (Draft/New → Pending/Active/Paid for invoices, or
  * Draft/New → Pending/Accepted for quotes).
  *
- * Once frozen, downstream {@see \SolidInvoice\TaxBundle\Calculator\TaxCalculator}
+ * Once frozen, downstream {@see \Augias\TaxBundle\Calculator\TaxCalculator}
  * passes must not overwrite the snapshot fields — see
  * {@see self::isLeavingDraft()} for the gating logic. Re-running the calculator on a
  * snapshotted document only updates the computed {@see LineTax::$amount}; it never
- * re-snapshots from the source {@see \SolidInvoice\TaxBundle\Entity\Tax}.
- * @see \SolidInvoice\TaxBundle\Tests\Listener\SnapshotTaxesOnIssueListenerTest
+ * re-snapshots from the source {@see \Augias\TaxBundle\Entity\Tax}.
+ * @see \Augias\TaxBundle\Tests\Listener\SnapshotTaxesOnIssueListenerTest
  */
 final class SnapshotTaxesOnIssueListener implements EventSubscriberInterface
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Entity;
+namespace Augias\InvoiceBundle\Entity;
 
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\NumericFilter;
@@ -26,6 +26,22 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use Augias\ApiBundle\State\Processor\InvoiceTransitionProcessor;
+use Augias\ApiBundle\State\Provider\InvoiceTransitionProvider;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Entity\LineInterface;
+use Augias\CoreBundle\Traits\Entity\Archivable;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\InvoiceBundle\Traits\InvoiceStatusTrait;
+use Augias\InvoiceBundle\Validator\Constraints\WithinPlanInvoiceLimit;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\TaxBundle\Entity\InvoiceTax;
 use Brick\Math\BigInteger;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
@@ -36,22 +52,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\ApiBundle\State\Processor\InvoiceTransitionProcessor;
-use SolidInvoice\ApiBundle\State\Provider\InvoiceTransitionProvider;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
-use SolidInvoice\CoreBundle\Entity\LineInterface;
-use SolidInvoice\CoreBundle\Traits\Entity\Archivable;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\InvoiceBundle\Traits\InvoiceStatusTrait;
-use SolidInvoice\InvoiceBundle\Validator\Constraints\WithinPlanInvoiceLimit;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;

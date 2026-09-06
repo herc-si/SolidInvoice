@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Tests\Widgets;
+namespace Augias\DashboardBundle\Tests\Widgets;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\DashboardBundle\Widgets\AttentionRequiredWidget;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\InvoiceBundle\Test\Factory\RecurringInvoiceFactory;
+use Augias\QuoteBundle\Enum\QuoteStatus;
+use Augias\QuoteBundle\Test\Factory\QuoteFactory;
 use Brick\Math\BigInteger;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\DashboardBundle\Widgets\AttentionRequiredWidget;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\InvoiceBundle\Test\Factory\RecurringInvoiceFactory;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
-use SolidInvoice\QuoteBundle\Test\Factory\QuoteFactory;
 
 final class AttentionRequiredWidgetTest extends WidgetTestCase
 {
@@ -182,7 +182,7 @@ final class AttentionRequiredWidgetTest extends WidgetTestCase
     {
         $widget = self::getContainer()->get(AttentionRequiredWidget::class);
 
-        self::assertSame('@SolidInvoiceDashboard/Widget/attention_required.html.twig', $widget->getTemplate());
+        self::assertSame('@AugiasDashboard/Widget/attention_required.html.twig', $widget->getTemplate());
     }
 
     public function testRenderWidgetWithNoData(): void

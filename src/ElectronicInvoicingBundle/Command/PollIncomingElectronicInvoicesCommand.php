@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Command;
+namespace Augias\ElectronicInvoicingBundle\Command;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\ElectronicInvoicingBundle\Manager\ElectronicInvoiceReceiptManagerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceReceiptManagerInterface;
 use SolidWorx\Platform\PlatformBundle\Console\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Scheduler\Attribute\AsCronTask;
@@ -34,7 +34,7 @@ use function sprintf;
  * receiving is a generic capability any provider can opt into, not a SUPER
  * PDP-specific status-polling workaround.
  *
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Command\PollIncomingElectronicInvoicesCommandTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Command\PollIncomingElectronicInvoicesCommandTest
  */
 #[AsCommand(
     name: 'solidinvoice:einvoicing:poll-incoming-invoices',

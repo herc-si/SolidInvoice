@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Action;
+namespace Augias\SaasBundle\Action;
 
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\CoreBundle\Telemetry\Telemetry;
-use SolidInvoice\CoreBundle\Telemetry\TelemetryEvent;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\CoreBundle\Telemetry\Telemetry;
+use Augias\CoreBundle\Telemetry\TelemetryEvent;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use SolidWorx\Platform\SaasBundle\Enum\SubscriptionStatus;
 use SolidWorx\Platform\SaasBundle\Repository\PlanRepositoryInterface;
@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * @see \SolidInvoice\SaasBundle\Tests\Action\SelectPlanActionTest
+ * @see \Augias\SaasBundle\Tests\Action\SelectPlanActionTest
  */
 final class SelectPlanAction extends AbstractController
 {
@@ -61,7 +61,7 @@ final class SelectPlanAction extends AbstractController
 
         $this->telemetry->event(TelemetryEvent::SaasPricingPageViewed);
 
-        return $this->render('@SolidInvoiceSaas/subscription/pricing.html.twig', [
+        return $this->render('@AugiasSaas/subscription/pricing.html.twig', [
             'plans' => $plans,
             'subscription' => $subscription,
         ]);

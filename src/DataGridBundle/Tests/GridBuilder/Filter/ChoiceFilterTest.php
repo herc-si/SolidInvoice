@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Tests\GridBuilder\Filter;
+namespace Augias\DataGridBundle\Tests\GridBuilder\Filter;
 
+use Augias\DataGridBundle\GridBuilder\Filter\ChoiceFilter;
+use Augias\DataGridBundle\Source\ORMSource;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\ChoiceFilter;
-use SolidInvoice\DataGridBundle\Source\ORMSource;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 #[CoversClass(ChoiceFilter::class)]

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Action;
+namespace Augias\InvoiceBundle\Action;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoiceLine;
+use Augias\InvoiceBundle\Form\Type\RecurringInvoiceType;
+use Augias\InvoiceBundle\Model\Graph;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\SaasBundle\Feature\Feature;
 use Brick\Math\Exception\MathException;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoiceLine;
-use SolidInvoice\InvoiceBundle\Form\Type\RecurringInvoiceType;
-use SolidInvoice\InvoiceBundle\Model\Graph;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -37,7 +37,7 @@ use Symfony\Component\Workflow\WorkflowInterface;
 use function assert;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Action\CreateRecurringTest
+ * @see \Augias\InvoiceBundle\Tests\Action\CreateRecurringTest
  */
 final class CreateRecurring extends AbstractController
 {
@@ -59,19 +59,19 @@ final class CreateRecurring extends AbstractController
     public function __invoke(Request $request, ?Client $client = null): Response
     {
         if (! $this->featureGate->isEnabled(Feature::RecurringInvoices->value)) {
-            return $this->render('@SolidInvoiceInvoice/Default/recurring_gated.html.twig');
+            return $this->render('@AugiasInvoice/Default/recurring_gated.html.twig');
         }
 
         if (! $this->featureGate->canUse(
             Feature::InvoicesPerMonth->value,
             $this->invoiceRepository->countCreatedInMonth($this->clock->now()),
         )) {
-            return $this->render('@SolidInvoiceInvoice/Default/invoice_gated.html.twig');
+            return $this->render('@AugiasInvoice/Default/invoice_gated.html.twig');
         }
 
         $totalClientsCount = $this->clientRepository->getTotalClients();
         if (0 === $totalClientsCount) {
-            return $this->render('@SolidInvoiceInvoice/Default/empty_clients.html.twig');
+            return $this->render('@AugiasInvoice/Default/empty_clients.html.twig');
         }
 
         if (1 === $totalClientsCount && ! $client instanceof Client) {
@@ -119,7 +119,7 @@ final class CreateRecurring extends AbstractController
             $this->totalCalculator->calculateTotals($invoice);
         }
 
-        return $this->render('@SolidInvoiceInvoice/Default/create.html.twig', [
+        return $this->render('@AugiasInvoice/Default/create.html.twig', [
             'invoice' => $invoice,
             'form' => $form,
             'recurring' => true,

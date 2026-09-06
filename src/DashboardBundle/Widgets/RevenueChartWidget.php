@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Widgets;
+namespace Augias\DashboardBundle\Widgets;
 
+use Augias\MoneyBundle\Currency\CurrencyScale;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Repository\PaymentRepository;
+use Augias\SettingsBundle\SystemConfig;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use Carbon\CarbonImmutable;
@@ -24,15 +28,11 @@ use Doctrine\Persistence\ObjectManager;
 use Money\Currency;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
-use SolidInvoice\MoneyBundle\Currency\CurrencyScale;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Repository\PaymentRepository;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 
 /**
- * @see \SolidInvoice\DashboardBundle\Tests\Widgets\RevenueChartWidgetTest
+ * @see \Augias\DashboardBundle\Tests\Widgets\RevenueChartWidgetTest
  */
 final readonly class RevenueChartWidget implements WidgetInterface
 {
@@ -133,7 +133,7 @@ final readonly class RevenueChartWidget implements WidgetInterface
 
     public function getTemplate(): string
     {
-        return '@SolidInvoiceDashboard/Widget/revenue_chart.html.twig';
+        return '@AugiasDashboard/Widget/revenue_chart.html.twig';
     }
 
     /**

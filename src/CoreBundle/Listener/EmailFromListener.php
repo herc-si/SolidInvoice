@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Listener;
+namespace Augias\CoreBundle\Listener;
 
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\UserBundle\Entity\User;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\UserBundle\Entity\User;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mailer\Event\MessageEvent;
 use Symfony\Component\Mime\Address;
@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Listener\EmailFromListenerTest
+ * @see \Augias\CoreBundle\Tests\Listener\EmailFromListenerTest
  */
 final readonly class EmailFromListener implements EventSubscriberInterface
 {

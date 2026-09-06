@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,28 +11,28 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Form\Type;
+namespace Augias\QuoteBundle\Form\Type;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Form\ClientAutocompleteType;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Form\Type\CustomFieldValueCollectionType;
+use Augias\CoreBundle\Form\Type\DiscountType;
+use Augias\CoreBundle\Generator\BillingIdGenerator;
+use Augias\MoneyBundle\Form\Type\HiddenMoneyType;
+use Augias\QuoteBundle\DTO\QuoteFormDTO;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Enum\QuoteClientMode;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\TaxBundle\Form\Type\InvoiceTaxType;
 use Doctrine\ORM\EntityRepository;
 use JsonException;
 use Money\Currency;
 use Override;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Form\ClientAutocompleteType;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Form\Type\CustomFieldValueCollectionType;
-use SolidInvoice\CoreBundle\Form\Type\DiscountType;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
-use SolidInvoice\MoneyBundle\Form\Type\HiddenMoneyType;
-use SolidInvoice\QuoteBundle\DTO\QuoteFormDTO;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Enum\QuoteClientMode;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\TaxBundle\Form\Type\InvoiceTaxType;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\Types\UlidType;
@@ -49,7 +49,7 @@ use Symfonycasts\DynamicForms\DependentField;
 use Symfonycasts\DynamicForms\DynamicFormBuilder;
 
 /**
- * @see \SolidInvoice\QuoteBundle\Tests\Form\Type\QuoteTypeTest
+ * @see \Augias\QuoteBundle\Tests\Form\Type\QuoteTypeTest
  * @extends AbstractType<QuoteFormDTO>
  */
 class QuoteType extends AbstractType

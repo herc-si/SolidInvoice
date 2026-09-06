@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CatalogBundle\DummyData;
+namespace Augias\CatalogBundle\DummyData;
 
+use Augias\CatalogBundle\Entity\Product;
+use Augias\CatalogBundle\Entity\ProductCategory;
+use Augias\CatalogBundle\Enum\ProductType;
+use Augias\CatalogBundle\Enum\ProductUnit;
+use Augias\CoreBundle\DummyData\DummyDataLoaderInterface;
+use Augias\CoreBundle\Entity\Company;
+use Augias\TaxBundle\Entity\Tax;
 use Brick\Math\BigInteger;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\CatalogBundle\Entity\Product;
-use SolidInvoice\CatalogBundle\Entity\ProductCategory;
-use SolidInvoice\CatalogBundle\Enum\ProductType;
-use SolidInvoice\CatalogBundle\Enum\ProductUnit;
-use SolidInvoice\CoreBundle\DummyData\DummyDataLoaderInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\TaxBundle\Entity\Tax;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use function assert;
 

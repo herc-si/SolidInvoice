@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\CoreBundle\Contracts\PaidSubscriptionGateInterface;
-use SolidInvoice\CoreBundle\Feature\UpgradePromptProvider;
-use SolidInvoice\DashboardBundle\Checklist\ChecklistItemInterface;
-use SolidInvoice\SaasBundle\Email\SaasEmailVerificationGate;
-use SolidInvoice\SaasBundle\Feature\UpgradePromptRenderer;
-use SolidInvoice\SaasBundle\Service\SubscriptionEligibility;
-use SolidInvoice\SaasBundle\SolidInvoiceSaasBundle;
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Contracts\PaidSubscriptionGateInterface;
+use Augias\CoreBundle\Feature\UpgradePromptProvider;
+use Augias\DashboardBundle\Checklist\ChecklistItemInterface;
+use Augias\SaasBundle\AugiasSaasBundle;
+use Augias\SaasBundle\Email\SaasEmailVerificationGate;
+use Augias\SaasBundle\Feature\UpgradePromptRenderer;
+use Augias\SaasBundle\Service\SubscriptionEligibility;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -37,15 +37,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('dashboard.checklist_item');
 
     $services
-        ->load(SolidInvoiceSaasBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
+        ->load(AugiasSaasBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
         ->exclude(dirname(__DIR__, 3) . '/{DependencyInjection,Entity,Message,Resources,Tests}');
 
     $services
-        ->load(SolidInvoiceSaasBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
+        ->load(AugiasSaasBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
         ->tag('controller.service_arguments');
 
     $services
-        ->load(SolidInvoiceSaasBundle::NAMESPACE . '\\Controller\\', dirname(__DIR__, 3) . '/Controller')
+        ->load(AugiasSaasBundle::NAMESPACE . '\\Controller\\', dirname(__DIR__, 3) . '/Controller')
         ->tag('controller.service_arguments');
 
     $services->alias(

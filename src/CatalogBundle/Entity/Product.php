@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CatalogBundle\Entity;
+namespace Augias\CatalogBundle\Entity;
 
+use Augias\CatalogBundle\Enum\ProductType;
+use Augias\CatalogBundle\Enum\ProductUnit;
+use Augias\CatalogBundle\Repository\ProductRepository;
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\TaxBundle\Entity\Tax;
 use Brick\Math\BigInteger;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CatalogBundle\Enum\ProductType;
-use SolidInvoice\CatalogBundle\Enum\ProductUnit;
-use SolidInvoice\CatalogBundle\Repository\ProductRepository;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\TaxBundle\Entity\Tax;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
@@ -38,7 +38,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * is why nothing here is snapshot onto the document beyond what the line stores
  * for itself.
  *
- * @see \SolidInvoice\CatalogBundle\Tests\Entity\ProductTest
+ * @see \Augias\CatalogBundle\Tests\Entity\ProductTest
  */
 #[ORM\Table(name: Product::TABLE_NAME)]
 #[ORM\UniqueConstraint(columns: ['reference', 'company_id'])]

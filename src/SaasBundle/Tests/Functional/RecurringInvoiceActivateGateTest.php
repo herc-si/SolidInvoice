@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Functional;
+namespace Augias\SaasBundle\Tests\Functional;
 
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
+use Augias\SaasBundle\EventSubscriber\RecurringInvoiceVerificationGuardListener;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
-use SolidInvoice\SaasBundle\EventSubscriber\RecurringInvoiceVerificationGuardListener;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Workflow\DefinitionBuilder;
 use Symfony\Component\Workflow\MarkingStore\MethodMarkingStore;

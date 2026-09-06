@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MoneyBundle\Currency;
+namespace Augias\MoneyBundle\Currency;
 
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
@@ -26,7 +26,7 @@ use Money\Currency;
  * currency's own decimal count, not a fixed 100 - assuming 100 everywhere is what put JPY and
  * BHD amounts out by two and one orders of magnitude respectively.
  *
- * @see \SolidInvoice\MoneyBundle\Tests\Currency\CurrencyScaleTest
+ * @see \Augias\MoneyBundle\Tests\Currency\CurrencyScaleTest
  */
 final readonly class CurrencyScale
 {

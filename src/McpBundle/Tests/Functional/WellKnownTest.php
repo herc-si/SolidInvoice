@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Tests\Functional;
+namespace Augias\McpBundle\Tests\Functional;
 
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\McpBundle\Action\WellKnownAgentSkillsIndex;
+use Augias\McpBundle\Action\WellKnownAuthServer;
+use Augias\McpBundle\Action\WellKnownProtectedResource;
+use Augias\McpBundle\Action\WellKnownServerCard;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\McpBundle\Action\WellKnownAgentSkillsIndex;
-use SolidInvoice\McpBundle\Action\WellKnownAuthServer;
-use SolidInvoice\McpBundle\Action\WellKnownProtectedResource;
-use SolidInvoice\McpBundle\Action\WellKnownServerCard;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 

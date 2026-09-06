@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Twig\Extension;
+namespace Augias\CoreBundle\Tests\Twig\Extension;
 
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Twig\Extension\EmailVerificationExtension;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\CoreBundle\Twig\Extension\EmailVerificationExtension;
 
 final class EmailVerificationExtensionTest extends TestCase
 {

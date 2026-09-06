@@ -1,13 +1,13 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
  # This source file is subject to the MIT license that is bundled
  # with this source code in the file LICENSE.
  #}
-{% extends "@SolidInvoiceCore/Layout/Email/base.html.twig" %}
-{% import "@SolidInvoiceCore/Layout/Email/components.html.twig" as email %}
+{% extends "@AugiasCore/Layout/Email/base.html.twig" %}
+{% import "@AugiasCore/Layout/Email/components.html.twig" as email %}
 
 {% set invoicePath = url("_view_invoice_external", {"uuid" : invoice.uuid}) %}
 
@@ -105,7 +105,7 @@
     {% endif %}
 
     {% if invoice.payments|length > 0 and not invoice.balance.zero %}
-        {% for payment in invoice.payments|filter((v) => v.status == enum('SolidInvoice\\PaymentBundle\\Enum\\PaymentStatus').Captured) %}
+        {% for payment in invoice.payments|filter((v) => v.status == enum('Augias\\PaymentBundle\\Enum\\PaymentStatus').Captured) %}
             {{ email.spacer('xs') }}
             {{ email.info_row('invoice.payment_method'|trans({'%method%': payment.method.name}, 'email'), (payment.total * -1)|formatCurrency(invoice.client.currency)) }}
         {% endfor %}

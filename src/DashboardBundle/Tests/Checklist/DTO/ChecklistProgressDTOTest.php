@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Tests\Checklist\DTO;
+namespace Augias\DashboardBundle\Tests\Checklist\DTO;
 
+use Augias\DashboardBundle\Checklist\DTO\ChecklistItemDTO;
+use Augias\DashboardBundle\Checklist\DTO\ChecklistProgressDTO;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\DashboardBundle\Checklist\DTO\ChecklistItemDTO;
-use SolidInvoice\DashboardBundle\Checklist\DTO\ChecklistProgressDTO;
 
 final class ChecklistProgressDTOTest extends TestCase
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Action;
+namespace Augias\QuoteBundle\Action;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\QuoteBundle\DTO\QuoteFormDTO;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Form\Type\QuoteType;
+use Augias\QuoteBundle\Manager\QuoteFormManager;
+use Augias\QuoteBundle\Model\Graph;
 use Brick\Math\Exception\MathException;
 use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\QuoteBundle\DTO\QuoteFormDTO;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Form\Type\QuoteType;
-use SolidInvoice\QuoteBundle\Manager\QuoteFormManager;
-use SolidInvoice\QuoteBundle\Model\Graph;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -50,7 +50,7 @@ final readonly class Edit
      * @return array{form: FormView, dto: QuoteFormDTO, quote: Quote}|Response
      * @throws MathException
      */
-    #[Template('@SolidInvoiceQuote/Default/edit.html.twig')]
+    #[Template('@AugiasQuote/Default/edit.html.twig')]
     public function __invoke(Request $request, Quote $quote): array | Response
     {
         $client = $quote->getClient();

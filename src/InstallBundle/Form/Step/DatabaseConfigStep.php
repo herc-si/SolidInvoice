@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Form\Step;
+namespace Augias\InstallBundle\Form\Step;
 
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\InstallBundle\Doctrine\Drivers;
-use SolidInvoice\InstallBundle\DTO\DatabaseConfig;
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\InstallBundle\Doctrine\Drivers;
+use Augias\InstallBundle\DTO\DatabaseConfig;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -28,7 +28,7 @@ use Symfonycasts\DynamicForms\DynamicFormBuilder;
 use function strtolower;
 
 /**
- * @see \SolidInvoice\InstallBundle\Tests\Form\Type\DatabaseConfigTypeTest
+ * @see \Augias\InstallBundle\Tests\Form\Type\DatabaseConfigTypeTest
  * @extends AbstractType<DatabaseConfig>
  */
 class DatabaseConfigStep extends AbstractType
@@ -83,7 +83,7 @@ class DatabaseConfigStep extends AbstractType
                     'label' => 'installation.database.name',
                     'required' => true,
                     'attr' => [
-                        'placeholder' => strtolower(SolidInvoiceCoreBundle::APP_NAME),
+                        'placeholder' => strtolower(AugiasCoreBundle::APP_NAME),
                     ],
                 ],
             ],

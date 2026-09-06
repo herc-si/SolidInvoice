@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
+namespace Augias\CoreBundle\Generator\BillingIdGenerator;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NonUniqueResultException;
@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use function assert;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Generator\BillingIdGenerator\AutoIncrementIdGeneratorTest
+ * @see \Augias\CoreBundle\Tests\Generator\BillingIdGenerator\AutoIncrementIdGeneratorTest
  */
 #[AsTaggedItem('auto_increment')]
 final readonly class AutoIncrementIdGenerator implements IdGeneratorInterface

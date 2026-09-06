@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Doctrine\Filter;
+namespace Augias\CoreBundle\Doctrine\Filter;
 
+use Augias\UserBundle\Entity\User;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Filter\SQLFilter;
-use SolidInvoice\UserBundle\Entity\User;
 use function sprintf;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Doctrine\Filter\CompanyFilterTest
+ * @see \Augias\CoreBundle\Tests\Doctrine\Filter\CompanyFilterTest
  */
 class CompanyFilter extends SQLFilter
 {

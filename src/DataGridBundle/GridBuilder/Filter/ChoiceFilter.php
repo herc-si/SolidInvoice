@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\GridBuilder\Filter;
+namespace Augias\DataGridBundle\GridBuilder\Filter;
 
+use Augias\DataGridBundle\Filter\ColumnFilterInterface;
+use Augias\DataGridBundle\Source\ORMSource;
 use Doctrine\ORM\QueryBuilder;
-use SolidInvoice\DataGridBundle\Filter\ColumnFilterInterface;
-use SolidInvoice\DataGridBundle\Source\ORMSource;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use function array_flip;
 use function is_string;
 
 /**
- * @see \SolidInvoice\DataGridBundle\Tests\GridBuilder\Filter\ChoiceFilterTest
+ * @see \Augias\DataGridBundle\Tests\GridBuilder\Filter\ChoiceFilterTest
  */
 final class ChoiceFilter implements ColumnFilterInterface
 {

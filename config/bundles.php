@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -12,6 +12,28 @@ declare(strict_types=1);
  */
 
 use ApiPlatform\Symfony\Bundle\ApiPlatformBundle;
+use Augias\ApiBundle\AugiasApiBundle;
+use Augias\BillBundle\AugiasBillBundle;
+use Augias\CatalogBundle\AugiasCatalogBundle;
+use Augias\ClientBundle\AugiasClientBundle;
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\CronBundle\AugiasCronBundle;
+use Augias\DashboardBundle\AugiasDashboardBundle;
+use Augias\DataGridBundle\AugiasDataGridBundle;
+use Augias\ElectronicInvoicingBundle\AugiasElectronicInvoicingBundle;
+use Augias\FormBundle\AugiasFormBundle;
+use Augias\InstallBundle\AugiasInstallBundle;
+use Augias\InvoiceBundle\AugiasInvoiceBundle;
+use Augias\MailerBundle\AugiasMailerBundle;
+use Augias\McpBundle\AugiasMcpBundle;
+use Augias\MoneyBundle\AugiasMoneyBundle;
+use Augias\NotificationBundle\AugiasNotificationBundle;
+use Augias\PaymentBundle\AugiasPaymentBundle;
+use Augias\QuoteBundle\AugiasQuoteBundle;
+use Augias\SettingsBundle\AugiasSettingsBundle;
+use Augias\SupplierBundle\AugiasSupplierBundle;
+use Augias\TaxBundle\AugiasTaxBundle;
+use Augias\UserBundle\AugiasUserBundle;
 use BabDev\PagerfantaBundle\BabDevPagerfantaBundle;
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
@@ -22,28 +44,6 @@ use Liip\TestFixturesBundle\LiipTestFixturesBundle;
 use Meilisearch\Bundle\MeilisearchBundle;
 use Payum\Bundle\PayumBundle\PayumBundle;
 use Sentry\SentryBundle\SentryBundle;
-use SolidInvoice\ApiBundle\SolidInvoiceApiBundle;
-use SolidInvoice\BillBundle\SolidInvoiceBillBundle;
-use SolidInvoice\CatalogBundle\SolidInvoiceCatalogBundle;
-use SolidInvoice\ClientBundle\SolidInvoiceClientBundle;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\CronBundle\SolidInvoiceCronBundle;
-use SolidInvoice\DashboardBundle\SolidInvoiceDashboardBundle;
-use SolidInvoice\DataGridBundle\SolidInvoiceDataGridBundle;
-use SolidInvoice\ElectronicInvoicingBundle\SolidInvoiceElectronicInvoicingBundle;
-use SolidInvoice\FormBundle\SolidInvoiceFormBundle;
-use SolidInvoice\InstallBundle\SolidInvoiceInstallBundle;
-use SolidInvoice\InvoiceBundle\SolidInvoiceInvoiceBundle;
-use SolidInvoice\MailerBundle\SolidInvoiceMailerBundle;
-use SolidInvoice\McpBundle\SolidInvoiceMcpBundle;
-use SolidInvoice\MoneyBundle\SolidInvoiceMoneyBundle;
-use SolidInvoice\NotificationBundle\SolidInvoiceNotificationBundle;
-use SolidInvoice\PaymentBundle\SolidInvoicePaymentBundle;
-use SolidInvoice\QuoteBundle\SolidInvoiceQuoteBundle;
-use SolidInvoice\SettingsBundle\SolidInvoiceSettingsBundle;
-use SolidInvoice\SupplierBundle\SolidInvoiceSupplierBundle;
-use SolidInvoice\TaxBundle\SolidInvoiceTaxBundle;
-use SolidInvoice\UserBundle\SolidInvoiceUserBundle;
 use SolidWorx\Platform\UiBundle\SolidWorxPlatformUiBundle;
 use SolidWorx\Toggler\Symfony\TogglerBundle;
 use Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle;
@@ -79,28 +79,28 @@ return [
     PayumBundle::class => ['all' => true],
     StofDoctrineExtensionsBundle::class => ['all' => true],
     ApiPlatformBundle::class => ['all' => true],
-    SolidInvoiceApiBundle::class => ['all' => true],
-    SolidInvoiceBillBundle::class => ['all' => true],
-    SolidInvoiceCatalogBundle::class => ['all' => true],
-    SolidInvoiceClientBundle::class => ['all' => true],
-    SolidInvoiceCoreBundle::class => ['all' => true],
-    SolidInvoiceCronBundle::class => ['all' => true],
-    SolidInvoiceDashboardBundle::class => ['all' => true],
-    SolidInvoiceDataGridBundle::class => ['all' => true],
-    SolidInvoiceElectronicInvoicingBundle::class => ['all' => true],
-    SolidInvoiceFormBundle::class => ['all' => true],
-    SolidInvoiceInstallBundle::class => ['all' => true],
-    SolidInvoiceInvoiceBundle::class => ['all' => true],
-    SolidInvoiceMailerBundle::class => ['all' => true],
-    SolidInvoiceMcpBundle::class => ['all' => true],
-    SolidInvoiceMoneyBundle::class => ['all' => true],
-    SolidInvoiceNotificationBundle::class => ['all' => true],
-    SolidInvoicePaymentBundle::class => ['all' => true],
-    SolidInvoiceQuoteBundle::class => ['all' => true],
-    SolidInvoiceSettingsBundle::class => ['all' => true],
-    SolidInvoiceSupplierBundle::class => ['all' => true],
-    SolidInvoiceTaxBundle::class => ['all' => true],
-    SolidInvoiceUserBundle::class => ['all' => true],
+    AugiasApiBundle::class => ['all' => true],
+    AugiasBillBundle::class => ['all' => true],
+    AugiasCatalogBundle::class => ['all' => true],
+    AugiasClientBundle::class => ['all' => true],
+    AugiasCoreBundle::class => ['all' => true],
+    AugiasCronBundle::class => ['all' => true],
+    AugiasDashboardBundle::class => ['all' => true],
+    AugiasDataGridBundle::class => ['all' => true],
+    AugiasElectronicInvoicingBundle::class => ['all' => true],
+    AugiasFormBundle::class => ['all' => true],
+    AugiasInstallBundle::class => ['all' => true],
+    AugiasInvoiceBundle::class => ['all' => true],
+    AugiasMailerBundle::class => ['all' => true],
+    AugiasMcpBundle::class => ['all' => true],
+    AugiasMoneyBundle::class => ['all' => true],
+    AugiasNotificationBundle::class => ['all' => true],
+    AugiasPaymentBundle::class => ['all' => true],
+    AugiasQuoteBundle::class => ['all' => true],
+    AugiasSettingsBundle::class => ['all' => true],
+    AugiasSupplierBundle::class => ['all' => true],
+    AugiasTaxBundle::class => ['all' => true],
+    AugiasUserBundle::class => ['all' => true],
     DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     LiipTestFixturesBundle::class => ['dev' => true, 'test' => true],
     DebugBundle::class => ['dev' => true],

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Tests\Functional;
+namespace Augias\ApiBundle\Tests\Functional;
 
+use Augias\ApiBundle\ApiTokenManager;
+use Augias\ApiBundle\Test\ApiTestCase;
+use Augias\ClientBundle\Entity\Client;
+use Augias\UserBundle\Test\Factory\UserFactory;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ApiBundle\ApiTokenManager;
-use SolidInvoice\ApiBundle\Test\ApiTestCase;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\UserBundle\Test\Factory\UserFactory;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Verifies the global disabled-account block is enforced at API authentication
- * via the firewall's {@see \SolidInvoice\UserBundle\Security\VerifiedUserChecker}.
+ * via the firewall's {@see \Augias\UserBundle\Security\VerifiedUserChecker}.
  */
 #[Group('functional')]
 final class ApiUserCheckerTest extends ApiTestCase

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\UserBundle\Repository\UserRepository;
-use SolidInvoice\UserBundle\Repository\UserRepositoryInterface;
-use SolidInvoice\UserBundle\Repository\UserSettingRepository;
-use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
-use SolidInvoice\UserBundle\SolidInvoiceUserBundle;
+use Augias\UserBundle\AugiasUserBundle;
+use Augias\UserBundle\Repository\UserRepository;
+use Augias\UserBundle\Repository\UserRepositoryInterface;
+use Augias\UserBundle\Repository\UserSettingRepository;
+use Augias\UserBundle\Repository\UserSettingRepositoryInterface;
 use SolidWorx\Platform\PlatformBundle\Contracts\Doctrine\Repository\UserRepository as PlatformUserRepository;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -29,11 +29,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->private();
 
     $services
-        ->load(SolidInvoiceUserBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
+        ->load(AugiasUserBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
         ->exclude(dirname(__DIR__, 3) . '/{DependencyInjection,Entity,Resources,Tests}');
 
     $services
-        ->load(SolidInvoiceUserBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
+        ->load(AugiasUserBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
         ->tag('controller.service_arguments');
 
     $services->alias(UserRepositoryInterface::class, UserRepository::class);
@@ -41,6 +41,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->alias(UserSettingRepositoryInterface::class, UserSettingRepository::class);
 
     $services
-        ->load(SolidInvoiceUserBundle::NAMESPACE . '\\DataFixtures\\ORM\\', dirname(__DIR__, 3) . '/DataFixtures/ORM/*')
+        ->load(AugiasUserBundle::NAMESPACE . '\\DataFixtures\\ORM\\', dirname(__DIR__, 3) . '/DataFixtures/ORM/*')
         ->tag('doctrine.fixture.orm');
 };

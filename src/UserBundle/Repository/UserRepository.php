@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Repository;
+namespace Augias\UserBundle\Repository;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\UserBundle\Entity\User;
 use DateTimeImmutable;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\Repository\UserRepositoryTest
+ * @see \Augias\UserBundle\Tests\Repository\UserRepositoryTest
  *
  * @extends \SolidWorx\Platform\PlatformBundle\Repository\UserRepository<User>
  */

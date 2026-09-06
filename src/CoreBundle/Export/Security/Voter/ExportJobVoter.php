@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Export\Security\Voter;
+namespace Augias\CoreBundle\Export\Security\Voter;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\ExportJob;
+use Augias\UserBundle\Entity\User;
 use SensitiveParameter;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\ExportJob;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Vote;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -24,7 +24,7 @@ use Symfony\Component\Uid\Ulid;
 
 /**
  * @extends Voter<string, ExportJob>
- * @see \SolidInvoice\CoreBundle\Tests\Export\Security\Voter\ExportJobVoterTest
+ * @see \Augias\CoreBundle\Tests\Export\Security\Voter\ExportJobVoterTest
  */
 final class ExportJobVoter extends Voter
 {

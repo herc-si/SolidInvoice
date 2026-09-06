@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\CoreBundle\Action\CreateCompany;
-use SolidInvoice\CoreBundle\Action\DeleteCompany;
-use SolidInvoice\CoreBundle\Action\Search;
-use SolidInvoice\CoreBundle\Action\SearchSuggestions;
-use SolidInvoice\CoreBundle\Action\SelectCompany;
-use SolidInvoice\CoreBundle\Action\ViewBilling;
-use SolidInvoice\CoreBundle\Export\Action\DownloadExport;
-use SolidInvoice\CoreBundle\Export\Action\ListExports;
-use SolidInvoice\CoreBundle\Export\Action\RequestExport;
+use Augias\CoreBundle\Action\CreateCompany;
+use Augias\CoreBundle\Action\DeleteCompany;
+use Augias\CoreBundle\Action\Search;
+use Augias\CoreBundle\Action\SearchSuggestions;
+use Augias\CoreBundle\Action\SelectCompany;
+use Augias\CoreBundle\Action\ViewBilling;
+use Augias\CoreBundle\Export\Action\DownloadExport;
+use Augias\CoreBundle\Export\Action\ListExports;
+use Augias\CoreBundle\Export\Action\RequestExport;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 

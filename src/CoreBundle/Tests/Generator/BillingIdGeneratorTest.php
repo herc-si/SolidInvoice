@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Generator;
+namespace Augias\CoreBundle\Tests\Generator;
 
+use Augias\CoreBundle\Generator\BillingIdGenerator;
+use Augias\CoreBundle\Generator\BillingIdGenerator\IdGeneratorInterface;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\SettingsBundle\SystemConfig;
 use JsonException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator\IdGeneratorInterface;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 
 #[CoversClass(BillingIdGenerator::class)]

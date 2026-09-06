@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Augias\SettingsBundle\Form\Type\MailTransportType;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\OraclePlatform;
 use Doctrine\DBAL\Schema\Schema;
@@ -21,7 +22,6 @@ use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Migrations\AbstractMigration;
-use SolidInvoice\SettingsBundle\Form\Type\MailTransportType;
 
 final class Version20100 extends AbstractMigration
 {

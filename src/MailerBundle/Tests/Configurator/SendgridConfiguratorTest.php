@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MailerBundle\Tests\Configurator;
+namespace Augias\MailerBundle\Tests\Configurator;
 
+use Augias\MailerBundle\Configurator\SendgridConfigurator;
+use Augias\MailerBundle\Form\Type\TransportConfig\KeyTransportConfigType;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\MailerBundle\Configurator\SendgridConfigurator;
-use SolidInvoice\MailerBundle\Form\Type\TransportConfig\KeyTransportConfigType;
 use Symfony\Component\Mailer\Transport\Dsn;
 
 final class SendgridConfiguratorTest extends TestCase

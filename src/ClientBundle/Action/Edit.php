@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Action;
+namespace Augias\ClientBundle\Action;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Form\Type\ClientType;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Form\Type\ClientType;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -38,7 +38,7 @@ final readonly class Edit
     /**
      * @return array{form: FormView, client: Client}|Response
      */
-    #[Template('@SolidInvoiceClient/Default/edit.html.twig')]
+    #[Template('@AugiasClient/Default/edit.html.twig')]
     public function __invoke(Request $request, Client $client): array | Response
     {
         $form = $this->formFactory->create(ClientType::class, $client);

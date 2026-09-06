@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Twig\Extension;
+namespace Augias\SettingsBundle\Twig\Extension;
 
 use const JSON_THROW_ON_ERROR;
+use Augias\ClientBundle\Entity\Address;
+use Augias\SettingsBundle\SystemConfig;
 use Doctrine\DBAL\Exception;
 use JsonException;
 use Override;
-use SolidInvoice\ClientBundle\Entity\Address;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use function json_decode;
 
 /**
- * @see \SolidInvoice\SettingsBundle\Tests\Twig\Extension\SettingsExtensionTest
+ * @see \Augias\SettingsBundle\Tests\Twig\Extension\SettingsExtensionTest
  */
 class SettingsExtension extends AbstractExtension
 {

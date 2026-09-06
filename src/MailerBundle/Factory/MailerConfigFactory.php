@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MailerBundle\Factory;
+namespace Augias\MailerBundle\Factory;
 
+use Augias\MailerBundle\Configurator\ConfiguratorInterface;
+use Augias\SettingsBundle\SystemConfig;
 use JsonException;
 use RuntimeException;
-use SolidInvoice\MailerBundle\Configurator\ConfiguratorInterface;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use function json_decode;
 
 /**
- * @see \SolidInvoice\MailerBundle\Tests\Factory\MailerConfigFactoryTest
+ * @see \Augias\MailerBundle\Tests\Factory\MailerConfigFactoryTest
  */
 final readonly class MailerConfigFactory
 {

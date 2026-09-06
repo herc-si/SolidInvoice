@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,25 +11,25 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Mcp;
+namespace Augias\PaymentBundle\Mcp;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Model\Graph as InvoiceGraph;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\McpBundle\Mcp\Attribute\McpScopeRequired;
+use Augias\McpBundle\Mcp\McpScopeGuard;
+use Augias\McpBundle\Mcp\Tool\EntityNormalizer;
+use Augias\McpBundle\Mcp\Tool\UlidParser;
+use Augias\McpBundle\Security\McpScope;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Entity\PaymentMethod;
+use Augias\PaymentBundle\Enum\PaymentStatus;
+use Augias\PaymentBundle\Repository\PaymentMethodRepository;
 use Carbon\CarbonImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Mcp\Capability\Attribute\McpTool;
 use Mcp\Exception\ToolCallException;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Model\Graph as InvoiceGraph;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\McpBundle\Mcp\Attribute\McpScopeRequired;
-use SolidInvoice\McpBundle\Mcp\McpScopeGuard;
-use SolidInvoice\McpBundle\Mcp\Tool\EntityNormalizer;
-use SolidInvoice\McpBundle\Mcp\Tool\UlidParser;
-use SolidInvoice\McpBundle\Security\McpScope;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Entity\PaymentMethod;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
-use SolidInvoice\PaymentBundle\Repository\PaymentMethodRepository;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Workflow\WorkflowInterface;
 

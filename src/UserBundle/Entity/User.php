@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Entity;
+namespace Augias\UserBundle\Entity;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Export\Attribute\ExportIgnore;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\UserBundle\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Export\Attribute\ExportIgnore;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\UserBundle\Repository\UserRepository;
 use SolidWorx\Platform\PlatformBundle\Security\TwoFactor\Traits\UserTwoFactor;
 use SolidWorx\Platform\SaasBundle\Trial\TrialUserInterface;
 

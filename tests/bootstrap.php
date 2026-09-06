@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -123,6 +123,6 @@ if (false === (bool) $_SERVER['APP_DEBUG'] && null === ($_SERVER['TEST_TOKEN'] ?
         $kernel->shutdown();
     };
 
-    $prepare(new SolidInvoice\Test\Kernel($env, $debug));
-    $prepare(new SolidInvoice\Test\SaasKernel($env, $debug));
+    $prepare(new Augias\Test\Kernel($env, $debug));
+    $prepare(new Augias\Test\SaasKernel($env, $debug));
 })();

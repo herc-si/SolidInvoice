@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Form\Type;
+namespace Augias\SettingsBundle\Form\Type;
 
-use SolidInvoice\CoreBundle\Entity\CustomField\CustomField;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Enum\CustomFieldType as CFType;
-use SolidInvoice\CoreBundle\Enum\CustomFieldVisibility;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
+use Augias\CoreBundle\Entity\CustomField\CustomField;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Enum\CustomFieldType as CFType;
+use Augias\CoreBundle\Enum\CustomFieldVisibility;
+use Augias\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;

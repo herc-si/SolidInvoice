@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Twig\Components;
+namespace Augias\NotificationBundle\Twig\Components;
 
-use SolidInvoice\NotificationBundle\Entity\TransportSetting;
-use SolidInvoice\NotificationBundle\Repository\TransportSettingRepository;
+use Augias\NotificationBundle\Entity\TransportSetting;
+use Augias\NotificationBundle\Repository\TransportSettingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
@@ -22,7 +22,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 /**
- * @see \SolidInvoice\NotificationBundle\Tests\Twig\Components\NotificationIntegrationsTest
+ * @see \Augias\NotificationBundle\Tests\Twig\Components\NotificationIntegrationsTest
  */
 #[AsLiveComponent]
 final class NotificationIntegrations extends AbstractController

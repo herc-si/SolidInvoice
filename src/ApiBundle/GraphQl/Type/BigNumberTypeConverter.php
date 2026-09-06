@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\GraphQl\Type;
+namespace Augias\ApiBundle\GraphQl\Type;
 
 use ApiPlatform\GraphQl\Type\TypeConverterInterface;
 use ApiPlatform\Metadata\GraphQl\Operation;
+use Augias\ApiBundle\Serializer\Normalizer\BigIntegerNormalizer;
 use Brick\Math\BigNumber;
 use GraphQL\Type\Definition\Type as GraphQLType;
 use Override;
-use SolidInvoice\ApiBundle\Serializer\Normalizer\BigIntegerNormalizer;
 use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 use Symfony\Component\TypeInfo\Type;
 use Symfony\Component\TypeInfo\TypeIdentifier;
@@ -31,7 +31,7 @@ use Symfony\Component\TypeInfo\TypeIdentifier;
  * {@see BigIntegerNormalizer} emits a float — a monetary amount divided back out of the
  * minor unit, or a line quantity, which can carry six decimal places.
  *
- * @see \SolidInvoice\ApiBundle\Tests\GraphQl\Type\BigNumberTypeConverterTest
+ * @see \Augias\ApiBundle\Tests\GraphQl\Type\BigNumberTypeConverterTest
  */
 #[AsDecorator(decorates: 'api_platform.graphql.type_converter')]
 final readonly class BigNumberTypeConverter implements TypeConverterInterface

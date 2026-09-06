@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,25 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdp;
+namespace Augias\ElectronicInvoicingBundle\Provider\SuperPdp;
 
 use const JSON_THROW_ON_ERROR;
+use Augias\ClientBundle\Entity\Address;
+use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Pdf\Generator;
+use Augias\CoreBundle\Templates\BillingTemplateChannel;
+use Augias\CoreBundle\Templates\BillingTemplateResolver;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\TaxBundle\Calculator\Result\TaxSummaryRow;
+use Augias\TaxBundle\Calculator\TaxCalculatorInterface;
+use Augias\TaxBundle\Entity\LineTax;
+use Augias\TaxBundle\Entity\TaxIdentifier;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Repository\TaxIdentifierRepository;
 use Brick\Math\BigNumber;
 use horstoeko\zugferd\codelists\ZugferdInvoiceType;
 use horstoeko\zugferd\codelists\ZugferdSchemeIdentifiers;
@@ -25,22 +41,6 @@ use horstoeko\zugferd\ZugferdDocumentBuilder;
 use horstoeko\zugferd\ZugferdDocumentPdfBuilder;
 use horstoeko\zugferd\ZugferdProfiles;
 use JsonException;
-use SolidInvoice\ClientBundle\Entity\Address;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Pdf\Generator;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateChannel;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\TaxBundle\Calculator\Result\TaxSummaryRow;
-use SolidInvoice\TaxBundle\Calculator\TaxCalculatorInterface;
-use SolidInvoice\TaxBundle\Entity\LineTax;
-use SolidInvoice\TaxBundle\Entity\TaxIdentifier;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Repository\TaxIdentifierRepository;
 use Twig\Environment;
 use function array_values;
 use function ctype_digit;
@@ -53,15 +53,15 @@ use function substr;
  * profile) for an {@see Invoice}, ready to be uploaded to SUPER PDP.
  *
  * Reuses the same Twig template and mpdf renderer as the regular invoice PDF
- * (see \SolidInvoice\InvoiceBundle\Action\View) as the human-readable layer,
+ * (see \Augias\InvoiceBundle\Action\View) as the human-readable layer,
  * and horstoeko/zugferd to build the CII XML and merge it into that PDF.
  *
  * Simplification for this first version: a line with more than one applied
  * tax rate (compound taxes) only has its first tax rate reflected in the CII
- * document — SolidInvoice's SIRET-gated eligibility targets standard French
+ * document — Augias's SIRET-gated eligibility targets standard French
  * B2B invoicing, where a line normally carries a single VAT rate.
  *
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Provider\SuperPdp\FacturXInvoiceBuilderTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Provider\SuperPdp\FacturXInvoiceBuilderTest
  */
 final readonly class FacturXInvoiceBuilder
 {
@@ -100,7 +100,7 @@ final readonly class FacturXInvoiceBuilder
         );
 
         $pdfBuilder = ZugferdDocumentPdfBuilder::fromPdfString($documentBuilder, $pdfContent);
-        $pdfBuilder->setAdditionalCreatorTool('SolidInvoice');
+        $pdfBuilder->setAdditionalCreatorTool('Augias');
         $pdfBuilder->generateDocument();
 
         return $pdfBuilder->downloadString();
@@ -122,7 +122,7 @@ final readonly class FacturXInvoiceBuilder
             $client?->getCurrencyCode() ?? $this->systemConfig->getCurrency()->getCode(),
         );
 
-        // BT-23: mandatory "cadre de facturation" code. SolidInvoice doesn't track
+        // BT-23: mandatory "cadre de facturation" code. Augias doesn't track
         // whether an invoice is for goods, services or both, so a mixed code like
         // "M1" would be tempting — but SUPER PDP rejects "M*" codes outright
         // whenever it classifies the flow as B2BInt (international), where only a
@@ -134,7 +134,7 @@ final readonly class FacturXInvoiceBuilder
 
         // Without a delivery/supply date, zugferd still emits an empty
         // ApplicableHeaderTradeDelivery element, which PEPPOL-EN16931-R008 rejects.
-        // The invoice date stands in for a supply date SolidInvoice doesn't track.
+        // The invoice date stands in for a supply date Augias doesn't track.
         $documentBuilder->setDocumentSupplyChainEvent($invoice->getInvoiceDate());
 
         $this->setSeller($documentBuilder, $invoice->getCompany());
@@ -346,7 +346,7 @@ final readonly class FacturXInvoiceBuilder
 
     /**
      * A Peppol scheme-0225 address is keyed on the 9-digit SIREN, not the
-     * 14-digit SIRET (SIREN + 5-digit NIC establishment code) — SolidInvoice's
+     * 14-digit SIRET (SIREN + 5-digit NIC establishment code) — Augias's
      * "SIRET"/"SIREN" tax identifier labels don't distinguish the two, so the
      * SIREN is extracted only when the value is unambiguously a full SIRET
      * (14 numeric digits). Anything else — already a bare SIREN, a malformed
@@ -391,7 +391,7 @@ final readonly class FacturXInvoiceBuilder
     /**
      * BR-FR-05/BT-22: three legal mentions French law requires on every invoice
      * (recovery-fee indemnity, late-payment penalty rate, early-payment discount
-     * policy — Code de commerce art. L441-10/D441-5). SolidInvoice doesn't let a
+     * policy — Code de commerce art. L441-10/D441-5). Augias doesn't let a
      * company customize this wording yet, so fixed boilerplate text is used.
      */
     private function addMandatoryFrenchNotes(ZugferdDocumentBuilder $documentBuilder): void

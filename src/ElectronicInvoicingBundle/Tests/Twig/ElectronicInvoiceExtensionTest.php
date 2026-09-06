@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Tests\Twig;
+namespace Augias\ElectronicInvoicingBundle\Tests\Twig;
 
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use Augias\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
+use Augias\ElectronicInvoicingBundle\Twig\ElectronicInvoiceExtension;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
-use SolidInvoice\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
-use SolidInvoice\ElectronicInvoicingBundle\Twig\ElectronicInvoiceExtension;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Twig\Environment;
 

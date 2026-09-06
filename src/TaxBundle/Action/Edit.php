@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Action;
+namespace Augias\TaxBundle\Action;
 
+use Augias\TaxBundle\Entity\Tax;
+use Augias\TaxBundle\Form\Type\TaxType;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\TaxBundle\Form\Type\TaxType;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -38,7 +38,7 @@ final readonly class Edit
     /**
      * @return array{form: FormView}|Response
      */
-    #[Template('@SolidInvoiceTax/Default/form.html.twig')]
+    #[Template('@AugiasTax/Default/form.html.twig')]
     public function __invoke(Request $request, Tax $tax): array | Response
     {
         $form = $this->formFactory->create(TaxType::class, $tax);

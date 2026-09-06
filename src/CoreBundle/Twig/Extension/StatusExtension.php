@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Twig\Extension;
+namespace Augias\CoreBundle\Twig\Extension;
 
+use Augias\BillBundle\Enum\BillStatus;
+use Augias\ClientBundle\Enum\ClientStatus;
+use Augias\CoreBundle\Enum\HasStatusLabel;
+use Augias\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
+use Augias\PaymentBundle\Enum\PaymentStatus;
+use Augias\QuoteBundle\Enum\QuoteStatus;
 use BackedEnum;
 use Override;
-use SolidInvoice\BillBundle\Enum\BillStatus;
-use SolidInvoice\ClientBundle\Enum\ClientStatus;
-use SolidInvoice\CoreBundle\Enum\HasStatusLabel;
-use SolidInvoice\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
@@ -132,7 +132,7 @@ class StatusExtension extends AbstractExtension
         $key = $status instanceof BackedEnum ? $status->value : strtolower($status->getLabel());
 
         return $environment->render(
-            '@SolidInvoiceCore/Status/label.html.twig',
+            '@AugiasCore/Status/label.html.twig',
             [
                 'entity' => [
                     'name' => $this->translator->trans('status.' . $key),

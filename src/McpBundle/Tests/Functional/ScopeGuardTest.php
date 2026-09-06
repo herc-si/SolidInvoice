@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Tests\Functional;
+namespace Augias\McpBundle\Tests\Functional;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\McpBundle\Mcp\McpScopeGuard;
+use Augias\McpBundle\Mcp\McpSecurityContext;
+use Augias\McpBundle\Security\McpOAuthAuthenticator;
+use Augias\McpBundle\Security\McpScope;
 use Doctrine\Persistence\ManagerRegistry;
 use Mcp\Exception\ToolCallException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\McpBundle\Mcp\McpScopeGuard;
-use SolidInvoice\McpBundle\Mcp\McpSecurityContext;
-use SolidInvoice\McpBundle\Security\McpOAuthAuthenticator;
-use SolidInvoice\McpBundle\Security\McpScope;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,25 +11,25 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Entity;
+namespace Augias\ElectronicInvoicingBundle\Entity;
 
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceReceiptRepository;
 use Brick\Math\BigNumber;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Money\Currency;
 use Money\Money;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceReceiptRepository;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid\Ulid;
 
 /**
  * One electronic invoice received BY this company from a supplier, imported
- * from an {@see \SolidInvoice\ElectronicInvoicingBundle\Provider\ElectronicInvoiceReceiverInterface}
+ * from an {@see \Augias\ElectronicInvoicingBundle\Provider\ElectronicInvoiceReceiverInterface}
  * provider — the inbound counterpart of {@see ElectronicInvoiceSubmission}.
  *
  * Deliberately its own entity rather than reusing PaymentBundle's Payment:
@@ -39,7 +39,7 @@ use Symfony\Component\Uid\Ulid;
  * payment decision, so forcing it through Payment's shape (and API surface)
  * would misrepresent both.
  *
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Entity\ElectronicInvoiceReceiptTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Entity\ElectronicInvoiceReceiptTest
  */
 #[ORM\Entity(repositoryClass: ElectronicInvoiceReceiptRepository::class)]
 #[ORM\Table(name: ElectronicInvoiceReceipt::TABLE_NAME)]
@@ -98,8 +98,8 @@ class ElectronicInvoiceReceipt
     /**
      * Relative path from the project root to the downloaded document on local
      * disk (e.g. `var/einvoicing/incoming/{companyId}/{id}.pdf`), following the
-     * same convention as {@see \SolidInvoice\CoreBundle\Entity\ExportJob::$archivePath}.
-     * Null until {@see \SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceReceiptManager}
+     * same convention as {@see \Augias\CoreBundle\Entity\ExportJob::$archivePath}.
+     * Null until {@see \Augias\ElectronicInvoicingBundle\Manager\ElectronicInvoiceReceiptManager}
      * downloads it.
      */
     #[ORM\Column(name: 'document_path', type: Types::STRING, length: 512, nullable: true)]
@@ -211,7 +211,7 @@ class ElectronicInvoiceReceipt
 
     /**
      * Combines totalAmount/currencyCode into a Money value object, the way
-     * {@see \SolidInvoice\PaymentBundle\Entity\Payment::getAmount()} does —
+     * {@see \Augias\PaymentBundle\Entity\Payment::getAmount()} does —
      * null when either half is missing (a provider that didn't report an
      * amount), rather than guessing a default currency.
      */

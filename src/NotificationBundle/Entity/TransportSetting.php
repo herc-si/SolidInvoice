@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Entity;
+namespace Augias\NotificationBundle\Entity;
 
+use Augias\CoreBundle\Export\Attribute\ExportIgnore;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\NotificationBundle\Repository\TransportSettingRepository;
+use Augias\UserBundle\Entity\User;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Export\Attribute\ExportIgnore;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\NotificationBundle\Repository\TransportSettingRepository;
-use SolidInvoice\UserBundle\Entity\User;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
@@ -27,7 +27,7 @@ use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @see \SolidInvoice\NotificationBundle\Tests\Entity\TransportSettingTest
+ * @see \Augias\NotificationBundle\Tests\Entity\TransportSettingTest
  */
 #[ORM\Entity(repositoryClass: TransportSettingRepository::class)]
 #[ORM\Table(name: TransportSetting::TABLE_NAME)]

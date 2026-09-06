@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Tests;
+namespace Augias\SettingsBundle\Tests;
 
 use const DATE_ATOM;
+use Augias\CoreBundle\Test\Traits\DoctrineTestTrait;
+use Augias\SettingsBundle\Entity\Setting;
+use Augias\SettingsBundle\SystemConfig;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Money\Currency;
-use SolidInvoice\CoreBundle\Test\Traits\DoctrineTestTrait;
-use SolidInvoice\SettingsBundle\Entity\Setting;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use function date;
 

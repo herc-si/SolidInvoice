@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Mailer;
+namespace Augias\QuoteBundle\Mailer;
 
+use Augias\NotificationBundle\Notification\NotificationManager;
+use Augias\QuoteBundle\Email\QuoteEmail;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Enum\QuoteStatus;
+use Augias\QuoteBundle\Exception\InvalidTransitionException;
+use Augias\QuoteBundle\Model\Graph;
+use Augias\QuoteBundle\Notification\QuoteStatusNotification;
 use JsonException;
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
-use SolidInvoice\QuoteBundle\Email\QuoteEmail;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
-use SolidInvoice\QuoteBundle\Exception\InvalidTransitionException;
-use SolidInvoice\QuoteBundle\Model\Graph;
-use SolidInvoice\QuoteBundle\Notification\QuoteStatusNotification;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Workflow\WorkflowInterface;

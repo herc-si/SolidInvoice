@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Form\Type;
+namespace Augias\CoreBundle\Form\Type;
 
+use Augias\CoreBundle\Entity\CustomField\CustomFieldValue;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Repository\CustomFieldRepository;
+use Augias\CoreBundle\Repository\CustomFieldValueRepository;
+use Augias\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Event\PostPersistEventArgs;
 use Error;
 use Override;
-use SolidInvoice\CoreBundle\Entity\CustomField\CustomFieldValue;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Repository\CustomFieldRepository;
-use SolidInvoice\CoreBundle\Repository\CustomFieldValueRepository;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -31,7 +31,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Form\Type\CustomFieldValueCollectionTypeTest
+ * @see \Augias\CoreBundle\Tests\Form\Type\CustomFieldValueCollectionTypeTest
  * @extends AbstractType<mixed>
  */
 final class CustomFieldValueCollectionType extends AbstractType

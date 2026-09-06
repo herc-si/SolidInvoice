@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Form\Step;
+namespace Augias\InstallBundle\Form\Step;
 
-use SolidInvoice\InstallBundle\DTO\Installation;
-use SolidInvoice\InstallBundle\DTO\UserAccount;
+use Augias\InstallBundle\DTO\Installation;
+use Augias\InstallBundle\DTO\UserAccount;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -31,7 +31,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Url;
 
 /**
- * @see \SolidInvoice\InstallBundle\Tests\Form\Step\SystemInformationFormTest
+ * @see \Augias\InstallBundle\Tests\Form\Step\SystemInformationFormTest
  * @extends AbstractType<UserAccount>
  */
 class UserAccountStep extends AbstractType

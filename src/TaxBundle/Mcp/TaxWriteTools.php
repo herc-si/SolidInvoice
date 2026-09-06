@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Mcp;
+namespace Augias\TaxBundle\Mcp;
 
+use Augias\McpBundle\Mcp\Attribute\McpScopeRequired;
+use Augias\McpBundle\Mcp\McpScopeGuard;
+use Augias\McpBundle\Mcp\Tool\EntityNormalizer;
+use Augias\McpBundle\Mcp\Tool\UlidParser;
+use Augias\McpBundle\Security\McpScope;
+use Augias\TaxBundle\Entity\Tax;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Repository\TaxRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Mcp\Capability\Attribute\McpTool;
 use Mcp\Exception\ToolCallException;
-use SolidInvoice\McpBundle\Mcp\Attribute\McpScopeRequired;
-use SolidInvoice\McpBundle\Mcp\McpScopeGuard;
-use SolidInvoice\McpBundle\Mcp\Tool\EntityNormalizer;
-use SolidInvoice\McpBundle\Mcp\Tool\UlidParser;
-use SolidInvoice\McpBundle\Security\McpScope;
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Repository\TaxRepository;
 
 final readonly class TaxWriteTools
 {

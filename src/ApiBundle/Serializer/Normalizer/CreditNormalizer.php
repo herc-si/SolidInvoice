@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Serializer\Normalizer;
+namespace Augias\ApiBundle\Serializer\Normalizer;
 
+use Augias\ClientBundle\Entity\Credit;
 use Brick\Math\BigNumber;
-use SolidInvoice\ClientBundle\Entity\Credit;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
@@ -25,7 +25,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
- * @see \SolidInvoice\ApiBundle\Tests\Serializer\Normalizer\CreditNormalizerTest
+ * @see \Augias\ApiBundle\Tests\Serializer\Normalizer\CreditNormalizerTest
  */
 #[AutoconfigureTag('serializer.normalizer')]
 final class CreditNormalizer implements NormalizerAwareInterface, NormalizerInterface, DenormalizerAwareInterface, DenormalizerInterface

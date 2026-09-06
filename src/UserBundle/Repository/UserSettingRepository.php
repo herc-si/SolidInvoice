@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Repository;
+namespace Augias\UserBundle\Repository;
 
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\UserSetting;
+use Augias\UserBundle\Enum\UserSettingType;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Entity\UserSetting;
-use SolidInvoice\UserBundle\Enum\UserSettingType;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 
 /**
  * @extends EntityRepository<UserSetting>
- * @see \SolidInvoice\UserBundle\Tests\Repository\UserSettingRepositoryTest
+ * @see \Augias\UserBundle\Tests\Repository\UserSettingRepositoryTest
  */
 final class UserSettingRepository extends EntityRepository implements UserSettingRepositoryInterface
 {

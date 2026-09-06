@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Onboarding\Manager;
+namespace Augias\UserBundle\Tests\Onboarding\Manager;
 
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\CoreBundle\Test\Traits\DoctrineTestTrait;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Enum\UserSettingType;
+use Augias\UserBundle\Onboarding\DTO\OnboardingData;
+use Augias\UserBundle\Onboarding\Manager\OnboardingManager;
+use Augias\UserBundle\Repository\UserSettingRepository;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\CoreBundle\Test\Traits\DoctrineTestTrait;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Enum\UserSettingType;
-use SolidInvoice\UserBundle\Onboarding\DTO\OnboardingData;
-use SolidInvoice\UserBundle\Onboarding\Manager\OnboardingManager;
-use SolidInvoice\UserBundle\Repository\UserSettingRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(OnboardingManager::class)]

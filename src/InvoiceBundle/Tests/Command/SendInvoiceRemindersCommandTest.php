@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,25 +11,25 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Command;
+namespace Augias\InvoiceBundle\Tests\Command;
 
 use const PHP_EOL;
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\ClientBundle\Test\Factory\ContactFactory;
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\CoreBundle\Test\Traits\ConsoleTesterTrait;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Command\SendInvoiceRemindersCommand;
+use Augias\InvoiceBundle\Entity\InvoiceReminder;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Message\SendInvoiceReminderMessage;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
 use Carbon\CarbonImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\ClientBundle\Test\Factory\ContactFactory;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\CoreBundle\Test\Traits\ConsoleTesterTrait;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Command\SendInvoiceRemindersCommand;
-use SolidInvoice\InvoiceBundle\Entity\InvoiceReminder;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Message\SendInvoiceReminderMessage;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
 use SolidWorx\Platform\PlatformBundle\Console\IO;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

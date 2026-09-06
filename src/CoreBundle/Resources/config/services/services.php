@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,26 +11,26 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
+use Augias\AppMode;
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Contracts\PaidSubscriptionGateInterface;
+use Augias\CoreBundle\DummyData\DummyDataLoader;
+use Augias\CoreBundle\Email\NullEmailVerificationGate;
+use Augias\CoreBundle\Export\Serializer\ExportSerializer;
+use Augias\CoreBundle\Feature\NullUpgradePromptProvider;
+use Augias\CoreBundle\Feature\UpgradePromptProvider;
+use Augias\CoreBundle\Form\Extension\FeatureRestrictedExtension;
+use Augias\CoreBundle\Routing\Loader\AbstractDirectoryLoader;
+use Augias\CoreBundle\Search\MultiSearchService;
+use Augias\CoreBundle\Search\SearchQueryParser;
+use Augias\CoreBundle\Subscription\NullPaidSubscriptionGate;
+use Augias\CoreBundle\Templates\BillingDocumentType;
+use Augias\CoreBundle\Templates\BillingTemplateRegistry;
+use Augias\CoreBundle\Translation\Extractor\MenuLabelExtractor;
+use Augias\CoreBundle\Twig\Extension\FeatureExtension;
 use Gedmo\Timestampable\TimestampableListener;
 use Mpociot\VatCalculator\VatCalculator;
-use SolidInvoice\AppMode;
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\CoreBundle\Contracts\PaidSubscriptionGateInterface;
-use SolidInvoice\CoreBundle\DummyData\DummyDataLoader;
-use SolidInvoice\CoreBundle\Email\NullEmailVerificationGate;
-use SolidInvoice\CoreBundle\Export\Serializer\ExportSerializer;
-use SolidInvoice\CoreBundle\Feature\NullUpgradePromptProvider;
-use SolidInvoice\CoreBundle\Feature\UpgradePromptProvider;
-use SolidInvoice\CoreBundle\Form\Extension\FeatureRestrictedExtension;
-use SolidInvoice\CoreBundle\Routing\Loader\AbstractDirectoryLoader;
-use SolidInvoice\CoreBundle\Search\MultiSearchService;
-use SolidInvoice\CoreBundle\Search\SearchQueryParser;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\CoreBundle\Subscription\NullPaidSubscriptionGate;
-use SolidInvoice\CoreBundle\Templates\BillingDocumentType;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateRegistry;
-use SolidInvoice\CoreBundle\Translation\Extractor\MenuLabelExtractor;
-use SolidInvoice\CoreBundle\Twig\Extension\FeatureExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
@@ -64,7 +64,7 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
     ;
 
     $services
-        ->load(SolidInvoiceCoreBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
+        ->load(AugiasCoreBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
         // Export/Serializer/Normalizer is excluded so the normalizers there are NOT
         // registered as global `serializer.normalizer` services. They are loaded
         // inline as fresh instances inside the dedicated export Serializer below
@@ -78,7 +78,7 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
 
     // The no-op FeatureExtension shadows three SaaS-only Twig function names so
     // self-hosted templates can call them safely. SaaS deployments register the
-    // real implementations from SolidInvoice\SaasBundle\Twig\FeatureExtension —
+    // real implementations from Augias\SaasBundle\Twig\FeatureExtension —
     // registering both would duplicate the function names and trigger a Twig
     // "function already defined" error at compile time. The same pattern applies
     // to FeatureRestrictedExtension: SaasBundle ships the real form-extension and
@@ -86,7 +86,7 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
     //
     // The check reads the `app_mode` container parameter rather than
     // $_ENV['SOLIDINVOICE_PLATFORM']: the kernel resolves the mode itself (see
-    // SolidInvoice\Kernel::prepareContainer()), and test kernels select a mode by
+    // Augias\Kernel::prepareContainer()), and test kernels select a mode by
     // constructor argument without ever writing to $_ENV.
     if (AppMode::from($container->getParameter('app_mode')) !== AppMode::SAAS) {
         $services->set(FeatureExtension::class);
@@ -94,12 +94,12 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
     }
 
     $services
-        ->load(SolidInvoiceCoreBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
+        ->load(AugiasCoreBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
         ->autowire(true)
         ->tag('controller.service_arguments');
 
     $services
-        ->load(SolidInvoiceCoreBundle::NAMESPACE . '\\Export\\Action\\', dirname(__DIR__, 3) . '/Export/Action')
+        ->load(AugiasCoreBundle::NAMESPACE . '\\Export\\Action\\', dirname(__DIR__, 3) . '/Export/Action')
         ->autowire(true)
         ->tag('controller.service_arguments');
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Action;
+namespace Augias\InvoiceBundle\Action;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\InvoiceBundle\DTO\InvoiceFormDTO;
+use Augias\InvoiceBundle\Email\InvoiceEmail;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Form\Type\InvoiceType;
+use Augias\InvoiceBundle\Manager\InvoiceFormManager;
+use Augias\InvoiceBundle\Model\Graph;
 use Brick\Math\Exception\MathException;
 use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\InvoiceBundle\DTO\InvoiceFormDTO;
-use SolidInvoice\InvoiceBundle\Email\InvoiceEmail;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Form\Type\InvoiceType;
-use SolidInvoice\InvoiceBundle\Manager\InvoiceFormManager;
-use SolidInvoice\InvoiceBundle\Model\Graph;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -54,7 +54,7 @@ final readonly class Edit
      * @return array{recurring: bool, form: FormView, dto: InvoiceFormDTO, invoice: Invoice}|Response
      * @throws MathException
      */
-    #[Template('@SolidInvoiceInvoice/Default/edit.html.twig')]
+    #[Template('@AugiasInvoice/Default/edit.html.twig')]
     public function __invoke(Request $request, Invoice $invoice): array | Response
     {
         if (InvoiceStatus::Paid === $invoice->getStatus()) {

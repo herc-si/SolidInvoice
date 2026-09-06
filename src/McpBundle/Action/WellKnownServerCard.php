@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Action;
+namespace Augias\McpBundle\Action;
 
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\McpBundle\Security\McpScope;
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\McpBundle\Security\McpScope;
 use stdClass;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
@@ -32,8 +32,8 @@ final readonly class WellKnownServerCard
     {
         return new JsonResponse([
             'serverInfo' => [
-                'name' => SolidInvoiceCoreBundle::APP_NAME,
-                'version' => SolidInvoiceCoreBundle::VERSION,
+                'name' => AugiasCoreBundle::APP_NAME,
+                'version' => AugiasCoreBundle::VERSION,
             ],
             'transport' => [
                 'type' => 'http',

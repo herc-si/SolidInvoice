@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Security\Voter;
+namespace Augias\SaasBundle\Security\Voter;
 
+use Augias\ApiBundle\Security\Attribute as ApiAttribute;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\McpBundle\Security\Attribute as McpAttribute;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\SaasBundle\Service\SubscriptionEligibility;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use SensitiveParameter;
-use SolidInvoice\ApiBundle\Security\Attribute as ApiAttribute;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\McpBundle\Security\Attribute as McpAttribute;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\SaasBundle\Service\SubscriptionEligibility;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Vote;
@@ -42,7 +42,7 @@ use Throwable;
  * per-attribute feature gate (`rest_api_access` for the API, `mcp_access`
  * for MCP) so plan-level downgrades immediately deny access even when the
  * subscription itself is still active.
- * @see \SolidInvoice\SaasBundle\Tests\Security\Voter\SubscriptionVoterTest
+ * @see \Augias\SaasBundle\Tests\Security\Voter\SubscriptionVoterTest
  * @extends Voter<string, mixed>
  */
 final class SubscriptionVoter extends Voter

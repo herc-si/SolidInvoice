@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Form\Type;
+namespace Augias\BillBundle\Form\Type;
 
+use Augias\BillBundle\Entity\BillPayment;
+use Augias\BillBundle\Enum\BillPaymentMethod;
 use Brick\Math\BigNumber;
 use Money\Currency;
-use SolidInvoice\BillBundle\Entity\BillPayment;
-use SolidInvoice\BillBundle\Enum\BillPaymentMethod;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * @see \SolidInvoice\BillBundle\Tests\Form\Type\BillPaymentTypeTest
+ * @see \Augias\BillBundle\Tests\Form\Type\BillPaymentTypeTest
  * @extends AbstractType<BillPayment>
  */
 final class BillPaymentType extends AbstractType

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Step;
+namespace Augias\InstallBundle\Step;
 
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\CoreBundle\Entity\Version;
+use Augias\CoreBundle\Repository\VersionRepository;
+use Augias\InstallBundle\DTO\Installation;
+use Augias\InstallBundle\Installer\Database\Migration;
 use Doctrine\Persistence\ManagerRegistry;
 use Generator;
-use SolidInvoice\CoreBundle\Entity\Version;
-use SolidInvoice\CoreBundle\Repository\VersionRepository;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\InstallBundle\DTO\Installation;
-use SolidInvoice\InstallBundle\Installer\Database\Migration;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
 /**
- * @see \SolidInvoice\InstallBundle\Tests\Step\RunMigrationsStepTest
+ * @see \Augias\InstallBundle\Tests\Step\RunMigrationsStepTest
  */
 #[AsTaggedItem('Creating database schema', priority: 10)]
 final readonly class RunMigrationsStep implements InstallationStepInterface
@@ -43,7 +43,7 @@ final readonly class RunMigrationsStep implements InstallationStepInterface
     {
         yield from $this->migration->migrate($callback);
 
-        $version = SolidInvoiceCoreBundle::VERSION;
+        $version = AugiasCoreBundle::VERSION;
 
         $entityManager = $this->registry->getManager();
 

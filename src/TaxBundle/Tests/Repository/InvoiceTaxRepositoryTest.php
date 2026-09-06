@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Tests\Repository;
+namespace Augias\TaxBundle\Tests\Repository;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\TaxBundle\Entity\InvoiceTax;
+use Augias\TaxBundle\Repository\InvoiceTaxRepository;
+use Augias\TaxBundle\Test\Factory\InvoiceTaxFactory;
 use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
-use SolidInvoice\TaxBundle\Repository\InvoiceTaxRepository;
-use SolidInvoice\TaxBundle\Test\Factory\InvoiceTaxFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(InvoiceTaxRepository::class)]

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Validator\Constraints;
+namespace Augias\InvoiceBundle\Tests\Validator\Constraints;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\InvoiceBundle\Validator\Constraints\WithinPlanInvoiceLimit;
+use Augias\InvoiceBundle\Validator\Constraints\WithinPlanInvoiceLimitValidator;
+use Augias\SaasBundle\Feature\Feature;
 use Carbon\CarbonImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
@@ -20,11 +25,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\InvoiceBundle\Validator\Constraints\WithinPlanInvoiceLimit;
-use SolidInvoice\InvoiceBundle\Validator\Constraints\WithinPlanInvoiceLimitValidator;
-use SolidInvoice\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\Validator\Constraint;

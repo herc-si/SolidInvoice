@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -7,12 +7,12 @@
  # with this source code in the file LICENSE.
  #}
 
-{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+{% extends "@AugiasCore/Layout/default.html.twig" %}
 
 {% block title %}{{ "invoice.action.create"|trans }}{% endblock %}
 
 {% block content %}
-    {% include '@SolidInvoiceDataGrid/Components/_empty_state.html.twig' with {
+    {% include '@AugiasDataGrid/Components/_empty_state.html.twig' with {
         icon: 'tabler:users',
         title: 'datagrid.empty.client.title',
         message: 'invoice.client.empty',

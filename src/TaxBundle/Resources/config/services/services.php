@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\TaxBundle\Calculator\TaxCalculator;
-use SolidInvoice\TaxBundle\Calculator\TaxCalculatorInterface;
-use SolidInvoice\TaxBundle\SolidInvoiceTaxBundle;
+use Augias\TaxBundle\AugiasTaxBundle;
+use Augias\TaxBundle\Calculator\TaxCalculator;
+use Augias\TaxBundle\Calculator\TaxCalculatorInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -27,11 +27,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ;
 
     $services
-        ->load(SolidInvoiceTaxBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
+        ->load(AugiasTaxBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
         ->exclude(dirname(__DIR__, 3) . '/{DependencyInjection,Entity,Resources,Tests}');
 
     $services
-        ->load(SolidInvoiceTaxBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
+        ->load(AugiasTaxBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
         ->tag('controller.service_arguments');
 
     $services->alias(TaxCalculatorInterface::class, TaxCalculator::class);

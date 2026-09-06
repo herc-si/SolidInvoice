@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Twig\Components;
+namespace Augias\UserBundle\Twig\Components;
 
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Repository\UserRepository;
 use Carbon\Carbon;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Encoding\Encoding;
@@ -23,8 +25,6 @@ use Override;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Totp\TotpAuthenticatorInterface;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Trusted\TrustedDeviceManagerInterface;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Trusted\TrustedDeviceTokenStorage;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Repository\UserRepository;
 use SolidWorx\Platform\PlatformBundle\Contracts\Security\TwoFactor\UserTwoFactorInterface;
 use SolidWorx\Platform\PlatformBundle\Form\Type\Security\TwoFactorVerifyType;
 use SolidWorx\Platform\PlatformBundle\Security\TwoFactor\BackupCodeGeneratorInterface;
@@ -46,9 +46,9 @@ use Symfony\UX\TwigComponent\Attribute\PreMount;
 use function assert;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\Twig\Components\TwoFactorSettingsTest
+ * @see \Augias\UserBundle\Tests\Twig\Components\TwoFactorSettingsTest
  */
-#[AsLiveComponent(name: 'User:TwoFactorSettings', template: '@SolidInvoiceUser/Components/TwoFactorSettings.html.twig')]
+#[AsLiveComponent(name: 'User:TwoFactorSettings', template: '@AugiasUser/Components/TwoFactorSettings.html.twig')]
 final class TwoFactorSettings extends AbstractController
 {
     use DefaultActionTrait;
@@ -201,7 +201,7 @@ final class TwoFactorSettings extends AbstractController
         // (which may return hashed codes or be stale)
         $codes = $this->getUser()->getBackupCodes();
 
-        $content = "SolidInvoice - Two-Factor Authentication Backup Codes\n";
+        $content = "Augias - Two-Factor Authentication Backup Codes\n";
         $content .= 'Generated: ' . Carbon::now()->format('Y-m-d H:i:s') . "\n";
         $content .= str_repeat('=', 50) . "\n\n";
 

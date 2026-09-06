@@ -1,5 +1,5 @@
 {#
-# This file is part of SolidInvoice package.
+# This file is part of Augias package.
 #
 # (c) Pierre du Plessis <open-source@solidworx.co>
 #
@@ -7,12 +7,12 @@
 # with this source code in the file LICENSE.
 #}
 
-{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+{% extends "@AugiasCore/Layout/default.html.twig" %}
 
 {% block content %}
     <div class="row">
         <aside class="col-12 col-md-4">
-            {% include '@SolidInvoiceUser/Layout/_partial/nav.html.twig' with {menuItem} %}
+            {% include '@AugiasUser/Layout/_partial/nav.html.twig' with {menuItem} %}
         </aside>
         <section class="col-12 col-md-8">
             {% block profile_content %}

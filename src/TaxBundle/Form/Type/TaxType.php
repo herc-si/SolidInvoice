@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Form\Type;
+namespace Augias\TaxBundle\Form\Type;
 
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Entity\Tax;
+use Augias\TaxBundle\Enum\TaxCategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @see \SolidInvoice\TaxBundle\Tests\Form\Type\TaxTypeTest
+ * @see \Augias\TaxBundle\Tests\Form\Type\TaxTypeTest
  * @extends AbstractType<Tax>
  */
 class TaxType extends AbstractType

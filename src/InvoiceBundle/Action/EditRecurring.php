@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Action;
+namespace Augias\InvoiceBundle\Action;
 
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Form\Type\RecurringInvoiceType;
+use Augias\InvoiceBundle\Model\Graph;
+use Augias\SaasBundle\Feature\Feature;
 use Brick\Math\Exception\MathException;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Form\Type\RecurringInvoiceType;
-use SolidInvoice\InvoiceBundle\Model\Graph;
-use SolidInvoice\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -32,7 +32,7 @@ use Symfony\Component\Workflow\WorkflowInterface;
 use function assert;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Action\EditRecurringTest
+ * @see \Augias\InvoiceBundle\Tests\Action\EditRecurringTest
  */
 final class EditRecurring extends AbstractController
 {
@@ -52,7 +52,7 @@ final class EditRecurring extends AbstractController
     public function __invoke(Request $request, RecurringInvoice $invoice): Response
     {
         if (! $this->featureGate->isEnabled(Feature::RecurringInvoices->value)) {
-            return $this->render('@SolidInvoiceInvoice/Default/recurring_gated.html.twig');
+            return $this->render('@AugiasInvoice/Default/recurring_gated.html.twig');
         }
 
         $form = $this->formFactory->create(RecurringInvoiceType::class, $invoice, [
@@ -80,7 +80,7 @@ final class EditRecurring extends AbstractController
             $this->totalCalculator->calculateTotals($invoice);
         }
 
-        return $this->render('@SolidInvoiceInvoice/Default/edit.html.twig', [
+        return $this->render('@AugiasInvoice/Default/edit.html.twig', [
             'recurring' => true,
             'form' => $form->createView(),
             'invoice' => $invoice,

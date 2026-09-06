@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Security\Voter;
+namespace Augias\ApiBundle\Security\Voter;
 
+use Augias\ApiBundle\Security\Attribute;
 use SensitiveParameter;
-use SolidInvoice\ApiBundle\Security\Attribute;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -30,7 +30,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  * Even on self-hosted the `rest_api_access` feature gate is consulted so
  * the same denial path runs end-to-end. NoopFeatureGate always returns
  * true on self-hosted, preserving the historical "always granted" behaviour.
- * @see \SolidInvoice\ApiBundle\Tests\Security\Voter\ApiAccessVoterTest
+ * @see \Augias\ApiBundle\Tests\Security\Voter\ApiAccessVoterTest
  * @extends Voter<string, mixed>
  */
 final class ApiAccessVoter extends Voter

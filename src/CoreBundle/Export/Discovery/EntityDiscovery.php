@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Export\Discovery;
+namespace Augias\CoreBundle\Export\Discovery;
 
+use Augias\CoreBundle\Export\Attribute\ExportIgnore;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\AssociationMapping;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\Persistence\ManagerRegistry;
 use ReflectionClass;
 use ReflectionProperty;
-use SolidInvoice\CoreBundle\Export\Attribute\ExportIgnore;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
 use function array_values;
 use function class_uses;
 use function in_array;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Tests\Widgets;
+namespace Augias\DashboardBundle\Tests\Widgets;
 
-use SolidInvoice\DashboardBundle\Widgets\QuickActionsWidget;
+use Augias\DashboardBundle\Widgets\QuickActionsWidget;
 
 final class QuickActionsWidgetTest extends WidgetTestCase
 {
@@ -30,7 +30,7 @@ final class QuickActionsWidgetTest extends WidgetTestCase
     {
         $widget = self::getContainer()->get(QuickActionsWidget::class);
 
-        self::assertSame('@SolidInvoiceDashboard/Widget/quick_actions.html.twig', $widget->getTemplate());
+        self::assertSame('@AugiasDashboard/Widget/quick_actions.html.twig', $widget->getTemplate());
     }
 
     public function testRenderWidget(): void

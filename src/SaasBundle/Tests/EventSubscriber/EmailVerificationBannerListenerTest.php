@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\EventSubscriber;
+namespace Augias\SaasBundle\Tests\EventSubscriber;
 
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\SaasBundle\EventSubscriber\EmailVerificationBannerListener;
 use Mockery as M;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\SaasBundle\EventSubscriber\EmailVerificationBannerListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -53,7 +53,7 @@ final class EmailVerificationBannerListenerTest extends TestCase
         $twig = M::mock(Environment::class);
         $twig->shouldReceive('render')
             ->once()
-            ->with('@SolidInvoiceSaas/_alert_banner.html.twig', M::on(static fn (array $context): bool => ($context['type'] ?? null) === 'warning'
+            ->with('@AugiasSaas/_alert_banner.html.twig', M::on(static fn (array $context): bool => ($context['type'] ?? null) === 'warning'
                 && ($context['title'] ?? null) === 'Verify your email'
                 && ($context['message'] ?? null) === 'Some features are disabled.'
                 && ! isset($context['cta_label'])

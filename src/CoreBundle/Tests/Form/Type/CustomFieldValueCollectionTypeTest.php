@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Form\Type;
+namespace Augias\CoreBundle\Tests\Form\Type;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Enum\ClientStatus;
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Entity\CustomField\CustomField;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Enum\CustomFieldType;
+use Augias\CoreBundle\Form\Type\CustomFieldValueCollectionType;
+use Augias\CoreBundle\Repository\CustomFieldValueRepository;
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Enum\ClientStatus;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Entity\CustomField\CustomField;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Enum\CustomFieldType;
-use SolidInvoice\CoreBundle\Form\Type\CustomFieldValueCollectionType;
-use SolidInvoice\CoreBundle\Repository\CustomFieldValueRepository;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Uid\Ulid;
 

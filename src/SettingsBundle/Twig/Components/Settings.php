@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Twig\Components;
+namespace Augias\SettingsBundle\Twig\Components;
 
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\SaasBundle\Service\SubscriptionService;
+use Augias\SettingsBundle\Entity\Setting;
+use Augias\SettingsBundle\Form\Type\SettingsType;
+use Augias\SettingsBundle\Repository\SettingsRepository;
 use Generator;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\SaasBundle\Service\SubscriptionService;
-use SolidInvoice\SettingsBundle\Entity\Setting;
-use SolidInvoice\SettingsBundle\Form\Type\SettingsType;
-use SolidInvoice\SettingsBundle\Repository\SettingsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormInterface;
@@ -37,7 +37,7 @@ use function array_key_first;
 use function str_replace;
 
 /**
- * @see \SolidInvoice\SettingsBundle\Tests\Twig\Components\SettingsTest
+ * @see \Augias\SettingsBundle\Tests\Twig\Components\SettingsTest
  */
 #[AsLiveComponent]
 final class Settings extends AbstractController

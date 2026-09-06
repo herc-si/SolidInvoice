@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Validator\Constraints;
+namespace Augias\UserBundle\Validator\Constraints;
 
-use SolidInvoice\UserBundle\Security\Turnstile\TurnstileVerifier;
+use Augias\UserBundle\Security\Turnstile\TurnstileVerifier;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

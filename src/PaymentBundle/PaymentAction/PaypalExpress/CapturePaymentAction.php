@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\PaymentAction\PaypalExpress;
+namespace Augias\PaymentBundle\PaymentAction\PaypalExpress;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\MoneyBundle\Formatter\MoneyFormatter;
+use Augias\PaymentBundle\Entity\Payment;
 use Brick\Math\Exception\MathException;
 use Exception;
 use Payum\Core\Action\ActionInterface;
@@ -22,10 +26,6 @@ use Payum\Core\GatewayAwareInterface;
 use Payum\Core\GatewayAwareTrait;
 use Payum\Core\Request\Capture;
 use Payum\Core\Security\GenericTokenFactoryInterface;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\MoneyBundle\Formatter\MoneyFormatter;
-use SolidInvoice\PaymentBundle\Entity\Payment;
 use function assert;
 
 /**
@@ -77,7 +77,7 @@ class CapturePaymentAction implements ActionInterface, GatewayAwareInterface
             $qty = $item->getQty()->toBigDecimal();
 
             // PayPal's NVP API only accepts a positive integer for an item quantity, but a
-            // SolidInvoice line can be billed in fractions of a unit (hours, weights, metered
+            // Augias line can be billed in fractions of a unit (hours, weights, metered
             // usage). Such a line is sent as a single unit priced at the line total, which
             // keeps the item amounts summing to ITEMAMT — what PayPal actually validates.
             $isWholeUnits = $qty->getFractionalPart()->isZero();

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Entity;
+namespace Augias\PaymentBundle\Entity;
 
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
@@ -22,6 +22,15 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Post;
+use Augias\ApiBundle\DTO\RecordPaymentInput;
+use Augias\ApiBundle\State\Processor\RecordPaymentProcessor;
+use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Exception\UnexpectedTypeException;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\PaymentBundle\Enum\PaymentStatus;
+use Augias\PaymentBundle\Repository\PaymentRepository;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
@@ -30,15 +39,6 @@ use Money\Currency;
 use Money\Money;
 use Override;
 use Payum\Core\Model\Payment as BasePayment;
-use SolidInvoice\ApiBundle\DTO\RecordPaymentInput;
-use SolidInvoice\ApiBundle\State\Processor\RecordPaymentProcessor;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CoreBundle\Exception\UnexpectedTypeException;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
-use SolidInvoice\PaymentBundle\Repository\PaymentRepository;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Serializer\Attribute\Groups;

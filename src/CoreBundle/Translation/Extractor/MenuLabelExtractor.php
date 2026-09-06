@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Translation\Extractor;
+namespace Augias\CoreBundle\Translation\Extractor;
 
 use LogicException;
 use PhpParser\NodeTraverser;
@@ -37,7 +37,7 @@ use Symfony\Component\Translation\MessageCatalogue;
  * It is intentionally self-contained and only depends on the `#[MenuBuilder]` attribute
  * and KnpMenu's `addChild()` contract, so it can be promoted to solidworx/platform as a
  * platform-level integration without modification.
- * @see \SolidInvoice\CoreBundle\Tests\Translation\Extractor\MenuLabelExtractorTest
+ * @see \Augias\CoreBundle\Tests\Translation\Extractor\MenuLabelExtractorTest
  */
 final class MenuLabelExtractor extends AbstractFileExtractor implements ExtractorInterface
 {

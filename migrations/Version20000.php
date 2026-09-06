@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -513,34 +513,34 @@ final class Version20000 extends AbstractMigration
             $date = date('Y-m-d H:i:s');
 
             $configs = [
-                ['setting_key' => 'system/company/company_name', 'setting_value' => 'SolidInvoice', 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
-                ['setting_key' => 'system/company/logo', 'setting_value' => null, 'description' => null, 'field_type' => 'SolidInvoice\CoreBundle\Form\Type\ImageUploadType'],
+                ['setting_key' => 'system/company/company_name', 'setting_value' => 'Augias', 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
+                ['setting_key' => 'system/company/logo', 'setting_value' => null, 'description' => null, 'field_type' => 'Augias\CoreBundle\Form\Type\ImageUploadType'],
                 ['setting_key' => 'quote/email_subject', 'setting_value' => 'New Quotation - #{id}', 'description' => 'To include the id of the quote in the subject, add the placeholder {id} where you want the id', 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
                 ['setting_key' => 'quote/bcc_address', 'setting_value' => null, 'description' => 'Send BCC copy of quote to this address', 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\EmailType'],
                 ['setting_key' => 'invoice/email_subject', 'setting_value' => 'New Invoice - #{id}', 'description' => 'To include the id of the invoice in the subject, add the placeholder {id} where you want the id', 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
                 ['setting_key' => 'invoice/bcc_address', 'setting_value' => null, 'description' => 'Send BCC copy of invoice to this address', 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\EmailType'],
-                ['setting_key' => 'email/from_name', 'setting_value' => 'SolidInvoice', 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
+                ['setting_key' => 'email/from_name', 'setting_value' => 'Augias', 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
                 ['setting_key' => 'email/from_address', 'setting_value' => 'no-reply@solidinvoice.co', 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
-                ['setting_key' => 'email/format', 'setting_value' => 'both', 'description' => 'In what format should emails be sent.', 'field_type' => 'SolidInvoice\SettingsBundle\Form\Type\MailFormatType'],
+                ['setting_key' => 'email/format', 'setting_value' => 'both', 'description' => 'In what format should emails be sent.', 'field_type' => 'Augias\SettingsBundle\Form\Type\MailFormatType'],
                 ['setting_key' => 'sms/twilio/number', 'setting_value' => null, 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
                 ['setting_key' => 'sms/twilio/sid', 'setting_value' => null, 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
                 ['setting_key' => 'sms/twilio/token', 'setting_value' => null, 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
-                ['setting_key' => 'design/system/theme', 'setting_value' => 'skin-solidinvoice-default', 'description' => null, 'field_type' => 'SolidInvoice\SettingsBundle\Form\Type\ThemeType'],
-                ['setting_key' => 'system/company/vat_number', 'setting_value' => null, 'description' => null, 'field_type' => 'SolidInvoice\TaxBundle\Form\Type\TaxNumberType'],
+                ['setting_key' => 'design/system/theme', 'setting_value' => 'skin-solidinvoice-default', 'description' => null, 'field_type' => 'Augias\SettingsBundle\Form\Type\ThemeType'],
+                ['setting_key' => 'system/company/vat_number', 'setting_value' => null, 'description' => null, 'field_type' => 'Augias\TaxBundle\Form\Type\TaxNumberType'],
                 ['setting_key' => 'system/company/contact_details/email', 'setting_value' => null, 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\EmailType'],
                 ['setting_key' => 'system/company/contact_details/phone_number', 'setting_value' => null, 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
-                ['setting_key' => 'system/company/contact_details/address', 'setting_value' => null, 'description' => null, 'field_type' => 'SolidInvoice\SettingsBundle\Form\Type\AddressType'],
-                ['setting_key' => 'notification/client_create', 'setting_value' => '{"email":true,"sms":false}', 'description' => null, 'field_type' => 'SolidInvoice\NotificationBundle\Form\Type\NotificationType'],
-                ['setting_key' => 'notification/invoice_status_update', 'setting_value' => '{"email":true,"sms":false}', 'description' => null, 'field_type' => 'SolidInvoice\NotificationBundle\Form\Type\NotificationType'],
-                ['setting_key' => 'notification/quote_status_update', 'setting_value' => '{"email":true,"sms":false}', 'description' => null, 'field_type' => 'SolidInvoice\NotificationBundle\Form\Type\NotificationType'],
-                ['setting_key' => 'notification/payment_made', 'setting_value' => '{"email":true,"sms":false}', 'description' => null, 'field_type' => 'SolidInvoice\NotificationBundle\Form\Type\NotificationType'],
-                ['setting_key' => 'email/sending_options/transport', 'setting_value' => null, 'description' => null, 'field_type' => 'SolidInvoice\SettingsBundle\Form\Type\MailTransportType'],
+                ['setting_key' => 'system/company/contact_details/address', 'setting_value' => null, 'description' => null, 'field_type' => 'Augias\SettingsBundle\Form\Type\AddressType'],
+                ['setting_key' => 'notification/client_create', 'setting_value' => '{"email":true,"sms":false}', 'description' => null, 'field_type' => 'Augias\NotificationBundle\Form\Type\NotificationType'],
+                ['setting_key' => 'notification/invoice_status_update', 'setting_value' => '{"email":true,"sms":false}', 'description' => null, 'field_type' => 'Augias\NotificationBundle\Form\Type\NotificationType'],
+                ['setting_key' => 'notification/quote_status_update', 'setting_value' => '{"email":true,"sms":false}', 'description' => null, 'field_type' => 'Augias\NotificationBundle\Form\Type\NotificationType'],
+                ['setting_key' => 'notification/payment_made', 'setting_value' => '{"email":true,"sms":false}', 'description' => null, 'field_type' => 'Augias\NotificationBundle\Form\Type\NotificationType'],
+                ['setting_key' => 'email/sending_options/transport', 'setting_value' => null, 'description' => null, 'field_type' => 'Augias\SettingsBundle\Form\Type\MailTransportType'],
                 ['setting_key' => 'email/sending_options/host', 'setting_value' => null, 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
                 ['setting_key' => 'email/sending_options/user', 'setting_value' => null, 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
                 ['setting_key' => 'email/sending_options/password', 'setting_value' => null, 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\PasswordType'],
                 ['setting_key' => 'email/sending_options/port', 'setting_value' => null, 'description' => null, 'field_type' => 'Symfony\Component\Form\Extension\Core\Type\TextType'],
-                ['setting_key' => 'email/sending_options/encryption', 'setting_value' => null, 'description' => null, 'field_type' => 'SolidInvoice\SettingsBundle\Form\Type\MailEncryptionType'],
-                ['setting_key' => 'system/company/currency', 'setting_value' => 'USD', 'description' => null, 'field_type' => 'SolidInvoice\MoneyBundle\Form\Type\CurrencyType'],
+                ['setting_key' => 'email/sending_options/encryption', 'setting_value' => null, 'description' => null, 'field_type' => 'Augias\SettingsBundle\Form\Type\MailEncryptionType'],
+                ['setting_key' => 'system/company/currency', 'setting_value' => 'USD', 'description' => null, 'field_type' => 'Augias\MoneyBundle\Form\Type\CurrencyType'],
             ];
 
             foreach ($configs as $config) {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Onboarding;
+namespace Augias\SaasBundle\Onboarding;
 
 use DateTimeImmutable;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
@@ -21,7 +21,7 @@ use function max;
 /**
  * Spreads onboarding emails proportionally across the trial window so the
  * cadence adapts to each Plan's trialDuration without hard-coded day offsets.
- * @see \SolidInvoice\SaasBundle\Tests\Onboarding\OnboardingScheduleCalculatorTest
+ * @see \Augias\SaasBundle\Tests\Onboarding\OnboardingScheduleCalculatorTest
  */
 final class OnboardingScheduleCalculator
 {

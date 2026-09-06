@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Manager;
+namespace Augias\ElectronicInvoicingBundle\Manager;
 
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
+use Augias\CoreBundle\Entity\Company;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
 
 interface ElectronicInvoiceReceiptManagerInterface
 {
     /**
      * True only when $company has an active provider that also implements
-     * {@see \SolidInvoice\ElectronicInvoicingBundle\Provider\ElectronicInvoiceReceiverInterface} —
+     * {@see \Augias\ElectronicInvoicingBundle\Provider\ElectronicInvoiceReceiverInterface} —
      * gates both the scheduled import and the "Received Invoices" menu entry.
      */
     public function isReceivingEnabled(Company $company): bool;

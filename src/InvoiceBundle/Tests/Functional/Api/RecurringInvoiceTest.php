@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,23 +11,23 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Functional\Api;
+namespace Augias\InvoiceBundle\Tests\Functional\Api;
 
+use Augias\ApiBundle\Test\ApiTestCase;
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\ClientBundle\Test\Factory\ContactFactory;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\CronBundle\Enum\ScheduleEndType;
+use Augias\CronBundle\Enum\ScheduleRecurringType;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoiceLine;
+use Augias\InvoiceBundle\Entity\RecurringOptions;
+use Augias\InvoiceBundle\Test\Factory\RecurringInvoiceFactory;
 use Carbon\Carbon;
 use DateTimeInterface;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ApiBundle\Test\ApiTestCase;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\ClientBundle\Test\Factory\ContactFactory;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\CronBundle\Enum\ScheduleEndType;
-use SolidInvoice\CronBundle\Enum\ScheduleRecurringType;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoiceLine;
-use SolidInvoice\InvoiceBundle\Entity\RecurringOptions;
-use SolidInvoice\InvoiceBundle\Test\Factory\RecurringInvoiceFactory;
 use Symfony\Component\Uid\Ulid;
 use function array_map;
 

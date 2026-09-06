@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Generator\BillingIdGenerator;
+namespace Augias\CoreBundle\Tests\Generator\BillingIdGenerator;
 
+use Augias\CoreBundle\Generator\BillingIdGenerator\UlidGenerator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator\UlidGenerator;
 use stdClass;
 use Symfony\Component\Uid\Ulid;
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Mcp\Attribute;
+namespace Augias\McpBundle\Mcp\Attribute;
 
 use Attribute;
-use SolidInvoice\McpBundle\Security\McpScope;
+use Augias\McpBundle\Security\McpScope;
 
 /**
  * Declares the scope a tool method requires. Read on the method, used as
  * documentation and discoverable by callers; actual enforcement happens via
- * {@see \SolidInvoice\McpBundle\Mcp\McpScopeGuard}.
+ * {@see \Augias\McpBundle\Mcp\McpScopeGuard}.
  */
 #[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_CLASS)]
 final readonly class McpScopeRequired

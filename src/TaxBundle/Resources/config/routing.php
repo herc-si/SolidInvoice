@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\TaxBundle\Action\Add;
-use SolidInvoice\TaxBundle\Action\Edit;
-use SolidInvoice\TaxBundle\Action\Index;
-use SolidInvoice\TaxBundle\Action\Validate;
+use Augias\TaxBundle\Action\Add;
+use Augias\TaxBundle\Action\Edit;
+use Augias\TaxBundle\Action\Index;
+use Augias\TaxBundle\Action\Validate;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {

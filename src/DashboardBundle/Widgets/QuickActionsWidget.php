@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Widgets;
+namespace Augias\DashboardBundle\Widgets;
 
 /**
- * @see \SolidInvoice\DashboardBundle\Tests\Widgets\QuickActionsWidgetTest
+ * @see \Augias\DashboardBundle\Tests\Widgets\QuickActionsWidgetTest
  */
 final class QuickActionsWidget implements WidgetInterface
 {
@@ -28,6 +28,6 @@ final class QuickActionsWidget implements WidgetInterface
 
     public function getTemplate(): string
     {
-        return '@SolidInvoiceDashboard/Widget/quick_actions.html.twig';
+        return '@AugiasDashboard/Widget/quick_actions.html.twig';
     }
 }

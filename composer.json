@@ -246,13 +246,13 @@
     },
     "autoload": {
         "psr-4": {
-            "SolidInvoice\\": "src/"
+            "Augias\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "App\\Mate\\": "mate/src/",
-            "SolidInvoice\\Test\\": "tests/Test"
+            "Augias\\Test\\": "tests/Test"
         },
         "classmap": [
             "migrations/"

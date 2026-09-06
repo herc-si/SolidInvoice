@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Action;
+namespace Augias\UserBundle\Action;
 
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\UserBundle\Entity\UserInvitation as UserInvitationEntity;
+use Augias\UserBundle\Repository\UserInvitationRepository;
+use Augias\UserBundle\UserInvitation\UserInvitation;
 use Generator;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\UserBundle\Entity\UserInvitation as UserInvitationEntity;
-use SolidInvoice\UserBundle\Repository\UserInvitationRepository;
-use SolidInvoice\UserBundle\UserInvitation\UserInvitation;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Uid\Ulid;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Form\Type;
+namespace Augias\UserBundle\Form\Type;
 
-use SolidInvoice\CoreBundle\Form\Type\LocaleType;
-use SolidInvoice\UserBundle\Entity\User;
+use Augias\CoreBundle\Form\Type\LocaleType;
+use Augias\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\Form\Type\ProfileTypeTest
+ * @see \Augias\UserBundle\Tests\Form\Type\ProfileTypeTest
  * @extends AbstractType<User>
  */
 class ProfileType extends AbstractType

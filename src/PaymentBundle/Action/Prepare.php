@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,28 +11,28 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Action;
+namespace Augias\PaymentBundle\Action;
 
 use const FILTER_VALIDATE_BOOLEAN;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\CoreBundle\Traits\SaveableTrait;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Model\Graph;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Entity\PaymentMethod;
+use Augias\PaymentBundle\Enum\PaymentStatus;
+use Augias\PaymentBundle\Event\PaymentCompleteEvent;
+use Augias\PaymentBundle\Event\PaymentEvents;
+use Augias\PaymentBundle\Form\Type\PaymentType;
+use Augias\PaymentBundle\Repository\PaymentMethodRepository;
 use Brick\Math\BigNumber;
 use Brick\Math\RoundingMode;
 use Carbon\Carbon;
 use Generator;
 use Payum\Core\Payum;
 use Payum\Core\Registry\RegistryInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\CoreBundle\Traits\SaveableTrait;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Model\Graph;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Entity\PaymentMethod;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
-use SolidInvoice\PaymentBundle\Event\PaymentCompleteEvent;
-use SolidInvoice\PaymentBundle\Event\PaymentEvents;
-use SolidInvoice\PaymentBundle\Form\Type\PaymentType;
-use SolidInvoice\PaymentBundle\Repository\PaymentMethodRepository;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -56,7 +56,7 @@ use function in_array;
 
 // @TODO: Refactor this class to make it cleaner
 /**
- * @see \SolidInvoice\PaymentBundle\Tests\Action\PrepareTest
+ * @see \Augias\PaymentBundle\Tests\Action\PrepareTest
  */
 final class Prepare
 {
@@ -82,7 +82,7 @@ final class Prepare
     /**
      * @return array{form: FormView, invoice: Invoice, internal: array<int, string>}|Response|null
      */
-    #[Template('@SolidInvoicePayment/Payment/create.html.twig')]
+    #[Template('@AugiasPayment/Payment/create.html.twig')]
     public function __invoke(Request $request, string $uuid): array | Response | null
     {
         $invoice = $this->invoiceRepository->findOneBy(['uuid' => $uuid]);

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,22 +11,22 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Tests\Functional;
+namespace Augias\McpBundle\Tests\Functional;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Mcp\ClientWriteTools;
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Mcp\InvoiceWriteTools;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\McpBundle\Mcp\Tool\ResourceWriteTools;
+use Augias\McpBundle\Security\McpOAuthAuthenticator;
+use Augias\McpBundle\Security\McpScope;
 use Mcp\Exception\ToolCallException;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Mcp\ClientWriteTools;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Mcp\InvoiceWriteTools;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\McpBundle\Mcp\Tool\ResourceWriteTools;
-use SolidInvoice\McpBundle\Security\McpOAuthAuthenticator;
-use SolidInvoice\McpBundle\Security\McpScope;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

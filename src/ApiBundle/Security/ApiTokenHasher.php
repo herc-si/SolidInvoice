@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Security;
+namespace Augias\ApiBundle\Security;
 
 use SensitiveParameter;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
  * table scan. Token entropy is already 256 bits of random_bytes, so a
  * pepper keyed by the app secret is sufficient. A DB-only leak yields
  * no usable hashes without also having the secret.
- * @see \SolidInvoice\ApiBundle\Tests\Security\ApiTokenHasherTest
+ * @see \Augias\ApiBundle\Tests\Security\ApiTokenHasherTest
  */
 final readonly class ApiTokenHasher
 {

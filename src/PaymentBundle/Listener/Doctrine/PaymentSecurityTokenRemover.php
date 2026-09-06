@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Listener\Doctrine;
+namespace Augias\PaymentBundle\Listener\Doctrine;
 
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Entity\SecurityToken;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PreRemoveEventArgs;
 use Doctrine\ORM\Events;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Entity\SecurityToken;
 
 /**
- * @see \SolidInvoice\PaymentBundle\Tests\Listener\Doctrine\PaymentSecurityTokenRemoverTest
+ * @see \Augias\PaymentBundle\Tests\Listener\Doctrine\PaymentSecurityTokenRemoverTest
  */
 #[AsEntityListener(event: Events::preRemove, entity: Payment::class)]
 final class PaymentSecurityTokenRemover

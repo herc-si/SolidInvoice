@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Command;
+namespace Augias\NotificationBundle\Command;
 
 use Composer\InstalledVersions;
 use Override;
@@ -97,12 +97,12 @@ final class GenerateTransportConfigCommand extends Command
             $name = ucfirst($name);
             [$dsn, $options] = $this->parseDsn($config['dsn']);
 
-            $form = $this->twig->render('@SolidInvoiceNotification/dev/TransportForm.text.twig', ['name' => $name, 'fields' => $options]);
+            $form = $this->twig->render('@AugiasNotification/dev/TransportForm.text.twig', ['name' => $name, 'fields' => $options]);
 
             $fs->dumpFile(sprintf('%s/Form/Type/Transport/%sType.php', dirname(__DIR__), $name), $form);
 
             $configurator = $this->twig->render(
-                '@SolidInvoiceNotification/dev/TransportConfiguration.text.twig',
+                '@AugiasNotification/dev/TransportConfiguration.text.twig',
                 [
                     'name' => $name,
                     'dsn' => $dsn,

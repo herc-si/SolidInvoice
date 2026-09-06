@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Export\Email;
+namespace Augias\CoreBundle\Export\Email;
 
-use SolidInvoice\CoreBundle\Entity\ExportJob;
-use SolidInvoice\UserBundle\Entity\User;
+use Augias\CoreBundle\Entity\ExportJob;
+use Augias\UserBundle\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 final class ExportReadyEmail extends TemplatedEmail
@@ -27,8 +27,8 @@ final class ExportReadyEmail extends TemplatedEmail
         parent::__construct();
 
         $this->subject('Your data export is ready');
-        $this->htmlTemplate('@SolidInvoiceCore/Email/export_ready.html.twig');
-        $this->textTemplate('@SolidInvoiceCore/Email/export_ready.text.twig');
+        $this->htmlTemplate('@AugiasCore/Email/export_ready.html.twig');
+        $this->textTemplate('@AugiasCore/Email/export_ready.text.twig');
         $this->context([
             'job' => $this->job,
             'user' => $this->user,

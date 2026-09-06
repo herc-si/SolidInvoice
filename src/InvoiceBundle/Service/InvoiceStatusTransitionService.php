@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Service;
+namespace Augias\InvoiceBundle\Service;
 
+use Augias\InvoiceBundle\Entity\BaseInvoice;
+use Augias\InvoiceBundle\Exception\InvalidTransitionException;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\InvoiceBundle\Entity\BaseInvoice;
-use SolidInvoice\InvoiceBundle\Exception\InvalidTransitionException;
 use Symfony\Component\Workflow\WorkflowInterface;
 
 /**
@@ -23,7 +23,7 @@ use Symfony\Component\Workflow\WorkflowInterface;
  * Provides clean abstraction for state changes that can be used
  * across different contexts (manual, automated, API, etc.).
  *
- * @see \SolidInvoice\InvoiceBundle\Tests\Service\InvoiceStatusTransitionServiceTest
+ * @see \Augias\InvoiceBundle\Tests\Service\InvoiceStatusTransitionServiceTest
  */
 final readonly class InvoiceStatusTransitionService
 {

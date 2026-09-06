@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Test;
+namespace Augias\InstallBundle\Test;
 
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
 use DateTimeInterface;
 use PHPUnit\Framework\Attributes\After;
 use PHPUnit\Framework\Attributes\Before;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
 use function date;
 use function putenv;
 
@@ -34,7 +34,7 @@ trait EnsureApplicationInstalled
         $_SERVER['SOLIDINVOICE_INSTALLED'] = $_ENV['SOLIDINVOICE_INSTALLED'] = date(DateTimeInterface::ATOM);
         putenv('SOLIDINVOICE_INSTALLED=' . $_SERVER['SOLIDINVOICE_INSTALLED']);
 
-        $this->company = CompanyFactory::createOne(['name' => SolidInvoiceCoreBundle::APP_NAME]);
+        $this->company = CompanyFactory::createOne(['name' => AugiasCoreBundle::APP_NAME]);
 
         static::getContainer()->get(CompanySelector::class)->switchCompany($this->company->getId());
     }

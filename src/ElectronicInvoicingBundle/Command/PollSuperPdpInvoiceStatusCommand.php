@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Command;
+namespace Augias\ElectronicInvoicingBundle\Command;
 
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use Augias\ElectronicInvoicingBundle\Notification\ElectronicInvoiceRejectedNotification;
+use Augias\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpApiException;
+use Augias\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpClient;
+use Augias\ElectronicInvoicingBundle\Provider\SuperPdpProvider;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceSubmissionRepository;
+use Augias\NotificationBundle\Notification\NotificationManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
-use SolidInvoice\ElectronicInvoicingBundle\Notification\ElectronicInvoiceRejectedNotification;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpApiException;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdp\SuperPdpClient;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdpProvider;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceProviderSettingRepository;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceSubmissionRepository;
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
 use SolidWorx\Platform\PlatformBundle\Console\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Scheduler\Attribute\AsCronTask;
@@ -41,7 +41,7 @@ use function sprintf;
  * known `status_code` on successful {@see ElectronicInvoiceSubmission}
  * records until they reach a terminal status.
  *
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Command\PollSuperPdpInvoiceStatusCommandTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Command\PollSuperPdpInvoiceStatusCommandTest
  */
 #[AsCommand(
     name: 'solidinvoice:einvoicing:poll-super-pdp-status',

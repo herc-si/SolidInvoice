@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Search;
+namespace Augias\InvoiceBundle\Tests\Search;
 
+use Augias\CoreBundle\Search\QualifiedResultFormatterInterface;
+use Augias\CoreBundle\Search\ResultFormatterInterface;
+use Augias\InvoiceBundle\Search\InvoiceResultFormatter;
+use Augias\MoneyBundle\Formatter\MoneyFormatterInterface;
+use Augias\SettingsBundle\SystemConfig;
 use Money\Currency;
 use Money\Money;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Search\QualifiedResultFormatterInterface;
-use SolidInvoice\CoreBundle\Search\ResultFormatterInterface;
-use SolidInvoice\InvoiceBundle\Search\InvoiceResultFormatter;
-use SolidInvoice\MoneyBundle\Formatter\MoneyFormatterInterface;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\Component\Routing\RouterInterface;
 
 final class InvoiceResultFormatterTest extends TestCase

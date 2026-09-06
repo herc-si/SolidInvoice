@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Search;
+namespace Augias\CoreBundle\Tests\Search;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Search\MultiSearchService;
+use Augias\CoreBundle\Search\ParsedQuery;
+use Augias\CoreBundle\Search\ResultFormatterInterface;
+use Augias\CoreBundle\Search\SearchResult;
 use Doctrine\Persistence\ManagerRegistry;
 use Meilisearch\Client;
 use Meilisearch\Exceptions\ApiException;
 use Meilisearch\Exceptions\CommunicationException;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Search\MultiSearchService;
-use SolidInvoice\CoreBundle\Search\ParsedQuery;
-use SolidInvoice\CoreBundle\Search\ResultFormatterInterface;
-use SolidInvoice\CoreBundle\Search\SearchResult;
 use Symfony\Component\Uid\Ulid;
 
 final class MultiSearchServiceTest extends TestCase

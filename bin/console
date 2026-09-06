@@ -1,10 +1,10 @@
 #!/usr/bin/env php
 <?php
 
-use SolidInvoice\AppMode;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\Kernel;
-use SolidInvoice\Runtime;
+use Augias\AppMode;
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\Kernel;
+use Augias\Runtime;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 if (!is_dir(dirname(__DIR__).'/vendor')) {
@@ -51,8 +51,8 @@ return static function (AppMode $mode, array $context) {
     $kernel = new Kernel($mode, $context['SOLIDINVOICE_ENV'], (bool) $context['SOLIDINVOICE_DEBUG']);
 
     $application = new Application($kernel);
-    $application->setName(SolidInvoiceCoreBundle::APP_NAME);
-    $application->setVersion(SolidInvoiceCoreBundle::VERSION);
+    $application->setName(AugiasCoreBundle::APP_NAME);
+    $application->setVersion(AugiasCoreBundle::VERSION);
 
     return $application;
 };

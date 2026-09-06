@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Action;
+namespace Augias\CoreBundle\Action;
 
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Company\CompanySelector;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Action\SearchSuggestionsTest
+ * @see \Augias\CoreBundle\Tests\Action\SearchSuggestionsTest
  */
 #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
 final readonly class SearchSuggestions

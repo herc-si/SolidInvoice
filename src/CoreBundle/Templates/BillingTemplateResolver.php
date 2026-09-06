@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Templates;
+namespace Augias\CoreBundle\Templates;
 
-use SolidInvoice\CoreBundle\Contracts\PaidSubscriptionGateInterface;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\SettingsBundle\SystemConfig;
+use Augias\CoreBundle\Contracts\PaidSubscriptionGateInterface;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\SettingsBundle\SystemConfig;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Toggler\ToggleInterface;
 
@@ -32,7 +32,7 @@ use SolidWorx\Toggler\ToggleInterface;
  * a plan downgrade, an ended trial or a paused subscription automatically
  * falls back to the default without any state to clean up.
  *
- * @see \SolidInvoice\CoreBundle\Tests\Templates\BillingTemplateResolverTest
+ * @see \Augias\CoreBundle\Tests\Templates\BillingTemplateResolverTest
  */
 final readonly class BillingTemplateResolver
 {
@@ -90,12 +90,12 @@ final readonly class BillingTemplateResolver
     public static function defaultTemplate(BillingDocumentType $documentType, BillingTemplateChannel $channel): string
     {
         return match ([$documentType, $channel]) {
-            [BillingDocumentType::Invoice, BillingTemplateChannel::Pdf] => '@SolidInvoiceInvoice/Pdf/invoice.html.twig',
-            [BillingDocumentType::Invoice, BillingTemplateChannel::Email] => '@SolidInvoiceInvoice/Email/invoice.html.twig',
-            [BillingDocumentType::Invoice, BillingTemplateChannel::View] => '@SolidInvoiceInvoice/external_invoice_view.html.twig',
-            [BillingDocumentType::Quote, BillingTemplateChannel::Pdf] => '@SolidInvoiceQuote/Pdf/quote.html.twig',
-            [BillingDocumentType::Quote, BillingTemplateChannel::Email] => '@SolidInvoiceQuote/Email/quote.html.twig',
-            [BillingDocumentType::Quote, BillingTemplateChannel::View] => '@SolidInvoiceQuote/quote_template.html.twig',
+            [BillingDocumentType::Invoice, BillingTemplateChannel::Pdf] => '@AugiasInvoice/Pdf/invoice.html.twig',
+            [BillingDocumentType::Invoice, BillingTemplateChannel::Email] => '@AugiasInvoice/Email/invoice.html.twig',
+            [BillingDocumentType::Invoice, BillingTemplateChannel::View] => '@AugiasInvoice/external_invoice_view.html.twig',
+            [BillingDocumentType::Quote, BillingTemplateChannel::Pdf] => '@AugiasQuote/Pdf/quote.html.twig',
+            [BillingDocumentType::Quote, BillingTemplateChannel::Email] => '@AugiasQuote/Email/quote.html.twig',
+            [BillingDocumentType::Quote, BillingTemplateChannel::View] => '@AugiasQuote/quote_template.html.twig',
         };
     }
 

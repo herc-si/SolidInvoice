@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\DataGrid;
+namespace Augias\UserBundle\Tests\DataGrid;
 
+use Augias\DataGridBundle\GridBuilder\Column\RelativeDateColumn;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
+use Augias\UserBundle\DataGrid\ApiTokenGrid;
+use Augias\UserBundle\Entity\ApiToken;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\RelativeDateColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
-use SolidInvoice\UserBundle\DataGrid\ApiTokenGrid;
-use SolidInvoice\UserBundle\Entity\ApiToken;
 use Symfony\Bundle\SecurityBundle\Security;
 
 final class ApiTokenGridTest extends TestCase

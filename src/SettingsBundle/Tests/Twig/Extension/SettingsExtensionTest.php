@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Tests\Twig\Extension;
+namespace Augias\SettingsBundle\Tests\Twig\Extension;
 
+use Augias\SettingsBundle\SystemConfig;
+use Augias\SettingsBundle\Twig\Extension\SettingsExtension;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\SettingsBundle\Twig\Extension\SettingsExtension;
 
 final class SettingsExtensionTest extends TestCase
 {

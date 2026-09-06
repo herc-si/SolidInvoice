@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Form\Step;
+namespace Augias\InstallBundle\Form\Step;
 
 use Symfony\Component\Form\AbstractType;
 
 /**
- * @see \SolidInvoice\InstallBundle\Tests\Form\Step\SystemRequirementsStepTest
+ * @see \Augias\InstallBundle\Tests\Form\Step\SystemRequirementsStepTest
  * @extends AbstractType<mixed>
  */
 final class SystemRequirementsStep extends AbstractType

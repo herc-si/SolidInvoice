@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Mcp;
+namespace Augias\McpBundle\Mcp;
 
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\McpBundle\Security\McpOAuthAuthenticator;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\McpBundle\Security\McpOAuthAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Uid\Ulid;

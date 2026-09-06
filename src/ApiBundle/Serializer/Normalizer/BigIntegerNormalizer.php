@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Serializer\Normalizer;
+namespace Augias\ApiBundle\Serializer\Normalizer;
 
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
@@ -23,7 +23,7 @@ use function is_a;
 use function sprintf;
 
 /**
- * @see \SolidInvoice\ApiBundle\Tests\Serializer\Normalizer\BigIntegerNormalizerTest
+ * @see \Augias\ApiBundle\Tests\Serializer\Normalizer\BigIntegerNormalizerTest
  */
 #[AutoconfigureTag('serializer.normalizer')]
 final class BigIntegerNormalizer implements NormalizerInterface, DenormalizerInterface

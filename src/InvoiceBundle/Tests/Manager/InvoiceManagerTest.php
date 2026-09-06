@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,33 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Manager;
+namespace Augias\InvoiceBundle\Tests\Manager;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Generator\BillingIdGenerator;
+use Augias\CoreBundle\Generator\BillingIdGenerator\IdGeneratorInterface;
+use Augias\CoreBundle\Repository\CustomFieldRepository;
+use Augias\CoreBundle\Repository\CustomFieldValueRepository;
+use Augias\CoreBundle\Service\CustomField\CustomFieldValueCopier;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line as InvoiceLine;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoiceLine;
+use Augias\InvoiceBundle\Exception\InvalidTransitionException;
+use Augias\InvoiceBundle\Listener\WorkFlowSubscriber;
+use Augias\InvoiceBundle\Manager\InvoiceManager;
+use Augias\NotificationBundle\Notification\NotificationManager;
+use Augias\QuoteBundle\Entity\Line;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\TaxBundle\Entity\InvoiceTax;
+use Augias\TaxBundle\Entity\LineTax;
+use Augias\TaxBundle\Entity\Tax;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Enum\TaxDirection;
+use Augias\TaxBundle\Enum\TaxType;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
@@ -22,31 +47,6 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use Money\Currency;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator\IdGeneratorInterface;
-use SolidInvoice\CoreBundle\Repository\CustomFieldRepository;
-use SolidInvoice\CoreBundle\Repository\CustomFieldValueRepository;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldValueCopier;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line as InvoiceLine;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoiceLine;
-use SolidInvoice\InvoiceBundle\Exception\InvalidTransitionException;
-use SolidInvoice\InvoiceBundle\Listener\WorkFlowSubscriber;
-use SolidInvoice\InvoiceBundle\Manager\InvoiceManager;
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
-use SolidInvoice\QuoteBundle\Entity\Line;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
-use SolidInvoice\TaxBundle\Entity\LineTax;
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Enum\TaxDirection;
-use SolidInvoice\TaxBundle\Enum\TaxType;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 use Symfony\Component\EventDispatcher\EventDispatcher;

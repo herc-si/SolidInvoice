@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,24 +11,24 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\DataGrid;
+namespace Augias\ElectronicInvoicingBundle\DataGrid;
 
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\Grid;
+use Augias\DataGridBundle\GridBuilder\Action\Action;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Column\DateTimeColumn;
+use Augias\DataGridBundle\GridBuilder\Column\MoneyColumn;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
+use Augias\DataGridBundle\GridBuilder\Filter\DateRangeFilter;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
 use Override;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\Grid;
-use SolidInvoice\DataGridBundle\GridBuilder\Action\Action;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\DateTimeColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\MoneyColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\DateRangeFilter;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
 use Symfony\Component\Translation\TranslatableMessage;
 use function str_replace;
 use function ucwords;
 
 /**
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\DataGrid\IncomingElectronicInvoiceGridTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\DataGrid\IncomingElectronicInvoiceGridTest
  */
 #[AsDataGrid(name: 'einvoicing_incoming_grid', title: 'Received Electronic Invoices')]
 final class IncomingElectronicInvoiceGrid extends Grid

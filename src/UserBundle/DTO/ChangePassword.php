@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\DTO;
+namespace Augias\UserBundle\DTO;
 
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Validator\Constraints\Length;
@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 use Symfony\Component\Validator\Constraints\PasswordStrength;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\DTO\ChangePasswordTest
+ * @see \Augias\UserBundle\Tests\DTO\ChangePasswordTest
  */
 final class ChangePassword
 {

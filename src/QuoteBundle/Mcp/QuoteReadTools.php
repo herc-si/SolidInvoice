@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Mcp;
+namespace Augias\QuoteBundle\Mcp;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\McpBundle\Mcp\Attribute\McpScopeRequired;
+use Augias\McpBundle\Mcp\McpScopeGuard;
+use Augias\McpBundle\Mcp\Tool\EntityNormalizer;
+use Augias\McpBundle\Mcp\Tool\UlidParser;
+use Augias\McpBundle\Security\McpScope;
+use Augias\QuoteBundle\Enum\QuoteStatus;
+use Augias\QuoteBundle\Repository\QuoteRepository;
 use Mcp\Capability\Attribute\McpTool;
 use Mcp\Exception\ToolCallException;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\McpBundle\Mcp\Attribute\McpScopeRequired;
-use SolidInvoice\McpBundle\Mcp\McpScopeGuard;
-use SolidInvoice\McpBundle\Mcp\Tool\EntityNormalizer;
-use SolidInvoice\McpBundle\Mcp\Tool\UlidParser;
-use SolidInvoice\McpBundle\Security\McpScope;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
-use SolidInvoice\QuoteBundle\Repository\QuoteRepository;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 
 final readonly class QuoteReadTools

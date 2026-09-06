@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Notification;
+namespace Augias\QuoteBundle\Notification;
 
+use Augias\NotificationBundle\Attribute\AsNotification;
+use Augias\NotificationBundle\Enum\NotificationCategory;
+use Augias\NotificationBundle\Notification\NotificationMessage;
 use Override;
-use SolidInvoice\NotificationBundle\Attribute\AsNotification;
-use SolidInvoice\NotificationBundle\Enum\NotificationCategory;
-use SolidInvoice\NotificationBundle\Notification\NotificationMessage;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\Notifier\Message\EmailMessage;
 use Symfony\Component\Notifier\Recipient\EmailRecipientInterface;
@@ -33,9 +33,9 @@ class QuoteStatusNotification extends NotificationMessage
 {
     public const EVENT = 'quote_status_update';
 
-    final public const string HTML_TEMPLATE = '@SolidInvoiceQuote/Email/status_change.html.twig';
+    final public const string HTML_TEMPLATE = '@AugiasQuote/Email/status_change.html.twig';
 
-    final public const string TEXT_TEMPLATE = '@SolidInvoiceQuote/Email/status_change.text.twig';
+    final public const string TEXT_TEMPLATE = '@AugiasQuote/Email/status_change.text.twig';
 
     public function getTextContent(Environment $twig): string
     {

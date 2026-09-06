@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\OAuth;
+namespace Augias\McpBundle\OAuth;
 
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\McpBundle\Entity\ConsentGrant;
-use SolidInvoice\McpBundle\Entity\OAuthClient;
-use SolidInvoice\McpBundle\Repository\ConsentGrantRepository;
-use SolidInvoice\UserBundle\Entity\User;
+use Augias\CoreBundle\Entity\Company;
+use Augias\McpBundle\Entity\ConsentGrant;
+use Augias\McpBundle\Entity\OAuthClient;
+use Augias\McpBundle\Repository\ConsentGrantRepository;
+use Augias\UserBundle\Entity\User;
 
 final readonly class ConsentService
 {

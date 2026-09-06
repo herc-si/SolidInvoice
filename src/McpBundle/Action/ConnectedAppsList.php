@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Action;
+namespace Augias\McpBundle\Action;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\McpBundle\Entity\OAuthClient;
+use Augias\McpBundle\Repository\McpAccessTokenRepository;
+use Augias\UserBundle\Entity\User;
 use DateTimeInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\McpBundle\Entity\OAuthClient;
-use SolidInvoice\McpBundle\Repository\McpAccessTokenRepository;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -87,7 +87,7 @@ final readonly class ConnectedAppsList
         }
 
         return new Response(
-            $this->twig->render('@SolidInvoiceMcp/ConnectedApps/index.html.twig', [
+            $this->twig->render('@AugiasMcp/ConnectedApps/index.html.twig', [
                 'connected_apps' => array_values($byClient),
             ]),
         );

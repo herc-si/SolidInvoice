@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "SolidInvoice version (e.g. 3.0.0)"
+        description: "Augias version (e.g. 3.0.0)"
         required: true
         type: string
 
@@ -322,7 +322,7 @@ jobs:
         with:
           pkgname: solidinvoice-bin
           pkgbuild: packaging/aur/PKGBUILD
-          commit_username: "SolidInvoice Bot"
+          commit_username: "Augias Bot"
           commit_email: "bot@solidinvoice.co"
           ssh_private_key: ${{ secrets.AUR_SSH_KEY }}
           commit_message: "Update to ${{ needs.prepare.outputs.version }}"

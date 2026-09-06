@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Tests\Calculator;
+namespace Augias\TaxBundle\Tests\Calculator;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\TaxBundle\Calculator\InvoiceTaxCalculator;
+use Augias\TaxBundle\Calculator\LineTaxCalculator;
+use Augias\TaxBundle\Calculator\TaxCalculator;
+use Augias\TaxBundle\Entity\InvoiceTax;
+use Augias\TaxBundle\Entity\LineTax;
+use Augias\TaxBundle\Entity\Tax;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Enum\TaxDirection;
+use Augias\TaxBundle\Enum\TaxType;
 use Brick\Math\BigDecimal;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\TaxBundle\Calculator\InvoiceTaxCalculator;
-use SolidInvoice\TaxBundle\Calculator\LineTaxCalculator;
-use SolidInvoice\TaxBundle\Calculator\TaxCalculator;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
-use SolidInvoice\TaxBundle\Entity\LineTax;
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Enum\TaxDirection;
-use SolidInvoice\TaxBundle\Enum\TaxType;
 
 /**
  * End-to-end orchestration tests that exercise the US-008 acceptance scenarios

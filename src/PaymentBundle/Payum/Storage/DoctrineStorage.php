@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Payum\Storage;
+namespace Augias\PaymentBundle\Payum\Storage;
 
 use LogicException;
 use Override;
@@ -25,7 +25,7 @@ use function count;
  * Overwrite the default DoctrineStorage to support UUIDs.
  * Ramsey/Uuid serializes to a binary string, which causes an error when trying
  * to save the value to the database.
- * @see \SolidInvoice\PaymentBundle\Tests\Payum\Storage\DoctrineStorageTest
+ * @see \Augias\PaymentBundle\Tests\Payum\Storage\DoctrineStorageTest
  */
 final class DoctrineStorage extends BaseDoctrineStorage
 {

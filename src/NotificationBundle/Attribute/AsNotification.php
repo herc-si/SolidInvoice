@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Attribute;
+namespace Augias\NotificationBundle\Attribute;
 
 use Attribute;
-use SolidInvoice\NotificationBundle\Enum\NotificationCategory;
+use Augias\NotificationBundle\Enum\NotificationCategory;
 
 /**
- * @see \SolidInvoice\NotificationBundle\Tests\Attribute\AsNotificationTest
+ * @see \Augias\NotificationBundle\Tests\Attribute\AsNotificationTest
  */
 #[Attribute(Attribute::TARGET_CLASS)]
 final class AsNotification

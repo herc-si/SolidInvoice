@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Form;
+namespace Augias\SaasBundle\Tests\Form;
 
+use Augias\SaasBundle\Feature\Feature;
+use Augias\SaasBundle\Feature\RequiredPlanLabelProvider;
+use Augias\SaasBundle\Form\Extension\FeatureRestrictedExtension;
+use Augias\SettingsBundle\Entity\Setting;
+use Augias\SettingsBundle\Form\Extension\CheckBoxExtension;
+use Augias\SettingsBundle\Form\Extension\TrialRestrictedExtension;
+use Augias\SettingsBundle\Form\Type\SettingsType;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\SaasBundle\Feature\RequiredPlanLabelProvider;
-use SolidInvoice\SaasBundle\Form\Extension\FeatureRestrictedExtension;
-use SolidInvoice\SettingsBundle\Entity\Setting;
-use SolidInvoice\SettingsBundle\Form\Extension\CheckBoxExtension;
-use SolidInvoice\SettingsBundle\Form\Extension\TrialRestrictedExtension;
-use SolidInvoice\SettingsBundle\Form\Type\SettingsType;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormFactoryInterface;

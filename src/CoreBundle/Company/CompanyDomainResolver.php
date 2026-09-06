@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Company;
+namespace Augias\CoreBundle\Company;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
 use League\Uri\Uri;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
 use Symfony\Contracts\Service\ResetInterface;
 use Throwable;
 use function in_array;
@@ -24,7 +24,7 @@ use function strtolower;
 use function trim;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Company\CompanyDomainResolverTest
+ * @see \Augias\CoreBundle\Tests\Company\CompanyDomainResolverTest
  */
 final class CompanyDomainResolver implements ResetInterface
 {

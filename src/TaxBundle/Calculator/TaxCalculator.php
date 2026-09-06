@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Calculator;
+namespace Augias\TaxBundle\Calculator;
 
+use Augias\InvoiceBundle\Entity\BaseInvoice;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\TaxBundle\Calculator\Result\CalculationResult;
+use Augias\TaxBundle\Calculator\Result\TaxSummaryRow;
 use Brick\Math\BigDecimal;
 use Brick\Math\Exception\MathException;
-use SolidInvoice\InvoiceBundle\Entity\BaseInvoice;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\TaxBundle\Calculator\Result\CalculationResult;
-use SolidInvoice\TaxBundle\Calculator\Result\TaxSummaryRow;
 
 /**
  * Orchestrates {@see LineTaxCalculator} and {@see InvoiceTaxCalculator}, returning a
- * single {@see CalculationResult} that {@see \SolidInvoice\CoreBundle\Billing\TotalCalculator}
+ * single {@see CalculationResult} that {@see \Augias\CoreBundle\Billing\TotalCalculator}
  * uses to populate {@see BaseInvoice}/{@see Quote} totals.
  */
 final readonly class TaxCalculator implements TaxCalculatorInterface

@@ -1,5 +1,5 @@
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -32,7 +32,7 @@ const navigateTo = (path: string): { ok: true; navigated: string } => {
 const tools: WebMcpTool[] = [
     {
         name: 'open_dashboard',
-        description: 'Navigate to the SolidInvoice dashboard.',
+        description: 'Navigate to the Augias dashboard.',
         inputSchema: { type: 'object', properties: {}, additionalProperties: false },
         execute: () => navigateTo('/dashboard'),
     },

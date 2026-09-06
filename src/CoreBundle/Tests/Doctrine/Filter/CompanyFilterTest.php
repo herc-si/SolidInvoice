@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Doctrine\Filter;
+namespace Augias\CoreBundle\Tests\Doctrine\Filter;
 
+use Augias\CoreBundle\Doctrine\Filter\CompanyFilter;
+use Augias\CoreBundle\Entity\Company;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\UserBundle\Entity\User;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MariaDBPlatform;
@@ -26,10 +30,6 @@ use Doctrine\Persistence\Mapping\RuntimeReflectionService;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Doctrine\Filter\CompanyFilter;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\UserBundle\Entity\User;
 
 #[CoversClass(CompanyFilter::class)]
 final class CompanyFilterTest extends TestCase

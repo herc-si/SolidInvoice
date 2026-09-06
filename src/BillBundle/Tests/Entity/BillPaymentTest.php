@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Tests\Entity;
+namespace Augias\BillBundle\Tests\Entity;
 
+use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Entity\BillPayment;
+use Augias\BillBundle\Enum\BillPaymentMethod;
 use Brick\Math\BigInteger;
 use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\BillBundle\Entity\BillPayment;
-use SolidInvoice\BillBundle\Enum\BillPaymentMethod;
 
 #[CoversClass(BillPayment::class)]
 final class BillPaymentTest extends TestCase

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Action;
+namespace Augias\QuoteBundle\Action;
 
+use Augias\CoreBundle\Response\FlashResponse;
+use Augias\QuoteBundle\Cloner\QuoteCloner;
+use Augias\QuoteBundle\Entity\Quote;
 use Generator;
-use SolidInvoice\CoreBundle\Response\FlashResponse;
-use SolidInvoice\QuoteBundle\Cloner\QuoteCloner;
-use SolidInvoice\QuoteBundle\Entity\Quote;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;

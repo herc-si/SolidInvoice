@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Tests\Form\Type;
+namespace Augias\ClientBundle\Tests\Form\Type;
 
+use Augias\ClientBundle\Form\Type\CreditType;
+use Augias\CoreBundle\Tests\FormTestCase;
 use Brick\Math\BigDecimal;
 use Brick\Math\Exception\MathException;
 use Money\Currency;
 use Override;
 use PHPUnit\Framework\Attributes\DataProvider;
-use SolidInvoice\ClientBundle\Form\Type\CreditType;
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 

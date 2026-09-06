@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Enum;
+namespace Augias\BillBundle\Enum;
 
 /**
- * How a {@see \SolidInvoice\BillBundle\Entity\BillPayment} was actually paid —
+ * How a {@see \Augias\BillBundle\Entity\BillPayment} was actually paid —
  * a small, purpose-built set for a manually-recorded outgoing payment, unlike
- * {@see \SolidInvoice\PaymentBundle\Enum\PaymentStatus} (an 11-case set of
+ * {@see \Augias\PaymentBundle\Enum\PaymentStatus} (an 11-case set of
  * Payum *gateway capture states*, not applicable here since no gateway is
  * involved in paying a supplier).
  */

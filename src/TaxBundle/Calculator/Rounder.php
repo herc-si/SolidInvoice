@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Calculator;
+namespace Augias\TaxBundle\Calculator;
 
+use Augias\TaxBundle\Enum\RoundingStrategy;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
-use SolidInvoice\TaxBundle\Enum\RoundingStrategy;
 
 /**
  * Rounds monetary amounts to a given scale using a configurable rounding strategy.
  *
  * Defaults to {@see RoundingStrategy::HalfEven} ("banker's rounding"), which matches
- * the behaviour of the legacy {@see \SolidInvoice\CoreBundle\Billing\TotalCalculator}.
- * @see \SolidInvoice\TaxBundle\Tests\Calculator\RounderTest
+ * the behaviour of the legacy {@see \Augias\CoreBundle\Billing\TotalCalculator}.
+ * @see \Augias\TaxBundle\Tests\Calculator\RounderTest
  */
 final readonly class Rounder
 {

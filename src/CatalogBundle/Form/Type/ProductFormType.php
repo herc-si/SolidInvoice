@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CatalogBundle\Form\Type;
+namespace Augias\CatalogBundle\Form\Type;
 
+use Augias\CatalogBundle\Entity\Product;
+use Augias\CatalogBundle\Entity\ProductCategory;
+use Augias\CatalogBundle\Enum\ProductType;
+use Augias\CatalogBundle\Enum\ProductUnit;
+use Augias\TaxBundle\Entity\Tax;
 use Money\Currency;
-use SolidInvoice\CatalogBundle\Entity\Product;
-use SolidInvoice\CatalogBundle\Entity\ProductCategory;
-use SolidInvoice\CatalogBundle\Enum\ProductType;
-use SolidInvoice\CatalogBundle\Enum\ProductUnit;
-use SolidInvoice\TaxBundle\Entity\Tax;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Tests\Doctrine;
+namespace Augias\InstallBundle\Tests\Doctrine;
 
+use Augias\InstallBundle\Doctrine\Drivers;
 use Iterator;
 use PDO;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\InstallBundle\Doctrine\Drivers;
 
 #[CoversClass(Drivers::class)]
 final class DriversTest extends TestCase

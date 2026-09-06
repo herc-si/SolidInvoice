@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Routing\Loader;
+namespace Augias\CoreBundle\Routing\Loader;
 
+use Augias\CoreBundle\Util\ClassUtil;
 use Doctrine\Inflector\InflectorFactory;
-use SolidInvoice\CoreBundle\Util\ClassUtil;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Config\Resource\DirectoryResource;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Pdf;
+namespace Augias\CoreBundle\Pdf;
 
 use Mpdf\Mpdf;
 use Mpdf\MpdfException;
@@ -19,7 +19,7 @@ use Mpdf\Output\Destination;
 use Psr\Log\LoggerInterface;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Pdf\GeneratorTest
+ * @see \Augias\CoreBundle\Tests\Pdf\GeneratorTest
  */
 class Generator
 {

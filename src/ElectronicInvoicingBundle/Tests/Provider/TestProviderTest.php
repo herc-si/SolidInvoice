@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Tests\Provider;
+namespace Augias\ElectronicInvoicingBundle\Tests\Provider;
 
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use Augias\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
+use Augias\ElectronicInvoicingBundle\Form\Type\Provider\TestProviderConfigType;
+use Augias\ElectronicInvoicingBundle\Provider\TestProvider;
+use Augias\InvoiceBundle\Entity\Invoice;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
-use SolidInvoice\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
-use SolidInvoice\ElectronicInvoicingBundle\Form\Type\Provider\TestProviderConfigType;
-use SolidInvoice\ElectronicInvoicingBundle\Provider\TestProvider;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
 
 #[CoversClass(TestProvider::class)]
 final class TestProviderTest extends TestCase

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Doctrine\Listener;
+namespace Augias\CoreBundle\Doctrine\Listener;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\Company;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Events;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\Company;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Doctrine\Listener\CompanyListenerTest
+ * @see \Augias\CoreBundle\Tests\Doctrine\Listener\CompanyListenerTest
  */
 #[AsDoctrineListener(Events::prePersist)]
 final readonly class CompanyListener

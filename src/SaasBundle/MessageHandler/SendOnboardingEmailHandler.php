@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\MessageHandler;
+namespace Augias\SaasBundle\MessageHandler;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\Company;
+use Augias\SaasBundle\Message\SendOnboardingEmailMessage;
+use Augias\SaasBundle\Onboarding\OnboardingContext;
+use Augias\SaasBundle\Onboarding\OnboardingEmailStepInterface;
+use Augias\SaasBundle\Onboarding\OnboardingStepRegistry;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\UserBundle\Entity\User;
 use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\SaasBundle\Message\SendOnboardingEmailMessage;
-use SolidInvoice\SaasBundle\Onboarding\OnboardingContext;
-use SolidInvoice\SaasBundle\Onboarding\OnboardingEmailStepInterface;
-use SolidInvoice\SaasBundle\Onboarding\OnboardingStepRegistry;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\UserBundle\Entity\User;
 use SolidWorx\Platform\SaasBundle\Entity\Trial;
 use SolidWorx\Platform\SaasBundle\Enum\SubscriptionStatus;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;

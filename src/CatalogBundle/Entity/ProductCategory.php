@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CatalogBundle\Entity;
+namespace Augias\CatalogBundle\Entity;
 
+use Augias\CatalogBundle\Repository\ProductCategoryRepository;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CatalogBundle\Repository\ProductCategoryRepository;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
@@ -25,9 +25,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Groups catalogue entries (e.g. "Prestations", "Matériel"). Mirrors
- * {@see \SolidInvoice\BillBundle\Entity\BillCategory} on the purchase side.
+ * {@see \Augias\BillBundle\Entity\BillCategory} on the purchase side.
  *
- * @see \SolidInvoice\CatalogBundle\Tests\Entity\ProductCategoryTest
+ * @see \Augias\CatalogBundle\Tests\Entity\ProductCategoryTest
  */
 #[ORM\Table(name: ProductCategory::TABLE_NAME)]
 #[ORM\UniqueConstraint(columns: ['name', 'company_id'])]

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Twig\Components;
+namespace Augias\PaymentBundle\Twig\Components;
 
-use SolidInvoice\PaymentBundle\Entity\PaymentMethod;
-use SolidInvoice\PaymentBundle\Factory\PaymentFactories;
-use SolidInvoice\PaymentBundle\Gateway\GatewayCategory;
-use SolidInvoice\PaymentBundle\Gateway\GatewayMetadataProvider;
-use SolidInvoice\PaymentBundle\Repository\PaymentMethodRepository;
+use Augias\PaymentBundle\Entity\PaymentMethod;
+use Augias\PaymentBundle\Factory\PaymentFactories;
+use Augias\PaymentBundle\Gateway\GatewayCategory;
+use Augias\PaymentBundle\Gateway\GatewayMetadataProvider;
+use Augias\PaymentBundle\Repository\PaymentMethodRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;

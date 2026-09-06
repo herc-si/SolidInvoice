@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Action;
+namespace Augias\UserBundle\Action;
 
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Enum\UserSettingType;
-use SolidInvoice\UserBundle\Form\Type\ProfileType;
-use SolidInvoice\UserBundle\Repository\UserRepositoryInterface;
-use SolidInvoice\UserBundle\Repository\UserSettingRepositoryInterface;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Enum\UserSettingType;
+use Augias\UserBundle\Form\Type\ProfileType;
+use Augias\UserBundle\Repository\UserRepositoryInterface;
+use Augias\UserBundle\Repository\UserSettingRepositoryInterface;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -44,7 +44,7 @@ final readonly class EditProfile
     /**
      * @return array{form: FormView}|Response
      */
-    #[Template('@SolidInvoiceUser/Profile/edit.html.twig')]
+    #[Template('@AugiasUser/Profile/edit.html.twig')]
     public function __invoke(Request $request): array | Response
     {
         $user = $this->tokenStorage->getToken()?->getUser();

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Entity;
+namespace Augias\BillBundle\Entity;
 
+use Augias\BillBundle\Enum\BillStatus;
+use Augias\BillBundle\Repository\BillRepository;
+use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
 use Brick\Math\BigNumber;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -21,13 +28,6 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Money\Currency;
 use Money\Money;
-use SolidInvoice\BillBundle\Enum\BillStatus;
-use SolidInvoice\BillBundle\Repository\BillRepository;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid\Ulid;
@@ -35,12 +35,12 @@ use Symfony\Component\Uid\Ulid;
 /**
  * An invoice this company received from a supplier (a {@see Client} flagged
  * {@see Client::isSupplier()}) and owes money on — the accounts-payable
- * mirror of {@see \SolidInvoice\InvoiceBundle\Entity\Invoice}.
+ * mirror of {@see \Augias\InvoiceBundle\Entity\Invoice}.
  * Either typed in directly (starts {@see BillStatus::Draft}) or created from
  * an already-received {@see ElectronicInvoiceReceipt} (starts
- * {@see BillStatus::Pending} directly, via {@see \SolidInvoice\BillBundle\Manager\BillManager::createFromReceipt()}).
+ * {@see BillStatus::Pending} directly, via {@see \Augias\BillBundle\Manager\BillManager::createFromReceipt()}).
  *
- * @see \SolidInvoice\BillBundle\Tests\Entity\BillTest
+ * @see \Augias\BillBundle\Tests\Entity\BillTest
  */
 #[ORM\Table(name: Bill::TABLE_NAME)]
 #[ORM\Entity(repositoryClass: BillRepository::class)]
@@ -102,7 +102,7 @@ class Bill
     /**
      * Relative path from the project root to a manually-uploaded document,
      * following the same `var/`-relative-path + Filesystem convention as
-     * {@see \SolidInvoice\CoreBundle\Entity\ExportJob::$archivePath}. Null
+     * {@see \Augias\CoreBundle\Entity\ExportJob::$archivePath}. Null
      * when the bill instead points at a receipt's own document, or has none.
      */
     #[ORM\Column(name: 'document_path', type: Types::STRING, length: 512, nullable: true)]

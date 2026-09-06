@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Entity;
+namespace Augias\InvoiceBundle\Entity;
 
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
@@ -23,21 +23,21 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use Augias\ApiBundle\State\Processor\GenerateInvoiceFromRecurringProcessor;
+use Augias\ApiBundle\State\Processor\RecurringInvoiceTransitionProcessor;
+use Augias\ApiBundle\State\Provider\RecurringInvoiceItemProvider;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\CoreBundle\Traits\Entity\Archivable;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
+use Augias\InvoiceBundle\Repository\RecurringInvoiceRepository;
+use Augias\TaxBundle\Entity\InvoiceTax;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\ApiBundle\State\Processor\GenerateInvoiceFromRecurringProcessor;
-use SolidInvoice\ApiBundle\State\Processor\RecurringInvoiceTransitionProcessor;
-use SolidInvoice\ApiBundle\State\Provider\RecurringInvoiceItemProvider;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\CoreBundle\Traits\Entity\Archivable;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
-use SolidInvoice\InvoiceBundle\Repository\RecurringInvoiceRepository;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Serializer\Attribute as Serialize;
@@ -46,7 +46,7 @@ use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Entity\RecurringInvoiceTest
+ * @see \Augias\InvoiceBundle\Tests\Entity\RecurringInvoiceTest
  */
 #[ORM\Table(name: RecurringInvoice::TABLE_NAME)]
 #[ORM\Entity(repositoryClass: RecurringInvoiceRepository::class)]

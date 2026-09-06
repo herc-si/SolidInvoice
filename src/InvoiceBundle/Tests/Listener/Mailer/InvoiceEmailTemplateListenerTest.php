@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Listener\Mailer;
+namespace Augias\InvoiceBundle\Tests\Listener\Mailer;
 
+use Augias\CoreBundle\Contracts\PaidSubscriptionGateInterface;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Templates\BillingDocumentType;
+use Augias\CoreBundle\Templates\BillingTemplateRegistry;
+use Augias\CoreBundle\Templates\BillingTemplateResolver;
+use Augias\InvoiceBundle\Email\InvoiceEmail;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Listener\Mailer\InvoiceEmailTemplateListener;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\SettingsBundle\SystemConfig;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Contracts\PaidSubscriptionGateInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Templates\BillingDocumentType;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateRegistry;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
-use SolidInvoice\InvoiceBundle\Email\InvoiceEmail;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Listener\Mailer\InvoiceEmailTemplateListener;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -66,7 +66,7 @@ final class InvoiceEmailTemplateListenerTest extends TestCase
         $message = new InvoiceEmail($invoice);
         $listener(new MessageEvent($message, Envelope::create($message->to('test@example.com')->from('from@example.com')), 'smtp'));
 
-        self::assertSame('@SolidInvoiceInvoice/Templates/sleek/email.html.twig', $message->getHtmlTemplate());
+        self::assertSame('@AugiasInvoice/Templates/sleek/email.html.twig', $message->getHtmlTemplate());
     }
 
     public function testKeepsTheDefaultTemplateWhenNoCustomTemplateApplies(): void
@@ -79,7 +79,7 @@ final class InvoiceEmailTemplateListenerTest extends TestCase
         $message = new InvoiceEmail($invoice);
         $listener(new MessageEvent($message, Envelope::create($message->to('test@example.com')->from('from@example.com')), 'smtp'));
 
-        self::assertSame('@SolidInvoiceInvoice/Email/invoice.html.twig', $message->getHtmlTemplate());
+        self::assertSame('@AugiasInvoice/Email/invoice.html.twig', $message->getHtmlTemplate());
     }
 
     public function testIgnoresOtherMessages(): void

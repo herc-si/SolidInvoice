@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Action\ForgotPassword;
+namespace Augias\UserBundle\Action\ForgotPassword;
 
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Form\Type\ChangePasswordFormType;
 use Doctrine\Persistence\ManagerRegistry;
 use SensitiveParameter;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Form\Type\ChangePasswordFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -91,7 +91,7 @@ final class Reset extends AbstractController
             return $this->redirectToRoute('_login_main');
         }
 
-        return $this->render('@SolidInvoiceUser/ForgotPassword/reset.html.twig', [
+        return $this->render('@AugiasUser/ForgotPassword/reset.html.twig', [
             'form' => $form,
         ]);
     }

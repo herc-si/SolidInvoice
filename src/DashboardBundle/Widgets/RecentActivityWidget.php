@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Widgets;
+namespace Augias\DashboardBundle\Widgets;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Repository\PaymentRepository;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Repository\QuoteRepository;
 use DateTimeInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Repository\PaymentRepository;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Repository\QuoteRepository;
 
 /**
- * @see \SolidInvoice\DashboardBundle\Tests\Widgets\RecentActivityWidgetTest
+ * @see \Augias\DashboardBundle\Tests\Widgets\RecentActivityWidgetTest
  */
 final readonly class RecentActivityWidget implements WidgetInterface
 {
@@ -149,6 +149,6 @@ final readonly class RecentActivityWidget implements WidgetInterface
 
     public function getTemplate(): string
     {
-        return '@SolidInvoiceDashboard/Widget/recent_activity.html.twig';
+        return '@AugiasDashboard/Widget/recent_activity.html.twig';
     }
 }

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\SettingsBundle\Action\CustomField\CreateAction as CustomFieldCreateAction;
-use SolidInvoice\SettingsBundle\Action\CustomField\DeleteAction as CustomFieldDeleteAction;
-use SolidInvoice\SettingsBundle\Action\CustomField\EditAction as CustomFieldEditAction;
-use SolidInvoice\SettingsBundle\Action\CustomField\IndexAction as CustomFieldIndexAction;
-use SolidInvoice\SettingsBundle\Action\CustomField\ReorderAction as CustomFieldReorderAction;
-use SolidInvoice\SettingsBundle\Action\Index;
+use Augias\SettingsBundle\Action\CustomField\CreateAction as CustomFieldCreateAction;
+use Augias\SettingsBundle\Action\CustomField\DeleteAction as CustomFieldDeleteAction;
+use Augias\SettingsBundle\Action\CustomField\EditAction as CustomFieldEditAction;
+use Augias\SettingsBundle\Action\CustomField\IndexAction as CustomFieldIndexAction;
+use Augias\SettingsBundle\Action\CustomField\ReorderAction as CustomFieldReorderAction;
+use Augias\SettingsBundle\Action\Index;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {

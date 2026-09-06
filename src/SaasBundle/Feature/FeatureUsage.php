@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Feature;
+namespace Augias\SaasBundle\Feature;
 
 /**
  * Pure helper for "approaching limit" decisions on quota-style features.
@@ -20,7 +20,7 @@ namespace SolidInvoice\SaasBundle\Feature;
  * of the quota remains, but never less than 1 remaining unit. Kept as a
  * stateless VO so banner partials, listeners, and onboarding emails can all
  * agree on when the warning should fire without each reinventing the maths.
- * @see \SolidInvoice\SaasBundle\Tests\Feature\FeatureUsageTest
+ * @see \Augias\SaasBundle\Tests\Feature\FeatureUsageTest
  */
 final readonly class FeatureUsage
 {

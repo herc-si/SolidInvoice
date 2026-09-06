@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Twig\Components;
+namespace Augias\NotificationBundle\Twig\Components;
 
+use Augias\NotificationBundle\Configurator\ConfiguratorInterface;
+use Augias\NotificationBundle\Entity\TransportSetting;
+use Augias\NotificationBundle\Repository\TransportSettingRepository;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use SolidInvoice\NotificationBundle\Configurator\ConfiguratorInterface;
-use SolidInvoice\NotificationBundle\Entity\TransportSetting;
-use SolidInvoice\NotificationBundle\Repository\TransportSettingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
@@ -37,7 +37,7 @@ use function ucwords;
 use function usort;
 
 /**
- * @see \SolidInvoice\NotificationBundle\Tests\Twig\Components\NotificationMarketplaceTest
+ * @see \Augias\NotificationBundle\Tests\Twig\Components\NotificationMarketplaceTest
  */
 #[AsLiveComponent]
 final class NotificationMarketplace extends AbstractController

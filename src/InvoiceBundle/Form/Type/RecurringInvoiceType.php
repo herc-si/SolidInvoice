@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,23 +11,23 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Form\Type;
+namespace Augias\InvoiceBundle\Form\Type;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Form\Type\CustomFieldValueCollectionType;
+use Augias\CoreBundle\Form\Type\DiscountType;
+use Augias\CronBundle\Form\Type\RecurringScheduleType;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\MoneyBundle\Form\Type\HiddenMoneyType;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\TaxBundle\Form\Type\InvoiceTaxType;
 use Carbon\CarbonImmutable;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Money\Currency;
 use Override;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Form\Type\CustomFieldValueCollectionType;
-use SolidInvoice\CoreBundle\Form\Type\DiscountType;
-use SolidInvoice\CronBundle\Form\Type\RecurringScheduleType;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\MoneyBundle\Form\Type\HiddenMoneyType;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\TaxBundle\Form\Type\InvoiceTaxType;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Form\AbstractType;
@@ -40,7 +40,7 @@ use Symfonycasts\DynamicForms\DependentField;
 use Symfonycasts\DynamicForms\DynamicFormBuilder;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Form\Type\RecurringInvoiceTypeTest
+ * @see \Augias\InvoiceBundle\Tests\Form\Type\RecurringInvoiceTypeTest
  * @extends AbstractType<RecurringInvoice>
  */
 class RecurringInvoiceType extends AbstractType

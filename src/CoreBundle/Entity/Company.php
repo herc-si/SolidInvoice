@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,36 +11,36 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Entity;
+namespace Augias\CoreBundle\Entity;
 
 use const PHP_URL_HOST;
+use Augias\ClientBundle\Entity\Address;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Entity\Credit;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\InvoiceReminder;
+use Augias\InvoiceBundle\Entity\Line as InvoieLine;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\NotificationBundle\Entity\TransportSetting;
+use Augias\NotificationBundle\Entity\UserNotification;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Entity\PaymentMethod;
+use Augias\QuoteBundle\Entity\Line as QuoteLine;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\SettingsBundle\Entity\Setting;
+use Augias\TaxBundle\Entity\Tax;
+use Augias\UserBundle\Entity\ApiToken;
+use Augias\UserBundle\Entity\ApiTokenHistory;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\UserInvitation;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\ClientBundle\Entity\Address;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Entity\Credit;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceProviderSetting;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\InvoiceReminder;
-use SolidInvoice\InvoiceBundle\Entity\Line as InvoieLine;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\NotificationBundle\Entity\TransportSetting;
-use SolidInvoice\NotificationBundle\Entity\UserNotification;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Entity\PaymentMethod;
-use SolidInvoice\QuoteBundle\Entity\Line as QuoteLine;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\SettingsBundle\Entity\Setting;
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\UserBundle\Entity\ApiToken;
-use SolidInvoice\UserBundle\Entity\ApiTokenHistory;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Entity\UserInvitation;
 use SolidWorx\Platform\PlatformBundle\Feature\SubscribableInterface;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;

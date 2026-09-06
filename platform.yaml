@@ -1,20 +1,20 @@
 platform:
-    name: !php/const SolidInvoice\CoreBundle\SolidInvoiceCoreBundle::APP_NAME
-    version: !php/const SolidInvoice\CoreBundle\SolidInvoiceCoreBundle::VERSION
+    name: !php/const Augias\CoreBundle\AugiasCoreBundle::APP_NAME
+    version: !php/const Augias\CoreBundle\AugiasCoreBundle::VERSION
 
     security:
         two_factor:
             enabled: true
-            base_template: "@SolidInvoiceCore/Layout/two_factor_security.html.twig"
+            base_template: "@AugiasCore/Layout/two_factor_security.html.twig"
     models:
-        user: SolidInvoice\UserBundle\Entity\User
+        user: Augias\UserBundle\Entity\User
 
 saas:
     doctrine:
         subscriptions:
-            entity: SolidInvoice\CoreBundle\Entity\Company
+            entity: Augias\CoreBundle\Entity\Company
         trial:
-            user_entity: SolidInvoice\UserBundle\Entity\User
+            user_entity: Augias\UserBundle\Entity\User
     payment:
         return_route: saas_payment_success
     integration:
@@ -24,7 +24,7 @@ saas:
             webhook_secret: '%env(SOLIDINVOICE_LEMON_SQUEEZY_WEBHOOK_SECRET)%'
             store_id: '%env(SOLIDINVOICE_LEMON_SQUEEZY_STORE_ID)%'
     # Canonical catalogue of every gated feature. Keep the keys here in lock-step
-    # with `SolidInvoice\SaasBundle\Feature\Feature` (asserted by FeatureCatalogTest).
+    # with `Augias\SaasBundle\Feature\Feature` (asserted by FeatureCatalogTest).
     # Defaults are the un-overridden values returned by FeatureGate::resolve()
     # when no plan/subscriber is in context (CLI commands, fixtures, etc.).
     features:
@@ -75,7 +75,7 @@ saas:
         custom_domain:
             type: boolean
             default: true
-            description: 'Host SolidInvoice on a custom domain or subdomain.'
+            description: 'Host Augias on a custom domain or subdomain.'
         custom_fields:
             type: boolean
             default: true
@@ -87,5 +87,5 @@ saas:
 
 ui:
     templates:
-        base: '@SolidInvoiceCore/Layout/base.html.twig'
-        login: '@SolidInvoiceUser/Security/login.html.twig'
+        base: '@AugiasCore/Layout/base.html.twig'
+        login: '@AugiasUser/Security/login.html.twig'

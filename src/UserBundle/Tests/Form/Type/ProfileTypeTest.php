@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\Form\Type;
+namespace Augias\UserBundle\Tests\Form\Type;
 
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Form\Type\ProfileType;
+use Augias\CoreBundle\Tests\FormTestCase;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Form\Type\ProfileType;
 
 final class ProfileTypeTest extends FormTestCase
 {

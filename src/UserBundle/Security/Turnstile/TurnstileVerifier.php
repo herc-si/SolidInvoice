@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Security\Turnstile;
+namespace Augias\UserBundle\Security\Turnstile;
 
 use SensitiveParameter;
 use SolidWorx\Toggler\ToggleInterface;
@@ -23,7 +23,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
  * Verifies a Cloudflare Turnstile token server-side.
  *
  * @see https://developers.cloudflare.com/turnstile/get-started/server-side-validation/
- * @see \SolidInvoice\UserBundle\Tests\Security\Turnstile\TurnstileVerifierTest
+ * @see \Augias\UserBundle\Tests\Security\Turnstile\TurnstileVerifierTest
  */
 final readonly class TurnstileVerifier
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Twig\Extension;
+namespace Augias\CoreBundle\Twig\Extension;
 
 use Override;
 use Twig\Extension\AbstractExtension;
@@ -19,7 +19,7 @@ use Twig\TwigFunction;
 
 /**
  * Self-hosted no-op for the SaaS-only Twig functions exposed by
- * SolidInvoice\SaasBundle\Twig\FeatureExtension.
+ * Augias\SaasBundle\Twig\FeatureExtension.
  *
  * Vendor PlatformBundle already exposes `feature_enabled`, `feature_can_use`
  * and `feature_remaining` in every deployment, so we only stub the three

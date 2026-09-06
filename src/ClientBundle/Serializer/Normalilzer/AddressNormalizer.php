@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Serializer\Normalilzer;
+namespace Augias\ClientBundle\Serializer\Normalilzer;
 
+use Augias\ClientBundle\Entity\Address;
+use Augias\ClientBundle\Entity\Client;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\ClientBundle\Entity\Address;
-use SolidInvoice\ClientBundle\Entity\Client;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -26,7 +26,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use function is_array;
 
 /**
- * @see \SolidInvoice\ClientBundle\Tests\Serializer\Normalizer\AddressNormalizerTest
+ * @see \Augias\ClientBundle\Tests\Serializer\Normalizer\AddressNormalizerTest
  */
 final class AddressNormalizer implements NormalizerAwareInterface, NormalizerInterface, DenormalizerAwareInterface, DenormalizerInterface
 {

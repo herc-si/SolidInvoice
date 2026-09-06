@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Export;
+namespace Augias\CoreBundle\Export;
 
+use Augias\CoreBundle\Export\Discovery\EntityExportSpec;
+use Augias\CoreBundle\Export\Serializer\Normalizer\ExportMoneyNormalizer;
 use Brick\Math\BigNumber;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Money\Currencies\ISOCurrencies;
 use Money\Money;
-use SolidInvoice\CoreBundle\Export\Discovery\EntityExportSpec;
-use SolidInvoice\CoreBundle\Export\Serializer\Normalizer\ExportMoneyNormalizer;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Uid\Ulid;

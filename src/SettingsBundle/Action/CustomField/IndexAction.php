@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Action\CustomField;
+namespace Augias\SettingsBundle\Action\CustomField;
 
-use SolidInvoice\CoreBundle\Entity\CustomField\CustomField;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Repository\CustomFieldRepository;
-use SolidInvoice\CoreBundle\Repository\CustomFieldValueRepository;
-use SolidInvoice\SaasBundle\Feature\Feature;
+use Augias\CoreBundle\Entity\CustomField\CustomField;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Repository\CustomFieldRepository;
+use Augias\CoreBundle\Repository\CustomFieldValueRepository;
+use Augias\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,10 +34,10 @@ final class IndexAction extends AbstractController
     public function __invoke(): Response
     {
         if (! $this->featureGate->isEnabled(Feature::CustomFields->value)) {
-            return $this->render('@SolidInvoiceSettings/CustomField/gated.html.twig');
+            return $this->render('@AugiasSettings/CustomField/gated.html.twig');
         }
 
-        return $this->render('@SolidInvoiceSettings/CustomField/index.html.twig', [
+        return $this->render('@AugiasSettings/CustomField/index.html.twig', [
             'client' => $this->buildRows(CustomFieldTarget::CLIENT),
             'contact' => $this->buildRows(CustomFieldTarget::CONTACT),
             'invoice' => $this->buildRows(CustomFieldTarget::INVOICE),

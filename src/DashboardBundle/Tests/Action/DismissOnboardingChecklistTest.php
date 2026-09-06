@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Tests\Action;
+namespace Augias\DashboardBundle\Tests\Action;
 
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\DashboardBundle\Action\DismissOnboardingChecklist;
-use SolidInvoice\DashboardBundle\Checklist\ChecklistManager;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\UserBundle\Test\Factory\UserFactory;
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\DashboardBundle\Action\DismissOnboardingChecklist;
+use Augias\DashboardBundle\Checklist\ChecklistManager;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\UserBundle\Test\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;

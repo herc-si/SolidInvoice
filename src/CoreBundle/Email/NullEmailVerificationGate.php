@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Email;
+namespace Augias\CoreBundle\Email;
 
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Entity\Company;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Email\NullEmailVerificationGateTest
+ * @see \Augias\CoreBundle\Tests\Email\NullEmailVerificationGateTest
  */
 final class NullEmailVerificationGate implements EmailVerificationGateInterface
 {

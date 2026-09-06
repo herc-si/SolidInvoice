@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -38,7 +38,7 @@
 ============================================================================ #}
 <pagefooter
     name="footer"
-    content-left="{{ setting('system/general/hide_powered_by') is not same as ('1') ? 'powered_by'|trans ~ ' ' ~ constant('SolidInvoice\\CoreBundle\\SolidInvoiceCoreBundle::APP_NAME') }}"
+    content-left="{{ setting('system/general/hide_powered_by') is not same as ('1') ? 'powered_by'|trans ~ ' ' ~ constant('Augias\\CoreBundle\\AugiasCoreBundle::APP_NAME') }}"
     content-right="{{ 'pdf.page'|trans }} {PAGENO} {{ 'pdf.of'|trans }} {nb}"
     line="on"
     footer-style="border-top: 1px solid #e2e8f0; font-size: 8pt; color: #64748b; padding-top: 8px;"
@@ -123,7 +123,7 @@
                         </td>
                     </tr>
                     {# Validity indicator #}
-                    {% if quote.status != enum('SolidInvoice\\QuoteBundle\\Enum\\QuoteStatus').Accepted and quote.status != enum('SolidInvoice\\QuoteBundle\\Enum\\QuoteStatus').Declined and quote.status != enum('SolidInvoice\\QuoteBundle\\Enum\\QuoteStatus').Cancelled %}
+                    {% if quote.status != enum('Augias\\QuoteBundle\\Enum\\QuoteStatus').Accepted and quote.status != enum('Augias\\QuoteBundle\\Enum\\QuoteStatus').Declined and quote.status != enum('Augias\\QuoteBundle\\Enum\\QuoteStatus').Cancelled %}
                         <tr>
                             <td colspan="2" style="text-align: right; padding: 2px 0 4px 0;">
                                 {% if isExpired %}
@@ -256,9 +256,9 @@
    CLIENT-VISIBLE CUSTOM FIELDS
 ============================================================================ #}
 <twig:CustomFieldsListPdf
-    :target="enum('SolidInvoice\\CoreBundle\\Enum\\CustomFieldTarget').QUOTE"
+    :target="enum('Augias\\CoreBundle\\Enum\\CustomFieldTarget').QUOTE"
     :recordId="quote.id"
-    :visibility="enum('SolidInvoice\\CoreBundle\\Enum\\CustomFieldVisibility').CLIENT_VISIBLE"
+    :visibility="enum('Augias\\CoreBundle\\Enum\\CustomFieldVisibility').CLIENT_VISIBLE"
 />
 
 {# ============================================================================

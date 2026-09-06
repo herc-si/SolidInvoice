@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Export;
+namespace Augias\DataGridBundle\Export;
 
+use Augias\CoreBundle\Export\Enum\ExportFormat;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
-use SolidInvoice\CoreBundle\Export\Enum\ExportFormat;
 use function array_filter;
 use function array_map;
 use function implode;
@@ -25,7 +25,7 @@ use function strtolower;
 use function substr;
 
 /**
- * @see \SolidInvoice\DataGridBundle\Tests\Export\ExportFilenameGeneratorTest
+ * @see \Augias\DataGridBundle\Tests\Export\ExportFilenameGeneratorTest
  */
 final class ExportFilenameGenerator
 {

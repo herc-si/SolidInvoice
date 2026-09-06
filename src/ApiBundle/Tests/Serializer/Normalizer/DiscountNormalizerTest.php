@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Tests\Serializer\Normalizer;
+namespace Augias\ApiBundle\Tests\Serializer\Normalizer;
 
+use Augias\ApiBundle\Serializer\Normalizer\DiscountNormalizer;
+use Augias\CoreBundle\Entity\Discount;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\ApiBundle\Serializer\Normalizer\DiscountNormalizer;
-use SolidInvoice\CoreBundle\Entity\Discount;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class DiscountNormalizerTest extends TestCase

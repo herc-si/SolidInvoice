@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -36,7 +36,7 @@ use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
 $header = <<<'EOF'
-This file is part of SolidInvoice project.
+This file is part of Augias project.
 
 (c) Pierre du Plessis <open-source@solidworx.co>
 

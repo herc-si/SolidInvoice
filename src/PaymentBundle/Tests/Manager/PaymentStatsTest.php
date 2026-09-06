@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Tests\Manager;
+namespace Augias\PaymentBundle\Tests\Manager;
 
+use Augias\PaymentBundle\Manager\PaymentStats;
+use Augias\PaymentBundle\Repository\PaymentRepository;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use DateMalformedStringException;
@@ -23,8 +25,6 @@ use Mockery as M;
 use Money\Currency;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\PaymentBundle\Manager\PaymentStats;
-use SolidInvoice\PaymentBundle\Repository\PaymentRepository;
 
 #[CoversClass(PaymentStats::class)]
 final class PaymentStatsTest extends TestCase

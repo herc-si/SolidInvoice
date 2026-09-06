@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Twig\Extension;
+namespace Augias\CoreBundle\Twig\Extension;
 
+use Augias\CoreBundle\Form\FieldRenderer;
+use Augias\MoneyBundle\Calculator;
 use Brick\Math\BigNumber;
 use Override;
-use SolidInvoice\CoreBundle\Form\FieldRenderer;
-use SolidInvoice\MoneyBundle\Calculator;
 use Symfony\Component\Form\FormView;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;

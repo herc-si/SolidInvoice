@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\GridBuilder\Filter;
+namespace Augias\DataGridBundle\GridBuilder\Filter;
 
+use Augias\DataGridBundle\Filter\ColumnFilterInterface;
+use Augias\DataGridBundle\Form\Type\DateRangeFormType;
+use Augias\DataGridBundle\Source\ORMSource;
 use Carbon\Carbon;
 use Doctrine\ORM\QueryBuilder;
-use SolidInvoice\DataGridBundle\Filter\ColumnFilterInterface;
-use SolidInvoice\DataGridBundle\Form\Type\DateRangeFormType;
-use SolidInvoice\DataGridBundle\Source\ORMSource;
 use function array_key_exists;
 use function assert;
 use function is_array;
@@ -25,7 +25,7 @@ use function sprintf;
 use function Symfony\Component\String\u;
 
 /**
- * @see \SolidInvoice\DataGridBundle\Tests\GridBuilder\Filter\DateRangeFilterTest
+ * @see \Augias\DataGridBundle\Tests\GridBuilder\Filter\DateRangeFilterTest
  */
 final readonly class DateRangeFilter implements ColumnFilterInterface
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Email;
+namespace Augias\InvoiceBundle\Email;
 
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\ReminderType;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\ReminderType;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 final class InvoiceReminderEmail extends TemplatedEmail
@@ -26,8 +26,8 @@ final class InvoiceReminderEmail extends TemplatedEmail
     ) {
         parent::__construct();
 
-        $this->htmlTemplate('@SolidInvoiceInvoice/Email/reminder.html.twig');
-        $this->textTemplate('@SolidInvoiceInvoice/Email/reminder.text.twig');
+        $this->htmlTemplate('@AugiasInvoice/Email/reminder.html.twig');
+        $this->textTemplate('@AugiasInvoice/Email/reminder.text.twig');
         $this->context([
             'invoice' => $this->invoice,
             'reminder_type' => $this->reminderType->value,

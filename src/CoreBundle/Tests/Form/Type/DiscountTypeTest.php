@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Form\Type;
+namespace Augias\CoreBundle\Tests\Form\Type;
 
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Form\Type\DiscountType;
+use Augias\CoreBundle\Tests\FormTestCase;
+use Augias\SettingsBundle\SystemConfig;
 use Brick\Math\BigDecimal;
 use Generator;
 use Mockery as M;
 use Money\Currency;
 use Override;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Form\Type\DiscountType;
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\Component\Form\FormExtensionInterface;
 use Symfony\Component\Form\PreloadedExtension;
 

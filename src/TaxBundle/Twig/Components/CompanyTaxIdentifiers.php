@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Twig\Components;
+namespace Augias\TaxBundle\Twig\Components;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\TaxBundle\Entity\TaxIdentifier;
+use Augias\TaxBundle\Form\Type\CompanyTaxIdentifiersFormType;
+use Augias\TaxBundle\Repository\TaxIdentifierRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\TaxBundle\Entity\TaxIdentifier;
-use SolidInvoice\TaxBundle\Form\Type\CompanyTaxIdentifiersFormType;
-use SolidInvoice\TaxBundle\Repository\TaxIdentifierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;

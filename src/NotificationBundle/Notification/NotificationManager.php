@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Notification;
+namespace Augias\NotificationBundle\Notification;
 
+use Augias\CoreBundle\Traits\FlashErrorTrait;
+use Augias\NotificationBundle\Attribute\AsNotification;
+use Augias\NotificationBundle\Configurator\ConfiguratorInterface;
+use Augias\NotificationBundle\Exception\InvalidNotificationMessageException;
+use Augias\NotificationBundle\Repository\UserNotificationRepository;
 use Psr\Log\LoggerInterface;
 use ReflectionObject;
-use SolidInvoice\CoreBundle\Traits\FlashErrorTrait;
-use SolidInvoice\NotificationBundle\Attribute\AsNotification;
-use SolidInvoice\NotificationBundle\Configurator\ConfiguratorInterface;
-use SolidInvoice\NotificationBundle\Exception\InvalidNotificationMessageException;
-use SolidInvoice\NotificationBundle\Repository\UserNotificationRepository;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 use Symfony\Component\HttpFoundation\RequestStack;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Functional;
+namespace Augias\CoreBundle\Tests\Functional;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Enum\ClientStatus;
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Test\Factory\CompanyFactory;
+use Augias\CoreBundle\Test\Traits\DoctrineTestTrait;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Test\Factory\UserFactory;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Enum\ClientStatus;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Test\Factory\CompanyFactory;
-use SolidInvoice\CoreBundle\Test\Traits\DoctrineTestTrait;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Test\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zenstruck\Browser\Test\HasBrowser;
 
@@ -34,8 +34,8 @@ use Zenstruck\Browser\Test\HasBrowser;
  *
  * Each "account" is an independent tenant — its own {@see Company}, its own {@see User}
  * (member of that company only), and its own {@see Client}/{@see Invoice}. The isolation
- * is enforced by the Doctrine {@see \SolidInvoice\CoreBundle\Doctrine\Filter\CompanyFilter},
- * scoped per request by {@see \SolidInvoice\CoreBundle\Listener\CompanyEventSubscriber}.
+ * is enforced by the Doctrine {@see \Augias\CoreBundle\Doctrine\Filter\CompanyFilter},
+ * scoped per request by {@see \Augias\CoreBundle\Listener\CompanyEventSubscriber}.
  *
  * This covers the two ways one tenant could reach another's data:
  *  - reading records (repository queries and direct object URLs), and

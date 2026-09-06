@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\DataGrid;
+namespace Augias\ClientBundle\DataGrid;
 
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Doctrine\Filter\ArchivableFilter;
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\GridBuilder\Batch\BatchAction;
+use Augias\DataGridBundle\GridBuilder\Query;
 use Doctrine\ORM\EntityManagerInterface;
 use Override;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Doctrine\Filter\ArchivableFilter;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\GridBuilder\Batch\BatchAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
 
 #[AsDataGrid(name: 'archived_client_grid', title: 'Archived Clients')]
 final class ArchivedClientGrid extends BaseClientGrid

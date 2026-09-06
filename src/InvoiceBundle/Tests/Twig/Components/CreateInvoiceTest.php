@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Twig\Components;
+namespace Augias\InvoiceBundle\Tests\Twig\Components;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\ClientBundle\Test\Factory\ContactFactory;
+use Augias\CoreBundle\Test\LiveComponentTest;
+use Augias\InvoiceBundle\DTO\InvoiceFormDTO;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Manager\InvoiceFormManager;
+use Augias\InvoiceBundle\Model\Graph;
+use Augias\InvoiceBundle\Twig\Components\CreateInvoice;
+use Augias\TaxBundle\Entity\Tax;
 use Brick\Math\Exception\MathException;
 use Carbon\CarbonImmutable;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\ClientBundle\Test\Factory\ContactFactory;
-use SolidInvoice\CoreBundle\Test\LiveComponentTest;
-use SolidInvoice\InvoiceBundle\DTO\InvoiceFormDTO;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Manager\InvoiceFormManager;
-use SolidInvoice\InvoiceBundle\Model\Graph;
-use SolidInvoice\InvoiceBundle\Twig\Components\CreateInvoice;
-use SolidInvoice\TaxBundle\Entity\Tax;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Workflow\WorkflowInterface;
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Gateway;
+namespace Augias\PaymentBundle\Gateway;
 
 use function preg_replace;
 use function str_replace;
@@ -24,7 +24,7 @@ use function ucwords;
  * icons, descriptions and setup instructions from here, so the copy lives in one
  * place instead of being duplicated across the Twig live components.
  *
- * @see \SolidInvoice\PaymentBundle\Tests\Gateway\GatewayMetadataProviderTest
+ * @see \Augias\PaymentBundle\Tests\Gateway\GatewayMetadataProviderTest
  */
 final class GatewayMetadataProvider
 {

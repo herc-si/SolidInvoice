@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Tests\Functional;
+namespace Augias\McpBundle\Tests\Functional;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Mcp\InvoiceWriteTools;
+use Augias\McpBundle\Security\McpOAuthAuthenticator;
+use Augias\McpBundle\Security\McpScope;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Mcp\QuoteWriteTools;
 use Mcp\Exception\ToolCallException;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Mcp\InvoiceWriteTools;
-use SolidInvoice\McpBundle\Security\McpOAuthAuthenticator;
-use SolidInvoice\McpBundle\Security\McpScope;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Mcp\QuoteWriteTools;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

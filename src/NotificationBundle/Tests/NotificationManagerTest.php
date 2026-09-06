@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Tests;
+namespace Augias\NotificationBundle\Tests;
 
+use Augias\CoreBundle\Test\Traits\FakerTestTrait;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\NotificationBundle\Attribute\AsNotification;
+use Augias\NotificationBundle\Configurator\ConfiguratorInterface;
+use Augias\NotificationBundle\Entity\TransportSetting;
+use Augias\NotificationBundle\Entity\UserNotification;
+use Augias\NotificationBundle\Exception\InvalidNotificationMessageException;
+use Augias\NotificationBundle\Notification\NotificationManager;
+use Augias\NotificationBundle\Notification\NotificationMessage;
+use Augias\NotificationBundle\Test\Factory\UserNotificationFactory;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Test\Factory\UserFactory;
 use Hamcrest\Core\IsEqual;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
@@ -20,18 +32,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RuntimeException;
-use SolidInvoice\CoreBundle\Test\Traits\FakerTestTrait;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\NotificationBundle\Attribute\AsNotification;
-use SolidInvoice\NotificationBundle\Configurator\ConfiguratorInterface;
-use SolidInvoice\NotificationBundle\Entity\TransportSetting;
-use SolidInvoice\NotificationBundle\Entity\UserNotification;
-use SolidInvoice\NotificationBundle\Exception\InvalidNotificationMessageException;
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
-use SolidInvoice\NotificationBundle\Notification\NotificationMessage;
-use SolidInvoice\NotificationBundle\Test\Factory\UserNotificationFactory;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Test\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 use Symfony\Component\HttpFoundation\Request;

@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -7,10 +7,10 @@
  # with this source code in the file LICENSE.
  #}
 
-{% extends '@SolidInvoiceCore/Layout/default_no_nav.html.twig' %}
+{% extends '@AugiasCore/Layout/default_no_nav.html.twig' %}
 
 {% block heading %}
-    {% include '@SolidInvoiceSaas/subscription/_header.html.twig' %}
+    {% include '@AugiasSaas/subscription/_header.html.twig' %}
 {% endblock heading %}
 
 {% block content %}
@@ -22,7 +22,7 @@
             </p>
 
             <div class="mt-4">
-                {% include '@SolidInvoiceSaas/subscription/_plans_grid.html.twig' with { plans: plans } only %}
+                {% include '@AugiasSaas/subscription/_plans_grid.html.twig' with { plans: plans } only %}
             </div>
         </div>
     </div>

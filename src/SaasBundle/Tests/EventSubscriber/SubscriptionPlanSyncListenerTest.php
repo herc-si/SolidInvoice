@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\EventSubscriber;
+namespace Augias\SaasBundle\Tests\EventSubscriber;
 
+use Augias\CoreBundle\ConfigWriter;
+use Augias\CoreBundle\Telemetry\Telemetry;
+use Augias\CoreBundle\Tests\Telemetry\CollectingMessageBus;
+use Augias\SaasBundle\EventSubscriber\SubscriptionPlanSyncListener;
 use Doctrine\DBAL\DriverManager;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use ReflectionProperty;
-use SolidInvoice\CoreBundle\ConfigWriter;
-use SolidInvoice\CoreBundle\Telemetry\Telemetry;
-use SolidInvoice\CoreBundle\Tests\Telemetry\CollectingMessageBus;
-use SolidInvoice\SaasBundle\EventSubscriber\SubscriptionPlanSyncListener;
 use SolidWorx\Platform\SaasBundle\Dto\LemonSqueezy\Subscription as LemonSqueezySubscription;
 use SolidWorx\Platform\SaasBundle\Dto\LemonSqueezy\SubscriptionAttributes;
 use SolidWorx\Platform\SaasBundle\Entity\Plan;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Tests\Security\Voter;
+namespace Augias\ApiBundle\Tests\Security\Voter;
 
+use Augias\ApiBundle\Security\Attribute;
+use Augias\ApiBundle\Security\Voter\ApiAccessVoter;
 use Mockery as M;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\ApiBundle\Security\Attribute;
-use SolidInvoice\ApiBundle\Security\Voter\ApiAccessVoter;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Platform\PlatformBundle\Feature\NoopFeatureGate;
 use SolidWorx\Toggler\ToggleInterface;

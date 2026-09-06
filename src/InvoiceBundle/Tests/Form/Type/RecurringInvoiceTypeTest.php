@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,27 +11,27 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Form\Type;
+namespace Augias\InvoiceBundle\Tests\Form\Type;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Form\Type\CustomFieldValueCollectionType;
+use Augias\CoreBundle\Form\Type\DiscountType;
+use Augias\CoreBundle\Repository\CustomFieldRepository;
+use Augias\CoreBundle\Repository\CustomFieldValueRepository;
+use Augias\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
+use Augias\CoreBundle\Tests\FormTestCase;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Entity\RecurringOptions;
+use Augias\InvoiceBundle\Form\Type\ItemType;
+use Augias\InvoiceBundle\Form\Type\RecurringInvoiceType;
+use Augias\SettingsBundle\SystemConfig;
 use Brick\Math\BigDecimal;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery as M;
 use Money\Currency;
 use Override;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Form\Type\CustomFieldValueCollectionType;
-use SolidInvoice\CoreBundle\Form\Type\DiscountType;
-use SolidInvoice\CoreBundle\Repository\CustomFieldRepository;
-use SolidInvoice\CoreBundle\Repository\CustomFieldValueRepository;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldTypeResolver;
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringOptions;
-use SolidInvoice\InvoiceBundle\Form\Type\ItemType;
-use SolidInvoice\InvoiceBundle\Form\Type\RecurringInvoiceType;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\Form\FormExtensionInterface;
 use Symfony\Component\Form\PreloadedExtension;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use SolidInvoice\CoreBundle\Export\Message\RequestCompanyExport;
-use SolidInvoice\CoreBundle\Telemetry\Message\SendTelemetryMessage;
-use SolidInvoice\CronBundle\Messenger\SentrySchedulerMiddleware;
-use SolidInvoice\InvoiceBundle\Message\SendInvoiceReminderMessage;
-use SolidInvoice\SaasBundle\Message\SendOnboardingEmailMessage;
+use Augias\CoreBundle\Export\Message\RequestCompanyExport;
+use Augias\CoreBundle\Telemetry\Message\SendTelemetryMessage;
+use Augias\CronBundle\Messenger\SentrySchedulerMiddleware;
+use Augias\InvoiceBundle\Message\SendInvoiceReminderMessage;
+use Augias\SaasBundle\Message\SendOnboardingEmailMessage;
 
 return App::config([
     'framework' => [

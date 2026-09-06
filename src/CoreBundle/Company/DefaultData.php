@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,26 +11,26 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Company;
+namespace Augias\CoreBundle\Company;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Entity\CustomField\CustomField;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Enum\CustomFieldType;
+use Augias\PaymentBundle\Entity\PaymentMethod;
+use Augias\SettingsBundle\Config\ProviderInterface;
+use Augias\SettingsBundle\DTO\Config;
+use Augias\SettingsBundle\Entity\Setting;
 use Carbon\Carbon;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
 use JsonException;
 use RuntimeException;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Entity\CustomField\CustomField;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Enum\CustomFieldType;
-use SolidInvoice\PaymentBundle\Entity\PaymentMethod;
-use SolidInvoice\SettingsBundle\Config\ProviderInterface;
-use SolidInvoice\SettingsBundle\DTO\Config;
-use SolidInvoice\SettingsBundle\Entity\Setting;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use function get_debug_type;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Company\DefaultDataTest
+ * @see \Augias\CoreBundle\Tests\Company\DefaultDataTest
  */
 final readonly class DefaultData
 {

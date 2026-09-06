@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Config;
+namespace Augias\InstallBundle\Config;
 
 use Webmozart\Assert\Assert;
 use function array_key_exists;
 use function sprintf;
 
 /**
- * @see \SolidInvoice\InstallBundle\Tests\Config\DatabaseConfigTest
+ * @see \Augias\InstallBundle\Tests\Config\DatabaseConfigTest
  */
 final class DatabaseConfig
 {

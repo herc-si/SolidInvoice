@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,23 +13,23 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Entity\PaymentMethod;
-use SolidInvoice\PaymentBundle\Entity\SecurityToken;
-use SolidInvoice\PaymentBundle\Form\Methods\AuthorizeNetAim;
-use SolidInvoice\PaymentBundle\Form\Methods\Be2billDirect;
-use SolidInvoice\PaymentBundle\Form\Methods\Be2billOffsite;
-use SolidInvoice\PaymentBundle\Form\Methods\KlarnaCheckout;
-use SolidInvoice\PaymentBundle\Form\Methods\KlarnaInvoice;
-use SolidInvoice\PaymentBundle\Form\Methods\Payex;
-use SolidInvoice\PaymentBundle\Form\Methods\PaypalExpressCheckout;
-use SolidInvoice\PaymentBundle\Form\Methods\PaypalProCheckout;
-use SolidInvoice\PaymentBundle\Form\Methods\StripeCheckout;
-use SolidInvoice\PaymentBundle\Form\Methods\StripeJs;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Entity\PaymentMethod;
+use Augias\PaymentBundle\Entity\SecurityToken;
+use Augias\PaymentBundle\Form\Methods\AuthorizeNetAim;
+use Augias\PaymentBundle\Form\Methods\Be2billDirect;
+use Augias\PaymentBundle\Form\Methods\Be2billOffsite;
+use Augias\PaymentBundle\Form\Methods\KlarnaCheckout;
+use Augias\PaymentBundle\Form\Methods\KlarnaInvoice;
+use Augias\PaymentBundle\Form\Methods\Payex;
+use Augias\PaymentBundle\Form\Methods\PaypalExpressCheckout;
+use Augias\PaymentBundle\Form\Methods\PaypalProCheckout;
+use Augias\PaymentBundle\Form\Methods\StripeCheckout;
+use Augias\PaymentBundle\Form\Methods\StripeJs;
 
 return App::config([
     'parameters' => [
-        'payum.template.layout' => '@SolidInvoicePayment/layout.html.twig',
+        'payum.template.layout' => '@AugiasPayment/layout.html.twig',
     ],
     'payum' => [
         'security' => [

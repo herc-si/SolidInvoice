@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Tests\Listener\Mailer;
+namespace Augias\QuoteBundle\Tests\Listener\Mailer;
 
+use Augias\ClientBundle\Entity\Contact;
+use Augias\QuoteBundle\Email\QuoteEmail;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Event\QuoteEvent;
+use Augias\QuoteBundle\Event\QuoteEvents;
+use Augias\QuoteBundle\Listener\Mailer\QuoteMailerListener;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\QuoteBundle\Email\QuoteEmail;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Event\QuoteEvent;
-use SolidInvoice\QuoteBundle\Event\QuoteEvents;
-use SolidInvoice\QuoteBundle\Listener\Mailer\QuoteMailerListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;

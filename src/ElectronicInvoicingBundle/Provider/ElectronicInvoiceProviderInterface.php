@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Provider;
+namespace Augias\ElectronicInvoicingBundle\Provider;
 
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
-use SolidInvoice\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceSubmission;
+use Augias\ElectronicInvoicingBundle\Enum\ElectronicInvoiceProcessingStatus;
+use Augias\InvoiceBundle\Entity\Invoice;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 /**
@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
  * A provider owns both generating its own document format (Factur-X, UBL,
  * CII, ...) and transmitting it — there is deliberately no shared central
  * generator, so adding a new platform is just a new class implementing this
- * interface, tagged for auto-discovery like SolidInvoice\NotificationBundle's
+ * interface, tagged for auto-discovery like Augias\NotificationBundle's
  * ConfiguratorInterface.
  */
 #[AutoconfigureTag(self::DI_TAG)]
@@ -55,7 +55,7 @@ interface ElectronicInvoiceProviderInterface
 
     /**
      * Classify $submission's provider-reported outcome (its `success` flag and,
-     * once polled, its raw `statusCode`) into SolidInvoice's own normalized
+     * once polled, its raw `statusCode`) into Augias's own normalized
      * outcome — used to display a consistent status alongside the invoice and
      * to decide when to alert users, regardless of which provider sent it.
      */

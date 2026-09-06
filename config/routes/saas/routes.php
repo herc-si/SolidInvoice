@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -14,6 +14,6 @@ declare(strict_types=1);
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {
-    $routingConfigurator->import('@SolidInvoiceSaasBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasSaasBundle/Resources/config/routing.php')
         ->prefix('/billing');
 };

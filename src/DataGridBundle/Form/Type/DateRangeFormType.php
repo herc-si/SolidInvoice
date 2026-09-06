@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Form\Type;
+namespace Augias\DataGridBundle\Form\Type;
 
 use Override;
 use Symfony\Component\Form\AbstractType;
@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @see \SolidInvoice\DataGridBundle\Tests\Form\Type\DateRangeFormTypeTest
+ * @see \Augias\DataGridBundle\Tests\Form\Type\DateRangeFormTypeTest
  * @extends AbstractType<array{end: mixed, start: mixed}>
  */
 final class DateRangeFormType extends AbstractType

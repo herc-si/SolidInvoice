@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Tests\DataGrid;
+namespace Augias\PaymentBundle\Tests\DataGrid;
 
+use Augias\DataGridBundle\GridBuilder\Column\DateTimeColumn;
+use Augias\DataGridBundle\GridBuilder\Column\MoneyColumn;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
+use Augias\PaymentBundle\DataGrid\PaymentsGrid;
+use Augias\PaymentBundle\Entity\Payment;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\DateTimeColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\MoneyColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
-use SolidInvoice\PaymentBundle\DataGrid\PaymentsGrid;
-use SolidInvoice\PaymentBundle\Entity\Payment;
 
 #[CoversClass(PaymentsGrid::class)]
 final class PaymentsGridTest extends TestCase

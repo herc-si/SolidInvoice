@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MailerBundle\Tests\Factory;
+namespace Augias\MailerBundle\Tests\Factory;
 
+use Augias\MailerBundle\Configurator\SesConfigurator;
+use Augias\MailerBundle\Factory\MailerConfigFactory;
+use Augias\SettingsBundle\SystemConfig;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use SolidInvoice\MailerBundle\Configurator\SesConfigurator;
-use SolidInvoice\MailerBundle\Factory\MailerConfigFactory;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\Component\Mailer\Bridge\Amazon\Transport\SesApiAsyncAwsTransport;
 use Symfony\Component\Mailer\Transport;
 

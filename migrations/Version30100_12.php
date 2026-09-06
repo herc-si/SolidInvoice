@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Migrations\AbstractMigration;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 
 final class Version30100_12 extends AbstractMigration

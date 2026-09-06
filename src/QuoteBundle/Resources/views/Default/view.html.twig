@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -7,7 +7,7 @@
  # with this source code in the file LICENSE.
  #}
 
-{% extends "@SolidInvoiceCore/Layout/default.html.twig" %}
+{% extends "@AugiasCore/Layout/default.html.twig" %}
 
 {% block page_title %}
     {{ "quote.title"|trans({"%id%" : quote.quoteId}) }}
@@ -71,7 +71,7 @@
                             </a>
                         </li>
 
-                        {% if quote.status != enum('SolidInvoice\\QuoteBundle\\Enum\\QuoteStatus').Accepted %}
+                        {% if quote.status != enum('Augias\\QuoteBundle\\Enum\\QuoteStatus').Accepted %}
                             <li>
                                 <a class="dropdown-item" href="{{ path('_quotes_edit', {'id' : quote.id}) }}">
                                     {{ ux_icon('tabler:pencil', {width: 16, height: 16}) }}
@@ -168,7 +168,7 @@
                         </li>
                     </ul>
                 </div>
-            {% elseif quote.status == enum('SolidInvoice\\QuoteBundle\\Enum\\QuoteStatus').Accepted and quote.invoice is not null %}
+            {% elseif quote.status == enum('Augias\\QuoteBundle\\Enum\\QuoteStatus').Accepted and quote.invoice is not null %}
                 {# Accepted: View Invoice button #}
                 <a href="{{ path('_invoices_view', {'id' : quote.invoice.id}) }}" class="btn btn-primary btn-hero">
                     {{ ux_icon('tabler:file-invoice', {width: 18, height: 18}) }}
@@ -348,7 +348,7 @@
                 </div>
 
                 {# Custom Fields (admin view shows ALL fields) #}
-                <twig:CustomFieldsList :target="enum('SolidInvoice\\CoreBundle\\Enum\\CustomFieldTarget').QUOTE" :recordId="quote.id" />
+                <twig:CustomFieldsList :target="enum('Augias\\CoreBundle\\Enum\\CustomFieldTarget').QUOTE" :recordId="quote.id" />
 
                 {# Terms & Notes #}
                 {% if quote.terms is not empty or quote.notes is not empty %}

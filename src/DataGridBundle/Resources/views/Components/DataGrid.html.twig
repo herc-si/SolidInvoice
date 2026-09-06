@@ -1,8 +1,8 @@
 {# @var paginator \Pagerfanta\Pagerfanta #}
-{# @var grid \SolidInvoice\DataGridBundle\GridInterface #}
+{# @var grid \Augias\DataGridBundle\GridInterface #}
 
 <div {{ attributes.defaults({class: 'datagrid'}) }}>
-    {% include "@SolidInvoiceCore/flash.html.twig" %}
+    {% include "@AugiasCore/flash.html.twig" %}
 
     {# Main Card Container #}
     <div class="card">
@@ -314,7 +314,7 @@
                         <tr>
                             <td colspan="{{ this.getVisibleColumns()|length + (grid.batchActions|length > 0 ? 1 : 0) + (grid.hasRowDetails() ? 1 : 0) + (grid.actions|length > 0 ? 1 : 0) }}">
                                 {% set is_filtered = search is not empty or gridFilters is not empty %}
-                                {% include '@SolidInvoiceDataGrid/Components/_empty_state.html.twig' with {
+                                {% include '@AugiasDataGrid/Components/_empty_state.html.twig' with {
                                     icon: 'tabler:database-off',
                                     title: is_filtered ? 'datagrid.no_results.label' : grid.getEmptyTitle(),
                                     message: is_filtered ? 'datagrid.no_results.filtered' : grid.getEmptyDescription(),
@@ -472,7 +472,7 @@
                                     <td colspan="{{ this.getVisibleColumns()|length + (grid.batchActions|length > 0 ? 1 : 0) + (grid.hasRowDetails() ? 1 : 0) + (grid.actions|length > 0 ? 1 : 0) }}">
                                         <div class="datagrid-detail-content">
                                             {# Render as Twig component for ApiTokenHistory #}
-                                            {% if grid.getRowDetailTemplate() == '@SolidInvoiceUser/Components/ApiTokenHistory.html.twig' %}
+                                            {% if grid.getRowDetailTemplate() == '@AugiasUser/Components/ApiTokenHistory.html.twig' %}
                                                 <twig:ApiTokenHistory :token="this.entityId(row)" />
                                             {% else %}
                                                 {% include grid.getRowDetailTemplate() with {token: this.entityId(row)} %}

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Tests\Checklist\Items;
+namespace Augias\DashboardBundle\Tests\Checklist\Items;
 
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\DashboardBundle\Checklist\Items\AddTaxRateItem;
-use SolidInvoice\DashboardBundle\Checklist\Items\ConfigurePaymentGatewayItem;
-use SolidInvoice\DashboardBundle\Checklist\Items\CreateClientItem;
-use SolidInvoice\DashboardBundle\Checklist\Items\CustomizeSettingsItem;
-use SolidInvoice\DashboardBundle\Checklist\Items\SendInvoiceItem;
-use SolidInvoice\DashboardBundle\Checklist\Items\UploadLogoItem;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\PaymentBundle\Test\Factory\PaymentMethodFactory;
-use SolidInvoice\SettingsBundle\SystemConfig;
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\DashboardBundle\Checklist\Items\AddTaxRateItem;
+use Augias\DashboardBundle\Checklist\Items\ConfigurePaymentGatewayItem;
+use Augias\DashboardBundle\Checklist\Items\CreateClientItem;
+use Augias\DashboardBundle\Checklist\Items\CustomizeSettingsItem;
+use Augias\DashboardBundle\Checklist\Items\SendInvoiceItem;
+use Augias\DashboardBundle\Checklist\Items\UploadLogoItem;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\PaymentBundle\Test\Factory\PaymentMethodFactory;
+use Augias\SettingsBundle\SystemConfig;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class ChecklistItemsTest extends KernelTestCase

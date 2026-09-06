@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Form\FormFlow;
+namespace Augias\InstallBundle\Form\FormFlow;
 
+use Augias\CoreBundle\ConfigWriter;
+use Augias\InstallBundle\Config\DatabaseConfig;
+use Augias\InstallBundle\Doctrine\Drivers;
+use Augias\InstallBundle\DTO\Installation;
 use Doctrine\DBAL\DriverManager;
 use Override;
 use PDO;
-use SolidInvoice\CoreBundle\ConfigWriter;
-use SolidInvoice\InstallBundle\Config\DatabaseConfig;
-use SolidInvoice\InstallBundle\Doctrine\Drivers;
-use SolidInvoice\InstallBundle\DTO\Installation;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;

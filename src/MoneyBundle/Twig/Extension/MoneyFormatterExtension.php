@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MoneyBundle\Twig\Extension;
+namespace Augias\MoneyBundle\Twig\Extension;
 
+use Augias\MoneyBundle\Formatter\MoneyFormatterInterface;
+use Augias\SettingsBundle\SystemConfig;
 use Brick\Math\BigNumber;
 use Brick\Math\RoundingMode;
 use Money\Currencies\ISOCurrencies;
@@ -21,8 +23,6 @@ use Money\Money;
 use NumberFormatter;
 use Override;
 use RuntimeException;
-use SolidInvoice\MoneyBundle\Formatter\MoneyFormatterInterface;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -30,7 +30,7 @@ use function is_string;
 use function sprintf;
 
 /**
- * @see \SolidInvoice\MoneyBundle\Tests\Twig\Extension\MoneyFormatterExtensionTest
+ * @see \Augias\MoneyBundle\Tests\Twig\Extension\MoneyFormatterExtensionTest
  */
 class MoneyFormatterExtension extends AbstractExtension
 {

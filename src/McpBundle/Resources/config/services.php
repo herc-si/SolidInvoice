@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\McpBundle\Action\DynamicClientRegistration;
-use SolidInvoice\McpBundle\OAuth\KeyManager;
-use SolidInvoice\McpBundle\OAuth\PendingAuthorization;
-use SolidInvoice\McpBundle\OAuth\ServerFactory;
-use SolidInvoice\McpBundle\OAuth\ServerFactoryInterface;
-use SolidInvoice\McpBundle\SolidInvoiceMcpBundle;
+use Augias\McpBundle\Action\DynamicClientRegistration;
+use Augias\McpBundle\AugiasMcpBundle;
+use Augias\McpBundle\OAuth\KeyManager;
+use Augias\McpBundle\OAuth\PendingAuthorization;
+use Augias\McpBundle\OAuth\ServerFactory;
+use Augias\McpBundle\OAuth\ServerFactoryInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
@@ -30,11 +30,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->private();
 
     $services
-        ->load(SolidInvoiceMcpBundle::NAMESPACE . '\\', dirname(__DIR__, 2))
-        ->exclude(dirname(__DIR__, 2) . '/{DependencyInjection,Entity,Resources,Tests,SolidInvoiceMcpBundle.php}');
+        ->load(AugiasMcpBundle::NAMESPACE . '\\', dirname(__DIR__, 2))
+        ->exclude(dirname(__DIR__, 2) . '/{DependencyInjection,Entity,Resources,Tests,AugiasMcpBundle.php}');
 
     $services
-        ->load(SolidInvoiceMcpBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 2) . '/Action')
+        ->load(AugiasMcpBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 2) . '/Action')
         ->tag('controller.service_arguments');
 
     $services->set(KeyManager::class)->arg('$configDir', '%env(SOLIDINVOICE_CONFIG_DIR)%')->arg('$encryptionKey', '%env(SOLIDINVOICE_APP_SECRET)%');

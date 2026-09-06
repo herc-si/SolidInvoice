@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Security\OAuth;
+namespace Augias\UserBundle\Security\OAuth;
 
+use Augias\UserBundle\Action\Security\OAuthConnectCheck;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\OAuth\OAuthUser;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\OAuth2Authenticator;
 use SensitiveParameter;
-use SolidInvoice\UserBundle\Action\Security\OAuthConnectCheck;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\OAuth\OAuthUser;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -36,7 +36,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPasspor
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\Security\OAuth\OAuthAuthenticatorTest
+ * @see \Augias\UserBundle\Tests\Security\OAuth\OAuthAuthenticatorTest
  */
 final class OAuthAuthenticator extends OAuth2Authenticator implements AuthenticationEntryPointInterface
 {

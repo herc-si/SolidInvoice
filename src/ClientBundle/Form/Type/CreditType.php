@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Form\Type;
+namespace Augias\ClientBundle\Form\Type;
 
 use Money\Currency;
 use Override;
@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @see \SolidInvoice\ClientBundle\Tests\Form\Type\CreditTypeTest
+ * @see \Augias\ClientBundle\Tests\Form\Type\CreditTypeTest
  * @extends AbstractType<array{amount: string}>
  */
 class CreditType extends AbstractType

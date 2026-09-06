@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Telemetry\Listener;
+namespace Augias\CoreBundle\Telemetry\Listener;
 
-use SolidInvoice\CoreBundle\Telemetry\Telemetry;
-use SolidInvoice\CoreBundle\Telemetry\TelemetryEvent;
-use SolidInvoice\InvoiceBundle\Event\InvoiceEvent;
-use SolidInvoice\InvoiceBundle\Event\InvoiceEvents;
+use Augias\CoreBundle\Telemetry\Telemetry;
+use Augias\CoreBundle\Telemetry\TelemetryEvent;
+use Augias\InvoiceBundle\Event\InvoiceEvent;
+use Augias\InvoiceBundle\Event\InvoiceEvents;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Telemetry\Listener\InvoiceCreatedTelemetryListenerTest
+ * @see \Augias\CoreBundle\Tests\Telemetry\Listener\InvoiceCreatedTelemetryListenerTest
  */
 #[AsEventListener(event: InvoiceEvents::INVOICE_POST_CREATE)]
 final readonly class InvoiceCreatedTelemetryListener

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Functional;
+namespace Augias\CoreBundle\Tests\Functional;
 
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\CoreBundle\Email\NullEmailVerificationGate;
-use SolidInvoice\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Email\NullEmailVerificationGate;
+use Augias\CoreBundle\Entity\Company;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class EmailVerificationGateBindingTest extends KernelTestCase
@@ -24,7 +24,7 @@ final class EmailVerificationGateBindingTest extends KernelTestCase
     {
         $bundles = self::$kernel->getBundles();
 
-        if (isset($bundles['SolidWorxPlatformSaasBundle']) || isset($bundles['SolidInvoiceSaasBundle'])) {
+        if (isset($bundles['SolidWorxPlatformSaasBundle']) || isset($bundles['AugiasSaasBundle'])) {
             self::markTestSkipped('Test kernel has SaaS bundles loaded; this regression test is for non-SaaS mode only.');
         }
     }

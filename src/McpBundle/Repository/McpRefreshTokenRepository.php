@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Repository;
+namespace Augias\McpBundle\Repository;
 
+use Augias\McpBundle\Entity\McpRefreshToken;
 use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
 use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
-use SolidInvoice\McpBundle\Entity\McpRefreshToken;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 
 /**

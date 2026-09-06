@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\EventSubscriber;
+namespace Augias\SaasBundle\Tests\EventSubscriber;
 
+use Augias\CoreBundle\Feature\NullUpgradePromptProvider;
+use Augias\CoreBundle\Feature\UpgradePromptProvider;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\SaasBundle\EventSubscriber\RecurringInvoiceFeatureGuardListener;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Feature\NullUpgradePromptProvider;
-use SolidInvoice\CoreBundle\Feature\UpgradePromptProvider;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\SaasBundle\EventSubscriber\RecurringInvoiceFeatureGuardListener;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Platform\PlatformBundle\Feature\NoopFeatureGate;
 use Symfony\Component\Translation\Loader\YamlFileLoader;

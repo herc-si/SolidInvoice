@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Contracts;
+namespace Augias\CoreBundle\Contracts;
 
-use SolidInvoice\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Entity\Company;
 
 /**
  * Answers "is this company on a paid plan right now" for dual-platform code
  * (e.g. MCP authorization) that must run on both hosted and self-hosted
  * installs. On SaaS this is backed by the subscription state; on self-hosted
- * the {@see \SolidInvoice\CoreBundle\Subscription\NullPaidSubscriptionGate}
+ * the {@see \Augias\CoreBundle\Subscription\NullPaidSubscriptionGate}
  * default always returns true so no subscription gating is applied.
  */
 interface PaidSubscriptionGateInterface

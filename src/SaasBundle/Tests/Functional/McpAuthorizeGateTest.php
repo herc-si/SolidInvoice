@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Functional;
+namespace Augias\SaasBundle\Tests\Functional;
 
+use Augias\CoreBundle\Contracts\PaidSubscriptionGateInterface;
+use Augias\CoreBundle\Feature\UpgradePromptProvider;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\McpBundle\Entity\OAuthClient;
+use Augias\McpBundle\Repository\OAuthClientRepository;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Test\Factory\UserFactory;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\CoreBundle\Contracts\PaidSubscriptionGateInterface;
-use SolidInvoice\CoreBundle\Feature\UpgradePromptProvider;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\McpBundle\Entity\OAuthClient;
-use SolidInvoice\McpBundle\Repository\OAuthClientRepository;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Test\Factory\UserFactory;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -31,7 +31,7 @@ use Symfony\Component\HttpFoundation\Response;
  * Verifies the MCP Authorize action surfaces a friendly upgrade page when
  * the user's eligible companies are all on plans without `mcp_access`. The
  * happy path (gate enabled, valid client, full consent flow) is covered by
- * `\SolidInvoice\McpBundle\Tests\Functional\ConsentGrantTest` and the broader
+ * `\Augias\McpBundle\Tests\Functional\ConsentGrantTest` and the broader
  * MCP suite — here we only assert the gating edge.
  */
 #[Group('functional')]

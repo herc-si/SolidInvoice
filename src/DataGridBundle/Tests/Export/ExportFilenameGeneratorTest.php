@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Tests\Export;
+namespace Augias\DataGridBundle\Tests\Export;
 
+use Augias\CoreBundle\Export\Enum\ExportFormat;
+use Augias\DataGridBundle\Export\ExportFilenameGenerator;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Export\Enum\ExportFormat;
-use SolidInvoice\DataGridBundle\Export\ExportFilenameGenerator;
 
 #[CoversClass(ExportFilenameGenerator::class)]
 final class ExportFilenameGeneratorTest extends TestCase

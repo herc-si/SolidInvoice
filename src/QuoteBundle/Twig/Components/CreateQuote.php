@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,31 +11,31 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Twig\Components;
+namespace Augias\QuoteBundle\Twig\Components;
 
+use Augias\CatalogBundle\Entity\Product;
+use Augias\CatalogBundle\Repository\ProductRepository;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Service\CustomField\CustomFieldFormWriter;
+use Augias\MoneyBundle\Calculator;
+use Augias\QuoteBundle\DTO\QuoteFormDTO;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Enum\QuoteClientMode;
+use Augias\QuoteBundle\Form\Type\QuoteType;
+use Augias\QuoteBundle\Manager\QuoteFormManager;
+use Augias\QuoteBundle\Model\Graph;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\TaxBundle\Entity\Tax;
+use Augias\TaxBundle\Repository\TaxRepository;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
-use SolidInvoice\CatalogBundle\Entity\Product;
-use SolidInvoice\CatalogBundle\Repository\ProductRepository;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Service\CustomField\CustomFieldFormWriter;
-use SolidInvoice\MoneyBundle\Calculator;
-use SolidInvoice\QuoteBundle\DTO\QuoteFormDTO;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Enum\QuoteClientMode;
-use SolidInvoice\QuoteBundle\Form\Type\QuoteType;
-use SolidInvoice\QuoteBundle\Manager\QuoteFormManager;
-use SolidInvoice\QuoteBundle\Model\Graph;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\TaxBundle\Entity\Tax;
-use SolidInvoice\TaxBundle\Repository\TaxRepository;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -54,7 +54,7 @@ use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
 
 /**
- * @see \SolidInvoice\QuoteBundle\Tests\Twig\Components\CreateQuoteTest
+ * @see \Augias\QuoteBundle\Tests\Twig\Components\CreateQuoteTest
  */
 #[AsLiveComponent()]
 final class CreateQuote extends AbstractController

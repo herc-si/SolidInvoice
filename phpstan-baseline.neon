@@ -49,253 +49,253 @@ parameters:
 			path: src/ApiBundle/State/Processor/RecurringInvoiceTransitionProcessor.php
 
 		-
-			message: '#^Cannot unset property SolidInvoice\\ApiBundle\\Test\\ApiTestCase\:\:\$company because it might have hooks in a subclass\.$#'
+			message: '#^Cannot unset property Augias\\ApiBundle\\Test\\ApiTestCase\:\:\$company because it might have hooks in a subclass\.$#'
 			identifier: unset.possiblyHookedProperty
 			count: 1
 			path: src/ApiBundle/Test/ApiTestCase.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\ApiBundle\\\\GeneratedApiToken'' and SolidInvoice\\ApiBundle\\GeneratedApiToken will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\ApiBundle\\\\GeneratedApiToken'' and Augias\\ApiBundle\\GeneratedApiToken will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/ApiBundle/Tests/ApiTokenManagerTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\UserBundle\\\\Entity\\\\ApiToken'' and SolidInvoice\\UserBundle\\Entity\\ApiToken will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\UserBundle\\\\Entity\\\\ApiToken'' and Augias\\UserBundle\\Entity\\ApiToken will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/ApiBundle/Tests/ApiTokenManagerTest.php
 
 		-
-			message: '#^Method SolidInvoice\\BillBundle\\DataGrid\\BillCategoryGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\BillBundle\\DataGrid\\BillCategoryGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/BillBundle/DataGrid/BillCategoryGrid.php
 
 		-
-			message: '#^Method SolidInvoice\\BillBundle\\DataGrid\\BillCategoryGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\BillBundle\\DataGrid\\BillCategoryGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/BillBundle/DataGrid/BillCategoryGrid.php
 
 		-
-			message: '#^Method SolidInvoice\\BillBundle\\DataGrid\\BillGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\BillBundle\\DataGrid\\BillGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/BillBundle/DataGrid/BillGrid.php
 
 		-
-			message: '#^Method SolidInvoice\\BillBundle\\DataGrid\\BillGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\BillBundle\\DataGrid\\BillGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/BillBundle/DataGrid/BillGrid.php
 
 		-
-			message: '#^Property SolidInvoice\\BillBundle\\Entity\\Bill\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\BillBundle\\Entity\\Bill\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Traits/Entity/TimeStampable.php
 
 		-
-			message: '#^Property SolidInvoice\\BillBundle\\Entity\\Bill\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\BillBundle\\Entity\\Bill\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Traits/Entity/TimeStampable.php
 
 		-
-			message: '#^Property SolidInvoice\\BillBundle\\Entity\\BillCategory\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\BillBundle\\Entity\\BillCategory\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/BillBundle/Entity/BillCategory.php
 
 		-
-			message: '#^Property SolidInvoice\\BillBundle\\Entity\\BillPayment\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\BillBundle\\Entity\\BillPayment\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Traits/Entity/TimeStampable.php
 
 		-
-			message: '#^Property SolidInvoice\\BillBundle\\Entity\\BillPayment\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\BillBundle\\Entity\\BillPayment\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Traits/Entity/TimeStampable.php
 
 		-
-			message: '#^Method SolidInvoice\\ClientBundle\\DataGrid\\ClientGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\ClientBundle\\DataGrid\\ClientGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/ClientBundle/DataGrid/ClientGrid.php
 
 		-
-			message: '#^Method SolidInvoice\\ClientBundle\\DataGrid\\ClientGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\ClientBundle\\DataGrid\\ClientGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/ClientBundle/DataGrid/ClientGrid.php
 
 		-
-			message: '#^Property SolidInvoice\\ClientBundle\\Entity\\Address\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ClientBundle\\Entity\\Address\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ClientBundle/Entity/Address.php
 
 		-
-			message: '#^Property SolidInvoice\\ClientBundle\\Entity\\Address\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ClientBundle\\Entity\\Address\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ClientBundle/Entity/Address.php
 
 		-
-			message: '#^Property SolidInvoice\\ClientBundle\\Entity\\Client\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ClientBundle\\Entity\\Client\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ClientBundle/Entity/Client.php
 
 		-
-			message: '#^Property SolidInvoice\\ClientBundle\\Entity\\Client\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\ClientBundle\\Entity\\Client\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ClientBundle/Entity/Client.php
 
 		-
-			message: '#^Property SolidInvoice\\ClientBundle\\Entity\\Client\:\:\$status type mapping mismatch\: property can contain SolidInvoice\\ClientBundle\\Enum\\ClientStatus\|null but database expects SolidInvoice\\ClientBundle\\Enum\\ClientStatus\.$#'
+			message: '#^Property Augias\\ClientBundle\\Entity\\Client\:\:\$status type mapping mismatch\: property can contain Augias\\ClientBundle\\Enum\\ClientStatus\|null but database expects Augias\\ClientBundle\\Enum\\ClientStatus\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ClientBundle/Entity/Client.php
 
 		-
-			message: '#^Property SolidInvoice\\ClientBundle\\Entity\\Client\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ClientBundle\\Entity\\Client\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ClientBundle/Entity/Client.php
 
 		-
-			message: '#^Property SolidInvoice\\ClientBundle\\Entity\\Contact\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ClientBundle\\Entity\\Contact\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ClientBundle/Entity/Contact.php
 
 		-
-			message: '#^Property SolidInvoice\\ClientBundle\\Entity\\Contact\:\:\$email type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\ClientBundle\\Entity\\Contact\:\:\$email type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ClientBundle/Entity/Contact.php
 
 		-
-			message: '#^Property SolidInvoice\\ClientBundle\\Entity\\Contact\:\:\$firstName type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\ClientBundle\\Entity\\Contact\:\:\$firstName type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ClientBundle/Entity/Contact.php
 
 		-
-			message: '#^Property SolidInvoice\\ClientBundle\\Entity\\Contact\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ClientBundle\\Entity\\Contact\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ClientBundle/Entity/Contact.php
 
 		-
-			message: '#^Property SolidInvoice\\ClientBundle\\Entity\\Credit\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ClientBundle\\Entity\\Credit\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ClientBundle/Entity/Credit.php
 
 		-
-			message: '#^Property SolidInvoice\\ClientBundle\\Entity\\Credit\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ClientBundle\\Entity\\Credit\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ClientBundle/Entity/Credit.php
 
 		-
-			message: '#^Method SolidInvoice\\ClientBundle\\Tests\\Form\\Type\\CreditTypeTest\:\:getTypes\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\ClientBundle\\Tests\\Form\\Type\\CreditTypeTest\:\:getTypes\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/ClientBundle/Tests/Form/Type/CreditTypeTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'' and SolidInvoice\\ClientBundle\\Search\\ClientResultFormatter will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'' and Augias\\ClientBundle\\Search\\ClientResultFormatter will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/ClientBundle/Tests/Search/ClientResultFormatterTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and SolidInvoice\\ClientBundle\\Search\\ClientResultFormatter will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and Augias\\ClientBundle\\Search\\ClientResultFormatter will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/ClientBundle/Tests/Search/ClientResultFormatterTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'' and SolidInvoice\\ClientBundle\\Search\\ContactResultFormatter will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'' and Augias\\ClientBundle\\Search\\ContactResultFormatter will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/ClientBundle/Tests/Search/ContactResultFormatterTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and SolidInvoice\\ClientBundle\\Search\\ContactResultFormatter will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and Augias\\ClientBundle\\Search\\ContactResultFormatter will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/ClientBundle/Tests/Search/ContactResultFormatterTest.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomField\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\CoreBundle\\Entity\\CustomField\\CustomField\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Entity/CustomField/CustomField.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomField\:\:\$fieldKey type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\CoreBundle\\Entity\\CustomField\\CustomField\:\:\$fieldKey type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Entity/CustomField/CustomField.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomField\:\:\$label type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\CoreBundle\\Entity\\CustomField\\CustomField\:\:\$label type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Entity/CustomField/CustomField.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomField\:\:\$target type mapping mismatch\: property can contain SolidInvoice\\CoreBundle\\Enum\\CustomFieldTarget\|null but database expects SolidInvoice\\CoreBundle\\Enum\\CustomFieldTarget\.$#'
+			message: '#^Property Augias\\CoreBundle\\Entity\\CustomField\\CustomField\:\:\$target type mapping mismatch\: property can contain Augias\\CoreBundle\\Enum\\CustomFieldTarget\|null but database expects Augias\\CoreBundle\\Enum\\CustomFieldTarget\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Entity/CustomField/CustomField.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomField\:\:\$type type mapping mismatch\: property can contain SolidInvoice\\CoreBundle\\Enum\\CustomFieldType\|null but database expects SolidInvoice\\CoreBundle\\Enum\\CustomFieldType\.$#'
+			message: '#^Property Augias\\CoreBundle\\Entity\\CustomField\\CustomField\:\:\$type type mapping mismatch\: property can contain Augias\\CoreBundle\\Enum\\CustomFieldType\|null but database expects Augias\\CoreBundle\\Enum\\CustomFieldType\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Entity/CustomField/CustomField.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomField\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\CoreBundle\\Entity\\CustomField\\CustomField\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Entity/CustomField/CustomField.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomFieldValue\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\CoreBundle\\Entity\\CustomField\\CustomFieldValue\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Entity/CustomField/CustomFieldValue.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomFieldValue\:\:\$field type mapping mismatch\: property can contain SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomField\|null but database expects SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomField\.$#'
+			message: '#^Property Augias\\CoreBundle\\Entity\\CustomField\\CustomFieldValue\:\:\$field type mapping mismatch\: property can contain Augias\\CoreBundle\\Entity\\CustomField\\CustomField\|null but database expects Augias\\CoreBundle\\Entity\\CustomField\\CustomField\.$#'
 			identifier: doctrine.associationType
 			count: 1
 			path: src/CoreBundle/Entity/CustomField/CustomFieldValue.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomFieldValue\:\:\$target type mapping mismatch\: property can contain SolidInvoice\\CoreBundle\\Enum\\CustomFieldTarget\|null but database expects SolidInvoice\\CoreBundle\\Enum\\CustomFieldTarget\.$#'
+			message: '#^Property Augias\\CoreBundle\\Entity\\CustomField\\CustomFieldValue\:\:\$target type mapping mismatch\: property can contain Augias\\CoreBundle\\Enum\\CustomFieldTarget\|null but database expects Augias\\CoreBundle\\Enum\\CustomFieldTarget\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Entity/CustomField/CustomFieldValue.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomFieldValue\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\CoreBundle\\Entity\\CustomField\\CustomFieldValue\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Entity/CustomField/CustomFieldValue.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Entity\\Version\:\:\$version type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\CoreBundle\\Entity\\Version\:\:\$version type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Entity/Version.php
@@ -313,37 +313,37 @@ parameters:
 			path: src/CoreBundle/Export/Discovery/EntityDiscovery.php
 
 		-
-			message: '#^Method SolidInvoice\\CoreBundle\\Generator\\BillingIdGenerator\\AutoIncrementIdGenerator\:\:getConfigurationFormType\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\CoreBundle\\Generator\\BillingIdGenerator\\AutoIncrementIdGenerator\:\:getConfigurationFormType\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/CoreBundle/Generator/BillingIdGenerator/AutoIncrementIdGenerator.php
 
 		-
-			message: '#^Method SolidInvoice\\CoreBundle\\Generator\\BillingIdGenerator\\IdGeneratorInterface\:\:getConfigurationFormType\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\CoreBundle\\Generator\\BillingIdGenerator\\IdGeneratorInterface\:\:getConfigurationFormType\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/CoreBundle/Generator/BillingIdGenerator/IdGeneratorInterface.php
 
 		-
-			message: '#^Method SolidInvoice\\CoreBundle\\Generator\\BillingIdGenerator\\RandomNumberGenerator\:\:getConfigurationFormType\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\CoreBundle\\Generator\\BillingIdGenerator\\RandomNumberGenerator\:\:getConfigurationFormType\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/CoreBundle/Generator/BillingIdGenerator/RandomNumberGenerator.php
 
 		-
-			message: '#^Method SolidInvoice\\CoreBundle\\Generator\\BillingIdGenerator\\TimestampGenerator\:\:getConfigurationFormType\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\CoreBundle\\Generator\\BillingIdGenerator\\TimestampGenerator\:\:getConfigurationFormType\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/CoreBundle/Generator/BillingIdGenerator/TimestampGenerator.php
 
 		-
-			message: '#^Method SolidInvoice\\CoreBundle\\Generator\\BillingIdGenerator\\UlidGenerator\:\:getConfigurationFormType\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\CoreBundle\\Generator\\BillingIdGenerator\\UlidGenerator\:\:getConfigurationFormType\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/CoreBundle/Generator/BillingIdGenerator/UlidGenerator.php
 
 		-
-			message: '#^Method SolidInvoice\\CoreBundle\\Generator\\BillingIdGenerator\\UuidGenerator\:\:getConfigurationFormType\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\CoreBundle\\Generator\\BillingIdGenerator\\UuidGenerator\:\:getConfigurationFormType\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/CoreBundle/Generator/BillingIdGenerator/UuidGenerator.php
@@ -361,31 +361,31 @@ parameters:
 			path: src/CoreBundle/Listener/CompanyEventSubscriber.php
 
 		-
-			message: '#^Call to method getFieldKey\(\) on an unknown class SolidInvoice\\CoreBundle\\Serializer\\Normalizer\\CustomField\.$#'
+			message: '#^Call to method getFieldKey\(\) on an unknown class Augias\\CoreBundle\\Serializer\\Normalizer\\CustomField\.$#'
 			identifier: class.notFound
 			count: 1
 			path: src/CoreBundle/Serializer/Normalizer/CustomFieldsNormalizer.php
 
 		-
-			message: '#^Call to method getId\(\) on an unknown class SolidInvoice\\CoreBundle\\Serializer\\Normalizer\\CustomField\.$#'
+			message: '#^Call to method getId\(\) on an unknown class Augias\\CoreBundle\\Serializer\\Normalizer\\CustomField\.$#'
 			identifier: class.notFound
 			count: 1
 			path: src/CoreBundle/Serializer/Normalizer/CustomFieldsNormalizer.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Serializer\\Normalizer\\CustomFieldsNormalizer\:\:\$defsByTarget has unknown class SolidInvoice\\CoreBundle\\Serializer\\Normalizer\\CustomField as its type\.$#'
+			message: '#^Property Augias\\CoreBundle\\Serializer\\Normalizer\\CustomFieldsNormalizer\:\:\$defsByTarget has unknown class Augias\\CoreBundle\\Serializer\\Normalizer\\CustomField as its type\.$#'
 			identifier: class.notFound
 			count: 1
 			path: src/CoreBundle/Serializer/Normalizer/CustomFieldsNormalizer.php
 
 		-
-			message: '#^Property SolidInvoice\\CoreBundle\\Service\\CustomField\\CustomFieldStagingStore\:\:\$entries \(WeakMap\<object, array\<string, array\{field\: SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomField, value\: string\|null\}\>\>\) does not accept WeakMap\<object, array\<string, array\{field\: SolidInvoice\\CoreBundle\\Entity\\CustomField\\CustomField, value\: string\|null\}\>\>\.$#'
+			message: '#^Property Augias\\CoreBundle\\Service\\CustomField\\CustomFieldStagingStore\:\:\$entries \(WeakMap\<object, array\<string, array\{field\: Augias\\CoreBundle\\Entity\\CustomField\\CustomField, value\: string\|null\}\>\>\) does not accept WeakMap\<object, array\<string, array\{field\: Augias\\CoreBundle\\Entity\\CustomField\\CustomField, value\: string\|null\}\>\>\.$#'
 			identifier: assign.propertyType
 			count: 3
 			path: src/CoreBundle/Service/CustomField/CustomFieldStagingStore.php
 
 		-
-			message: '#^Cannot unset property SolidInvoice\\CoreBundle\\Test\\LiveComponentTest\:\:\$company because it might have hooks in a subclass\.$#'
+			message: '#^Cannot unset property Augias\\CoreBundle\\Test\\LiveComponentTest\:\:\$company because it might have hooks in a subclass\.$#'
 			identifier: unset.possiblyHookedProperty
 			count: 1
 			path: src/CoreBundle/Test/LiveComponentTest.php
@@ -403,43 +403,43 @@ parameters:
 			path: src/CoreBundle/Tests/Form/Type/ImageUploadTypeTest.php
 
 		-
-			message: '#^Cannot unset property SolidInvoice\\CoreBundle\\Tests\\FormTestCase\:\:\$company because it might have hooks in a subclass\.$#'
+			message: '#^Cannot unset property Augias\\CoreBundle\\Tests\\FormTestCase\:\:\$company because it might have hooks in a subclass\.$#'
 			identifier: unset.possiblyHookedProperty
 			count: 1
 			path: src/CoreBundle/Tests/FormTestCase.php
 
 		-
-			message: '#^Cannot unset property SolidInvoice\\CoreBundle\\Tests\\FormTestCase\:\:\$company because it might have hooks in a subclass\.$#'
+			message: '#^Cannot unset property Augias\\CoreBundle\\Tests\\FormTestCase\:\:\$company because it might have hooks in a subclass\.$#'
 			identifier: unset.possiblyHookedProperty
 			count: 1
 			path: src/InstallBundle/Test/EnsureApplicationInstalled.php
 
 		-
-			message: '#^Method SolidInvoice\\CoreBundle\\Tests\\FormTestCase\:\:assertFormData\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
+			message: '#^Method Augias\\CoreBundle\\Tests\\FormTestCase\:\:assertFormData\(\) has parameter \$form with generic interface Symfony\\Component\\Form\\FormInterface but does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/CoreBundle/Tests/FormTestCase.php
 
 		-
-			message: '#^Method SolidInvoice\\CoreBundle\\Tests\\FormTestCase\:\:getTypeExtensions\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeExtensionInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\CoreBundle\\Tests\\FormTestCase\:\:getTypeExtensions\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeExtensionInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/CoreBundle/Tests/FormTestCase.php
 
 		-
-			message: '#^Method SolidInvoice\\CoreBundle\\Tests\\FormTestCase\:\:getTypes\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\CoreBundle\\Tests\\FormTestCase\:\:getTypes\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/CoreBundle/Tests/FormTestCase.php
 
 		-
-			message: '#^Call to function is_a\(\) with arguments ''SolidInvoice\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'', ''SolidInvoice\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and true will always evaluate to true\.$#'
+			message: '#^Call to function is_a\(\) with arguments ''Augias\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'', ''Augias\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and true will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: src/CoreBundle/Tests/Search/QualifiedResultFormatterInterfaceTest.php
 
 		-
-			message: '#^Trait SolidInvoice\\CoreBundle\\Traits\\SerializeTrait is used zero times and is not analysed\.$#'
+			message: '#^Trait Augias\\CoreBundle\\Traits\\SerializeTrait is used zero times and is not analysed\.$#'
 			identifier: trait.unused
 			count: 1
 			path: src/CoreBundle/Traits/SerializeTrait.php
@@ -457,13 +457,13 @@ parameters:
 			path: src/DashboardBundle/Tests/WidgetFactoryTest.php
 
 		-
-			message: '#^Cannot unset property SolidInvoice\\DashboardBundle\\Tests\\Widgets\\WidgetTestCase\:\:\$company because it might have hooks in a subclass\.$#'
+			message: '#^Cannot unset property Augias\\DashboardBundle\\Tests\\Widgets\\WidgetTestCase\:\:\$company because it might have hooks in a subclass\.$#'
 			identifier: unset.possiblyHookedProperty
 			count: 1
 			path: src/DashboardBundle/Tests/Widgets/WidgetTestCase.php
 
 		-
-			message: '#^PHPDoc tag @var with type array\<SolidInvoice\\DashboardBundle\\Widgets\\WidgetInterface\> is not subtype of native type SplPriorityQueue\.$#'
+			message: '#^PHPDoc tag @var with type array\<Augias\\DashboardBundle\\Widgets\\WidgetInterface\> is not subtype of native type SplPriorityQueue\.$#'
 			identifier: varTag.nativeType
 			count: 1
 			path: src/DashboardBundle/Twig/Extension/WidgetExtension.php
@@ -475,37 +475,37 @@ parameters:
 			path: src/DataGridBundle/Export/ExportFilenameGenerator.php
 
 		-
-			message: '#^Method SolidInvoice\\DataGridBundle\\Filter\\ColumnFilterInterface\:\:form\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\DataGridBundle\\Filter\\ColumnFilterInterface\:\:form\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/DataGridBundle/Filter/ColumnFilterInterface.php
 
 		-
-			message: '#^Method SolidInvoice\\DataGridBundle\\GridBuilder\\Filter\\ChoiceFilter\:\:form\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\DataGridBundle\\GridBuilder\\Filter\\ChoiceFilter\:\:form\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/DataGridBundle/GridBuilder/Filter/ChoiceFilter.php
 
 		-
-			message: '#^Method SolidInvoice\\DataGridBundle\\GridBuilder\\Filter\\DateRangeFilter\:\:form\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\DataGridBundle\\GridBuilder\\Filter\\DateRangeFilter\:\:form\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/DataGridBundle/GridBuilder/Filter/DateRangeFilter.php
 
 		-
-			message: '#^Method SolidInvoice\\DataGridBundle\\GridBuilder\\Filter\\EntityFilter\:\:form\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\DataGridBundle\\GridBuilder\\Filter\\EntityFilter\:\:form\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/DataGridBundle/GridBuilder/Filter/EntityFilter.php
 
 		-
-			message: '#^Method SolidInvoice\\DataGridBundle\\GridBuilder\\Formatter\\MoneyFormatter\:\:format\(\) never returns Symfony\\Component\\Translation\\TranslatableMessage so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\DataGridBundle\\GridBuilder\\Formatter\\MoneyFormatter\:\:format\(\) never returns Symfony\\Component\\Translation\\TranslatableMessage so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/DataGridBundle/GridBuilder/Formatter/MoneyFormatter.php
 
 		-
-			message: '#^Method SolidInvoice\\DataGridBundle\\GridBuilder\\Formatter\\UrlFormatter\:\:format\(\) never returns Symfony\\Component\\Translation\\TranslatableMessage so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\DataGridBundle\\GridBuilder\\Formatter\\UrlFormatter\:\:format\(\) never returns Symfony\\Component\\Translation\\TranslatableMessage so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/DataGridBundle/GridBuilder/Formatter/UrlFormatter.php
@@ -523,193 +523,193 @@ parameters:
 			path: src/DataGridBundle/Tests/GridBuilder/QueryTest.php
 
 		-
-			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceProviderSetting\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceProviderSetting\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ElectronicInvoicingBundle/Entity/ElectronicInvoiceProviderSetting.php
 
 		-
-			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceProviderSetting\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceProviderSetting\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ElectronicInvoicingBundle/Entity/ElectronicInvoiceProviderSetting.php
 
 		-
-			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceReceipt\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceReceipt\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Traits/Entity/TimeStampable.php
 
 		-
-			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceReceipt\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceReceipt\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Traits/Entity/TimeStampable.php
 
 		-
-			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceSubmission\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceSubmission\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ElectronicInvoicingBundle/Entity/ElectronicInvoiceSubmission.php
 
 		-
-			message: '#^Property SolidInvoice\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceSubmission\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\ElectronicInvoicingBundle\\Entity\\ElectronicInvoiceSubmission\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/ElectronicInvoicingBundle/Entity/ElectronicInvoiceSubmission.php
 
 		-
-			message: '#^Call to function is_a\(\) with arguments ''SolidInvoice\\\\InstallBundle\\\\Step\\\\CreateDatabaseStep'', ''SolidInvoice\\\\InstallBundle\\\\Step\\\\InstallationStepInterface'' and true will always evaluate to true\.$#'
+			message: '#^Call to function is_a\(\) with arguments ''Augias\\\\InstallBundle\\\\Step\\\\CreateDatabaseStep'', ''Augias\\\\InstallBundle\\\\Step\\\\InstallationStepInterface'' and true will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: src/InstallBundle/Tests/Step/CreateDatabaseStepTest.php
 
 		-
-			message: '#^Call to function is_a\(\) with arguments ''SolidInvoice\\\\InstallBundle\\\\Step\\\\RunMigrationsStep'', ''SolidInvoice\\\\InstallBundle\\\\Step\\\\InstallationStepInterface'' and true will always evaluate to true\.$#'
+			message: '#^Call to function is_a\(\) with arguments ''Augias\\\\InstallBundle\\\\Step\\\\RunMigrationsStep'', ''Augias\\\\InstallBundle\\\\Step\\\\InstallationStepInterface'' and true will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: src/InstallBundle/Tests/Step/RunMigrationsStepTest.php
 
 		-
-			message: '#^Instanceof between SolidInvoice\\InvoiceBundle\\Entity\\RecurringOptions and SolidInvoice\\InvoiceBundle\\Entity\\RecurringOptions will always evaluate to true\.$#'
+			message: '#^Instanceof between Augias\\InvoiceBundle\\Entity\\RecurringOptions and Augias\\InvoiceBundle\\Entity\\RecurringOptions will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: src/InvoiceBundle/Cloner/InvoiceCloner.php
 
 		-
-			message: '#^Method SolidInvoice\\InvoiceBundle\\DataGrid\\InvoiceGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\InvoiceBundle\\DataGrid\\InvoiceGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/InvoiceBundle/DataGrid/InvoiceGrid.php
 
 		-
-			message: '#^Method SolidInvoice\\InvoiceBundle\\DataGrid\\InvoiceGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\InvoiceBundle\\DataGrid\\InvoiceGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/InvoiceBundle/DataGrid/InvoiceGrid.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\Invoice\:\:\$client type mapping mismatch\: property can contain SolidInvoice\\ClientBundle\\Entity\\Client\|null but database expects SolidInvoice\\ClientBundle\\Entity\\Client\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\Invoice\:\:\$client type mapping mismatch\: property can contain Augias\\ClientBundle\\Entity\\Client\|null but database expects Augias\\ClientBundle\\Entity\\Client\.$#'
 			identifier: doctrine.associationType
 			count: 1
 			path: src/InvoiceBundle/Entity/Invoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\Invoice\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\Invoice\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/Invoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\Invoice\:\:\$due type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\|null\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\Invoice\:\:\$due type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\|null\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/Invoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\Invoice\:\:\$invoiceDate type mapping mismatch\: property can contain DateTimeInterface but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\Invoice\:\:\$invoiceDate type mapping mismatch\: property can contain DateTimeInterface but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/Invoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\Invoice\:\:\$paidDate type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\|null\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\Invoice\:\:\$paidDate type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\|null\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/Invoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\Invoice\:\:\$status type mapping mismatch\: property can contain SolidInvoice\\InvoiceBundle\\Enum\\InvoiceStatus\|null but database expects SolidInvoice\\InvoiceBundle\\Enum\\InvoiceStatus\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\Invoice\:\:\$status type mapping mismatch\: property can contain Augias\\InvoiceBundle\\Enum\\InvoiceStatus\|null but database expects Augias\\InvoiceBundle\\Enum\\InvoiceStatus\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/Invoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\Invoice\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\Invoice\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/Invoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\Invoice\:\:\$uuid type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\Invoice\:\:\$uuid type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/Invoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\InvoiceReminder\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\InvoiceReminder\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/InvoiceReminder.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\InvoiceReminder\:\:\$invoice type mapping mismatch\: property can contain SolidInvoice\\InvoiceBundle\\Entity\\Invoice\|null but database expects SolidInvoice\\InvoiceBundle\\Entity\\Invoice\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\InvoiceReminder\:\:\$invoice type mapping mismatch\: property can contain Augias\\InvoiceBundle\\Entity\\Invoice\|null but database expects Augias\\InvoiceBundle\\Entity\\Invoice\.$#'
 			identifier: doctrine.associationType
 			count: 1
 			path: src/InvoiceBundle/Entity/InvoiceReminder.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\InvoiceReminder\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\InvoiceReminder\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/InvoiceReminder.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\Line\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\Line\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/Line.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\Line\:\:\$description type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\Line\:\:\$description type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/Line.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\Line\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\Line\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/Line.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/RecurringInvoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$dateEnd type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\|null\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$dateEnd type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\|null\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/RecurringInvoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$dateStart type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$dateStart type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/RecurringInvoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$invoiceTaxes in isset\(\) is not nullable nor uninitialized\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$invoiceTaxes in isset\(\) is not nullable nor uninitialized\.$#'
 			identifier: isset.initializedProperty
 			count: 1
 			path: src/InvoiceBundle/Entity/RecurringInvoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$recurringOptions type mapping mismatch\: database can contain SolidInvoice\\InvoiceBundle\\Entity\\RecurringOptions\|null but property expects SolidInvoice\\InvoiceBundle\\Entity\\RecurringOptions\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$recurringOptions type mapping mismatch\: database can contain Augias\\InvoiceBundle\\Entity\\RecurringOptions\|null but property expects Augias\\InvoiceBundle\\Entity\\RecurringOptions\.$#'
 			identifier: doctrine.associationType
 			count: 1
 			path: src/InvoiceBundle/Entity/RecurringInvoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$status type mapping mismatch\: property can contain SolidInvoice\\InvoiceBundle\\Enum\\RecurringInvoiceStatus\|null but database expects SolidInvoice\\InvoiceBundle\\Enum\\RecurringInvoiceStatus\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$status type mapping mismatch\: property can contain Augias\\InvoiceBundle\\Enum\\RecurringInvoiceStatus\|null but database expects Augias\\InvoiceBundle\\Enum\\RecurringInvoiceStatus\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/RecurringInvoice.php
 
 		-
-			message: '#^Property SolidInvoice\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\InvoiceBundle\\Entity\\RecurringInvoice\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/InvoiceBundle/Entity/RecurringInvoice.php
@@ -733,91 +733,91 @@ parameters:
 			path: src/InvoiceBundle/Tests/Action/SendManualReminderTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'' and SolidInvoice\\InvoiceBundle\\Search\\InvoiceResultFormatter will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'' and Augias\\InvoiceBundle\\Search\\InvoiceResultFormatter will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/InvoiceBundle/Tests/Search/InvoiceResultFormatterTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and SolidInvoice\\InvoiceBundle\\Search\\InvoiceResultFormatter will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and Augias\\InvoiceBundle\\Search\\InvoiceResultFormatter will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/InvoiceBundle/Tests/Search/InvoiceResultFormatterTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'' and SolidInvoice\\InvoiceBundle\\Search\\RecurringInvoiceResultFormatter will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'' and Augias\\InvoiceBundle\\Search\\RecurringInvoiceResultFormatter will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/InvoiceBundle/Tests/Search/RecurringInvoiceResultFormatterTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and SolidInvoice\\InvoiceBundle\\Search\\RecurringInvoiceResultFormatter will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and Augias\\InvoiceBundle\\Search\\RecurringInvoiceResultFormatter will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/InvoiceBundle/Tests/Search/RecurringInvoiceResultFormatterTest.php
 
 		-
-			message: '#^Method SolidInvoice\\MailerBundle\\Factory\\MailerConfigFactory\:\:fromStrings\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\MailerBundle\\Factory\\MailerConfigFactory\:\:fromStrings\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/MailerBundle/Factory/MailerConfigFactory.php
 
 		-
-			message: '#^Property SolidInvoice\\McpBundle\\Entity\\ConsentGrant\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\McpBundle\\Entity\\ConsentGrant\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/McpBundle/Entity/ConsentGrant.php
 
 		-
-			message: '#^Property SolidInvoice\\McpBundle\\Entity\\ConsentGrant\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\McpBundle\\Entity\\ConsentGrant\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/McpBundle/Entity/ConsentGrant.php
 
 		-
-			message: '#^Property SolidInvoice\\McpBundle\\Entity\\McpAccessToken\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\McpBundle\\Entity\\McpAccessToken\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/McpBundle/Entity/McpAccessToken.php
 
 		-
-			message: '#^Property SolidInvoice\\McpBundle\\Entity\\McpAccessToken\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\McpBundle\\Entity\\McpAccessToken\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/McpBundle/Entity/McpAccessToken.php
 
 		-
-			message: '#^Property SolidInvoice\\McpBundle\\Entity\\McpRefreshToken\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\McpBundle\\Entity\\McpRefreshToken\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/McpBundle/Entity/McpRefreshToken.php
 
 		-
-			message: '#^Property SolidInvoice\\McpBundle\\Entity\\McpRefreshToken\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\McpBundle\\Entity\\McpRefreshToken\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/McpBundle/Entity/McpRefreshToken.php
 
 		-
-			message: '#^Property SolidInvoice\\McpBundle\\Entity\\OAuthAuthCode\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\McpBundle\\Entity\\OAuthAuthCode\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/McpBundle/Entity/OAuthAuthCode.php
 
 		-
-			message: '#^Property SolidInvoice\\McpBundle\\Entity\\OAuthAuthCode\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\McpBundle\\Entity\\OAuthAuthCode\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/McpBundle/Entity/OAuthAuthCode.php
 
 		-
-			message: '#^Property SolidInvoice\\McpBundle\\Entity\\OAuthClient\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\McpBundle\\Entity\\OAuthClient\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/McpBundle/Entity/OAuthClient.php
 
 		-
-			message: '#^Property SolidInvoice\\McpBundle\\Entity\\OAuthClient\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\McpBundle\\Entity\\OAuthClient\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/McpBundle/Entity/OAuthClient.php
@@ -829,31 +829,31 @@ parameters:
 			path: src/McpBundle/Mcp/Tool/WorkflowTools.php
 
 		-
-			message: '#^Call to function method_exists\(\) with SolidInvoice\\InvoiceBundle\\Entity\\Invoice\|SolidInvoice\\InvoiceBundle\\Entity\\RecurringInvoice\|SolidInvoice\\QuoteBundle\\Entity\\Quote and ''getStatus'' will always evaluate to true\.$#'
+			message: '#^Call to function method_exists\(\) with Augias\\InvoiceBundle\\Entity\\Invoice\|Augias\\InvoiceBundle\\Entity\\RecurringInvoice\|Augias\\QuoteBundle\\Entity\\Quote and ''getStatus'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: src/McpBundle/Mcp/Tool/WorkflowTools.php
 
 		-
-			message: '#^Method SolidInvoice\\McpBundle\\Repository\\McpRefreshTokenRepository\:\:getNewRefreshToken\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\McpBundle\\Repository\\McpRefreshTokenRepository\:\:getNewRefreshToken\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/McpBundle/Repository/McpRefreshTokenRepository.php
 
 		-
-			message: '#^Method SolidInvoice\\McpBundle\\Repository\\OAuthClientRepository\:\:findByUser\(\) return type has no value type specified in iterable type array\.$#'
+			message: '#^Method Augias\\McpBundle\\Repository\\OAuthClientRepository\:\:findByUser\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/McpBundle/Repository/OAuthClientRepository.php
 
 		-
-			message: '#^Method SolidInvoice\\McpBundle\\Security\\McpOAuthAuthenticator\:\:onAuthenticationFailure\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\McpBundle\\Security\\McpOAuthAuthenticator\:\:onAuthenticationFailure\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/McpBundle/Security/McpOAuthAuthenticator.php
 
 		-
-			message: '#^Parameter \#1 \$id of method SolidInvoice\\UserBundle\\Repository\\UserRepositoryInterface\:\:find\(\) expects int, Symfony\\Component\\Uid\\Ulid given\.$#'
+			message: '#^Parameter \#1 \$id of method Augias\\UserBundle\\Repository\\UserRepositoryInterface\:\:find\(\) expects int, Symfony\\Component\\Uid\\Ulid given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/McpBundle/Security/McpOAuthUserProvider.php
@@ -871,7 +871,7 @@ parameters:
 			path: src/MoneyBundle/Twig/Extension/MoneyFormatterExtension.php
 
 		-
-			message: '#^Property SolidInvoice\\NotificationBundle\\Entity\\UserNotification\:\:\$user type mapping mismatch\: database can contain SolidInvoice\\UserBundle\\Entity\\User\|null but property expects SolidInvoice\\UserBundle\\Entity\\User\.$#'
+			message: '#^Property Augias\\NotificationBundle\\Entity\\UserNotification\:\:\$user type mapping mismatch\: database can contain Augias\\UserBundle\\Entity\\User\|null but property expects Augias\\UserBundle\\Entity\\User\.$#'
 			identifier: doctrine.associationType
 			count: 1
 			path: src/NotificationBundle/Entity/UserNotification.php
@@ -889,79 +889,79 @@ parameters:
 			path: src/NotificationBundle/Tests/Entity/UserNotificationTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with arguments ''SolidInvoice\\\\NotificationBundle\\\\Enum\\\\NotificationCategory'', SolidInvoice\\NotificationBundle\\Enum\\NotificationCategory and string will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with arguments ''Augias\\\\NotificationBundle\\\\Enum\\\\NotificationCategory'', Augias\\NotificationBundle\\Enum\\NotificationCategory and string will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/NotificationBundle/Tests/Notification/NotificationAttributesTest.php
 
 		-
-			message: '#^Method SolidInvoice\\PaymentBundle\\Action\\Done\:\:__invoke\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\PaymentBundle\\Action\\Done\:\:__invoke\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/PaymentBundle/Action/Done.php
 
 		-
-			message: '#^Method SolidInvoice\\PaymentBundle\\Action\\Prepare\:\:__invoke\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\PaymentBundle\\Action\\Prepare\:\:__invoke\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/PaymentBundle/Action/Prepare.php
 
 		-
-			message: '#^Property SolidInvoice\\PaymentBundle\\Entity\\Payment\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\PaymentBundle\\Entity\\Payment\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/PaymentBundle/Entity/Payment.php
 
 		-
-			message: '#^Property SolidInvoice\\PaymentBundle\\Entity\\Payment\:\:\$status type mapping mismatch\: property can contain SolidInvoice\\PaymentBundle\\Enum\\PaymentStatus\|null but database expects SolidInvoice\\PaymentBundle\\Enum\\PaymentStatus\.$#'
+			message: '#^Property Augias\\PaymentBundle\\Entity\\Payment\:\:\$status type mapping mismatch\: property can contain Augias\\PaymentBundle\\Enum\\PaymentStatus\|null but database expects Augias\\PaymentBundle\\Enum\\PaymentStatus\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/PaymentBundle/Entity/Payment.php
 
 		-
-			message: '#^Property SolidInvoice\\PaymentBundle\\Entity\\Payment\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\PaymentBundle\\Entity\\Payment\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/PaymentBundle/Entity/Payment.php
 
 		-
-			message: '#^Property SolidInvoice\\PaymentBundle\\Entity\\PaymentMethod\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\PaymentBundle\\Entity\\PaymentMethod\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/PaymentBundle/Entity/PaymentMethod.php
 
 		-
-			message: '#^Property SolidInvoice\\PaymentBundle\\Entity\\PaymentMethod\:\:\$enabled type mapping mismatch\: database can contain bool\|null but property expects bool\.$#'
+			message: '#^Property Augias\\PaymentBundle\\Entity\\PaymentMethod\:\:\$enabled type mapping mismatch\: database can contain bool\|null but property expects bool\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/PaymentBundle/Entity/PaymentMethod.php
 
 		-
-			message: '#^Property SolidInvoice\\PaymentBundle\\Entity\\PaymentMethod\:\:\$factoryName type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\PaymentBundle\\Entity\\PaymentMethod\:\:\$factoryName type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/PaymentBundle/Entity/PaymentMethod.php
 
 		-
-			message: '#^Property SolidInvoice\\PaymentBundle\\Entity\\PaymentMethod\:\:\$gatewayName type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\PaymentBundle\\Entity\\PaymentMethod\:\:\$gatewayName type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/PaymentBundle/Entity/PaymentMethod.php
 
 		-
-			message: '#^Property SolidInvoice\\PaymentBundle\\Entity\\PaymentMethod\:\:\$internal type mapping mismatch\: database can contain bool\|null but property expects bool\.$#'
+			message: '#^Property Augias\\PaymentBundle\\Entity\\PaymentMethod\:\:\$internal type mapping mismatch\: database can contain bool\|null but property expects bool\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/PaymentBundle/Entity/PaymentMethod.php
 
 		-
-			message: '#^Property SolidInvoice\\PaymentBundle\\Entity\\PaymentMethod\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\PaymentBundle\\Entity\\PaymentMethod\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/PaymentBundle/Entity/PaymentMethod.php
 
 		-
-			message: '#^Property SolidInvoice\\PaymentBundle\\Entity\\PaymentMethod\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\PaymentBundle\\Entity\\PaymentMethod\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/PaymentBundle/Entity/PaymentMethod.php
@@ -979,79 +979,79 @@ parameters:
 			path: src/PaymentBundle/Mcp/PaymentWriteTools.php
 
 		-
-			message: '#^Method SolidInvoice\\PaymentBundle\\Tests\\Form\\Type\\PaymentTypeTest\:\:getTypes\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\PaymentBundle\\Tests\\Form\\Type\\PaymentTypeTest\:\:getTypes\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/PaymentBundle/Tests/Form/Type/PaymentTypeTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'' and SolidInvoice\\PaymentBundle\\Search\\PaymentResultFormatter will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'' and Augias\\PaymentBundle\\Search\\PaymentResultFormatter will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/PaymentBundle/Tests/Search/PaymentResultFormatterTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and SolidInvoice\\PaymentBundle\\Search\\PaymentResultFormatter will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and Augias\\PaymentBundle\\Search\\PaymentResultFormatter will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/PaymentBundle/Tests/Search/PaymentResultFormatterTest.php
 
 		-
-			message: '#^Method SolidInvoice\\QuoteBundle\\DataGrid\\QuoteGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\QuoteBundle\\DataGrid\\QuoteGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/QuoteBundle/DataGrid/QuoteGrid.php
 
 		-
-			message: '#^Method SolidInvoice\\QuoteBundle\\DataGrid\\QuoteGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\QuoteBundle\\DataGrid\\QuoteGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/QuoteBundle/DataGrid/QuoteGrid.php
 
 		-
-			message: '#^Property SolidInvoice\\QuoteBundle\\Entity\\Line\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\QuoteBundle\\Entity\\Line\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/QuoteBundle/Entity/Line.php
 
 		-
-			message: '#^Property SolidInvoice\\QuoteBundle\\Entity\\Line\:\:\$description type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\QuoteBundle\\Entity\\Line\:\:\$description type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/QuoteBundle/Entity/Line.php
 
 		-
-			message: '#^Property SolidInvoice\\QuoteBundle\\Entity\\Line\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\QuoteBundle\\Entity\\Line\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/QuoteBundle/Entity/Line.php
 
 		-
-			message: '#^Property SolidInvoice\\QuoteBundle\\Entity\\Quote\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\QuoteBundle\\Entity\\Quote\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/QuoteBundle/Entity/Quote.php
 
 		-
-			message: '#^Property SolidInvoice\\QuoteBundle\\Entity\\Quote\:\:\$due type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\|null\.$#'
+			message: '#^Property Augias\\QuoteBundle\\Entity\\Quote\:\:\$due type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\|null\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/QuoteBundle/Entity/Quote.php
 
 		-
-			message: '#^Property SolidInvoice\\QuoteBundle\\Entity\\Quote\:\:\$status type mapping mismatch\: property can contain SolidInvoice\\QuoteBundle\\Enum\\QuoteStatus\|null but database expects SolidInvoice\\QuoteBundle\\Enum\\QuoteStatus\.$#'
+			message: '#^Property Augias\\QuoteBundle\\Entity\\Quote\:\:\$status type mapping mismatch\: property can contain Augias\\QuoteBundle\\Enum\\QuoteStatus\|null but database expects Augias\\QuoteBundle\\Enum\\QuoteStatus\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/QuoteBundle/Entity/Quote.php
 
 		-
-			message: '#^Property SolidInvoice\\QuoteBundle\\Entity\\Quote\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\QuoteBundle\\Entity\\Quote\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/QuoteBundle/Entity/Quote.php
 
 		-
-			message: '#^Property SolidInvoice\\QuoteBundle\\Entity\\Quote\:\:\$uuid type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\QuoteBundle\\Entity\\Quote\:\:\$uuid type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/QuoteBundle/Entity/Quote.php
@@ -1063,19 +1063,19 @@ parameters:
 			path: src/QuoteBundle/Mcp/QuoteWriteTools.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'' and SolidInvoice\\QuoteBundle\\Search\\QuoteResultFormatter will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\CoreBundle\\\\Search\\\\QualifiedResultFormatterInterface'' and Augias\\QuoteBundle\\Search\\QuoteResultFormatter will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/QuoteBundle/Tests/Search/QuoteResultFormatterTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and SolidInvoice\\QuoteBundle\\Search\\QuoteResultFormatter will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\CoreBundle\\\\Search\\\\ResultFormatterInterface'' and Augias\\QuoteBundle\\Search\\QuoteResultFormatter will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/QuoteBundle/Tests/Search/QuoteResultFormatterTest.php
 
 		-
-			message: '#^Parameter \$subscriptions of method SolidInvoice\\SaasBundle\\Tests\\Company\\SubscriptionAwareUserCompaniesTest\:\:buildDecorator\(\) expects SplObjectStorage\<SolidInvoice\\CoreBundle\\Entity\\Company, SolidWorx\\Platform\\SaasBundle\\Entity\\Subscription\|null\>, SplObjectStorage\<object, mixed\> given\.$#'
+			message: '#^Parameter \$subscriptions of method Augias\\SaasBundle\\Tests\\Company\\SubscriptionAwareUserCompaniesTest\:\:buildDecorator\(\) expects SplObjectStorage\<Augias\\CoreBundle\\Entity\\Company, SolidWorx\\Platform\\SaasBundle\\Entity\\Subscription\|null\>, SplObjectStorage\<object, mixed\> given\.$#'
 			identifier: argument.type
 			count: 4
 			path: src/SaasBundle/Tests/Company/SubscriptionAwareUserCompaniesTest.php
@@ -1099,13 +1099,13 @@ parameters:
 			path: src/SaasBundle/Tests/Functional/QuoteSendGateTest.php
 
 		-
-			message: '#^Property SolidInvoice\\SettingsBundle\\Entity\\Setting\:\:\$key type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\SettingsBundle\\Entity\\Setting\:\:\$key type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/SettingsBundle/Entity/Setting.php
 
 		-
-			message: '#^Property SolidInvoice\\SettingsBundle\\Entity\\Setting\:\:\$type type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\SettingsBundle\\Entity\\Setting\:\:\$type type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/SettingsBundle/Entity/Setting.php
@@ -1123,7 +1123,7 @@ parameters:
 			path: src/SettingsBundle/Tests/DTO/ConfigTest.php
 
 		-
-			message: '#^Method SolidInvoice\\SettingsBundle\\Tests\\Form\\Type\\SettingsTypeTest\:\:getTypes\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\SettingsBundle\\Tests\\Form\\Type\\SettingsTypeTest\:\:getTypes\(\) return type with generic interface Symfony\\Component\\Form\\FormTypeInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/SettingsBundle/Tests/Form/Type/SettingsTypeTest.php
@@ -1135,319 +1135,319 @@ parameters:
 			path: src/SettingsBundle/Tests/SystemConfigTest.php
 
 		-
-			message: '#^Method SolidInvoice\\SupplierBundle\\DataGrid\\SupplierGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\SupplierBundle\\DataGrid\\SupplierGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/SupplierBundle/DataGrid/SupplierGrid.php
 
 		-
-			message: '#^Method SolidInvoice\\SupplierBundle\\DataGrid\\SupplierGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\SupplierBundle\\DataGrid\\SupplierGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/SupplierBundle/DataGrid/SupplierGrid.php
 
 		-
-			message: '#^Method SolidInvoice\\TaxBundle\\DataGrid\\TaxGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\TaxBundle\\DataGrid\\TaxGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/TaxBundle/DataGrid/TaxGrid.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\InvoiceTax\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\InvoiceTax\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/InvoiceTax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\InvoiceTax\:\:\$nameSnapshot type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\InvoiceTax\:\:\$nameSnapshot type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/InvoiceTax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\InvoiceTax\:\:\$snapshottedAt type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\|null\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\InvoiceTax\:\:\$snapshottedAt type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\|null\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/InvoiceTax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\InvoiceTax\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\InvoiceTax\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/InvoiceTax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\LineTax\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\LineTax\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/LineTax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\LineTax\:\:\$nameSnapshot type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\LineTax\:\:\$nameSnapshot type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/LineTax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\LineTax\:\:\$snapshottedAt type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\|null\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\LineTax\:\:\$snapshottedAt type mapping mismatch\: property can contain DateTimeInterface\|null but database expects DateTimeImmutable\|null\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/LineTax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\LineTax\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\LineTax\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/LineTax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\Tax\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\Tax\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/Tax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\Tax\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\Tax\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/Tax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\Tax\:\:\$rate type mapping mismatch\: property can contain float\|null but database expects float\|int\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\Tax\:\:\$rate type mapping mismatch\: property can contain float\|null but database expects float\|int\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/Tax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\Tax\:\:\$type type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\Tax\:\:\$type type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/Tax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\Tax\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\Tax\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/Tax.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\TaxIdentifier\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\TaxIdentifier\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/TaxIdentifier.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\TaxIdentifier\:\:\$label type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\TaxIdentifier\:\:\$label type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/TaxIdentifier.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\TaxIdentifier\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\TaxIdentifier\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/TaxIdentifier.php
 
 		-
-			message: '#^Property SolidInvoice\\TaxBundle\\Entity\\TaxIdentifier\:\:\$value type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\TaxBundle\\Entity\\TaxIdentifier\:\:\$value type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/TaxBundle/Entity/TaxIdentifier.php
 
 		-
-			message: '#^Method SolidInvoice\\TaxBundle\\Tests\\Listener\\SnapshotTaxesOnIssueListenerTest\:\:makeEvent\(\) return type with generic class Symfony\\Component\\Workflow\\Event\\Event does not specify its types\: T$#'
+			message: '#^Method Augias\\TaxBundle\\Tests\\Listener\\SnapshotTaxesOnIssueListenerTest\:\:makeEvent\(\) return type with generic class Symfony\\Component\\Workflow\\Event\\Event does not specify its types\: T$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/TaxBundle/Tests/Listener/SnapshotTaxesOnIssueListenerTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\TaxBundle\\\\Entity\\\\InvoiceTax'' and SolidInvoice\\TaxBundle\\Entity\\InvoiceTax will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\TaxBundle\\\\Entity\\\\InvoiceTax'' and Augias\\TaxBundle\\Entity\\InvoiceTax will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/TaxBundle/Tests/Repository/InvoiceTaxRepositoryTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SolidInvoice\\\\TaxBundle\\\\Entity\\\\LineTax'' and SolidInvoice\\TaxBundle\\Entity\\LineTax will always evaluate to true\.$#'
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Augias\\\\TaxBundle\\\\Entity\\\\LineTax'' and Augias\\TaxBundle\\Entity\\LineTax will always evaluate to true\.$#'
 			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: src/TaxBundle/Tests/Repository/LineTaxRepositoryTest.php
 
 		-
-			message: '#^Method SolidInvoice\\TaxBundle\\Validator\\Constraints\\ExactlyOneDocument\:\:getTargets\(\) never returns ''property'' so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\TaxBundle\\Validator\\Constraints\\ExactlyOneDocument\:\:getTargets\(\) never returns ''property'' so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/TaxBundle/Validator/Constraints/ExactlyOneDocument.php
 
 		-
-			message: '#^Method SolidInvoice\\TaxBundle\\Validator\\Constraints\\ExactlyOneDocument\:\:getTargets\(\) never returns array\<''class''\|''property''\> so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\TaxBundle\\Validator\\Constraints\\ExactlyOneDocument\:\:getTargets\(\) never returns array\<''class''\|''property''\> so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/TaxBundle/Validator/Constraints/ExactlyOneDocument.php
 
 		-
-			message: '#^Method SolidInvoice\\TaxBundle\\Validator\\Constraints\\ExactlyOneLine\:\:getTargets\(\) never returns ''property'' so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\TaxBundle\\Validator\\Constraints\\ExactlyOneLine\:\:getTargets\(\) never returns ''property'' so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/TaxBundle/Validator/Constraints/ExactlyOneLine.php
 
 		-
-			message: '#^Method SolidInvoice\\TaxBundle\\Validator\\Constraints\\ExactlyOneLine\:\:getTargets\(\) never returns array\<''class''\|''property''\> so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\TaxBundle\\Validator\\Constraints\\ExactlyOneLine\:\:getTargets\(\) never returns array\<''class''\|''property''\> so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/TaxBundle/Validator/Constraints/ExactlyOneLine.php
 
 		-
-			message: '#^Method SolidInvoice\\TaxBundle\\Validator\\Constraints\\IncompatibleTaxConfiguration\:\:getTargets\(\) never returns ''property'' so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\TaxBundle\\Validator\\Constraints\\IncompatibleTaxConfiguration\:\:getTargets\(\) never returns ''property'' so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/TaxBundle/Validator/Constraints/IncompatibleTaxConfiguration.php
 
 		-
-			message: '#^Method SolidInvoice\\TaxBundle\\Validator\\Constraints\\IncompatibleTaxConfiguration\:\:getTargets\(\) never returns array\<''class''\|''property''\> so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\TaxBundle\\Validator\\Constraints\\IncompatibleTaxConfiguration\:\:getTargets\(\) never returns array\<''class''\|''property''\> so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/TaxBundle/Validator/Constraints/IncompatibleTaxConfiguration.php
 
 		-
-			message: '#^Method SolidInvoice\\TaxBundle\\Validator\\Constraints\\SameCompanyAsClient\:\:getTargets\(\) never returns ''property'' so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\TaxBundle\\Validator\\Constraints\\SameCompanyAsClient\:\:getTargets\(\) never returns ''property'' so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/TaxBundle/Validator/Constraints/SameCompanyAsClient.php
 
 		-
-			message: '#^Method SolidInvoice\\TaxBundle\\Validator\\Constraints\\SameCompanyAsClient\:\:getTargets\(\) never returns array\<''class''\|''property''\> so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\TaxBundle\\Validator\\Constraints\\SameCompanyAsClient\:\:getTargets\(\) never returns array\<''class''\|''property''\> so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/TaxBundle/Validator/Constraints/SameCompanyAsClient.php
 
 		-
-			message: '#^Method SolidInvoice\\UserBundle\\DataGrid\\ApiTokenGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\UserBundle\\DataGrid\\ApiTokenGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/UserBundle/DataGrid/ApiTokenGrid.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\ApiToken\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\ApiToken\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/ApiToken.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\ApiToken\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\ApiToken\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/ApiToken.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\ApiToken\:\:\$token type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\ApiToken\:\:\$token type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/ApiToken.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\ApiToken\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\ApiToken\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/ApiToken.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\ApiToken\:\:\$user type mapping mismatch\: property can contain Symfony\\Component\\Security\\Core\\User\\UserInterface\|null but database expects SolidInvoice\\UserBundle\\Entity\\User\|null\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\ApiToken\:\:\$user type mapping mismatch\: property can contain Symfony\\Component\\Security\\Core\\User\\UserInterface\|null but database expects Augias\\UserBundle\\Entity\\User\|null\.$#'
 			identifier: doctrine.associationType
 			count: 1
 			path: src/UserBundle/Entity/ApiToken.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\ApiTokenHistory\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\ApiTokenHistory\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/ApiTokenHistory.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\ApiTokenHistory\:\:\$ip type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\ApiTokenHistory\:\:\$ip type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/ApiTokenHistory.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\ApiTokenHistory\:\:\$method type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\ApiTokenHistory\:\:\$method type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/ApiTokenHistory.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\ApiTokenHistory\:\:\$resource type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\ApiTokenHistory\:\:\$resource type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/ApiTokenHistory.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\ApiTokenHistory\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\ApiTokenHistory\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/ApiTokenHistory.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\ApiTokenHistory\:\:\$userAgent type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\ApiTokenHistory\:\:\$userAgent type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/ApiTokenHistory.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\ResetPasswordRequest\:\:\$user type mapping mismatch\: property can contain SolidInvoice\\UserBundle\\Entity\\User\|null but database expects SolidInvoice\\UserBundle\\Entity\\User\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\ResetPasswordRequest\:\:\$user type mapping mismatch\: property can contain Augias\\UserBundle\\Entity\\User\|null but database expects Augias\\UserBundle\\Entity\\User\.$#'
 			identifier: doctrine.associationType
 			count: 1
 			path: src/UserBundle/Entity/ResetPasswordRequest.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\User\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\User\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/User.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\User\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\User\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/User.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\UserInvitation\:\:\$created type mapping mismatch\: property can contain DateTimeInterface but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\UserInvitation\:\:\$created type mapping mismatch\: property can contain DateTimeInterface but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/UserInvitation.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\UserInvitation\:\:\$invitedBy type mapping mismatch\: property can contain SolidInvoice\\UserBundle\\Entity\\User\|null but database expects SolidInvoice\\UserBundle\\Entity\\User\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\UserInvitation\:\:\$invitedBy type mapping mismatch\: property can contain Augias\\UserBundle\\Entity\\User\|null but database expects Augias\\UserBundle\\Entity\\User\.$#'
 			identifier: doctrine.associationType
 			count: 1
 			path: src/UserBundle/Entity/UserInvitation.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\UserSetting\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\UserSetting\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/UserSetting.php
 
 		-
-			message: '#^Property SolidInvoice\\UserBundle\\Entity\\UserSetting\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\UserBundle\\Entity\\UserSetting\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/UserBundle/Entity/UserSetting.php
 
 		-
-			message: '#^Interface SolidInvoice\\UserBundle\\Repository\\UserRepositoryInterface has PHPDoc tag @method for method findOneBy\(\) parameter \#1 \$criteria with no value type specified in iterable type array\.$#'
+			message: '#^Interface Augias\\UserBundle\\Repository\\UserRepositoryInterface has PHPDoc tag @method for method findOneBy\(\) parameter \#1 \$criteria with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/UserBundle/Repository/UserRepositoryInterface.php
 
 		-
-			message: '#^Method SolidInvoice\\UserBundle\\Security\\OAuth\\OAuthAuthenticator\:\:onAuthenticationFailure\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\UserBundle\\Security\\OAuth\\OAuthAuthenticator\:\:onAuthenticationFailure\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/UserBundle/Security/OAuth/OAuthAuthenticator.php
 
 		-
-			message: '#^Method SolidInvoice\\UserBundle\\Security\\OAuth\\OAuthAuthenticator\:\:onAuthenticationSuccess\(\) never returns null so it can be removed from the return type\.$#'
+			message: '#^Method Augias\\UserBundle\\Security\\OAuth\\OAuthAuthenticator\:\:onAuthenticationSuccess\(\) never returns null so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
 			path: src/UserBundle/Security/OAuth/OAuthAuthenticator.php
@@ -1477,19 +1477,19 @@ parameters:
 			path: src/UserBundle/Twig/Components/TwoFactorSettings.php
 
 		-
-			message: '#^Instanceof between SolidInvoice\\UserBundle\\Entity\\User and SolidWorx\\Platform\\PlatformBundle\\Contracts\\Security\\TwoFactor\\UserTwoFactorInterface will always evaluate to true\.$#'
+			message: '#^Instanceof between Augias\\UserBundle\\Entity\\User and SolidWorx\\Platform\\PlatformBundle\\Contracts\\Security\\TwoFactor\\UserTwoFactorInterface will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 4
 			path: src/UserBundle/Twig/Components/TwoFactorSettings.php
 
 		-
-			message: '#^Instanceof between SolidInvoice\\UserBundle\\Entity\\User and Symfony\\Component\\Security\\Core\\User\\UserInterface will always evaluate to true\.$#'
+			message: '#^Instanceof between Augias\\UserBundle\\Entity\\User and Symfony\\Component\\Security\\Core\\User\\UserInterface will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: src/UserBundle/Twig/Components/TwoFactorSettings.php
 
 		-
-			message: '#^Method SolidInvoice\\UserBundle\\Twig\\Components\\TwoFactorSettings\:\:instantiateForm\(\) return type with generic interface Symfony\\Component\\Form\\FormInterface does not specify its types\: TData$#'
+			message: '#^Method Augias\\UserBundle\\Twig\\Components\\TwoFactorSettings\:\:instantiateForm\(\) return type with generic interface Symfony\\Component\\Form\\FormInterface does not specify its types\: TData$#'
 			identifier: missingType.generics
 			count: 1
 			path: src/UserBundle/Twig/Components/TwoFactorSettings.php
@@ -1501,25 +1501,25 @@ parameters:
 			path: src/UserBundle/Twig/Components/UserNotification.php
 
 		-
-			message: '#^Property SolidInvoice\\CatalogBundle\\Entity\\Product\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\CatalogBundle\\Entity\\Product\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CatalogBundle/Entity/Product.php
 
 		-
-			message: '#^Property SolidInvoice\\CatalogBundle\\Entity\\ProductCategory\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			message: '#^Property Augias\\CatalogBundle\\Entity\\ProductCategory\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CatalogBundle/Entity/ProductCategory.php
 
 		-
-			message: '#^Property SolidInvoice\\CatalogBundle\\Entity\\Product\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\CatalogBundle\\Entity\\Product\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Traits/Entity/TimeStampable.php
 
 		-
-			message: '#^Property SolidInvoice\\CatalogBundle\\Entity\\Product\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			message: '#^Property Augias\\CatalogBundle\\Entity\\Product\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Traits/Entity/TimeStampable.php

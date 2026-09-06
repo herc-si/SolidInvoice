@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,25 +11,25 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Functional;
+namespace Augias\InvoiceBundle\Tests\Functional;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\ClientBundle\Test\Factory\ContactFactory;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Command\SendInvoiceRemindersCommand;
+use Augias\InvoiceBundle\Entity\ReminderStatus;
+use Augias\InvoiceBundle\Entity\ReminderType;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\MessageHandler\SendInvoiceReminderHandler;
+use Augias\InvoiceBundle\Notification\InvoiceReminderNotification;
+use Augias\InvoiceBundle\Notification\InvoiceReminderStoppedNotification;
+use Augias\InvoiceBundle\Repository\InvoiceReminderRepository;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\InvoiceBundle\Test\Factory\InvoiceFactory;
+use Augias\SettingsBundle\Entity\Setting;
+use Augias\SettingsBundle\Repository\SettingsRepository;
 use Carbon\CarbonImmutable;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\ClientBundle\Test\Factory\ContactFactory;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Command\SendInvoiceRemindersCommand;
-use SolidInvoice\InvoiceBundle\Entity\ReminderStatus;
-use SolidInvoice\InvoiceBundle\Entity\ReminderType;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\MessageHandler\SendInvoiceReminderHandler;
-use SolidInvoice\InvoiceBundle\Notification\InvoiceReminderNotification;
-use SolidInvoice\InvoiceBundle\Notification\InvoiceReminderStoppedNotification;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceReminderRepository;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\InvoiceBundle\Test\Factory\InvoiceFactory;
-use SolidInvoice\SettingsBundle\Entity\Setting;
-use SolidInvoice\SettingsBundle\Repository\SettingsRepository;
 use SolidWorx\Platform\PlatformBundle\Console\IO;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;

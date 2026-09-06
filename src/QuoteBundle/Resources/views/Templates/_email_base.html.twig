@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -10,8 +10,8 @@
  # provides a few colour/copy variables and (optionally) overrides the
  # `intro` and `signoff` blocks.
  #}
-{% extends "@SolidInvoiceCore/Layout/Email/base.html.twig" %}
-{% import "@SolidInvoiceCore/Layout/Email/components.html.twig" as email %}
+{% extends "@AugiasCore/Layout/Email/base.html.twig" %}
+{% import "@AugiasCore/Layout/Email/components.html.twig" as email %}
 
 {% set quotePath = url("_view_quote_external", {"uuid" : quote.uuid}) %}
 {% set accent = accent|default('#2e963a') %}

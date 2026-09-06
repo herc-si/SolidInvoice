@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Export;
+namespace Augias\CoreBundle\Export;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\ExportJob;
+use Augias\CoreBundle\Export\Discovery\EntityDiscovery;
+use Augias\CoreBundle\Export\Discovery\EntityExportSpec;
+use Augias\CoreBundle\Export\Enum\ExportFormat;
+use Augias\CoreBundle\Export\Serializer\ExportSerializer;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\ExportJob;
-use SolidInvoice\CoreBundle\Export\Discovery\EntityDiscovery;
-use SolidInvoice\CoreBundle\Export\Discovery\EntityExportSpec;
-use SolidInvoice\CoreBundle\Export\Enum\ExportFormat;
-use SolidInvoice\CoreBundle\Export\Serializer\ExportSerializer;
 use SplFileInfo;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Filesystem\Filesystem;

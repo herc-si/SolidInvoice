@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Form\Extension;
+namespace Augias\SaasBundle\Tests\Form\Extension;
 
+use Augias\SaasBundle\Feature\RequiredPlanLabelProvider;
+use Augias\SaasBundle\Form\Extension\FeatureRestrictedExtension;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\SaasBundle\Feature\RequiredPlanLabelProvider;
-use SolidInvoice\SaasBundle\Form\Extension\FeatureRestrictedExtension;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;

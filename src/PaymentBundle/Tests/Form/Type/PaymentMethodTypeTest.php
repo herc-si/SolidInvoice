@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Tests\Form\Type;
+namespace Augias\PaymentBundle\Tests\Form\Type;
 
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
-use SolidInvoice\PaymentBundle\Form\Type\PaymentMethodType;
+use Augias\CoreBundle\Tests\FormTestCase;
+use Augias\PaymentBundle\Form\Type\PaymentMethodType;
 
 final class PaymentMethodTypeTest extends FormTestCase
 {

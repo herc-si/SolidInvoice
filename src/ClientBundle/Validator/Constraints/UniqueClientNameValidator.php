@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Validator\Constraints;
+namespace Augias\ClientBundle\Validator\Constraints;
 
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Repository\ClientRepository;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use function is_string;
 
 /**
- * @see \SolidInvoice\ClientBundle\Tests\Validator\Constraints\UniqueClientNameValidatorTest
+ * @see \Augias\ClientBundle\Tests\Validator\Constraints\UniqueClientNameValidatorTest
  */
 final class UniqueClientNameValidator extends ConstraintValidator
 {

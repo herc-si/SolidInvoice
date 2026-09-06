@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Action;
+namespace Augias\PaymentBundle\Action;
 
+use Augias\CoreBundle\Traits\SaveableTrait;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Enum\PaymentStatus;
+use Augias\PaymentBundle\Event\PaymentCompleteEvent;
+use Augias\PaymentBundle\Event\PaymentEvents;
+use Augias\PaymentBundle\PaymentAction\Request\StatusRequest;
 use Carbon\Carbon;
 use Payum\Core\Model\Token;
 use Payum\Core\Payum;
-use SolidInvoice\CoreBundle\Traits\SaveableTrait;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Enum\PaymentStatus;
-use SolidInvoice\PaymentBundle\Event\PaymentCompleteEvent;
-use SolidInvoice\PaymentBundle\Event\PaymentEvents;
-use SolidInvoice\PaymentBundle\PaymentAction\Request\StatusRequest;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

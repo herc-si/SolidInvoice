@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Action;
+namespace Augias\CoreBundle\Action;
 
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Form\Type\CompanyType;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\SaasBundle\Plan\DefaultPlanProvider;
+use Augias\UserBundle\Entity\User;
 use DateInterval;
 use Money\Currencies\ISOCurrencies;
 use Money\Formatter\IntlMoneyFormatter;
 use Money\Money;
 use NumberFormatter;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Form\Type\CompanyType;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\SaasBundle\Plan\DefaultPlanProvider;
-use SolidInvoice\UserBundle\Entity\User;
 use SolidWorx\Platform\SaasBundle\Entity\Plan;
 use SolidWorx\Platform\SaasBundle\Trial\TrialManagerInterface;
 use SolidWorx\Toggler\ToggleInterface;
@@ -95,7 +95,7 @@ final class CreateCompany extends AbstractController
         }
 
         return $this->render(
-            '@SolidInvoiceCore/Company/create.html.twig',
+            '@AugiasCore/Company/create.html.twig',
             [
                 'form' => $form,
                 'allowCancel' => ! $user->getCompanies()->isEmpty(),

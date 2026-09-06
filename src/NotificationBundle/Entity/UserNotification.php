@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,22 +11,22 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Entity;
+namespace Augias\NotificationBundle\Entity;
 
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\NotificationBundle\Repository\UserNotificationRepository;
+use Augias\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\NotificationBundle\Repository\UserNotificationRepository;
-use SolidInvoice\UserBundle\Entity\User;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * @see \SolidInvoice\NotificationBundle\Tests\Entity\UserNotificationTest
+ * @see \Augias\NotificationBundle\Tests\Entity\UserNotificationTest
  */
 #[ORM\Entity(repositoryClass: UserNotificationRepository::class)]
 #[ORM\Table(name: UserNotification::TABLE_NAME)]

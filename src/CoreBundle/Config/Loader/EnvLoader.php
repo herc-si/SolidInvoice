@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Config\Loader;
+namespace Augias\CoreBundle\Config\Loader;
 
-use SolidInvoice\CoreBundle\ConfigWriter;
-use SolidInvoice\InstallBundle\Config\DatabaseConfig;
+use Augias\CoreBundle\ConfigWriter;
+use Augias\InstallBundle\Config\DatabaseConfig;
 use Symfony\Component\DependencyInjection\EnvVarLoaderInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use function strtoupper;

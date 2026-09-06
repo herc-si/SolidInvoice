@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,24 +11,24 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Tests\Cloner;
+namespace Augias\QuoteBundle\Tests\Cloner;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Generator\BillingIdGenerator;
+use Augias\CoreBundle\Generator\BillingIdGenerator\IdGeneratorInterface;
+use Augias\QuoteBundle\Cloner\QuoteCloner;
+use Augias\QuoteBundle\Entity\Line;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Enum\QuoteStatus;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\TaxBundle\Entity\LineTax;
+use Augias\TaxBundle\Entity\Tax;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use Carbon\Carbon;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator\IdGeneratorInterface;
-use SolidInvoice\QuoteBundle\Cloner\QuoteCloner;
-use SolidInvoice\QuoteBundle\Entity\Line;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\TaxBundle\Entity\LineTax;
-use SolidInvoice\TaxBundle\Entity\Tax;
 use Symfony\Component\DependencyInjection\ServiceLocator;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Workflow\Definition;

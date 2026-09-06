@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Repository;
+namespace Augias\InvoiceBundle\Repository;
 
+use Augias\InvoiceBundle\Entity\RecurringOptions;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\InvoiceBundle\Entity\RecurringOptions;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 
 /**

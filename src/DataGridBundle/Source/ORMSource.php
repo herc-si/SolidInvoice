@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Source;
+namespace Augias\DataGridBundle\Source;
 
+use Augias\DataGridBundle\GridBuilder\Query;
+use Augias\DataGridBundle\GridInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
-use SolidInvoice\DataGridBundle\GridInterface;
 
 /**
- * @see \SolidInvoice\DataGridBundle\Tests\Source\ORMSourceTest
+ * @see \Augias\DataGridBundle\Tests\Source\ORMSourceTest
  */
 class ORMSource implements SourceInterface
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Action;
+namespace Augias\CoreBundle\Action;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Contracts\EmailVerificationGateInterface;
+use Augias\CoreBundle\Pdf\Generator;
+use Augias\CoreBundle\Response\PdfResponse;
+use Augias\CoreBundle\Templates\BillingTemplateChannel;
+use Augias\CoreBundle\Templates\BillingTemplateResolver;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\QuoteBundle\Entity\Quote;
 use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
 use Mpdf\MpdfException;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Contracts\EmailVerificationGateInterface;
-use SolidInvoice\CoreBundle\Pdf\Generator;
-use SolidInvoice\CoreBundle\Response\PdfResponse;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateChannel;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\QuoteBundle\Entity\Quote;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,16 +60,16 @@ class ViewBilling
      * @return array{quote: Quote, title: string, template: string}|Response
      * @throws InvalidArgumentException|InvalidParameterException|MissingMandatoryParametersException|NotFoundHttpException|RouteNotFoundException|LoaderError|MpdfException|RuntimeError|SyntaxError
      */
-    #[Template('@SolidInvoiceCore/View/quote.html.twig')]
+    #[Template('@AugiasCore/View/quote.html.twig')]
     public function quoteAction(Request $request, string $uuid): array | Response
     {
         $options = [
             'repository' => Quote::class,
             'route' => '_quotes_view',
-            'template' => '@SolidInvoiceQuote/quote_template.html.twig',
+            'template' => '@AugiasQuote/quote_template.html.twig',
             'uuid' => $uuid,
             'entity' => 'quote',
-            'pdfTemplate' => '@SolidInvoiceQuote/Pdf/quote.html.twig',
+            'pdfTemplate' => '@AugiasQuote/Pdf/quote.html.twig',
         ];
 
         return $this->createResponse($request, $options);
@@ -81,16 +81,16 @@ class ViewBilling
      * @return array{invoice: Invoice, title: string, template: string}|Response
      * @throws InvalidArgumentException|InvalidParameterException|MissingMandatoryParametersException|NotFoundHttpException|RouteNotFoundException|LoaderError|MpdfException|RuntimeError|SyntaxError
      */
-    #[Template('@SolidInvoiceCore/View/invoice.html.twig')]
+    #[Template('@AugiasCore/View/invoice.html.twig')]
     public function invoiceAction(Request $request, string $uuid): array | Response
     {
         $options = [
             'repository' => Invoice::class,
             'route' => '_invoices_view',
-            'template' => '@SolidInvoiceInvoice/external_invoice_view.html.twig',
+            'template' => '@AugiasInvoice/external_invoice_view.html.twig',
             'uuid' => $uuid,
             'entity' => 'invoice',
-            'pdfTemplate' => '@SolidInvoiceInvoice/Pdf/invoice.html.twig',
+            'pdfTemplate' => '@AugiasInvoice/Pdf/invoice.html.twig',
         ];
 
         return $this->createResponse($request, $options);

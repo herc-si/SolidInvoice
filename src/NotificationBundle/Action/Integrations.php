@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\NotificationBundle\Action;
+namespace Augias\NotificationBundle\Action;
 
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +21,7 @@ final class Integrations extends AbstractController
     /**
      * @return array{}
      */
-    #[Template('@SolidInvoiceNotification/Integration/add.html.twig')]
+    #[Template('@AugiasNotification/Integration/add.html.twig')]
     public function __invoke(): array
     {
         return [];

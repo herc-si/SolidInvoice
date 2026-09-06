@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Action;
+namespace Augias\ElectronicInvoicingBundle\Action;
 
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
+use Augias\ElectronicInvoicingBundle\Repository\ElectronicInvoiceReceiptRepository;
 use InvalidArgumentException;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
-use SolidInvoice\ElectronicInvoicingBundle\Repository\ElectronicInvoiceReceiptRepository;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,9 +25,9 @@ use function sprintf;
 
 /**
  * Serves the locally-stored document for a received electronic invoice — the
- * inbound counterpart of {@see \SolidInvoice\CoreBundle\Export\Action\DownloadExport},
+ * inbound counterpart of {@see \Augias\CoreBundle\Export\Action\DownloadExport},
  * whose realpath traversal guard is mirrored here for the same reason: the
- * stored path always comes from {@see \SolidInvoice\ElectronicInvoicingBundle\Manager\ElectronicInvoiceReceiptManager},
+ * stored path always comes from {@see \Augias\ElectronicInvoicingBundle\Manager\ElectronicInvoiceReceiptManager},
  * but a malformed value must never be able to serve an arbitrary file.
  *
  * Tenant isolation is enforced by ElectronicInvoiceReceiptRepository::find()

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,26 +11,26 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Manager;
+namespace Augias\BillBundle\Manager;
 
+use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Entity\BillPayment;
+use Augias\BillBundle\Enum\BillPaymentMethod;
+use Augias\BillBundle\Model\Graph;
 use Brick\Math\BigNumber;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\BillBundle\Entity\BillPayment;
-use SolidInvoice\BillBundle\Enum\BillPaymentMethod;
-use SolidInvoice\BillBundle\Model\Graph;
 use Symfony\Component\Workflow\WorkflowInterface;
 
 /**
  * Records money paid against a {@see Bill} and reacts to it — the
- * accounts-payable equivalent of how a captured {@see \SolidInvoice\PaymentBundle\Entity\Payment}
- * eventually drives an Invoice to {@see \SolidInvoice\InvoiceBundle\Enum\InvoiceStatus::Paid}.
+ * accounts-payable equivalent of how a captured {@see \Augias\PaymentBundle\Entity\Payment}
+ * eventually drives an Invoice to {@see \Augias\InvoiceBundle\Enum\InvoiceStatus::Paid}.
  * There's no Payum capture callback to hook here, so this manager itself
  * decides when the bill is fully paid and applies the `pay` transition,
  * right after persisting the payment.
  *
- * @see \SolidInvoice\BillBundle\Tests\Manager\BillPaymentManagerTest
+ * @see \Augias\BillBundle\Tests\Manager\BillPaymentManagerTest
  */
 final readonly class BillPaymentManager
 {

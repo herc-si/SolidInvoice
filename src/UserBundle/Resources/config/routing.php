@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,25 +11,25 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use SolidInvoice\UserBundle\Action\AcceptInvitation;
-use SolidInvoice\UserBundle\Action\ApiIndex;
-use SolidInvoice\UserBundle\Action\DeleteUserInvite;
-use SolidInvoice\UserBundle\Action\EditProfile;
-use SolidInvoice\UserBundle\Action\ForgotPassword\Check;
-use SolidInvoice\UserBundle\Action\ForgotPassword\Request;
-use SolidInvoice\UserBundle\Action\ForgotPassword\Reset;
-use SolidInvoice\UserBundle\Action\InviteUser;
-use SolidInvoice\UserBundle\Action\Notifications;
-use SolidInvoice\UserBundle\Action\Profile;
-use SolidInvoice\UserBundle\Action\Register;
-use SolidInvoice\UserBundle\Action\ResendUserInvite;
-use SolidInvoice\UserBundle\Action\Security\ChangePassword;
-use SolidInvoice\UserBundle\Action\Security\OAuthConnect;
-use SolidInvoice\UserBundle\Action\Security\OAuthConnectCheck;
-use SolidInvoice\UserBundle\Action\Security\TwoFactorIndex;
-use SolidInvoice\UserBundle\Action\Security\VerifyEmail;
-use SolidInvoice\UserBundle\Action\Users;
-use SolidInvoice\UserBundle\Onboarding\Action\Onboarding;
+use Augias\UserBundle\Action\AcceptInvitation;
+use Augias\UserBundle\Action\ApiIndex;
+use Augias\UserBundle\Action\DeleteUserInvite;
+use Augias\UserBundle\Action\EditProfile;
+use Augias\UserBundle\Action\ForgotPassword\Check;
+use Augias\UserBundle\Action\ForgotPassword\Request;
+use Augias\UserBundle\Action\ForgotPassword\Reset;
+use Augias\UserBundle\Action\InviteUser;
+use Augias\UserBundle\Action\Notifications;
+use Augias\UserBundle\Action\Profile;
+use Augias\UserBundle\Action\Register;
+use Augias\UserBundle\Action\ResendUserInvite;
+use Augias\UserBundle\Action\Security\ChangePassword;
+use Augias\UserBundle\Action\Security\OAuthConnect;
+use Augias\UserBundle\Action\Security\OAuthConnectCheck;
+use Augias\UserBundle\Action\Security\TwoFactorIndex;
+use Augias\UserBundle\Action\Security\VerifyEmail;
+use Augias\UserBundle\Action\Users;
+use Augias\UserBundle\Onboarding\Action\Onboarding;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {

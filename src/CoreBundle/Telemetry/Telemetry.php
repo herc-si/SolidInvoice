@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Telemetry;
+namespace Augias\CoreBundle\Telemetry;
 
 use const PHP_OS_FAMILY;
 use const PHP_VERSION;
+use Augias\CoreBundle\AugiasCoreBundle;
+use Augias\CoreBundle\ConfigWriter;
+use Augias\CoreBundle\Telemetry\Message\SendTelemetryMessage;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
@@ -25,9 +28,6 @@ use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SQLitePlatform;
 use Doctrine\DBAL\Platforms\SQLServerPlatform;
 use PDO;
-use SolidInvoice\CoreBundle\ConfigWriter;
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
-use SolidInvoice\CoreBundle\Telemetry\Message\SendTelemetryMessage;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Throwable;
@@ -45,7 +45,7 @@ use function strtolower;
  * — only the installation's technical configuration and named, fixed-vocabulary
  * events.
  *
- * @see \SolidInvoice\CoreBundle\Tests\Telemetry\TelemetryTest
+ * @see \Augias\CoreBundle\Tests\Telemetry\TelemetryTest
  */
 final readonly class Telemetry
 {
@@ -91,7 +91,7 @@ final readonly class Telemetry
         try {
             $this->bus->dispatch(new SendTelemetryMessage('event', [
                 'build_id' => $this->buildId,
-                'app' => strtolower(SolidInvoiceCoreBundle::APP_NAME),
+                'app' => strtolower(AugiasCoreBundle::APP_NAME),
                 'event' => $event->value,
                 'properties' => $properties,
             ]));
@@ -112,7 +112,7 @@ final readonly class Telemetry
         }
 
         try {
-            $version = SolidInvoiceCoreBundle::VERSION;
+            $version = AugiasCoreBundle::VERSION;
 
             if (! in_array($this->lastVersion, [null, '', $version], true)) {
                 $this->event(TelemetryEvent::Update, [
@@ -125,7 +125,7 @@ final readonly class Telemetry
 
             $this->bus->dispatch(new SendTelemetryMessage('ping', [
                 'build_id' => $this->buildId,
-                'app' => strtolower(SolidInvoiceCoreBundle::APP_NAME),
+                'app' => strtolower(AugiasCoreBundle::APP_NAME),
                 'version' => $version,
                 ...$this->buildEnvironment(),
             ]));

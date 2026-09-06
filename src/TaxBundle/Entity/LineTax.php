@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Entity;
+namespace Augias\TaxBundle\Entity;
 
 use ApiPlatform\Metadata\ApiProperty;
+use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\InvoiceBundle\Entity\Line as InvoiceLine;
+use Augias\QuoteBundle\Entity\Line as QuoteLine;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Enum\TaxType;
+use Augias\TaxBundle\Repository\LineTaxRepository;
+use Augias\TaxBundle\Validator\Constraints\ExactlyOneLine;
+use Augias\TaxBundle\Validator\Constraints\IncompatibleTaxConfiguration;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigInteger;
 use Brick\Math\BigNumber;
@@ -23,16 +33,6 @@ use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Doctrine\Type\BigIntegerType;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\InvoiceBundle\Entity\Line as InvoiceLine;
-use SolidInvoice\QuoteBundle\Entity\Line as QuoteLine;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Enum\TaxType;
-use SolidInvoice\TaxBundle\Repository\LineTaxRepository;
-use SolidInvoice\TaxBundle\Validator\Constraints\ExactlyOneLine;
-use SolidInvoice\TaxBundle\Validator\Constraints\IncompatibleTaxConfiguration;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Serializer\Attribute\Groups;
@@ -40,7 +40,7 @@ use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @see \SolidInvoice\TaxBundle\Tests\Entity\LineTaxTest
+ * @see \Augias\TaxBundle\Tests\Entity\LineTaxTest
  */
 #[ORM\Table(name: LineTax::TABLE_NAME)]
 #[ORM\Entity(repositoryClass: LineTaxRepository::class)]
@@ -261,7 +261,7 @@ class LineTax
      *
      * Refuses to overwrite once {@see $snapshottedAt} has been set — that timestamp is
      * the canonical "frozen" marker, written by
-     * {@see \SolidInvoice\TaxBundle\Listener\SnapshotTaxesOnIssueListener} on the
+     * {@see \Augias\TaxBundle\Listener\SnapshotTaxesOnIssueListener} on the
      * draft→issued transition.
      *
      * @throws MathException

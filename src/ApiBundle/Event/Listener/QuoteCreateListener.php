@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Event\Listener;
+namespace Augias\ApiBundle\Event\Listener;
 
 use ApiPlatform\Symfony\EventListener\EventPriorities;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
-use SolidInvoice\QuoteBundle\Model\Graph;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Enum\QuoteStatus;
+use Augias\QuoteBundle\Model\Graph;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Workflow\WorkflowInterface;
 
 /**
- * @see \SolidInvoice\ApiBundle\Tests\Event\Listener\QuoteCreateListenerTest
+ * @see \Augias\ApiBundle\Tests\Event\Listener\QuoteCreateListenerTest
  */
 class QuoteCreateListener implements EventSubscriberInterface
 {

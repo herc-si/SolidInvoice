@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,22 +11,22 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Tests\Functional\Templates;
+namespace Augias\QuoteBundle\Tests\Functional\Templates;
 
+use Augias\ClientBundle\Test\Factory\ClientFactory;
+use Augias\ClientBundle\Test\Factory\ContactFactory;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\CoreBundle\Pdf\Generator;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\QuoteBundle\Entity\Line;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\QuoteBundle\Enum\QuoteStatus;
+use Augias\QuoteBundle\Test\Factory\QuoteFactory;
+use Augias\SettingsBundle\Entity\Setting;
 use Brick\Math\BigInteger;
 use Carbon\CarbonImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
-use SolidInvoice\ClientBundle\Test\Factory\ClientFactory;
-use SolidInvoice\ClientBundle\Test\Factory\ContactFactory;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\CoreBundle\Pdf\Generator;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\QuoteBundle\Entity\Line;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\QuoteBundle\Enum\QuoteStatus;
-use SolidInvoice\QuoteBundle\Test\Factory\QuoteFactory;
-use SolidInvoice\SettingsBundle\Entity\Setting;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Twig\Environment;
 use function basename;
@@ -89,7 +89,7 @@ final class TemplatesRenderingTest extends KernelTestCase
         self::assertInstanceOf(Environment::class, $twig);
 
         $output = $twig->render(
-            sprintf('@SolidInvoiceQuote/Templates/%s/%s.html.twig', $slug, $channel),
+            sprintf('@AugiasQuote/Templates/%s/%s.html.twig', $slug, $channel),
             ['quote' => $quote]
         );
 
@@ -135,7 +135,7 @@ final class TemplatesRenderingTest extends KernelTestCase
         self::assertInstanceOf(Environment::class, $twig);
 
         $html = $twig->render(
-            sprintf('@SolidInvoiceQuote/Templates/%s/pdf.html.twig', $slug),
+            sprintf('@AugiasQuote/Templates/%s/pdf.html.twig', $slug),
             ['quote' => $quote]
         );
 

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,15 +11,15 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice;
+namespace Augias;
 
+use Augias\CoreBundle\Doctrine\Type\ArrayType;
+use Augias\CoreBundle\Doctrine\Type\JsonArrayType;
+use Augias\CoreBundle\Doctrine\Type\ObjectType;
+use Augias\SaasBundle\AugiasSaasBundle;
 use BadMethodCallException;
 use Doctrine\DBAL\Types\Type;
 use Override;
-use SolidInvoice\CoreBundle\Doctrine\Type\ArrayType;
-use SolidInvoice\CoreBundle\Doctrine\Type\JsonArrayType;
-use SolidInvoice\CoreBundle\Doctrine\Type\ObjectType;
-use SolidInvoice\SaasBundle\SolidInvoiceSaasBundle;
 use SolidWorx\Platform\PlatformBundle\Kernel as BaseKernel;
 use SolidWorx\Platform\SaasBundle\SolidWorxPlatformSaasBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -85,7 +85,7 @@ class Kernel extends BaseKernel
 
         if ($this->mode === AppMode::SAAS) {
             yield new SolidWorxPlatformSaasBundle();
-            yield new SolidInvoiceSaasBundle();
+            yield new AugiasSaasBundle();
         }
     }
 

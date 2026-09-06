@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,26 +11,26 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Cloner;
+namespace Augias\InvoiceBundle\Cloner;
 
+use Augias\CoreBundle\Generator\BillingIdGenerator;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoiceLine;
+use Augias\InvoiceBundle\Entity\RecurringOptions;
+use Augias\InvoiceBundle\Exception\InvalidTransitionException;
+use Augias\InvoiceBundle\Manager\InvoiceManager;
+use Augias\TaxBundle\Service\TaxSnapshotCopier;
 use Brick\Math\Exception\MathException;
 use Carbon\Carbon;
 use JsonException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoiceLine;
-use SolidInvoice\InvoiceBundle\Entity\RecurringOptions;
-use SolidInvoice\InvoiceBundle\Exception\InvalidTransitionException;
-use SolidInvoice\InvoiceBundle\Manager\InvoiceManager;
-use SolidInvoice\TaxBundle\Service\TaxSnapshotCopier;
 use Traversable;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Cloner\InvoiceClonerTest
+ * @see \Augias\InvoiceBundle\Tests\Cloner\InvoiceClonerTest
  */
 final readonly class InvoiceCloner
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -14,55 +14,55 @@ declare(strict_types=1);
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {
-    $routingConfigurator->import('@SolidInvoiceDashboardBundle/Resources/config/routing.php');
+    $routingConfigurator->import('@AugiasDashboardBundle/Resources/config/routing.php');
 
-    $routingConfigurator->import('@SolidInvoiceSettingsBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasSettingsBundle/Resources/config/routing.php')
         ->prefix('/');
 
-    $routingConfigurator->import('@SolidInvoiceCoreBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasCoreBundle/Resources/config/routing.php')
         ->prefix('/');
 
-    $routingConfigurator->import('@SolidInvoiceInstallBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasInstallBundle/Resources/config/routing.php')
         ->prefix('/');
 
-    $routingConfigurator->import('@SolidInvoiceClientBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasClientBundle/Resources/config/routing.php')
         ->prefix('/clients');
 
-    $routingConfigurator->import('@SolidInvoiceQuoteBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasQuoteBundle/Resources/config/routing.php')
         ->prefix('/quotes');
 
-    $routingConfigurator->import('@SolidInvoiceInvoiceBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasInvoiceBundle/Resources/config/routing.php')
         ->prefix('/invoices');
 
-    $routingConfigurator->import('@SolidInvoicePaymentBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasPaymentBundle/Resources/config/routing.php')
         ->prefix('/payments');
 
-    $routingConfigurator->import('@SolidInvoiceTaxBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasTaxBundle/Resources/config/routing.php')
         ->prefix('/tax');
 
-    $routingConfigurator->import('@SolidInvoiceUserBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasUserBundle/Resources/config/routing.php')
         ->prefix('/');
 
-    $routingConfigurator->import('@SolidInvoiceNotificationBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasNotificationBundle/Resources/config/routing.php')
         ->prefix('/notifications');
 
-    $routingConfigurator->import('@SolidInvoiceElectronicInvoicingBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasElectronicInvoicingBundle/Resources/config/routing.php')
         ->prefix('/electronic-invoicing');
 
-    $routingConfigurator->import('@SolidInvoiceSupplierBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasSupplierBundle/Resources/config/routing.php')
         ->prefix('/suppliers');
 
-    $routingConfigurator->import('@SolidInvoiceBillBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasBillBundle/Resources/config/routing.php')
         ->prefix('/bills');
 
-    $routingConfigurator->import('@SolidInvoiceCatalogBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasCatalogBundle/Resources/config/routing.php')
         ->prefix('/catalog');
 
-    $routingConfigurator->import('@SolidInvoiceMcpBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasMcpBundle/Resources/config/routing.php')
         ->prefix('/');
 
     $routingConfigurator->import('.', 'mcp');
 
-    $routingConfigurator->import('@SolidInvoiceDataGridBundle/Resources/config/routing.php')
+    $routingConfigurator->import('@AugiasDataGridBundle/Resources/config/routing.php')
         ->prefix('/');
 };

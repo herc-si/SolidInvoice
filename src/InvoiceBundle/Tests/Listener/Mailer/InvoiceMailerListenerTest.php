@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Listener\Mailer;
+namespace Augias\InvoiceBundle\Tests\Listener\Mailer;
 
+use Augias\ClientBundle\Entity\Contact;
+use Augias\InvoiceBundle\Email\InvoiceEmail;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Event\InvoiceEvent;
+use Augias\InvoiceBundle\Event\InvoiceEvents;
+use Augias\InvoiceBundle\Listener\Mailer\InvoiceMailerListener;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\InvoiceBundle\Email\InvoiceEmail;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Event\InvoiceEvent;
-use SolidInvoice\InvoiceBundle\Event\InvoiceEvents;
-use SolidInvoice\InvoiceBundle\Listener\Mailer\InvoiceMailerListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;

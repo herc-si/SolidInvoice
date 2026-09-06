@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SettingsBundle\Form\Type;
+namespace Augias\SettingsBundle\Form\Type;
 
 use const JSON_THROW_ON_ERROR;
+use Augias\MailerBundle\Configurator\ConfiguratorInterface;
 use JsonException;
-use SolidInvoice\MailerBundle\Configurator\ConfiguratorInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

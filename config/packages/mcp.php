@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
+use Augias\CoreBundle\AugiasCoreBundle;
 
 // Session store is configurable via SOLIDINVOICE_MCP_SESSION_STORE
 // (file | memory | cache | framework):
@@ -30,9 +30,9 @@ $env = static fn (string $name, string | int $default): string | int => $_ENV[$n
 
 return App::config([
     'mcp' => [
-        'app' => SolidInvoiceCoreBundle::APP_NAME,
-        'version' => SolidInvoiceCoreBundle::VERSION,
-        'description' => 'MCP server for ' . SolidInvoiceCoreBundle::APP_NAME,
+        'app' => AugiasCoreBundle::APP_NAME,
+        'version' => AugiasCoreBundle::VERSION,
+        'description' => 'MCP server for ' . AugiasCoreBundle::APP_NAME,
         'client_transports' => [
             'stdio' => false,
             'http' => true,

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Twig;
+namespace Augias\SaasBundle\Twig;
 
-use SolidInvoice\SaasBundle\Feature\FeatureCopy;
-use SolidInvoice\SaasBundle\Feature\FeatureCopyRegistry;
-use SolidInvoice\SaasBundle\Feature\UpgradePromptRenderer;
+use Augias\SaasBundle\Feature\FeatureCopy;
+use Augias\SaasBundle\Feature\FeatureCopyRegistry;
+use Augias\SaasBundle\Feature\UpgradePromptRenderer;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Twig\Attribute\AsTwigFunction;
 
@@ -31,7 +31,7 @@ use Twig\Attribute\AsTwigFunction;
  * via the gate alias (NoopFeatureGate / PlanFeatureGate) automatically.
  *
  * In self-hosted deployments where SaasBundle is not loaded, the no-op
- * SolidInvoice\CoreBundle\Twig\Extension\FeatureExtension provides the three
+ * Augias\CoreBundle\Twig\Extension\FeatureExtension provides the three
  * SaaS-only names so templates can call them unconditionally.
  */
 final readonly class FeatureExtension

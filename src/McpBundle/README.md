@@ -1,6 +1,6 @@
-# SolidInvoice MCP Server
+# Augias MCP Server
 
-Exposes SolidInvoice to AI agents (Claude Desktop, Cursor, Goose, mcp-inspector, etc.) over the **Model Context Protocol** using Streamable HTTP with OAuth2 authentication.
+Exposes Augias to AI agents (Claude Desktop, Cursor, Goose, mcp-inspector, etc.) over the **Model Context Protocol** using Streamable HTTP with OAuth2 authentication.
 
 ## What it gives AI agents
 
@@ -68,7 +68,7 @@ agent  ── redirect user ──►  /oauth/authorize?response_type=code&clien
                              &code_challenge=...&code_challenge_method=S256
                              &scope=mcp:read mcp:write
 
-user signs in → SolidInvoice shows the consent page
+user signs in → Augias shows the consent page
   - multi-company users: pick which tenant this token binds to
   - scopes: Read always on; Write togglable (only if requested)
   - "Don't ask me again" remembers the grant for (client + user + company + scopes)

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,17 +11,17 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Entity;
+namespace Augias\CoreBundle\Entity;
 
+use Augias\CoreBundle\Export\Attribute\ExportIgnore;
+use Augias\CoreBundle\Export\Enum\ExportFormat;
+use Augias\CoreBundle\Export\Enum\ExportStatus;
+use Augias\CoreBundle\Repository\ExportJobRepository;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use SolidInvoice\CoreBundle\Export\Attribute\ExportIgnore;
-use SolidInvoice\CoreBundle\Export\Enum\ExportFormat;
-use SolidInvoice\CoreBundle\Export\Enum\ExportStatus;
-use SolidInvoice\CoreBundle\Repository\ExportJobRepository;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid\Ulid;

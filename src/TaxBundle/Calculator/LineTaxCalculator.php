@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Calculator;
+namespace Augias\TaxBundle\Calculator;
 
+use Augias\CoreBundle\Entity\LineInterface;
+use Augias\TaxBundle\Calculator\Result\LineBreakdown;
+use Augias\TaxBundle\Calculator\Result\TaxSummaryRow;
+use Augias\TaxBundle\Entity\LineTax;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Enum\TaxType;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
 use Brick\Math\RoundingMode;
-use SolidInvoice\CoreBundle\Entity\LineInterface;
-use SolidInvoice\TaxBundle\Calculator\Result\LineBreakdown;
-use SolidInvoice\TaxBundle\Calculator\Result\TaxSummaryRow;
-use SolidInvoice\TaxBundle\Entity\LineTax;
-use SolidInvoice\TaxBundle\Enum\TaxCategory;
-use SolidInvoice\TaxBundle\Enum\TaxType;
 
 /**
  * Computes the per-line tax breakdown for an invoice or quote line.
@@ -32,7 +32,7 @@ use SolidInvoice\TaxBundle\Enum\TaxType;
  * - {@see TaxType::Inclusive} — the rate is *extracted* from the gross line total,
  *   shrinking the line subtotal. The gross line total stays unchanged.
  *   Compound + Inclusive is rejected by
- *   {@see \SolidInvoice\TaxBundle\Validator\Constraints\IncompatibleTaxConfiguration}.
+ *   {@see \Augias\TaxBundle\Validator\Constraints\IncompatibleTaxConfiguration}.
  * - {@see TaxType::Exclusive} — the rate is applied as a percentage on top of the base.
  *   Base is `subtotal` for non-compound or `subtotal + accumulated non-compound tax`
  *   when compound, allowing layered jurisdictions (e.g. Quebec QST on top of GST) to
@@ -46,7 +46,7 @@ use SolidInvoice\TaxBundle\Enum\TaxType;
  *   {@see TaxCategory::ReverseCharge} produce a summary row with amount = 0 (so the
  *   row still appears on the invoice/quote for compliance/clarity).
  *
- * @see \SolidInvoice\TaxBundle\Tests\Calculator\LineTaxCalculatorTest
+ * @see \Augias\TaxBundle\Tests\Calculator\LineTaxCalculatorTest
  */
 final class LineTaxCalculator
 {

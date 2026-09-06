@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\TaxBundle\Service;
+namespace Augias\TaxBundle\Service;
 
+use Augias\TaxBundle\Entity\InvoiceTax;
+use Augias\TaxBundle\Entity\LineTax;
 use Brick\Math\Exception\MathException;
 use DateTimeInterface;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
-use SolidInvoice\TaxBundle\Entity\LineTax;
 
 /**
  * Copies LineTax/InvoiceTax rows to fresh entities, preserving snapshot fields verbatim.
@@ -24,7 +24,7 @@ use SolidInvoice\TaxBundle\Entity\LineTax;
  * Used by the quote→invoice converter and the recurring invoice generator to ensure
  * generated documents own independent snapshot rows (not shared references) and remain
  * immutable even when master Tax rates change later.
- * @see \SolidInvoice\TaxBundle\Tests\Service\TaxSnapshotCopierTest
+ * @see \Augias\TaxBundle\Tests\Service\TaxSnapshotCopierTest
  */
 final class TaxSnapshotCopier
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,25 +11,25 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\DataGrid;
+namespace Augias\BillBundle\DataGrid;
 
+use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Enum\BillStatus;
+use Augias\DataGridBundle\Attributes\AsDataGrid;
+use Augias\DataGridBundle\Grid;
+use Augias\DataGridBundle\GridBuilder\Action\Action;
+use Augias\DataGridBundle\GridBuilder\Action\EditAction;
+use Augias\DataGridBundle\GridBuilder\Action\ViewAction;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Column\MoneyColumn;
+use Augias\DataGridBundle\GridBuilder\Column\RelativeDateColumn;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
+use Augias\DataGridBundle\GridBuilder\Filter\ChoiceFilter;
+use Augias\DataGridBundle\GridBuilder\Filter\DateRangeFilter;
+use Augias\DataGridBundle\GridBuilder\Query;
+use Augias\DataGridBundle\Source\ORMSource;
 use Doctrine\ORM\EntityManagerInterface;
 use Override;
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\BillBundle\Enum\BillStatus;
-use SolidInvoice\DataGridBundle\Attributes\AsDataGrid;
-use SolidInvoice\DataGridBundle\Grid;
-use SolidInvoice\DataGridBundle\GridBuilder\Action\Action;
-use SolidInvoice\DataGridBundle\GridBuilder\Action\EditAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Action\ViewAction;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\MoneyColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\RelativeDateColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\ChoiceFilter;
-use SolidInvoice\DataGridBundle\GridBuilder\Filter\DateRangeFilter;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
-use SolidInvoice\DataGridBundle\Source\ORMSource;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Translation\TranslatableMessage;
 use function array_column;
@@ -37,7 +37,7 @@ use function array_key_exists;
 use function array_map;
 
 /**
- * @see \SolidInvoice\BillBundle\Tests\DataGrid\BillGridTest
+ * @see \Augias\BillBundle\Tests\DataGrid\BillGridTest
  */
 #[AsDataGrid(name: 'bill_grid', title: 'Bills')]
 final class BillGrid extends Grid

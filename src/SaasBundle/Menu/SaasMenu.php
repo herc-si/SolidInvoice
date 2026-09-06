@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Menu;
+namespace Augias\SaasBundle\Menu;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Enum\Menu\MenuPriority;
+use Augias\CoreBundle\Repository\CompanyRepository;
 use Knp\Menu\ItemInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Enum\Menu\MenuPriority;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
 use SolidWorx\Platform\PlatformBundle\Attributes\Menu\MenuBuilder;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use SolidWorx\Platform\SaasBundle\Subscription\SubscriptionManager;

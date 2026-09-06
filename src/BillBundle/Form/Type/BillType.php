@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Form\Type;
+namespace Augias\BillBundle\Form\Type;
 
+use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Entity\BillCategory;
+use Augias\ClientBundle\Entity\Client;
+use Augias\MoneyBundle\Form\Type\CurrencyType;
 use Doctrine\ORM\EntityRepository;
 use Money\Currency;
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\BillBundle\Entity\BillCategory;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\MoneyBundle\Form\Type\CurrencyType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -32,7 +32,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @see \SolidInvoice\BillBundle\Tests\Form\Type\BillTypeTest
+ * @see \Augias\BillBundle\Tests\Form\Type\BillTypeTest
  * @extends AbstractType<Bill>
  */
 final class BillType extends AbstractType

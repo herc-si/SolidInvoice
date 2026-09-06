@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use SolidInvoice\CoreBundle\SolidInvoiceCoreBundle;
+use Augias\CoreBundle\AugiasCoreBundle;
 
 $formats = [
     'jsonld' => ['mime_types' => ['application/ld+json']],
@@ -41,8 +41,8 @@ foreach ($formats as $format => $formatConfig) {
 
 return App::config([
     'api_platform' => [
-        'title' => SolidInvoiceCoreBundle::APP_NAME,
-        'version' => SolidInvoiceCoreBundle::VERSION,
+        'title' => AugiasCoreBundle::APP_NAME,
+        'version' => AugiasCoreBundle::VERSION,
         'show_webby' => false,
         'enable_profiler' => param('kernel.debug'),
         'path_segment_name_generator' => 'api_platform.metadata.path_segment_name_generator.dash',
@@ -94,10 +94,10 @@ return App::config([
             'graphiql' => ['enabled' => true],
         ],
         'description' => <<<DESC
-SolidInvoice is a simple open source invoicing application aimed to help small businesses and freelancers manage their day-to-day billing.
+Augias is a simple open source invoicing application aimed to help small businesses and freelancers manage their day-to-day billing.
 
 ### Authentication
-SolidInvoice uses an API tokens for authentication.
+Augias uses an API tokens for authentication.
 To authenticate, you need to create an API token and set the `X-API-TOKEN` header to your API token.
 
 To create an API token, go to the [API Tokens](/profile/api) page and click the `Create Token` button.
@@ -163,12 +163,12 @@ When the rate limit is exceeded, the API returns a `429 Too Many Requests` respo
 
 ### Versioning Policy
 
-SolidInvoice does not use URL-based versioning (e.g., `/api/v1`). Breaking changes follow a **6-month sunset cycle**.
+Augias does not use URL-based versioning (e.g., `/api/v1`). Breaking changes follow a **6-month sunset cycle**.
 Deprecated operations return a `Sunset` header indicating when they will be removed.
 
 ### Integration Guides
 
-SolidInvoice's API is compatible with popular automation platforms:
+Augias's API is compatible with popular automation platforms:
 
 - **Make.com** (formerly Integromat): Use the HTTP module with `X-API-TOKEN` header authentication.
 - **n8n**: Use the HTTP Request node with Header Auth. Set header name `X-API-TOKEN` and your token as the value.

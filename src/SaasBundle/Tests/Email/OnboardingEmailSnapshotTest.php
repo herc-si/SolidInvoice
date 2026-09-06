@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,26 +11,26 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Tests\Email;
+namespace Augias\SaasBundle\Tests\Email;
 
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\SaasBundle\Onboarding\OnboardingContext;
+use Augias\SaasBundle\Onboarding\OnboardingEmailStepInterface;
+use Augias\SaasBundle\Onboarding\Step\AddFirstClientStep;
+use Augias\SaasBundle\Onboarding\Step\CustomizeLogoStep;
+use Augias\SaasBundle\Onboarding\Step\RecurringBillingStep;
+use Augias\SaasBundle\Onboarding\Step\SendFirstInvoiceStep;
+use Augias\SaasBundle\Onboarding\Step\TrialAboutToEndStep;
+use Augias\SaasBundle\Onboarding\Step\TurnInvoicesIntoPaymentsStep;
+use Augias\SaasBundle\Onboarding\Step\UpgradeOfferStep;
+use Augias\SaasBundle\Onboarding\Step\WelcomeStep;
+use Augias\Test\SaasKernel;
+use Augias\UserBundle\Entity\User;
 use DateTimeImmutable;
 use Override;
 use ReflectionProperty;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\SaasBundle\Onboarding\OnboardingContext;
-use SolidInvoice\SaasBundle\Onboarding\OnboardingEmailStepInterface;
-use SolidInvoice\SaasBundle\Onboarding\Step\AddFirstClientStep;
-use SolidInvoice\SaasBundle\Onboarding\Step\CustomizeLogoStep;
-use SolidInvoice\SaasBundle\Onboarding\Step\RecurringBillingStep;
-use SolidInvoice\SaasBundle\Onboarding\Step\SendFirstInvoiceStep;
-use SolidInvoice\SaasBundle\Onboarding\Step\TrialAboutToEndStep;
-use SolidInvoice\SaasBundle\Onboarding\Step\TurnInvoicesIntoPaymentsStep;
-use SolidInvoice\SaasBundle\Onboarding\Step\UpgradeOfferStep;
-use SolidInvoice\SaasBundle\Onboarding\Step\WelcomeStep;
-use SolidInvoice\Test\SaasKernel;
-use SolidInvoice\UserBundle\Entity\User;
 use SolidWorx\Platform\SaasBundle\Entity\Plan;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use Spatie\Snapshots\MatchesSnapshots;
@@ -173,7 +173,7 @@ final class OnboardingEmailSnapshotTest extends KernelTestCase
         $idProperty->setValue($user, new Ulid());
 
         $plan = new Plan();
-        $plan->setName('SolidInvoice Pro');
+        $plan->setName('Augias Pro');
         $plan->setPrice(1200);
         $plan->setPlanId('pro-monthly');
 

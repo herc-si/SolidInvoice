@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ElectronicInvoicingBundle\Provider\SuperPdp;
+namespace Augias\ElectronicInvoicingBundle\Provider\SuperPdp;
 
 use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
@@ -30,7 +30,7 @@ use function sprintf;
  * call rather than cached, since electronic-invoice submissions/status
  * checks are low-frequency operations for a self-hosted invoicing app.
  *
- * @see \SolidInvoice\ElectronicInvoicingBundle\Tests\Provider\SuperPdp\SuperPdpClientTest
+ * @see \Augias\ElectronicInvoicingBundle\Tests\Provider\SuperPdp\SuperPdpClientTest
  */
 final readonly class SuperPdpClient
 {

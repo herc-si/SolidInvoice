@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Action;
+namespace Augias\UserBundle\Action;
 
-use SolidInvoice\UserBundle\DTO\Registration;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Entity\UserInvitation;
-use SolidInvoice\UserBundle\Form\Type\RegisterType;
-use SolidInvoice\UserBundle\Repository\UserInvitationRepository;
-use SolidInvoice\UserBundle\Repository\UserRepository;
+use Augias\UserBundle\DTO\Registration;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Entity\UserInvitation;
+use Augias\UserBundle\Form\Type\RegisterType;
+use Augias\UserBundle\Repository\UserInvitationRepository;
+use Augias\UserBundle\Repository\UserRepository;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -104,6 +104,6 @@ final class Register extends AbstractController
             return $this->security->login($user, 'security.authenticator.form_login.main', 'main');
         }
 
-        return $this->render('@SolidInvoiceUser/Security/register.html.twig', ['form' => $form, 'turnstile_site_key' => $this->turnstileSiteKey]);
+        return $this->render('@AugiasUser/Security/register.html.twig', ['form' => $form, 'turnstile_site_key' => $this->turnstileSiteKey]);
     }
 }

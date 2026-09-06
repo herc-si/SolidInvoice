@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Twig\Components;
+namespace Augias\ClientBundle\Twig\Components;
 
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Form\Type\CreditType;
-use SolidInvoice\ClientBundle\Repository\CreditRepository;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Form\Type\CreditType;
+use Augias\ClientBundle\Repository\CreditRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -26,7 +26,7 @@ use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 /**
- * @see \SolidInvoice\ClientBundle\Tests\Twig\Components\ClientCreditTest
+ * @see \Augias\ClientBundle\Tests\Twig\Components\ClientCreditTest
  */
 #[AsLiveComponent]
 final class ClientCredit extends AbstractController

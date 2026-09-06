@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\EventSubscriber;
+namespace Augias\SaasBundle\EventSubscriber;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Repository\CompanyRepository;
+use Augias\SaasBundle\Service\TrialBanner;
+use Augias\SaasBundle\Service\TrialBannerResolver;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
-use SolidInvoice\SaasBundle\Service\TrialBanner;
-use SolidInvoice\SaasBundle\Service\TrialBannerResolver;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use SolidWorx\Platform\SaasBundle\Enum\SubscriptionStatus;
 use SolidWorx\Platform\SaasBundle\Repository\PlanRepositoryInterface;
@@ -38,7 +38,7 @@ use Twig\Environment;
 use function in_array;
 
 /**
- * @see \SolidInvoice\SaasBundle\Tests\EventSubscriber\RequestListenerTest
+ * @see \Augias\SaasBundle\Tests\EventSubscriber\RequestListenerTest
  */
 final readonly class RequestListener implements EventSubscriberInterface
 {
@@ -103,7 +103,7 @@ final readonly class RequestListener implements EventSubscriberInterface
             case SubscriptionStatus::PENDING:
                 $event->setResponse(
                     new Response(
-                        $this->twig->render('@SolidInvoiceSaas/subscription/pending.html.twig', [
+                        $this->twig->render('@AugiasSaas/subscription/pending.html.twig', [
                             'subscription' => $subscription,
                             'plans' => $this->planRepository->findAllOrdered(),
                         ]),
@@ -113,7 +113,7 @@ final readonly class RequestListener implements EventSubscriberInterface
             case SubscriptionStatus::PAUSED:
                 $event->setResponse(
                     new Response(
-                        $this->twig->render('@SolidInvoiceSaas/subscription/paused.html.twig', [
+                        $this->twig->render('@AugiasSaas/subscription/paused.html.twig', [
                             'subscription' => $subscription,
                         ]),
                     )
@@ -127,7 +127,7 @@ final readonly class RequestListener implements EventSubscriberInterface
 
                 $event->setResponse(
                     new Response(
-                        $this->twig->render('@SolidInvoiceSaas/subscription/cancelled.html.twig', [
+                        $this->twig->render('@AugiasSaas/subscription/cancelled.html.twig', [
                             'subscription' => $subscription,
                         ]),
                     )
@@ -137,7 +137,7 @@ final readonly class RequestListener implements EventSubscriberInterface
                 if ($subscription->getEndDate() <= $this->clock->now()) {
                     $event->setResponse(
                         new Response(
-                            $this->twig->render('@SolidInvoiceSaas/subscription/trial_expired.html.twig', [
+                            $this->twig->render('@AugiasSaas/subscription/trial_expired.html.twig', [
                                 'subscription' => $subscription,
                                 'coupon_code' => $this->onboardingCouponCode,
                                 'coupon_percent' => $this->couponPercent,
@@ -174,7 +174,7 @@ final readonly class RequestListener implements EventSubscriberInterface
             return;
         }
 
-        $html = $this->twig->render('@SolidInvoiceSaas/_alert_banner.html.twig', [
+        $html = $this->twig->render('@AugiasSaas/_alert_banner.html.twig', [
             'type' => $banner->type,
             'icon' => $banner->icon,
             'title' => $this->translator->trans($banner->titleKey, $banner->params),

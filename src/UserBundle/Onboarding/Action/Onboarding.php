@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Onboarding\Action;
+namespace Augias\UserBundle\Onboarding\Action;
 
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Onboarding\DTO\OnboardingData;
-use SolidInvoice\UserBundle\Onboarding\Form\Type\OnboardingType;
-use SolidInvoice\UserBundle\Onboarding\Manager\OnboardingManager;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Onboarding\DTO\OnboardingData;
+use Augias\UserBundle\Onboarding\Form\Type\OnboardingType;
+use Augias\UserBundle\Onboarding\Manager\OnboardingManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Flow\FormFlowInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -101,7 +101,7 @@ final class Onboarding extends AbstractController
         assert($formData instanceof OnboardingData);
 
         // Render current step
-        return $this->render('@SolidInvoiceUser/Onboarding/onboarding.html.twig', [
+        return $this->render('@AugiasUser/Onboarding/onboarding.html.twig', [
             'form' => $form->getStepForm(),
             'currentStep' => $form->getCursor()->getCurrentStep(),
             'progress' => $this->calculateProgress($form),

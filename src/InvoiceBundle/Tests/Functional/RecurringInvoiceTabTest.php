@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Tests\Functional;
+namespace Augias\InvoiceBundle\Tests\Functional;
 
-use SolidInvoice\CoreBundle\Test\LiveComponentTest;
+use Augias\CoreBundle\Test\LiveComponentTest;
 
 /**
  * Recurring invoices have no sidebar entry — these tabs are the only way

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\OAuth;
+namespace Augias\McpBundle\OAuth;
 
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\UserBundle\Entity\User;
+use Augias\CoreBundle\Entity\Company;
+use Augias\UserBundle\Entity\User;
 
 /**
  * Holds the user/company choice from the consent step so the auth-code and

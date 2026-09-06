@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\Listener\Mailer;
+namespace Augias\QuoteBundle\Listener\Mailer;
 
+use Augias\CoreBundle\Traits\FlashErrorTrait;
+use Augias\QuoteBundle\Email\QuoteEmail;
+use Augias\QuoteBundle\Event\QuoteEvent;
+use Augias\QuoteBundle\Event\QuoteEvents;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\CoreBundle\Traits\FlashErrorTrait;
-use SolidInvoice\QuoteBundle\Email\QuoteEmail;
-use SolidInvoice\QuoteBundle\Event\QuoteEvent;
-use SolidInvoice\QuoteBundle\Event\QuoteEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 
 /**
- * @see \SolidInvoice\QuoteBundle\Tests\Listener\Mailer\QuoteMailerListenerTest
+ * @see \Augias\QuoteBundle\Tests\Listener\Mailer\QuoteMailerListenerTest
  */
 class QuoteMailerListener implements EventSubscriberInterface
 {

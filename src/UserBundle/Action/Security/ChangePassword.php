@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Action\Security;
+namespace Augias\UserBundle\Action\Security;
 
-use SolidInvoice\UserBundle\DTO\ChangePassword as ChangePasswordDTO;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Form\Type\ChangePasswordType;
-use SolidInvoice\UserBundle\Repository\UserRepositoryInterface;
+use Augias\UserBundle\DTO\ChangePassword as ChangePasswordDTO;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Form\Type\ChangePasswordType;
+use Augias\UserBundle\Repository\UserRepositoryInterface;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -45,7 +45,7 @@ final readonly class ChangePassword
     /**
      * @return array{form: FormView}|Response
      */
-    #[Template('@SolidInvoiceUser/ChangePassword/change_password.html.twig')]
+    #[Template('@AugiasUser/ChangePassword/change_password.html.twig')]
     public function __invoke(Request $request): array | Response
     {
         $changePasswordDTO = new ChangePasswordDTO();

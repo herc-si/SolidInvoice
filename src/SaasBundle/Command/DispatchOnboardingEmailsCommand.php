@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Command;
+namespace Augias\SaasBundle\Command;
 
+use Augias\SaasBundle\Onboarding\OnboardingDispatcher;
+use Augias\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Clock\ClockInterface;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\SaasBundle\Onboarding\OnboardingDispatcher;
-use SolidInvoice\UserBundle\Entity\User;
 use SolidWorx\Platform\PlatformBundle\Console\Command;
 use SolidWorx\Platform\SaasBundle\Entity\Trial;
 use SolidWorx\Platform\SaasBundle\Enum\SubscriptionStatus;

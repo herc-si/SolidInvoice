@@ -40,7 +40,7 @@
     </exclude>
   </groups>
   <testsuites>
-    <testsuite name="SolidInvoice Test Suite">
+    <testsuite name="Augias Test Suite">
       <directory>src/*Bundle/Tests</directory>
     </testsuite>
   </testsuites>
@@ -55,7 +55,7 @@
     <server name="SOLIDINVOICE_DEBUG" value="0"/>
     <server name="APP_ENV" value="test"/>
     <server name="APP_DEBUG" value="0"/>
-    <server name="KERNEL_CLASS" value="SolidInvoice\Test\Kernel"/>
+    <server name="KERNEL_CLASS" value="Augias\Test\Kernel"/>
     <server name="BROWSER_ALWAYS_START_WEBSERVER" value="1"/>
   </php>
   <extensions>

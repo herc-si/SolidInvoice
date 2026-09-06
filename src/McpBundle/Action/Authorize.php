@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Action;
+namespace Augias\McpBundle\Action;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Company\UserEligibleCompanies;
+use Augias\CoreBundle\Contracts\PaidSubscriptionGateInterface;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Feature\UpgradePromptProvider;
+use Augias\McpBundle\Entity\OAuthClient;
+use Augias\McpBundle\OAuth\ConsentService;
+use Augias\McpBundle\OAuth\OAuthUserEntity;
+use Augias\McpBundle\OAuth\PendingAuthorization;
+use Augias\McpBundle\OAuth\ScopeEntity;
+use Augias\McpBundle\OAuth\ServerFactoryInterface;
+use Augias\McpBundle\Security\McpScope;
+use Augias\UserBundle\Entity\User;
 use InvalidArgumentException;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Exception\OAuthServerException;
@@ -20,19 +33,6 @@ use League\OAuth2\Server\RequestTypes\AuthorizationRequestInterface;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Company\UserEligibleCompanies;
-use SolidInvoice\CoreBundle\Contracts\PaidSubscriptionGateInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Feature\UpgradePromptProvider;
-use SolidInvoice\McpBundle\Entity\OAuthClient;
-use SolidInvoice\McpBundle\OAuth\ConsentService;
-use SolidInvoice\McpBundle\OAuth\OAuthUserEntity;
-use SolidInvoice\McpBundle\OAuth\PendingAuthorization;
-use SolidInvoice\McpBundle\OAuth\ScopeEntity;
-use SolidInvoice\McpBundle\OAuth\ServerFactoryInterface;
-use SolidInvoice\McpBundle\Security\McpScope;
-use SolidInvoice\UserBundle\Entity\User;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
@@ -154,7 +154,7 @@ final readonly class Authorize
         }
 
         return new Response(
-            $this->twig->render('@SolidInvoiceMcp/Authorize/consent.html.twig', [
+            $this->twig->render('@AugiasMcp/Authorize/consent.html.twig', [
                 'client' => $client,
                 'user' => $user,
                 'companies' => $companies,
@@ -342,7 +342,7 @@ final readonly class Authorize
     private function renderError(string $code, string $description, int $status): Response
     {
         return new Response(
-            $this->twig->render('@SolidInvoiceMcp/Authorize/error.html.twig', [
+            $this->twig->render('@AugiasMcp/Authorize/error.html.twig', [
                 'error' => $code,
                 'error_description' => $description,
             ]),
@@ -353,7 +353,7 @@ final readonly class Authorize
     private function renderUpgradeRequired(): Response
     {
         return new Response(
-            $this->twig->render('@SolidInvoiceMcp/Authorize/upgrade_required.html.twig', [
+            $this->twig->render('@AugiasMcp/Authorize/upgrade_required.html.twig', [
                 'banner' => $this->upgradePromptProvider->prompt('mcp_access'),
                 'plan_label' => $this->upgradePromptProvider->menuLabel('mcp_access'),
             ]),

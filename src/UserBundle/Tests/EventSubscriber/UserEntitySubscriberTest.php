@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\EventSubscriber;
+namespace Augias\UserBundle\Tests\EventSubscriber;
 
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\EventSubscriber\UserEntitySubscriber;
+use Augias\UserBundle\Repository\UserRepository;
+use Augias\UserBundle\Security\EmailVerifier;
 use Carbon\Carbon;
 use Exception;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\EventSubscriber\UserEntitySubscriber;
-use SolidInvoice\UserBundle\Repository\UserRepository;
-use SolidInvoice\UserBundle\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\ErrorHandler\BufferingLogger;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -104,7 +104,7 @@ final class UserEntitySubscriberTest extends TestCase
             ->willReturnCallback(function (TemplatedEmail $email) use ($user): void {
                 self::assertSame($user->getEmail(), $email->getTo()[0]->getAddress());
                 self::assertSame('Please Confirm your Email', $email->getSubject());
-                self::assertSame('@SolidInvoiceUser/Email/confirm_email.html.twig', $email->getHtmlTemplate());
+                self::assertSame('@AugiasUser/Email/confirm_email.html.twig', $email->getHtmlTemplate());
             });
 
         $subscriber->postPersist($user);

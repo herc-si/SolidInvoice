@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Export;
+namespace Augias\CoreBundle\Export;
 
+use Augias\CoreBundle\Export\Serializer\Normalizer\ExportMoneyNormalizer;
 use BackedEnum;
 use Brick\Math\BigNumber;
 use DateTimeInterface;
 use Money\Currencies\ISOCurrencies;
 use Money\Money;
-use SolidInvoice\CoreBundle\Export\Serializer\Normalizer\ExportMoneyNormalizer;
 use Stringable;
 use Symfony\Component\Uid\Ulid;
 

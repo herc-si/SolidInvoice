@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Listener;
+namespace Augias\InvoiceBundle\Listener;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Credit;
+use Augias\ClientBundle\Repository\CreditRepository;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Repository\PaymentRepository;
 use Brick\Math\Exception\MathException;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Credit;
-use SolidInvoice\ClientBundle\Repository\CreditRepository;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Repository\PaymentRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\Event;
 

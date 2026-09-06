@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -7,7 +7,7 @@
  # with this source code in the file LICENSE.
  #}
 
-{% extends '@SolidInvoiceCore/Layout/base.html.twig' %}
+{% extends '@AugiasCore/Layout/base.html.twig' %}
 
 {% block heading %}
     {% set title = block('title') is defined ? block('title') %}
@@ -33,7 +33,7 @@
 
         <div class="page-body">
             <div class="container-xl">
-                {% include "@SolidInvoiceCore/flash.html.twig" %}
+                {% include "@AugiasCore/flash.html.twig" %}
                 {{ block('content') is defined ? block('content') }}
             </div>
         </div>

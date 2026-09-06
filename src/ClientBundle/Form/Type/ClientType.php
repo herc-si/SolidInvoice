@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Form\Type;
+namespace Augias\ClientBundle\Form\Type;
 
+use Augias\ClientBundle\Entity\Address;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Form\Type\CustomFieldValueCollectionType;
+use Augias\MoneyBundle\Form\Type\CurrencyType;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\SettingsBundle\SystemConfig;
+use Augias\TaxBundle\Form\Type\TaxIdentifierType;
 use Override;
 use RuntimeException;
-use SolidInvoice\ClientBundle\Entity\Address;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Form\Type\CustomFieldValueCollectionType;
-use SolidInvoice\MoneyBundle\Form\Type\CurrencyType;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\SettingsBundle\SystemConfig;
-use SolidInvoice\TaxBundle\Form\Type\TaxIdentifierType;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -35,7 +35,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 /**
- * @see \SolidInvoice\ClientBundle\Tests\Form\Type\ClientTypeTest
+ * @see \Augias\ClientBundle\Tests\Form\Type\ClientTypeTest
  * @extends AbstractType<Client>
  */
 class ClientType extends AbstractType

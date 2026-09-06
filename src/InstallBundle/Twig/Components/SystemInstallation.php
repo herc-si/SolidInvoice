@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,12 +11,12 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Twig\Components;
+namespace Augias\InstallBundle\Twig\Components;
 
-use SolidInvoice\AppRequirements;
-use SolidInvoice\InstallBundle\DTO\Installation;
-use SolidInvoice\InstallBundle\Form\Type\InstallationType;
-use SolidInvoice\InstallBundle\Step\InstallationStepInterface;
+use Augias\AppRequirements;
+use Augias\InstallBundle\DTO\Installation;
+use Augias\InstallBundle\Form\Type\InstallationType;
+use Augias\InstallBundle\Step\InstallationStepInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;

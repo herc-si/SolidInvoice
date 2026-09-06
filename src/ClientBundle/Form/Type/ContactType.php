@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,20 +11,20 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Form\Type;
+namespace Augias\ClientBundle\Form\Type;
 
+use Augias\ClientBundle\Entity\Contact;
+use Augias\CoreBundle\Enum\CustomFieldTarget;
+use Augias\CoreBundle\Form\Type\CustomFieldValueCollectionType;
+use Augias\SaasBundle\Feature\Feature;
 use Override;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\CoreBundle\Enum\CustomFieldTarget;
-use SolidInvoice\CoreBundle\Form\Type\CustomFieldValueCollectionType;
-use SolidInvoice\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @see \SolidInvoice\ClientBundle\Tests\Form\Type\ContactTypeTest
+ * @see \Augias\ClientBundle\Tests\Form\Type\ContactTypeTest
  * @extends AbstractType<Contact>
  */
 class ContactType extends AbstractType

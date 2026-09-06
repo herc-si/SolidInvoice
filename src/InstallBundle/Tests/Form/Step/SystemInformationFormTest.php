@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InstallBundle\Tests\Form\Step;
+namespace Augias\InstallBundle\Tests\Form\Step;
 
+use Augias\CoreBundle\Tests\FormTestCase;
+use Augias\InstallBundle\DTO\UserAccount;
+use Augias\InstallBundle\Form\Step\UserAccountStep;
+use Augias\MoneyBundle\Form\Type\CurrencyType;
 use Override;
 use PHPUnit\Framework\Attributes\CoversClass;
-use SolidInvoice\CoreBundle\Tests\FormTestCase;
-use SolidInvoice\InstallBundle\DTO\UserAccount;
-use SolidInvoice\InstallBundle\Form\Step\UserAccountStep;
-use SolidInvoice\MoneyBundle\Form\Type\CurrencyType;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,24 +11,24 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Tests\Functional;
+namespace Augias\McpBundle\Tests\Functional;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\McpBundle\Entity\McpAccessToken;
+use Augias\McpBundle\Entity\OAuthClient;
+use Augias\McpBundle\OAuth\ServerFactoryInterface;
+use Augias\McpBundle\Repository\McpAccessTokenRepository;
+use Augias\McpBundle\Repository\OAuthClientRepository;
+use Augias\McpBundle\Security\McpOAuthAuthenticator;
+use Augias\UserBundle\Entity\User;
+use Augias\UserBundle\Test\Factory\UserFactory;
 use Carbon\CarbonImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use League\OAuth2\Server\ResourceServer;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\Attributes\Group;
 use Psr\Http\Message\ServerRequestInterface;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\McpBundle\Entity\McpAccessToken;
-use SolidInvoice\McpBundle\Entity\OAuthClient;
-use SolidInvoice\McpBundle\OAuth\ServerFactoryInterface;
-use SolidInvoice\McpBundle\Repository\McpAccessTokenRepository;
-use SolidInvoice\McpBundle\Repository\OAuthClientRepository;
-use SolidInvoice\McpBundle\Security\McpOAuthAuthenticator;
-use SolidInvoice\UserBundle\Entity\User;
-use SolidInvoice\UserBundle\Test\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;

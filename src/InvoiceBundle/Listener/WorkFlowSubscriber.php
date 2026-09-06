@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,23 +11,23 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Listener;
+namespace Augias\InvoiceBundle\Listener;
 
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
+use Augias\InvoiceBundle\Model\Graph;
+use Augias\InvoiceBundle\Notification\InvoiceStatusNotification;
+use Augias\NotificationBundle\Notification\NotificationManager;
 use Carbon\CarbonImmutable;
 use Doctrine\Persistence\ManagerRegistry;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\InvoiceBundle\Enum\RecurringInvoiceStatus;
-use SolidInvoice\InvoiceBundle\Model\Graph;
-use SolidInvoice\InvoiceBundle\Notification\InvoiceStatusNotification;
-use SolidInvoice\NotificationBundle\Notification\NotificationManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\Transition;
 
 /**
- * @see \SolidInvoice\InvoiceBundle\Tests\Listener\WorkFlowSubscriberTest
+ * @see \Augias\InvoiceBundle\Tests\Listener\WorkFlowSubscriberTest
  */
 class WorkFlowSubscriber implements EventSubscriberInterface
 {

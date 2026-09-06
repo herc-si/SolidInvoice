@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Feature;
+namespace Augias\CoreBundle\Feature;
 
 /**
  * Renders SaaS upgrade prompts (banner HTML) and resolves the cheapest plan
@@ -21,7 +21,7 @@ namespace SolidInvoice\CoreBundle\Feature;
  * In self-hosted deployments the implementation is a no-op
  * (`NullUpgradePromptProvider`) — `prompt()` returns an empty string and
  * `menuLabel()` returns `null`. In SaaS deployments
- * `SolidInvoice\SaasBundle\Feature\UpgradePromptRenderer` is wired in.
+ * `Augias\SaasBundle\Feature\UpgradePromptRenderer` is wired in.
  *
  * Lives in CoreBundle (not SaasBundle) because Action and menu services are
  * loaded in every deployment and need a stable contract to type-hint against.

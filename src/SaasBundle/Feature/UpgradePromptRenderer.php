@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Feature;
+namespace Augias\SaasBundle\Feature;
 
-use SolidInvoice\CoreBundle\Feature\UpgradePromptProvider;
+use Augias\CoreBundle\Feature\UpgradePromptProvider;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Platform\SaasBundle\Entity\Plan;
 use SolidWorx\Platform\SaasBundle\Repository\PlanRepositoryInterface;
@@ -26,13 +26,13 @@ use Twig\Environment;
  * Builds upgrade-prompt UI fragments by combining `FeatureGate::upgradeOptions()`
  * with persisted `Plan` entities (for prices) and the shared banner partial.
  *
- * Lives in SolidInvoice's SaasBundle (not in vendor PlatformBundle) because the
- * banner copy and route names (`saas_subscription_plans`) are SolidInvoice-specific.
- * @see \SolidInvoice\SaasBundle\Tests\Feature\UpgradePromptRendererTest
+ * Lives in Augias's SaasBundle (not in vendor PlatformBundle) because the
+ * banner copy and route names (`saas_subscription_plans`) are Augias-specific.
+ * @see \Augias\SaasBundle\Tests\Feature\UpgradePromptRendererTest
  */
 final readonly class UpgradePromptRenderer implements RequiredPlanLabelProvider, UpgradePromptProvider
 {
-    private const string BANNER_TEMPLATE = '@SolidInvoiceSaas/feature/_upgrade_banner.html.twig';
+    private const string BANNER_TEMPLATE = '@AugiasSaas/feature/_upgrade_banner.html.twig';
 
     public function __construct(
         private FeatureGate $gate,

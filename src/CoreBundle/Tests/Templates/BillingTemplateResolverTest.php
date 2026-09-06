@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,22 +11,22 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Templates;
+namespace Augias\CoreBundle\Tests\Templates;
 
+use Augias\CoreBundle\Contracts\PaidSubscriptionGateInterface;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Templates\BillingDocumentType;
+use Augias\CoreBundle\Templates\BillingTemplateChannel;
+use Augias\CoreBundle\Templates\BillingTemplateRegistry;
+use Augias\CoreBundle\Templates\BillingTemplateResolver;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\SettingsBundle\SystemConfig;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Contracts\PaidSubscriptionGateInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Templates\BillingDocumentType;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateChannel;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateRegistry;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -120,15 +120,15 @@ final class BillingTemplateResolverTest extends TestCase
         $resolver = $this->createResolver();
 
         self::assertSame(
-            '@SolidInvoiceInvoice/Templates/sleek/pdf.html.twig',
+            '@AugiasInvoice/Templates/sleek/pdf.html.twig',
             $resolver->resolve($this->createInvoice(), BillingTemplateChannel::Pdf),
         );
         self::assertSame(
-            '@SolidInvoiceInvoice/Templates/sleek/email.html.twig',
+            '@AugiasInvoice/Templates/sleek/email.html.twig',
             $resolver->resolve($this->createInvoice(), BillingTemplateChannel::Email),
         );
         self::assertSame(
-            '@SolidInvoiceInvoice/Templates/sleek/preview.html.twig',
+            '@AugiasInvoice/Templates/sleek/preview.html.twig',
             $resolver->customTemplate($this->createInvoice(), BillingTemplateChannel::View),
         );
     }
@@ -139,7 +139,7 @@ final class BillingTemplateResolverTest extends TestCase
 
         self::assertNull($resolver->customTemplate($this->createInvoice(), BillingTemplateChannel::Pdf));
         self::assertSame(
-            '@SolidInvoiceInvoice/Pdf/invoice.html.twig',
+            '@AugiasInvoice/Pdf/invoice.html.twig',
             $resolver->resolve($this->createInvoice(), BillingTemplateChannel::Pdf),
         );
     }
@@ -162,7 +162,7 @@ final class BillingTemplateResolverTest extends TestCase
         $resolver = $this->createResolver(['subscriptionActive' => false]);
 
         self::assertSame(
-            '@SolidInvoiceInvoice/Pdf/invoice.html.twig',
+            '@AugiasInvoice/Pdf/invoice.html.twig',
             $resolver->resolve($this->createInvoice(), BillingTemplateChannel::Pdf),
         );
     }
@@ -172,7 +172,7 @@ final class BillingTemplateResolverTest extends TestCase
         $resolver = $this->createResolver(['featureEnabled' => false]);
 
         self::assertSame(
-            '@SolidInvoiceInvoice/Email/invoice.html.twig',
+            '@AugiasInvoice/Email/invoice.html.twig',
             $resolver->resolve($this->createInvoice(), BillingTemplateChannel::Email),
         );
     }
@@ -182,7 +182,7 @@ final class BillingTemplateResolverTest extends TestCase
         $resolver = $this->createResolver(['slug' => 'removed-template']);
 
         self::assertSame(
-            '@SolidInvoiceInvoice/Pdf/invoice.html.twig',
+            '@AugiasInvoice/Pdf/invoice.html.twig',
             $resolver->resolve($this->createInvoice(), BillingTemplateChannel::Pdf),
         );
     }
@@ -193,11 +193,11 @@ final class BillingTemplateResolverTest extends TestCase
         $resolver = $this->createResolver();
 
         self::assertSame(
-            '@SolidInvoiceQuote/Pdf/quote.html.twig',
+            '@AugiasQuote/Pdf/quote.html.twig',
             $resolver->resolve($this->createQuote(), BillingTemplateChannel::Pdf),
         );
         self::assertSame(
-            '@SolidInvoiceQuote/Email/quote.html.twig',
+            '@AugiasQuote/Email/quote.html.twig',
             $resolver->resolve($this->createQuote(), BillingTemplateChannel::Email),
         );
         self::assertNull($resolver->customTemplate($this->createQuote(), BillingTemplateChannel::View));
@@ -210,7 +210,7 @@ final class BillingTemplateResolverTest extends TestCase
         }
 
         self::assertSame(
-            '@SolidInvoiceQuote/Templates/sleek/pdf.html.twig',
+            '@AugiasQuote/Templates/sleek/pdf.html.twig',
             $this->createResolver()->resolve($this->createQuote(), BillingTemplateChannel::Pdf),
         );
     }
@@ -218,11 +218,11 @@ final class BillingTemplateResolverTest extends TestCase
     public function testDefaultTemplates(): void
     {
         self::assertSame(
-            '@SolidInvoiceInvoice/external_invoice_view.html.twig',
+            '@AugiasInvoice/external_invoice_view.html.twig',
             BillingTemplateResolver::defaultTemplate(BillingDocumentType::Invoice, BillingTemplateChannel::View),
         );
         self::assertSame(
-            '@SolidInvoiceQuote/quote_template.html.twig',
+            '@AugiasQuote/quote_template.html.twig',
             BillingTemplateResolver::defaultTemplate(BillingDocumentType::Quote, BillingTemplateChannel::View),
         );
     }

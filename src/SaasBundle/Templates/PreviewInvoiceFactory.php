@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Templates;
+namespace Augias\SaasBundle\Templates;
 
+use Augias\ClientBundle\Entity\Address;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\SettingsBundle\SystemConfig;
 use Carbon\CarbonImmutable;
 use ReflectionProperty;
-use SolidInvoice\ClientBundle\Entity\Address;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\SettingsBundle\SystemConfig;
 use Symfony\Component\Uid\Ulid;
 use Symfony\Component\Uid\Uuid;
 
@@ -32,7 +32,7 @@ use Symfony\Component\Uid\Uuid;
  * details (name, logo, address) still come from the active company via the
  * usual Twig helpers, so the preview looks like the user's own invoice.
  *
- * @see \SolidInvoice\SaasBundle\Tests\Templates\PreviewInvoiceFactoryTest
+ * @see \Augias\SaasBundle\Tests\Templates\PreviewInvoiceFactoryTest
  */
 final readonly class PreviewInvoiceFactory
 {

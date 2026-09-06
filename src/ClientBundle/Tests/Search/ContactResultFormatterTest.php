@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Tests\Search;
+namespace Augias\ClientBundle\Tests\Search;
 
+use Augias\ClientBundle\Search\ContactResultFormatter;
+use Augias\CoreBundle\Search\QualifiedResultFormatterInterface;
+use Augias\CoreBundle\Search\ResultFormatterInterface;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\ClientBundle\Search\ContactResultFormatter;
-use SolidInvoice\CoreBundle\Search\QualifiedResultFormatterInterface;
-use SolidInvoice\CoreBundle\Search\ResultFormatterInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 final class ContactResultFormatterTest extends TestCase

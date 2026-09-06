@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,23 +11,23 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Mcp\Tool;
+namespace Augias\McpBundle\Mcp\Tool;
 
+use Augias\McpBundle\Mcp\Attribute\McpScopeRequired;
+use Augias\McpBundle\Mcp\McpScopeGuard;
+use Augias\McpBundle\Security\McpScope;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
 use Mcp\Capability\Attribute\McpTool;
 use Mcp\Exception\ToolCallException;
-use SolidInvoice\McpBundle\Mcp\Attribute\McpScopeRequired;
-use SolidInvoice\McpBundle\Mcp\McpScopeGuard;
-use SolidInvoice\McpBundle\Security\McpScope;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * Generic query tools for reading SolidInvoice business resources. Company
+ * Generic query tools for reading Augias business resources. Company
  * isolation is enforced by the active CompanyFilter — every query runs under
- * the token's bound company, set by {@see \SolidInvoice\McpBundle\Security\McpOAuthAuthenticator}.
+ * the token's bound company, set by {@see \Augias\McpBundle\Security\McpOAuthAuthenticator}.
  */
 final readonly class ResourceQueryTools
 {
@@ -40,7 +40,7 @@ final readonly class ResourceQueryTools
     }
 
     /**
-     * List records of a SolidInvoice resource (invoices, quotes, clients, contacts,
+     * List records of a Augias resource (invoices, quotes, clients, contacts,
      * payments, taxes, payment methods, recurring invoices).
      *
      * @param string               $resource       Resource name: invoice, recurring_invoice, quote, client, contact, payment, payment_method, tax
@@ -105,7 +105,7 @@ final readonly class ResourceQueryTools
     }
 
     /**
-     * Fetch a single record of a SolidInvoice resource by its ULID.
+     * Fetch a single record of a Augias resource by its ULID.
      *
      * @param string $resource Resource name (see list_resource for supported values)
      * @param string $id       ULID of the record

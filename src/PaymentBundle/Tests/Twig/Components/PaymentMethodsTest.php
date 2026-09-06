@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Tests\Twig\Components;
+namespace Augias\PaymentBundle\Tests\Twig\Components;
 
-use SolidInvoice\CoreBundle\Test\LiveComponentTest;
-use SolidInvoice\PaymentBundle\Twig\Components\PaymentMethods;
+use Augias\CoreBundle\Test\LiveComponentTest;
+use Augias\PaymentBundle\Twig\Components\PaymentMethods;
 
 final class PaymentMethodsTest extends LiveComponentTest
 {

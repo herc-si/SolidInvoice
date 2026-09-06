@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\MoneyBundle\Tests\Form\DataTransformer;
+namespace Augias\MoneyBundle\Tests\Form\DataTransformer;
 
+use Augias\MoneyBundle\Currency\CurrencyScale;
+use Augias\MoneyBundle\Form\DataTransformer\ViewTransformer;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use Brick\Math\Exception\DivisionByZeroException;
@@ -23,8 +25,6 @@ use Money\Currency;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\MoneyBundle\Currency\CurrencyScale;
-use SolidInvoice\MoneyBundle\Form\DataTransformer\ViewTransformer;
 
 #[CoversClass(ViewTransformer::class)]
 final class ViewTransformerTest extends TestCase

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Action;
+namespace Augias\UserBundle\Action;
 
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -21,7 +21,7 @@ final class Profile
     /**
      * @return array<never>
      */
-    #[Template('@SolidInvoiceUser/Profile/show.html.twig')]
+    #[Template('@AugiasUser/Profile/show.html.twig')]
     public function __invoke(TokenStorageInterface $storage): array
     {
         return [];

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Action;
+namespace Augias\CoreBundle\Action;
 
-use SolidInvoice\CoreBundle\Search\MultiSearchService;
-use SolidInvoice\CoreBundle\Search\SearchQueryParser;
-use SolidInvoice\CoreBundle\Search\SearchResult;
+use Augias\CoreBundle\Search\MultiSearchService;
+use Augias\CoreBundle\Search\SearchQueryParser;
+use Augias\CoreBundle\Search\SearchResult;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -24,7 +24,7 @@ use function strlen;
 use function trim;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Action\SearchTest
+ * @see \Augias\CoreBundle\Tests\Action\SearchTest
  */
 #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
 final readonly class Search

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\BillBundle\Manager;
+namespace Augias\BillBundle\Manager;
 
+use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Enum\BillStatus;
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
+use Augias\TaxBundle\Entity\TaxIdentifier;
 use Brick\Math\BigInteger;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\BillBundle\Entity\Bill;
-use SolidInvoice\BillBundle\Enum\BillStatus;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
-use SolidInvoice\TaxBundle\Entity\TaxIdentifier;
 
 /**
  * Converts an imported {@see ElectronicInvoiceReceipt} into a tracked
@@ -29,7 +29,7 @@ use SolidInvoice\TaxBundle\Entity\TaxIdentifier;
  * does automatically: a received document may be a duplicate or need
  * correction before it becomes a tracked liability.
  *
- * @see \SolidInvoice\BillBundle\Tests\Manager\BillManagerTest
+ * @see \Augias\BillBundle\Tests\Manager\BillManagerTest
  */
 final readonly class BillManager
 {

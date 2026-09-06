@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -17,18 +17,18 @@ return App::config([
     'twig_component' => [
         'anonymous_template_directory' => 'components/',
         'defaults' => [
-            'SolidInvoice\\ClientBundle\\Twig\\Components\\' => '@SolidInvoiceClient/Components',
-            'SolidInvoice\\CoreBundle\\Twig\\Components\\' => '@SolidInvoiceCore/Components',
-            'SolidInvoice\\DataGridBundle\\Twig\\Components\\' => '@SolidInvoiceDataGrid/Components',
-            'SolidInvoice\\ElectronicInvoicingBundle\\Twig\\Components\\' => '@SolidInvoiceElectronicInvoicing/Components',
-            'SolidInvoice\\InstallBundle\\Twig\\Components\\' => '@SolidInvoiceInstall/Components',
-            'SolidInvoice\\InvoiceBundle\\Twig\\Components\\' => '@SolidInvoiceInvoice/Components',
-            'SolidInvoice\\NotificationBundle\\Twig\\Components\\' => '@SolidInvoiceNotification/Components',
-            'SolidInvoice\\QuoteBundle\\Twig\\Components\\' => '@SolidInvoiceQuote/Components',
-            'SolidInvoice\\SettingsBundle\\Twig\\Components\\' => '@SolidInvoiceSettings/Components',
-            'SolidInvoice\\TaxBundle\\Twig\\Components\\' => '@SolidInvoiceTax/Components',
-            'SolidInvoice\\PaymentBundle\\Twig\\Components\\' => '@SolidInvoicePayment/Components',
-            'SolidInvoice\\UserBundle\\Twig\\Components\\' => '@SolidInvoiceUser/Components',
+            'Augias\\ClientBundle\\Twig\\Components\\' => '@AugiasClient/Components',
+            'Augias\\CoreBundle\\Twig\\Components\\' => '@AugiasCore/Components',
+            'Augias\\DataGridBundle\\Twig\\Components\\' => '@AugiasDataGrid/Components',
+            'Augias\\ElectronicInvoicingBundle\\Twig\\Components\\' => '@AugiasElectronicInvoicing/Components',
+            'Augias\\InstallBundle\\Twig\\Components\\' => '@AugiasInstall/Components',
+            'Augias\\InvoiceBundle\\Twig\\Components\\' => '@AugiasInvoice/Components',
+            'Augias\\NotificationBundle\\Twig\\Components\\' => '@AugiasNotification/Components',
+            'Augias\\QuoteBundle\\Twig\\Components\\' => '@AugiasQuote/Components',
+            'Augias\\SettingsBundle\\Twig\\Components\\' => '@AugiasSettings/Components',
+            'Augias\\TaxBundle\\Twig\\Components\\' => '@AugiasTax/Components',
+            'Augias\\PaymentBundle\\Twig\\Components\\' => '@AugiasPayment/Components',
+            'Augias\\UserBundle\\Twig\\Components\\' => '@AugiasUser/Components',
         ],
     ],
 ]);

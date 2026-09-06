@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ApiBundle\Tests\GraphQl\Type;
+namespace Augias\ApiBundle\Tests\GraphQl\Type;
 
 use ApiPlatform\GraphQl\Type\TypeConverterInterface;
 use ApiPlatform\Metadata\GraphQl\Query;
+use Augias\ApiBundle\GraphQl\Type\BigNumberTypeConverter;
+use Augias\InvoiceBundle\Entity\Line;
 use Brick\Math\BigDecimal;
 use Brick\Math\BigNumber;
 use GraphQL\Type\Definition\Type as GraphQLType;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as M;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\ApiBundle\GraphQl\Type\BigNumberTypeConverter;
-use SolidInvoice\InvoiceBundle\Entity\Line;
 use Symfony\Component\TypeInfo\Type;
 
 final class BigNumberTypeConverterTest extends TestCase

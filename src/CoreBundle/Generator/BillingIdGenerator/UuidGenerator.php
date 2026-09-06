@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Generator\BillingIdGenerator;
+namespace Augias\CoreBundle\Generator\BillingIdGenerator;
 
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\Uid\UuidV7;
 
 /**
- * @see \SolidInvoice\CoreBundle\Tests\Generator\BillingIdGenerator\UuidGeneratorTest
+ * @see \Augias\CoreBundle\Tests\Generator\BillingIdGenerator\UuidGeneratorTest
  */
 #[AsTaggedItem('uuid')]
 final class UuidGenerator implements IdGeneratorInterface

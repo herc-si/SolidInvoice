@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Action;
+namespace Augias\McpBundle\Action;
 
+use Augias\McpBundle\OAuth\KeyManager;
+use Augias\McpBundle\Repository\McpAccessTokenRepository;
+use Augias\McpBundle\Repository\McpRefreshTokenRepository;
 use InvalidArgumentException;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Key\InMemory;
@@ -22,9 +25,6 @@ use Lcobucci\JWT\Validation\Constraint\SignedWith;
 use Lcobucci\JWT\Validation\RequiredConstraintsViolated;
 use RuntimeException;
 use SensitiveParameter;
-use SolidInvoice\McpBundle\OAuth\KeyManager;
-use SolidInvoice\McpBundle\Repository\McpAccessTokenRepository;
-use SolidInvoice\McpBundle\Repository\McpRefreshTokenRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

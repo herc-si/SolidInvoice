@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\GridBuilder\Formatter;
+namespace Augias\DataGridBundle\GridBuilder\Formatter;
 
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Column\RelativeDateColumn;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use DateTimeInterface;
 use Exception;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\RelativeDateColumn;
 use function htmlspecialchars;
 use function sprintf;
 
@@ -27,7 +27,7 @@ use function sprintf;
  *
  * Output:
  *   <time class="datagrid-relative-date" datetime="2026-01-01T10:00:00Z" title="01 Jan 2026">3 days ago</time>
- * @see \SolidInvoice\DataGridBundle\Tests\GridBuilder\Formatter\RelativeDateFormatterTest
+ * @see \Augias\DataGridBundle\Tests\GridBuilder\Formatter\RelativeDateFormatterTest
  */
 final class RelativeDateFormatter implements FormatterInterface
 {

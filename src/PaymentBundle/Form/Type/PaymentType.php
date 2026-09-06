@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Form\Type;
+namespace Augias\PaymentBundle\Form\Type;
 
+use Augias\PaymentBundle\Entity\PaymentMethod;
 use Brick\Math\BigNumber;
 use Doctrine\Persistence\ManagerRegistry;
 use Money\Currency;
 use Override;
-use SolidInvoice\PaymentBundle\Entity\PaymentMethod;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\UX\StimulusBundle\Helper\StimulusHelper;
 
 /**
- * @see \SolidInvoice\PaymentBundle\Tests\Form\Type\PaymentTypeTest
+ * @see \Augias\PaymentBundle\Tests\Form\Type\PaymentTypeTest
  * @extends AbstractType<array{payment_method: mixed, amount: string, capture_online: bool, reference: mixed, notes: string}>
  */
 class PaymentType extends AbstractType

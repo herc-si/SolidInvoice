@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle;
+namespace Augias\DataGridBundle;
 
+use Augias\DataGridBundle\Filter\ColumnFilterInterface;
+use Augias\DataGridBundle\GridBuilder\Action\Action;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Column\DateTimeColumn;
+use Augias\DataGridBundle\GridBuilder\Column\StringColumn;
+use Augias\DataGridBundle\GridBuilder\Query;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
@@ -20,16 +26,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionNamedType;
-use SolidInvoice\DataGridBundle\Filter\ColumnFilterInterface;
-use SolidInvoice\DataGridBundle\GridBuilder\Action\Action;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\DateTimeColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StringColumn;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
 use Symfony\Component\Translation\TranslatableMessage;
 
 /**
- * @see \SolidInvoice\DataGridBundle\Tests\GridTest
+ * @see \Augias\DataGridBundle\Tests\GridTest
  */
 abstract class Grid implements GridInterface
 {

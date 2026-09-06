@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\GridBuilder\Formatter;
+namespace Augias\DataGridBundle\GridBuilder\Formatter;
 
-use SolidInvoice\DataGridBundle\GridBuilder\Column\Column;
-use SolidInvoice\DataGridBundle\GridBuilder\Column\StatusColumn;
+use Augias\DataGridBundle\GridBuilder\Column\Column;
+use Augias\DataGridBundle\GridBuilder\Column\StatusColumn;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use function htmlspecialchars;
 use function sprintf;
@@ -26,7 +26,7 @@ use function ucwords;
  *
  * Output:
  *   <span class="datagrid-status status-{variant}">{Label}</span>
- * @see \SolidInvoice\DataGridBundle\Tests\GridBuilder\Formatter\StatusFormatterTest
+ * @see \Augias\DataGridBundle\Tests\GridBuilder\Formatter\StatusFormatterTest
  */
 final readonly class StatusFormatter implements FormatterInterface
 {

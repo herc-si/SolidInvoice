@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,8 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DataGridBundle\Tests\Source;
+namespace Augias\DataGridBundle\Tests\Source;
 
+use Augias\DataGridBundle\GridBuilder\Query;
+use Augias\DataGridBundle\GridInterface;
+use Augias\DataGridBundle\Source\ORMSource;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -20,9 +23,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\DataGridBundle\GridBuilder\Query;
-use SolidInvoice\DataGridBundle\GridInterface;
-use SolidInvoice\DataGridBundle\Source\ORMSource;
 
 #[CoversClass(ORMSource::class)]
 final class ORMSourceTest extends TestCase

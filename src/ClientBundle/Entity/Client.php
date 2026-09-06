@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\ClientBundle\Entity;
+namespace Augias\ClientBundle\Entity;
 
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
@@ -23,24 +23,24 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
+use Augias\ClientBundle\Enum\ClientStatus;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\ClientBundle\Validator\Constraints\WithinPlanClientLimit;
+use Augias\CoreBundle\Traits\Entity\Archivable;
+use Augias\CoreBundle\Traits\Entity\CompanyAware;
+use Augias\CoreBundle\Traits\Entity\TimeStampable;
+use Augias\InvoiceBundle\Entity\Invoice;
+use Augias\InvoiceBundle\Entity\RecurringInvoice;
+use Augias\InvoiceBundle\Enum\InvoiceStatus;
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\QuoteBundle\Entity\Quote;
+use Augias\TaxBundle\Entity\TaxIdentifier;
+use Augias\TaxBundle\Validator\Constraints\RequiredFiscalIdentifierForElectronicInvoicing;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Money\Currency;
-use SolidInvoice\ClientBundle\Enum\ClientStatus;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\ClientBundle\Validator\Constraints\WithinPlanClientLimit;
-use SolidInvoice\CoreBundle\Traits\Entity\Archivable;
-use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
-use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-use SolidInvoice\InvoiceBundle\Entity\Invoice;
-use SolidInvoice\InvoiceBundle\Entity\RecurringInvoice;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceStatus;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\QuoteBundle\Entity\Quote;
-use SolidInvoice\TaxBundle\Entity\TaxIdentifier;
-use SolidInvoice\TaxBundle\Validator\Constraints\RequiredFiscalIdentifierForElectronicInvoicing;
 use Stringable;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
@@ -129,7 +129,7 @@ class Client implements Stringable
 
     /**
      * Whether this party bills THIS company — the accounts-payable role, see
-     * {@see \SolidInvoice\BillBundle\Entity\Bill::$supplier}. Independent of
+     * {@see \Augias\BillBundle\Entity\Bill::$supplier}. Independent of
      * {@see $isClient}: a pure supplier (never invoiced) has this true and
      * `isClient` false.
      */
@@ -142,7 +142,7 @@ class Client implements Stringable
      * registration) rather than a private individual. Kept in sync with
      * whether `name` was typed in directly or left blank for {@see ClientType}
      * to fill in from the primary contact — see its SUBMIT listener. Drives
-     * {@see \SolidInvoice\TaxBundle\Validator\Constraints\RequiredFiscalIdentifierForElectronicInvoicingValidator}:
+     * {@see \Augias\TaxBundle\Validator\Constraints\RequiredFiscalIdentifierForElectronicInvoicingValidator}:
      * an individual is never required to provide a SIRET, since the French
      * mandatory e-invoicing rules this validates against only apply
      * between VAT-registered businesses, not to private consumers.

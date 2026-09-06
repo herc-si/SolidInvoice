@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\EventSubscriber;
+namespace Augias\UserBundle\EventSubscriber;
 
+use Augias\CoreBundle\Company\ResolvedHost;
+use Augias\CoreBundle\Entity\Company;
+use Augias\CoreBundle\Listener\HostRoutingListener;
+use Augias\UserBundle\Entity\User;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
-use SolidInvoice\CoreBundle\Company\ResolvedHost;
-use SolidInvoice\CoreBundle\Entity\Company;
-use SolidInvoice\CoreBundle\Listener\HostRoutingListener;
-use SolidInvoice\UserBundle\Entity\User;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Event\AuthenticationSuccessEvent;
@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
 /**
- * @see \SolidInvoice\UserBundle\Tests\EventSubscriber\UserLoginEventSubscriberTest
+ * @see \Augias\UserBundle\Tests\EventSubscriber\UserLoginEventSubscriberTest
  */
 final readonly class UserLoginEventSubscriber implements EventSubscriberInterface
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CatalogBundle\Action\Category;
+namespace Augias\CatalogBundle\Action\Category;
 
 use Symfony\Bridge\Twig\Attribute\Template;
 
@@ -20,7 +20,7 @@ final class Index
     /**
      * @return array{}
      */
-    #[Template('@SolidInvoiceCatalog/Category/index.html.twig')]
+    #[Template('@AugiasCatalog/Category/index.html.twig')]
     public function __invoke(): array
     {
         return [];

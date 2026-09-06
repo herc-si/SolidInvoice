@@ -1,5 +1,5 @@
 {#
- # This file is part of SolidInvoice package.
+ # This file is part of Augias package.
  #
  # (c) Pierre du Plessis <open-source@solidworx.co>
  #
@@ -24,7 +24,7 @@
                                     </div>
                                 {% endif %}
                                 <div>
-                                    <h1 class="app-brand-name mb-0">{{ constant('SolidInvoice\\CoreBundle\\SolidInvoiceCoreBundle::APP_NAME') }}</h1>
+                                    <h1 class="app-brand-name mb-0">{{ constant('Augias\\CoreBundle\\AugiasCoreBundle::APP_NAME') }}</h1>
                                     {#<p class="app-brand-tagline mb-0">{{ 'quote.external.tagline'|trans }}</p>#}
                                 </div>
                             </div>
@@ -175,9 +175,9 @@
 
                         {# Client-visible custom fields #}
                         <twig:CustomFieldsListPdf
-                            :target="enum('SolidInvoice\\CoreBundle\\Enum\\CustomFieldTarget').QUOTE"
+                            :target="enum('Augias\\CoreBundle\\Enum\\CustomFieldTarget').QUOTE"
                             :recordId="quote.id"
-                            :visibility="enum('SolidInvoice\\CoreBundle\\Enum\\CustomFieldVisibility').CLIENT_VISIBLE"
+                            :visibility="enum('Augias\\CoreBundle\\Enum\\CustomFieldVisibility').CLIENT_VISIBLE"
                         />
 
                         <hr class="my-4">
@@ -267,7 +267,7 @@
                                         <div class="d-flex align-items-center justify-content-center gap-2">
                                             {{ app_logo(24, showDefault: true, showOnlyAppIcon: true) }}
                                             <span class="text-muted">
-                                                {{ 'quote.external.footer.powered_by'|trans }} <strong class="text-primary">{{ constant('SolidInvoice\\CoreBundle\\SolidInvoiceCoreBundle::APP_NAME') }}</strong>
+                                                {{ 'quote.external.footer.powered_by'|trans }} <strong class="text-primary">{{ constant('Augias\\CoreBundle\\AugiasCoreBundle::APP_NAME') }}</strong>
                                             </span>
                                         </div>
                                         <div class="mt-2 small text-muted">

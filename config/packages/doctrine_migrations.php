@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Augias\CoreBundle\Doctrine\Migrations\NaturalVersionComparator;
 use Doctrine\Migrations\Version\Comparator;
-use SolidInvoice\CoreBundle\Doctrine\Migrations\NaturalVersionComparator;
 
 return App::config([
     'doctrine_migrations' => [

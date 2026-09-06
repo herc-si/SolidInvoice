@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Tests\Functional;
+namespace Augias\McpBundle\Tests\Functional;
 
+use Augias\ClientBundle\Mcp\ClientReadTools;
+use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\InvoiceBundle\Mcp\InvoiceReadTools;
+use Augias\McpBundle\Mcp\Tool\ResourceQueryTools;
+use Augias\McpBundle\Mcp\Tool\WorkflowTools;
+use Augias\PaymentBundle\Mcp\PaymentMethodReadTools;
+use Augias\QuoteBundle\Mcp\QuoteReadTools;
+use Augias\SettingsBundle\Mcp\SettingsReadTools;
+use Augias\TaxBundle\Mcp\TaxReadTools;
 use PHPUnit\Framework\Attributes\Group;
-use SolidInvoice\ClientBundle\Mcp\ClientReadTools;
-use SolidInvoice\InstallBundle\Test\EnsureApplicationInstalled;
-use SolidInvoice\InvoiceBundle\Mcp\InvoiceReadTools;
-use SolidInvoice\McpBundle\Mcp\Tool\ResourceQueryTools;
-use SolidInvoice\McpBundle\Mcp\Tool\WorkflowTools;
-use SolidInvoice\PaymentBundle\Mcp\PaymentMethodReadTools;
-use SolidInvoice\QuoteBundle\Mcp\QuoteReadTools;
-use SolidInvoice\SettingsBundle\Mcp\SettingsReadTools;
-use SolidInvoice\TaxBundle\Mcp\TaxReadTools;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**

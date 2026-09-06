@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\McpBundle\Security\Voter;
+namespace Augias\McpBundle\Security\Voter;
 
+use Augias\McpBundle\Security\Attribute;
 use SensitiveParameter;
-use SolidInvoice\McpBundle\Security\Attribute;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use SolidWorx\Toggler\ToggleInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -30,7 +30,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  * Even on self-hosted the `mcp_access` feature gate is consulted so the
  * same denial path runs end-to-end. NoopFeatureGate always returns true
  * on self-hosted, preserving the historical "always granted" behaviour.
- * @see \SolidInvoice\McpBundle\Tests\Security\Voter\McpAccessVoterTest
+ * @see \Augias\McpBundle\Tests\Security\Voter\McpAccessVoterTest
  * @extends Voter<string, mixed>
  */
 final class McpAccessVoter extends Voter

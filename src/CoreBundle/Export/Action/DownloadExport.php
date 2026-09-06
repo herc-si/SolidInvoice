@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Export\Action;
+namespace Augias\CoreBundle\Export\Action;
 
+use Augias\CoreBundle\Entity\ExportJob;
+use Augias\CoreBundle\Export\Enum\ExportStatus;
+use Augias\CoreBundle\Export\Security\Voter\ExportJobVoter;
+use Augias\CoreBundle\Repository\ExportJobRepository;
 use InvalidArgumentException;
-use SolidInvoice\CoreBundle\Entity\ExportJob;
-use SolidInvoice\CoreBundle\Export\Enum\ExportStatus;
-use SolidInvoice\CoreBundle\Export\Security\Voter\ExportJobVoter;
-use SolidInvoice\CoreBundle\Repository\ExportJobRepository;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\RedirectResponse;

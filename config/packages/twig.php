@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -19,9 +19,9 @@ return App::config([
         'strict_variables' => param('kernel.debug'),
         'file_name_pattern' => '*.twig',
         'form_themes' => [
-            '@SolidInvoiceNotification/Form/fields.html.twig',
-            '@SolidInvoiceCore/Form/fields.html.twig',
-            '@SolidInvoiceDataGrid/Form/fields.html.twig',
+            '@AugiasNotification/Form/fields.html.twig',
+            '@AugiasCore/Form/fields.html.twig',
+            '@AugiasDataGrid/Form/fields.html.twig',
         ],
     ],
 ]);

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,21 +11,21 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\PaymentBundle\Listener\Doctrine;
+namespace Augias\PaymentBundle\Listener\Doctrine;
 
+use Augias\PaymentBundle\Entity\Payment;
+use Augias\PaymentBundle\Entity\SecurityToken;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Payum\Core\Model\Identity;
 use SensitiveParameter;
-use SolidInvoice\PaymentBundle\Entity\Payment;
-use SolidInvoice\PaymentBundle\Entity\SecurityToken;
 use Symfony\Component\Uid\Ulid;
 use Throwable;
 
 /**
- * @see \SolidInvoice\PaymentBundle\Tests\Listener\Doctrine\SecurityTokenPaymentLinkerTest
+ * @see \Augias\PaymentBundle\Tests\Listener\Doctrine\SecurityTokenPaymentLinkerTest
  */
 #[AsEntityListener(event: Events::prePersist, entity: SecurityToken::class)]
 #[AsEntityListener(event: Events::preUpdate, entity: SecurityToken::class)]

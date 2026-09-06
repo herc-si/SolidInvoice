@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\DashboardBundle\Checklist\Items;
+namespace Augias\DashboardBundle\Checklist\Items;
 
-use SolidInvoice\DashboardBundle\Checklist\ChecklistItemInterface;
-use SolidInvoice\PaymentBundle\Repository\PaymentMethodRepository;
+use Augias\DashboardBundle\Checklist\ChecklistItemInterface;
+use Augias\PaymentBundle\Repository\PaymentMethodRepository;
 
 final readonly class ConfigurePaymentGatewayItem implements ChecklistItemInterface
 {

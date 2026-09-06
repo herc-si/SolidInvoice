@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Action;
+namespace Augias\SaasBundle\Action;
 
+use Augias\CoreBundle\Company\CompanySelector;
+use Augias\CoreBundle\Repository\CompanyRepository;
 use Carbon\CarbonImmutable;
-use SolidInvoice\CoreBundle\Company\CompanySelector;
-use SolidInvoice\CoreBundle\Repository\CompanyRepository;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use SolidWorx\Platform\SaasBundle\Enum\SubscriptionStatus;
 use SolidWorx\Platform\SaasBundle\Subscription\SubscriptionProviderInterface;
@@ -52,7 +52,7 @@ final class SubscriptionOverviewAction extends AbstractController
             return $this->redirectToRoute('saas_subscription_plans');
         }
 
-        return $this->render('@SolidInvoiceSaas/subscription/overview.html.twig', [
+        return $this->render('@AugiasSaas/subscription/overview.html.twig', [
             'subscription' => $subscription,
             'plan' => $subscription->getPlan(),
             'isTrial' => $subscription->getStatus() === SubscriptionStatus::TRIAL,

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,18 +11,18 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\QuoteBundle\DTO;
+namespace Augias\QuoteBundle\DTO;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Entity\Contact;
+use Augias\ClientBundle\Validator\Constraints\UniqueClientName;
+use Augias\CoreBundle\Entity\Discount;
+use Augias\QuoteBundle\Entity\Line;
+use Augias\QuoteBundle\Enum\QuoteClientMode;
+use Augias\TaxBundle\Entity\InvoiceTax;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Entity\Contact;
-use SolidInvoice\ClientBundle\Validator\Constraints\UniqueClientName;
-use SolidInvoice\CoreBundle\Entity\Discount;
-use SolidInvoice\QuoteBundle\Entity\Line;
-use SolidInvoice\QuoteBundle\Enum\QuoteClientMode;
-use SolidInvoice\TaxBundle\Entity\InvoiceTax;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

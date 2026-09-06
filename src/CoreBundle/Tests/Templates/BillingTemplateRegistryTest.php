@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,13 +11,13 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Tests\Templates;
+namespace Augias\CoreBundle\Tests\Templates;
 
+use Augias\CoreBundle\Templates\BillingDocumentType;
+use Augias\CoreBundle\Templates\BillingTemplateChannel;
+use Augias\CoreBundle\Templates\BillingTemplateRegistry;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use SolidInvoice\CoreBundle\Templates\BillingDocumentType;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateChannel;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateRegistry;
 use Symfony\Component\Filesystem\Filesystem;
 use function dirname;
 use function sprintf;
@@ -93,12 +93,12 @@ final class BillingTemplateRegistryTest extends TestCase
     public function testTemplatePathForExistingVariant(): void
     {
         self::assertSame(
-            '@SolidInvoiceInvoice/Templates/sleek/pdf.html.twig',
+            '@AugiasInvoice/Templates/sleek/pdf.html.twig',
             $this->createRegistry()->templatePath('sleek', BillingDocumentType::Invoice, BillingTemplateChannel::Pdf),
         );
 
         self::assertSame(
-            '@SolidInvoiceQuote/Templates/sleek/preview.html.twig',
+            '@AugiasQuote/Templates/sleek/preview.html.twig',
             $this->createRegistry()->templatePath('sleek', BillingDocumentType::Quote, BillingTemplateChannel::View),
         );
     }

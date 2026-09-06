@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\CoreBundle\Enum;
+namespace Augias\CoreBundle\Enum;
 
 /**
- * Locales SolidInvoice ships translated UI catalogs for (see translations/*.<locale>.yml).
+ * Locales Augias ships translated UI catalogs for (see translations/*.<locale>.yml).
  * This is a subset of the wider push/pull locale list in config/packages/translation.php,
  * which also includes locales that only exist on the translation provider.
  */

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,19 +11,19 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Config;
+namespace Augias\SaasBundle\Config;
 
-use SolidInvoice\CoreBundle\Templates\BillingTemplateRegistry;
-use SolidInvoice\CoreBundle\Templates\BillingTemplateResolver;
-use SolidInvoice\SaasBundle\Feature\Feature;
-use SolidInvoice\SaasBundle\Form\Type\CustomDomainType;
-use SolidInvoice\SaasBundle\Form\Type\InvoiceTemplateType;
-use SolidInvoice\SettingsBundle\Config\ProviderInterface;
-use SolidInvoice\SettingsBundle\DTO\Config;
+use Augias\CoreBundle\Templates\BillingTemplateRegistry;
+use Augias\CoreBundle\Templates\BillingTemplateResolver;
+use Augias\SaasBundle\Feature\Feature;
+use Augias\SaasBundle\Form\Type\CustomDomainType;
+use Augias\SaasBundle\Form\Type\InvoiceTemplateType;
+use Augias\SettingsBundle\Config\ProviderInterface;
+use Augias\SettingsBundle\DTO\Config;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 /**
- * @see \SolidInvoice\SaasBundle\Tests\Config\ConfigProviderTest
+ * @see \Augias\SaasBundle\Tests\Config\ConfigProviderTest
  */
 final class ConfigProvider implements ProviderInterface
 {

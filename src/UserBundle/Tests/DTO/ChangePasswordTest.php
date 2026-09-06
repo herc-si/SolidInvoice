@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,10 +11,10 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\UserBundle\Tests\DTO;
+namespace Augias\UserBundle\Tests\DTO;
 
-use SolidInvoice\CoreBundle\Test\Traits\FakerTestTrait;
-use SolidInvoice\UserBundle\DTO\ChangePassword;
+use Augias\CoreBundle\Test\Traits\FakerTestTrait;
+use Augias\UserBundle\DTO\ChangePassword;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 

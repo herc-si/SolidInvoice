@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,25 +11,25 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\InvoiceBundle\Action;
+namespace Augias\InvoiceBundle\Action;
 
+use Augias\ClientBundle\Entity\Client;
+use Augias\ClientBundle\Repository\ClientRepository;
+use Augias\CoreBundle\Billing\TotalCalculator;
+use Augias\InvoiceBundle\DTO\InvoiceFormDTO;
+use Augias\InvoiceBundle\Email\InvoiceEmail;
+use Augias\InvoiceBundle\Entity\Line;
+use Augias\InvoiceBundle\Enum\InvoiceClientMode;
+use Augias\InvoiceBundle\Form\Type\InvoiceType;
+use Augias\InvoiceBundle\Manager\InvoiceFormManager;
+use Augias\InvoiceBundle\Model\Graph;
+use Augias\InvoiceBundle\Repository\InvoiceRepository;
+use Augias\SaasBundle\Feature\Feature;
 use Brick\Math\Exception\MathException;
 use Carbon\CarbonImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use InvalidArgumentException;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\ClientBundle\Entity\Client;
-use SolidInvoice\ClientBundle\Repository\ClientRepository;
-use SolidInvoice\CoreBundle\Billing\TotalCalculator;
-use SolidInvoice\InvoiceBundle\DTO\InvoiceFormDTO;
-use SolidInvoice\InvoiceBundle\Email\InvoiceEmail;
-use SolidInvoice\InvoiceBundle\Entity\Line;
-use SolidInvoice\InvoiceBundle\Enum\InvoiceClientMode;
-use SolidInvoice\InvoiceBundle\Form\Type\InvoiceType;
-use SolidInvoice\InvoiceBundle\Manager\InvoiceFormManager;
-use SolidInvoice\InvoiceBundle\Model\Graph;
-use SolidInvoice\InvoiceBundle\Repository\InvoiceRepository;
-use SolidInvoice\SaasBundle\Feature\Feature;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -67,7 +67,7 @@ final class Create extends AbstractController
             Feature::InvoicesPerMonth->value,
             $this->invoiceRepository->countCreatedInMonth($this->clock->now()),
         )) {
-            return $this->render('@SolidInvoiceInvoice/Default/invoice_gated.html.twig');
+            return $this->render('@AugiasInvoice/Default/invoice_gated.html.twig');
         }
 
         $totalClientsCount = $this->clientRepository->getTotalClients();
@@ -143,7 +143,7 @@ final class Create extends AbstractController
             }
         }
 
-        return $this->render('@SolidInvoiceInvoice/Default/create.html.twig', [
+        return $this->render('@AugiasInvoice/Default/create.html.twig', [
             'dto' => $dto,
             'form' => $form,
             'recurring' => false,

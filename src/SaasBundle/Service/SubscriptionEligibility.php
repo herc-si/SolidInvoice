@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -11,11 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace SolidInvoice\SaasBundle\Service;
+namespace Augias\SaasBundle\Service;
 
+use Augias\CoreBundle\Contracts\PaidSubscriptionGateInterface;
+use Augias\CoreBundle\Entity\Company;
 use Psr\Clock\ClockInterface;
-use SolidInvoice\CoreBundle\Contracts\PaidSubscriptionGateInterface;
-use SolidInvoice\CoreBundle\Entity\Company;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
 use SolidWorx\Platform\SaasBundle\Enum\SubscriptionStatus;
 use SolidWorx\Platform\SaasBundle\Subscription\SubscriptionProviderInterface;
@@ -23,10 +23,10 @@ use SolidWorx\Platform\SaasBundle\Subscription\SubscriptionProviderInterface;
 /**
  * Single source of truth for "is this company allowed to use paid features right now".
  *
- * Used by both {@see \SolidInvoice\SaasBundle\Security\Voter\SubscriptionVoter} (runtime
- * access on every request) and {@see \SolidInvoice\SaasBundle\Company\SubscriptionAwareUserCompanies}
+ * Used by both {@see \Augias\SaasBundle\Security\Voter\SubscriptionVoter} (runtime
+ * access on every request) and {@see \Augias\SaasBundle\Company\SubscriptionAwareUserCompanies}
  * (filtering company pickers before the user even gets to authorise).
- * @see \SolidInvoice\SaasBundle\Tests\Service\SubscriptionEligibilityTest
+ * @see \Augias\SaasBundle\Tests\Service\SubscriptionEligibilityTest
  */
 final readonly class SubscriptionEligibility implements PaidSubscriptionGateInterface
 {
