@@ -6,11 +6,48 @@
  * loudest thing on screen, competing with the figures and names that people
  * actually read; a tint carries the same signal and lets the data lead.
  *
- * Tabler ships `-lt` for its whole palette except `gray`, which the status
- * enums use for the quietest states (new, draft). Defined here to match.
+ * Tabler builds those variants by putting the colour at full strength as *text*
+ * over the same colour at 10% as background. That is precisely the pattern
+ * DESIGN.md records as non-conformant — measured here at 1.97:1 for Pending and
+ * 2.48:1 for Paid, against a 4.5:1 requirement. The tint is worth keeping; the
+ * text colour is not, so each chip is repointed at a `-dark` step that clears AA
+ * over its own tint. `!important` is not decoration: Tabler's colour utilities
+ * carry it, and a plain declaration loses to them at any specificity.
+ *
+ * Tabler also ships no `-lt` for `gray`, which the status enums use for their
+ * quietest states (new, draft), so it is defined here outright.
  */
 
 .bg-gray-lt {
     background-color: var(--swp-gray-100);
     color: var(--swp-text-secondary);
+}
+
+// Measured over each colour's own 10% tint composited on white.
+
+.badge {
+
+    &.bg-yellow-lt {
+        color: #854d0e !important; // yellow-800
+    }
+
+    &.bg-green-lt {
+        color: #166534 !important; // green-800
+    }
+
+    &.bg-red-lt {
+        color: #b91c1c !important; // red-700, matches --swp-danger-dark
+    }
+
+    &.bg-purple-lt {
+        color: #7e22ce !important; // purple-700
+    }
+
+    &.bg-teal-lt {
+        color: #0f766e !important; // teal-700
+    }
+
+    &.bg-orange-lt {
+        color: #c2410c !important; // orange-700
+    }
 }

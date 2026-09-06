@@ -209,7 +209,7 @@ A 10-step slate ramp. Every neutral is tinted cool, not pure gray.
 
 **The Legible Status Rule.** Status colors are fills, not text. `success`, `danger`, `warning`, and `info` are tuned for chip backgrounds and icon fills, and none of them clears 4.5:1 as text — on white or on their own `-light` tint. Status *text* uses the `-dark` step (`success-dark`, `danger-dark`). This matters most on money: an amount is the one value in the product that must never be hard to read, so the `.money` component binds its colors to AA-safe steps on every surface rather than to the raw status colors.
 
-*Known non-conformance:* the chip variants in §5 still specify raw status text on `-light` tints (measured: Paid 2.24:1, Overdue 3.08:1, Warning 1.93:1, Info 3.01:1 — all fail). Chips were out of scope for the pass that introduced this rule. Repointing Paid and Overdue chips to `success-dark` / `danger-dark` clears them (4.84:1 and 5.30:1); Warning and Info need `-dark` steps that do not exist yet.
+*Chips now conform.* They previously failed the rule twice over: the spec above put raw status text on `-light` tints, and the shipped markup used Tabler's `-lt` utilities, which do the same thing with Tabler's own palette. Measured on the rendered page before the fix: Pending 1.97:1, Paid 2.48:1, Overdue 4.04:1, Archived 4.20:1 — all short of 4.5:1. `_badges.scss` keeps the tint and repoints the text at a darker step of the same hue, measured after: Pending 6.33:1, Paid 6.46:1, Overdue 5.60:1, Archived 6.05:1, Draft/New 6.92:1, Cancelled 12.08:1. The `-800` steps were chosen over `-700` for headroom, since a chip also sits on `surface-hover` and on the canvas, both darker than the white these were measured against.
 
 ## 3. Typography
 
@@ -273,7 +273,8 @@ Soft and approachable. Generous radii, gentle shadows, restrained color. Buttons
 ### Chips / Badges
 
 - **Style:** Pill-shaped (`radius-full`), tinted background + matching saturated text. 2px × 10px padding, weight 500.
-- **Status variants:** `Paid` (success-light bg / success text), `Overdue` (danger-light / danger), `Pending` / `Due Soon` (warning-light / warning), `Draft` / `Sent` (info-light / info), `Cancelled` (gray-100 / text-muted).
+- **Status variants:** implemented with Tabler's tinted `bg-<colour>-lt` utilities — the colour at 10% as background — with the text repointed to an AA-safe `-700`/`-800` step in `_badges.scss`. `Paid` (green), `Overdue` (red), `Pending` (yellow), `Archived` (purple), `Draft` / `New` (gray), `Cancelled` (dark).
+- **Draft is grey, not `info`.** A draft is the absence of a status rather than an informational one, and `info` blue reads as an active system message; keeping drafts neutral also leaves blue free for genuine notices. Grey and dark separate the two inactive states — a draft has not started, a cancelled one has ended.
 - **Rule:** A chip never appears with color alone — it carries a text label. Color is amplification, not signal.
 
 ### Cards
