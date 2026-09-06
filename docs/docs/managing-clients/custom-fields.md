@@ -80,7 +80,7 @@ Deleting a custom field permanently removes all stored values for that field. Th
 
 ## Custom fields are per-company
 
-Each company in SolidInvoice has its own set of custom fields. Fields created in one company are not shared with other companies.
+Each company in Augias has its own set of custom fields. Fields created in one company are not shared with other companies.
 
 ## Related
 

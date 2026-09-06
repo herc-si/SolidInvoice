@@ -1,17 +1,17 @@
 ---
 title: GraphQL API
-description: Query and mutate SolidInvoice data using the GraphQL API.
+description: Query and mutate Augias data using the GraphQL API.
 sidebar_position: 2
 ---
 
 # GraphQL API
 
-SolidInvoice's GraphQL API gives you a flexible, typed interface to the same data as the REST API. Instead of calling multiple fixed endpoints, you write a single query that describes exactly what you need — and the server returns precisely that, nothing more.
+Augias's GraphQL API gives you a flexible, typed interface to the same data as the REST API. Instead of calling multiple fixed endpoints, you write a single query that describes exactly what you need — and the server returns precisely that, nothing more.
 
-The GraphQL endpoint is available at `/api/graphql` on your SolidInvoice installation.
+The GraphQL endpoint is available at `/api/graphql` on your Augias installation.
 
 :::info[Hosted vs self-hosted]
-If you're on the **hosted SolidInvoice plan**, the endpoint is:
+If you're on the **hosted Augias plan**, the endpoint is:
 
 ```text
 https://augias.app/api/graphql
@@ -398,7 +398,7 @@ Check the `errors` array in the response. Each error includes a `message` and an
 
 ### GraphiQL shows a blank page or won't load
 
-GraphiQL is served at `/api/graphql` and requires a browser. If you're getting a blank page, check your browser console for JavaScript errors and make sure the page is not being blocked by a content security policy on your SolidInvoice instance.
+GraphiQL is served at `/api/graphql` and requires a browser. If you're getting a blank page, check your browser console for JavaScript errors and make sure the page is not being blocked by a content security policy on your Augias instance.
 
 ### API token management operations fail
 

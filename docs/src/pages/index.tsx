@@ -15,7 +15,7 @@ function HomepageHeader() {
       <div className={styles.heroGradient} aria-hidden="true" />
       <div className="container">
         <div className={styles.heroInner}>
-          <span className={styles.heroEyebrow}>SolidInvoice Documentation</span>
+          <span className={styles.heroEyebrow}>Augias Documentation</span>
           <Heading as="h1" className={styles.heroTitle}>
             Everything you need to bill clients{' '}
             <span className={styles.heroTitleAccent}>your way.</span>
@@ -53,7 +53,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={siteConfig.title}
-      description="Documentation for SolidInvoice, the open-source invoicing platform for freelancers and small businesses. Installation guides, integrations, and API reference.">
+      description="Documentation for Augias, the open-source invoicing platform for freelancers and small businesses. Installation guides, integrations, and API reference.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

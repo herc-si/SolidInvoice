@@ -1,4 +1,4 @@
-# SolidInvoice - AI Assistant Guide
+# Augias - AI Assistant Guide
 
 Open-source invoicing application for small businesses/freelancers. Features: client management, quotes, invoices (recurring), payments (Payum), tax/discounts, REST API, notifications.
 

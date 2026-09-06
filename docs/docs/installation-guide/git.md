@@ -1,13 +1,13 @@
 ---
 title: Git (advanced)
-description: Clone the SolidInvoice source for contributing or hacking on the code.
+description: Clone the Augias source for contributing or hacking on the code.
 sidebar_position: 9
 ---
 
 # Git (advanced)
 
 :::warning
-Installing from Git is intended for contributors and developers who want to hack on the SolidInvoice source. **It is not recommended for production use** — for that, use the [quick install](./quick-install.mdx), [Homebrew](./homebrew.md), or [Docker](./docker.md).
+Installing from Git is intended for contributors and developers who want to hack on the Augias source. **It is not recommended for production use** — for that, use the [quick install](./quick-install.mdx), [Homebrew](./homebrew.md), or [Docker](./docker.md).
 :::
 
 ## System requirements
@@ -21,8 +21,8 @@ Installing from Git is intended for contributors and developers who want to hack
 ## Clone and install
 
 ```bash
-git clone https://github.com/SolidInvoice/SolidInvoice.git
-cd SolidInvoice
+git clone https://github.com/herc-si/SolidInvoice.git
+cd Augias
 composer install
 bun install
 bun run build
@@ -30,7 +30,7 @@ bun run build
 
 ## Run the local web server
 
-The recommended way to run SolidInvoice for development is the [Symfony CLI](https://symfony.com/doc/current/setup/symfony_cli.html#running-the-local-web-server) — it ships a local web server with HTTPS, Docker integration, and a workers manager.
+The recommended way to run Augias for development is the [Symfony CLI](https://symfony.com/doc/current/setup/symfony_cli.html#running-the-local-web-server) — it ships a local web server with HTTPS, Docker integration, and a workers manager.
 
 ```bash
 symfony serve
@@ -74,6 +74,6 @@ If you'd rather use Nginx or Apache directly, point the document root at `public
 
 Open the URL Symfony CLI prints (typically `https://127.0.0.1:7005`) and finish setup with the [first-run wizard](./system-installation.md).
 
-For development workflow, code conventions, and how to run the test suite, read [`CONTRIBUTING.md`](https://github.com/SolidInvoice/SolidInvoice/blob/3.0.x/CONTRIBUTING.md) in the repository.
+For development workflow, code conventions, and how to run the test suite, read [`CONTRIBUTING.md`](https://github.com/herc-si/SolidInvoice/blob/3.0.x/CONTRIBUTING.md) in the repository.
 
-If you encounter issues, please [open a bug report](https://github.com/SolidInvoice/SolidInvoice/issues).
+If you encounter issues, please [open a bug report](https://github.com/herc-si/SolidInvoice/issues).

@@ -3,7 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'SolidInvoice Docs',
+  title: 'Augias Docs',
   tagline: 'Open-source invoicing for freelancers and small businesses',
   favicon: 'img/favicon.ico',
 
@@ -11,7 +11,10 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://solidinvoice.co',
+  // TODO: replace once Augias has a domain. Docusaurus needs `url` for canonical
+  // tags and the sitemap, so it cannot be dropped — but pointing it at the old
+  // project's site would publish canonicals nobody here controls.
+  url: 'https://example.invalid',
   baseUrl: '/docs/',
 
   // The host serves every docs page at its trailing-slash URL and 307-redirects
@@ -20,8 +23,8 @@ const config: Config = {
   // points at a redirect. Keep this aligned with the host.
   trailingSlash: true,
 
-  organizationName: 'SolidInvoice',
-  projectName: 'SolidInvoice',
+  organizationName: 'Augias',
+  projectName: 'Augias',
 
   onBrokenLinks: 'throw',
   markdown: {
@@ -44,7 +47,7 @@ const config: Config = {
       tagName: 'meta',
       attributes: {
         property: 'og:site_name',
-        content: 'SolidInvoice Docs',
+        content: 'Augias Docs',
       },
     },
     {
@@ -88,7 +91,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           routeBasePath: '/',
           editUrl:
-            'https://github.com/SolidInvoice/SolidInvoice/edit/3.0.x/docs/',
+            'https://github.com/herc-si/SolidInvoice/edit/3.0.x/docs/',
         },
         blog: false,
         theme: {
@@ -117,9 +120,9 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'SolidInvoice Docs',
+      title: 'Augias Docs',
       logo: {
-        alt: 'SolidInvoice Logo',
+        alt: 'Augias Logo',
         src: 'img/logo.png',
         width: 32,
         height: 32,
@@ -132,17 +135,7 @@ const config: Config = {
           label: 'Documentation',
         },
         {
-          to: 'https://solidinvoice.co/blog',
-          label: 'Blog',
-          position: 'left',
-        },
-        {
-          to: 'https://solidinvoice.co',
-          label: 'Cloud Hosted',
-          position: 'left',
-        },
-        {
-          href: 'https://github.com/SolidInvoice/SolidInvoice',
+          href: 'https://github.com/herc-si/SolidInvoice',
           label: 'GitHub',
           position: 'right',
         },
@@ -177,11 +170,11 @@ const config: Config = {
           items: [
             {
               label: 'GitHub Discussions',
-              href: 'https://github.com/SolidInvoice/SolidInvoice/discussions',
+              href: 'https://github.com/herc-si/SolidInvoice/discussions',
             },
             {
               label: 'Report an Issue',
-              href: 'https://github.com/SolidInvoice/SolidInvoice/issues',
+              href: 'https://github.com/herc-si/SolidInvoice/issues',
             },
             {
               label: 'X (Twitter)',
@@ -193,21 +186,13 @@ const config: Config = {
           title: 'More',
           items: [
             {
-              label: 'Main Site',
-              href: 'https://solidinvoice.co',
-            },
-            {
-              label: 'Blog',
-              href: 'https://solidinvoice.co/blog',
-            },
-            {
               label: 'GitHub',
-              href: 'https://github.com/SolidInvoice/SolidInvoice',
+              href: 'https://github.com/herc-si/SolidInvoice',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} SolidInvoice. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Augias. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

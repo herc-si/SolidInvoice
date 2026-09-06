@@ -1,12 +1,12 @@
 ---
 title: REST API
-description: Authenticate and use the SolidInvoice REST API.
+description: Authenticate and use the Augias REST API.
 sidebar_position: 1
 ---
 
 # REST API
 
-SolidInvoice exposes a REST API at `/api/*` that mirrors the web UI: clients, invoices, quotes, payments, recurring invoices, taxes, and more. Authentication is via a per-user API token. The full endpoint reference is auto-generated and served by your SolidInvoice instance at `/api/docs`.
+Augias exposes a REST API at `/api/*` that mirrors the web UI: clients, invoices, quotes, payments, recurring invoices, taxes, and more. Authentication is via a per-user API token. The full endpoint reference is auto-generated and served by your Augias instance at `/api/docs`.
 
 :::tip
 Prefer a flexible query language over fixed endpoints? See the [GraphQL API](./graphql.md) for an alternative way to access the same data.
@@ -14,7 +14,7 @@ Prefer a flexible query language over fixed endpoints? See the [GraphQL API](./g
 
 ## Creating an API token
 
-Sign in to SolidInvoice and open `Settings` → `API Keys` (or visit `/profile/api` directly). Click the green `+ Create Token` button at the top right of the list.
+Sign in to Augias and open `Settings` → `API Keys` (or visit `/profile/api` directly). Click the green `+ Create Token` button at the top right of the list.
 
 ![The API Tokens page with the stats row, info banner, Create Token button, and one existing token](/img/api/api-tokens-page.png)
 

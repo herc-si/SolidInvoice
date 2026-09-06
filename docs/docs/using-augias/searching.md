@@ -6,14 +6,14 @@ sidebar_position: 1
 
 # Searching
 
-The search bar at the top of every SolidInvoice page is a single entry point for finding any record across your account — clients, contacts, invoices, recurring invoices, quotes, and payments. Type a few characters, and matching records group by type in a dropdown. Hit `↵` (or click a row) to jump straight to a record.
+The search bar at the top of every Augias page is a single entry point for finding any record across your account — clients, contacts, invoices, recurring invoices, quotes, and payments. Type a few characters, and matching records group by type in a dropdown. Hit `↵` (or click a row) to jump straight to a record.
 
 You can focus the search bar from anywhere with the keyboard shortcut `Ctrl+K` (or `Cmd+K` on macOS), and there's a `?` icon at the right edge of the bar that opens a quick syntax reference modal.
 
 :::info[Hosted vs self-hosted]
-Search is **always available** on the [hosted SolidInvoice](https://solidinvoice.co) plan — there's nothing to set up.
+Search requires Meilisearch; see the [Meilisearch integration](../integrations/meilisearch.md) guide to enable it.
 
-If you're **self-hosting**, search is optional and needs to be enabled by configuring a search engine. See the [Meilisearch integration](../integrations/meilisearch.md) for the setup steps. Without it, the search bar is hidden and the rest of SolidInvoice runs normally.
+If you're **self-hosting**, search is optional and needs to be enabled by configuring a search engine. See the [Meilisearch integration](../integrations/meilisearch.md) for the setup steps. Without it, the search bar is hidden and the rest of Augias runs normally.
 :::
 
 ## What's searchable

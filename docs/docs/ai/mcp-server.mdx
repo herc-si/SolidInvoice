@@ -1,6 +1,6 @@
 ---
 title: MCP server
-description: Connect AI agents like Claude, Cursor, and Codex to SolidInvoice over the Model Context Protocol.
+description: Connect AI agents like Claude, Cursor, and Codex to Augias over the Model Context Protocol.
 sidebar_position: 1
 ---
 
@@ -9,13 +9,13 @@ import TabItem from '@theme/TabItem';
 
 # MCP server
 
-SolidInvoice ships with a built-in [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server. Once you connect an AI agent to it, the agent can read your invoices, quotes, clients, and payments — and, if you grant write access, create and update them on your behalf.
+Augias ships with a built-in [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server. Once you connect an AI agent to it, the agent can read your invoices, quotes, clients, and payments — and, if you grant write access, create and update them on your behalf.
 
 Every connection is bound to a single company at consent time and authenticated with OAuth 2.1. An agent connected to Company A can never see Company B's data, even if you belong to both.
 
 ## Endpoint URL
 
-The MCP server is always served at the path `/_mcp` on your SolidInvoice instance.
+The MCP server is always served at the path `/_mcp` on your Augias instance.
 
 | Deployment   | URL                                            |
 |--------------|------------------------------------------------|
@@ -34,8 +34,8 @@ A self-hosted instance must be reachable over HTTPS for OAuth to work. The flow 
 
 You don't paste API keys anywhere. The first time an agent connects, it walks you through a standard OAuth consent flow:
 
-1. The agent discovers SolidInvoice's OAuth endpoints from `/.well-known/oauth-authorization-server` and registers itself dynamically.
-2. Your browser opens to the SolidInvoice consent page. Sign in if you aren't already.
+1. The agent discovers Augias's OAuth endpoints from `/.well-known/oauth-authorization-server` and registers itself dynamically.
+2. Your browser opens to the Augias consent page. Sign in if you aren't already.
 3. On the consent screen you choose:
    - **Which company** the agent will act on (if you belong to more than one).
    - **Which scopes** to grant — `mcp:read` is always enabled; `mcp:write` is opt-in and only shown if the agent asked for it.
@@ -52,7 +52,7 @@ The exact steps depend on the agent. The URL is always your `/_mcp` endpoint; ev
 
 In Claude Desktop, open `Settings → Connectors → Add custom connector` and enter:
 
-- **Name**: `SolidInvoice`
+- **Name**: `Augias`
 - **URL**: `https://augias.app/_mcp` (or your self-hosted URL)
 
 Claude opens a browser window to complete OAuth. Approve the consent screen and the connector is ready to use in any chat.
@@ -205,7 +205,7 @@ Revoking an agent does not delete its registration, so the same agent can be rec
 
 ## Self-hosted: enabling the server
 
-The MCP server is bundled with SolidInvoice 3.0 and enabled by default. The only one-time prerequisites are:
+The MCP server is bundled with Augias 3.0 and enabled by default. The only one-time prerequisites are:
 
 - **OAuth signing keys.** Run `bin/console mcp:keys:generate` once; keys are written to `$AUGIAS_CONFIG_DIR/oauth/` and survive redeployments. The single-binary launcher (`augias run`) does this automatically on first start.
 - **Database migrations.** Run `bin/console doctrine:migrations:migrate` to create the OAuth and token tables.
@@ -250,6 +250,6 @@ The token expired or was revoked. Most agents refresh automatically; if not, rec
 <details>
 <summary>Self-hosted: OAuth redirect fails</summary>
 
-SolidInvoice must be reachable from the agent's browser over HTTPS at the same hostname the agent was configured with. Mixed `http`/`https` or hostname mismatches between the configured URL and the redirect target will break the flow.
+Augias must be reachable from the agent's browser over HTTPS at the same hostname the agent was configured with. Mixed `http`/`https` or hostname mismatches between the configured URL and the redirect target will break the flow.
 
 </details>

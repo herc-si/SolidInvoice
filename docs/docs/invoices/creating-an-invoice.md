@@ -1,6 +1,6 @@
 ---
 title: Creating an invoice
-description: Create a new invoice in SolidInvoice and send it to a client.
+description: Create a new invoice in Augias and send it to a client.
 sidebar_position: 1
 ---
 
@@ -12,7 +12,7 @@ To create a new invoice, go to `Invoices` in the sidebar and click `+ Create Inv
 
 ## Choose a client
 
-The first step is selecting who the invoice is for. SolidInvoice offers two modes:
+The first step is selecting who the invoice is for. Augias offers two modes:
 
 - **Existing** — choose a client already in your contacts list from the dropdown.
 - **NewClient** — create a new client on the spot by entering their name, contact name, and email address. The new client is saved to your contacts automatically.

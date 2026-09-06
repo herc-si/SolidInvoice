@@ -19,7 +19,7 @@ use ReflectionClass;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 
 /**
- * Regression test for https://github.com/Augias/Augias/issues/2428:
+ * Regression test for https://github.com/SolidInvoice/SolidInvoice/issues/2428:
  * The DataGrid template was referencing "executeSingleAction" which does not exist —
  * the correct LiveAction method name is "executeSingle".
  */
@@ -78,7 +78,7 @@ final class DataGridTemplateActionNameTest extends TestCase
     }
 
     /**
-     * Regression tests for https://github.com/Augias/Augias/issues/2430:
+     * Regression tests for https://github.com/SolidInvoice/SolidInvoice/issues/2430:
      * The DataGrid template was referencing "executeBatchAction" which does not exist —
      * the correct LiveAction method name is "executeBatch".
      */

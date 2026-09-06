@@ -1,17 +1,17 @@
 {
-  "skill_name": "solidinvoice-feature-docs",
+  "skill_name": "augias-feature-docs",
   "evals": [
     {
       "id": 1,
       "name": "explicit-feature-creating-client",
-      "prompt": "Document the process of creating a new client in SolidInvoice. I want a user-facing docs page covering the create flow.",
+      "prompt": "Document the process of creating a new client in Augias. I want a user-facing docs page covering the create flow.",
       "expected_output": "A new markdown page under docs/managing-clients/ (or equivalent existing section) covering the client creation flow, with proposed SUMMARY.md placement, screenshot plan, and adherence to GitBook conventions. Skill should ask for scope confirmation and the local URL before capturing screenshots.",
       "files": []
     },
     {
       "id": 2,
       "name": "technical-feature-cron-setup",
-      "prompt": "Write end-user docs for setting up the cron job that SolidInvoice needs for recurring invoices and notifications.",
+      "prompt": "Write end-user docs for setting up the cron job that Augias needs for recurring invoices and notifications.",
       "expected_output": "A docs page covering cron setup, including code blocks with proper language tags (bash) for crontab examples, hint blocks for prerequisites/gotchas, and cross-links to related pages (e.g. recurring invoices). No invented commands — should read existing CronBundle code or ask the user.",
       "files": []
     },

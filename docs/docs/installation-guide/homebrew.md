@@ -1,6 +1,6 @@
 ---
 title: Homebrew
-description: Install SolidInvoice from the SolidWorx Homebrew tap on macOS or Linux.
+description: Install Augias from the SolidWorx Homebrew tap on macOS or Linux.
 sidebar_position: 3
 ---
 

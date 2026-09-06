@@ -1,16 +1,16 @@
 ---
 title: Sentry
-description: Send SolidInvoice errors, logs, and performance data to Sentry.
+description: Send Augias errors, logs, and performance data to Sentry.
 sidebar_position: 1
 ---
 
 # Sentry
 
-SolidInvoice integrates with [Sentry](https://sentry.io/) so you can monitor errors, logs, and performance for your installation. The integration is built in — you only need to provide a DSN to enable it.
+Augias integrates with [Sentry](https://sentry.io/) so you can monitor errors, logs, and performance for your installation. The integration is built in — you only need to provide a DSN to enable it.
 
 ## What gets captured
 
-When a DSN is configured, SolidInvoice sends the following to Sentry:
+When a DSN is configured, Augias sends the following to Sentry:
 
 - **Errors** — uncaught exceptions and any log entry at level `ERROR` or higher, buffered using Monolog's *fingers crossed* handler so each error ships with the surrounding context (up to 50 prior log records).
 - **Logs** — log records at `INFO` level and above, excluding the `doctrine`, `request`, `security`, `event`, and `console` channels (these are noisy and rarely useful at scale).
@@ -22,14 +22,14 @@ Errors with HTTP status codes `401`, `404`, and `405` are excluded by default to
 ## Setting up Sentry
 
 1. Create a project in Sentry and copy its [DSN](https://docs.sentry.io/product/sentry-basics/dsn-explainer/).
-2. Set the `AUGIAS_SENTRY_DSN` environment variable for your SolidInvoice instance (see the platform-specific instructions below).
+2. Set the `AUGIAS_SENTRY_DSN` environment variable for your Augias instance (see the platform-specific instructions below).
 3. Restart the application so the new environment is loaded.
 
 That's all that's required to start receiving errors. Performance tracing and profiling are opt-in and configured separately (see [Performance monitoring](#performance-monitoring)).
 
 ### Docker
 
-If you're running SolidInvoice using Docker, pass the DSN as an environment variable:
+If you're running Augias using Docker, pass the DSN as an environment variable:
 
 ```bash
 docker run -e AUGIAS_SENTRY_DSN=https://<key>@o0.ingest.sentry.io/<project-id> augias/augias
@@ -37,7 +37,7 @@ docker run -e AUGIAS_SENTRY_DSN=https://<key>@o0.ingest.sentry.io/<project-id> a
 
 ### Distribution package
 
-When running SolidInvoice from the distribution package or from source, add the DSN to the `.env` file at the root of the application. Create the file if it doesn't exist:
+When running Augias from the distribution package or from source, add the DSN to the `.env` file at the root of the application. Create the file if it doesn't exist:
 
 ```ini title=".env"
 AUGIAS_SENTRY_DSN=https://<key>@o0.ingest.sentry.io/<project-id>
@@ -93,12 +93,12 @@ AUGIAS_SENTRY_PROFILES_SAMPLE_RATE=1.0
 The profile sample rate is *relative to* the trace sample rate. With the values above, 10% of requests are traced and 100% of those traces are profiled — i.e. 10% of all requests are profiled.
 
 :::warning
-If `excimer` is not installed, leave `AUGIAS_SENTRY_PROFILES_SAMPLE_RATE` at `0`. The static binary distribution of SolidInvoice ships with `excimer` included; if you've built PHP yourself, you'll need to install it via PECL.
+If `excimer` is not installed, leave `AUGIAS_SENTRY_PROFILES_SAMPLE_RATE` at `0`. The static binary distribution of Augias ships with `excimer` included; if you've built PHP yourself, you'll need to install it via PECL.
 :::
 
 ## Using a Sentry Relay
 
-[Sentry Relay](https://docs.sentry.io/product/relay/) is a lightweight proxy that buffers events locally and forwards them to Sentry asynchronously. It's worth using when you want predictable latency, scrub sensitive data before it leaves your network, or run SolidInvoice in environments with restricted egress.
+[Sentry Relay](https://docs.sentry.io/product/relay/) is a lightweight proxy that buffers events locally and forwards them to Sentry asynchronously. It's worth using when you want predictable latency, scrub sensitive data before it leaves your network, or run Augias in environments with restricted egress.
 
 To send events through Relay, point the DSN at your Relay instance and keep the default short timeouts:
 
@@ -112,7 +112,7 @@ When sending events directly to `sentry.io` (no Relay), consider raising both ti
 
 ## Tagging releases
 
-By default, events are tagged with SolidInvoice's application version. If you deploy from source or run a customised build, set `AUGIAS_SENTRY_RELEASE` to a value that uniquely identifies the deployment — typically a Git SHA or semver tag:
+By default, events are tagged with Augias's application version. If you deploy from source or run a customised build, set `AUGIAS_SENTRY_RELEASE` to a value that uniquely identifies the deployment — typically a Git SHA or semver tag:
 
 ```ini title=".env"
 AUGIAS_SENTRY_RELEASE=3.0.0-rc1

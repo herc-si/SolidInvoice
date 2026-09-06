@@ -1,6 +1,6 @@
-# SolidInvoice - AI Assistant Guide
+# Augias - AI Assistant Guide
 
-This document provides comprehensive guidance for AI assistants working with the SolidInvoice codebase. It covers the architecture, conventions, workflows, and best practices to help you understand and effectively contribute to this project.
+This document provides comprehensive guidance for AI assistants working with the Augias codebase. It covers the architecture, conventions, workflows, and best practices to help you understand and effectively contribute to this project.
 
 ## Table of Contents
 
@@ -22,7 +22,7 @@ This document provides comprehensive guidance for AI assistants working with the
 
 ## Project Overview
 
-**SolidInvoice** is a sophisticated open-source invoicing application designed for small businesses and freelancers. It provides comprehensive billing operations including:
+**Augias** is a sophisticated open-source invoicing application designed for small businesses and freelancers. It provides comprehensive billing operations including:
 
 - Client and contact management
 - Quote creation and management
@@ -84,7 +84,7 @@ Any changes to templates or frontend code should be made in accordance with the 
 
 ### Distribution
 
-- **Docker:** Official SolidInvoice Docker images available on Docker Hub (solidinvoice/solidinvoice). Runs the FrankenPHP binary inside the container.
+- **Docker:** Official Augias Docker images available on Docker Hub (augias/augias). Runs the FrankenPHP binary inside the container.
 - **FrankenPHP:** Official recommended installation method. Application is built into a single binary, which contains PHP, all required extensions, the web server, and the application code.
 - **Archive:** ZIP/TAR archives for manual installation (all assets pre-compiled)
 
@@ -95,7 +95,7 @@ Any changes to templates or frontend code should be made in accordance with the 
 ### Root Directory Layout
 
 ```text
-/home/user/SolidInvoice/
+/home/user/Augias/
 ├── assets/                 # Frontend JavaScript and SCSS
 │   ├── controllers/        # Stimulus controllers
 │   ├── img/                # Images and icons
@@ -121,7 +121,7 @@ Any changes to templates or frontend code should be made in accordance with the 
 
 ### Bundle Organization (src/)
 
-SolidInvoice uses a modular bundle architecture with 18 bundles:
+Augias uses a modular bundle architecture with 18 bundles:
 
 #### Business Logic Bundles
 
@@ -244,7 +244,7 @@ Key events:
 #### 7. Platform
 
 This application is built using SolidWorx/Platform, which provides foundational services, base entities, and utilities to streamline development.
-SolidWorx/Platform is built in conjunction with SolidInvoice and is designed to be reusable across multiple projects.
+SolidWorx/Platform is built in conjunction with Augias and is designed to be reusable across multiple projects.
 For any UI functionality, use the SolidWorx/PlatformUI package which provides Twig templates and components for common styles.
 In cases where a specific UI component is not available in PlatformUI, mention what is needed so that it can be added to the PlatformUI package for future use.
 
@@ -292,8 +292,8 @@ trait Money {
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/SolidInvoice/SolidInvoice.git
-   cd SolidInvoice
+   git clone https://github.com/herc-si/SolidInvoice.git
+   cd Augias
    ```
 
 2. **Install PHP dependencies:**
@@ -482,7 +482,7 @@ Configuration: `ecs.php`
 declare(strict_types=1);
 
 /*
- * This file is part of SolidInvoice project.
+ * This file is part of Augias project.
  *
  * (c) Pierre du Plessis <open-source@solidworx.co>
  *
@@ -560,9 +560,9 @@ Before committing code:
 
 3. Add common traits as needed:
    ```php
-   use SolidInvoice\CoreBundle\Traits\Entity\Archivable;
-   use SolidInvoice\CoreBundle\Traits\Entity\TimeStampable;
-   use SolidInvoice\CoreBundle\Traits\Entity\CompanyAware;
+   use Augias\CoreBundle\Traits\Entity\Archivable;
+   use Augias\CoreBundle\Traits\Entity\TimeStampable;
+   use Augias\CoreBundle\Traits\Entity\CompanyAware;
    ```
 
 4. Generate migration:
@@ -619,7 +619,7 @@ Never use a default currency.
 Use the PDF manager service:
 
 ```php
-use SolidInvoice\CoreBundle\Pdf\Generator;
+use Augias\CoreBundle\Pdf\Generator;
 
 $generator->generate($html, $filename);
 ```
@@ -1017,9 +1017,9 @@ bun run lint:css # StyleLint
 ### Project Links
 
 - [**Homepage:**](https://solidinvoice.co)
-- [**Repository:**](https://github.com/SolidInvoice/SolidInvoice)
-- [**Issues:**](https://github.com/SolidInvoice/SolidInvoice/issues)
-- [**Docker Hub:**](https://hub.docker.com/r/solidinvoice/solidinvoice/)
+- [**Repository:**](https://github.com/herc-si/SolidInvoice)
+- [**Issues:**](https://github.com/herc-si/SolidInvoice/issues)
+- [**Docker Hub:**](https://hub.docker.com/r/augias/augias/)
 
 ---
 
@@ -1069,11 +1069,11 @@ bun run lint:css # StyleLint
 
 ## Design System Guide
 
-This section provides comprehensive guidelines for implementing consistent, modern UI across all SolidInvoice pages. **All UI changes MUST follow these guidelines.**
+This section provides comprehensive guidelines for implementing consistent, modern UI across all Augias pages. **All UI changes MUST follow these guidelines.**
 
 ### Design Philosophy
 
-SolidInvoice follows a **Clean & Minimal** design aesthetic:
+Augias follows a **Clean & Minimal** design aesthetic:
 
 - **Content-focused**: Reduce visual noise, let data speak
 - **Consistent spacing**: Use the 8px-based spacing scale
@@ -1593,7 +1593,7 @@ All design values are defined as CSS custom properties with the `--swp-` prefix 
 
 ### File Reference
 
-**Design System (SolidInvoice custom styles):**
+**Design System (Augias custom styles):**
 
 | File | Purpose |
 |------|---------|
@@ -1656,7 +1656,7 @@ Interpret creatively and make unexpected choices that feel genuinely designed fo
 
 **Last Updated:** 2025-12-31
 **Document Version:** 1.1.0
-**SolidInvoice Version:** 3.0.0-dev
+**Augias Version:** 3.0.0-dev
 
 <!-- BEGIN AI_MATE_INSTRUCTIONS -->
 AI Mate Summary:

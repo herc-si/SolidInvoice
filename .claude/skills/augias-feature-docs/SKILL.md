@@ -1,11 +1,11 @@
 ---
-name: solidinvoice-feature-docs
-description: Use when the user asks to create, write, or add end-user documentation for a SolidInvoice feature, or to "document the changes in the current branch". Triggers on phrases like "document this feature", "write docs for X", "add a docs page", "document the client creation flow", "create user documentation", or any request to produce Docusaurus-rendered user-facing documentation under the SolidInvoice docs/ directory. Also use when working in the SolidInvoice repo and the user asks for documentation help, even without explicitly mentioning Docusaurus or the docs folder. Do not use this skill for developer/contributor docs, README updates, or API reference — only for end-user documentation in docs/.
+name: augias-feature-docs
+description: Use when the user asks to create, write, or add end-user documentation for an Augias feature, or to "document the changes in the current branch". Triggers on phrases like "document this feature", "write docs for X", "add a docs page", "document the client creation flow", "create user documentation", or any request to produce Docusaurus-rendered user-facing documentation under the Augias docs/ directory. Also use when working in the Augias repo and the user asks for documentation help, even without explicitly mentioning Docusaurus or the docs folder. Do not use this skill for developer/contributor docs, README updates, or API reference — only for end-user documentation in docs/.
 ---
 
-# SolidInvoice feature documentation
+# Augias feature documentation
 
-Produce a single, focused, end-user documentation page for one SolidInvoice feature, fitted to the project's Docusaurus site.
+Produce a single, focused, end-user documentation page for one Augias feature, fitted to the project's Docusaurus site.
 
 ## Non-negotiables
 
@@ -86,13 +86,13 @@ Follow the conventions in `docs/CLAUDE.md` (frontmatter, second person, task-ori
 ````markdown
 ---
 title: Creating a client
-description: Add a new client to SolidInvoice.
+description: Add a new client to Augias.
 sidebar_position: 1
 ---
 
 # Creating a client
 
-Add a new client to your SolidInvoice account so you can issue them quotes and invoices.
+Add a new client to your Augias account so you can issue them quotes and invoices.
 
 ## Open the create form
 

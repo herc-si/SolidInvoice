@@ -1,4 +1,4 @@
-# SolidInvoice Design System
+# Augias Design System
 
 Guidelines for implementing consistent, modern UI. **All UI changes MUST follow these guidelines.**
 

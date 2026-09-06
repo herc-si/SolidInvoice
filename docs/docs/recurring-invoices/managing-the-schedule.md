@@ -17,7 +17,7 @@ A recurring invoice moves through these states:
 - **`Draft`** — saved but not generating invoices yet. Editable.
 - **`Active`** — the scheduler will generate invoices on matching dates.
 - **`Paused`** — generation is temporarily stopped. The schedule is preserved and can be resumed.
-- **`Complete`** — the schedule reached its end date or occurrence count. SolidInvoice sets this automatically; see [Understanding the schedule](./understanding-the-schedule.md#end-conditions).
+- **`Complete`** — the schedule reached its end date or occurrence count. Augias sets this automatically; see [Understanding the schedule](./understanding-the-schedule.md#end-conditions).
 - **`Cancelled`** — manually stopped. No more invoices will be generated.
 - **`Archived`** — hidden from the default list views. Archive when you no longer want to see a recurring invoice but don't want to delete its history.
 

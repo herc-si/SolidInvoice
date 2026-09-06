@@ -1,7 +1,7 @@
-Translating SolidInvoice
+Translating Augias
 ========================
 
-SolidInvoice uses a single, unified translation system built on the
+Augias uses a single, unified translation system built on the
 [Symfony Translation](https://symfony.com/doc/current/translation.html) component.
 Every user-facing string lives in a translation catalog — there are no hard-coded English
 strings in templates, forms, controllers, validators, or enums. This makes the app fully
@@ -127,7 +127,7 @@ bin/console translation:extract en --dump-messages --no-fill   # list, don't wri
 ```
 
 There is also a custom **menu-label extractor**
-(`SolidInvoice\CoreBundle\Translation\Extractor\MenuLabelExtractor`) that surfaces the
+(`Augias\CoreBundle\Translation\Extractor\MenuLabelExtractor`) that surfaces the
 labels passed to KnpMenu `addChild()` calls, which the built-in extractor skips.
 
 ## Pushing / pulling with a provider

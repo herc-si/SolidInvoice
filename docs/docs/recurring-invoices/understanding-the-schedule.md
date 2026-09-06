@@ -6,11 +6,11 @@ sidebar_position: 2
 
 # Understanding the schedule
 
-A recurring invoice is generated when three things line up: today's date matches the schedule, the recurring invoice is in the `Active` state, and SolidInvoice's background scheduler runs. This page explains each piece.
+A recurring invoice is generated when three things line up: today's date matches the schedule, the recurring invoice is in the `Active` state, and Augias's background scheduler runs. This page explains each piece.
 
 ## How generation works
 
-SolidInvoice's background scheduler runs **every hour**. On each run, it:
+Augias's background scheduler runs **every hour**. On each run, it:
 
 1. Finds every active recurring invoice.
 2. Checks whether today's date is one of the schedule's matching dates.

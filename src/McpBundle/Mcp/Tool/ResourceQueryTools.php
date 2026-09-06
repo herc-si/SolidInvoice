@@ -40,7 +40,7 @@ final readonly class ResourceQueryTools
     }
 
     /**
-     * List records of a Augias resource (invoices, quotes, clients, contacts,
+     * List records of an Augias resource (invoices, quotes, clients, contacts,
      * payments, taxes, payment methods, recurring invoices).
      *
      * @param string               $resource       Resource name: invoice, recurring_invoice, quote, client, contact, payment, payment_method, tax
@@ -105,7 +105,7 @@ final readonly class ResourceQueryTools
     }
 
     /**
-     * Fetch a single record of a Augias resource by its ULID.
+     * Fetch a single record of an Augias resource by its ULID.
      *
      * @param string $resource Resource name (see list_resource for supported values)
      * @param string $id       ULID of the record

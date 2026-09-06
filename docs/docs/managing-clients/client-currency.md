@@ -6,7 +6,7 @@ sidebar_position: 5
 
 # Client currency
 
-Each client in SolidInvoice has a currency. The currency determines what unit you bill the client in — every quote, invoice, payment, and credit adjustment for that client is denominated in their chosen currency.
+Each client in Augias has a currency. The currency determines what unit you bill the client in — every quote, invoice, payment, and credit adjustment for that client is denominated in their chosen currency.
 
 ## Where it's set
 
@@ -47,7 +47,7 @@ If you genuinely need to switch a client to a new currency, archive the old clie
 
 ## Multi-currency in one workspace
 
-You can have clients in different currencies inside a single SolidInvoice company — there's no requirement to keep everyone on the same one. Each client's documents and stats are kept in their own currency. SolidInvoice does **not** convert between currencies on dashboards or reports — totals are shown per currency rather than aggregated into a single number.
+You can have clients in different currencies inside a single Augias company — there's no requirement to keep everyone on the same one. Each client's documents and stats are kept in their own currency. Augias does **not** convert between currencies on dashboards or reports — totals are shown per currency rather than aggregated into a single number.
 
 If you operate in materially different currencies and want clean per-currency books, the cleanest separation is to use [companies](../companies/overview.md) — one company per currency — and switch between them as needed.
 

@@ -1,6 +1,6 @@
 ---
 title: Creating a client
-description: Add a new client to SolidInvoice with their company details, contacts, and addresses.
+description: Add a new client to Augias with their company details, contacts, and addresses.
 sidebar_position: 2
 ---
 
@@ -48,7 +48,7 @@ Addresses don't have a billing-vs-shipping type — they're a flat list, and the
 
 ## Save
 
-Click `Save Client` at the bottom of the form. SolidInvoice persists the client (with its contacts and addresses), shows a success message, and redirects you to [the client view page](./viewing-a-client.md).
+Click `Save Client` at the bottom of the form. Augias persists the client (with its contacts and addresses), shows a success message, and redirects you to [the client view page](./viewing-a-client.md).
 
 :::tip
 You can leave `Address Info` empty and add addresses later from the client view page — the same is true for additional contacts.

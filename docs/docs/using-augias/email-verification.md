@@ -1,16 +1,16 @@
 ---
 title: Email verification
-description: Verify your email address to unlock all SolidInvoice features.
+description: Verify your email address to unlock all Augias features.
 sidebar_position: 3
 ---
 
 # Email verification
 
-When you create a SolidInvoice account, a verification email is sent automatically. Confirming your address unlocks features that send emails to clients.
+When you create an Augias account, a verification email is sent automatically. Confirming your address unlocks features that send emails to clients.
 
 ## What's gated until you verify
 
-You can log in and use most of SolidInvoice right away. However, the following actions are disabled until your email is verified:
+You can log in and use most of Augias right away. However, the following actions are disabled until your email is verified:
 
 - Sending invoices to clients
 - Sending quotes to clients
@@ -23,7 +23,7 @@ A banner at the top of the page reminds you to verify while any of these feature
 
 1. Check your inbox for an email with the subject **"Please Confirm your Email"**.
 2. Click the `Confirm Email Address` button inside. If the button doesn't work, copy the link beneath it and paste it into your browser.
-3. SolidInvoice confirms your address and redirects you to the login page with a success message.
+3. Augias confirms your address and redirects you to the login page with a success message.
 
 :::info
 The verification link expires after a short window. If yours has expired, complete your account setup again via the registration flow or ask your administrator to re-invite you.

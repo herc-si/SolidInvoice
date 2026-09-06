@@ -6,7 +6,7 @@ sidebar_position: 1
 
 # Creating a recurring invoice
 
-A recurring invoice is a saved template tied to one client. SolidInvoice generates a real invoice from it on the schedule you set — daily, weekly, monthly, or yearly — until you stop it or it reaches its end condition.
+A recurring invoice is a saved template tied to one client. Augias generates a real invoice from it on the schedule you set — daily, weekly, monthly, or yearly — until you stop it or it reaches its end condition.
 
 ## Open the create form
 
@@ -50,5 +50,5 @@ Two save options are available from the green button at the bottom of the form:
 After saving you land on the recurring invoice's view page. From there you can `Activate` a draft, or move on to [Managing the schedule](./managing-the-schedule.md) once it's running.
 
 :::warning
-Generated invoices only get created if SolidInvoice's background scheduler is running. Set this up once during installation — see [Cron job setup](../installation-guide/distribution-package/cron-job-setup.md). Without it, an active recurring invoice still won't produce any invoices.
+Generated invoices only get created if Augias's background scheduler is running. Set this up once during installation — see [Cron job setup](../installation-guide/distribution-package/cron-job-setup.md). Without it, an active recurring invoice still won't produce any invoices.
 :::

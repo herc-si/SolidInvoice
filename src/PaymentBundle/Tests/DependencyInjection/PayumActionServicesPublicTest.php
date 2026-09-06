@@ -21,7 +21,7 @@ use Payum\Core\Extension\ExtensionInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
- * Regression test for https://github.com/Augias/Augias/issues/2436
+ * Regression test for https://github.com/SolidInvoice/SolidInvoice/issues/2436
  *
  * PayumBundle's ContainerAwareCoreGatewayFactory resolves "@serviceId" strings
  * to real service objects via $container->has() / $container->get(). In Symfony's

@@ -1,6 +1,6 @@
 ---
 title: Sending, printing, and downloading invoices
-description: Email an invoice to a client, download it as a PDF, or print it directly from SolidInvoice.
+description: Email an invoice to a client, download it as a PDF, or print it directly from Augias.
 sidebar_position: 3
 ---
 
@@ -61,4 +61,4 @@ The PDF is generated server-side and is always up to date. If you edit the invoi
 
 Click the `Print` button (printer icon) in the invoice toolbar to open the browser's print dialog.
 
-SolidInvoice sends the invoice to the browser's native print function. You can print to a physical printer or use your operating system's "Print to PDF" option as an alternative to the built-in PDF download.
+Augias sends the invoice to the browser's native print function. You can print to a physical printer or use your operating system's "Print to PDF" option as an alternative to the built-in PDF download.

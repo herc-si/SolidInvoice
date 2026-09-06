@@ -6,11 +6,11 @@ sidebar_position: 6
 
 # Overdue invoices
 
-SolidInvoice can automatically mark unpaid invoices as overdue once their due date passes, and send escalating reminder emails to clients at configurable intervals.
+Augias can automatically mark unpaid invoices as overdue once their due date passes, and send escalating reminder emails to clients at configurable intervals.
 
 ## How it works
 
-A background task runs every hour and checks all pending invoices. Any invoice whose due date has passed is transitioned to the **Overdue** status automatically. When that happens, SolidInvoice also sends an internal notification to users who subscribe to invoice alerts.
+A background task runs every hour and checks all pending invoices. Any invoice whose due date has passed is transitioned to the **Overdue** status automatically. When that happens, Augias also sends an internal notification to users who subscribe to invoice alerts.
 
 :::info
 An invoice must have a due date set for the automation to act on it. Invoices with no due date are never marked overdue.
@@ -24,7 +24,7 @@ See [Creating an invoice](./creating-an-invoice.md) for the full invoice form re
 
 ## Payment reminders
 
-In addition to marking invoices overdue, SolidInvoice can send reminder emails to clients on a schedule. Reminders are sent to the contacts on the invoice at three intervals after the due date:
+In addition to marking invoices overdue, Augias can send reminder emails to clients on a schedule. Reminders are sent to the contacts on the invoice at three intervals after the due date:
 
 | Days overdue | Email subject |
 | --- | --- |

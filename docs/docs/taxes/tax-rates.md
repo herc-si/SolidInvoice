@@ -6,7 +6,7 @@ sidebar_position: 1
 
 # Setting up tax rates
 
-Tax rates define the percentages or flat amounts that SolidInvoice uses when calculating tax on invoice and quote line items, and for invoice-level adjustments such as withholding tax. You must create at least one tax rate before the tax column appears on invoices.
+Tax rates define the percentages or flat amounts that Augias uses when calculating tax on invoice and quote line items, and for invoice-level adjustments such as withholding tax. You must create at least one tax rate before the tax column appears on invoices.
 
 ## Navigate to Tax Rates
 

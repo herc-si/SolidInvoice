@@ -1,7 +1,7 @@
 Contributing
 ============
 
-If you wish to contribute to SolidInvoice, please fork it, make your changes, and submit a pull request.
+If you wish to contribute to Augias, please fork it, make your changes, and submit a pull request.
 
 Where possible, pull requests need to have unit tests available, and the unit tests should not fail.
 
@@ -12,7 +12,7 @@ If you encounter any bug or inconsistency, please submit a bug report, so we can
 Translations
 ------------
 
-SolidInvoice is fully translatable through a single, unified translation system — there are
+Augias is fully translatable through a single, unified translation system — there are
 no hard-coded user-facing strings. If you add or change any text, put it in a translation
 catalog and reference it by key. See [TRANSLATING.md](TRANSLATING.md) for the conventions,
 the shared reusable keys, and the provider push/pull workflow.

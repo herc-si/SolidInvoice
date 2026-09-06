@@ -1,12 +1,12 @@
 ---
 title: Invoice statuses
-description: Understand every invoice status in SolidInvoice and what actions are available at each stage.
+description: Understand every invoice status in Augias and what actions are available at each stage.
 sidebar_position: 2
 ---
 
 # Invoice statuses
 
-Every invoice in SolidInvoice has a status that reflects where it is in the billing lifecycle. The status controls which actions are available and whether automated reminders apply.
+Every invoice in Augias has a status that reflects where it is in the billing lifecycle. The status controls which actions are available and whether automated reminders apply.
 
 ## Status overview
 
@@ -40,7 +40,7 @@ A pending invoice has been published and the client is expected to pay. The invo
 - **Pay Now** — record a payment against this invoice.
 - **Send** — email the invoice to the client again (useful if the original email was missed).
 
-SolidInvoice automatically tracks the due date and transitions the status to **Overdue** when it passes.
+Augias automatically tracks the due date and transitions the status to **Overdue** when it passes.
 
 :::info
 Automated payment reminders only run for invoices with a **Pending** or **Overdue** status. See [Payment reminders](./payment-reminders.md) for how to configure them.

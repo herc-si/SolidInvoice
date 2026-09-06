@@ -1,6 +1,6 @@
 ---
 title: Two-factor authentication
-description: Protect your SolidInvoice account with a second verification step at login.
+description: Protect your Augias account with a second verification step at login.
 sidebar_position: 2
 ---
 
@@ -14,11 +14,11 @@ In the left sidebar, click your name or avatar to open the profile menu, then ch
 
 ## Choose an authentication method
 
-SolidInvoice supports two independent 2FA methods. You can enable one or both.
+Augias supports two independent 2FA methods. You can enable one or both.
 
 ### Email authentication
 
-When enabled, SolidInvoice emails you a 6-digit code each time you log in. Codes are sent to your account's email address.
+When enabled, Augias emails you a 6-digit code each time you log in. Codes are sent to your account's email address.
 
 Click `Enable` under **Email Authentication** to turn it on. The status badge next to the method changes to `Enabled`.
 
@@ -33,7 +33,7 @@ When enabled, you generate 6-digit codes in an app like Google Authenticator, Au
 
 ## Backup codes
 
-When you enable any 2FA method, SolidInvoice generates a set of single-use backup codes. Use one if you lose access to your phone or email.
+When you enable any 2FA method, Augias generates a set of single-use backup codes. Use one if you lose access to your phone or email.
 
 The **Backup Codes** section shows how many codes remain. From there you can:
 

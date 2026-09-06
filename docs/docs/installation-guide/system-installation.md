@@ -1,12 +1,12 @@
 ---
 title: System Installation
-description: Walk through the SolidInvoice installation wizard.
+description: Walk through the Augias installation wizard.
 sidebar_position: 8
 ---
 
 # System Installation
 
-When you open SolidInvoice for the first time, you're sent to `/install`. The wizard checks your system, sets up the database, configures the application, and creates your admin user.
+When you open Augias for the first time, you're sent to `/install`. The wizard checks your system, sets up the database, configures the application, and creates your admin user.
 
 ## Before you start
 
@@ -25,7 +25,7 @@ The first screen introduces the wizard. Click `Begin Installation` to start.
 
 ## System Requirements
 
-This step verifies your environment can run SolidInvoice. Two summary cards show how many `Required` and `Recommended` checks pass. The `Next` button stays disabled while any required check is failing.
+This step verifies your environment can run Augias. Two summary cards show how many `Required` and `Recommended` checks pass. The `Next` button stays disabled while any required check is failing.
 
 ![The system requirements screen with all checks passing](/img/installation-guide/wizard-system-requirements.webp)
 
@@ -40,11 +40,11 @@ If you change a setting, refresh the page (the browser's reload button) to re-ru
 
 ## Database configuration
 
-Pick the database engine SolidInvoice should use.
+Pick the database engine Augias should use.
 
 ![The database configuration screen with SQLite selected](/img/installation-guide/wizard-database-sqlite.png)
 
-The available options depend on which PDO drivers are installed on your server. The full list SolidInvoice can use is:
+The available options depend on which PDO drivers are installed on your server. The full list Augias can use is:
 
 - **MySQL**
 - **MariaDB**
@@ -63,9 +63,9 @@ For MySQL, MariaDB, or PostgreSQL, fill in the connection details:
 | `Port` | Optional. Leave blank to use the engine's default. |
 | `User` | Database user. |
 | `Password` | Password for that user. |
-| `Database Name` | The schema/database to use. SolidInvoice will create it if it doesn't already exist (the user must have permission to do so). |
+| `Database Name` | The schema/database to use. Augias will create it if it doesn't already exist (the user must have permission to do so). |
 
-Click `Next`. SolidInvoice connects to the server to verify the credentials before moving on; any errors are shown above the form.
+Click `Next`. Augias connects to the server to verify the credentials before moving on; any errors are shown above the form.
 
 ## Your account
 
@@ -75,7 +75,7 @@ This step combines two things: how the app will refer to itself, and the admin u
 
 | Field | Notes |
 | --- | --- |
-| `Application URL` | The public URL where this SolidInvoice instance is reachable. Defaults to the URL you're loading the wizard from; must include `http://` or `https://`. |
+| `Application URL` | The public URL where this Augias instance is reachable. Defaults to the URL you're loading the wizard from; must include `http://` or `https://`. |
 | `Locale` | Language plus number and currency formatting. The dropdown lists the full set of locales supported by your PHP `intl` extension. If `intl` isn't installed, the field is read-only and locked to English. |
 | `First name` / `Last name` | Used in the UI and on outgoing emails. |
 | `Email address` | Becomes the admin user's login. |
@@ -113,9 +113,9 @@ When all five sub-steps show a green check, the `Next` button at the bottom is r
 
 A confirmation screen with a quick summary of what was set up.
 
-![The finish screen with the Launch SolidInvoice button](/img/installation-guide/wizard-finish.png)
+![The finish screen with the Launch Augias button](/img/installation-guide/wizard-finish.png)
 
-Click `Launch SolidInvoice` to go to the login page. Sign in with the admin email and password you set during the wizard.
+Click `Launch Augias` to go to the login page. Sign in with the admin email and password you set during the wizard.
 
 :::info
 If you installed via the [distribution package](./distribution-package/index.mdx) or from [Git](./git.md), one more thing is left: starting the background worker that handles emails and recurring invoices. See the [Cron job setup](./distribution-package/cron-job-setup.md) guide for systemd, cron, cPanel, Plesk, and Windows configurations.
@@ -127,7 +127,7 @@ If you used [Quick install](./quick-install.mdx), [Homebrew](./homebrew.md), or 
 
 ### `/install` returns 404 instead of showing the wizard
 
-The application already considers itself installed. SolidInvoice writes an `installed:` timestamp to its config file (under the directory shown as `Config Directory` on the requirements screen). Only remove that line if you genuinely intend to reinstall — clearing it without also dropping the existing database will leave the next install in a broken half-state.
+The application already considers itself installed. Augias writes an `installed:` timestamp to its config file (under the directory shown as `Config Directory` on the requirements screen). Only remove that line if you genuinely intend to reinstall — clearing it without also dropping the existing database will leave the next install in a broken half-state.
 
 ### A required check is marked `Failed`
 
@@ -139,7 +139,7 @@ The credentials are wrong, or the user lacks permission to create the target dat
 
 ### `Could not connect` / connection timeout
 
-The host and port are reachable from where you ran the wizard but not from the SolidInvoice host. Verify the database server is listening on the address you entered and that no firewall is in the way.
+The host and port are reachable from where you ran the wizard but not from the Augias host. Verify the database server is listening on the address you entered and that no firewall is in the way.
 
 ### `Creating database schema` fails
 
@@ -147,4 +147,4 @@ The chosen user can connect but lacks DDL rights on the target database. Re-gran
 
 ### The install screen stalls and never shows progress
 
-The wizard streams progress over Server-Sent Events. If you're behind a reverse proxy, make sure it isn't buffering responses (for nginx, set `proxy_buffering off;` on the SolidInvoice location). Open the browser console — you'll see `EventSource` errors when the stream is being held back.
+The wizard streams progress over Server-Sent Events. If you're behind a reverse proxy, make sure it isn't buffering responses (for nginx, set `proxy_buffering off;` on the Augias location). Open the browser console — you'll see `EventSource` errors when the stream is being held back.

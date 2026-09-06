@@ -1,6 +1,6 @@
 ---
 title: Creating a company
-description: Add a new company workspace in SolidInvoice.
+description: Add a new company workspace in Augias.
 sidebar_position: 2
 ---
 
@@ -10,7 +10,7 @@ There are three places to start the create-company form. The form itself is the 
 
 ## On your first login
 
-The first time you log in (or any time you log in without belonging to any company yet), SolidInvoice takes you straight to the create-company page. You can't reach the rest of the app until at least one company exists.
+The first time you log in (or any time you log in without belonging to any company yet), Augias takes you straight to the create-company page. You can't reach the rest of the app until at least one company exists.
 
 ![The create-company page on first login](/img/companies/create-company-first-run.png)
 
@@ -36,5 +36,5 @@ Two fields, both required:
 Click `Create Company`. The new company becomes your active workspace and you land on its dashboard.
 
 :::info
-On the self-hosted version of SolidInvoice there's no per-company subscription — create as many as you need.
+On the self-hosted version of Augias there's no per-company subscription — create as many as you need.
 :::

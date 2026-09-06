@@ -1,12 +1,12 @@
 ---
 title: Helm (Kubernetes)
-description: Deploy SolidInvoice to a Kubernetes cluster using the official Helm chart.
+description: Deploy Augias to a Kubernetes cluster using the official Helm chart.
 sidebar_position: 8
 ---
 
 # Helm (Kubernetes)
 
-The official SolidInvoice Helm chart deploys the application, a background worker, and a scheduler to any Kubernetes cluster. It can also bring up MySQL, PostgreSQL, and Redis via Bitnami subcharts.
+The official Augias Helm chart deploys the application, a background worker, and a scheduler to any Kubernetes cluster. It can also bring up MySQL, PostgreSQL, and Redis via Bitnami subcharts.
 
 ## Prerequisites
 
@@ -14,33 +14,34 @@ The official SolidInvoice Helm chart deploys the application, a background worke
 - Helm **3.2+**
 - A StorageClass that supports `ReadWriteOnce` PersistentVolumeClaims (required for the application's secrets vault at `/etc/augias`)
 
-## Add the Helm repository
+## Get the chart
+
+The chart is not published to a Helm repository; it ships inside this one.
 
 ```bash
-helm repo add augias https://charts.solidinvoice.co
-helm repo update
+git clone https://github.com/herc-si/SolidInvoice.git
+cd SolidInvoice
+helm dependency update helm/augias
 ```
 
-:::tip[Discover on Artifact Hub]
-The chart is also indexed on [Artifact Hub](https://artifacthub.io/packages/helm/augias/augias), where you can browse all available versions, read the full values reference, and copy install commands.
-:::
+All commands below install from that local path.
 
 ## Quick start with MySQL
 
 ```bash
-helm install augias augias/augias \
+helm install augias helm/augias \
   --set mysql.enabled=true \
   --set mysql.auth.password="your-mysql-password" \
   --set mysql.auth.rootPassword="your-root-password" \
   --set app.secret="your-secret-key"
 ```
 
-This brings up SolidInvoice with a bundled MySQL instance. Browse to the pod's URL and complete the [installation wizard](./system-installation.md).
+This brings up Augias with a bundled MySQL instance. Browse to the pod's URL and complete the [installation wizard](./system-installation.md).
 
 ## Quick start with PostgreSQL
 
 ```bash
-helm install augias augias/augias \
+helm install augias helm/augias \
   --set postgresql.enabled=true \
   --set postgresql.auth.password="your-pg-password" \
   --set app.secret="your-secret-key"
@@ -51,7 +52,7 @@ helm install augias augias/augias \
 Pass a full `DATABASE_URL` to skip the bundled database subcharts:
 
 ```bash
-helm install augias augias/augias \
+helm install augias helm/augias \
   --set externalDatabase.url="mysql://user:password@host:3306/augias" \
   --set app.secret="your-secret-key"
 ```
@@ -61,7 +62,7 @@ helm install augias augias/augias \
 Redis is required for asynchronous background jobs (sending emails, processing payments). When `redis.enabled=true` the chart configures the Messenger transport automatically:
 
 ```bash
-helm install augias augias/augias \
+helm install augias helm/augias \
   --set mysql.enabled=true \
   --set mysql.auth.password="your-mysql-password" \
   --set redis.enabled=true \
@@ -74,7 +75,7 @@ helm install augias augias/augias \
 Set `install.enabled=true` to run the installer as a Kubernetes Job during the first deploy, so the wizard step is skipped entirely:
 
 ```bash
-helm install augias augias/augias \
+helm install augias helm/augias \
   --set mysql.enabled=true \
   --set mysql.auth.password="your-mysql-password" \
   --set app.secret="your-secret-key" \
@@ -86,7 +87,7 @@ helm install augias augias/augias \
 ## Expose via Ingress
 
 ```bash
-helm install augias augias/augias \
+helm install augias helm/augias \
   --set mysql.enabled=true \
   --set mysql.auth.password="your-mysql-password" \
   --set app.secret="your-secret-key" \
@@ -128,7 +129,7 @@ Always pass `--reuse-values` (or re-specify `app.secret`) so the secret doesn't 
 
 ```bash
 helm repo update augias
-helm upgrade augias augias/augias --reuse-values
+helm upgrade augias helm/augias --reuse-values
 ```
 
 Database migrations run automatically as a pre-upgrade Job before the new pods start.

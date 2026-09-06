@@ -1,8 +1,8 @@
-# SolidInvoice Helm Chart
+# Augias Helm Chart
 
-[SolidInvoice](https://github.com/SolidWorx/SolidInvoice) is an open-source invoicing application designed for small businesses and freelancers. It provides client management, quotes, invoices (including recurring), payment processing via Payum, tax and discount handling, a REST API, and notifications.
+[Augias](https://github.com/SolidWorx/Augias) is an open-source invoicing application designed for small businesses and freelancers. It provides client management, quotes, invoices (including recurring), payment processing via Payum, tax and discount handling, a REST API, and notifications.
 
-This Helm chart deploys SolidInvoice on a Kubernetes cluster using the [Helm](https://helm.sh) package manager.
+This Helm chart deploys Augias on a Kubernetes cluster using the [Helm](https://helm.sh) package manager.
 
 ---
 
@@ -122,7 +122,7 @@ The following table lists the major configurable parameters. For the full list s
 | `externalDatabase.url` | Full `DATABASE_URL` connection string | `""` |
 | `externalDatabase.existingSecret` | Existing Secret containing `DATABASE_URL` | `""` |
 | `mailer.dsn` | Mailer DSN | `null://null` |
-| `mailer.sender` | Sender address for outgoing emails | `SolidInvoice <no-reply@example.com>` |
+| `mailer.sender` | Sender address for outgoing emails | `Augias <no-reply@example.com>` |
 | `mailer.existingSecret` | Existing Secret containing `MAILER_DSN` | `""` |
 | `messenger.dsn` | Messenger transport DSN (auto-set when Redis enabled) | `""` |
 | `worker.enabled` | Enable Messenger consumer worker Deployment | `true` |
@@ -207,9 +207,9 @@ kubectl delete pvc augias-augias-config
 
 ## Architecture
 
-SolidInvoice on Kubernetes consists of the following components:
+Augias on Kubernetes consists of the following components:
 
-- **App Deployment** — Runs the SolidInvoice web application using [FrankenPHP](https://frankenphp.dev), a modern PHP application server with built-in HTTP/2 and HTTPS support. FrankenPHP can also be run in persistent worker mode (`app.workerMode=true`) for improved performance.
+- **App Deployment** — Runs the Augias web application using [FrankenPHP](https://frankenphp.dev), a modern PHP application server with built-in HTTP/2 and HTTPS support. FrankenPHP can also be run in persistent worker mode (`app.workerMode=true`) for improved performance.
 
 - **Worker Deployment** — Runs the Symfony Messenger consumer (`messenger:consume`). Processes background jobs such as email sending and notification dispatch. Enabled by default (`worker.enabled=true`). Scales independently of the app via HPA.
 
@@ -225,7 +225,7 @@ SolidInvoice on Kubernetes consists of the following components:
 
 ## Links
 
-- [SolidInvoice on GitHub](https://github.com/SolidWorx/SolidInvoice)
-- [SolidInvoice Documentation](https://solidinvoice.co/docs)
+- [Augias on GitHub](https://github.com/SolidWorx/Augias)
+- [Augias Documentation](https://solidinvoice.co/docs)
 - [Helm Documentation](https://helm.sh/docs/)
 - [Bitnami Charts](https://github.com/bitnami/charts)

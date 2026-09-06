@@ -1,6 +1,6 @@
 ---
 title: Docker
-description: Run SolidInvoice as a Docker container, optionally alongside a database via Docker Compose.
+description: Run Augias as a Docker container, optionally alongside a database via Docker Compose.
 sidebar_position: 6
 ---
 
@@ -22,7 +22,7 @@ docker run -d -p 8765:8765 -v augias_data:/etc/augias augias/augias
 The application starts on `http://127.0.0.1:8765`. Continue with the [first-run wizard](./system-installation.md).
 
 :::tip
-Change `8765` on the left side of the `-p` flag to expose SolidInvoice on a different host port (e.g. `-p 80:8765`).
+Change `8765` on the left side of the `-p` flag to expose Augias on a different host port (e.g. `-p 80:8765`).
 :::
 
 ## Docker Compose

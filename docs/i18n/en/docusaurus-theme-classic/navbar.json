@@ -1,10 +1,10 @@
 {
   "title": {
-    "message": "SolidInvoice Docs",
+    "message": "Augias Docs",
     "description": "The title in the navbar"
   },
   "logo.alt": {
-    "message": "SolidInvoice Logo",
+    "message": "Augias Logo",
     "description": "The alt text of navbar logo"
   },
   "item.label.Documentation": {

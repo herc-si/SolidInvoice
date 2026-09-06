@@ -150,7 +150,7 @@ final readonly class FeatureCopyRegistry
             Feature::CustomDomain => new FeatureCopy(
                 icon: 'tabler:world',
                 headline: 'Use your own domain',
-                description: 'Serve the client portal from billing.yourcompany.com instead of a Augias subdomain — the kind of polish clients notice.',
+                description: 'Serve the client portal from billing.yourcompany.com instead of an Augias subdomain — the kind of polish clients notice.',
                 bullets: [
                     'CNAME any domain you own',
                     'Automatic TLS certificates',

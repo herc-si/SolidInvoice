@@ -6,7 +6,7 @@ sidebar_position: 4
 
 # Applying taxes to invoices
 
-SolidInvoice supports two independent levels of tax on every invoice (and quote):
+Augias supports two independent levels of tax on every invoice (and quote):
 
 - **Line taxes** — applied to individual line items, calculated as a percentage or flat amount of each item's price.
 - **Invoice taxes** — applied to the invoice as a whole, used for withholding tax, surcharges, or any adjustment that spans all line items.
@@ -65,7 +65,7 @@ The same line-tax and invoice-tax controls are available when creating a quote. 
 
 ## Rate snapshots
 
-When an invoice is issued, SolidInvoice records a snapshot of each tax rate — its name, percentage, category, and type — at that point in time. If you later edit a tax rate, the change applies only to new invoices; the tax amounts on previously issued invoices remain unchanged.
+When an invoice is issued, Augias records a snapshot of each tax rate — its name, percentage, category, and type — at that point in time. If you later edit a tax rate, the change applies only to new invoices; the tax amounts on previously issued invoices remain unchanged.
 
 ## Related
 

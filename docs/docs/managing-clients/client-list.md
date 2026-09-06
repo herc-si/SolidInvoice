@@ -1,6 +1,6 @@
 ---
 title: Client list
-description: Browse, search, filter, and archive clients in SolidInvoice.
+description: Browse, search, filter, and archive clients in Augias.
 sidebar_position: 1
 ---
 

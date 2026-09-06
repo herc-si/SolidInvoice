@@ -6,19 +6,19 @@ product
 
 ## Users
 
-Freelancers through small business owners (1–20 people) using SolidInvoice to manage clients, quotes, invoices, and payments. The spectrum spans solo operators billing between project work and non-technical SMB owners doing admin in the evenings, plus the occasional bookkeeper running it as a daily tool. Context is mostly desktop with occasional mobile checks; the user is rarely an accounting expert and often arrives reluctantly because the task is "boring but important."
+Freelancers through small business owners (1–20 people) using Augias to manage clients, quotes, invoices, and payments. The spectrum spans solo operators billing between project work and non-technical SMB owners doing admin in the evenings, plus the occasional bookkeeper running it as a daily tool. Context is mostly desktop with occasional mobile checks; the user is rarely an accounting expert and often arrives reluctantly because the task is "boring but important."
 
 The job to be done: get paid faster, with less friction, and look professional doing it. On any given screen the primary task is usually creating, sending, or reconciling money — not exploring the app.
 
 ## Product Purpose
 
-Open-source, self-hostable invoicing for people who don't want enterprise accounting software. SolidInvoice exists so a freelancer or small business can run their billing without surrendering data to a SaaS vendor or paying per-seat to QuickBooks/Xero. Success looks like: an invoice goes out in under a minute, a payment is recorded without ambiguity, and the user trusts what the totals say without double-checking in a spreadsheet.
+Open-source, self-hostable invoicing for people who don't want enterprise accounting software. Augias exists so a freelancer or small business can run their billing without surrendering data to a SaaS vendor or paying per-seat to QuickBooks/Xero. Success looks like: an invoice goes out in under a minute, a payment is recorded without ambiguity, and the user trusts what the totals say without double-checking in a spreadsheet.
 
 The current rewrite (AdminLTE → Tabler / Bootstrap 5.3) is the moment to shed the legacy "admin panel" feel and become a modern product UI that's pleasant to live in.
 
 ## Positioning
 
-Get paid faster, and own everything. The invoice goes out in under a minute and the data stays yours — self-hosting is the how, not the headline. Competitors ask users to choose between speed and control: SaaS billing tools are quick but hold the data hostage, while self-hosted alternatives hand back control and charge for it in friction. SolidInvoice refuses the trade.
+Get paid faster, and own everything. The invoice goes out in under a minute and the data stays yours — self-hosting is the how, not the headline. Competitors ask users to choose between speed and control: SaaS billing tools are quick but hold the data hostage, while self-hosted alternatives hand back control and charge for it in friction. Augias refuses the trade.
 
 Every screen reinforces this by serving the money task first and never making ownership feel like a tax. If a screen is slower, rougher, or more manual *because* the app is self-hosted, the positioning has been broken — independence is supposed to be invisible in the daily flow, not something the user pays for on every click.
 
@@ -29,7 +29,7 @@ Friendly, approachable, modern. The app should feel like a competent colleague, 
 ## Anti-references
 
 - **Legacy AdminLTE / Bootstrap admin dashboards.** Dark blue navbar, sidebar tree, boxy widgets, generic icon set. The exact look the rewrite is escaping.
-- **Enterprise accounting (QuickBooks, Sage, Xero).** Dense corporate UIs, cluttered toolbars, 90s-feeling forms, intimidating density. SolidInvoice is the opposite end of the market.
+- **Enterprise accounting (QuickBooks, Sage, Xero).** Dense corporate UIs, cluttered toolbars, 90s-feeling forms, intimidating density. Augias is the opposite end of the market.
 - **AI-slop SaaS templates.** Purple gradients, glass cards, hero-metric tiles, identical card grids, gradient text. Generic startup-dashboard aesthetic.
 - **Crypto / fintech neon-on-black.** Aggressive dark UIs with neon accents. Wrong register entirely for SMB billing.
 

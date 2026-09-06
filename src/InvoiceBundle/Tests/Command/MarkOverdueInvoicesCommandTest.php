@@ -133,7 +133,7 @@ final class MarkOverdueInvoicesCommandTest extends KernelTestCase
     }
 
     /**
-     * Regression test for https://github.com/Augias/Augias/issues/2380
+     * Regression test for https://github.com/SolidInvoice/SolidInvoice/issues/2380
      *
      * When invoice lines are lazy-loaded into the Doctrine identity map during a
      * workflow transition flush (e.g. by a postUpdate listener), a subsequent

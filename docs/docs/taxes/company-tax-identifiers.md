@@ -6,7 +6,7 @@ sidebar_position: 2
 
 # Adding company tax identifiers
 
-Company tax identifiers are your own business's tax registration numbers — VAT number, GST registration, TIN, ABN, and so on. SolidInvoice prints them on every invoice and quote you issue so your clients can verify your tax registration.
+Company tax identifiers are your own business's tax registration numbers — VAT number, GST registration, TIN, ABN, and so on. Augias prints them on every invoice and quote you issue so your clients can verify your tax registration.
 
 ## Navigate to the settings
 

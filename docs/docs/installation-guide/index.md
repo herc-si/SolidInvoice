@@ -1,15 +1,15 @@
 ---
 title: Installation Guide
-description: Choose how to install SolidInvoice — quick install, Homebrew, Docker, distribution package, or from source.
+description: Choose how to install Augias — quick install, Homebrew, Docker, distribution package, or from source.
 sidebar_position: 1
 ---
 
 # Installation Guide
 
-SolidInvoice runs anywhere you can run a binary, a Docker container, or PHP. Pick the method that fits your environment — each path below is self-contained, so you only follow the steps that apply to it.
+Augias runs anywhere you can run a binary, a Docker container, or PHP. Pick the method that fits your environment — each path below is self-contained, so you only follow the steps that apply to it.
 
 :::tip[Don't want to host it yourself?]
-The [hosted version of SolidInvoice](https://solidinvoice.co) takes care of installation, updates, backups, and SSL for $8/month. Sign up and skip this guide entirely.
+Augias is self-hosted only: you run it on your own infrastructure and keep your own backups.
 :::
 
 ## Pick an install method
@@ -20,7 +20,7 @@ The [hosted version of SolidInvoice](https://solidinvoice.co) takes care of inst
 | Install from a package manager on macOS or Linux | [Homebrew](./homebrew.md) |
 | Install as a snap on Ubuntu or any Linux with snapd | [Snap](./snap.md) |
 | Install natively on Debian, Ubuntu, RHEL, Fedora, or Alpine | [Linux packages](./linux-packages.mdx) |
-| Run SolidInvoice as a container alongside your other services | [Docker](./docker.md) |
+| Run Augias as a container alongside your other services | [Docker](./docker.md) |
 | Deploy to a Kubernetes cluster | [Helm](./helm.md) |
 | Deploy to shared hosting, an existing webserver, or have full control over the stack | [Distribution package](./distribution-package/index.mdx) |
 | Hack on the source or contribute back upstream | [Git (advanced)](./git.md) |

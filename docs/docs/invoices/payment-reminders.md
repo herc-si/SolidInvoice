@@ -6,7 +6,7 @@ sidebar_position: 5
 
 # Payment reminders
 
-SolidInvoice can automatically send payment reminder emails to clients for unpaid invoices. Reminders run on a fixed schedule — one optional reminder before the due date, then at days 1, 7, and 14 after the invoice becomes overdue.
+Augias can automatically send payment reminder emails to clients for unpaid invoices. Reminders run on a fixed schedule — one optional reminder before the due date, then at days 1, 7, and 14 after the invoice becomes overdue.
 
 You can also send a reminder manually at any time from the invoice view.
 
@@ -86,6 +86,6 @@ The invoice must have at least one contact with an email address. If the client 
 
 ## After the final reminder
 
-After the day-14 automated reminder is sent, SolidInvoice stops sending automated reminders for that invoice and sends an **escalation notification** to your internal users. This notification signals that the automated cycle is complete and manual follow-up is needed — for example, contacting the client by phone, offering a payment plan, or reviewing next steps.
+After the day-14 automated reminder is sent, Augias stops sending automated reminders for that invoice and sends an **escalation notification** to your internal users. This notification signals that the automated cycle is complete and manual follow-up is needed — for example, contacting the client by phone, offering a payment plan, or reviewing next steps.
 
 Manual reminders via the UI remain available at any time even after the automated cycle ends.

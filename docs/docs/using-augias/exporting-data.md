@@ -6,7 +6,7 @@ sidebar_position: 5
 
 # Exporting data
 
-SolidInvoice lets you export data in two ways: download the rows from any grid directly, or request a complete export of everything in your company.
+Augias lets you export data in two ways: download the rows from any grid directly, or request a complete export of everything in your company.
 
 ## Grid export
 
@@ -28,11 +28,11 @@ A full export packages everything in your company — clients, contacts, invoice
 
 1. In the left sidebar, click your name to open the profile menu, then choose `Data Export`. You can also navigate to `/profile/exports`.
 2. Click `Request Export`.
-3. SolidInvoice queues the export as a background job. You'll receive an email notification when it's ready.
+3. Augias queues the export as a background job. You'll receive an email notification when it's ready.
 4. Return to the `Data Export` page and click `Download` next to the completed export.
 
 :::info
-Large datasets can take a few minutes to process. The export runs in the background so you can keep working in SolidInvoice.
+Large datasets can take a few minutes to process. The export runs in the background so you can keep working in Augias.
 :::
 
 ## Related

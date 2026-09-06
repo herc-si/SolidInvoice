@@ -6,7 +6,7 @@ sidebar_position: 4
 
 # Prometheus metrics
 
-When running the SolidInvoice [distribution package](../installation-guide/distribution-package/index.mdx) (single binary), you can expose a Prometheus-compatible metrics endpoint that reports Caddy HTTP metrics and FrankenPHP worker and thread statistics.
+When running the Augias [distribution package](../installation-guide/distribution-package/index.mdx) (single binary), you can expose a Prometheus-compatible metrics endpoint that reports Caddy HTTP metrics and FrankenPHP worker and thread statistics.
 
 :::info
 Prometheus metrics are only available with the distribution package (the `augias` single binary). Docker and Helm deployments do not expose this endpoint by default.
@@ -20,7 +20,7 @@ Pass `--enable-metrics` to the `run` command:
 augias run --enable-metrics
 ```
 
-The metrics endpoint starts on port **9090** by default. SolidInvoice prints a note at startup confirming the address:
+The metrics endpoint starts on port **9090** by default. Augias prints a note at startup confirming the address:
 
 ```
 Metrics: Prometheus metrics available at http://localhost:9090/metrics
@@ -46,7 +46,7 @@ scrape_configs:
           - localhost:9090
 ```
 
-Replace `localhost` with the host or IP where SolidInvoice is running, and adjust the port if you used `--metrics-port`.
+Replace `localhost` with the host or IP where Augias is running, and adjust the port if you used `--metrics-port`.
 
 ## What's exposed
 

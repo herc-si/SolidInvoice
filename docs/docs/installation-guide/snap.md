@@ -1,12 +1,12 @@
 ---
 title: Snap
-description: Install SolidInvoice from the Snap Store on Ubuntu or any Linux distribution with snapd.
+description: Install Augias from the Snap Store on Ubuntu or any Linux distribution with snapd.
 sidebar_position: 4
 ---
 
 # Snap
 
-SolidInvoice is available on the [Snap Store](https://snapcraft.io/augias). The snap bundles the self-contained binary and registers it as a background service — no PHP, webserver, or cron job required.
+Augias is available on the [Snap Store](https://snapcraft.io/augias). The snap bundles the self-contained binary and registers it as a background service — no PHP, webserver, or cron job required.
 
 ## System requirements
 
@@ -21,7 +21,7 @@ sudo snap install augias
 The service starts automatically after installation and listens on `http://localhost:8765`. Open that URL in your browser and finish setup with the [first-run wizard](./system-installation.md).
 
 :::info
-The snap runs over plain HTTP. For production, place SolidInvoice behind a reverse proxy (Nginx, Caddy, Traefik) that terminates TLS.
+The snap runs over plain HTTP. For production, place Augias behind a reverse proxy (Nginx, Caddy, Traefik) that terminates TLS.
 :::
 
 ## Manage the service

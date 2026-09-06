@@ -1,6 +1,6 @@
 ---
 title: Distribution package
-description: Install SolidInvoice from the distribution archive on an existing PHP webserver, covering download, extraction, permissions, and the first-run setup wizard.
+description: Install Augias from the distribution archive on an existing PHP webserver, covering download, extraction, permissions, and the first-run setup wizard.
 sidebar_position: 1
 ---
 
@@ -9,14 +9,14 @@ import TabItem from '@theme/TabItem';
 
 # Distribution package
 
-The distribution package is a pre-built archive of SolidInvoice that you serve from an existing PHP webserver. Choose this method when you can't use the [quick install](../quick-install.mdx) — for example on shared hosting, on a managed PHP host, or when company policy requires you to use a specific webserver.
+The distribution package is a pre-built archive of Augias that you serve from an existing PHP webserver. Choose this method when you can't use the [quick install](../quick-install.mdx) — for example on shared hosting, on a managed PHP host, or when company policy requires you to use a specific webserver.
 
 :::warning
 This is the most involved install method. You're responsible for the webserver, PHP, the database, the cron job, and the async worker. If you have a choice, the [quick install](../quick-install.mdx), [Homebrew](../homebrew.md), or [Docker](../docker.md) installs handle all of this for you.
 :::
 
 :::tip[Skip the setup entirely]
-The [hosted version of SolidInvoice](https://solidinvoice.co) takes care of the webserver, updates, and backups for $8/month.
+This method assumes you already run a PHP webserver and are comfortable maintaining it.
 :::
 
 ## System requirements
@@ -105,7 +105,7 @@ Open your browser at the URL the webserver is serving and finish setup with the 
 
 ## 3. Run the background worker
 
-SolidInvoice uses a single background worker for both async messages (emails, webhook dispatch) and scheduled tasks (recurring invoices, reminders, overdue checks). The worker runs `bin/console messenger:consume --all` in a loop.
+Augias uses a single background worker for both async messages (emails, webhook dispatch) and scheduled tasks (recurring invoices, reminders, overdue checks). The worker runs `bin/console messenger:consume --all` in a loop.
 
 Follow the [cron job setup guide](./cron-job-setup.md) — it covers systemd, cron, cPanel, Plesk, and Windows Task Scheduler.
 
@@ -125,7 +125,7 @@ The first-run wizard configures everything you need to get started. The variable
 | `AUGIAS_APPLICATION_URL` | Public URL of the installation, e.g. `https://invoice.example.com`. |
 | `AUGIAS_DATABASE_URL` | Database DSN. The first-run wizard can also write this for you. |
 | `AUGIAS_MAILER_DSN` | Outbound mail transport (SMTP, Mailgun, SendGrid, etc.). Overrides the transport configured in the UI. |
-| `AUGIAS_MAILER_SENDER` | The `From:` address SolidInvoice sends mail from. Overrides the address configured in the UI. |
+| `AUGIAS_MAILER_SENDER` | The `From:` address Augias sends mail from. Overrides the address configured in the UI. |
 | `AUGIAS_LOCALE` | Default locale (e.g. `en`). |
 
 Other integrations (Sentry, Meilisearch, Google OAuth) have their own environment variables and are documented on their respective pages.

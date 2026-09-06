@@ -6,7 +6,7 @@ sidebar_position: 3
 
 # Adding client tax identifiers
 
-Client tax identifiers are your client's tax registration numbers — their VAT number, GST registration, TIN, and so on. SolidInvoice prints them on the invoices and quotes you send to that client.
+Client tax identifiers are your client's tax registration numbers — their VAT number, GST registration, TIN, and so on. Augias prints them on the invoices and quotes you send to that client.
 
 ## Where to add them
 

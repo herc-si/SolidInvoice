@@ -1,6 +1,6 @@
 ---
 title: Quick install
-description: Install SolidInvoice from the self-contained download — no PHP, webserver, or Composer required.
+description: Install Augias from the self-contained download — no PHP, webserver, or Composer required.
 sidebar_position: 2
 ---
 
@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 # Quick install
 
-The quick install bundles SolidInvoice, PHP, and a webserver into a single self-contained download. It is the fastest way to get a production-ready instance running and is the recommended install method for most users.
+The quick install bundles Augias, PHP, and a webserver into a single self-contained download. It is the fastest way to get a production-ready instance running and is the recommended install method for most users.
 
 ## System requirements
 
@@ -30,17 +30,17 @@ There is no native Windows build. Run the Linux binary inside [WSL2](https://lea
   **One-liner install** — downloads the binary and installs it to `/usr/local/bin`:
 
   ```bash
-  curl -fsSL https://raw.githubusercontent.com/SolidInvoice/SolidInvoice/3.0.x/packaging/install.sh | sh
+  curl -fsSL https://raw.githubusercontent.com/herc-si/SolidInvoice/3.0.x/packaging/install.sh | sh
   augias run
   ```
 
-  To also install a systemd service so SolidInvoice starts on boot:
+  To also install a systemd service so Augias starts on boot:
 
   ```bash
-  curl -fsSL https://raw.githubusercontent.com/SolidInvoice/SolidInvoice/3.0.x/packaging/install.sh | INSTALL_SERVICE=1 sh
+  curl -fsSL https://raw.githubusercontent.com/herc-si/SolidInvoice/3.0.x/packaging/install.sh | INSTALL_SERVICE=1 sh
   ```
 
-  **Manual download** — grab the binary for your architecture from the [releases page](https://github.com/SolidInvoice/SolidInvoice/releases/latest), then make it executable and start it:
+  **Manual download** — grab the binary for your architecture from the [releases page](https://github.com/herc-si/SolidInvoice/releases/latest), then make it executable and start it:
 
   ```bash
   chmod +x augias
@@ -50,7 +50,7 @@ There is no native Windows build. Run the Linux binary inside [WSL2](https://lea
   </TabItem>
   <TabItem value="macos" label="macOS">
 
-  Download the latest binary for your architecture from the [releases page](https://github.com/SolidInvoice/SolidInvoice/releases/latest), then make it executable and start it:
+  Download the latest binary for your architecture from the [releases page](https://github.com/herc-si/SolidInvoice/releases/latest), then make it executable and start it:
 
   ```bash
   chmod +x augias
@@ -60,7 +60,7 @@ There is no native Windows build. Run the Linux binary inside [WSL2](https://lea
   On first launch macOS may block the binary because it isn't notarised. Open `System Settings → Privacy & Security` and click `Open anyway`, or run `xattr -d com.apple.quarantine ./augias` first.
 
   :::tip
-  On macOS, [Homebrew](./homebrew.md) is the easiest way to install and keep SolidInvoice up to date.
+  On macOS, [Homebrew](./homebrew.md) is the easiest way to install and keep Augias up to date.
   :::
 
   </TabItem>
@@ -112,7 +112,7 @@ Use this when you already have a certificate (wildcard, EV, or one issued by a c
 ./augias run --disable-https
 ```
 
-Use when an upstream proxy (Cloudflare, Nginx, an ingress controller) terminates TLS for you. SolidInvoice listens over plain HTTP and trusts the proxy's `X-Forwarded-*` headers.
+Use when an upstream proxy (Cloudflare, Nginx, an ingress controller) terminates TLS for you. Augias listens over plain HTTP and trusts the proxy's `X-Forwarded-*` headers.
 
 ## Available flags
 
@@ -154,7 +154,7 @@ Returns `OK` (HTTP 200) when the application is running.
 
 ## Updating
 
-Replace the binary with the latest release and restart it. Application data lives in `~/.SolidInvoice/`, separately from the binary, so updates don't touch your invoices, clients, or settings.
+Replace the binary with the latest release and restart it. Application data lives in `~/.Augias/`, separately from the binary, so updates don't touch your invoices, clients, or settings.
 
 ## Worker mode (high-traffic deployments)
 

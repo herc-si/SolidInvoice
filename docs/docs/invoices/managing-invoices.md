@@ -1,6 +1,6 @@
 ---
 title: Managing invoices
-description: View, search, clone, cancel, and archive invoices in SolidInvoice.
+description: View, search, clone, cancel, and archive invoices in Augias.
 sidebar_position: 4
 ---
 

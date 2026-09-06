@@ -6,6 +6,10 @@ Unreleased
 
 ### Changes
 
+* Renamed the application from SolidInvoice to Augias — display name, PHP namespace, environment variables, package names and data paths. See `UPGRADE.md` for the migration steps
+* Rebuilt the data grid tables and moved the brand palette from green to ink blue, freeing green to mean "paid" and nothing else
+* Status chips now meet WCAG AA; they previously measured as low as 1.97:1
+* Added a product catalogue, suppliers, purchase invoices and incoming electronic invoices
 * API authentication now uses the `X-API-TOKEN` header exclusively; the `?token=` query-string fallback has been removed
 
 3.0.0 / 2026-06-17

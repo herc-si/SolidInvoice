@@ -1,6 +1,6 @@
 ---
 title: Cron job setup
-description: Schedule the SolidInvoice background worker on your platform — systemd, cron, Plesk, cPanel, or Windows.
+description: Schedule the Augias background worker on your platform — systemd, cron, Plesk, cPanel, or Windows.
 sidebar_position: 2
 ---
 
@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 # Cron job setup
 
-SolidInvoice uses a single background worker for both async messages (email, webhooks) and scheduled tasks (recurring invoices, reminders, overdue checks). The command is the same in every case:
+Augias uses a single background worker for both async messages (email, webhooks) and scheduled tasks (recurring invoices, reminders, overdue checks). The command is the same in every case:
 
 ```bash
 bin/console messenger:consume --all --time-limit=3600 --memory-limit=128M
@@ -36,7 +36,7 @@ You only need to set up a worker when running from the [distribution package](./
 
   ```ini title="/etc/systemd/system/augias-worker.service"
   [Unit]
-  Description=SolidInvoice worker
+  Description=Augias worker
   After=network.target
 
   [Service]
@@ -157,7 +157,7 @@ You only need to set up a worker when running from the [distribution package](./
   Use Task Scheduler to run the worker every minute.
 
   1. Open **Task Scheduler** and select **Create Task**.
-  2. **General** — name the task `SolidInvoice worker`.
+  2. **General** — name the task `Augias worker`.
   3. **Triggers** — add a new trigger:
      - Begin the task: **On a schedule**
      - **Daily**, recur every `1` day

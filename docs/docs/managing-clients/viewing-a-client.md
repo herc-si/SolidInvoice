@@ -44,7 +44,7 @@ The lower half of the page has tabs:
 - `Invoices` — every invoice for this client, with status and total. Counts shown in a badge.
 - `Payments` — appears only when at least one payment has been recorded against the client.
 
-Each of the document tabs is a list with the same row actions as the global Quotes / Invoices / Payments pages — see those areas of SolidInvoice for the per-document operations. From the client view, you can read the lists and click through to individual documents; you can't edit invoices or quotes inline here.
+Each of the document tabs is a list with the same row actions as the global Quotes / Invoices / Payments pages — see those areas of Augias for the per-document operations. From the client view, you can read the lists and click through to individual documents; you can't edit invoices or quotes inline here.
 
 ## Contacts
 
@@ -57,7 +57,7 @@ A contact must always have at least one of: `First name`, `Last name`, `Email`. 
 
 To add another contact, click `+ Add Contact` at the top right of the card. The same form used during create opens — fill in name + email + any additional details and save.
 
-To delete a contact, edit the contact and use the delete control inside the form. SolidInvoice prevents you from deleting the last remaining contact: a client must always have at least one.
+To delete a contact, edit the contact and use the delete control inside the form. Augias prevents you from deleting the last remaining contact: a client must always have at least one.
 
 ### Additional contact details
 

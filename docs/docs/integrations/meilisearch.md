@@ -1,14 +1,14 @@
 ---
 title: Meilisearch
-description: Power SolidInvoice's global search with a Meilisearch instance.
+description: Power Augias's global search with a Meilisearch instance.
 sidebar_position: 2
 ---
 
 # Meilisearch
 
-SolidInvoice uses [Meilisearch](https://www.meilisearch.com/) to power the global search bar in the top navigation. When a Meilisearch instance is configured, you can search across clients, contacts, invoices, recurring invoices, quotes, and payments from a single query box, with typo tolerance and per-entity filters.
+Augias uses [Meilisearch](https://www.meilisearch.com/) to power the global search bar in the top navigation. When a Meilisearch instance is configured, you can search across clients, contacts, invoices, recurring invoices, quotes, and payments from a single query box, with typo tolerance and per-entity filters.
 
-The integration is entirely optional — without it, SolidInvoice runs normally and the search bar is hidden.
+The integration is entirely optional — without it, Augias runs normally and the search bar is hidden.
 
 ## How it works
 
@@ -24,7 +24,7 @@ You need a running Meilisearch server (v1.x). Common options:
 - **Self-hosted** — install via [the official binary, Docker image, or package manager](https://www.meilisearch.com/docs/learn/getting_started/installation).
 - **Meilisearch Cloud** — managed hosting; provides a URL and API key out of the box.
 
-The server needs to be reachable from the SolidInvoice application over HTTP. For self-hosted deployments, this is usually a private network address or `http://localhost:7700`.
+The server needs to be reachable from the Augias application over HTTP. For self-hosted deployments, this is usually a private network address or `http://localhost:7700`.
 
 :::warning
 Always set a master key on your Meilisearch server in production (`MEILI_MASTER_KEY` on the Meilisearch side). Running with no master key exposes write access to anyone who can reach the HTTP port.
@@ -32,7 +32,7 @@ Always set a master key on your Meilisearch server in production (`MEILI_MASTER_
 
 ## Configuration
 
-The integration is configured through three environment variables, set the same way you set any other SolidInvoice environment variable (Docker `-e` flag, or a `.env` file in the application root for the distribution package).
+The integration is configured through three environment variables, set the same way you set any other Augias environment variable (Docker `-e` flag, or a `.env` file in the application root for the distribution package).
 
 | Variable | Default | Description |
 | --- | --- | --- |
@@ -56,7 +56,7 @@ The search bar is shown only when both `AUGIAS_MEILISEARCH_URL` and `AUGIAS_MEIL
 
 ## Initial indexing
 
-After configuring the environment variables for the first time — and any time you import data outside the SolidInvoice UI (for example, from a database backup or a migration from another tool) — you'll need to populate the indexes manually.
+After configuring the environment variables for the first time — and any time you import data outside the Augias UI (for example, from a database backup or a migration from another tool) — you'll need to populate the indexes manually.
 
 Create the indexes with the configured settings:
 
@@ -101,7 +101,7 @@ The Meilisearch search bundle ships with a small set of commands for managing th
 | --- | --- |
 | `bin/console meilisearch:create` | Create the indexes and apply their configured settings (filterable/sortable attributes). Safe to run repeatedly. |
 | `bin/console meilisearch:import` | Bulk-import every entity into its index. See [Initial indexing](#initial-indexing). |
-| `bin/console meilisearch:update-settings` | Push only the settings (filterable/sortable attributes, etc.) without re-indexing documents. Use after upgrading SolidInvoice if the bundled index settings have changed. |
+| `bin/console meilisearch:update-settings` | Push only the settings (filterable/sortable attributes, etc.) without re-indexing documents. Use after upgrading Augias if the bundled index settings have changed. |
 | `bin/console meilisearch:clear` | Remove all documents from the indexes but keep the indexes themselves. |
 | `bin/console meilisearch:delete` | Delete the indexes entirely. You'll need to run `meilisearch:create` and `meilisearch:import` again afterwards. |
 
@@ -117,7 +117,7 @@ If indexes ever drift out of sync — for example, after a database restore — 
 
 ## Security
 
-The API key SolidInvoice uses needs both read and write access to the indexes. The simplest setup is to use the Meilisearch master key, but for production you should generate a [scoped API key](https://www.meilisearch.com/docs/learn/security/master_api_keys) limited to the indexes that match your configured prefix.
+The API key Augias uses needs both read and write access to the indexes. The simplest setup is to use the Meilisearch master key, but for production you should generate a [scoped API key](https://www.meilisearch.com/docs/learn/security/master_api_keys) limited to the indexes that match your configured prefix.
 
 When generating a scoped key, grant it the following actions on indexes matching `<prefix>*`:
 
@@ -129,7 +129,7 @@ When generating a scoped key, grant it the following actions on indexes matching
 If you don't plan to run the maintenance commands from the application server (for example, you run them from a separate ops host), you can issue a more restrictive key for the application itself that grants only `search`, `documents.add`, `documents.delete`, and `documents.get`.
 
 :::warning
-Per-company isolation is enforced by SolidInvoice through the `companyId` filter on every query, not by Meilisearch itself. Anyone with direct access to the Meilisearch HTTP API and a valid key can read across all companies' data. Treat the Meilisearch endpoint as you would the application database — keep it on a private network and restrict the API key.
+Per-company isolation is enforced by Augias through the `companyId` filter on every query, not by Meilisearch itself. Anyone with direct access to the Meilisearch HTTP API and a valid key can read across all companies' data. Treat the Meilisearch endpoint as you would the application database — keep it on a private network and restrict the API key.
 :::
 
 ## Disabling the integration
@@ -141,4 +141,4 @@ AUGIAS_MEILISEARCH_URL=
 AUGIAS_MEILISEARCH_API_KEY=
 ```
 
-Restart the application. The search bar disappears, and SolidInvoice stops dispatching updates to Meilisearch. Existing indexes on the Meilisearch server are left in place — delete them manually with `bin/console meilisearch:delete` (run before clearing the env vars) or directly through the Meilisearch dashboard if you no longer need them.
+Restart the application. The search bar disappears, and Augias stops dispatching updates to Meilisearch. Existing indexes on the Meilisearch server are left in place — delete them manually with `bin/console meilisearch:delete` (run before clearing the env vars) or directly through the Meilisearch dashboard if you no longer need them.

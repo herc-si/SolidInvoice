@@ -1,5 +1,5 @@
 ---
-name: SolidInvoice
+name: Augias
 description: Open-source, self-hostable invoicing for freelancers and small businesses.
 colors:
   primary: "#1e4976"
@@ -142,15 +142,15 @@ components:
     padding: "2px 10px"
 ---
 
-# Design System: SolidInvoice
+# Design System: Augias
 
 ## 1. Overview
 
 **Creative North Star: "The Friendly Desk"**
 
-SolidInvoice should feel like a clean workspace with a touch of warmth — approachable, never corporate. The user comes in expecting admin pain and finds an organized desk instead: paper-white surfaces, soft shadows that suggest depth without performing it, and a quiet ink-blue accent that says "you can do this" instead of shouting. The interface treats money with respect (clarity, precision, never hiding totals) while treating the human warmly (plain language, encouraging empty states, no scolding).
+Augias should feel like a clean workspace with a touch of warmth — approachable, never corporate. The user comes in expecting admin pain and finds an organized desk instead: paper-white surfaces, soft shadows that suggest depth without performing it, and a quiet ink-blue accent that says "you can do this" instead of shouting. The interface treats money with respect (clarity, precision, never hiding totals) while treating the human warmly (plain language, encouraging empty states, no scolding).
 
-The system explicitly rejects four aesthetics. It is not a legacy AdminLTE/Bootstrap admin panel — no dark blue navbar, no sidebar tree of every entity, no boxy widgets. It is not enterprise accounting (QuickBooks, Sage, Xero) — no dense corporate toolbars, no 90s-feeling forms. It is not AI-slop SaaS — no purple gradients, no glass cards, no hero-metric tiles, no gradient text. It is not crypto/fintech neon-on-black. SolidInvoice sits where competent SMB tools live: Linear's restraint applied to invoicing.
+The system explicitly rejects four aesthetics. It is not a legacy AdminLTE/Bootstrap admin panel — no dark blue navbar, no sidebar tree of every entity, no boxy widgets. It is not enterprise accounting (QuickBooks, Sage, Xero) — no dense corporate toolbars, no 90s-feeling forms. It is not AI-slop SaaS — no purple gradients, no glass cards, no hero-metric tiles, no gradient text. It is not crypto/fintech neon-on-black. Augias sits where competent SMB tools live: Linear's restraint applied to invoicing.
 
 **Key Characteristics:**
 
@@ -219,7 +219,7 @@ A 10-step slate ramp. Every neutral is tinted cool, not pure gray.
 **Body Font:** Same system sans stack.
 **Mono Font:** System mono (`ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace`)
 
-**Character:** Native, performant, invisible. SolidInvoice doesn't put a "designer font" between the user and the data. System fonts render the OS's native UI text — on macOS it's San Francisco, on Windows it's Segoe UI, on Linux it's Roboto or Noto Sans. The result is an app that always looks correct, never out-of-place, and loads in zero milliseconds. Body sits at 15px (0.9375rem) — one notch larger than the 14px default for slightly more comfortable reading.
+**Character:** Native, performant, invisible. Augias doesn't put a "designer font" between the user and the data. System fonts render the OS's native UI text — on macOS it's San Francisco, on Windows it's Segoe UI, on Linux it's Roboto or Noto Sans. The result is an app that always looks correct, never out-of-place, and loads in zero milliseconds. Body sits at 15px (0.9375rem) — one notch larger than the 14px default for slightly more comfortable reading.
 
 ### Hierarchy
 
@@ -305,7 +305,7 @@ Soft and approachable. Generous radii, gentle shadows, restrained color. Buttons
 
 ### Empty States
 
-One shared primitive for every "nothing here yet" surface: `@SolidInvoiceDataGrid/Components/_empty_state.html.twig` (icon medallion + title + optional message + optional CTA, styled by `.datagrid-empty*`). It is the single reusable empty state — the data grid, the "no clients yet" invoice-create gate, and any future empty collection all render through it rather than reinventing markup.
+One shared primitive for every "nothing here yet" surface: `@AugiasDataGrid/Components/_empty_state.html.twig` (icon medallion + title + optional message + optional CTA, styled by `.datagrid-empty*`). It is the single reusable empty state — the data grid, the "no clients yet" invoice-create gate, and any future empty collection all render through it rather than reinventing markup.
 
 - **Medallion:** 80px `gray-50` disc, `gray-300` glyph. Neutral by default — an empty list is not an error, so it never uses a status color.
 - **First-run copy names the entity.** Generic "create your first item" is a missed onboarding moment. A grid supplies its own copy through `getEmptyTitle()` / `getEmptyDescription()` (base class returns the generic fallback); the four core lists — clients, invoices, quotes, payments — override it with encouraging, plain-English copy per Design Principle 2 (Reduce admin dread).
@@ -363,7 +363,7 @@ At display size `.money--total` also drops the currency code to `money-currency-
 
 **Rules:**
 
-- A SolidInvoice money display is the single source of truth for any currency value. Raw `{{ amount }}` rendering without this component is prohibited.
+- An Augias money display is the single source of truth for any currency value. Raw `{{ amount }}` rendering without this component is prohibited.
 - The currency never wraps away from its amount. A currency code orphaned onto a previous line is exactly the misreading the system exists to prevent.
 - Every color the component can take is AA-compliant against both `surface` and `body-bg`. Money is never rendered in a color that only works on some backgrounds — see The Legible Status Rule.
 

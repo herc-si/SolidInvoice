@@ -34,7 +34,7 @@ Click `Save`. The modal closes and the `Credit Balance` card updates immediately
 Use the same `+ Add Credit` modal. Type a negative number — `-20` to remove `20` from the balance, for example.
 
 :::warning
-SolidInvoice does not stop you from going below zero this way. If you enter a deduction larger than the current balance, the resulting balance will be negative. There is no separate "deduct" form — negative amounts are the only way to reduce credit manually.
+Augias does not stop you from going below zero this way. If you enter a deduction larger than the current balance, the resulting balance will be negative. There is no separate "deduct" form — negative amounts are the only way to reduce credit manually.
 :::
 
 ## Applying credit to an invoice
@@ -54,14 +54,14 @@ You don't have to use the entire credit balance on a single invoice — pay a po
 
 If the amount entered exceeds either limit:
 
-- More than the **available credit** → SolidInvoice rejects the payment with `Not enough credit available on this client's account`.
-- More than the **invoice balance** → SolidInvoice rejects the payment with `Amount exceeds invoice balance`.
+- More than the **available credit** → Augias rejects the payment with `Not enough credit available on this client's account`.
+- More than the **invoice balance** → Augias rejects the payment with `Amount exceeds invoice balance`.
 
 ## Tracking credit history
 
-The credit balance is a single rolling number. SolidInvoice does not currently store a history of every adjustment — you can see *what the balance is now*, but not *every time it changed*.
+The credit balance is a single rolling number. Augias does not currently store a history of every adjustment — you can see *what the balance is now*, but not *every time it changed*.
 
-If you need an audit trail, record each adjustment in your accounting system or in the client's notes externally. Two indirect signals exist inside SolidInvoice:
+If you need an audit trail, record each adjustment in your accounting system or in the client's notes externally. Two indirect signals exist inside Augias:
 
 - **Payments using credit** — every time credit is applied to an invoice, a `Payment` row is created with method `Credit`. These are visible on the client's `Payments` tab and contribute to `Total Income`.
 - **Manual adjustments** (the `+ Add Credit` modal) leave no per-transaction record beyond the resulting balance.

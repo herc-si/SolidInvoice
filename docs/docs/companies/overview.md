@@ -1,12 +1,12 @@
 ---
 title: Overview
-description: How companies work in SolidInvoice.
+description: How companies work in Augias.
 sidebar_position: 1
 ---
 
 # Overview
 
-A company in SolidInvoice is a self-contained workspace. Everything you do in the app — adding clients, sending quotes, issuing invoices, tracking payments — happens inside one company at a time.
+A company in Augias is a self-contained workspace. Everything you do in the app — adding clients, sending quotes, issuing invoices, tracking payments — happens inside one company at a time.
 
 ## What lives in a company
 

@@ -1,10 +1,10 @@
 # CLAUDE.md — Documentation
 
-Scope: end-user documentation for SolidInvoice, served by **Docusaurus** from this directory. This file layers on top of the project root `CLAUDE.md` (which covers code). When editing files under `docs/`, follow this guide.
+Scope: end-user documentation for Augias, served by **Docusaurus** from this directory. This file layers on top of the project root `CLAUDE.md` (which covers code). When editing files under `docs/`, follow this guide.
 
 ## Audience & purpose
 
-These docs are for **end users** of SolidInvoice — freelancers, small business owners, and self-hosters — not contributors or API consumers.
+These docs are for **end users** of Augias — freelancers, small business owners, and self-hosters — not contributors or API consumers.
 
 - Developer/contributor guidance lives in the project root (`README.md`, `CONTRIBUTING.md`, root `CLAUDE.md`).
 - API reference is auto-generated and published at `https://augias.app/api/docs` — do not duplicate it here.
@@ -40,7 +40,7 @@ Every page must start with YAML frontmatter:
 ```yaml
 ---
 title: Creating a client
-description: Add a new client to SolidInvoice.
+description: Add a new client to Augias.
 sidebar_position: 1
 ---
 ```
