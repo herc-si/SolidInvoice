@@ -109,7 +109,7 @@ final class SentrySchedulerMiddlewareTest extends TestCase
 
     public function testCapturesOkCheckInOnSuccess(): void
     {
-        $envelope = $this->makeScheduledEnvelope('solidinvoice:invoices:mark-overdue');
+        $envelope = $this->makeScheduledEnvelope('augias:invoices:mark-overdue');
         $stack = $this->makeStack($envelope);
 
         $this->middleware->handle($envelope, $stack);
@@ -159,7 +159,7 @@ final class SentrySchedulerMiddlewareTest extends TestCase
 
     public function testCapturesErrorCheckInAndRethrowsOnException(): void
     {
-        $envelope = $this->makeScheduledEnvelope('solidinvoice:invoices:mark-overdue');
+        $envelope = $this->makeScheduledEnvelope('augias:invoices:mark-overdue');
         $exception = new RuntimeException('job failed');
 
         $middleware = $this->createStub(MiddlewareInterface::class);
@@ -186,13 +186,13 @@ final class SentrySchedulerMiddlewareTest extends TestCase
 
     public function testSlugFromRunCommandMessage(): void
     {
-        $envelope = $this->makeScheduledEnvelope('solidinvoice:invoices:mark-overdue');
+        $envelope = $this->makeScheduledEnvelope('augias:invoices:mark-overdue');
         $stack = $this->makeStack($envelope);
 
         $this->middleware->handle($envelope, $stack);
 
         $checkInEvents = $this->getCheckInEvents();
-        self::assertSame('test_schedule-solidinvoice-invoices-mark-overdue', $checkInEvents[0]->getCheckIn()?->getMonitorSlug());
+        self::assertSame('test_schedule-augias-invoices-mark-overdue', $checkInEvents[0]->getCheckIn()?->getMonitorSlug());
     }
 
     public function testSlugFromRunCommandMessageStripsArguments(): void

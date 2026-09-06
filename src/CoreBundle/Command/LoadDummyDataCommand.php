@@ -29,7 +29,7 @@ use function assert;
 use function sprintf;
 
 #[AsCommand(
-    name: 'solidinvoice:dummy-data:load',
+    name: 'augias:dummy-data:load',
     description: 'Load dummy data into a company for demonstration purposes',
 )]
 final class LoadDummyDataCommand extends Command

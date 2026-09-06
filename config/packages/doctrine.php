@@ -25,7 +25,7 @@ return App::config([
         'dbal' => [
             'connections' => [
                 'default' => [
-                    'url' => env('SOLIDINVOICE_DATABASE_URL')->resolve(),
+                    'url' => env('AUGIAS_DATABASE_URL')->resolve(),
                     // No hardcoded server_version: it forces the platform for every driver
                     // (e.g. MariaDB was detected as plain MySQL, breaking schema introspection
                     // and the doctrine/migrations metadata check). DBAL detects the server

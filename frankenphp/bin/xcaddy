@@ -51,31 +51,31 @@ echo "CGO_CFLAGS: ${CGO_CFLAGS:-not set}"
 echo ""
 
 # Get the SolidInvoice source directory from environment variable
-# This is set by build-solidinvoice.sh
-if [ -z "${SOLIDINVOICE_SOURCE_DIR:-}" ]; then
-	echo "Error: SOLIDINVOICE_SOURCE_DIR environment variable not set"
-	echo "This should be set by build-solidinvoice.sh"
+# This is set by build-augias.sh
+if [ -z "${AUGIAS_SOURCE_DIR:-}" ]; then
+	echo "Error: AUGIAS_SOURCE_DIR environment variable not set"
+	echo "This should be set by build-augias.sh"
 	exit 1
 fi
 
-if [ ! -d "${SOLIDINVOICE_SOURCE_DIR}" ]; then
-	echo "Error: SOLIDINVOICE_SOURCE_DIR does not exist: ${SOLIDINVOICE_SOURCE_DIR}"
+if [ ! -d "${AUGIAS_SOURCE_DIR}" ]; then
+	echo "Error: AUGIAS_SOURCE_DIR does not exist: ${AUGIAS_SOURCE_DIR}"
 	exit 1
 fi
 
 # Build our custom application using the CGO flags set by static-php-cli
-cd "${SOLIDINVOICE_SOURCE_DIR}"
+cd "${AUGIAS_SOURCE_DIR}"
 
 # Get version from environment or use git
 VERSION="${FRANKENPHP_VERSION:-dev}"
 
-echo "Building from: ${SOLIDINVOICE_SOURCE_DIR}"
+echo "Building from: ${AUGIAS_SOURCE_DIR}"
 echo "Version: ${VERSION}"
 echo ""
 
 # Verify we have Go source files
 if ! ls *.go >/dev/null 2>&1; then
-	echo "Error: No Go files found in ${SOLIDINVOICE_SOURCE_DIR}"
+	echo "Error: No Go files found in ${AUGIAS_SOURCE_DIR}"
 	exit 1
 fi
 

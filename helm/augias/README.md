@@ -10,7 +10,7 @@ This Helm chart deploys SolidInvoice on a Kubernetes cluster using the [Helm](ht
 
 - Kubernetes 1.23+
 - Helm 3.2+
-- A StorageClass that supports persistent volume claims (PVC) — required for `/etc/solidinvoice` (Symfony secrets vault and configuration storage)
+- A StorageClass that supports persistent volume claims (PVC) — required for `/etc/augias` (Symfony secrets vault and configuration storage)
 
 ---
 
@@ -27,7 +27,7 @@ helm repo update
 ### Update chart dependencies
 
 ```bash
-helm dep update helm/solidinvoice
+helm dep update helm/augias
 ```
 
 ### Minimal install (external database)
@@ -35,15 +35,15 @@ helm dep update helm/solidinvoice
 The simplest production-ready install uses an external database provided via a connection URL:
 
 ```bash
-helm install solidinvoice ./helm/solidinvoice \
-  --set externalDatabase.url="mysql://user:password@host:3306/solidinvoice" \
+helm install augias ./helm/augias \
+  --set externalDatabase.url="mysql://user:password@host:3306/augias" \
   --set app.secret="your-secret-key"
 ```
 
 ### Install with MySQL subchart
 
 ```bash
-helm install solidinvoice ./helm/solidinvoice \
+helm install augias ./helm/augias \
   --set mysql.enabled=true \
   --set mysql.auth.password="your-mysql-password" \
   --set mysql.auth.rootPassword="your-root-password" \
@@ -53,7 +53,7 @@ helm install solidinvoice ./helm/solidinvoice \
 ### Install with PostgreSQL subchart
 
 ```bash
-helm install solidinvoice ./helm/solidinvoice \
+helm install augias ./helm/augias \
   --set postgresql.enabled=true \
   --set postgresql.auth.password="your-pg-password" \
   --set app.secret="your-secret-key"
@@ -64,7 +64,7 @@ helm install solidinvoice ./helm/solidinvoice \
 Redis enables the Symfony Messenger async transport, which offloads background tasks (email sending, notification dispatch) from the request cycle:
 
 ```bash
-helm install solidinvoice ./helm/solidinvoice \
+helm install augias ./helm/augias \
   --set mysql.enabled=true \
   --set mysql.auth.password="your-mysql-password" \
   --set redis.enabled=true \
@@ -74,10 +74,10 @@ helm install solidinvoice ./helm/solidinvoice \
 
 ### GitOps / automated install (skip web wizard)
 
-For fully automated deployments, enable the CLI install Job. This pre-install hook runs `solidinvoice:install` before the application starts, skipping the web wizard:
+For fully automated deployments, enable the CLI install Job. This pre-install hook runs `augias:install` before the application starts, skipping the web wizard:
 
 ```bash
-helm install solidinvoice ./helm/solidinvoice \
+helm install augias ./helm/augias \
   --set mysql.enabled=true \
   --set mysql.auth.password="your-mysql-password" \
   --set app.secret="your-secret-key" \
@@ -89,7 +89,7 @@ helm install solidinvoice ./helm/solidinvoice \
 Alternatively, store admin credentials in an existing Secret:
 
 ```bash
-helm install solidinvoice ./helm/solidinvoice \
+helm install augias ./helm/augias \
   --set mysql.enabled=true \
   --set mysql.auth.password="your-mysql-password" \
   --set app.secret="your-secret-key" \
@@ -105,12 +105,12 @@ The following table lists the major configurable parameters. For the full list s
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
-| `image.repository` | Container image repository | `solidinvoice/solidinvoice` |
+| `image.repository` | Container image repository | `augias/augias` |
 | `image.tag` | Image tag (defaults to chart appVersion) | `""` |
 | `image.pullPolicy` | Image pull policy | `IfNotPresent` |
 | `replicaCount` | Number of app replicas | `1` |
-| `app.secret` | `SOLIDINVOICE_APP_SECRET` — auto-generated if empty | `""` |
-| `app.url` | `SOLIDINVOICE_APPLICATION_URL` — public URL of the installation (optional) | `""` |
+| `app.secret` | `AUGIAS_APP_SECRET` — auto-generated if empty | `""` |
+| `app.url` | `AUGIAS_APPLICATION_URL` — public URL of the installation (optional) | `""` |
 | `app.locale` | Application locale | `en` |
 | `app.allowRegistration` | Allow public user registration | `false` |
 | `app.workerMode` | Enable FrankenPHP persistent worker mode | `false` |
@@ -131,7 +131,7 @@ The following table lists the major configurable parameters. For the full list s
 | `scheduler.enabled` | Enable cron scheduler CronJob | `true` |
 | `scheduler.schedule` | Cron schedule expression | `* * * * *` |
 | `scheduler.timeZone` | Timezone for the CronJob | `UTC` |
-| `persistence.enabled` | Enable PVC for `/etc/solidinvoice` | `true` |
+| `persistence.enabled` | Enable PVC for `/etc/augias` | `true` |
 | `persistence.storageClass` | StorageClass name (empty = cluster default) | `""` |
 | `persistence.accessModes` | PVC access modes | `[ReadWriteOnce]` |
 | `persistence.size` | PVC size | `1Gi` |
@@ -143,12 +143,12 @@ The following table lists the major configurable parameters. For the full list s
 | `service.type` | Kubernetes Service type | `ClusterIP` |
 | `service.port` | Service port | `80` |
 | `mysql.enabled` | Enable Bitnami MySQL subchart | `false` |
-| `mysql.auth.database` | MySQL database name | `solidinvoice` |
-| `mysql.auth.username` | MySQL username | `solidinvoice` |
+| `mysql.auth.database` | MySQL database name | `augias` |
+| `mysql.auth.username` | MySQL username | `augias` |
 | `mysql.auth.password` | MySQL password | `""` |
 | `postgresql.enabled` | Enable Bitnami PostgreSQL subchart | `false` |
-| `postgresql.auth.database` | PostgreSQL database name | `solidinvoice` |
-| `postgresql.auth.username` | PostgreSQL username | `solidinvoice` |
+| `postgresql.auth.database` | PostgreSQL database name | `augias` |
+| `postgresql.auth.username` | PostgreSQL username | `augias` |
 | `postgresql.auth.password` | PostgreSQL password | `""` |
 | `redis.enabled` | Enable Bitnami Redis subchart | `false` |
 | `redis.auth.password` | Redis password | `""` |
@@ -178,7 +178,7 @@ The following table lists the major configurable parameters. For the full list s
 To upgrade the release:
 
 ```bash
-helm upgrade solidinvoice ./helm/solidinvoice \
+helm upgrade augias ./helm/augias \
   --set app.secret="your-saved-secret-key" \
   --reuse-values
 ```
@@ -192,15 +192,15 @@ Database migrations run automatically as a pre-upgrade Helm hook Job (`migration
 ## Uninstall
 
 ```bash
-helm uninstall solidinvoice
+helm uninstall augias
 ```
 
-**Note:** The PVC for `/etc/solidinvoice` is annotated with `helm.sh/resource-policy: keep` and will **not** be deleted on uninstall. This prevents accidental data loss of the Symfony secrets vault and configuration.
+**Note:** The PVC for `/etc/augias` is annotated with `helm.sh/resource-policy: keep` and will **not** be deleted on uninstall. This prevents accidental data loss of the Symfony secrets vault and configuration.
 
 To delete the PVC manually after uninstall:
 
 ```bash
-kubectl delete pvc solidinvoice-solidinvoice-config
+kubectl delete pvc augias-augias-config
 ```
 
 ---
@@ -219,7 +219,7 @@ SolidInvoice on Kubernetes consists of the following components:
 
 - **Install Job** (optional) — A pre-install Helm hook that runs the CLI install command for automated/GitOps deployments.
 
-- **Persistent Volume** — Mounts `/etc/solidinvoice` across all workloads. This directory holds the Symfony encrypted secrets vault and application configuration. It must be shared across all pods.
+- **Persistent Volume** — Mounts `/etc/augias` across all workloads. This directory holds the Symfony encrypted secrets vault and application configuration. It must be shared across all pods.
 
 ---
 

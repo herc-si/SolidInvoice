@@ -1,47 +1,47 @@
 post_install() {
     # Create system user and group
-    if ! getent group solidinvoice >/dev/null 2>&1; then
-        groupadd --system solidinvoice
+    if ! getent group augias >/dev/null 2>&1; then
+        groupadd --system augias
     fi
 
-    if ! getent passwd solidinvoice >/dev/null 2>&1; then
-        useradd --system --gid solidinvoice \
-            --home-dir /var/lib/solidinvoice --no-create-home \
+    if ! getent passwd augias >/dev/null 2>&1; then
+        useradd --system --gid augias \
+            --home-dir /var/lib/augias --no-create-home \
             --shell /usr/sbin/nologin \
-            --comment "SolidInvoice service account" solidinvoice
+            --comment "SolidInvoice service account" augias
     fi
 
     # Fix ownership
-    chown solidinvoice:solidinvoice /var/lib/solidinvoice
-    chown root:solidinvoice /etc/solidinvoice
-    chown root:solidinvoice /etc/solidinvoice/solidinvoice.env
+    chown augias:augias /var/lib/augias
+    chown root:augias /etc/augias
+    chown root:augias /etc/augias/augias.env
 
     systemctl daemon-reload
 
     echo ""
     echo "SolidInvoice has been installed."
     echo ""
-    echo "  Start:   sudo systemctl start solidinvoice"
-    echo "  Enable:  sudo systemctl enable solidinvoice"
-    echo "  Config:  /etc/solidinvoice/solidinvoice.env"
+    echo "  Start:   sudo systemctl start augias"
+    echo "  Enable:  sudo systemctl enable augias"
+    echo "  Config:  /etc/augias/augias.env"
     echo ""
 }
 
 post_upgrade() {
     systemctl daemon-reload
 
-    if systemctl is-active --quiet solidinvoice; then
+    if systemctl is-active --quiet augias; then
         echo "Restarting SolidInvoice..."
-        systemctl restart solidinvoice
+        systemctl restart augias
     fi
 }
 
 pre_remove() {
-    if systemctl is-active --quiet solidinvoice 2>/dev/null; then
-        systemctl stop solidinvoice
+    if systemctl is-active --quiet augias 2>/dev/null; then
+        systemctl stop augias
     fi
-    if systemctl is-enabled --quiet solidinvoice 2>/dev/null; then
-        systemctl disable solidinvoice
+    if systemctl is-enabled --quiet augias 2>/dev/null; then
+        systemctl disable augias
     fi
 }
 

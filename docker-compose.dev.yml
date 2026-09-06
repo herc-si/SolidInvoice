@@ -1,5 +1,5 @@
 # Local development stack: runs the app FROM THE LOCAL SOURCE TREE (bind-mounted),
-# not the published `solidinvoice/solidinvoice` image. Use docker-compose.yml
+# not the published `augias/augias` image. Use docker-compose.yml
 # instead if you just want to run a prebuilt release.
 #
 # Usage:
@@ -11,7 +11,7 @@
 #
 # By default the app uses SQLite (SolidInvoice's own default — see
 # config/services.php), so no separate database container is required. To use
-# MySQL instead, uncomment the `db` service and the `SOLIDINVOICE_DATABASE_URL`
+# MySQL instead, uncomment the `db` service and the `AUGIAS_DATABASE_URL`
 # line below.
 
 services:
@@ -36,11 +36,11 @@ services:
     ports:
       - "8765:8765"
     environment:
-      SOLIDINVOICE_ENV: dev
-      SOLIDINVOICE_DEBUG: 1
+      AUGIAS_ENV: dev
+      AUGIAS_DEBUG: 1
       SERVER_NAME: ":8765"
       APP_PATH: /app
-      # SOLIDINVOICE_DATABASE_URL: "mysql://root@db:3306/solidinvoice?serverVersion=8.0"
+      # AUGIAS_DATABASE_URL: "mysql://root@db:3306/augias?serverVersion=8.0"
     # The frankenphp base image probes Caddy's admin API on :2019, which the
     # Caddyfile turns off (`admin off`), so the inherited check can never pass
     # and the container sits permanently "unhealthy". Probe the /health
@@ -84,9 +84,9 @@ services:
     # unprocessed until someone notices the container is gone.
     restart: unless-stopped
     environment:
-      SOLIDINVOICE_ENV: dev
-      SOLIDINVOICE_DEBUG: 1
-      # SOLIDINVOICE_DATABASE_URL: "mysql://root@db:3306/solidinvoice?serverVersion=8.0"
+      AUGIAS_ENV: dev
+      AUGIAS_DEBUG: 1
+      # AUGIAS_DATABASE_URL: "mysql://root@db:3306/augias?serverVersion=8.0"
     volumes:
       - .:/app
       - dev_vendor:/app/vendor
@@ -122,8 +122,8 @@ services:
     # Self-limits and exits zero like worker, so `on-failure` never revives it.
     restart: unless-stopped
     environment:
-      SOLIDINVOICE_ENV: dev
-      SOLIDINVOICE_DEBUG: 1
+      AUGIAS_ENV: dev
+      AUGIAS_DEBUG: 1
     volumes:
       - .:/app
       - dev_vendor:/app/vendor
@@ -136,7 +136,7 @@ services:
   #   image: "mysql:8.0"
   #   restart: always
   #   environment:
-  #     MYSQL_DATABASE: solidinvoice
+  #     MYSQL_DATABASE: augias
   #     MYSQL_ALLOW_EMPTY_PASSWORD: 1
   #   volumes:
   #     - dev_db_data:/var/lib/mysql

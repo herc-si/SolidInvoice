@@ -32,8 +32,8 @@ jobs:
       fail-fast: false
 
     env:
-      SOLIDINVOICE_ENV: test
-      SOLIDINVOICE_DEBUG: 0
+      AUGIAS_ENV: test
+      AUGIAS_DEBUG: 0
       PANTHER_NO_HEADLESS: 0
       PANTHER_APP_ENV: test
       PANTHER_NO_SANDBOX: 1

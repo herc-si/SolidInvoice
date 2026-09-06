@@ -15,12 +15,12 @@ use Augias\Runtime;
 
 $_SERVER['APP_RUNTIME'] = Runtime::class;
 $_SERVER['APP_RUNTIME_OPTIONS'] = [
-    'env_var_name' => 'SOLIDINVOICE_ENV',
-    'debug_var_name' => 'SOLIDINVOICE_DEBUG'
+    'env_var_name' => 'AUGIAS_ENV',
+    'debug_var_name' => 'AUGIAS_DEBUG'
 ];
 
 require_once dirname(__DIR__) . '/vendor/autoload_runtime.php';
 
 return static function (AppMode $mode, array $context) {
-    return new Kernel($mode, $context['SOLIDINVOICE_ENV'], (bool) $context['SOLIDINVOICE_DEBUG']);
+    return new Kernel($mode, $context['AUGIAS_ENV'], (bool) $context['AUGIAS_DEBUG']);
 };

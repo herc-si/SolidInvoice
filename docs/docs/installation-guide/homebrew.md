@@ -18,13 +18,13 @@ No PHP, webserver, or cron job is required.
 ## Install
 
 ```bash
-brew install solidworx/tap/solidinvoice
+brew install solidworx/tap/augias
 ```
 
 ## Run
 
 ```bash
-solidinvoice run
+augias run
 ```
 
 The application starts on `https://localhost:8765` with a self-signed certificate. Open the URL in your browser and finish setup with the [first-run wizard](./system-installation.md).
@@ -38,5 +38,5 @@ Recurring tasks and async work (email sending) run automatically — there is no
 ## Update
 
 ```bash
-brew upgrade solidworx/tap/solidinvoice
+brew upgrade solidworx/tap/augias
 ```

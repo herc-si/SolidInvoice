@@ -32,9 +32,9 @@ You only need to set up a worker when running from the [distribution package](./
 
   A long-running systemd service is the most reliable option on a Linux server.
 
-  Create a unit file at `/etc/systemd/system/solidinvoice-worker.service`:
+  Create a unit file at `/etc/systemd/system/augias-worker.service`:
 
-  ```ini title="/etc/systemd/system/solidinvoice-worker.service"
+  ```ini title="/etc/systemd/system/augias-worker.service"
   [Unit]
   Description=SolidInvoice worker
   After=network.target
@@ -42,7 +42,7 @@ You only need to set up a worker when running from the [distribution package](./
   [Service]
   Type=simple
   User=www-data
-  WorkingDirectory=/opt/solidinvoice
+  WorkingDirectory=/opt/augias
   ExecStart=/usr/bin/php bin/console messenger:consume --all --time-limit=3600 --memory-limit=128M
   Restart=on-failure
   RestartSec=5
@@ -55,10 +55,10 @@ You only need to set up a worker when running from the [distribution package](./
 
   ```bash
   sudo systemctl daemon-reload
-  sudo systemctl enable --now solidinvoice-worker.service
+  sudo systemctl enable --now augias-worker.service
   ```
 
-  For higher throughput, run multiple copies via a systemd template (`solidinvoice-worker@.service`) and start `solidinvoice-worker@1`, `solidinvoice-worker@2`, etc.
+  For higher throughput, run multiple copies via a systemd template (`augias-worker@.service`) and start `augias-worker@1`, `augias-worker@2`, etc.
 
   </TabItem>
 
@@ -66,11 +66,11 @@ You only need to set up a worker when running from the [distribution package](./
 
   Use [Supervisord](http://supervisord.org/) on systems without systemd (or when your stack already manages other services with it).
 
-  Create a program file at `/etc/supervisor/conf.d/solidinvoice-worker.conf`:
+  Create a program file at `/etc/supervisor/conf.d/augias-worker.conf`:
 
-  ```ini title="/etc/supervisor/conf.d/solidinvoice-worker.conf"
-  [program:solidinvoice-worker]
-  command=/usr/bin/php /opt/solidinvoice/bin/console messenger:consume --all --time-limit=3600 --memory-limit=128M
+  ```ini title="/etc/supervisor/conf.d/augias-worker.conf"
+  [program:augias-worker]
+  command=/usr/bin/php /opt/augias/bin/console messenger:consume --all --time-limit=3600 --memory-limit=128M
   user=www-data
   numprocs=1
   process_name=%(program_name)s_%(process_num)02d
@@ -81,8 +81,8 @@ You only need to set up a worker when running from the [distribution package](./
   stopasgroup=true
   killasgroup=true
   stopwaitsecs=30
-  stdout_logfile=/var/log/supervisor/solidinvoice-worker.log
-  stderr_logfile=/var/log/supervisor/solidinvoice-worker.err.log
+  stdout_logfile=/var/log/supervisor/augias-worker.log
+  stderr_logfile=/var/log/supervisor/augias-worker.err.log
   ```
 
   Reload Supervisord and start the worker:
@@ -90,7 +90,7 @@ You only need to set up a worker when running from the [distribution package](./
   ```bash
   sudo supervisorctl reread
   sudo supervisorctl update
-  sudo supervisorctl start solidinvoice-worker:*
+  sudo supervisorctl start augias-worker:*
   ```
 
   Increase `numprocs` to run multiple workers in parallel — Supervisord will append the process number to `process_name` automatically.
@@ -106,14 +106,14 @@ You only need to set up a worker when running from the [distribution package](./
   Use cron when you can't run a long-running service (for example on shared hosting that blocks daemons). The `--time-limit=55` flag makes the worker self-terminate before the next cron tick:
 
   ```bash title="crontab -e"
-  * * * * * /usr/bin/php /opt/solidinvoice/bin/console messenger:consume --all --limit=10 --time-limit=55 --memory-limit=128M
+  * * * * * /usr/bin/php /opt/augias/bin/console messenger:consume --all --limit=10 --time-limit=55 --memory-limit=128M
   ```
 
   :::note
   This approach introduces up to a 60-second delay before async messages and scheduled tasks start processing. For most self-hosted setups this is fine — but use the **systemd** option if you have it.
   :::
 
-  Replace `/opt/solidinvoice` with the actual path to your installation.
+  Replace `/opt/augias` with the actual path to your installation.
 
   </TabItem>
 
@@ -126,12 +126,12 @@ You only need to set up a worker when running from the [distribution package](./
      - **Command:**
 
        ```bash
-       /usr/bin/php /home/yourusername/path/to/solidinvoice/bin/console messenger:consume --all --limit=10 --time-limit=55 --memory-limit=128M
+       /usr/bin/php /home/yourusername/path/to/augias/bin/console messenger:consume --all --limit=10 --time-limit=55 --memory-limit=128M
        ```
 
   4. Save.
 
-  Replace `/home/yourusername/path/to/solidinvoice` with the actual path to your installation.
+  Replace `/home/yourusername/path/to/augias` with the actual path to your installation.
 
   </TabItem>
 
@@ -145,7 +145,7 @@ You only need to set up a worker when running from the [distribution package](./
      - **Command:**
 
        ```bash
-       /usr/bin/php /path/to/solidinvoice/bin/console messenger:consume --all --limit=10 --time-limit=55 --memory-limit=128M
+       /usr/bin/php /path/to/augias/bin/console messenger:consume --all --limit=10 --time-limit=55 --memory-limit=128M
        ```
 
   4. Save the task.
@@ -168,12 +168,12 @@ You only need to set up a worker when running from the [distribution package](./
      - **Add arguments:**
 
        ```text
-       C:\path\to\solidinvoice\bin\console messenger:consume --all --limit=10 --time-limit=55 --memory-limit=128M
+       C:\path\to\augias\bin\console messenger:consume --all --limit=10 --time-limit=55 --memory-limit=128M
        ```
 
   5. Save the task.
 
-  Replace `C:\path\to\solidinvoice` with the actual path to your installation.
+  Replace `C:\path\to\augias` with the actual path to your installation.
 
   </TabItem>
 </Tabs>

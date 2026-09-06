@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 #[AutoconfigureTag(OnboardingEmailStepInterface::DI_TAG)]
 interface OnboardingEmailStepInterface
 {
-    public const string DI_TAG = 'solidinvoice.onboarding_email_step';
+    public const string DI_TAG = 'augias.onboarding_email_step';
 
     /**
      * Stable unique key identifying this step. Persisted in user_settings to

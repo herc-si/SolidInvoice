@@ -26,7 +26,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autoconfigure()
         ->autowire()
         ->private()
-        ->bind('$locale', env('SOLIDINVOICE_LOCALE'))
+        ->bind('$locale', env('AUGIAS_LOCALE'))
         ->bind('$normalizer', service('api_platform.serializer.normalizer.item'))
     ;
 

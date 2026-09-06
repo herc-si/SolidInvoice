@@ -243,8 +243,8 @@ final class RequestListenerTest extends TestCase
 
         $listener->onKernelRequest($event);
 
-        self::assertSame($sessionId, $_SERVER['SOLIDINVOICE_APP_SECRET']);
-        self::assertSame($sessionId, $_ENV['SOLIDINVOICE_APP_SECRET']);
+        self::assertSame($sessionId, $_SERVER['AUGIAS_APP_SECRET']);
+        self::assertSame($sessionId, $_ENV['AUGIAS_APP_SECRET']);
         self::assertNull($event->getResponse());
         self::assertFalse($event->isPropagationStopped());
     }

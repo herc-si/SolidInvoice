@@ -37,7 +37,7 @@ final class InstallFlowType extends AbstractButtonFlowType
 {
     public function __construct(
         private readonly ConfigWriter $systemConfigWriter,
-        #[Autowire(env: 'SOLIDINVOICE_CONFIG_DIR')]
+        #[Autowire(env: 'AUGIAS_CONFIG_DIR')]
         private readonly string $configDir
     ) {
     }
@@ -52,7 +52,7 @@ final class InstallFlowType extends AbstractButtonFlowType
                 if ($formData->databaseConfig->driver === 'sqlite') {
                     try {
                         new Filesystem()->mkdir($this->configDir . '/db');
-                        $formData->databaseConfig->name = $this->configDir . '/db/solidinvoice.db';
+                        $formData->databaseConfig->name = $this->configDir . '/db/augias.db';
                     } catch (IOException $e) {
                         $flow->addError(new FormError($e->getMessage()));
                         return;

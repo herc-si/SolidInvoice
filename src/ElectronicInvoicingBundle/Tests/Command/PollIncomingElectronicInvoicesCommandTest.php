@@ -81,7 +81,7 @@ final class PollIncomingElectronicInvoicesCommandTest extends KernelTestCase
         $application = new Application(self::$kernel);
 
         /** @var LazyCommand $lazyCommand */
-        $lazyCommand = $application->find('solidinvoice:einvoicing:poll-incoming-invoices');
+        $lazyCommand = $application->find('augias:einvoicing:poll-incoming-invoices');
 
         /** @var PollIncomingElectronicInvoicesCommand $command */
         $command = $lazyCommand->getCommand();

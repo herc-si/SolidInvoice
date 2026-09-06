@@ -38,7 +38,7 @@ When you enable any 2FA method, SolidInvoice generates a set of single-use backu
 The **Backup Codes** section shows how many codes remain. From there you can:
 
 - **View Codes** — display all remaining codes.
-- **Download** — save them as a text file (`solidinvoice-backup-codes-YYYY-MM-DD.txt`). Store this somewhere safe.
+- **Download** — save them as a text file (`augias-backup-codes-YYYY-MM-DD.txt`). Store this somewhere safe.
 - **Regenerate Codes** — invalidates all existing codes and creates a fresh set.
 
 :::warning

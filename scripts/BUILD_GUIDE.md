@@ -108,14 +108,14 @@ Builds the standalone binary (FrankenPHP static build). Automatically builds the
 5. Optionally uploads to GitHub releases (if `RELEASE=1`)
 
 **Output:**
-- `frankenphp/dist/solidinvoice-{os}-{arch}` (e.g., `solidinvoice-linux-x86_64`)
+- `frankenphp/dist/augias-{os}-{arch}` (e.g., `augias-linux-x86_64`)
 
 ### 3. `frankenphp/build-static.sh` - Static Binary Builder
 
 Low-level script that builds the FrankenPHP static binary. Usually called by `build_binary.sh`.
 
 **Environment Variables:**
-- `SOLIDINVOICE_VERSION` - Version for the binary (default: current branch or commit SHA)
+- `AUGIAS_VERSION` - Version for the binary (default: current branch or commit SHA)
 - `PHP_VERSION` - PHP version to build (default: latest 8.3.x)
 - `RELEASE` - Set to `1` to upload to GitHub releases
 - `DEBUG_SYMBOLS` - Set to `1` to include debug symbols
@@ -153,7 +153,7 @@ You want to test a feature branch:
 
 ```bash
 # From any directory
-cd /path/to/solidinvoice
+cd /path/to/augias
 git checkout feature-auth
 ./scripts/build_binary.sh --local
 
@@ -185,7 +185,7 @@ RELEASE=1 ./scripts/build_binary.sh v2.3.0
 # Or upload separately after building
 gh release upload v2.3.0 build/dist/SolidInvoice-v2.3.0.tar.gz
 gh release upload v2.3.0 build/dist/SolidInvoice-v2.3.0.zip
-gh release upload v2.3.0 frankenphp/dist/solidinvoice-linux-x86_64
+gh release upload v2.3.0 frankenphp/dist/augias-linux-x86_64
 ```
 
 ### Scenario 5: Iterative Development
@@ -235,12 +235,12 @@ Both contain the same files:
 
 ### Binary Files
 Located in `frankenphp/dist/`:
-- `solidinvoice-{os}-{arch}` - Platform-specific binary
+- `augias-{os}-{arch}` - Platform-specific binary
 
 Examples:
-- `solidinvoice-linux-x86_64`
-- `solidinvoice-linux-aarch64`
-- `solidinvoice-mac-arm64`
+- `augias-linux-x86_64`
+- `augias-linux-aarch64`
+- `augias-mac-arm64`
 
 Each binary is a self-contained executable with:
 - PHP runtime embedded
@@ -312,7 +312,7 @@ Recommended workflow for development:
    ```
 3. **Verify binary** works:
    ```bash
-   ./frankenphp/dist/solidinvoice-{os}-{arch} version
+   ./frankenphp/dist/augias-{os}-{arch} version
    ```
 4. **Iterate** as needed (repeat steps 1-3)
 5. **Commit** when satisfied
@@ -326,9 +326,9 @@ Recommended workflow for development:
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `SOLIDINVOICE_VERSION` | Version for binary | Current branch/commit |
-| `SOLIDINVOICE_ENV` | App environment | `prod` |
-| `SOLIDINVOICE_DEBUG` | Debug mode | `0` |
+| `AUGIAS_VERSION` | Version for binary | Current branch/commit |
+| `AUGIAS_ENV` | App environment | `prod` |
+| `AUGIAS_DEBUG` | Debug mode | `0` |
 | `NODE_ENVIRONMENT` | Node env | `production` |
 | `RELEASE` | Upload to GitHub | `0` |
 | `PHP_VERSION` | PHP version to build | Latest 8.3.x |

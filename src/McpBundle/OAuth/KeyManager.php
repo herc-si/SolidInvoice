@@ -21,7 +21,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * Manages the RSA signing keys used for OAuth2 access-token JWTs.
  *
- * Keys are persisted under SOLIDINVOICE_CONFIG_DIR/oauth/ so they survive
+ * Keys are persisted under AUGIAS_CONFIG_DIR/oauth/ so they survive
  * redeployments alongside the rest of the app config. `bin/console
  * mcp:keys:generate` writes them; FrankenPHP's launcher calls that command on
  * first boot so deployments don't need a manual setup step.
@@ -34,7 +34,7 @@ final readonly class KeyManager
         private Filesystem $filesystem = new Filesystem(),
     ) {
         if ($this->encryptionKey === null || $this->encryptionKey === '') {
-            throw new RuntimeException('SOLIDINVOICE_APP_SECRET must be configured before using MCP (used as the OAuth auth-code encryption key).');
+            throw new RuntimeException('AUGIAS_APP_SECRET must be configured before using MCP (used as the OAuth auth-code encryption key).');
         }
     }
 

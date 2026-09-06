@@ -15,7 +15,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 return App::config([
     'stof_doctrine_extensions' => [
-        'default_locale' => env('SOLIDINVOICE_LOCALE'),
+        'default_locale' => env('AUGIAS_LOCALE'),
         'orm' => [
             'default' => [
                 'timestampable' => true,

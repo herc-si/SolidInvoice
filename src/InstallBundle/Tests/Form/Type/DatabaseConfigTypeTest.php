@@ -54,7 +54,7 @@ final class DatabaseConfigTypeTest extends FormTestCase
             'port' => 5432,
             'user' => 'postgres',
             'password' => 'secret',
-            'name' => 'solidinvoice',
+            'name' => 'augias',
         ];
 
         $this->assertFormData(
@@ -66,7 +66,7 @@ final class DatabaseConfigTypeTest extends FormTestCase
                 port: 5432,
                 user: 'postgres',
                 password: 'secret',
-                name: 'solidinvoice',
+                name: 'augias',
             )
         );
     }
@@ -79,7 +79,7 @@ final class DatabaseConfigTypeTest extends FormTestCase
             'port' => 3306,
             'user' => 'root',
             'password' => '',
-            'name' => 'solidinvoice',
+            'name' => 'augias',
         ];
 
         $this->assertFormData(
@@ -91,7 +91,7 @@ final class DatabaseConfigTypeTest extends FormTestCase
                 port: 3306,
                 user: 'root',
                 password: '',
-                name: 'solidinvoice',
+                name: 'augias',
             )
         );
     }

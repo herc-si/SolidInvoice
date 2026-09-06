@@ -18,7 +18,7 @@
 set -e
 
 GITHUB_REPO="SolidInvoice/SolidInvoice"
-BINARY_NAME="solidinvoice"
+BINARY_NAME="augias"
 INSTALL_DIR="${INSTALL_DIR:-/usr/local/bin}"
 
 # Colors (only if stdout is a terminal)
@@ -190,60 +190,60 @@ install_systemd_service() {
 
     info "Installing systemd service..."
 
-    SERVICE_URL="https://raw.githubusercontent.com/${GITHUB_REPO}/${VERSION}/packaging/systemd/solidinvoice.service"
-    ENV_URL="https://raw.githubusercontent.com/${GITHUB_REPO}/${VERSION}/packaging/systemd/solidinvoice.env"
+    SERVICE_URL="https://raw.githubusercontent.com/${GITHUB_REPO}/${VERSION}/packaging/systemd/augias.service"
+    ENV_URL="https://raw.githubusercontent.com/${GITHUB_REPO}/${VERSION}/packaging/systemd/augias.env"
 
     tmpdir_svc=$(mktemp -d)
     trap 'rm -rf "$tmpdir_svc"' EXIT
 
-    download "$SERVICE_URL" "${tmpdir_svc}/solidinvoice.service"
-    download "$ENV_URL" "${tmpdir_svc}/solidinvoice.env"
+    download "$SERVICE_URL" "${tmpdir_svc}/augias.service"
+    download "$ENV_URL" "${tmpdir_svc}/augias.env"
 
-    $SUDO cp "${tmpdir_svc}/solidinvoice.service" /usr/lib/systemd/system/solidinvoice.service
-    $SUDO chmod 0644 /usr/lib/systemd/system/solidinvoice.service
+    $SUDO cp "${tmpdir_svc}/augias.service" /usr/lib/systemd/system/augias.service
+    $SUDO chmod 0644 /usr/lib/systemd/system/augias.service
 
-    $SUDO mkdir -p /etc/solidinvoice
-    if [ ! -f /etc/solidinvoice/solidinvoice.env ]; then
-        $SUDO cp "${tmpdir_svc}/solidinvoice.env" /etc/solidinvoice/solidinvoice.env
-        $SUDO chmod 0640 /etc/solidinvoice/solidinvoice.env
+    $SUDO mkdir -p /etc/augias
+    if [ ! -f /etc/augias/augias.env ]; then
+        $SUDO cp "${tmpdir_svc}/augias.env" /etc/augias/augias.env
+        $SUDO chmod 0640 /etc/augias/augias.env
     fi
 
     rm -rf "$tmpdir_svc"
     trap - EXIT
 
     # Create service user (compatible with both glibc and BusyBox/Alpine)
-    if ! getent group solidinvoice >/dev/null 2>&1; then
+    if ! getent group augias >/dev/null 2>&1; then
         if command -v groupadd >/dev/null 2>&1; then
-            $SUDO groupadd --system solidinvoice
+            $SUDO groupadd --system augias
         else
-            $SUDO addgroup -S solidinvoice
+            $SUDO addgroup -S augias
         fi
     fi
-    if ! getent passwd solidinvoice >/dev/null 2>&1; then
+    if ! getent passwd augias >/dev/null 2>&1; then
         if command -v useradd >/dev/null 2>&1; then
-            $SUDO useradd --system --gid solidinvoice \
-                --home-dir /var/lib/solidinvoice --no-create-home \
+            $SUDO useradd --system --gid augias \
+                --home-dir /var/lib/augias --no-create-home \
                 --shell /usr/sbin/nologin \
-                --comment "SolidInvoice service account" solidinvoice
+                --comment "SolidInvoice service account" augias
         else
-            $SUDO adduser -S -G solidinvoice -h /var/lib/solidinvoice \
-                -s /usr/sbin/nologin -D solidinvoice
+            $SUDO adduser -S -G augias -h /var/lib/augias \
+                -s /usr/sbin/nologin -D augias
         fi
     fi
 
-    $SUDO mkdir -p /var/lib/solidinvoice
-    $SUDO chown solidinvoice:solidinvoice /var/lib/solidinvoice
-    $SUDO chown root:solidinvoice /etc/solidinvoice
-    $SUDO chmod 0750 /etc/solidinvoice /var/lib/solidinvoice
+    $SUDO mkdir -p /var/lib/augias
+    $SUDO chown augias:augias /var/lib/augias
+    $SUDO chown root:augias /etc/augias
+    $SUDO chmod 0750 /etc/augias /var/lib/augias
 
     $SUDO systemctl daemon-reload
 
     success "systemd service installed"
     echo ""
-    echo "  Start:   sudo systemctl start solidinvoice"
-    echo "  Enable:  sudo systemctl enable solidinvoice"
-    echo "  Status:  sudo systemctl status solidinvoice"
-    echo "  Config:  /etc/solidinvoice/solidinvoice.env"
+    echo "  Start:   sudo systemctl start augias"
+    echo "  Enable:  sudo systemctl enable augias"
+    echo "  Status:  sudo systemctl status augias"
+    echo "  Config:  /etc/augias/augias.env"
     echo ""
 }
 

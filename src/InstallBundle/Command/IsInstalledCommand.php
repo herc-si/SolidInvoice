@@ -19,7 +19,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 #[AsCommand(
-    name: 'solidinvoice:is-installed',
+    name: 'augias:is-installed',
     description: 'Checks if the application is installed. Exits 0 if installed, 1 if not.',
     hidden: true,
 )]

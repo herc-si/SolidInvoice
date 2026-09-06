@@ -7,7 +7,7 @@ Scope: end-user documentation for SolidInvoice, served by **Docusaurus** from th
 These docs are for **end users** of SolidInvoice — freelancers, small business owners, and self-hosters — not contributors or API consumers.
 
 - Developer/contributor guidance lives in the project root (`README.md`, `CONTRIBUTING.md`, root `CLAUDE.md`).
-- API reference is auto-generated and published at `https://solidinvoice.app/api/docs` — do not duplicate it here.
+- API reference is auto-generated and published at `https://augias.app/api/docs` — do not duplicate it here.
 
 ## Site structure
 
@@ -138,7 +138,7 @@ Fenced blocks with a language tag for highlighting. Configured Prism languages: 
 
 ````markdown
 ```bash
-* * * * * /usr/bin/php /path/to/solidinvoice/bin/console schedule:run
+* * * * * /usr/bin/php /path/to/augias/bin/console schedule:run
 ```
 ````
 
@@ -146,7 +146,7 @@ Useful features when they help readability:
 
 ````markdown
 ```bash title="crontab -e"
-* * * * * /usr/bin/php /path/to/solidinvoice/bin/console schedule:run
+* * * * * /usr/bin/php /path/to/augias/bin/console schedule:run
 ```
 
 ```yaml {2,5-7} showLineNumbers

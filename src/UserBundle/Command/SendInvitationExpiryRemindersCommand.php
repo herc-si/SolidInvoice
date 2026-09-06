@@ -29,7 +29,7 @@ use function sprintf;
  * @see \Augias\UserBundle\Tests\Command\SendInvitationExpiryRemindersCommandTest
  */
 #[AsCommand(
-    name: 'solidinvoice:invitations:send-expiry-reminders',
+    name: 'augias:invitations:send-expiry-reminders',
     description: 'Send a reminder email for invitations that are about to expire',
 )]
 #[AsCronTask('#daily', schedule: 'send_invitation_expiry_reminders')]

@@ -2,12 +2,12 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: {{ include "solidinvoice.fullname" . }}
+  name: {{ include "augias.fullname" . }}
   labels:
-    {{- include "solidinvoice.labels" . | nindent 4 }}
+    {{- include "augias.labels" . | nindent 4 }}
 spec:
   minAvailable: {{ .Values.podDisruptionBudget.minAvailable }}
   selector:
     matchLabels:
-      {{- include "solidinvoice.selectorLabels" . | nindent 6 }}
+      {{- include "augias.selectorLabels" . | nindent 6 }}
 {{- end }}

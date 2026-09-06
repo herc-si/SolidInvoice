@@ -12,23 +12,23 @@ The official SolidInvoice Helm chart deploys the application, a background worke
 
 - Kubernetes **1.23+**
 - Helm **3.2+**
-- A StorageClass that supports `ReadWriteOnce` PersistentVolumeClaims (required for the application's secrets vault at `/etc/solidinvoice`)
+- A StorageClass that supports `ReadWriteOnce` PersistentVolumeClaims (required for the application's secrets vault at `/etc/augias`)
 
 ## Add the Helm repository
 
 ```bash
-helm repo add solidinvoice https://charts.solidinvoice.co
+helm repo add augias https://charts.solidinvoice.co
 helm repo update
 ```
 
 :::tip[Discover on Artifact Hub]
-The chart is also indexed on [Artifact Hub](https://artifacthub.io/packages/helm/solidinvoice/solidinvoice), where you can browse all available versions, read the full values reference, and copy install commands.
+The chart is also indexed on [Artifact Hub](https://artifacthub.io/packages/helm/augias/augias), where you can browse all available versions, read the full values reference, and copy install commands.
 :::
 
 ## Quick start with MySQL
 
 ```bash
-helm install solidinvoice solidinvoice/solidinvoice \
+helm install augias augias/augias \
   --set mysql.enabled=true \
   --set mysql.auth.password="your-mysql-password" \
   --set mysql.auth.rootPassword="your-root-password" \
@@ -40,7 +40,7 @@ This brings up SolidInvoice with a bundled MySQL instance. Browse to the pod's U
 ## Quick start with PostgreSQL
 
 ```bash
-helm install solidinvoice solidinvoice/solidinvoice \
+helm install augias augias/augias \
   --set postgresql.enabled=true \
   --set postgresql.auth.password="your-pg-password" \
   --set app.secret="your-secret-key"
@@ -51,8 +51,8 @@ helm install solidinvoice solidinvoice/solidinvoice \
 Pass a full `DATABASE_URL` to skip the bundled database subcharts:
 
 ```bash
-helm install solidinvoice solidinvoice/solidinvoice \
-  --set externalDatabase.url="mysql://user:password@host:3306/solidinvoice" \
+helm install augias augias/augias \
+  --set externalDatabase.url="mysql://user:password@host:3306/augias" \
   --set app.secret="your-secret-key"
 ```
 
@@ -61,7 +61,7 @@ helm install solidinvoice solidinvoice/solidinvoice \
 Redis is required for asynchronous background jobs (sending emails, processing payments). When `redis.enabled=true` the chart configures the Messenger transport automatically:
 
 ```bash
-helm install solidinvoice solidinvoice/solidinvoice \
+helm install augias augias/augias \
   --set mysql.enabled=true \
   --set mysql.auth.password="your-mysql-password" \
   --set redis.enabled=true \
@@ -74,7 +74,7 @@ helm install solidinvoice solidinvoice/solidinvoice \
 Set `install.enabled=true` to run the installer as a Kubernetes Job during the first deploy, so the wizard step is skipped entirely:
 
 ```bash
-helm install solidinvoice solidinvoice/solidinvoice \
+helm install augias augias/augias \
   --set mysql.enabled=true \
   --set mysql.auth.password="your-mysql-password" \
   --set app.secret="your-secret-key" \
@@ -86,13 +86,13 @@ helm install solidinvoice solidinvoice/solidinvoice \
 ## Expose via Ingress
 
 ```bash
-helm install solidinvoice solidinvoice/solidinvoice \
+helm install augias augias/augias \
   --set mysql.enabled=true \
   --set mysql.auth.password="your-mysql-password" \
   --set app.secret="your-secret-key" \
   --set ingress.enabled=true \
   --set ingress.hosts[0].host="invoices.example.com" \
-  --set ingress.tls[0].secretName="solidinvoice-tls" \
+  --set ingress.tls[0].secretName="augias-tls" \
   --set "ingress.tls[0].hosts[0]=invoices.example.com"
 ```
 
@@ -101,7 +101,7 @@ helm install solidinvoice solidinvoice/solidinvoice \
 The chart is also published to GitHub Container Registry as an OCI artifact. Use this if you prefer OCI-native installs or want to pin to an exact version without adding a repo:
 
 ```bash
-helm install solidinvoice oci://ghcr.io/solidinvoice/charts/solidinvoice --version 3.0.0
+helm install augias oci://ghcr.io/augias/charts/augias --version 3.0.0
 ```
 
 ## Key values reference
@@ -118,7 +118,7 @@ helm install solidinvoice oci://ghcr.io/solidinvoice/charts/solidinvoice --versi
 | `worker.enabled` | `true` | Deploy the Messenger consumer worker |
 | `worker.replicaCount` | `1` | Number of worker pods |
 | `scheduler.enabled` | `true` | Deploy the cron scheduler |
-| `persistence.enabled` | `true` | Create a PVC for `/etc/solidinvoice` |
+| `persistence.enabled` | `true` | Create a PVC for `/etc/augias` |
 | `persistence.size` | `1Gi` | PVC size |
 | `ingress.enabled` | `false` | Create an Ingress resource |
 
@@ -127,15 +127,15 @@ helm install solidinvoice oci://ghcr.io/solidinvoice/charts/solidinvoice --versi
 Always pass `--reuse-values` (or re-specify `app.secret`) so the secret doesn't change between releases:
 
 ```bash
-helm repo update solidinvoice
-helm upgrade solidinvoice solidinvoice/solidinvoice --reuse-values
+helm repo update augias
+helm upgrade augias augias/augias --reuse-values
 ```
 
 Database migrations run automatically as a pre-upgrade Job before the new pods start.
 
 ## Persistence
 
-`/etc/solidinvoice` stores the application's Symfony secrets vault. The PVC is annotated with `helm.sh/resource-policy: keep` so it is **not** deleted when you run `helm uninstall`. Back it up before migrating clusters.
+`/etc/augias` stores the application's Symfony secrets vault. The PVC is annotated with `helm.sh/resource-policy: keep` so it is **not** deleted when you run `helm uninstall`. Back it up before migrating clusters.
 
 :::warning
 For multi-replica deployments (`replicaCount > 1`), the PVC must use a `ReadWriteMany` StorageClass so all pods can share the vault. A `ReadWriteOnce` PVC only works with a single replica.

@@ -22,7 +22,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->defaults()
         ->autoconfigure()
         ->autowire()
-        ->bind('$locale', env('SOLIDINVOICE_LOCALE'))
+        ->bind('$locale', env('AUGIAS_LOCALE'))
         ->private()
     ;
 

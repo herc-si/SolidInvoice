@@ -70,7 +70,7 @@ use function Symfony\Component\String\u;
 /**
  * @see \Augias\InstallBundle\Tests\Command\InstallCommandTest
  */
-#[AsCommand(name: 'solidinvoice:install', description: 'Installs the application')]
+#[AsCommand(name: 'augias:install', description: 'Installs the application')]
 class InstallCommand extends Command
 {
     /**
@@ -85,7 +85,7 @@ class InstallCommand extends Command
         private readonly KernelInterface $kernel,
         private readonly Telemetry $telemetry,
         private readonly UserSettingRepositoryInterface $userSettingRepository,
-        #[Autowire(env: 'SOLIDINVOICE_CONFIG_DIR')]
+        #[Autowire(env: 'AUGIAS_CONFIG_DIR')]
         private readonly string $configDir,
         private readonly ?string $installed
     ) {
@@ -110,7 +110,7 @@ class InstallCommand extends Command
             ->addOption('admin-password', null, InputOption::VALUE_REQUIRED, 'The password of admin user')
             ->addOption('admin-email', null, InputOption::VALUE_REQUIRED, 'The email address of admin user')
             ->addOption('locale', null, InputOption::VALUE_REQUIRED, 'The locale to use')
-            ->addOption('application-url', null, InputOption::VALUE_REQUIRED, 'The URL where this Augias instance will be accessible (including protocol, e.g. https://invoices.example.com). Use `bin/console secrets:set SOLIDINVOICE_APPLICATION_URL` to update this after installation.')
+            ->addOption('application-url', null, InputOption::VALUE_REQUIRED, 'The URL where this Augias instance will be accessible (including protocol, e.g. https://invoices.example.com). Use `bin/console secrets:set AUGIAS_APPLICATION_URL` to update this after installation.')
             ->addOption('disable-telemetry', null, InputOption::VALUE_NONE, 'Disable sending anonymous usage statistics');
     }
 
@@ -166,7 +166,7 @@ class InstallCommand extends Command
         }
 
         // The application URL is optional (it can be set later via
-        // `secrets:set SOLIDINVOICE_APPLICATION_URL`), but validate it when provided.
+        // `secrets:set AUGIAS_APPLICATION_URL`), but validate it when provided.
         $applicationUrl = $input->getOption('application-url');
 
         if (null !== $applicationUrl && '' !== $applicationUrl) {
@@ -308,7 +308,7 @@ class InstallCommand extends Command
         ];
 
         // Only persist the application URL when provided; otherwise the
-        // SOLIDINVOICE_APPLICATION_URL env default (empty) applies.
+        // AUGIAS_APPLICATION_URL env default (empty) applies.
         $applicationUrl = $input->getOption('application-url');
 
         if (null !== $applicationUrl && '' !== $applicationUrl) {
@@ -366,7 +366,7 @@ class InstallCommand extends Command
 
     private function defaultSqlitePath(): string
     {
-        return $this->configDir . '/db/solidinvoice.db';
+        return $this->configDir . '/db/augias.db';
     }
 
     private function resolveSqlitePath(InputInterface $input): string

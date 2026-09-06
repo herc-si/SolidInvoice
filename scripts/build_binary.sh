@@ -62,7 +62,7 @@ ENVIRONMENT:
 OUTPUT:
     build/dist/SolidInvoice-{VERSION}.tar.gz     (if not --skip-dist)
     build/dist/SolidInvoice-{VERSION}.zip        (if not --skip-dist)
-    frankenphp/dist/solidinvoice-{os}-{arch}     (binary)
+    frankenphp/dist/augias-{os}-{arch}     (binary)
 
 WORKFLOW:
     1. Checks if dist archive exists (unless --local)
@@ -70,7 +70,7 @@ WORKFLOW:
     3. If --skip-dist: Uses existing dist (must exist)
     4. Otherwise: Builds dist only if it doesn't exist
     5. Copies dist archive to frankenphp/app.tar.gz
-    6. Builds static binary via frankenphp/build-solidinvoice.sh
+    6. Builds static binary via frankenphp/build-augias.sh
     7. Optionally uploads to GitHub releases
 
 For more details, see scripts/BUILD_GUIDE.md
@@ -106,25 +106,25 @@ if git rev-parse --git-dir > /dev/null 2>&1; then
 fi
 
 # Set defaults
-SOLIDINVOICE_VERSION=${1:-$CURRENT_BRANCH}
+AUGIAS_VERSION=${1:-$CURRENT_BRANCH}
 
 # Remove flags from version
-SOLIDINVOICE_VERSION=${SOLIDINVOICE_VERSION//--local/}
-SOLIDINVOICE_VERSION=${SOLIDINVOICE_VERSION//--skip-dist/}
+AUGIAS_VERSION=${AUGIAS_VERSION//--local/}
+AUGIAS_VERSION=${AUGIAS_VERSION//--skip-dist/}
 
 # Trim whitespace
-SOLIDINVOICE_VERSION=$(echo "$SOLIDINVOICE_VERSION" | xargs)
+AUGIAS_VERSION=$(echo "$AUGIAS_VERSION" | xargs)
 
 # Interactive prompt if still empty
-if [ -z "$SOLIDINVOICE_VERSION" ]; then
+if [ -z "$AUGIAS_VERSION" ]; then
     if [ $USE_LOCAL -eq 1 ]; then
         # For local builds, use current commit SHA as version
-        SOLIDINVOICE_VERSION=$(git rev-parse --short HEAD)
-        echo "Using local build with version: $SOLIDINVOICE_VERSION"
+        AUGIAS_VERSION=$(git rev-parse --short HEAD)
+        echo "Using local build with version: $AUGIAS_VERSION"
     else
         echo "Enter version number: "
         read -r version
-        SOLIDINVOICE_VERSION=${version}
+        AUGIAS_VERSION=${version}
     fi
 fi
 
@@ -137,41 +137,41 @@ NEED_BUILD_DIST=0
 
 if [ $SKIP_DIST -eq 1 ]; then
     # User explicitly wants to skip dist build
-    if [ ! -f "${DIST_DIR}"/SolidInvoice-"$SOLIDINVOICE_VERSION".tar.gz ]; then
+    if [ ! -f "${DIST_DIR}"/SolidInvoice-"$AUGIAS_VERSION".tar.gz ]; then
         echo "Error: Dist archive does not exist and --skip-dist was specified."
-        echo "Expected: ${DIST_DIR}/SolidInvoice-${SOLIDINVOICE_VERSION}.tar.gz"
+        echo "Expected: ${DIST_DIR}/SolidInvoice-${AUGIAS_VERSION}.tar.gz"
         exit 1
     fi
     echo "Skipping dist build (--skip-dist specified)"
-    echo "Using existing dist archive: ${DIST_DIR}/SolidInvoice-${SOLIDINVOICE_VERSION}.tar.gz"
+    echo "Using existing dist archive: ${DIST_DIR}/SolidInvoice-${AUGIAS_VERSION}.tar.gz"
 elif [ $USE_LOCAL -eq 1 ]; then
     # For --local, ALWAYS rebuild to pick up latest changes
     NEED_BUILD_DIST=1
-    if [ -f "${DIST_DIR}"/SolidInvoice-"$SOLIDINVOICE_VERSION".tar.gz ]; then
+    if [ -f "${DIST_DIR}"/SolidInvoice-"$AUGIAS_VERSION".tar.gz ]; then
         echo "Removing existing dist archive to rebuild with latest local changes..."
-        rm "${DIST_DIR}"/SolidInvoice-"$SOLIDINVOICE_VERSION".tar.gz
-        rm -f "${DIST_DIR}"/SolidInvoice-"$SOLIDINVOICE_VERSION".zip
+        rm "${DIST_DIR}"/SolidInvoice-"$AUGIAS_VERSION".tar.gz
+        rm -f "${DIST_DIR}"/SolidInvoice-"$AUGIAS_VERSION".zip
     fi
     echo "Building dist archive from local changes..."
-elif [ ! -f "${DIST_DIR}"/SolidInvoice-"$SOLIDINVOICE_VERSION".tar.gz ]; then
+elif [ ! -f "${DIST_DIR}"/SolidInvoice-"$AUGIAS_VERSION".tar.gz ]; then
     # Dist doesn't exist, need to build it
     NEED_BUILD_DIST=1
     echo "Dist archive not found. Building it automatically..."
 else
     # Dist exists and not using --local, reuse it
-    echo "Using existing dist archive: ${DIST_DIR}/SolidInvoice-${SOLIDINVOICE_VERSION}.tar.gz"
+    echo "Using existing dist archive: ${DIST_DIR}/SolidInvoice-${AUGIAS_VERSION}.tar.gz"
 fi
 
 # Build dist if needed
 if [ $NEED_BUILD_DIST -eq 1 ]; then
     if [ $USE_LOCAL -eq 1 ]; then
-        "${ROOT_DIR}/scripts/build_dist.sh" "$SOLIDINVOICE_VERSION" "$SOLIDINVOICE_VERSION" --local
+        "${ROOT_DIR}/scripts/build_dist.sh" "$AUGIAS_VERSION" "$AUGIAS_VERSION" --local
     else
-        "${ROOT_DIR}/scripts/build_dist.sh" "$SOLIDINVOICE_VERSION" "$SOLIDINVOICE_VERSION"
+        "${ROOT_DIR}/scripts/build_dist.sh" "$AUGIAS_VERSION" "$AUGIAS_VERSION"
     fi
 
     # Verify the build was successful
-    if [ ! -f "${DIST_DIR}"/SolidInvoice-"$SOLIDINVOICE_VERSION".tar.gz ]; then
+    if [ ! -f "${DIST_DIR}"/SolidInvoice-"$AUGIAS_VERSION".tar.gz ]; then
         echo "Error: Dist build failed. Archive was not created."
         exit 1
     fi
@@ -182,8 +182,8 @@ fi
 cd "${ROOT_DIR}/frankenphp"
 
 
-cp "${DIST_DIR}"/SolidInvoice-"$SOLIDINVOICE_VERSION".tar.gz ./app.tar.gz
+cp "${DIST_DIR}"/SolidInvoice-"$AUGIAS_VERSION".tar.gz ./app.tar.gz
 
 # Use the SolidInvoice wrapper script which calls build-static.sh with proper config
-export SOLIDINVOICE_VERSION
-./build-solidinvoice.sh
+export AUGIAS_VERSION
+./build-augias.sh

@@ -5,17 +5,17 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_DATABASE: solidinvoice
+      MYSQL_DATABASE: augias
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
   app:
-    image: "solidinvoice/solidinvoice:latest"
+    image: "augias/augias:latest"
     depends_on:
       - db
     ports:
       - "8765:8765"
     restart: always
     volumes:
-      - app_data:/etc/solidinvoice
+      - app_data:/etc/augias
 
 volumes:
   db_data: {}

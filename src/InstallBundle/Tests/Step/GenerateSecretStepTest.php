@@ -100,6 +100,6 @@ final class GenerateSecretStepTest extends TestCase
         self::assertSame([], iterator_to_array($generator));
 
         self::assertFileExists($dotenvFile);
-        self::assertStringStartsWith("SOLIDINVOICE_APP_SECRET='def", file_get_contents($dotenvFile));
+        self::assertStringStartsWith("AUGIAS_APP_SECRET='def", file_get_contents($dotenvFile));
     }
 }

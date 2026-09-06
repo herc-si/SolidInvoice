@@ -66,11 +66,11 @@ done
 
 set -euxo pipefail
 
-export SOLIDINVOICE_ENV=prod
-export SOLIDINVOICE_DEBUG=0
+export AUGIAS_ENV=prod
+export AUGIAS_DEBUG=0
 export NODE_ENVIRONMENT=production
 
-REPO=https://github.com/solidinvoice/solidinvoice.git
+REPO=https://github.com/augias/augias.git
 USE_LOCAL=0
 
 # Parse arguments and filter out --local
@@ -162,8 +162,8 @@ bun run build
 rm -Rf node_modules .env .git
 chmod -R 0777 var
 
-echo "SOLIDINVOICE_ENV=$SOLIDINVOICE_ENV" >> .env
-echo "SOLIDINVOICE_DEBUG=$SOLIDINVOICE_DEBUG" >> .env
+echo "AUGIAS_ENV=$AUGIAS_ENV" >> .env
+echo "AUGIAS_DEBUG=$AUGIAS_DEBUG" >> .env
 
 chmod a+w config
 
@@ -171,8 +171,8 @@ zip -qr "${DIST_DIR}/SolidInvoice-$VERSION".zip ./
 tar -czf "${DIST_DIR}/SolidInvoice-$VERSION".tar.gz ./
 
 if [ "${RELEASE:-}" = "1" ]; then
-	gh release upload "${VERSION}" "${DIST_DIR}"/SolidInvoice-"${VERSION}".zip --repo solidinvoice/solidinvoice --clobber
-	gh release upload "${VERSION}" "${DIST_DIR}"/SolidInvoice-"${VERSION}".tar.gz --repo solidinvoice/solidinvoice --clobber
+	gh release upload "${VERSION}" "${DIST_DIR}"/SolidInvoice-"${VERSION}".zip --repo augias/augias --clobber
+	gh release upload "${VERSION}" "${DIST_DIR}"/SolidInvoice-"${VERSION}".tar.gz --repo augias/augias --clobber
 fi
 
 cd ../ && rm -Rf "./SolidInvoice"

@@ -22,8 +22,8 @@
 # ============================================================================
 #
 # Via the Cloudsmith web UI:
-# 1. Create organization "solidinvoice" (or use existing)
-# 2. Create repository "solidinvoice"
+# 1. Create organization "augias" (or use existing)
+# 2. Create repository "augias"
 # 3. Set repository type to "Open-Source" (free tier)
 # 4. Enable formats: Debian/Ubuntu, RedHat, Alpine
 #
@@ -40,32 +40,32 @@
 # ============================================================================
 #
 # Debian/Ubuntu (.deb):
-#   cloudsmith push deb solidinvoice/solidinvoice/any-distro/any-version \
-#     dist/solidinvoice_VERSION_amd64.deb
+#   cloudsmith push deb augias/augias/any-distro/any-version \
+#     dist/augias_VERSION_amd64.deb
 #
 # RPM (.rpm):
-#   cloudsmith push rpm solidinvoice/solidinvoice/any-distro/any-version \
-#     dist/solidinvoice-VERSION.x86_64.rpm
+#   cloudsmith push rpm augias/augias/any-distro/any-version \
+#     dist/augias-VERSION.x86_64.rpm
 #
 # Alpine (.apk):
-#   cloudsmith push alpine solidinvoice/solidinvoice/alpine/any-version \
-#     dist/solidinvoice-VERSION.apk
+#   cloudsmith push alpine augias/augias/alpine/any-version \
+#     dist/augias-VERSION.apk
 #
 # ============================================================================
 # STEP 4: User Installation Instructions
 # ============================================================================
 #
 # Debian/Ubuntu (APT):
-#   curl -1sLf 'https://dl.cloudsmith.io/public/solidinvoice/solidinvoice/setup.deb.sh' | sudo -E bash
-#   sudo apt install solidinvoice
+#   curl -1sLf 'https://dl.cloudsmith.io/public/augias/augias/setup.deb.sh' | sudo -E bash
+#   sudo apt install augias
 #
 # RHEL/CentOS/Fedora (YUM/DNF):
-#   curl -1sLf 'https://dl.cloudsmith.io/public/solidinvoice/solidinvoice/setup.rpm.sh' | sudo -E bash
-#   sudo dnf install solidinvoice
+#   curl -1sLf 'https://dl.cloudsmith.io/public/augias/augias/setup.rpm.sh' | sudo -E bash
+#   sudo dnf install augias
 #
 # Alpine (APK):
-#   curl -1sLf 'https://dl.cloudsmith.io/public/solidinvoice/solidinvoice/setup.alpine.sh' | sudo -E sh
-#   sudo apk add solidinvoice
+#   curl -1sLf 'https://dl.cloudsmith.io/public/augias/augias/setup.alpine.sh' | sudo -E sh
+#   sudo apk add augias
 #
 # ============================================================================
 # STEP 5: GPG Signing (Cloudsmith handles this automatically)
@@ -81,6 +81,6 @@ echo "This is a documentation script. Please read the comments for setup instruc
 echo ""
 echo "Quick start:"
 echo "  1. Create Cloudsmith account at https://cloudsmith.io"
-echo "  2. Create org 'solidinvoice' and repo 'solidinvoice'"
+echo "  2. Create org 'augias' and repo 'augias'"
 echo "  3. Generate API key and add as CLOUDSMITH_API_KEY GitHub secret"
 echo "  4. The publish-packages workflow will handle the rest"

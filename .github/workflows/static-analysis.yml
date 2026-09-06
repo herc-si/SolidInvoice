@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      SOLIDINVOICE_ENV: test
-      SOLIDINVOICE_DEBUG: 1
+      AUGIAS_ENV: test
+      AUGIAS_DEBUG: 1
 
     steps:
       - name: Harden Runner

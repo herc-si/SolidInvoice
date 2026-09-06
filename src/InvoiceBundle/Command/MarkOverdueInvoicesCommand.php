@@ -30,7 +30,7 @@ use function sprintf;
  * @see \Augias\InvoiceBundle\Tests\Command\MarkOverdueInvoicesCommandTest
  */
 #[AsCommand(
-    name: 'solidinvoice:invoices:mark-overdue',
+    name: 'augias:invoices:mark-overdue',
     description: 'Mark pending invoices as overdue when past due date',
 )]
 #[AsCronTask('#hourly', schedule: 'mark_invoices_overdue')]

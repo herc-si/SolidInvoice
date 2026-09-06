@@ -44,7 +44,7 @@ use function sprintf;
  * @see \Augias\ElectronicInvoicingBundle\Tests\Command\PollSuperPdpInvoiceStatusCommandTest
  */
 #[AsCommand(
-    name: 'solidinvoice:einvoicing:poll-super-pdp-status',
+    name: 'augias:einvoicing:poll-super-pdp-status',
     description: 'Refresh the processing status of invoices submitted to SUPER PDP',
 )]
 #[AsCronTask('#hourly', schedule: 'poll_super_pdp_invoice_status')]

@@ -10,9 +10,9 @@
 # Override architecture with:
 #   nfpm package -p deb -f packaging/nfpm.yaml --target dist/ --arch arm64
 
-name: solidinvoice
+name: augias
 arch: ${NFPM_ARCH}
-version: ${SOLIDINVOICE_VERSION}
+version: ${AUGIAS_VERSION}
 release: 1
 epoch: 0
 section: web
@@ -31,40 +31,40 @@ description: |
 
 contents:
   # Binary
-  - src: ../frankenphp/dist/solidinvoice-linux
-    dst: /usr/bin/solidinvoice
+  - src: ../frankenphp/dist/augias-linux
+    dst: /usr/bin/augias
     file_info:
       mode: 0755
 
   # systemd service
-  - src: systemd/solidinvoice.service
-    dst: /usr/lib/systemd/system/solidinvoice.service
+  - src: systemd/augias.service
+    dst: /usr/lib/systemd/system/augias.service
     file_info:
       mode: 0644
 
   # Default environment file
-  - src: systemd/solidinvoice.env
-    dst: /etc/solidinvoice/solidinvoice.env
+  - src: systemd/augias.env
+    dst: /etc/augias/augias.env
     type: config|noreplace
     file_info:
       mode: 0640
       owner: root
-      group: solidinvoice
+      group: augias
 
   # Create required directories
-  - dst: /var/lib/solidinvoice
+  - dst: /var/lib/augias
     type: dir
     file_info:
       mode: 0750
-      owner: solidinvoice
-      group: solidinvoice
+      owner: augias
+      group: augias
 
-  - dst: /etc/solidinvoice
+  - dst: /etc/augias
     type: dir
     file_info:
       mode: 0750
       owner: root
-      group: solidinvoice
+      group: augias
 
 scripts:
   postinstall: scripts/postinstall.sh

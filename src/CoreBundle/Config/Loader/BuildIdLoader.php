@@ -26,7 +26,7 @@ final readonly class BuildIdLoader implements EnvVarLoaderInterface
 {
     public function __construct(
         private ConfigWriter $configWriter,
-        #[Autowire(env: 'default::SOLIDINVOICE_BUILD_ID')]
+        #[Autowire(env: 'default::AUGIAS_BUILD_ID')]
         private ?string $buildId,
     ) {
     }
@@ -44,7 +44,7 @@ final readonly class BuildIdLoader implements EnvVarLoaderInterface
             $buildId = (string) Uuid::v7();
             $this->configWriter->save(['BUILD_ID' => $buildId]);
 
-            return ['SOLIDINVOICE_BUILD_ID' => $buildId];
+            return ['AUGIAS_BUILD_ID' => $buildId];
         } catch (Exception) {
             // Vault not yet initialized (app not installed) — skip silently
             return [];

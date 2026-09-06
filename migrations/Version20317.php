@@ -37,11 +37,11 @@ final class Version20317 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $secret = $_SERVER['SOLIDINVOICE_APP_SECRET'] ?? $_ENV['SOLIDINVOICE_APP_SECRET'] ?? null;
+        $secret = $_SERVER['AUGIAS_APP_SECRET'] ?? $_ENV['AUGIAS_APP_SECRET'] ?? null;
 
         if (! is_string($secret) || '' === $secret) {
             throw new RuntimeException(
-                'SOLIDINVOICE_APP_SECRET must be set to run this migration; it is the key used to hash API tokens.'
+                'AUGIAS_APP_SECRET must be set to run this migration; it is the key used to hash API tokens.'
             );
         }
 

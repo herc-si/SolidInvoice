@@ -25,7 +25,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator, ContainerBuilder $container): void {
     $parameters = $containerConfigurator->parameters();
 
-    $parameters->set('env(database_name)', 'solidinvoice_test');
+    $parameters->set('env(database_name)', 'augias_test');
 
     $services = $containerConfigurator->services();
 

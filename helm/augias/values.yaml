@@ -1,10 +1,10 @@
-# Default values for solidinvoice.
+# Default values for augias.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 ## @section Image configuration
 image:
-  repository: solidinvoice/solidinvoice
+  repository: augias/augias
   ## @param image.tag Overrides the image tag. Defaults to the chart appVersion.
   tag: ""
   pullPolicy: IfNotPresent
@@ -18,9 +18,9 @@ replicaCount: 1
 
 ## @section Application configuration
 app:
-  ## @param app.secret SOLIDINVOICE_APP_SECRET. Auto-generated if empty (not recommended for production).
+  ## @param app.secret AUGIAS_APP_SECRET. Auto-generated if empty (not recommended for production).
   secret: ""
-  ## @param app.url Public URL of the installation (SOLIDINVOICE_APPLICATION_URL), e.g. https://invoices.example.com. Optional.
+  ## @param app.url Public URL of the installation (AUGIAS_APPLICATION_URL), e.g. https://invoices.example.com. Optional.
   url: ""
   ## @param app.locale Application locale
   locale: "en"
@@ -87,7 +87,7 @@ messenger:
   dsn: ""
 
 ## @section Worker (Messenger consumer) configuration
-## Runs 'solidinvoice worker' — a dedicated process supervisor for Symfony Messenger consumers.
+## Runs 'augias worker' — a dedicated process supervisor for Symfony Messenger consumers.
 ## The main app Deployment runs with --messenger-workers=0 so workers are fully isolated here.
 worker:
   ## @param worker.enabled Enable the Messenger consumer worker Deployment
@@ -112,9 +112,9 @@ worker:
     targetCPUUtilizationPercentage: 80
 
 ## @section Persistence configuration
-## /etc/solidinvoice MUST be persisted — it holds Symfony's encrypted secrets vault.
+## /etc/augias MUST be persisted — it holds Symfony's encrypted secrets vault.
 persistence:
-  ## @param persistence.enabled Enable persistent storage for /etc/solidinvoice
+  ## @param persistence.enabled Enable persistent storage for /etc/augias
   enabled: true
   ## @param persistence.storageClass StorageClass for the PVC (empty = cluster default)
   storageClass: ""
@@ -138,7 +138,7 @@ ingress:
   className: ""
   annotations: {}
   hosts:
-    - host: solidinvoice.example.com
+    - host: augias.example.com
       paths:
         - path: /
           pathType: Prefix
@@ -155,8 +155,8 @@ service:
 mysql:
   enabled: false
   auth:
-    database: solidinvoice
-    username: solidinvoice
+    database: augias
+    username: augias
     ## @param mysql.auth.password MySQL password (auto-generated if empty)
     password: ""
     rootPassword: ""
@@ -166,8 +166,8 @@ mysql:
 postgresql:
   enabled: false
   auth:
-    database: solidinvoice
-    username: solidinvoice
+    database: augias
+    username: augias
     ## @param postgresql.auth.password PostgreSQL password (auto-generated if empty)
     password: ""
 

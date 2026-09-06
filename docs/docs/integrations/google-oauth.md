@@ -38,7 +38,7 @@ Before SolidInvoice can talk to Google, you need a Google OAuth 2.0 client.
 6. Under `Authorized redirect URIs`, add the SolidInvoice OAuth check URL for your installation:
 
    ```text
-   https://your-solidinvoice-domain.example/oauth/check/google
+   https://your-augias-domain.example/oauth/check/google
    ```
 
    The path is always `/oauth/check/google`. Add one entry per environment (production, staging, local development).
@@ -54,8 +54,8 @@ Set two environment variables on the SolidInvoice instance, then restart the app
 
 | Variable | Description |
 | --- | --- |
-| `SOLIDINVOICE_OAUTH_CLIENT_GOOGLE_CLIENT_ID` | The `Client ID` from the Google Cloud Console. |
-| `SOLIDINVOICE_OAUTH_CLIENT_GOOGLE_CLIENT_SECRET` | The `Client secret` from the Google Cloud Console. |
+| `AUGIAS_OAUTH_CLIENT_GOOGLE_CLIENT_ID` | The `Client ID` from the Google Cloud Console. |
+| `AUGIAS_OAUTH_CLIENT_GOOGLE_CLIENT_SECRET` | The `Client secret` from the Google Cloud Console. |
 
 Both variables must be set for the integration to activate. Leaving either empty disables the Google buttons everywhere in the UI.
 
@@ -63,16 +63,16 @@ For Docker:
 
 ```bash
 docker run \
-  -e SOLIDINVOICE_OAUTH_CLIENT_GOOGLE_CLIENT_ID=... \
-  -e SOLIDINVOICE_OAUTH_CLIENT_GOOGLE_CLIENT_SECRET=... \
-  solidinvoice/solidinvoice
+  -e AUGIAS_OAUTH_CLIENT_GOOGLE_CLIENT_ID=... \
+  -e AUGIAS_OAUTH_CLIENT_GOOGLE_CLIENT_SECRET=... \
+  augias/augias
 ```
 
 For the distribution package and source installs, add the values to `.env` at the root of the application:
 
 ```ini title=".env"
-SOLIDINVOICE_OAUTH_CLIENT_GOOGLE_CLIENT_ID=1234567890-abcdef.apps.googleusercontent.com
-SOLIDINVOICE_OAUTH_CLIENT_GOOGLE_CLIENT_SECRET=GOCSPX-your-client-secret
+AUGIAS_OAUTH_CLIENT_GOOGLE_CLIENT_ID=1234567890-abcdef.apps.googleusercontent.com
+AUGIAS_OAUTH_CLIENT_GOOGLE_CLIENT_SECRET=GOCSPX-your-client-secret
 ```
 
 :::tip
@@ -113,7 +113,7 @@ The redirect URI configured in the Google Cloud Console does not exactly match t
 
 ### Google buttons don't appear on the login or registration page
 
-Both `SOLIDINVOICE_OAUTH_CLIENT_GOOGLE_CLIENT_ID` and `SOLIDINVOICE_OAUTH_CLIENT_GOOGLE_CLIENT_SECRET` must be set and non-empty. After changing either variable, clear the application cache with `bin/console cache:clear` and reload the page.
+Both `AUGIAS_OAUTH_CLIENT_GOOGLE_CLIENT_ID` and `AUGIAS_OAUTH_CLIENT_GOOGLE_CLIENT_SECRET` must be set and non-empty. After changing either variable, clear the application cache with `bin/console cache:clear` and reload the page.
 
 ### Authentication is rejected after the Google flow
 

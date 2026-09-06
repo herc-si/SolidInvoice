@@ -26,7 +26,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autoconfigure()
         ->autowire()
         ->private()
-        ->bind('$installed', env('SOLIDINVOICE_INSTALLED'))
+        ->bind('$installed', env('AUGIAS_INSTALLED'))
         ->bind('$debug', param('kernel.debug'))
         ->bind('$vault', service('secrets.vault'))
     ;

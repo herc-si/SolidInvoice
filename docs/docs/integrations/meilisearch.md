@@ -36,22 +36,22 @@ The integration is configured through three environment variables, set the same 
 
 | Variable | Default | Description |
 | --- | --- | --- |
-| `SOLIDINVOICE_MEILISEARCH_URL` | *(empty)* | Base URL of your Meilisearch instance, e.g. `http://meilisearch:7700`. Leave empty to disable the integration. |
-| `SOLIDINVOICE_MEILISEARCH_API_KEY` | *(empty)* | An API key with read/write access to the indexes. Use the master key during setup, then switch to a scoped key once the indexes exist (see [Security](#security)). |
-| `SOLIDINVOICE_MEILISEARCH_PREFIX` | `solidinvoice_<env>_` | Prefix prepended to every index name. The default keeps `dev`, `test`, and `prod` indexes separate when sharing one Meilisearch server. |
+| `AUGIAS_MEILISEARCH_URL` | *(empty)* | Base URL of your Meilisearch instance, e.g. `http://meilisearch:7700`. Leave empty to disable the integration. |
+| `AUGIAS_MEILISEARCH_API_KEY` | *(empty)* | An API key with read/write access to the indexes. Use the master key during setup, then switch to a scoped key once the indexes exist (see [Security](#security)). |
+| `AUGIAS_MEILISEARCH_PREFIX` | `augias_<env>_` | Prefix prepended to every index name. The default keeps `dev`, `test`, and `prod` indexes separate when sharing one Meilisearch server. |
 
 A typical production configuration:
 
 ```ini title=".env"
-SOLIDINVOICE_MEILISEARCH_URL=http://meilisearch.internal:7700
-SOLIDINVOICE_MEILISEARCH_API_KEY=your-meilisearch-api-key
-SOLIDINVOICE_MEILISEARCH_PREFIX=solidinvoice_prod_
+AUGIAS_MEILISEARCH_URL=http://meilisearch.internal:7700
+AUGIAS_MEILISEARCH_API_KEY=your-meilisearch-api-key
+AUGIAS_MEILISEARCH_PREFIX=augias_prod_
 ```
 
 Restart the application after changing any of these values.
 
 :::info
-The search bar is shown only when both `SOLIDINVOICE_MEILISEARCH_URL` and `SOLIDINVOICE_MEILISEARCH_API_KEY` are non-empty. If you've configured the variables but the search bar still doesn't appear, clear the application cache: `bin/console cache:clear`.
+The search bar is shown only when both `AUGIAS_MEILISEARCH_URL` and `AUGIAS_MEILISEARCH_API_KEY` are non-empty. If you've configured the variables but the search bar still doesn't appear, clear the application cache: `bin/console cache:clear`.
 :::
 
 ## Initial indexing
@@ -109,7 +109,7 @@ Each command accepts `--indices=<list>` to scope it to a subset of indexes.
 
 ## Using the search bar
 
-Once Meilisearch is configured and indexed, the search bar appears in the top navigation of every page. The query syntax (free-text, qualifiers like `in:`, `status:`, `client:`, `sort:`, etc.), what's searchable, and worked examples are documented at [Searching](../using-solidinvoice/searching.md) — that page covers everything end users need.
+Once Meilisearch is configured and indexed, the search bar appears in the top navigation of every page. The query syntax (free-text, qualifiers like `in:`, `status:`, `client:`, `sort:`, etc.), what's searchable, and worked examples are documented at [Searching](../using-augias/searching.md) — that page covers everything end users need.
 
 Indexing happens in real time: when a record is created, updated, or deleted through the UI, the API, or the MCP server, the change is dispatched to Meilisearch as part of the same request. There is no replication delay beyond Meilisearch's own indexing time (typically milliseconds), and no scheduled re-index for normal operation.
 
@@ -137,8 +137,8 @@ Per-company isolation is enforced by SolidInvoice through the `companyId` filter
 To turn the search off, clear the URL or API key:
 
 ```ini title=".env"
-SOLIDINVOICE_MEILISEARCH_URL=
-SOLIDINVOICE_MEILISEARCH_API_KEY=
+AUGIAS_MEILISEARCH_URL=
+AUGIAS_MEILISEARCH_API_KEY=
 ```
 
 Restart the application. The search bar disappears, and SolidInvoice stops dispatching updates to Meilisearch. Existing indexes on the Meilisearch server are left in place — delete them manually with `bin/console meilisearch:delete` (run before clearing the env vars) or directly through the Meilisearch dashboard if you no longer need them.

@@ -173,7 +173,7 @@ final class QuoteTypeTest extends FormTestCase
         return [
             new PreloadedExtension([$type, $itemType, new DiscountType($systemConfig), $customFieldsType], [
                 ChoiceType::class => [
-                    new AutocompleteChoiceTypeExtension(new ChecksumCalculator($_SERVER['SOLIDINVOICE_APP_SECRET'])),
+                    new AutocompleteChoiceTypeExtension(new ChecksumCalculator($_SERVER['AUGIAS_APP_SECRET'])),
                 ],
             ]),
         ];

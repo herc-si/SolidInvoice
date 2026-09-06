@@ -5,9 +5,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "solidinvoice.fullname" . }}-install
+  name: {{ include "augias.fullname" . }}-install
   labels:
-    {{- include "solidinvoice.labels" . | nindent 4 }}
+    {{- include "augias.labels" . | nindent 4 }}
   annotations:
     helm.sh/hook: pre-install
     helm.sh/hook-weight: "0"
@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "solidinvoice.selectorLabels" . | nindent 8 }}
+        {{- include "augias.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: install
     spec:
       restartPolicy: OnFailure
@@ -25,11 +25,11 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "solidinvoice.serviceAccountName" . }}
+      serviceAccountName: {{ include "augias.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- $mysqlInit := trim (include "solidinvoice.mysqlInitContainer" .) }}
-      {{- $postgresqlInit := trim (include "solidinvoice.postgresqlInitContainer" .) }}
+      {{- $mysqlInit := trim (include "augias.mysqlInitContainer" .) }}
+      {{- $postgresqlInit := trim (include "augias.postgresqlInitContainer" .) }}
       {{- if or $mysqlInit $postgresqlInit }}
       initContainers:
         {{- if $mysqlInit }}
@@ -41,30 +41,30 @@ spec:
       {{- end }}
       containers:
         - name: install
-          image: {{ include "solidinvoice.imageName" . }}
+          image: {{ include "augias.imageName" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
             - /bin/sh
             - -c
             - |
               # Idempotent: exit cleanly if already installed
-              if /usr/local/bin/solidinvoice console solidinvoice:is-installed --no-ansi --no-interaction 2>/dev/null; then
+              if /usr/local/bin/augias console augias:is-installed --no-ansi --no-interaction 2>/dev/null; then
                 echo "SolidInvoice is already installed. Skipping."
                 exit 0
               fi
 
               # Run the CLI installer
-              /usr/local/bin/solidinvoice console solidinvoice:install \
+              /usr/local/bin/augias console augias:install \
                 {{- if .Values.mysql.enabled }}
                 --database-driver=pdo_mysql \
-                --database-host={{ include "solidinvoice.mysql.host" . }} \
+                --database-host={{ include "augias.mysql.host" . }} \
                 --database-port=3306 \
                 --database-name={{ .Values.mysql.auth.database }} \
                 --database-user={{ .Values.mysql.auth.username }} \
                 --database-password="${MYSQL_PASSWORD}" \
                 {{- else if .Values.postgresql.enabled }}
                 --database-driver=pdo_pgsql \
-                --database-host={{ include "solidinvoice.postgresql.host" . }} \
+                --database-host={{ include "augias.postgresql.host" . }} \
                 --database-port=5432 \
                 --database-name={{ .Values.postgresql.auth.database }} \
                 --database-user={{ .Values.postgresql.auth.username }} \
@@ -80,14 +80,14 @@ spec:
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "solidinvoice.mysql.secretName" . }}
+                  name: {{ include "augias.mysql.secretName" . }}
                   key: mysql-password
             {{- end }}
             {{- if .Values.postgresql.enabled }}
             - name: POSTGRESQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "solidinvoice.postgresql.secretName" . }}
+                  name: {{ include "augias.postgresql.secretName" . }}
                   key: password
             {{- end }}
             {{- if .Values.install.existingSecret }}
@@ -105,28 +105,28 @@ spec:
             - name: ADMIN_EMAIL
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "solidinvoice.fullname" . }}-install
+                  name: {{ include "augias.fullname" . }}-install
                   key: ADMIN_EMAIL
             - name: ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "solidinvoice.fullname" . }}-install
+                  name: {{ include "augias.fullname" . }}-install
                   key: ADMIN_PASSWORD
             {{- end }}
           envFrom:
             - configMapRef:
-                name: {{ include "solidinvoice.fullname" . }}
+                name: {{ include "augias.fullname" . }}
             - secretRef:
-                name: {{ include "solidinvoice.fullname" . }}
+                name: {{ include "augias.fullname" . }}
             {{- with .Values.app.extraEnvFrom }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
           volumeMounts:
-            {{- include "solidinvoice.configVolumeMount" . | nindent 12 }}
+            {{- include "augias.configVolumeMount" . | nindent 12 }}
           resources:
             {{- toYaml .Values.install.resources | nindent 12 }}
           securityContext:
             {{- toYaml .Values.containerSecurityContext | nindent 12 }}
       volumes:
-        {{- include "solidinvoice.configVolume" . | nindent 8 }}
+        {{- include "augias.configVolume" . | nindent 8 }}
 {{- end }}

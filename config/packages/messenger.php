@@ -31,7 +31,7 @@ return App::config([
                 // This single transport handles all async messages
                 // Scale by running multiple workers: bin/console messenger:consume async --limit=100
                 'async' => [
-                    'dsn' => env('SOLIDINVOICE_MESSENGER_DSN'),
+                    'dsn' => env('AUGIAS_MESSENGER_DSN'),
                     'retry_strategy' => [
                         'max_retries' => 3,
                         'delay' => 1000, // 1 second initial delay

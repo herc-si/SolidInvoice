@@ -2,7 +2,7 @@
 # Tests the minimal configuration using externalDatabase.url
 
 externalDatabase:
-  url: "mysql://solidinvoice:password@mysql-host:3306/solidinvoice?serverVersion=8.0&charset=utf8mb4"
+  url: "mysql://augias:password@mysql-host:3306/augias?serverVersion=8.0&charset=utf8mb4"
 
 worker:
   enabled: false

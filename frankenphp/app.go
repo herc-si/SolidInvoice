@@ -31,7 +31,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"solidinvoice/internal/serverconfig"
+	"augias/internal/serverconfig"
 
 	// plug in Caddy modules here.
 	_ "github.com/caddyserver/caddy/v2/modules/standard"
@@ -135,7 +135,7 @@ func initializeApp() error {
 		upperAppName + "_ENV":        "prod",
 		upperAppName + "_DEBUG":      "0",
 		"APP_PATH":                   appPath,
-		"SOLIDINVOICE_RUNTIME":       "frankenphp",
+		"AUGIAS_RUNTIME":       "frankenphp",
 	}
 
 	// Only set if not already set
@@ -204,7 +204,7 @@ func setupCommands() {
 		RunE: func(cmd *cobra.Command, args []string) error {
 			// Set log format early (before any logging)
 			if logFormat != "" {
-				must(os.Setenv("SOLIDINVOICE_LOG_FORMAT", logFormat))
+				must(os.Setenv("AUGIAS_LOG_FORMAT", logFormat))
 			}
 
 			caddyLogInfo := `
@@ -301,7 +301,7 @@ func setupCommands() {
 				EnableLetsEncrypt: enableLetsEncrypt,
 				HttpPort:          httpPort,
 				ServerIp:          serverIp,
-				Docker:            os.Getenv("SOLIDINVOICE_DOCKER") == "true",
+				Docker:            os.Getenv("AUGIAS_DOCKER") == "true",
 			})
 			if err != nil {
 				return err
@@ -321,7 +321,7 @@ func setupCommands() {
 			// Configure FrankenPHP worker mode
 			// Check environment variable first, then CLI flag
 			workerModeEnabled := os.Getenv("FRANKENPHP_WORKER_MODE") == "1" ||
-				os.Getenv("SOLIDINVOICE_WORKER_MODE") == "1" ||
+				os.Getenv("AUGIAS_WORKER_MODE") == "1" ||
 				enableWorkerMode
 
 			if workerModeEnabled {
@@ -483,7 +483,7 @@ func setupCommands() {
 						log.Error(ctx, errors.Join(errors.New("failed to clear cache"), err))
 					}
 					// Generate OAuth2 signing keys for the MCP server on first boot.
-					// Idempotent — skipped if the keys already exist in SOLIDINVOICE_CONFIG_DIR/oauth/.
+					// Idempotent — skipped if the keys already exist in AUGIAS_CONFIG_DIR/oauth/.
 					if err := runConsoleCommand("mcp:keys:generate"); err != nil {
 						log.Error(ctx, errors.Join(errors.New("failed to generate MCP OAuth signing keys"), err))
 					}
@@ -509,77 +509,77 @@ func setupCommands() {
 
 	runCmd.PreRunE = func(cmd *cobra.Command, args []string) error {
 		if !cmd.Flags().Changed("port") {
-			if v := os.Getenv("SOLIDINVOICE_PORT"); v != "" {
+			if v := os.Getenv("AUGIAS_PORT"); v != "" {
 				httpPort = v
 			}
 		}
 		if !cmd.Flags().Changed("server-ip") {
-			if v := os.Getenv("SOLIDINVOICE_SERVER_IP"); v != "" {
+			if v := os.Getenv("AUGIAS_SERVER_IP"); v != "" {
 				serverIp = v
 			}
 		}
 		if !cmd.Flags().Changed("domain") {
-			if v := os.Getenv("SOLIDINVOICE_DOMAIN"); v != "" {
+			if v := os.Getenv("AUGIAS_DOMAIN"); v != "" {
 				domain = v
 			}
 		}
 		if !cmd.Flags().Changed("disable-https") {
-			v := os.Getenv("SOLIDINVOICE_DISABLE_HTTPS")
+			v := os.Getenv("AUGIAS_DISABLE_HTTPS")
 			if v == "1" || strings.EqualFold(v, "true") {
 				disableHttps = true
 			}
 		}
 		if !cmd.Flags().Changed("lets-encrypt") {
-			v := os.Getenv("SOLIDINVOICE_LETS_ENCRYPT")
+			v := os.Getenv("AUGIAS_LETS_ENCRYPT")
 			if v == "1" || strings.EqualFold(v, "true") {
 				enableLetsEncrypt = true
 			}
 		}
 		if !cmd.Flags().Changed("ssl-cert") {
-			if v := os.Getenv("SOLIDINVOICE_SSL_CERT"); v != "" {
+			if v := os.Getenv("AUGIAS_SSL_CERT"); v != "" {
 				sslCertFile = v
 			}
 		}
 		if !cmd.Flags().Changed("ssl-key") {
-			if v := os.Getenv("SOLIDINVOICE_SSL_KEY"); v != "" {
+			if v := os.Getenv("AUGIAS_SSL_KEY"); v != "" {
 				sslKeyFile = v
 			}
 		}
 		if !cmd.Flags().Changed("worker-threads") {
-			if v := os.Getenv("SOLIDINVOICE_WORKER_THREADS"); v != "" {
+			if v := os.Getenv("AUGIAS_WORKER_THREADS"); v != "" {
 				if n, err := strconv.Atoi(v); err == nil {
 					workerThreads = n
 				}
 			}
 		}
 		if !cmd.Flags().Changed("messenger-workers") {
-			if v := os.Getenv("SOLIDINVOICE_MESSENGER_WORKERS"); v != "" {
+			if v := os.Getenv("AUGIAS_MESSENGER_WORKERS"); v != "" {
 				if n, err := strconv.Atoi(v); err == nil {
 					messengerWorkers = n
 				}
 			}
 		}
 		if !cmd.Flags().Changed("skip-intro") {
-			v := os.Getenv("SOLIDINVOICE_SKIP_INTRO")
+			v := os.Getenv("AUGIAS_SKIP_INTRO")
 			if v == "1" || strings.EqualFold(v, "true") {
 				skipIntro = true
 			}
 		}
 		if !cmd.Flags().Changed("enable-metrics") {
-			v := os.Getenv("SOLIDINVOICE_ENABLE_METRICS")
+			v := os.Getenv("AUGIAS_ENABLE_METRICS")
 			if v == "1" || strings.EqualFold(v, "true") {
 				enableMetrics = true
 			}
 		}
 		if !cmd.Flags().Changed("metrics-port") {
-			if v := os.Getenv("SOLIDINVOICE_METRICS_PORT"); v != "" {
+			if v := os.Getenv("AUGIAS_METRICS_PORT"); v != "" {
 				if n, err := strconv.Atoi(v); err == nil {
 					metricsPort = n
 				}
 			}
 		}
 		if !cmd.Flags().Changed("log-format") {
-			if v := os.Getenv("SOLIDINVOICE_LOG_FORMAT"); v != "" {
+			if v := os.Getenv("AUGIAS_LOG_FORMAT"); v != "" {
 				logFormat = v
 			}
 		}
@@ -589,13 +589,13 @@ func setupCommands() {
 	runCmd.PersistentFlags().StringVar(&domain, "domain", "", "The domain name to use for the application. When specifying a domain, an SSL certificate will automatically be generated for you")
 	runCmd.PersistentFlags().StringVar(&httpPort, "port", defaultPort, "The default port to use for the application. When specifying a domain to use, the port will default to 443")
 	runCmd.PersistentFlags().StringVar(&serverIp, "server-ip", defaultServerIp, "If you have multiple IP addresses on your server, specify the IP address to use. By default, the server will bind to all IP addresses")
-	runCmd.PersistentFlags().BoolVar(&disableHttps, "disable-https", false, "Disable HTTPS. The application will only be accessible using http://. This setting is not recommended, unless you are setting up a reverse proxy which will handle https. Combine with --domain to specify the hostname Caddy should accept when behind a reverse proxy (e.g. --disable-https --domain solidinvoice.example.com)")
+	runCmd.PersistentFlags().BoolVar(&disableHttps, "disable-https", false, "Disable HTTPS. The application will only be accessible using http://. This setting is not recommended, unless you are setting up a reverse proxy which will handle https. Combine with --domain to specify the hostname Caddy should accept when behind a reverse proxy (e.g. --disable-https --domain augias.example.com)")
 	runCmd.PersistentFlags().BoolVar(&enableLetsEncrypt, "lets-encrypt", false, "Enable Let's Encrypt for automatic SSL certificates (requires --domain)")
 	runCmd.PersistentFlags().StringVar(&sslCertFile, "ssl-cert", "", "Path to custom SSL certificate file (requires --ssl-key and --domain)")
 	runCmd.PersistentFlags().StringVar(&sslKeyFile, "ssl-key", "", "Path to custom SSL private key file (requires --ssl-cert and --domain)")
 	runCmd.PersistentFlags().BoolVar(&enableWorkerMode, "worker-mode", false, "Enable FrankenPHP worker mode for improved performance (keeps PHP workers alive between requests). Recommended for SaaS/high-traffic deployments. Can also be enabled via FRANKENPHP_WORKER_MODE=1 environment variable")
 	runCmd.PersistentFlags().IntVar(&workerThreads, "worker-threads", 2, "Number of FrankenPHP worker threads when worker mode is enabled (default: 2)")
-	runCmd.PersistentFlags().IntVar(&messengerWorkers, "messenger-workers", 1, "Number of messenger worker processes to spawn. Each worker processes async messages independently. Set to 0 to disable built-in workers entirely (recommended for Kubernetes, where a dedicated worker pod runs 'solidinvoice worker'). Increase above 1 for high-traffic standalone deployments (e.g., --messenger-workers=5)")
+	runCmd.PersistentFlags().IntVar(&messengerWorkers, "messenger-workers", 1, "Number of messenger worker processes to spawn. Each worker processes async messages independently. Set to 0 to disable built-in workers entirely (recommended for Kubernetes, where a dedicated worker pod runs 'augias worker'). Increase above 1 for high-traffic standalone deployments (e.g., --messenger-workers=5)")
 	runCmd.PersistentFlags().StringVar(&logFormat, "log-format", "console", "Log output format: 'json' for structured JSON logs, or 'console' (default) for human-readable console output")
 	runCmd.PersistentFlags().BoolVar(&skipIntro, "skip-intro", false, "Skip the introductory application info message")
 	runCmd.PersistentFlags().BoolVar(&enableMetrics, "enable-metrics", false, "Enable Prometheus metrics endpoint on a dedicated port. Exposes Caddy HTTP metrics and FrankenPHP worker/thread metrics for scraping")
@@ -607,7 +607,7 @@ func setupCommands() {
 		Long:  "Starts one or more Symfony Messenger consumer processes managed by a supervisor loop with automatic restart and graceful shutdown. Intended for use in dedicated worker containers (e.g. a Kubernetes worker Deployment). Install detection is built in — workers wait automatically until the application is installed.",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if logFormat != "" {
-				must(os.Setenv("SOLIDINVOICE_LOG_FORMAT", logFormat))
+				must(os.Setenv("AUGIAS_LOG_FORMAT", logFormat))
 			}
 
 			caddyLogInfo := `
@@ -689,14 +689,14 @@ func setupCommands() {
 
 	workerCmd.PreRunE = func(cmd *cobra.Command, args []string) error {
 		if !cmd.Flags().Changed("workers") {
-			if v := os.Getenv("SOLIDINVOICE_WORKER_COUNT"); v != "" {
+			if v := os.Getenv("AUGIAS_WORKER_COUNT"); v != "" {
 				if n, err := strconv.Atoi(v); err == nil {
 					workerCount = n
 				}
 			}
 		}
 		if !cmd.Flags().Changed("log-format") {
-			if v := os.Getenv("SOLIDINVOICE_LOG_FORMAT"); v != "" {
+			if v := os.Getenv("AUGIAS_LOG_FORMAT"); v != "" {
 				logFormat = v
 			}
 		}
@@ -866,7 +866,7 @@ func runConsoleCommand(args ...string) error {
 }
 
 func isAppInstalled() bool {
-	return runConsoleCommand("solidinvoice:is-installed") == nil
+	return runConsoleCommand("augias:is-installed") == nil
 }
 
 func must(err error) {

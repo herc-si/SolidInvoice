@@ -24,7 +24,7 @@ type Params struct {
 // Use Domain + DisableHttps together to tell Caddy to accept requests for the
 // given hostname over plain HTTP (the reverse proxy handles TLS):
 //
-//	solidinvoice run --domain solidinvoice.example.com --disable-https
+//	augias run --domain augias.example.com --disable-https
 func BuildServerName(p Params) (string, error) {
 	if p.Domain != "" {
 		validate := validator.New(validator.WithRequiredStructEnabled())

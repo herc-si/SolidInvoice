@@ -31,7 +31,7 @@ final readonly class SendTelemetryHandler
     public function __construct(
         private HttpClientInterface $httpClient,
         private LoggerInterface $logger,
-        #[Autowire(env: 'SOLIDINVOICE_TELEMETRY_URL')]
+        #[Autowire(env: 'AUGIAS_TELEMETRY_URL')]
         private string $telemetryUrl,
     ) {
     }

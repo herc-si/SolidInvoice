@@ -17,7 +17,7 @@ return App::config([
     'framework' => [
         'router' => [
             'utf8' => true,
-            'default_uri' => env('SOLIDINVOICE_APPLICATION_URL'),
+            'default_uri' => env('AUGIAS_APPLICATION_URL'),
         ],
     ],
 ]);

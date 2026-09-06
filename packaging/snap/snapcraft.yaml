@@ -1,6 +1,6 @@
-name: solidinvoice
+name: augias
 title: SolidInvoice
-version: ${SOLIDINVOICE_VERSION}
+version: ${AUGIAS_VERSION}
 summary: Simple and elegant invoicing solution
 description: |
   SolidInvoice is an open-source invoicing application for small businesses
@@ -12,12 +12,12 @@ description: |
   No PHP, Apache, or Nginx installation required.
 
   After installation, start the application with:
-    sudo snap start solidinvoice
+    sudo snap start augias
 
   Then open your browser to http://localhost:8765 to complete setup.
 
   Configuration can be set via snap configuration:
-    sudo snap set solidinvoice port=8080
+    sudo snap set augias port=8080
 
 license: MIT
 base: core24
@@ -25,8 +25,8 @@ confinement: strict
 grade: stable
 
 apps:
-  solidinvoice:
-    command: bin/solidinvoice run --disable-https --skip-intro --log-format json
+  augias:
+    command: bin/augias run --disable-https --skip-intro --log-format json
     daemon: simple
     restart-condition: on-failure
     restart-delay: 5s
@@ -34,21 +34,21 @@ apps:
       - network
       - network-bind
     environment:
-      SOLIDINVOICE_CONFIG_DIR: $SNAP_COMMON/config
+      AUGIAS_CONFIG_DIR: $SNAP_COMMON/config
       HOME: $SNAP_COMMON
 
   cli:
-    command: bin/solidinvoice
+    command: bin/augias
     plugs:
       - network
       - network-bind
 
 parts:
-  solidinvoice:
+  augias:
     plugin: dump
     source: dist/
     source-type: local
     organize:
-      solidinvoice-linux-*: bin/solidinvoice
+      augias-linux-*: bin/augias
     stage:
-      - bin/solidinvoice
+      - bin/augias

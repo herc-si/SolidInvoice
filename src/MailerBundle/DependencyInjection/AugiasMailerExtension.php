@@ -27,6 +27,6 @@ class AugiasMailerExtension extends Extension
         $loader->import('services/*.php');
 
         $container->registerForAutoconfiguration(ConfiguratorInterface::class)
-            ->addTag('solidinvoice_mailer.transport.configurator');
+            ->addTag('augias_mailer.transport.configurator');
     }
 }

@@ -11,8 +11,8 @@ permissions:
     pull-requests: write
 
 env:
-    SOLIDINVOICE_ENV: test
-    SOLIDINVOICE_DEBUG: 0
+    AUGIAS_ENV: test
+    AUGIAS_DEBUG: 0
     PANTHER_NO_HEADLESS: 0
     PANTHER_APP_ENV: test
     PANTHER_NO_SANDBOX: 1
@@ -160,15 +160,15 @@ jobs:
       db:
         image: ${{ matrix.db.image }}:${{ matrix.db.version }}
         env:
-          ORACLE_PASSWORD: solidinvoice
-          MYSQL_ROOT_PASSWORD: solidinvoice
-          MYSQL_DATABASE: solidinvoice
-          POSTGRES_PASSWORD: solidinvoice
+          ORACLE_PASSWORD: augias
+          MYSQL_ROOT_PASSWORD: augias
+          MYSQL_DATABASE: augias
+          POSTGRES_PASSWORD: augias
         ports:
           - "${{ matrix.db.port }}:${{ matrix.db.port }}"
 
     env:
-      SOLIDINVOICE_DATABASE_URL: "${{ matrix.db.scheme }}://${{ matrix.db.user }}:solidinvoice@127.0.0.1:${{ matrix.db.port }}/solidinvoice_%app_mode%_%env(default:app_mode:TEST_TOKEN)%?serverVersion=${{ matrix.db.server_version }}"
+      AUGIAS_DATABASE_URL: "${{ matrix.db.scheme }}://${{ matrix.db.user }}:augias@127.0.0.1:${{ matrix.db.port }}/augias_%app_mode%_%env(default:app_mode:TEST_TOKEN)%?serverVersion=${{ matrix.db.server_version }}"
 
     steps:
       - name: Harden Runner

@@ -26,7 +26,7 @@
     runs in its own process with its own database connection. That makes them incompatible
     with the rest of the suite: they cannot see data inside dama/doctrine-test-bundle's
     uncommitted transaction, their own writes are never rolled back, and their setUp()
-    deletes SOLIDINVOICE_CONFIG_DIR (var/cache/test/config) - a path shared by every
+    deletes AUGIAS_CONFIG_DIR (var/cache/test/config) - a path shared by every
     paratest worker.
 
     They are therefore excluded by default, so `bin/phpunit` and `bin/paratest` run the rest
@@ -49,10 +49,10 @@
     <ini name="error_reporting" value="-1"/>
     <env name="PANTHER_NO_HEADLESS" value="0"/>
     <env name="PANTHER_APP_ENV" value="test"/>
-    <env name="SOLIDINVOICE_DATABASE_URL" value="sqlite:///%kernel.cache_dir%/solidinvoice_%app_mode%_%env(default:app_mode:TEST_TOKEN)%.db"/>
-    <server name="SOLIDINVOICE_APP_SECRET" value="$ecretf0rt3st"/>
-    <server name="SOLIDINVOICE_ENV" value="test"/>
-    <server name="SOLIDINVOICE_DEBUG" value="0"/>
+    <env name="AUGIAS_DATABASE_URL" value="sqlite:///%kernel.cache_dir%/augias_%app_mode%_%env(default:app_mode:TEST_TOKEN)%.db"/>
+    <server name="AUGIAS_APP_SECRET" value="$ecretf0rt3st"/>
+    <server name="AUGIAS_ENV" value="test"/>
+    <server name="AUGIAS_DEBUG" value="0"/>
     <server name="APP_ENV" value="test"/>
     <server name="APP_DEBUG" value="0"/>
     <server name="KERNEL_CLASS" value="Augias\Test\Kernel"/>

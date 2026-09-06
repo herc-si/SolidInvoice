@@ -7,8 +7,8 @@ FROM golang-base AS builder
 ARG TARGETARCH
 ARG TARGETOS
 
-ARG SOLIDINVOICE_VERSION=''
-ENV SOLIDINVOICE_VERSION=${SOLIDINVOICE_VERSION}
+ARG AUGIAS_VERSION=''
+ENV AUGIAS_VERSION=${AUGIAS_VERSION}
 
 ARG PHP_VERSION=''
 ENV PHP_VERSION=${PHP_VERSION}
@@ -113,7 +113,7 @@ RUN \
     --mount=type=cache,id=php-pkgroot-${TARGETARCH},target=/go/src/app/frankenphp/dist/static-php-cli/pkgroot \
     --mount=type=cache,id=php-downloads-${TARGETARCH},target=/go/src/app/frankenphp/dist/static-php-cli/downloads \
     --mount=type=cache,id=php-source-${TARGETARCH},target=/go/src/app/frankenphp/dist/static-php-cli/source \
-    CI="" GITHUB_TOKEN=$(cat /run/secrets/github-token) ./scripts/build_binary.sh $SOLIDINVOICE_VERSION
+    CI="" GITHUB_TOKEN=$(cat /run/secrets/github-token) ./scripts/build_binary.sh $AUGIAS_VERSION
 
 FROM alpine
 
@@ -127,20 +127,20 @@ LABEL org.opencontainers.image.source=https://github.com/SolidInvoice/SolidInvoi
 LABEL org.opencontainers.image.licenses=MIT
 LABEL org.opencontainers.image.vendor="SolidWorx"
 
-ARG SOLIDINVOICE_VERSION=''
-ENV SOLIDINVOICE_VERSION=${SOLIDINVOICE_VERSION}
+ARG AUGIAS_VERSION=''
+ENV AUGIAS_VERSION=${AUGIAS_VERSION}
 
-ENV SOLIDINVOICE_ENV=prod
-ENV SOLIDINVOICE_DEBUG=0
-ENV SOLIDINVOICE_CONFIG_DIR=/etc/solidinvoice
-ENV SOLIDINVOICE_DOCKER=true
+ENV AUGIAS_ENV=prod
+ENV AUGIAS_DEBUG=0
+ENV AUGIAS_CONFIG_DIR=/etc/augias
+ENV AUGIAS_DOCKER=true
 
 EXPOSE 8765
 
-VOLUME ["/etc/solidinvoice"]
+VOLUME ["/etc/augias"]
 
-COPY --from=builder /go/src/app/frankenphp/dist/solidinvoice-${TARGETOS}-${TARGETARCH} /usr/local/bin/solidinvoice
+COPY --from=builder /go/src/app/frankenphp/dist/augias-${TARGETOS}-${TARGETARCH} /usr/local/bin/augias
 
-ENTRYPOINT ["/usr/local/bin/solidinvoice"]
+ENTRYPOINT ["/usr/local/bin/augias"]
 
 CMD ["run", "--disable-https"]

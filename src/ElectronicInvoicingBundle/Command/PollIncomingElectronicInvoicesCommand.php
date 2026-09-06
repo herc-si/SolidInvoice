@@ -37,7 +37,7 @@ use function sprintf;
  * @see \Augias\ElectronicInvoicingBundle\Tests\Command\PollIncomingElectronicInvoicesCommandTest
  */
 #[AsCommand(
-    name: 'solidinvoice:einvoicing:poll-incoming-invoices',
+    name: 'augias:einvoicing:poll-incoming-invoices',
     description: 'Import electronic invoices received by each company since the last run',
 )]
 #[AsCronTask('#hourly', schedule: 'poll_incoming_electronic_invoices')]

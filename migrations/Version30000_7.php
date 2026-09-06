@@ -113,6 +113,6 @@ final class Version30000_7 extends AbstractMigration
 
     private function isSaasPlatform(): bool
     {
-        return ($_ENV['SOLIDINVOICE_PLATFORM'] ?? $_SERVER['SOLIDINVOICE_PLATFORM'] ?? getenv('SOLIDINVOICE_PLATFORM')) === 'saas';
+        return ($_ENV['AUGIAS_PLATFORM'] ?? $_SERVER['AUGIAS_PLATFORM'] ?? getenv('AUGIAS_PLATFORM')) === 'saas';
     }
 }

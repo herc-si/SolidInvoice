@@ -50,7 +50,7 @@
         },
         "url": {
           "type": "string",
-          "description": "Public URL of the installation (SOLIDINVOICE_APPLICATION_URL). Optional."
+          "description": "Public URL of the installation (AUGIAS_APPLICATION_URL). Optional."
         },
         "locale": {
           "type": "string",

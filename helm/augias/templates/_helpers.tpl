@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "solidinvoice.name" -}}
+{{- define "augias.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "solidinvoice.fullname" -}}
+{{- define "augias.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "solidinvoice.chart" -}}
+{{- define "augias.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "solidinvoice.labels" -}}
-helm.sh/chart: {{ include "solidinvoice.chart" . }}
-{{ include "solidinvoice.selectorLabels" . }}
+{{- define "augias.labels" -}}
+helm.sh/chart: {{ include "augias.chart" . }}
+{{ include "augias.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "solidinvoice.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "solidinvoice.name" . }}
+{{- define "augias.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "augias.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "solidinvoice.serviceAccountName" -}}
+{{- define "augias.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "solidinvoice.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "augias.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
@@ -64,101 +64,101 @@ Create the name of the service account to use
 {{/*
 Return the image name
 */}}
-{{- define "solidinvoice.imageName" -}}
+{{- define "augias.imageName" -}}
 {{- printf "%s:%s" .Values.image.repository (default .Chart.AppVersion .Values.image.tag) }}
 {{- end }}
 
 {{/*
-Return the PVC name for /etc/solidinvoice config volume
+Return the PVC name for /etc/augias config volume
 */}}
-{{- define "solidinvoice.pvcName" -}}
+{{- define "augias.pvcName" -}}
 {{- if .Values.persistence.existingClaim }}
 {{- .Values.persistence.existingClaim }}
 {{- else }}
-{{- printf "%s-config" (include "solidinvoice.fullname" .) }}
+{{- printf "%s-config" (include "augias.fullname" .) }}
 {{- end }}
 {{- end }}
 
 {{/*
 Config volume definition (used across app, worker, jobs, cronjob)
-Returns the volume spec entry for the solidinvoice-config volume.
+Returns the volume spec entry for the augias-config volume.
 */}}
-{{- define "solidinvoice.configVolume" -}}
-- name: solidinvoice-config
+{{- define "augias.configVolume" -}}
+- name: augias-config
   persistentVolumeClaim:
-    claimName: {{ include "solidinvoice.pvcName" . }}
+    claimName: {{ include "augias.pvcName" . }}
 {{- end }}
 
 {{/*
 Config volumeMount definition (used across app, worker, jobs, cronjob)
-Returns the volumeMount entry mounting /etc/solidinvoice.
+Returns the volumeMount entry mounting /etc/augias.
 */}}
-{{- define "solidinvoice.configVolumeMount" -}}
-- name: solidinvoice-config
-  mountPath: /etc/solidinvoice
+{{- define "augias.configVolumeMount" -}}
+- name: augias-config
+  mountPath: /etc/augias
 {{- end }}
 
 {{/*
 Return the name of the MySQL secret containing the password.
 */}}
-{{- define "solidinvoice.mysql.secretName" -}}
+{{- define "augias.mysql.secretName" -}}
 {{- printf "%s-mysql" .Release.Name }}
 {{- end }}
 
 {{/*
 Return the name of the PostgreSQL secret containing the password.
 */}}
-{{- define "solidinvoice.postgresql.secretName" -}}
+{{- define "augias.postgresql.secretName" -}}
 {{- printf "%s-postgresql" .Release.Name }}
 {{- end }}
 
 {{/*
 Return the name of the Redis secret containing the password.
 */}}
-{{- define "solidinvoice.redis.secretName" -}}
+{{- define "augias.redis.secretName" -}}
 {{- printf "%s-redis" .Release.Name }}
 {{- end }}
 
 {{/*
 Return the name of the Meilisearch secret containing the master key.
 */}}
-{{- define "solidinvoice.meilisearch.secretName" -}}
+{{- define "augias.meilisearch.secretName" -}}
 {{- printf "%s-meilisearch" .Release.Name }}
 {{- end }}
 
 {{/*
 Return the MySQL host
 */}}
-{{- define "solidinvoice.mysql.host" -}}
+{{- define "augias.mysql.host" -}}
 {{- printf "%s-mysql" .Release.Name }}
 {{- end }}
 
 {{/*
 Return the PostgreSQL host
 */}}
-{{- define "solidinvoice.postgresql.host" -}}
+{{- define "augias.postgresql.host" -}}
 {{- printf "%s-postgresql" .Release.Name }}
 {{- end }}
 
 {{/*
 Return the Redis master host
 */}}
-{{- define "solidinvoice.redis.host" -}}
+{{- define "augias.redis.host" -}}
 {{- printf "%s-redis-master" .Release.Name }}
 {{- end }}
 
 {{/*
 Return the Meilisearch host URL
 */}}
-{{- define "solidinvoice.meilisearch.url" -}}
+{{- define "augias.meilisearch.url" -}}
 {{- printf "http://%s-meilisearch:7700" .Release.Name }}
 {{- end }}
 
 {{/*
 Worker selector labels - distinguishes worker pods from app pods
 */}}
-{{- define "solidinvoice.worker.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "solidinvoice.name" . }}
+{{- define "augias.worker.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "augias.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/component: worker
 {{- end }}
@@ -166,9 +166,9 @@ app.kubernetes.io/component: worker
 {{/*
 Worker labels
 */}}
-{{- define "solidinvoice.worker.labels" -}}
-helm.sh/chart: {{ include "solidinvoice.chart" . }}
-{{ include "solidinvoice.worker.selectorLabels" . }}
+{{- define "augias.worker.labels" -}}
+helm.sh/chart: {{ include "augias.chart" . }}
+{{ include "augias.worker.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}

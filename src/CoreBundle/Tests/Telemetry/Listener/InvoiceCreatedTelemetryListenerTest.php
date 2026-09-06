@@ -64,6 +64,6 @@ final class InvoiceCreatedTelemetryListenerTest extends TestCase
         $vault = $this->createMock(AbstractVault::class);
         $vault->expects(self::never())->method('generateKeys')->willReturn(true);
 
-        return new ConfigWriter($vault, '/tmp/solidinvoice-test-config');
+        return new ConfigWriter($vault, '/tmp/augias-test-config');
     }
 }

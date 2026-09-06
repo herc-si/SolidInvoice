@@ -48,13 +48,13 @@ final class InstallationTest extends PantherTestCase
     protected function setUp(): void
     {
         unset(
-            $_SERVER['SOLIDINVOICE_LOCALE'],
-            $_ENV['SOLIDINVOICE_LOCALE'],
-            $_SERVER['SOLIDINVOICE_INSTALLED'],
-            $_ENV['SOLIDINVOICE_INSTALLED']
+            $_SERVER['AUGIAS_LOCALE'],
+            $_ENV['AUGIAS_LOCALE'],
+            $_SERVER['AUGIAS_INSTALLED'],
+            $_ENV['AUGIAS_INSTALLED']
         );
 
-        $configDir = self::getContainer()->getParameter('env(SOLIDINVOICE_CONFIG_DIR)');
+        $configDir = self::getContainer()->getParameter('env(AUGIAS_CONFIG_DIR)');
 
         // Remove the config directory BEFORE parent::setUp() to ensure a clean state
         // when the kernel boots. This prevents any cached secrets from affecting the test.
@@ -107,7 +107,7 @@ final class InstallationTest extends PantherTestCase
             static fn (Client $client) => $client->getCookieJar()->clear()
         );
 
-        $configDir = self::getContainer()->getParameter('env(SOLIDINVOICE_CONFIG_DIR)');
+        $configDir = self::getContainer()->getParameter('env(AUGIAS_CONFIG_DIR)');
 
         $fs = new Filesystem();
         if ($fs->exists($configDir)) {
@@ -120,7 +120,7 @@ final class InstallationTest extends PantherTestCase
     public function testSystemRequirements(): void
     {
         $req = new AppRequirements(
-            self::getContainer()->getParameter('env(SOLIDINVOICE_CONFIG_DIR)'),
+            self::getContainer()->getParameter('env(AUGIAS_CONFIG_DIR)'),
             self::getContainer()->getParameter('kernel.cache_dir'),
             self::getContainer()->getParameter('kernel.logs_dir'),
         );

@@ -33,13 +33,13 @@ final readonly class TrialBannerResolver
 {
     public function __construct(
         private ClockInterface $clock,
-        #[Autowire(env: 'SOLIDINVOICE_SAAS_ONBOARDING_COUPON_CODE')]
+        #[Autowire(env: 'AUGIAS_SAAS_ONBOARDING_COUPON_CODE')]
         private string $couponCode = '',
-        #[Autowire(env: 'int:SOLIDINVOICE_SAAS_ONBOARDING_COUPON_PERCENT')]
+        #[Autowire(env: 'int:AUGIAS_SAAS_ONBOARDING_COUPON_PERCENT')]
         private int $couponPercent = 30,
-        #[Autowire(env: 'int:SOLIDINVOICE_SAAS_TRIAL_BANNER_DAYS')]
+        #[Autowire(env: 'int:AUGIAS_SAAS_TRIAL_BANNER_DAYS')]
         private int $bannerDays = 7,
-        #[Autowire(env: 'int:SOLIDINVOICE_SAAS_TRIAL_COUPON_DAYS')]
+        #[Autowire(env: 'int:AUGIAS_SAAS_TRIAL_COUPON_DAYS')]
         private int $couponDays = 2,
     ) {
     }

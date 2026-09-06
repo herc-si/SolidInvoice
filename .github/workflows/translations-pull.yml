@@ -24,9 +24,9 @@ jobs:
       pull-requests: write
 
     env:
-      SOLIDINVOICE_ENV: dev
-      SOLIDINVOICE_DEBUG: 1
-      SOLIDINVOICE_TRANSLATION_DSN: ${{ secrets.CROWDIN_DSN }}
+      AUGIAS_ENV: dev
+      AUGIAS_DEBUG: 1
+      AUGIAS_TRANSLATION_DSN: ${{ secrets.CROWDIN_DSN }}
 
     steps:
       - name: Harden Runner

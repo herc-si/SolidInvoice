@@ -19,7 +19,7 @@ set -euxo pipefail
 # - Final binary has ONLY SolidInvoice commands (no Caddy/FrankenPHP CLI)
 #
 # Environment variables:
-#   SOLIDINVOICE_VERSION - Version for the binary (mapped to FRANKENPHP_VERSION)
+#   AUGIAS_VERSION - Version for the binary (mapped to FRANKENPHP_VERSION)
 #   All other FrankenPHP env vars are also supported
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -70,12 +70,12 @@ else
 	DEFAULT_VERSION="dev-$(date +%Y%m%d-%H%M%S)_FrankenPHP"
 fi
 
-if [ -n "${SOLIDINVOICE_VERSION:-}" ]; then
-	export FRANKENPHP_VERSION="${SOLIDINVOICE_VERSION}-FrankenPHP"
-	VERSION="${SOLIDINVOICE_VERSION}"
+if [ -n "${AUGIAS_VERSION:-}" ]; then
+	export FRANKENPHP_VERSION="${AUGIAS_VERSION}-FrankenPHP"
+	VERSION="${AUGIAS_VERSION}"
 else
 	VERSION="${DEFAULT_VERSION}"
-	export SOLIDINVOICE_VERSION="${DEFAULT_VERSION}"
+	export AUGIAS_VERSION="${DEFAULT_VERSION}"
 	export FRANKENPHP_VERSION="${DEFAULT_VERSION}"
 fi
 
@@ -145,7 +145,7 @@ echo "========================================"
 cd "${SCRIPT_DIR}"
 
 # Export the source directory so our fake xcaddy knows where to build from
-export SOLIDINVOICE_SOURCE_DIR="${SCRIPT_DIR}"
+export AUGIAS_SOURCE_DIR="${SCRIPT_DIR}"
 
 # Check if this is a fresh build (xcaddy not yet installed)
 FRESH_BUILD=false
@@ -243,16 +243,16 @@ case "${arch_uname}" in
 esac
 
 FRANKENPHP_BIN="${SCRIPT_DIR}/dist/frankenphp-${os_output}-${arch_uname}"
-SOLIDINVOICE_BIN="${SCRIPT_DIR}/dist/solidinvoice-${os_output}-${arch_output}"
+AUGIAS_BIN="${SCRIPT_DIR}/dist/augias-${os_output}-${arch_output}"
 
 if [ ! -f "${FRANKENPHP_BIN}" ]; then
 	echo "Error: Expected binary not found at ${FRANKENPHP_BIN}"
 	exit 1
 fi
 
-# Rename to solidinvoice
-mv "${FRANKENPHP_BIN}" "${SOLIDINVOICE_BIN}"
-echo "Binary renamed: ${SOLIDINVOICE_BIN}"
+# Rename to augias
+mv "${FRANKENPHP_BIN}" "${AUGIAS_BIN}"
+echo "Binary renamed: ${AUGIAS_BIN}"
 
 # Clean up embed directory
 rm -rf "${EMBED_DIR}"
@@ -261,19 +261,19 @@ rm -rf "${EMBED_DIR}"
 echo ""
 echo "Testing binary..."
 echo ""
-"${SOLIDINVOICE_BIN}" version
+"${AUGIAS_BIN}" version
 echo ""
 
 echo "Available commands:"
-"${SOLIDINVOICE_BIN}" --help || true
+"${AUGIAS_BIN}" --help || true
 
 echo ""
 echo "=========================================="
 echo "Build Complete!"
 echo "=========================================="
-echo "Binary: ${SOLIDINVOICE_BIN}"
+echo "Binary: ${AUGIAS_BIN}"
 echo "Version: ${VERSION}"
-echo "Size: $(du -h "${SOLIDINVOICE_BIN}" | cut -f1)"
+echo "Size: $(du -h "${AUGIAS_BIN}" | cut -f1)"
 echo ""
 echo "✓ Uses upstream build-static.sh (no modifications)"
 echo "✓ Includes ONLY SolidInvoice commands"
@@ -286,6 +286,6 @@ echo ""
 
 if [ "${RELEASE:-}" = "1" ]; then
 	echo "Uploading to GitHub releases..."
-	gh release upload "${VERSION}" "${SOLIDINVOICE_BIN}" --repo solidinvoice/solidinvoice --clobber
+	gh release upload "${VERSION}" "${AUGIAS_BIN}" --repo augias/augias --clobber
 	echo "Upload complete!"
 fi

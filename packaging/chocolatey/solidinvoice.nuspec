@@ -5,8 +5,8 @@
 -->
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
-    <id>solidinvoice</id>
-    <version>${SOLIDINVOICE_VERSION}</version>
+    <id>augias</id>
+    <version>${AUGIAS_VERSION}</version>
     <title>SolidInvoice</title>
     <authors>Pierre du Plessis</authors>
     <owners>SolidWorx</owners>

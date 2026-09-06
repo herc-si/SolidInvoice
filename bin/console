@@ -14,8 +14,8 @@ if (!is_dir(dirname(__DIR__).'/vendor')) {
 $_SERVER['APP_RUNTIME'] = Runtime::class;
 
 $_SERVER['APP_RUNTIME_OPTIONS'] = [
-    'env_var_name' => 'SOLIDINVOICE_ENV',
-    'debug_var_name' => 'SOLIDINVOICE_DEBUG',
+    'env_var_name' => 'AUGIAS_ENV',
+    'debug_var_name' => 'AUGIAS_DEBUG',
 ];
 
 require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
@@ -48,7 +48,7 @@ if (function_exists('ini_set')) {
 }
 
 return static function (AppMode $mode, array $context) {
-    $kernel = new Kernel($mode, $context['SOLIDINVOICE_ENV'], (bool) $context['SOLIDINVOICE_DEBUG']);
+    $kernel = new Kernel($mode, $context['AUGIAS_ENV'], (bool) $context['AUGIAS_DEBUG']);
 
     $application = new Application($kernel);
     $application->setName(AugiasCoreBundle::APP_NAME);

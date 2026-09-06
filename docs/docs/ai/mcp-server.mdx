@@ -19,8 +19,8 @@ The MCP server is always served at the path `/_mcp` on your SolidInvoice instanc
 
 | Deployment   | URL                                            |
 |--------------|------------------------------------------------|
-| Cloud SaaS   | `https://solidinvoice.app/_mcp`                |
-| Self-hosted  | `https://<your-solidinvoice-host>/_mcp`        |
+| Cloud SaaS   | `https://augias.app/_mcp`                |
+| Self-hosted  | `https://<your-augias-host>/_mcp`        |
 
 :::info
 The transport is **Streamable HTTP** (the standard remote-MCP transport), not stdio. Any agent that supports remote MCP servers with OAuth can connect — no proxy or wrapper script is required.
@@ -53,7 +53,7 @@ The exact steps depend on the agent. The URL is always your `/_mcp` endpoint; ev
 In Claude Desktop, open `Settings → Connectors → Add custom connector` and enter:
 
 - **Name**: `SolidInvoice`
-- **URL**: `https://solidinvoice.app/_mcp` (or your self-hosted URL)
+- **URL**: `https://augias.app/_mcp` (or your self-hosted URL)
 
 Claude opens a browser window to complete OAuth. Approve the consent screen and the connector is ready to use in any chat.
 
@@ -63,7 +63,7 @@ Claude opens a browser window to complete OAuth. Approve the consent screen and 
 From a terminal:
 
 ```bash
-claude mcp add --transport http solidinvoice https://solidinvoice.app/_mcp
+claude mcp add --transport http augias https://augias.app/_mcp
 ```
 
 For a self-hosted instance, swap the URL. The first tool call in a session triggers the OAuth flow in your browser.
@@ -71,7 +71,7 @@ For a self-hosted instance, swap the URL. The first tool call in a session trigg
 To make the connection available across all your projects, add `--scope user`:
 
 ```bash
-claude mcp add --scope user --transport http solidinvoice https://solidinvoice.app/_mcp
+claude mcp add --scope user --transport http augias https://augias.app/_mcp
 ```
 
   </TabItem>
@@ -82,8 +82,8 @@ Open `Settings → MCP → Add new MCP server` and add:
 ```json
 {
   "mcpServers": {
-    "solidinvoice": {
-      "url": "https://solidinvoice.app/_mcp"
+    "augias": {
+      "url": "https://augias.app/_mcp"
     }
   }
 }
@@ -97,8 +97,8 @@ Cursor will prompt you to authorize in the browser on first use.
 Add the server to `~/.codex/config.toml`:
 
 ```ini title="~/.codex/config.toml"
-[mcp_servers.solidinvoice]
-url = "https://solidinvoice.app/_mcp"
+[mcp_servers.augias]
+url = "https://augias.app/_mcp"
 ```
 
 Restart Codex. The first request triggers browser-based OAuth.
@@ -114,7 +114,7 @@ In Goose, add an extension of type `Remote (HTTP)` pointing at your `/_mcp` URL.
 The official inspector is the quickest way to test a connection without configuring a full agent:
 
 ```bash
-npx @modelcontextprotocol/inspector https://solidinvoice.app/_mcp
+npx @modelcontextprotocol/inspector https://augias.app/_mcp
 ```
 
 It walks through dynamic client registration, opens the consent page in your browser, then drops you into a UI where you can list and call every tool the server exposes.
@@ -124,7 +124,7 @@ It walks through dynamic client registration, opens the consent page in your bro
 
 Any MCP client that supports the **Streamable HTTP** transport with **OAuth 2.1 (authorization code + PKCE)** and **Dynamic Client Registration (RFC 7591)** can connect with no extra setup:
 
-- Server URL: `https://solidinvoice.app/_mcp` (or your self-hosted URL)
+- Server URL: `https://augias.app/_mcp` (or your self-hosted URL)
 - Auth: discovered automatically from `/.well-known/oauth-authorization-server`
 - Scopes: request `mcp:read` and (if the agent needs to make changes) `mcp:write`
 
@@ -142,7 +142,7 @@ After connecting, ask the agent something like *"List my unpaid invoices"* or *"
 If you belong to multiple companies, the consent screen shows a company picker. The choice is locked into the access token — to point the same agent at a different company, revoke it from `Profile → Connected apps` and reconnect.
 
 :::tip
-You can connect the same agent to multiple companies by registering it more than once under different names — for example `solidinvoice-acme` and `solidinvoice-personal`. Each registration gets its own consent and its own token, so the agent can act against either company by picking the matching connection.
+You can connect the same agent to multiple companies by registering it more than once under different names — for example `augias-acme` and `augias-personal`. Each registration gets its own consent and its own token, so the agent can act against either company by picking the matching connection.
 :::
 
 ## Available tools
@@ -207,21 +207,21 @@ Revoking an agent does not delete its registration, so the same agent can be rec
 
 The MCP server is bundled with SolidInvoice 3.0 and enabled by default. The only one-time prerequisites are:
 
-- **OAuth signing keys.** Run `bin/console mcp:keys:generate` once; keys are written to `$SOLIDINVOICE_CONFIG_DIR/oauth/` and survive redeployments. The single-binary launcher (`solidinvoice run`) does this automatically on first start.
+- **OAuth signing keys.** Run `bin/console mcp:keys:generate` once; keys are written to `$AUGIAS_CONFIG_DIR/oauth/` and survive redeployments. The single-binary launcher (`augias run`) does this automatically on first start.
 - **Database migrations.** Run `bin/console doctrine:migrations:migrate` to create the OAuth and token tables.
 
 For multi-node deployments, switch the MCP session store off the default on-disk backend so sessions survive across nodes:
 
 ```ini title=".env.local"
-SOLIDINVOICE_MCP_SESSION_STORE=cache
-SOLIDINVOICE_MCP_SESSION_CACHE_POOL=cache.app
+AUGIAS_MCP_SESSION_STORE=cache
+AUGIAS_MCP_SESSION_CACHE_POOL=cache.app
 ```
 
 | Store       | When to use                                                                          |
 |-------------|--------------------------------------------------------------------------------------|
 | `file`      | Default. Single-node deployments.                                                    |
 | `memory`    | Local development only — sessions reset on every worker restart.                     |
-| `cache`     | Multi-node deployments. Point `SOLIDINVOICE_MCP_SESSION_CACHE_POOL` at a Redis pool. |
+| `cache`     | Multi-node deployments. Point `AUGIAS_MCP_SESSION_CACHE_POOL` at a Redis pool. |
 | `framework` | Re-uses your application's Symfony session handler.                                  |
 
 ## Troubleshooting

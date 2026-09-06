@@ -27,8 +27,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autoconfigure()
         ->autowire()
         ->private()
-        ->bind('$installed', env('SOLIDINVOICE_INSTALLED'))
-        ->bind('$customDomainDnsRecord', env('SOLIDINVOICE_CUSTOM_DOMAIN_DNS_RECORD'))
+        ->bind('$installed', env('AUGIAS_INSTALLED'))
+        ->bind('$customDomainDnsRecord', env('AUGIAS_CUSTOM_DOMAIN_DNS_RECORD'))
     ;
 
     $services
@@ -41,7 +41,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services
         ->get(MailTransportType::class)
-        ->arg('$transports', tagged_iterator('solidinvoice_mailer.transport.configurator'));
+        ->arg('$transports', tagged_iterator('augias_mailer.transport.configurator'));
 
     $services
         ->get(SystemConfig::class);

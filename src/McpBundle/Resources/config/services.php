@@ -37,13 +37,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->load(AugiasMcpBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 2) . '/Action')
         ->tag('controller.service_arguments');
 
-    $services->set(KeyManager::class)->arg('$configDir', '%env(SOLIDINVOICE_CONFIG_DIR)%')->arg('$encryptionKey', '%env(SOLIDINVOICE_APP_SECRET)%');
+    $services->set(KeyManager::class)->arg('$configDir', '%env(AUGIAS_CONFIG_DIR)%')->arg('$encryptionKey', '%env(AUGIAS_APP_SECRET)%');
 
     $services->set(PendingAuthorization::class);
 
     $services->alias(ServerFactoryInterface::class, ServerFactory::class);
 
-    $services->set(ServerFactory::class)->arg('$accessTokenTtl', '%env(SOLIDINVOICE_MCP_ACCESS_TOKEN_TTL)%')->arg('$refreshTokenTtl', '%env(SOLIDINVOICE_MCP_REFRESH_TOKEN_TTL)%')->arg('$authCodeTtl', '%env(SOLIDINVOICE_MCP_AUTH_CODE_TTL)%');
+    $services->set(ServerFactory::class)->arg('$accessTokenTtl', '%env(AUGIAS_MCP_ACCESS_TOKEN_TTL)%')->arg('$refreshTokenTtl', '%env(AUGIAS_MCP_REFRESH_TOKEN_TTL)%')->arg('$authCodeTtl', '%env(AUGIAS_MCP_AUTH_CODE_TTL)%');
 
     $services->set(DynamicClientRegistration::class)
         ->tag('controller.service_arguments')->arg('$mcpOauthRegisterLimiter', service('limiter.mcp_oauth_register')->nullOnInvalid());

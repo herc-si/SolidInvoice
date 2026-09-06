@@ -53,17 +53,17 @@ final readonly class Telemetry
         private MessageBusInterface $bus,
         private ConfigWriter $configWriter,
         private Connection $connection,
-        #[Autowire(env: 'default::SOLIDINVOICE_BUILD_ID')]
+        #[Autowire(env: 'default::AUGIAS_BUILD_ID')]
         private ?string $buildId,
-        #[Autowire(env: 'bool:SOLIDINVOICE_ENABLE_TELEMETRY')]
+        #[Autowire(env: 'bool:AUGIAS_ENABLE_TELEMETRY')]
         private bool $enableTelemetry,
-        #[Autowire(env: 'SOLIDINVOICE_INSTALL_TYPE')]
+        #[Autowire(env: 'AUGIAS_INSTALL_TYPE')]
         private string $installType,
-        #[Autowire(env: 'bool:default::SOLIDINVOICE_DOCKER')]
+        #[Autowire(env: 'bool:default::AUGIAS_DOCKER')]
         private bool $docker,
-        #[Autowire(env: 'SOLIDINVOICE_LOCALE')]
+        #[Autowire(env: 'AUGIAS_LOCALE')]
         private string $locale,
-        #[Autowire(env: 'default::SOLIDINVOICE_TELEMETRY_LAST_VERSION')]
+        #[Autowire(env: 'default::AUGIAS_TELEMETRY_LAST_VERSION')]
         private ?string $lastVersion,
     ) {
     }
@@ -172,7 +172,7 @@ final readonly class Telemetry
             return $this->installType;
         }
 
-        // The Docker images (and Helm chart) set SOLIDINVOICE_DOCKER=true.
+        // The Docker images (and Helm chart) set AUGIAS_DOCKER=true.
         return $this->docker ? 'docker' : 'manual';
     }
 

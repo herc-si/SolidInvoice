@@ -61,8 +61,8 @@ final class BuildIdLoaderTest extends TestCase
 
         $result = $loader->loadEnvVars();
 
-        self::assertArrayHasKey('SOLIDINVOICE_BUILD_ID', $result);
-        self::assertTrue(Uuid::isValid($result['SOLIDINVOICE_BUILD_ID']));
+        self::assertArrayHasKey('AUGIAS_BUILD_ID', $result);
+        self::assertTrue(Uuid::isValid($result['AUGIAS_BUILD_ID']));
     }
 
     public function testSealsBuildIdToVaultWhenNotSet(): void
@@ -76,8 +76,8 @@ final class BuildIdLoaderTest extends TestCase
 
         self::assertFileExists($dotenvFile);
         $contents = file_get_contents($dotenvFile);
-        self::assertStringContainsString('SOLIDINVOICE_BUILD_ID=', (string) $contents);
-        self::assertStringContainsString($result['SOLIDINVOICE_BUILD_ID'], (string) $contents);
+        self::assertStringContainsString('AUGIAS_BUILD_ID=', (string) $contents);
+        self::assertStringContainsString($result['AUGIAS_BUILD_ID'], (string) $contents);
     }
 
     public function testReturnsSameValueOnlyOnce(): void
@@ -88,7 +88,7 @@ final class BuildIdLoaderTest extends TestCase
         // First call with empty buildId generates a UUID
         $loader = new BuildIdLoader($configWriter, '');
         $result = $loader->loadEnvVars();
-        $generatedId = $result['SOLIDINVOICE_BUILD_ID'];
+        $generatedId = $result['AUGIAS_BUILD_ID'];
 
         // Subsequent loader instance with the generated value is a no-op
         $loader2 = new BuildIdLoader($configWriter, $generatedId);

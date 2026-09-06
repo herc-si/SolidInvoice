@@ -7,7 +7,7 @@
 # Filename convention: manifests/s/SolidInvoice/SolidInvoice/<version>/SolidInvoice.SolidInvoice.yaml
 
 PackageIdentifier: SolidInvoice.SolidInvoice
-PackageVersion: "${SOLIDINVOICE_VERSION}"
+PackageVersion: "${AUGIAS_VERSION}"
 PackageName: SolidInvoice
 Publisher: SolidWorx
 PublisherUrl: https://solidinvoice.co
@@ -25,11 +25,11 @@ PackageUrl: https://github.com/SolidInvoice/SolidInvoice
 Installers:
   - Architecture: x64
     InstallerType: portable
-    InstallerUrl: https://github.com/SolidInvoice/SolidInvoice/releases/download/${SOLIDINVOICE_VERSION}/solidinvoice-windows-amd64.exe
+    InstallerUrl: https://github.com/SolidInvoice/SolidInvoice/releases/download/${AUGIAS_VERSION}/augias-windows-amd64.exe
     InstallerSha256: ""
   - Architecture: arm64
     InstallerType: portable
-    InstallerUrl: https://github.com/SolidInvoice/SolidInvoice/releases/download/${SOLIDINVOICE_VERSION}/solidinvoice-windows-arm64.exe
+    InstallerUrl: https://github.com/SolidInvoice/SolidInvoice/releases/download/${AUGIAS_VERSION}/augias-windows-arm64.exe
     InstallerSha256: ""
 ManifestType: singleton
 ManifestVersion: 1.6.0

@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "solidinvoice.fullname" . }}-worker
+  name: {{ include "augias.fullname" . }}-worker
   labels:
-    {{- include "solidinvoice.worker.labels" . | nindent 4 }}
+    {{- include "augias.worker.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.worker.autoscaling.enabled }}
   replicas: {{ .Values.worker.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "solidinvoice.worker.selectorLabels" . | nindent 6 }}
+      {{- include "augias.worker.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "solidinvoice.worker.selectorLabels" . | nindent 8 }}
+        {{- include "augias.worker.selectorLabels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -30,11 +30,11 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "solidinvoice.serviceAccountName" . }}
+      serviceAccountName: {{ include "augias.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- $mysqlInit := trim (include "solidinvoice.mysqlInitContainer" .) }}
-      {{- $postgresqlInit := trim (include "solidinvoice.postgresqlInitContainer" .) }}
+      {{- $mysqlInit := trim (include "augias.mysqlInitContainer" .) }}
+      {{- $postgresqlInit := trim (include "augias.postgresqlInitContainer" .) }}
       {{- if or $mysqlInit $postgresqlInit }}
       initContainers:
         {{- if $mysqlInit }}
@@ -46,15 +46,15 @@ spec:
       {{- end }}
       containers:
         - name: worker
-          image: {{ include "solidinvoice.imageName" . }}
+          image: {{ include "augias.imageName" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
-            - /usr/local/bin/solidinvoice
+            - /usr/local/bin/augias
             - worker
             - --workers={{ .Values.worker.count }}
-          {{- include "solidinvoice.commonEnv" . | nindent 10 }}
+          {{- include "augias.commonEnv" . | nindent 10 }}
           volumeMounts:
-            {{- include "solidinvoice.configVolumeMount" . | nindent 12 }}
+            {{- include "augias.configVolumeMount" . | nindent 12 }}
           resources:
             {{- toYaml .Values.worker.resources | nindent 12 }}
           securityContext:
@@ -69,7 +69,7 @@ spec:
             periodSeconds: 60
             failureThreshold: 3
       volumes:
-        {{- include "solidinvoice.configVolume" . | nindent 8 }}
+        {{- include "augias.configVolume" . | nindent 8 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

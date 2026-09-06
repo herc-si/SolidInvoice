@@ -32,20 +32,20 @@ final class Runtime extends SymfonyRuntime
     }
 
     /**
-     * Resolved with tryFrom() rather than from() so a misconfigured SOLIDINVOICE_PLATFORM
+     * Resolved with tryFrom() rather than from() so a misconfigured AUGIAS_PLATFORM
      * fails with a message naming the accepted values, instead of a bare ValueError from
      * deep inside the runtime before the application has booted.
      */
     private function appMode(): AppMode
     {
-        $platform = (string) ($_SERVER['SOLIDINVOICE_PLATFORM'] ?? '');
+        $platform = (string) ($_SERVER['AUGIAS_PLATFORM'] ?? '');
 
         if ('' === $platform) {
             return AppMode::SELF_HOSTED;
         }
 
         return AppMode::tryFrom($platform) ?? throw new InvalidArgumentException(sprintf(
-            'Invalid value "%s" for SOLIDINVOICE_PLATFORM. Expected one of: %s.',
+            'Invalid value "%s" for AUGIAS_PLATFORM. Expected one of: %s.',
             $platform,
             implode(', ', array_column(AppMode::cases(), 'value')),
         ));

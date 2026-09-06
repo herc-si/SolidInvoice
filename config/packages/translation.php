@@ -25,7 +25,7 @@ $locales = [
 
 return App::config([
     'framework' => [
-        'default_locale' => env('SOLIDINVOICE_LOCALE'),
+        'default_locale' => env('AUGIAS_LOCALE'),
         'translator' => [
             'fallbacks' => ['en'],
             // Provider-agnostic push/pull integration. The DSN selects the provider
@@ -34,7 +34,7 @@ return App::config([
             // only contacted by the `translation:push` / `translation:pull` commands.
             'providers' => [
                 'crowdin' => [
-                    'dsn' => env('SOLIDINVOICE_TRANSLATION_DSN'),
+                    'dsn' => env('AUGIAS_TRANSLATION_DSN'),
                     'domains' => ['messages', 'email', 'validators'],
                     'locales' => $locales,
                 ],

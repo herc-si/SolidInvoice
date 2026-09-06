@@ -98,7 +98,7 @@ vim src/CoreBundle/Action/SomeAction.php
 ./build_binary.sh --local
 
 # Run binary
-./frankenphp/dist/solidinvoice-* run
+./frankenphp/dist/augias-* run
 ```
 
 ### Testing Performance Tweaks
@@ -190,7 +190,7 @@ project/
 ├── frankenphp/
 │   ├── app.tar.gz                         ← Copy of dist (for embedding)
 │   └── dist/
-│       └── solidinvoice-{os}-{arch}       ← Final binary
+│       └── augias-{os}-{arch}       ← Final binary
 └── scripts/
     ├── build_binary.sh                     ← This script
     └── build_dist.sh                       ← Builds dist archive

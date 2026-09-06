@@ -107,7 +107,7 @@ final class SendRecurringInvoicesCommandTest extends KernelTestCase
         $application = new Application(self::bootKernel());
 
         /** @var LazyCommand $lazyCommand */
-        $lazyCommand = $application->find('solidinvoice:recurring:send-invoices');
+        $lazyCommand = $application->find('augias:recurring:send-invoices');
 
         /** @var SendRecurringInvoicesCommand $command */
         $command = $lazyCommand->getCommand();

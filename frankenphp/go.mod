@@ -1,4 +1,4 @@
-module solidinvoice
+module augias
 
 go 1.26.0
 

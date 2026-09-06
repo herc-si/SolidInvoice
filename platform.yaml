@@ -20,9 +20,9 @@ saas:
     integration:
         lemon_squeezy:
             enabled: true
-            api_key: '%env(SOLIDINVOICE_LEMON_SQUEEZY_API_KEY)%'
-            webhook_secret: '%env(SOLIDINVOICE_LEMON_SQUEEZY_WEBHOOK_SECRET)%'
-            store_id: '%env(SOLIDINVOICE_LEMON_SQUEEZY_STORE_ID)%'
+            api_key: '%env(AUGIAS_LEMON_SQUEEZY_API_KEY)%'
+            webhook_secret: '%env(AUGIAS_LEMON_SQUEEZY_WEBHOOK_SECRET)%'
+            store_id: '%env(AUGIAS_LEMON_SQUEEZY_STORE_ID)%'
     # Canonical catalogue of every gated feature. Keep the keys here in lock-step
     # with `Augias\SaasBundle\Feature\Feature` (asserted by FeatureCatalogTest).
     # Defaults are the un-overridden values returned by FeatureGate::resolve()

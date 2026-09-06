@@ -25,13 +25,13 @@ use function strtoupper;
 
 readonly class ConfigWriter
 {
-    public const string CONFIG_PREFIX = 'SOLIDINVOICE_';
+    public const string CONFIG_PREFIX = 'AUGIAS_';
 
     private string $pathPrefix;
 
     public function __construct(
         private AbstractVault $vault,
-        #[Autowire(env: 'SOLIDINVOICE_CONFIG_DIR')]
+        #[Autowire(env: 'AUGIAS_CONFIG_DIR')]
         string $secretsDir,
     ) {
         $this->pathPrefix = rtrim(str_replace('/', DIRECTORY_SEPARATOR, $secretsDir), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . basename($secretsDir) . '.';

@@ -33,6 +33,6 @@ final class AugiasCoreBundle extends Bundle
         $container->addCompilerPass(new SubscriberResolverPass());
 
         $container->registerForAutoconfiguration(ResultFormatterInterface::class)
-            ->addTag('solidinvoice.search.result_formatter');
+            ->addTag('augias.search.result_formatter');
     }
 }

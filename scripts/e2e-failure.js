@@ -36,7 +36,7 @@ module.exports = async ({ github, context }) => {
                 `${rootDir}/var/browser/screenshots/${element}`,
                 {
                     tags: `ci,github-actions,e2e,screenshot,${context.ref}`,
-                    folder: `solidinvoice/ci/errors/${context.issue.number}/${context.sha}`,
+                    folder: `augias/ci/errors/${context.issue.number}/${context.sha}`,
                     sign_url: true,
                     use_filename: true,
                     unique_filename: false,

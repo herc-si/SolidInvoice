@@ -33,7 +33,7 @@ class SectionRepository extends EntityRepository
      * @param string $cacheKey
      * @return list<Setting>
      */
-    public function getTopLevelSections(bool $cache = false, $cacheKey = 'solidinvoice_settings_top_section_sections', int $lifetime = 604800): array
+    public function getTopLevelSections(bool $cache = false, $cacheKey = 'augias_settings_top_section_sections', int $lifetime = 604800): array
     {
         $qb = $this->createQueryBuilder('s')
             ->where('s.parent IS NULL');

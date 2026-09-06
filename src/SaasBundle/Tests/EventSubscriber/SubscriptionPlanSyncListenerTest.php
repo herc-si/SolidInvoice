@@ -211,7 +211,7 @@ final class SubscriptionPlanSyncListenerTest extends TestCase
 
         return new Telemetry(
             $this->bus,
-            new ConfigWriter($vault, '/tmp/solidinvoice-test-config'),
+            new ConfigWriter($vault, '/tmp/augias-test-config'),
             DriverManager::getConnection(['driver' => 'pdo_sqlite', 'memory' => true]),
             'build-123',
             true,

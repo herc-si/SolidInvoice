@@ -41,7 +41,7 @@ use function sprintf;
  * @see \Augias\InvoiceBundle\Tests\Command\SendInvoiceRemindersCommandTest
  */
 #[AsCommand(
-    name: 'solidinvoice:invoices:send-reminders',
+    name: 'augias:invoices:send-reminders',
     description: 'Send payment reminders for pending and overdue invoices',
 )]
 // Every hour at a hashed minute to spread load. The hash is seeded from the full command line, so

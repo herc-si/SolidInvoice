@@ -25,8 +25,8 @@ on:
         default: true
 
 env:
-  SOLIDINVOICE_ENV: prod
-  SOLIDINVOICE_DEBUG: 0
+  AUGIAS_ENV: prod
+  AUGIAS_DEBUG: 0
 
 permissions:
   contents: read
@@ -60,7 +60,7 @@ jobs:
           elif [[ "${EVENT_NAME}" == "workflow_dispatch" && -n "${INPUT_VERSION}" ]]; then
             ref="${INPUT_VERSION}"
           else
-            ref="$(gh release view --repo solidinvoice/solidinvoice --json tagName --jq '.tagName')"
+            ref="$(gh release view --repo augias/augias --json tagName --jq '.tagName')"
           fi
           echo "ref=${ref}" >> "${GITHUB_OUTPUT}"
 
@@ -134,7 +134,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       HOMEBREW_NO_AUTO_UPDATE: 1
-      SOLIDINVOICE_VERSION: ${{ needs.prepare.outputs.ref }}
+      AUGIAS_VERSION: ${{ needs.prepare.outputs.ref }}
       PHP_VERSION: 8.5
     steps:
       - name: Harden the runner (Audit all outbound calls)
@@ -163,7 +163,7 @@ jobs:
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: frankenphp/dist/static-php-cli
-          key: ${{ matrix.os }}-${{ matrix.platform }}-static-php-${{ env.PHP_VERSION }}-${{ hashFiles('frankenphp/build-static.sh', 'frankenphp/build-solidinvoice.sh') }}
+          key: ${{ matrix.os }}-${{ matrix.platform }}-static-php-${{ env.PHP_VERSION }}-${{ hashFiles('frankenphp/build-static.sh', 'frankenphp/build-augias.sh') }}
           restore-keys: |
               ${{ matrix.os }}-${{ matrix.platform }}-static-php-${{ env.PHP_VERSION }}-
               ${{ matrix.os }}-${{ matrix.platform }}-static-php-
@@ -198,7 +198,7 @@ jobs:
         uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: frankenphp/dist/static-php-cli
-          key: ${{ matrix.os }}-${{ matrix.platform }}-static-php-${{ env.PHP_VERSION }}-${{ hashFiles('frankenphp/build-static.sh', 'frankenphp/build-solidinvoice.sh') }}
+          key: ${{ matrix.os }}-${{ matrix.platform }}-static-php-${{ env.PHP_VERSION }}-${{ hashFiles('frankenphp/build-static.sh', 'frankenphp/build-augias.sh') }}
 
   build-linux:
     name: Build Linux ${{ matrix.arch }} binary
@@ -217,7 +217,7 @@ jobs:
             runner: ubuntu-24.04-arm
     runs-on: ${{ matrix.runner }}
     env:
-      SOLIDINVOICE_VERSION: ${{ needs.prepare.outputs.ref }}
+      AUGIAS_VERSION: ${{ needs.prepare.outputs.ref }}
       PHP_VERSION: 8.5
     steps:
       - name: Harden the runner
@@ -250,7 +250,7 @@ jobs:
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: frankenphp/dist/static-php-cli
-          key: linux-${{ matrix.arch }}-static-php-${{ env.PHP_VERSION }}-${{ hashFiles('frankenphp/build-static.sh', 'frankenphp/build-solidinvoice.sh') }}
+          key: linux-${{ matrix.arch }}-static-php-${{ env.PHP_VERSION }}-${{ hashFiles('frankenphp/build-static.sh', 'frankenphp/build-augias.sh') }}
           restore-keys: |
               linux-${{ matrix.arch }}-static-php-${{ env.PHP_VERSION }}-
               linux-${{ matrix.arch }}-static-php-
@@ -288,7 +288,7 @@ jobs:
         uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: frankenphp/dist/static-php-cli
-          key: linux-${{ matrix.arch }}-static-php-${{ env.PHP_VERSION }}-${{ hashFiles('frankenphp/build-static.sh', 'frankenphp/build-solidinvoice.sh') }}
+          key: linux-${{ matrix.arch }}-static-php-${{ env.PHP_VERSION }}-${{ hashFiles('frankenphp/build-static.sh', 'frankenphp/build-augias.sh') }}
 
       - name: Login to DockerHub
         if: needs.prepare.outputs.release == '1'
@@ -303,7 +303,7 @@ jobs:
 
       - name: Copy binary to Docker context
         if: needs.prepare.outputs.release == '1'
-        run: cp frankenphp/dist/solidinvoice-linux-${{ matrix.arch }} docker/solidinvoice
+        run: cp frankenphp/dist/augias-linux-${{ matrix.arch }} docker/augias
 
       - name: Build and push Docker image
         if: needs.prepare.outputs.release == '1'
@@ -315,9 +315,9 @@ jobs:
           set: |
             package.platform=${{ matrix.platform }}
             package.tags=
-            package.output=type=image,name=solidinvoice/solidinvoice,push-by-digest=true,name-canonical=true,push=true
+            package.output=type=image,name=augias/augias,push-by-digest=true,name-canonical=true,push=true
         env:
-          SOLIDINVOICE_VERSION: ${{ needs.prepare.outputs.ref }}
+          AUGIAS_VERSION: ${{ needs.prepare.outputs.ref }}
           LATEST: ${{ !contains(needs.prepare.outputs.ref, '-') }}
 
       - name: Export digest for manifest merge
@@ -368,7 +368,7 @@ jobs:
 
       - name: Create and push multi-platform manifest
         run: |
-          IMAGE="solidinvoice/solidinvoice"
+          IMAGE="augias/augias"
 
           TAGS="-t ${IMAGE}:${VERSION}"
 
@@ -441,7 +441,7 @@ jobs:
           VERSION: ${{ needs.prepare.outputs.ref }}
         run: |
           gh release upload "$VERSION" /tmp/helm-packages/*.tgz \
-            --repo solidinvoice/solidinvoice --clobber
+            --repo augias/augias --clobber
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
@@ -453,7 +453,7 @@ jobs:
       - name: Push chart to GHCR (OCI)
         run: |
           for chart in /tmp/helm-packages/*.tgz; do
-            helm push "$chart" oci://ghcr.io/solidinvoice/charts
+            helm push "$chart" oci://ghcr.io/augias/charts
           done
 
       - name: Publish to Helm repository (gh-pages)

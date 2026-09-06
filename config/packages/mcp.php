@@ -15,11 +15,11 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Augias\CoreBundle\AugiasCoreBundle;
 
-// Session store is configurable via SOLIDINVOICE_MCP_SESSION_STORE
+// Session store is configurable via AUGIAS_MCP_SESSION_STORE
 // (file | memory | cache | framework):
 //   - file: on-disk (default, single-node deployments)
 //   - memory: in-process (dev only; resets on restart)
-//   - cache: PSR-16 cache pool — set SOLIDINVOICE_MCP_SESSION_CACHE_POOL
+//   - cache: PSR-16 cache pool — set AUGIAS_MCP_SESSION_CACHE_POOL
 //     to a Redis-backed pool for multi-node deployments
 //   - framework: Symfony session.handler (shares the app's session storage)
 //
@@ -40,10 +40,10 @@ return App::config([
         'http' => [
             'path' => '/_mcp',
             'session' => [
-                'store' => (string) $env('SOLIDINVOICE_MCP_SESSION_STORE', 'file'),
-                'cache_pool' => (string) $env('SOLIDINVOICE_MCP_SESSION_CACHE_POOL', 'cache.mcp.sessions'),
-                'prefix' => (string) $env('SOLIDINVOICE_MCP_SESSION_PREFIX', 'mcp-'),
-                'ttl' => (int) $env('SOLIDINVOICE_MCP_SESSION_TTL', 3600),
+                'store' => (string) $env('AUGIAS_MCP_SESSION_STORE', 'file'),
+                'cache_pool' => (string) $env('AUGIAS_MCP_SESSION_CACHE_POOL', 'cache.mcp.sessions'),
+                'prefix' => (string) $env('AUGIAS_MCP_SESSION_PREFIX', 'mcp-'),
+                'ttl' => (int) $env('AUGIAS_MCP_SESSION_TTL', 3600),
             ],
         ],
     ],

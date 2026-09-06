@@ -1,9 +1,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "solidinvoice.fullname" . }}-migrate
+  name: {{ include "augias.fullname" . }}-migrate
   labels:
-    {{- include "solidinvoice.labels" . | nindent 4 }}
+    {{- include "augias.labels" . | nindent 4 }}
   annotations:
     helm.sh/hook: pre-upgrade
     helm.sh/hook-weight: "0"
@@ -14,7 +14,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "solidinvoice.selectorLabels" . | nindent 8 }}
+        {{- include "augias.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: migrate
     spec:
       restartPolicy: OnFailure
@@ -22,11 +22,11 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "solidinvoice.serviceAccountName" . }}
+      serviceAccountName: {{ include "augias.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- $mysqlInit := trim (include "solidinvoice.mysqlInitContainer" .) }}
-      {{- $postgresqlInit := trim (include "solidinvoice.postgresqlInitContainer" .) }}
+      {{- $mysqlInit := trim (include "augias.mysqlInitContainer" .) }}
+      {{- $postgresqlInit := trim (include "augias.postgresqlInitContainer" .) }}
       {{- if or $mysqlInit $postgresqlInit }}
       initContainers:
         {{- if $mysqlInit }}
@@ -38,20 +38,20 @@ spec:
       {{- end }}
       containers:
         - name: migrate
-          image: {{ include "solidinvoice.imageName" . }}
+          image: {{ include "augias.imageName" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
-            - /usr/local/bin/solidinvoice
+            - /usr/local/bin/augias
             - console
             - doctrine:migrations:migrate
             - --no-interaction
             - --no-ansi
-          {{- include "solidinvoice.commonEnv" . | nindent 10 }}
+          {{- include "augias.commonEnv" . | nindent 10 }}
           volumeMounts:
-            {{- include "solidinvoice.configVolumeMount" . | nindent 12 }}
+            {{- include "augias.configVolumeMount" . | nindent 12 }}
           resources:
             {{- toYaml .Values.migrations.resources | nindent 12 }}
           securityContext:
             {{- toYaml .Values.containerSecurityContext | nindent 12 }}
       volumes:
-        {{- include "solidinvoice.configVolume" . | nindent 8 }}
+        {{- include "augias.configVolume" . | nindent 8 }}

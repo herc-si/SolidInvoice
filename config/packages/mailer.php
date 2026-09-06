@@ -16,9 +16,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 return App::config([
     'framework' => [
         'mailer' => [
-            'dsn' => env('SOLIDINVOICE_MAILER_DSN'),
+            'dsn' => env('AUGIAS_MAILER_DSN'),
             'envelope' => [
-                'sender' => env('SOLIDINVOICE_MAILER_SENDER'),
+                'sender' => env('AUGIAS_MAILER_SENDER'),
             ],
         ],
     ],

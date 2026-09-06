@@ -114,7 +114,7 @@ final class ProcessCompanyExportHandlerTest extends KernelTestCase
 
         $manifest = json_decode($manifestContents, true, 8, JSON_THROW_ON_ERROR);
         self::assertIsArray($manifest);
-        self::assertArrayHasKey('solidinvoice_version', $manifest);
+        self::assertArrayHasKey('augias_version', $manifest);
         self::assertArrayHasKey('entity_counts', $manifest);
     }
 }

@@ -24,7 +24,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire()
         ->private()
         // SupplierGrid extends ClientBundle's BaseClientGrid, which needs $locale.
-        ->bind('$locale', env('SOLIDINVOICE_LOCALE'))
+        ->bind('$locale', env('AUGIAS_LOCALE'))
     ;
 
     $services

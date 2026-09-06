@@ -10,19 +10,19 @@ LABEL org.opencontainers.image.source=https://github.com/SolidInvoice/SolidInvoi
 LABEL org.opencontainers.image.licenses=MIT
 LABEL org.opencontainers.image.vendor="SolidWorx"
 
-ARG SOLIDINVOICE_VERSION=''
-ENV SOLIDINVOICE_VERSION=${SOLIDINVOICE_VERSION}
-ENV SOLIDINVOICE_ENV=prod
-ENV SOLIDINVOICE_DEBUG=0
-ENV SOLIDINVOICE_CONFIG_DIR=/etc/solidinvoice
-ENV SOLIDINVOICE_DOCKER=true
+ARG AUGIAS_VERSION=''
+ENV AUGIAS_VERSION=${AUGIAS_VERSION}
+ENV AUGIAS_ENV=prod
+ENV AUGIAS_DEBUG=0
+ENV AUGIAS_CONFIG_DIR=/etc/augias
+ENV AUGIAS_DOCKER=true
 
 EXPOSE 8765
 
-VOLUME ["/etc/solidinvoice"]
+VOLUME ["/etc/augias"]
 
-COPY solidinvoice /usr/local/bin/solidinvoice
+COPY augias /usr/local/bin/augias
 
-ENTRYPOINT ["/usr/local/bin/solidinvoice"]
+ENTRYPOINT ["/usr/local/bin/augias"]
 
 CMD ["run", "--disable-https"]

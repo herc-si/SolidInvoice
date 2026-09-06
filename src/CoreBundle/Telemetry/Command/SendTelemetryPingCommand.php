@@ -19,7 +19,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Scheduler\Attribute\AsCronTask;
 
 #[AsCommand(
-    name: 'solidinvoice:telemetry:ping',
+    name: 'augias:telemetry:ping',
     description: 'Send the daily telemetry heartbeat to SolidWorx Insights',
 )]
 #[AsCronTask('#daily', schedule: 'telemetry_ping')]

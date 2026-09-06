@@ -188,7 +188,7 @@ final class TelemetryTest extends TestCase
         $vault = $this->createStub(AbstractVault::class);
         $vault->method('generateKeys')->willReturn(true);
 
-        $configWriter = new ConfigWriter($vault, '/tmp/solidinvoice-test-config');
+        $configWriter = new ConfigWriter($vault, '/tmp/augias-test-config');
 
         return new Telemetry(
             $this->bus,

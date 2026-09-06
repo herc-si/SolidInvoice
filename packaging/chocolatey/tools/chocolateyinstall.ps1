@@ -4,9 +4,9 @@
 $ErrorActionPreference = 'Stop'
 
 $packageArgs = @{
-    packageName    = 'solidinvoice'
-    url64          = "https://github.com/SolidInvoice/SolidInvoice/releases/download/${env:chocolateyPackageVersion}/solidinvoice-windows-amd64.exe"
-    fileFullPath   = "$(Get-ToolsLocation)\solidinvoice.exe"
+    packageName    = 'augias'
+    url64          = "https://github.com/SolidInvoice/SolidInvoice/releases/download/${env:chocolateyPackageVersion}/augias-windows-amd64.exe"
+    fileFullPath   = "$(Get-ToolsLocation)\augias.exe"
     checksum64     = '' # Updated by CI
     checksumType64 = 'sha256'
 }
@@ -17,4 +17,4 @@ Get-ChocolateyWebFile @packageArgs
 $toolsDir = Get-ToolsLocation
 Install-ChocolateyPath -PathToInstall $toolsDir -PathType 'Machine'
 
-Write-Output "SolidInvoice installed. Run 'solidinvoice run' to start."
+Write-Output "SolidInvoice installed. Run 'augias run' to start."

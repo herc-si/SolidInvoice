@@ -21,12 +21,12 @@ Every tool call runs under **exactly one company** — bound at consent time, im
    bin/console mcp:keys:generate
    ```
 
-   Keys are written to `$SOLIDINVOICE_CONFIG_DIR/oauth/` (persistent config directory,
+   Keys are written to `$AUGIAS_CONFIG_DIR/oauth/` (persistent config directory,
    survives redeployments). The FrankenPHP launcher runs this command automatically on
-   startup — deployments using `solidinvoice run` don't need this step.
+   startup — deployments using `augias run` don't need this step.
 
    The command uses OpenSSL's CSPRNG (`OPENSSL_KEYTYPE_RSA` / `/dev/urandom`) for key
-   material. The `SOLIDINVOICE_APP_SECRET` is separately used as the encryption key
+   material. The `AUGIAS_APP_SECRET` is separately used as the encryption key
    for OAuth auth-code payloads via `league/oauth2-server`'s `AuthorizationServer` —
    not for the RSA keys themselves.
 
@@ -105,12 +105,12 @@ Three independent layers:
 ## Connecting from Claude Desktop / mcp-inspector
 
 ```bash
-npx @modelcontextprotocol/inspector https://your-solidinvoice-host/_mcp
+npx @modelcontextprotocol/inspector https://your-augias-host/_mcp
 ```
 
 The inspector walks through DCR + OAuth flow automatically.
 
-In Claude Desktop: add a remote MCP server pointing to `https://your-solidinvoice-host/_mcp`.
+In Claude Desktop: add a remote MCP server pointing to `https://your-augias-host/_mcp`.
 
 ## Session storage
 
@@ -119,15 +119,15 @@ several backends. Pick the one that matches your deployment topology via env var
 
 | Store       | How to enable                                              | Notes                                                               |
 |-------------|------------------------------------------------------------|---------------------------------------------------------------------|
-| `file`      | `SOLIDINVOICE_MCP_SESSION_STORE=file` (default)            | On-disk in `var/cache/<env>/mcp-sessions/`. Single-node deployments. |
-| `memory`    | `SOLIDINVOICE_MCP_SESSION_STORE=memory`                    | In-process. Resets on every worker restart — dev only.               |
-| `cache`     | `SOLIDINVOICE_MCP_SESSION_STORE=cache` + point `SOLIDINVOICE_MCP_SESSION_CACHE_POOL` at a Redis-backed PSR-6 pool | Multi-node deployments (Redis, Memcached, etc.).                    |
-| `framework` | `SOLIDINVOICE_MCP_SESSION_STORE=framework`                 | Shares the app's Symfony session handler.                            |
+| `file`      | `AUGIAS_MCP_SESSION_STORE=file` (default)            | On-disk in `var/cache/<env>/mcp-sessions/`. Single-node deployments. |
+| `memory`    | `AUGIAS_MCP_SESSION_STORE=memory`                    | In-process. Resets on every worker restart — dev only.               |
+| `cache`     | `AUGIAS_MCP_SESSION_STORE=cache` + point `AUGIAS_MCP_SESSION_CACHE_POOL` at a Redis-backed PSR-6 pool | Multi-node deployments (Redis, Memcached, etc.).                    |
+| `framework` | `AUGIAS_MCP_SESSION_STORE=framework`                 | Shares the app's Symfony session handler.                            |
 
 Additional env vars:
 
-- `SOLIDINVOICE_MCP_SESSION_PREFIX` — key prefix (default `mcp-`)
-- `SOLIDINVOICE_MCP_SESSION_TTL` — session TTL in seconds (default `3600`)
+- `AUGIAS_MCP_SESSION_PREFIX` — key prefix (default `mcp-`)
+- `AUGIAS_MCP_SESSION_TTL` — session TTL in seconds (default `3600`)
 
 ## Audit logging
 

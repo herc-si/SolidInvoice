@@ -176,7 +176,7 @@ final class PollSuperPdpInvoiceStatusCommandTest extends KernelTestCase
         $application = new Application(self::$kernel);
 
         /** @var LazyCommand $lazyCommand */
-        $lazyCommand = $application->find('solidinvoice:einvoicing:poll-super-pdp-status');
+        $lazyCommand = $application->find('augias:einvoicing:poll-super-pdp-status');
 
         /** @var PollSuperPdpInvoiceStatusCommand $command */
         $command = $lazyCommand->getCommand();

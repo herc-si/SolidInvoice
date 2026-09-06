@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 /**
  * Filters the user's company list down to those with an active (or in-grace)
  * subscription. Only registered when the SaaS bundle is loaded
- * (`SOLIDINVOICE_PLATFORM=saas`); self-hosted installs continue to use the
+ * (`AUGIAS_PLATFORM=saas`); self-hosted installs continue to use the
  * default {@see \Augias\CoreBundle\Company\AllUserCompanies}.
  * @see \Augias\SaasBundle\Tests\Company\SubscriptionAwareUserCompaniesTest
  */

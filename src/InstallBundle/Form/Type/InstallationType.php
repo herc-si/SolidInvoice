@@ -36,7 +36,7 @@ final class InstallationType extends AbstractFlowType
     public function __construct(
         private readonly RequestStack $requestStack,
         private readonly AppRequirements $appRequirements,
-        #[Autowire(env: 'SOLIDINVOICE_RUNTIME')]
+        #[Autowire(env: 'AUGIAS_RUNTIME')]
         private readonly ?string $runtime = null,
     ) {
     }

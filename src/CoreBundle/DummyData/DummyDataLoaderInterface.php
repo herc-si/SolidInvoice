@@ -16,7 +16,7 @@ namespace Augias\CoreBundle\DummyData;
 use Augias\CoreBundle\Entity\Company;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
-#[AutoconfigureTag('solidinvoice.dummy_data_loader')]
+#[AutoconfigureTag('augias.dummy_data_loader')]
 interface DummyDataLoaderInterface
 {
     public function load(Company $company): void;

@@ -44,7 +44,7 @@ class SystemInstallation extends AbstractController
     public function __construct(
         #[AutowireLocator(InstallationStepInterface::DI_TAG)]
         private readonly ServiceLocator $steps,
-        #[Autowire(env: 'SOLIDINVOICE_CONFIG_DIR')]
+        #[Autowire(env: 'AUGIAS_CONFIG_DIR')]
         private readonly string $configDir,
         #[Autowire(param: 'kernel.cache_dir')]
         private readonly string $cacheDir,

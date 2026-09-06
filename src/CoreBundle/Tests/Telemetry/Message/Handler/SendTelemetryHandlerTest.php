@@ -38,14 +38,14 @@ final class SendTelemetryHandlerTest extends TestCase
 
         $handler = new SendTelemetryHandler($client, new NullLogger(), 'https://insights.solidworx.co');
 
-        $handler(new SendTelemetryMessage('ping', ['build_id' => 'abc', 'app' => 'solidinvoice']));
+        $handler(new SendTelemetryMessage('ping', ['build_id' => 'abc', 'app' => 'augias']));
 
         self::assertCount(1, $requests);
         self::assertSame('POST', $requests[0]['method']);
         self::assertSame('https://insights.solidworx.co/v1/ping', $requests[0]['url']);
         self::assertContains('Content-Type: application/json', $requests[0]['options']['headers']);
         self::assertSame(
-            ['build_id' => 'abc', 'app' => 'solidinvoice'],
+            ['build_id' => 'abc', 'app' => 'augias'],
             json_decode((string) $requests[0]['options']['body'], true, 512, JSON_THROW_ON_ERROR),
         );
     }
@@ -62,7 +62,7 @@ final class SendTelemetryHandlerTest extends TestCase
 
         $handler = new SendTelemetryHandler($client, new NullLogger(), 'https://insights.solidworx.co/');
 
-        $handler(new SendTelemetryMessage('event', ['build_id' => 'abc', 'app' => 'solidinvoice', 'event' => 'invoice_created']));
+        $handler(new SendTelemetryMessage('event', ['build_id' => 'abc', 'app' => 'augias', 'event' => 'invoice_created']));
 
         self::assertCount(1, $requests);
         self::assertSame('https://insights.solidworx.co/v1/event', $requests[0]['url']);

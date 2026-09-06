@@ -83,7 +83,7 @@ final readonly class CompanyExporter
         $format = $job->getFormat();
 
         $stagingDir = sys_get_temp_dir()
-            . '/solidinvoice_export_'
+            . '/augias_export_'
             . $job->getId()->toBase58()
             . '_'
             . bin2hex(random_bytes(8));

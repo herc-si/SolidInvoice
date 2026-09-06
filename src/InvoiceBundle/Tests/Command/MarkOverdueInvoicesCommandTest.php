@@ -189,7 +189,7 @@ final class MarkOverdueInvoicesCommandTest extends KernelTestCase
         $application = new Application(self::bootKernel());
 
         /** @var LazyCommand $lazyCommand */
-        $lazyCommand = $application->find('solidinvoice:invoices:mark-overdue');
+        $lazyCommand = $application->find('augias:invoices:mark-overdue');
 
         /** @var MarkOverdueInvoicesCommand $command */
         $command = $lazyCommand->getCommand();

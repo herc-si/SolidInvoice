@@ -19,7 +19,7 @@ return App::config([
             'scoped_clients' => [
                 'lemon_squeezy' => [
                     'base_uri' => 'https://api.lemonsqueezy.com/v1/',
-                    'auth_bearer' => env('SOLIDINVOICE_LEMON_SQUEEZY_API_KEY'),
+                    'auth_bearer' => env('AUGIAS_LEMON_SQUEEZY_API_KEY'),
                     'headers' => [
                         'Content-Type' => 'application/vnd.api+json',
                         'Accept' => 'application/vnd.api+json',

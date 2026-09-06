@@ -16,7 +16,7 @@ The official Docker image runs the same self-contained build used in the [quick 
 ## Quick start
 
 ```bash
-docker run -d -p 8765:8765 -v solidinvoice_data:/etc/solidinvoice solidinvoice/solidinvoice
+docker run -d -p 8765:8765 -v augias_data:/etc/augias augias/augias
 ```
 
 The application starts on `http://127.0.0.1:8765`. Continue with the [first-run wizard](./system-installation.md).
@@ -37,17 +37,17 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_DATABASE: solidinvoice
+      MYSQL_DATABASE: augias
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
   app:
-    image: "solidinvoice/solidinvoice:latest"
+    image: "augias/augias:latest"
     depends_on:
       - db
     ports:
       - "8765:8765"
     restart: always
     volumes:
-      - app_data:/etc/solidinvoice
+      - app_data:/etc/augias
 
 volumes:
   db_data: {}
@@ -66,15 +66,15 @@ The example above uses an empty MySQL root password for simplicity. Set `MYSQL_R
 
 ## Persisting data
 
-Mount a volume (or bind mount) at `/etc/solidinvoice` so application data survives container restarts and image upgrades:
+Mount a volume (or bind mount) at `/etc/augias` so application data survives container restarts and image upgrades:
 
 ```bash
-docker run -d -p 8765:8765 -v solidinvoice_data:/etc/solidinvoice solidinvoice/solidinvoice
+docker run -d -p 8765:8765 -v augias_data:/etc/augias augias/augias
 ```
 
 ## Image source
 
-Pull from [Docker Hub](https://hub.docker.com/r/solidinvoice/solidinvoice).
+Pull from [Docker Hub](https://hub.docker.com/r/augias/augias).
 
 :::info
 Recurring tasks and async work (email sending) run automatically inside the container — no separate cron job or messenger consumer to set up.
@@ -83,6 +83,6 @@ Recurring tasks and async work (email sending) run automatically inside the cont
 ## Update
 
 ```bash
-docker pull solidinvoice/solidinvoice:latest
+docker pull augias/augias:latest
 docker compose up -d   # or `docker stop` + `docker run` again
 ```

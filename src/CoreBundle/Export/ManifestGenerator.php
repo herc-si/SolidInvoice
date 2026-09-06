@@ -26,7 +26,7 @@ final class ManifestGenerator
     public function generate(ExportJob $job, array $entityCounts): array
     {
         return [
-            'solidinvoice_version' => AugiasCoreBundle::VERSION,
+            'augias_version' => AugiasCoreBundle::VERSION,
             'export_id' => $job->getId()->toBase58(),
             'company_id' => $job->getCompany()->getId()->toBase58(),
             'requested_by' => $job->getRequestedBy()->toBase58(),

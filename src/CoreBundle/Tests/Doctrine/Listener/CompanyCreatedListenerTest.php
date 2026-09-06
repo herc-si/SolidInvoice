@@ -35,20 +35,20 @@ final class CompanyCreatedListenerTest extends KernelTestCase
     {
         parent::setUp();
 
-        $_SERVER['SOLIDINVOICE_LOCALE'] = $_ENV['SOLIDINVOICE_LOCALE'] = 'en_US';
-        $_SERVER['SOLIDINVOICE_INSTALLED'] = $_ENV['SOLIDINVOICE_INSTALLED'] = date(DateTimeInterface::ATOM);
-        putenv('SOLIDINVOICE_INSTALLED=' . $_SERVER['SOLIDINVOICE_INSTALLED']);
+        $_SERVER['AUGIAS_LOCALE'] = $_ENV['AUGIAS_LOCALE'] = 'en_US';
+        $_SERVER['AUGIAS_INSTALLED'] = $_ENV['AUGIAS_INSTALLED'] = date(DateTimeInterface::ATOM);
+        putenv('AUGIAS_INSTALLED=' . $_SERVER['AUGIAS_INSTALLED']);
     }
 
     protected function tearDown(): void
     {
         unset(
-            $_SERVER['SOLIDINVOICE_LOCALE'],
-            $_ENV['SOLIDINVOICE_LOCALE'],
-            $_SERVER['SOLIDINVOICE_INSTALLED'],
-            $_ENV['SOLIDINVOICE_INSTALLED'],
+            $_SERVER['AUGIAS_LOCALE'],
+            $_ENV['AUGIAS_LOCALE'],
+            $_SERVER['AUGIAS_INSTALLED'],
+            $_ENV['AUGIAS_INSTALLED'],
         );
-        putenv('SOLIDINVOICE_INSTALLED');
+        putenv('AUGIAS_INSTALLED');
 
         parent::tearDown();
     }

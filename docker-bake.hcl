@@ -2,7 +2,7 @@ variable "IMAGE_NAME" {
     default = "herc-si/augias"
 }
 
-variable "SOLIDINVOICE_VERSION" {
+variable "AUGIAS_VERSION" {
     default = "2.4.x"
 }
 
@@ -64,7 +64,7 @@ function "_semver" {
 
 function "__semver" {
     params = [v]
-    result = v == {} ? [clean_tag(SOLIDINVOICE_VERSION)] : v.prerelease == null ? [v.major, "${v.major}.${v.minor}", "${v.major}.${v.minor}.${v.patch}"] : ["${v.major}.${v.minor}.${v.patch}-${v.prerelease}"]
+    result = v == {} ? [clean_tag(AUGIAS_VERSION)] : v.prerelease == null ? [v.major, "${v.major}.${v.minor}", "${v.major}.${v.minor}.${v.patch}"] : ["${v.major}.${v.minor}.${v.patch}-${v.prerelease}"]
 }
 
 group "default" {
@@ -91,10 +91,10 @@ target "build-static" {
             LATEST ? "${IMAGE_NAME}:latest" : "",
             NIGHTLY ? "${IMAGE_NAME}:nightly" : "",
             PREVIEW ? flatten(["${IMAGE_NAME}:next", "${IMAGE_NAME}:3.0-dev"]) : flatten([]),
-            SOLIDINVOICE_VERSION == "2.4.x" ? [] : [for v in semver(SOLIDINVOICE_VERSION) : "${IMAGE_NAME}:${v}"]
+            AUGIAS_VERSION == "2.4.x" ? [] : [for v in semver(AUGIAS_VERSION) : "${IMAGE_NAME}:${v}"]
     ])))
     args = {
-        SOLIDINVOICE_VERSION = "${SOLIDINVOICE_VERSION}"
+        AUGIAS_VERSION = "${AUGIAS_VERSION}"
         PHP_VERSION = "${PHP_VERSION}"
         # RELEASE removed — Linux binary upload now handled by the workflow
         NO_COMPRESS = "${NO_COMPRESS}"
@@ -118,9 +118,9 @@ target "package" {
             LATEST ? "${IMAGE_NAME}:latest" : "",
             NIGHTLY ? "${IMAGE_NAME}:nightly" : "",
             PREVIEW ? flatten(["${IMAGE_NAME}:next", "${IMAGE_NAME}:3.0-dev"]) : flatten([]),
-            SOLIDINVOICE_VERSION == "2.4.x" ? [] : [for v in semver(SOLIDINVOICE_VERSION) : "${IMAGE_NAME}:${v}"]
+            AUGIAS_VERSION == "2.4.x" ? [] : [for v in semver(AUGIAS_VERSION) : "${IMAGE_NAME}:${v}"]
     ])))
     args = {
-        SOLIDINVOICE_VERSION = "${SOLIDINVOICE_VERSION}"
+        AUGIAS_VERSION = "${AUGIAS_VERSION}"
     }
 }

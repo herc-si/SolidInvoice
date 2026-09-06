@@ -30,7 +30,7 @@ use function str_replace;
 class AppRequirements extends SymfonyRequirements
 {
     public function __construct(
-        #[Autowire(env: 'SOLIDINVOICE_CONFIG_DIR')]
+        #[Autowire(env: 'AUGIAS_CONFIG_DIR')]
         string $configDir,
         #[Autowire(param: 'kernel.cache_dir')]
         string $cacheDir,

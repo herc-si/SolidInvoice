@@ -14,7 +14,7 @@ The GraphQL endpoint is available at `/api/graphql` on your SolidInvoice install
 If you're on the **hosted SolidInvoice plan**, the endpoint is:
 
 ```text
-https://solidinvoice.app/api/graphql
+https://augias.app/api/graphql
 ```
 
 For a **self-hosted instance**, replace the domain with your own:
@@ -31,7 +31,7 @@ Not sure whether to use REST or GraphQL? Use **REST** if you're integrating with
 
 ## Interactive explorer (GraphiQL)
 
-Opening `/api/graphql` in a browser loads **GraphiQL**, an in-browser IDE for building and testing queries. On the hosted plan that's [solidinvoice.app/api/graphql](https://solidinvoice.app/api/graphql); on a self-hosted instance use your own domain. It includes:
+Opening `/api/graphql` in a browser loads **GraphiQL**, an in-browser IDE for building and testing queries. On the hosted plan that's [augias.app/api/graphql](https://augias.app/api/graphql); on a self-hosted instance use your own domain. It includes:
 
 - A query editor with syntax highlighting and autocomplete
 - Inline documentation for every type and field
@@ -45,7 +45,7 @@ GraphiQL is the fastest way to explore what's available — use the `Docs` panel
 GraphQL uses the same API token authentication as the REST API. Create a token at `Settings` → `API Keys` (see [Creating an API token](./rest-api.md#creating-an-api-token)), then send it in the `X-API-TOKEN` header on every request.
 
 ```bash
-curl -X POST https://solidinvoice.app/api/graphql \
+curl -X POST https://augias.app/api/graphql \
      -H "X-API-TOKEN: <your-token>" \
      -H "Content-Type: application/json" \
      -d '{"query": "{ invoices { edges { node { id status } } } }"}'
@@ -88,7 +88,7 @@ query {
 ```
 
 ```bash
-curl -X POST https://solidinvoice.app/api/graphql \
+curl -X POST https://augias.app/api/graphql \
      -H "X-API-TOKEN: <your-token>" \
      -H "Content-Type: application/json" \
      -d '{
@@ -200,7 +200,7 @@ query GetInvoicesByStatus($status: String) {
 Send the variables in the `variables` field of the request body:
 
 ```bash
-curl -X POST https://solidinvoice.app/api/graphql \
+curl -X POST https://augias.app/api/graphql \
      -H "X-API-TOKEN: <your-token>" \
      -H "Content-Type: application/json" \
      -d '{

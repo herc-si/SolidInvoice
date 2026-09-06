@@ -155,7 +155,7 @@ final class SendInvoiceRemindersCommandTest extends KernelTestCase
         $application = new Application(self::bootKernel());
 
         /** @var LazyCommand $lazyCommand */
-        $lazyCommand = $application->find('solidinvoice:invoices:send-reminders');
+        $lazyCommand = $application->find('augias:invoices:send-reminders');
 
         /** @var SendInvoiceRemindersCommand $command */
         $command = $lazyCommand->getCommand();

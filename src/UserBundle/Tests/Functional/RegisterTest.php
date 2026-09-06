@@ -42,7 +42,7 @@ final class RegisterTest extends WebTestCase
      */
     public function testRegistrationSucceedsWhenCaptchaDisabled(): void
     {
-        $this->setEnv('SOLIDINVOICE_ALLOW_REGISTRATION', '1');
+        $this->setEnv('AUGIAS_ALLOW_REGISTRATION', '1');
 
         $client = $this->bootClient();
 
@@ -59,9 +59,9 @@ final class RegisterTest extends WebTestCase
      */
     public function testRegistrationBlockedWhenCaptchaTokenMissing(): void
     {
-        $this->setEnv('SOLIDINVOICE_ALLOW_REGISTRATION', '1');
-        $this->setEnv('SOLIDINVOICE_TURNSTILE_SITE_KEY', 'test-site-key');
-        $this->setEnv('SOLIDINVOICE_TURNSTILE_SECRET_KEY', 'test-secret-key');
+        $this->setEnv('AUGIAS_ALLOW_REGISTRATION', '1');
+        $this->setEnv('AUGIAS_TURNSTILE_SITE_KEY', 'test-site-key');
+        $this->setEnv('AUGIAS_TURNSTILE_SECRET_KEY', 'test-secret-key');
 
         $client = $this->bootClient();
 

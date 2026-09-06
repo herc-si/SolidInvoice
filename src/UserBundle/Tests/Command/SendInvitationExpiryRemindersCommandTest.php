@@ -153,7 +153,7 @@ final class SendInvitationExpiryRemindersCommandTest extends KernelTestCase
         $application = new Application(self::bootKernel());
 
         /** @var LazyCommand $lazyCommand */
-        $lazyCommand = $application->find('solidinvoice:invitations:send-expiry-reminders');
+        $lazyCommand = $application->find('augias:invitations:send-expiry-reminders');
 
         /** @var SendInvitationExpiryRemindersCommand $command */
         $command = $lazyCommand->getCommand();

@@ -28,7 +28,7 @@ use function in_array;
 use function str_starts_with;
 
 /**
- * Resolves the inbound Host header against `SOLIDINVOICE_APPLICATION_URL` and the per-company
+ * Resolves the inbound Host header against `AUGIAS_APPLICATION_URL` and the per-company
  * `custom_domain` column so downstream listeners can short-circuit company selection, and so
  * unknown hosts return 404 instead of leaking the multi-tenant selector.
  *

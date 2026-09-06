@@ -15,7 +15,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 return App::config([
     'framework' => [
-        'secret' => env('SOLIDINVOICE_APP_SECRET'),
+        'secret' => env('AUGIAS_APP_SECRET'),
         'php_errors' => [
             'log' => true,
         ],
@@ -27,11 +27,11 @@ return App::config([
             'x-forwarded-prefix',
         ],
         'session' => [
-            'name' => 'SOLIDINVOICE_APP',
+            'name' => 'AUGIAS_APP',
         ],
         'secrets' => [
             'enabled' => true,
-            'vault_directory' => env('SOLIDINVOICE_CONFIG_DIR'),
+            'vault_directory' => env('AUGIAS_CONFIG_DIR'),
         ],
     ],
 ]);

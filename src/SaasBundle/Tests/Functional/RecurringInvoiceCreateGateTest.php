@@ -66,7 +66,7 @@ final class RecurringInvoiceCreateGateTest extends WebTestCase
         $providerId = 'test.' . UpgradePromptProvider::class;
         self::assertTrue($container->has($providerId));
 
-        if (($_ENV['SOLIDINVOICE_PLATFORM'] ?? $_SERVER['SOLIDINVOICE_PLATFORM'] ?? null) !== 'saas') {
+        if (($_ENV['AUGIAS_PLATFORM'] ?? $_SERVER['AUGIAS_PLATFORM'] ?? null) !== 'saas') {
             self::assertInstanceOf(NullUpgradePromptProvider::class, $container->get($providerId));
         }
 

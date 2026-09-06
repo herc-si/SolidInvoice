@@ -28,7 +28,7 @@ use function sprintf;
  * @see \Augias\UserBundle\Tests\Command\MarkExpiredInvitationsCommandTest
  */
 #[AsCommand(
-    name: 'solidinvoice:invitations:mark-expired',
+    name: 'augias:invitations:mark-expired',
     description: 'Flag user invitations that are past their validity period as expired',
 )]
 #[AsCronTask('#daily', schedule: 'mark_expired_invitations')]

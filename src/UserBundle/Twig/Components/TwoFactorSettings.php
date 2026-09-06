@@ -215,7 +215,7 @@ final class TwoFactorSettings extends AbstractController
 
         $this->dispatchBrowserEvent('download:file', [
             'content' => $content,
-            'filename' => 'solidinvoice-backup-codes-' . Carbon::now()->format('Y-m-d') . '.txt',
+            'filename' => 'augias-backup-codes-' . Carbon::now()->format('Y-m-d') . '.txt',
             'type' => 'text/plain',
         ]);
 

@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 #[AutoconfigureTag(InstallationStepInterface::DI_TAG)]
 interface InstallationStepInterface
 {
-    public const string DI_TAG = 'solidinvoice.installation_step';
+    public const string DI_TAG = 'augias.installation_step';
 
     public static function priority(): int;
 

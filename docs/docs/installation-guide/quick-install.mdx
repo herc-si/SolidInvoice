@@ -31,7 +31,7 @@ There is no native Windows build. Run the Linux binary inside [WSL2](https://lea
 
   ```bash
   curl -fsSL https://raw.githubusercontent.com/SolidInvoice/SolidInvoice/3.0.x/packaging/install.sh | sh
-  solidinvoice run
+  augias run
   ```
 
   To also install a systemd service so SolidInvoice starts on boot:
@@ -43,8 +43,8 @@ There is no native Windows build. Run the Linux binary inside [WSL2](https://lea
   **Manual download** — grab the binary for your architecture from the [releases page](https://github.com/SolidInvoice/SolidInvoice/releases/latest), then make it executable and start it:
 
   ```bash
-  chmod +x solidinvoice
-  ./solidinvoice run
+  chmod +x augias
+  ./augias run
   ```
 
   </TabItem>
@@ -53,11 +53,11 @@ There is no native Windows build. Run the Linux binary inside [WSL2](https://lea
   Download the latest binary for your architecture from the [releases page](https://github.com/SolidInvoice/SolidInvoice/releases/latest), then make it executable and start it:
 
   ```bash
-  chmod +x solidinvoice
-  ./solidinvoice run
+  chmod +x augias
+  ./augias run
   ```
 
-  On first launch macOS may block the binary because it isn't notarised. Open `System Settings → Privacy & Security` and click `Open anyway`, or run `xattr -d com.apple.quarantine ./solidinvoice` first.
+  On first launch macOS may block the binary because it isn't notarised. Open `System Settings → Privacy & Security` and click `Open anyway`, or run `xattr -d com.apple.quarantine ./augias` first.
 
   :::tip
   On macOS, [Homebrew](./homebrew.md) is the easiest way to install and keep SolidInvoice up to date.
@@ -79,7 +79,7 @@ The application uses [Caddy](https://caddyserver.com/) under the hood, so HTTPS 
 ### Self-signed (default)
 
 ```bash
-./solidinvoice run
+./augias run
 ```
 
 Useful for local testing. Browsers will show a warning that you have to accept once.
@@ -87,7 +87,7 @@ Useful for local testing. Browsers will show a warning that you have to accept o
 ### Let's Encrypt (recommended for production)
 
 ```bash
-./solidinvoice run --domain=invoice.example.com --lets-encrypt
+./augias run --domain=invoice.example.com --lets-encrypt
 ```
 
 Issues and renews a free SSL certificate from [Let's Encrypt](https://letsencrypt.org/) automatically. Requirements:
@@ -98,10 +98,10 @@ Issues and renews a free SSL certificate from [Let's Encrypt](https://letsencryp
 ### Custom certificate
 
 ```bash
-./solidinvoice run \
+./augias run \
   --domain=invoice.example.com \
-  --ssl-cert=/etc/ssl/solidinvoice.pem \
-  --ssl-key=/etc/ssl/solidinvoice.key
+  --ssl-cert=/etc/ssl/augias.pem \
+  --ssl-key=/etc/ssl/augias.key
 ```
 
 Use this when you already have a certificate (wildcard, EV, or one issued by a corporate CA).
@@ -109,7 +109,7 @@ Use this when you already have a certificate (wildcard, EV, or one issued by a c
 ### Behind a reverse proxy
 
 ```bash
-./solidinvoice run --disable-https
+./augias run --disable-https
 ```
 
 Use when an upstream proxy (Cloudflare, Nginx, an ingress controller) terminates TLS for you. SolidInvoice listens over plain HTTP and trusts the proxy's `X-Forwarded-*` headers.
@@ -138,10 +138,10 @@ All flags below apply to the `run` command.
 ## Other commands
 
 ```bash
-./solidinvoice console <command>   # run any Symfony console command (e.g. cache:clear)
-./solidinvoice worker --workers=2  # dedicated messenger worker process (e.g. for Kubernetes)
-./solidinvoice version             # print the version
-./solidinvoice build-info          # print build details
+./augias console <command>   # run any Symfony console command (e.g. cache:clear)
+./augias worker --workers=2  # dedicated messenger worker process (e.g. for Kubernetes)
+./augias version             # print the version
+./augias build-info          # print build details
 ```
 
 ## Health check
@@ -161,7 +161,7 @@ Replace the binary with the latest release and restart it. Application data live
 For instances handling sustained traffic, enable worker mode:
 
 ```bash
-./solidinvoice run --worker-mode --worker-threads=4 --messenger-workers=5
+./augias run --worker-mode --worker-threads=4 --messenger-workers=5
 ```
 
 Worker mode keeps PHP processes alive between requests, which significantly reduces request latency at the cost of higher memory use.

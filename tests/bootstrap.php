@@ -20,7 +20,7 @@ use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-(new Dotenv('SOLIDINVOICE_ENV', 'SOLIDINVOICE_DEBUG'))->bootEnv(dirname(__DIR__) . '/.env', 'test');
+(new Dotenv('AUGIAS_ENV', 'AUGIAS_DEBUG'))->bootEnv(dirname(__DIR__) . '/.env', 'test');
 
 if (class_exists(Deprecation::class)) {
     Deprecation::enableWithTriggerError();
@@ -41,7 +41,7 @@ if (false === (bool) $_SERVER['APP_DEBUG'] && null === ($_SERVER['TEST_TOKEN'] ?
 
 /*
  * The suite runs two kernels: the default one and SaasTestKernel, which has its own cache
- * dir and therefore its own database (SOLIDINVOICE_DATABASE_URL is relative to
+ * dir and therefore its own database (AUGIAS_DATABASE_URL is relative to
  * %kernel.cache_dir%). Foundry's automatic reset only builds one schema per run - the one
  * belonging to whichever test class runs first - so the other database is left with a stale
  * schema, or none at all on a fresh checkout or in CI.
@@ -51,8 +51,8 @@ if (false === (bool) $_SERVER['APP_DEBUG'] && null === ($_SERVER['TEST_TOKEN'] ?
  * key split that stops the two kernels from sharing a single static connection.
  */
 (static function (): void {
-    $env = $_ENV['SOLIDINVOICE_ENV'] ?? $_SERVER['SOLIDINVOICE_ENV'] ?? 'test';
-    $debug = filter_var((string) ($_ENV['SOLIDINVOICE_DEBUG'] ?? $_SERVER['SOLIDINVOICE_DEBUG'] ?? 'true'), FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+    $env = $_ENV['AUGIAS_ENV'] ?? $_SERVER['AUGIAS_ENV'] ?? 'test';
+    $debug = filter_var((string) ($_ENV['AUGIAS_DEBUG'] ?? $_SERVER['AUGIAS_DEBUG'] ?? 'true'), FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
 
     $prepare = static function (KernelInterface $kernel): void {
         $kernel->boot();
@@ -98,7 +98,7 @@ if (false === (bool) $_SERVER['APP_DEBUG'] && null === ($_SERVER['TEST_TOKEN'] ?
             $schemaManager = $tmpConnection->createSchemaManager();
 
             // getIdentifier()->getValue() and not toString(): the latter returns the *quoted*
-            // form ("solidinvoice_self-hosted_test") for any name needing quoting, so it never
+            // form ("augias_self-hosted_test") for any name needing quoting, so it never
             // matches the raw name and the database is re-created on every run.
             if (! array_any($schemaManager->introspectDatabaseNames(), static fn (UnqualifiedName $db, int $_): bool => $db->getIdentifier()->getValue() === $dbName)) {
                 $schemaManager->createDatabase($tmpConnection->getDatabasePlatform()->quoteSingleIdentifier($dbName));

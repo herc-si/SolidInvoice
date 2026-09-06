@@ -35,7 +35,7 @@ use function ucfirst;
  * @codeCoverageIgnore
  */
 #[AsCommand(
-    name: 'solidinvoice:dev:notification:generate-transport-config',
+    name: 'augias:dev:notification:generate-transport-config',
     description: 'Generates a transport configuration for a notifier transport'
 )]
 final class GenerateTransportConfigCommand extends Command

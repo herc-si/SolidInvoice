@@ -76,9 +76,9 @@ final readonly class RequestListener implements EventSubscriberInterface
         private ClockInterface $clock,
         private TrialBannerResolver $trialBannerResolver,
         private TranslatorInterface $translator,
-        #[Autowire(env: 'SOLIDINVOICE_SAAS_ONBOARDING_COUPON_CODE')]
+        #[Autowire(env: 'AUGIAS_SAAS_ONBOARDING_COUPON_CODE')]
         private string $onboardingCouponCode = '',
-        #[Autowire(env: 'int:SOLIDINVOICE_SAAS_ONBOARDING_COUPON_PERCENT')]
+        #[Autowire(env: 'int:AUGIAS_SAAS_ONBOARDING_COUPON_PERCENT')]
         private int $couponPercent = 30,
     ) {
     }

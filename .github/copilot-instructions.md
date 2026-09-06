@@ -84,7 +84,7 @@ Any changes to templates or frontend code should be made in accordance with the 
 
 ### Distribution
 
-- **Docker:** Official SolidInvoice Docker images available on Docker Hub (solidinvoice/solidinvoice). Runs the FrankenPHP binary inside the container.
+- **Docker:** Official SolidInvoice Docker images available on Docker Hub (augias/augias). Runs the FrankenPHP binary inside the container.
 - **FrankenPHP:** Official recommended installation method. Application is built into a single binary, which contains PHP, all required extensions, the web server, and the application code.
 - **Archive:** ZIP/TAR archives for manual installation (all assets pre-compiled)
 
@@ -972,7 +972,7 @@ bun run lint:css # StyleLint
 - [**Homepage:**](https://solidinvoice.co)
 - [**Repository:**](https://github.com/SolidInvoice/SolidInvoice)
 - [**Issues:**](https://github.com/SolidInvoice/SolidInvoice/issues)
-- [**Docker Hub:**](https://hub.docker.com/r/solidinvoice/solidinvoice/)
+- [**Docker Hub:**](https://hub.docker.com/r/augias/augias/)
 
 ---
 

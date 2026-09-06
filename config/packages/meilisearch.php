@@ -22,9 +22,9 @@ use Augias\QuoteBundle\Entity\Quote;
 
 return App::config([
     'meilisearch' => [
-        'url' => env('SOLIDINVOICE_MEILISEARCH_URL'),
-        'api_key' => env('SOLIDINVOICE_MEILISEARCH_API_KEY'),
-        'prefix' => env('SOLIDINVOICE_MEILISEARCH_PREFIX'),
+        'url' => env('AUGIAS_MEILISEARCH_URL'),
+        'api_key' => env('AUGIAS_MEILISEARCH_API_KEY'),
+        'prefix' => env('AUGIAS_MEILISEARCH_PREFIX'),
         'indices' => [
             [
                 'name' => 'clients',

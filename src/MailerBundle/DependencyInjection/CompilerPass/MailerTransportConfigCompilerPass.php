@@ -31,7 +31,7 @@ final class MailerTransportConfigCompilerPass implements CompilerPassInterface
         $definition = new Definition(MailerConfigFactory::class);
         $definition->setDecoratedService('mailer.transport_factory');
         $definition->addArgument(new Reference(MailerConfigFactory::class . '.inner'));
-        $definition->setArgument('$transports', new TaggedIteratorArgument('solidinvoice_mailer.transport.configurator'));
+        $definition->setArgument('$transports', new TaggedIteratorArgument('augias_mailer.transport.configurator'));
         $definition->setAutowired(true);
 
         $container->setDefinition(MailerConfigFactory::class, $definition);

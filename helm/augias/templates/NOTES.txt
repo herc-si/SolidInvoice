@@ -6,7 +6,7 @@ SolidInvoice has been deployed successfully!
 {{- end }}
 {{- else }}
   To access SolidInvoice, run:
-  kubectl port-forward svc/{{ include "solidinvoice.fullname" . }} 8080:{{ .Values.service.port }} -n {{ .Release.Namespace }}
+  kubectl port-forward svc/{{ include "augias.fullname" . }} 8080:{{ .Values.service.port }} -n {{ .Release.Namespace }}
   Then open: http://localhost:8080
 {{- end }}
 
@@ -21,7 +21,7 @@ SolidInvoice has been deployed successfully!
 
 ==> IMPORTANT - App Secret:
   No app.secret was provided. An app secret has been auto-generated and stored in the Secret:
-    kubectl get secret {{ include "solidinvoice.fullname" . }} -n {{ .Release.Namespace }} -o jsonpath='{.data.SOLIDINVOICE_APP_SECRET}' | base64 -d
+    kubectl get secret {{ include "augias.fullname" . }} -n {{ .Release.Namespace }} -o jsonpath='{.data.AUGIAS_APP_SECRET}' | base64 -d
 
   Save this value! If lost and the Secret is deleted, encrypted config data will be unrecoverable.
   Set it explicitly in future upgrades: --set app.secret=<saved-value>
@@ -31,7 +31,7 @@ SolidInvoice has been deployed successfully!
 
 ==> WARNING - No database configured:
   Neither a database subchart nor an external database is configured.
-  SolidInvoice will use SQLite (stored in /etc/solidinvoice), which is NOT recommended for production.
+  SolidInvoice will use SQLite (stored in /etc/augias), which is NOT recommended for production.
   Configure a database:
     --set mysql.enabled=true --set mysql.auth.password=<password>
     or
@@ -42,6 +42,6 @@ SolidInvoice has been deployed successfully!
 
 ==> WARNING - PVC access mode conflict:
   replicaCount={{ .Values.replicaCount }} with accessModes=ReadWriteOnce means only ONE node can mount the
-  /etc/solidinvoice PVC at a time. Other replicas will fail to start.
+  /etc/augias PVC at a time. Other replicas will fail to start.
   Use ReadWriteMany (requires an NFS/CephFS StorageClass) or set replicaCount=1.
 {{- end }}

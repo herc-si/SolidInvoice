@@ -32,13 +32,13 @@ Download the latest archive from the SolidWorx download server:
 
 ```bash
 # Zip
-curl -LO https://download.solidworx.co/solidinvoice/latest/archive/zip
+curl -LO https://download.solidworx.co/augias/latest/archive/zip
 
 # Or tar.gz
-curl -LO https://download.solidworx.co/solidinvoice/latest/archive/tar.gz
+curl -LO https://download.solidworx.co/augias/latest/archive/tar.gz
 ```
 
-Extract it to a directory served by your webserver, for example `/opt/solidinvoice`.
+Extract it to a directory served by your webserver, for example `/opt/augias`.
 
 :::info
 On shared hosting with FTP-only access, download the archive locally, extract it, and upload the extracted files to your hosting account.
@@ -54,7 +54,7 @@ Point your webserver at the `public/` directory inside the extracted archive.
   ```nginx
   server {
       server_name yourdomain.com www.yourdomain.com;
-      root /opt/solidinvoice/public;
+      root /opt/augias/public;
 
       location / {
           # try to serve file directly, fallback to index.php
@@ -69,8 +69,8 @@ Point your webserver at the `public/` directory inside the extracted archive.
           fastcgi_param HTTPS off;
       }
 
-      error_log /var/log/nginx/solidinvoice_error.log;
-      access_log /var/log/nginx/solidinvoice_access.log;
+      error_log /var/log/nginx/augias_error.log;
+      access_log /var/log/nginx/augias_access.log;
   }
   ```
 
@@ -82,15 +82,15 @@ Point your webserver at the `public/` directory inside the extracted archive.
       ServerName yourdomain.com
       ServerAlias www.yourdomain.com
 
-      DocumentRoot /opt/solidinvoice/public
-      <Directory /opt/solidinvoice/public>
+      DocumentRoot /opt/augias/public
+      <Directory /opt/augias/public>
           # enable the .htaccess rewrites
           AllowOverride All
           Require all granted
       </Directory>
 
-      ErrorLog /var/log/apache2/solidinvoice.error.log
-      CustomLog /var/log/apache2/solidinvoice.access.log combined
+      ErrorLog /var/log/apache2/augias.error.log
+      CustomLog /var/log/apache2/augias.access.log combined
   </VirtualHost>
   ```
 
@@ -119,20 +119,20 @@ The first-run wizard configures everything you need to get started. The variable
 
 | Variable | Description |
 | --- | --- |
-| `SOLIDINVOICE_ENV` | Application environment. Use `prod` in production. |
-| `SOLIDINVOICE_DEBUG` | Enable verbose error pages. Set to `0` in production. |
-| `SOLIDINVOICE_APP_SECRET` | Long random string used to sign cookies and CSRF tokens. |
-| `SOLIDINVOICE_APPLICATION_URL` | Public URL of the installation, e.g. `https://invoice.example.com`. |
-| `SOLIDINVOICE_DATABASE_URL` | Database DSN. The first-run wizard can also write this for you. |
-| `SOLIDINVOICE_MAILER_DSN` | Outbound mail transport (SMTP, Mailgun, SendGrid, etc.). Overrides the transport configured in the UI. |
-| `SOLIDINVOICE_MAILER_SENDER` | The `From:` address SolidInvoice sends mail from. Overrides the address configured in the UI. |
-| `SOLIDINVOICE_LOCALE` | Default locale (e.g. `en`). |
+| `AUGIAS_ENV` | Application environment. Use `prod` in production. |
+| `AUGIAS_DEBUG` | Enable verbose error pages. Set to `0` in production. |
+| `AUGIAS_APP_SECRET` | Long random string used to sign cookies and CSRF tokens. |
+| `AUGIAS_APPLICATION_URL` | Public URL of the installation, e.g. `https://invoice.example.com`. |
+| `AUGIAS_DATABASE_URL` | Database DSN. The first-run wizard can also write this for you. |
+| `AUGIAS_MAILER_DSN` | Outbound mail transport (SMTP, Mailgun, SendGrid, etc.). Overrides the transport configured in the UI. |
+| `AUGIAS_MAILER_SENDER` | The `From:` address SolidInvoice sends mail from. Overrides the address configured in the UI. |
+| `AUGIAS_LOCALE` | Default locale (e.g. `en`). |
 
 Other integrations (Sentry, Meilisearch, Google OAuth) have their own environment variables and are documented on their respective pages.
 
 ## Updating
 
-1. Stop the messenger worker: `sudo systemctl stop solidinvoice-worker.service` (or comment out the cron entry).
+1. Stop the messenger worker: `sudo systemctl stop augias-worker.service` (or comment out the cron entry).
 2. Back up your database and the project directory.
 3. Download the new archive and replace the project files, **keeping** your `.env.local` and any custom changes.
 4. Run `bin/console cache:clear --env=prod` and `bin/console doctrine:migrations:migrate --env=prod --no-interaction`.

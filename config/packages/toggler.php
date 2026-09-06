@@ -17,11 +17,11 @@ return App::config([
     'toggler' => [
         'config' => [
             'features' => [
-                'allow_registration' => env('SOLIDINVOICE_ALLOW_REGISTRATION'),
-                'google_oauth_login' => '@=env("SOLIDINVOICE_OAUTH_CLIENT_GOOGLE_CLIENT_ID") !== null && env("SOLIDINVOICE_OAUTH_CLIENT_GOOGLE_CLIENT_SECRET") !== null',
-                'turnstile_captcha' => '@=env("SOLIDINVOICE_TURNSTILE_SITE_KEY") !== null && env("SOLIDINVOICE_TURNSTILE_SECRET_KEY") !== null',
-                'saas_enabled' => '@=env("SOLIDINVOICE_PLATFORM") === \'saas\'',
-                'meilisearch_search' => '@=env("SOLIDINVOICE_MEILISEARCH_URL") !== "" && env("SOLIDINVOICE_MEILISEARCH_API_KEY") !== ""',
+                'allow_registration' => env('AUGIAS_ALLOW_REGISTRATION'),
+                'google_oauth_login' => '@=env("AUGIAS_OAUTH_CLIENT_GOOGLE_CLIENT_ID") !== null && env("AUGIAS_OAUTH_CLIENT_GOOGLE_CLIENT_SECRET") !== null',
+                'turnstile_captcha' => '@=env("AUGIAS_TURNSTILE_SITE_KEY") !== null && env("AUGIAS_TURNSTILE_SECRET_KEY") !== null',
+                'saas_enabled' => '@=env("AUGIAS_PLATFORM") === \'saas\'',
+                'meilisearch_search' => '@=env("AUGIAS_MEILISEARCH_URL") !== "" && env("AUGIAS_MEILISEARCH_API_KEY") !== ""',
             ],
         ],
     ],

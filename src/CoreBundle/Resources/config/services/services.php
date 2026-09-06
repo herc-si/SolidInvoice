@@ -58,8 +58,8 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
         ->private()
         ->bind('$projectDir', param('kernel.project_dir'))
         ->bind('$cacheDir', param('kernel.cache_dir'))
-        ->bind('$installed', env('SOLIDINVOICE_INSTALLED'))
-        ->bind('$applicationUrl', env('SOLIDINVOICE_APPLICATION_URL'))
+        ->bind('$installed', env('AUGIAS_INSTALLED'))
+        ->bind('$applicationUrl', env('AUGIAS_APPLICATION_URL'))
         ->bind('$vault', service('secrets.vault'))
     ;
 
@@ -85,7 +85,7 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
     // CoreBundle ships a no-op so the `feature_gated` form option remains valid.
     //
     // The check reads the `app_mode` container parameter rather than
-    // $_ENV['SOLIDINVOICE_PLATFORM']: the kernel resolves the mode itself (see
+    // $_ENV['AUGIAS_PLATFORM']: the kernel resolves the mode itself (see
     // Augias\Kernel::prepareContainer()), and test kernels select a mode by
     // constructor argument without ever writing to $_ENV.
     if (AppMode::from($container->getParameter('app_mode')) !== AppMode::SAAS) {
@@ -157,14 +157,14 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
     $services->set(InspectUuidCommand::class);
 
     $services->set(DummyDataLoader::class)
-        ->arg('$loaders', tagged_iterator('solidinvoice.dummy_data_loader'));
+        ->arg('$loaders', tagged_iterator('augias.dummy_data_loader'));
 
     $services->set(MultiSearchService::class)
-        ->arg('$formatters', tagged_iterator('solidinvoice.search.result_formatter'))
-        ->arg('$indexPrefix', env('SOLIDINVOICE_MEILISEARCH_PREFIX'));
+        ->arg('$formatters', tagged_iterator('augias.search.result_formatter'))
+        ->arg('$indexPrefix', env('AUGIAS_MEILISEARCH_PREFIX'));
 
     $services->set(SearchQueryParser::class)
-        ->arg('$formatters', tagged_iterator('solidinvoice.search.result_formatter'));
+        ->arg('$formatters', tagged_iterator('augias.search.result_formatter'));
 
     // Dedicated encoder chain for the export feature. The export pipeline does its
     // own value normalisation (GridRowExtractor / EntityRowNormalizer produce flat

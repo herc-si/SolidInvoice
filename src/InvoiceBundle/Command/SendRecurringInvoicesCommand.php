@@ -35,7 +35,7 @@ use function sprintf;
  * @see \Augias\InvoiceBundle\Tests\Command\SendRecurringInvoicesCommandTest
  */
 #[AsCommand(
-    name: 'solidinvoice:recurring:send-invoices',
+    name: 'augias:recurring:send-invoices',
     description: 'Send recurring invoices',
 )]
 #[AsCronTask('#hourly', schedule: 'send_recurring_invoices')]

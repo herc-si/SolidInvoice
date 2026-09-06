@@ -6,7 +6,7 @@ sidebar_position: 4
 
 # Snap
 
-SolidInvoice is available on the [Snap Store](https://snapcraft.io/solidinvoice). The snap bundles the self-contained binary and registers it as a background service — no PHP, webserver, or cron job required.
+SolidInvoice is available on the [Snap Store](https://snapcraft.io/augias). The snap bundles the self-contained binary and registers it as a background service — no PHP, webserver, or cron job required.
 
 ## System requirements
 
@@ -15,7 +15,7 @@ SolidInvoice is available on the [Snap Store](https://snapcraft.io/solidinvoice)
 ## Install
 
 ```bash
-sudo snap install solidinvoice
+sudo snap install augias
 ```
 
 The service starts automatically after installation and listens on `http://localhost:8765`. Open that URL in your browser and finish setup with the [first-run wizard](./system-installation.md).
@@ -27,11 +27,11 @@ The snap runs over plain HTTP. For production, place SolidInvoice behind a rever
 ## Manage the service
 
 ```bash
-sudo snap start solidinvoice    # start
-sudo snap stop solidinvoice     # stop
-sudo snap restart solidinvoice  # restart
-snap logs solidinvoice          # view logs
-snap logs -n 100 solidinvoice   # view last 100 lines
+sudo snap start augias    # start
+sudo snap stop augias     # stop
+sudo snap restart augias  # restart
+snap logs augias          # view logs
+snap logs -n 100 augias   # view last 100 lines
 ```
 
 ## CLI
@@ -39,18 +39,18 @@ snap logs -n 100 solidinvoice   # view last 100 lines
 The snap exposes a `cli` app for running console commands:
 
 ```bash
-solidinvoice.cli console cache:clear
-solidinvoice.cli version
+augias.cli console cache:clear
+augias.cli version
 ```
 
 ## Data
 
-Application data is stored in `/var/snap/solidinvoice/common/`.
+Application data is stored in `/var/snap/augias/common/`.
 
 ## Update
 
 ```bash
-sudo snap refresh solidinvoice
+sudo snap refresh augias
 ```
 
 Snaps update automatically in the background by default. Run the above to force an immediate refresh.

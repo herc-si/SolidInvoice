@@ -111,7 +111,7 @@ final class MarkExpiredInvitationsCommandTest extends KernelTestCase
         $application = new Application(self::bootKernel());
 
         /** @var LazyCommand $lazyCommand */
-        $lazyCommand = $application->find('solidinvoice:invitations:mark-expired');
+        $lazyCommand = $application->find('augias:invitations:mark-expired');
 
         /** @var MarkExpiredInvitationsCommand $command */
         $command = $lazyCommand->getCommand();

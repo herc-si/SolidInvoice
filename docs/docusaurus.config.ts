@@ -111,7 +111,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/solidinvoice-social-card.png',
+    image: 'img/augias-social-card.png',
     colorMode: {
       defaultMode: 'light',
       respectPrefersColorScheme: true,
@@ -185,7 +185,7 @@ const config: Config = {
             },
             {
               label: 'X (Twitter)',
-              href: 'https://x.com/solidinvoice',
+              href: 'https://x.com/augias',
             },
           ],
         },

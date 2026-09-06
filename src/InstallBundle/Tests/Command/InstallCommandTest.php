@@ -227,8 +227,8 @@ final class InstallCommandTest extends TestCase
 
     public function testSaveConfigWritesDatabaseUrlForSqlite(): void
     {
-        $configDir = sys_get_temp_dir() . '/solidinvoice-install-test';
-        $expectedDsn = sprintf('sqlite:///%s/db/solidinvoice.db', $configDir);
+        $configDir = sys_get_temp_dir() . '/augias-install-test';
+        $expectedDsn = sprintf('sqlite:///%s/db/augias.db', $configDir);
 
         $sealed = [];
         $vault = M::mock(AbstractVault::class);
@@ -258,8 +258,8 @@ final class InstallCommandTest extends TestCase
         $method = new ReflectionMethod(InstallCommand::class, 'saveConfig');
         $method->invoke($command, $input);
 
-        self::assertArrayHasKey('SOLIDINVOICE_DATABASE_URL', $sealed);
-        self::assertSame($expectedDsn, $sealed['SOLIDINVOICE_DATABASE_URL']);
+        self::assertArrayHasKey('AUGIAS_DATABASE_URL', $sealed);
+        self::assertSame($expectedDsn, $sealed['AUGIAS_DATABASE_URL']);
         self::assertDirectoryExists($configDir . '/db');
     }
 

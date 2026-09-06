@@ -55,7 +55,7 @@ jobs:
         run: helm lint helm/augias --values helm/augias/ci/postgresql-values.yaml
 
       - name: Template chart (MySQL values)
-        run: helm template solidinvoice helm/augias --values helm/augias/ci/mysql-values.yaml
+        run: helm template augias helm/augias --values helm/augias/ci/mysql-values.yaml
 
       - name: Template chart (PostgreSQL values)
-        run: helm template solidinvoice helm/augias --values helm/augias/ci/postgresql-values.yaml
+        run: helm template augias helm/augias --values helm/augias/ci/postgresql-values.yaml

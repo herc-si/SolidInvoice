@@ -31,7 +31,7 @@ use function Sentry\captureException;
 use function sprintf;
 
 #[AsCommand(
-    name: 'solidinvoice:saas:dispatch-onboarding-emails',
+    name: 'augias:saas:dispatch-onboarding-emails',
     description: 'Dispatch the next due onboarding email for each user currently on a trial',
 )]
 #[AsCronTask(expression: '#hourly', schedule: 'onboarding_emails')]

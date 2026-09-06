@@ -23,7 +23,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autoconfigure()
         ->autowire()
         ->private()
-        ->bind('$env', env('SOLIDINVOICE_ENV'))
+        ->bind('$env', env('AUGIAS_ENV'))
     ;
 
     $services

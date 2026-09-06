@@ -65,10 +65,10 @@ final class GenerateBuildIdStepTest extends TestCase
 
         self::assertFileExists($dotenvFile);
         $contents = file_get_contents($dotenvFile);
-        self::assertStringContainsString('SOLIDINVOICE_BUILD_ID=', (string) $contents);
+        self::assertStringContainsString('AUGIAS_BUILD_ID=', (string) $contents);
 
         // Extract the stored UUID and validate it
-        preg_match("/SOLIDINVOICE_BUILD_ID='([^']+)'/", $contents, $matches);
+        preg_match("/AUGIAS_BUILD_ID='([^']+)'/", $contents, $matches);
         self::assertNotEmpty($matches[1] ?? '');
         self::assertTrue(Uuid::isValid($matches[1]));
     }
