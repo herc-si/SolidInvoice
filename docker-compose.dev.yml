@@ -41,6 +41,16 @@ services:
       SERVER_NAME: ":8765"
       APP_PATH: /app
       # SOLIDINVOICE_DATABASE_URL: "mysql://root@db:3306/solidinvoice?serverVersion=8.0"
+    # The frankenphp base image probes Caddy's admin API on :2019, which the
+    # Caddyfile turns off (`admin off`), so the inherited check can never pass
+    # and the container sits permanently "unhealthy". Probe the /health
+    # endpoint the Caddyfile actually defines instead.
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8765/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
     volumes:
       - .:/app
       - dev_vendor:/app/vendor
@@ -60,9 +70,19 @@ services:
     build:
       context: .
       dockerfile: docker/dev.Dockerfile
-    # Exits until the database exists (created by the /install wizard on
-    # first run), so keep restarting rather than staying crashed.
-    restart: on-failure
+    # No HTTP surface here, so the frankenphp base image's Caddy admin probe is
+    # meaningless rather than merely misconfigured — it would sit "unhealthy"
+    # forever and teach you to ignore the column. Liveness is already covered:
+    # if the consumer dies the shell exits, the container exits, and the
+    # restart policy above brings it back.
+    healthcheck:
+      disable: true
+    # Two reasons to come back up, and `on-failure` only covers the first: it
+    # exits non-zero until the database exists (created by the /install wizard
+    # on first run), and it exits *zero* every time it hits its own
+    # --time-limit/--memory-limit below, which otherwise leaves the queue
+    # unprocessed until someone notices the container is gone.
+    restart: unless-stopped
     environment:
       SOLIDINVOICE_ENV: dev
       SOLIDINVOICE_DEBUG: 1
@@ -76,6 +96,41 @@ services:
              bin/console messenger:consume async --time-limit=3600 --memory-limit=128M -vv"
     # depends_on:
     #   - db
+
+  # Runs scheduled tasks (hourly electronic-invoicing status/incoming polls,
+  # recurring-invoice generation, marking invoices overdue, ...). Each
+  # #[AsCronTask(schedule: 'x')] gets its own Messenger transport named
+  # `scheduler_x` (confirmed via `messenger:consume poll_super_pdp_invoice_status`,
+  # which lists every registered receiver) — `--all` consumes every one of
+  # them as they come due, in a single long-running process; `async`/`failed`
+  # are excluded since `worker` above already owns `async` and `failed` is a
+  # dead-letter store, not something to actively consume. cron:run/schedule:run
+  # (a leftover from a different scheduling library) does NOT work with
+  # symfony/scheduler and was never wired into any container here — without
+  # this service, every #[AsCronTask] job silently never ran locally.
+  cron:
+    build:
+      context: .
+      dockerfile: docker/dev.Dockerfile
+    # No HTTP surface here, so the frankenphp base image's Caddy admin probe is
+    # meaningless rather than merely misconfigured — it would sit "unhealthy"
+    # forever and teach you to ignore the column. Liveness is already covered:
+    # if the consumer dies the shell exits, the container exits, and the
+    # restart policy above brings it back.
+    healthcheck:
+      disable: true
+    # Self-limits and exits zero like worker, so `on-failure` never revives it.
+    restart: unless-stopped
+    environment:
+      SOLIDINVOICE_ENV: dev
+      SOLIDINVOICE_DEBUG: 1
+    volumes:
+      - .:/app
+      - dev_vendor:/app/vendor
+      - dev_var:/app/var
+    command: >
+      sh -c "until [ -f vendor/autoload.php ]; do sleep 1; done &&
+             bin/console messenger:consume --all --exclude-receivers=async --exclude-receivers=failed --time-limit=3600 --memory-limit=128M -vv"
 
   # db:
   #   image: "mysql:8.0"
