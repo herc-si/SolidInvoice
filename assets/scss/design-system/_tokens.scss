@@ -15,21 +15,30 @@
     // Brand Colors (Primary & Secondary)
     // -------------------------------------------------------------------------
 
-    // Primary: Green - Used for main CTAs, links, active states
-    --swp-primary: #2e963a;
-    --swp-primary-rgb: 46, 150, 58;
-    --swp-primary-hover: #268032;
-    --swp-primary-dark: #1f6c29;
-    --swp-primary-light: #e8f5e9;
-    --swp-primary-lighter: #f1f9f2;
+    // Primary: Ink Blue - Main CTAs, links, active states.
+    // The brand was green, which put it on the same hue as `success` in a
+    // product where green *means* money received: a primary button and a "Paid"
+    // chip read as the same signal. The old green also measured 3.79:1 on white
+    // while serving as `$link-color`, so every link in the application failed
+    // WCAG AA. Ink blue clears both problems — 9.25:1 on surface, 8.54:1 on the
+    // canvas, and no hue shared with any status colour.
+    --swp-primary: #1e4976;
+    --swp-primary-rgb: 30, 73, 118;
+    --swp-primary-hover: #183a5e;
+    --swp-primary-dark: #12293f;
+    --swp-primary-light: #e4edf6;
+    --swp-primary-lighter: #f3f8fc;
 
-    // Secondary: Orange - Used sparingly for accents
-    --swp-secondary: #f0a015;
-    --swp-secondary-rgb: 240, 160, 21;
-    --swp-secondary-hover: #d89012;
-    --swp-secondary-dark: #c8820e;
-    --swp-secondary-light: #fff8e1;
-    --swp-secondary-lighter: #fffcf0;
+    // Secondary: Terracotta - Used sparingly for accents.
+    // 5.52:1 on surface and 5.09:1 on the canvas, so it holds AA as text as
+    // well as behind white. Deliberately kept off amber: `warning` owns that
+    // hue, and an accent that borrows a status colour stops being an accent.
+    --swp-secondary: #a94e28;
+    --swp-secondary-rgb: 169, 78, 40;
+    --swp-secondary-hover: #91421f;
+    --swp-secondary-dark: #75351a;
+    --swp-secondary-light: #fbeee7;
+    --swp-secondary-lighter: #fdf8f5;
 
     // -------------------------------------------------------------------------
     // Neutral Colors (Slate-based gray scale for modern feel)

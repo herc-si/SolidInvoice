@@ -2,15 +2,15 @@
 name: SolidInvoice
 description: Open-source, self-hostable invoicing for freelancers and small businesses.
 colors:
-  primary: "#2e963a"
-  primary-hover: "#268032"
-  primary-dark: "#1f6c29"
-  primary-light: "#e8f5e9"
-  primary-lighter: "#f1f9f2"
-  secondary: "#f0a015"
-  secondary-hover: "#d89012"
-  secondary-dark: "#c8820e"
-  secondary-light: "#fff8e1"
+  primary: "#1e4976"
+  primary-hover: "#183a5e"
+  primary-dark: "#12293f"
+  primary-light: "#e4edf6"
+  primary-lighter: "#f3f8fc"
+  secondary: "#a94e28"
+  secondary-hover: "#91421f"
+  secondary-dark: "#75351a"
+  secondary-light: "#fbeee7"
   success: "#10b981"
   success-dark: "#047857"
   success-light: "#d1fae5"
@@ -148,14 +148,14 @@ components:
 
 **Creative North Star: "The Friendly Desk"**
 
-SolidInvoice should feel like a clean workspace with a touch of warmth — approachable, never corporate. The user comes in expecting admin pain and finds an organized desk instead: paper-white surfaces, soft shadows that suggest depth without performing it, and a quiet green accent that says "you can do this" instead of shouting. The interface treats money with respect (clarity, precision, never hiding totals) while treating the human warmly (plain language, encouraging empty states, no scolding).
+SolidInvoice should feel like a clean workspace with a touch of warmth — approachable, never corporate. The user comes in expecting admin pain and finds an organized desk instead: paper-white surfaces, soft shadows that suggest depth without performing it, and a quiet ink-blue accent that says "you can do this" instead of shouting. The interface treats money with respect (clarity, precision, never hiding totals) while treating the human warmly (plain language, encouraging empty states, no scolding).
 
 The system explicitly rejects four aesthetics. It is not a legacy AdminLTE/Bootstrap admin panel — no dark blue navbar, no sidebar tree of every entity, no boxy widgets. It is not enterprise accounting (QuickBooks, Sage, Xero) — no dense corporate toolbars, no 90s-feeling forms. It is not AI-slop SaaS — no purple gradients, no glass cards, no hero-metric tiles, no gradient text. It is not crypto/fintech neon-on-black. SolidInvoice sits where competent SMB tools live: Linear's restraint applied to invoicing.
 
 **Key Characteristics:**
 
 - **System fonts, never web fonts.** Native feel, zero load cost, looks correct on every platform.
-- **One accent green, used deliberately.** Trust Green (#2e963a) carries primary CTAs and positive money states. Secondary orange exists but appears sparingly.
+- **One accent, used deliberately.** Ink Blue (#1e4976) carries primary CTAs and active states. Terracotta exists but appears sparingly. Positive money states belong to `success`, not to the brand — see below.
 - **Slate-based neutrals.** Cool gray scale (gray-50 → gray-900) with a hint of blue. No pure black, no pure white in body text.
 - **Soft, rounded shapes.** 8px on buttons and inputs, 12px on cards, 16px+ on modals. Nothing sharp; nothing fully circular except pill badges.
 - **8px spacing grid.** Half-steps allowed (2px, 6px, 10px, 14px) for fine-tuning.
@@ -163,15 +163,17 @@ The system explicitly rejects four aesthetics. It is not a legacy AdminLTE/Boots
 
 ## 2. Colors
 
-A slate-and-paper palette with a single warm-green accent. The neutral scale carries 90% of the surface area; the green appears only where it does work.
+A slate-and-paper palette with a single ink-blue accent. The neutral scale carries 90% of the surface area; the blue appears only where it does work.
 
 ### Primary
 
-- **Trust Green** (`#2e963a` / oklch(57.6% 0.156 142)): The single accent. Used on primary CTAs ("Create Invoice", "Send", "Record Payment"), active nav states, "Paid" badges, focus borders on form fields, and links. A confident, slightly muted forest green — money-positive without being neon. Variants: `primary-hover` (#268032), `primary-dark` (#1f6c29) for active states, `primary-light` (#e8f5e9) for selected-row tints and success alert backgrounds, `primary-lighter` (#f1f9f2) for ambient hover surfaces.
+- **Ink Blue** (`#1e4976`): The single accent. Used on primary CTAs ("Create Invoice", "Send", "Record Payment"), active nav states, focus borders on form fields, and links. The colour of a ledger rather than of a brand shouting. 9.25:1 on surface and 8.54:1 on the canvas, so it holds AA as link text — the green it replaced measured **3.79:1** and failed as `$link-color` on every link in the application. Variants: `primary-hover` (#183a5e), `primary-dark` (#12293f) for active states, `primary-light` (#e4edf6) for selected-row tints, `primary-lighter` (#f3f8fc) for ambient hover surfaces.
+
+  The brand deliberately no longer shares a hue with any status colour. While it was green it collided with `success` in a product where green *means* money received: a primary button and a "Paid" chip carried the same signal, and this document had to spend a sentence insisting the two greens were different.
 
 ### Secondary
 
-- **Warm Amber** (`#f0a015`): Used *sparingly* for non-primary attention — secondary buttons, "Sent" or "Pending" badges, secondary CTA accents on marketing-adjacent surfaces. Never paired with primary green at high saturation on the same screen; the two are alternates, not partners.
+- **Terracotta** (`#a94e28`): Used *sparingly* for non-primary attention — secondary buttons and secondary CTA accents. 5.52:1 on surface, 5.09:1 on the canvas, so it is safe as text as well as behind white. Deliberately off amber: `warning` owns that hue, and an accent borrowing a status colour stops being an accent. Never paired with the primary at high saturation on the same screen; the two are alternates, not partners.
 
 ### Tertiary (Semantic / Status)
 
@@ -179,7 +181,7 @@ These four colors are reserved for status meaning and must never be used decorat
 
 They are **fill** colors, not **text** colors. At full saturation none of them clears 4.5:1 on `surface` (measured: success 2.54:1, danger 3.76:1, warning and info lower still). Use them for chip backgrounds, icon fills, and borders; when a status needs to be rendered as *text*, use the `-dark` step. See The Legible Status Rule below.
 
-- **Success** (`#10b981`): Distinct from primary green. Used on payment confirmation toasts, "Settled" states, and positive deltas. Pair with `success-light` (#d1fae5) for backgrounds. For success-colored text use **`success-dark`** (`#047857`, emerald-700 — 5.48:1 on surface, 5.06:1 on body-bg).
+- **Success** (`#10b981`): The only green in the system now that the brand has left the hue, so a green chip means "paid" and nothing else. Used on payment confirmation toasts, "Settled" states, and positive deltas. Pair with `success-light` (#d1fae5) for backgrounds. For success-colored text use **`success-dark`** (`#047857`, emerald-700 — 5.48:1 on surface, 5.06:1 on body-bg).
 - **Danger** (`#ef4444`): Overdue invoices, destructive confirmations, validation errors. Pair with `danger-light` (#fee2e2). For danger-colored text use **`danger-dark`** (`#b91c1c`, red-700 — 6.47:1 on surface, 5.97:1 on body-bg).
 - **Warning** (`#f59e0b`): "Due soon", soft alerts, partial-payment hints. Pair with `warning-light` (#fef3c7).
 - **Info** (`#3b82f6`): Neutral information, "Draft" badges, system messages. Pair with `info-light` (#dbeafe).
@@ -201,7 +203,7 @@ A 10-step slate ramp. Every neutral is tinted cool, not pure gray.
 
 ### Named Rules
 
-**The One Accent Rule.** Trust Green carries primary action; Warm Amber carries secondary. They never appear at full saturation on the same screen. If a screen needs both, demote one to its tint (`*-light` family) and keep the other at full color.
+**The One Accent Rule.** Ink Blue carries primary action; Terracotta carries secondary. They never appear at full saturation on the same screen. If a screen needs both, demote one to its tint (`*-light` family) and keep the other at full color.
 
 **The Tinted Neutrals Rule.** Every "gray" is slate-tinted (cool, slight blue). Pure-gray neutrals (`#cccccc` family) are prohibited. Pure `#000` and `#fff` for text are prohibited; use `text-primary` (#1e293b) and `surface` (#ffffff against the tinted body, never as text on tinted body).
 
@@ -254,7 +256,7 @@ Subtle ambient layering. Most surfaces lift slightly off the canvas at rest — 
 
 **The Paper-On-Desk Rule.** Cards at rest carry `shadow-sm`. They look like sheets of paper resting on the canvas, not like floating chrome.
 
-**The Focus Halo Rule.** Keyboard focus is always a soft 3px green halo (`ring-primary`), never a 1px hard outline. Visible from across the room, but it doesn't shout.
+**The Focus Halo Rule.** Keyboard focus is always a soft 3px ink halo (`ring-primary`), never a 1px hard outline. Visible from across the room, but it doesn't shout.
 
 **The No Inner Shadow on Inputs Rule.** Form fields are flat with a 1px border. The `shadow-inner` token exists for special cases (search bars on dark surfaces) but is not used on default inputs.
 
@@ -265,8 +267,8 @@ Soft and approachable. Generous radii, gentle shadows, restrained color. Buttons
 ### Buttons
 
 - **Shape:** Rounded with `radius-md` (8px). Buttons are never pill-shaped except when carrying icon-only actions on dense toolbars.
-- **Primary:** Trust Green background (`#2e963a`), white text, 10px × 16px padding, weight 500, `shadow-xs` at rest. Hover shifts background to `primary-hover` (`#268032`). Focus adds the green halo ring. Active uses `primary-dark` (`#1f6c29`).
-- **Secondary:** Warm Amber background (`#f0a015`), white text. Same shape rules. Used for "Save & Send", non-primary actions in the same flow as primary.
+- **Primary:** Ink Blue background (`#1e4976`), white text at 9.25:1, 10px × 16px padding, weight 500, `shadow-xs` at rest. Hover shifts background to `primary-hover` (`#183a5e`). Focus adds the halo ring. Active uses `primary-dark` (`#12293f`).
+- **Secondary:** Terracotta background (`#a94e28`), white text. Same shape rules. Used for "Save & Send", non-primary actions in the same flow as primary.
 - **Ghost / Tertiary:** Transparent background, `text-primary` color, 1px transparent border that becomes `border` on hover. Hover background shifts to `surface-hover`. Used for "Cancel", row-action menus, secondary nav.
 - **Destructive:** Danger background (`#ef4444`), white text, used only on destructive confirmations ("Delete invoice"). Never on the primary flow.
 
@@ -288,7 +290,7 @@ Soft and approachable. Generous radii, gentle shadows, restrained color. Buttons
 ### Inputs / Form Fields
 
 - **Style:** `surface` background, 1px `border` (#e2e8f0), `radius-md` (8px), 10px × 16px padding, body typography (15px / 400). No inner shadow.
-- **Focus:** Border shifts to `primary` (Trust Green), `ring-primary` halo appears around. Smooth 200ms transition.
+- **Focus:** Border shifts to `primary` (Ink Blue), `ring-primary` halo appears around. Smooth 200ms transition.
 - **Error:** Border shifts to `danger`, ring becomes `ring-danger`. Help text below the field switches to danger color with an icon prefix.
 - **Disabled:** Background `gray-50`, text `text-light`, no focus treatment.
 - **Labels:** `text-label` utility — `text-sm` (13px), weight 500, color `text-secondary`. Always above the field, never floating.
@@ -309,7 +311,7 @@ One shared primitive for every "nothing here yet" surface: `@SolidInvoiceDataGri
 - **First-run copy names the entity.** Generic "create your first item" is a missed onboarding moment. A grid supplies its own copy through `getEmptyTitle()` / `getEmptyDescription()` (base class returns the generic fallback); the four core lists — clients, invoices, quotes, payments — override it with encouraging, plain-English copy per Design Principle 2 (Reduce admin dread).
 - **No dead ends.** Every first-run empty state offers the next action. Where an entity is not created directly (Payments arrive when an invoice is paid), the CTA points at the real next step (`Create an invoice`) rather than showing nothing. A filtered-to-empty result is different: it shows the generic "no results" copy and *no* create CTA.
 
-The first-run onboarding wizard (`/onboarding`) follows the same system — Trust Green, `--swp-*` tokens, flat surfaces, ease-out motion — via `assets/scss/components/_onboarding-wizard.scss`. It is the activation surface, so it is held to the design system as strictly as any in-app screen.
+The first-run onboarding wizard (`/onboarding`) follows the same system — Ink Blue, `--swp-*` tokens, flat surfaces, ease-out motion — via `assets/scss/components/_onboarding-wizard.scss`. It is the activation surface, so it is held to the design system as strictly as any in-app screen.
 
 ### Modals
 
@@ -320,7 +322,7 @@ The first-run onboarding wizard (`/onboarding`) follows the same system — Trus
 
 ### Navigation
 
-- **Style:** Top horizontal nav (Tabler default). `surface` background, `text-secondary` for inactive links, `text-primary` weight 600 for the active link with a 2px primary-green underline beneath.
+- **Style:** Top horizontal nav (Tabler default). `surface` background, `text-secondary` for inactive links, `text-primary` weight 600 for the active link with a 2px primary underline beneath.
 - **Active company indicator:** Always visible in the top-left. Multi-tenant safety lives here.
 
 ### Signature Component: Money Display
@@ -369,7 +371,7 @@ At display size `.money--total` also drops the currency code to `money-currency-
 
 ### Do:
 
-- **Do** use Trust Green (`#2e963a`) sparingly. Primary CTAs, "Paid" states, active nav, focus rings. If green covers more than ~10% of any screen, you're overusing it.
+- **Do** use Ink Blue (`#1e4976`) sparingly. Primary CTAs, active nav, focus rings. If it covers more than ~10% of any screen, you're overusing it. "Paid" is `success`, not the brand.
 - **Do** put status meaning on color *and* label. A green chip without "Paid" text is wrong.
 - **Do** use tabular figures (`font-variant-numeric: tabular-nums`) for every money column, total, and invoice ID.
 - **Do** lift cards with `shadow-sm` at rest. The paper-on-desk feel is the whole point.

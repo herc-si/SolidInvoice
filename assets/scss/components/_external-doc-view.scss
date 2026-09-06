@@ -35,7 +35,7 @@
     .app-brand-name {
         font-size: 1.5rem;
         font-weight: 700;
-        color: var(--tblr-primary, #2e963a);
+        color: var(--tblr-primary, #1e4976);
         line-height: 1.2;
     }
 
@@ -146,7 +146,7 @@
 .ext-doc-metadata-total {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--tblr-primary, #2e963a);
+    color: var(--tblr-primary, #1e4976);
     line-height: 1.2;
 }
 
@@ -290,7 +290,7 @@
     .ext-doc-totals-value {
         font-size: 2rem;
         font-weight: 700;
-        color: var(--tblr-primary, #2e963a);
+        color: var(--tblr-primary, #1e4976);
         line-height: 1;
     }
 }
@@ -340,7 +340,7 @@ hr {
 // Focus styles for keyboard navigation
 
 .btn:focus-visible {
-    outline: 2px solid var(--tblr-primary, #2e963a);
+    outline: 2px solid var(--tblr-primary, #1e4976);
     outline-offset: 2px;
 }
 
@@ -592,7 +592,7 @@ hr {
     .text-primary,
     .ext-doc-metadata-total,
     .ext-doc-totals-final .ext-doc-totals-value {
-        color: #2e963a !important;
+        color: #1e4976 !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }

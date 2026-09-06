@@ -14,10 +14,10 @@ All CSS custom properties use `--swp-` prefix. Defined in `/assets/scss/design-s
 
 | Token                                | Usage                           |
 |--------------------------------------|---------------------------------|
-| `--swp-primary` (#2e963a)            | Main CTAs, links, active states |
-| `--swp-primary-dark` (#1f6c29)       | Hover/active states             |
-| `--swp-primary-light` (#e8f5e9)      | Backgrounds, badges             |
-| `--swp-secondary` (#f0a015)          | Accent (use sparingly)          |
+| `--swp-primary` (#1e4976)            | Main CTAs, links, active states |
+| `--swp-primary-dark` (#12293f)       | Hover/active states             |
+| `--swp-primary-light` (#e4edf6)      | Backgrounds, badges             |
+| `--swp-secondary` (#a94e28)          | Accent (use sparingly)          |
 | `--swp-success/danger/warning/info`  | Status colors                   |
 | `--swp-gray-50` to `--swp-gray-900`  | Text and backgrounds            |
 | `--swp-text-primary/secondary/muted` | Text hierarchy                  |
