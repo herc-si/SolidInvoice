@@ -49,11 +49,11 @@ enum BillStatus: string implements HasStatusLabel
     public function getColor(): string
     {
         return match ($this) {
-            self::Draft => 'secondary',
+            self::Draft => 'gray',
             self::Pending => 'yellow',
             self::Paid => 'green',
             self::Overdue => 'red',
-            self::Cancelled => 'gray',
+            self::Cancelled => 'dark',
             self::Archived => 'purple',
         };
     }

@@ -1,0 +1,16 @@
+/**
+ * SolidInvoice — Status Badges
+ *
+ * Status chips render as Tabler's tinted `bg-<colour>-lt` variants rather than
+ * solid fills. On a list, a solid saturated pill repeated down every row is the
+ * loudest thing on screen, competing with the figures and names that people
+ * actually read; a tint carries the same signal and lets the data lead.
+ *
+ * Tabler ships `-lt` for its whole palette except `gray`, which the status
+ * enums use for the quietest states (new, draft). Defined here to match.
+ */
+
+.bg-gray-lt {
+    background-color: var(--swp-gray-100);
+    color: var(--swp-text-secondary);
+}

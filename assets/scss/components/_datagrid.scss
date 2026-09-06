@@ -668,13 +668,17 @@
         border-bottom: 1px solid var(--swp-border-light);
     }
 
+    // A filled grey header band with uppercase, letter-spaced labels is the
+    // AdminLTE signature this rewrite is leaving behind. The column names are
+    // structure, not content: they earn their place through weight and a firm
+    // rule under the row, not through a block of colour behind them.
+
     th {
-        font-size: var(--swp-text-xs);
+        font-size: var(--swp-text-sm);
         font-weight: var(--swp-font-semibold);
-        color: var(--swp-text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        background: var(--swp-gray-50);
+        color: var(--swp-text-secondary);
+        background: transparent;
+        border-bottom: 2px solid var(--swp-border);
         white-space: nowrap;
         user-select: none;
     }
@@ -761,13 +765,6 @@
         padding: 2px 10px;
         font-weight: var(--swp-font-medium);
         letter-spacing: 0;
-
-        // `text-gray-fg` is amber-bound; neutralise the Cancelled chip explicitly.
-
-        &.bg-gray.text-gray-fg {
-            background-color: var(--swp-gray-100);
-            color: var(--swp-text-secondary);
-        }
     }
 }
 
@@ -815,6 +812,33 @@
     align-items: center;
     justify-content: flex-end;
     gap: var(--swp-space-1);
+}
+
+// Two icons on every row is a column of noise repeated as far as the list goes,
+// competing with the data for attention while only ever applying to the one row
+// under the pointer. Fading them in on hover keeps them exactly as reachable —
+// opacity, not visibility, so they stay in the tab order — and `focus-within`
+// brings them back for keyboard users the moment they are tabbed to.
+
+.datagrid-table tbody {
+
+    .datagrid-row-actions {
+        opacity: 0;
+        transition: opacity var(--swp-transition-fast);
+    }
+
+    tr:hover .datagrid-row-actions,
+    tr:focus-within .datagrid-row-actions {
+        opacity: 1;
+    }
+}
+
+// A touch screen has no hover state to reveal them with, so there they stay put.
+@media (hover: none) {
+
+    .datagrid-table tbody .datagrid-row-actions {
+        opacity: 1;
+    }
 }
 
 .datagrid-action-btn {

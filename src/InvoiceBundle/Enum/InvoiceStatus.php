@@ -44,12 +44,12 @@ enum InvoiceStatus: string implements HasStatusLabel
     {
         return match ($this) {
             self::New => 'gray',
-            self::Draft => 'secondary',
+            self::Draft => 'gray',
             self::Pending => 'yellow',
             self::Paid => 'green',
             self::Active => 'green',
             self::Overdue => 'red',
-            self::Cancelled => 'gray',
+            self::Cancelled => 'dark',
             self::Archived => 'purple',
         };
     }

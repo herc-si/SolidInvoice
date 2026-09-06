@@ -44,9 +44,9 @@ enum RecurringInvoiceStatus: string implements HasStatusLabel
             self::New => 'gray',
             self::Active => 'green',
             self::Complete => 'teal',
-            self::Draft => 'secondary',
+            self::Draft => 'gray',
             self::Paused => 'dark',
-            self::Cancelled => 'gray',
+            self::Cancelled => 'dark',
             self::Archived => 'purple',
         };
     }

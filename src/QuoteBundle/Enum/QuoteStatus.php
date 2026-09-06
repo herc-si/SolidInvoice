@@ -42,10 +42,10 @@ enum QuoteStatus: string implements HasStatusLabel
     {
         return match ($this) {
             self::New => 'gray',
-            self::Draft => 'secondary',
+            self::Draft => 'gray',
             self::Pending => 'yellow',
             self::Accepted => 'green',
-            self::Cancelled => 'gray',
+            self::Cancelled => 'dark',
             self::Declined => 'red',
             self::Archived => 'purple',
         };
