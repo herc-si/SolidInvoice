@@ -309,10 +309,12 @@
         {% set attr = attr|merge({class: attr.class ~ ' d-flex align-items-center gap-2'}) %}
         {% set label_html = true %}
         {% set label_text = label|default(name|humanize) %}
+        {#- `label_html` turns off Symfony's own translation of the label, so the
+            text has to be translated here or the raw key reaches the page. -#}
         {%- set label -%}
             {{ icon|raw }}
             {%- if label_text is defined -%}
-                {{- label_text -}}
+                {{- label_text|trans({}, translation_domain) -}}
             {%- endif -%}
         {%- endset -%}
     {% endif %}
