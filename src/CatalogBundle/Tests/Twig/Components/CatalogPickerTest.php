@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of Augias project.
  *
- * (c) Pierre du Plessis <open-source@solidworx.co>
+ * (c) HERC SI <opensource@herc-si.fr>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -72,7 +72,12 @@ final class CatalogPickerTest extends LiveComponentTest
         // single text field on the line, so they arrive joined.
         self::assertSame("Journée de conseil\nAccompagnement sur site", $line['description']);
         self::assertSame('1', $line['qty']);
-        self::assertStringStartsWith('90000', $line['price']);
+        // 900 EUR, not 90 000. The catalogue stores minor units and the money
+        // field reads major ones; this assertion used to expect the stored
+        // integer, which locked in a line priced a hundred times over.
+        // Compared numerically because the field re-renders the value through
+        // its own formatting.
+        self::assertSame(900.0, (float) $line['price']);
         self::assertCount(1, $line['taxes']);
     }
 

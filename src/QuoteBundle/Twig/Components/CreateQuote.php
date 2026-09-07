@@ -23,6 +23,7 @@ use Augias\CoreBundle\Entity\Discount;
 use Augias\CoreBundle\Enum\CustomFieldTarget;
 use Augias\CoreBundle\Service\CustomField\CustomFieldFormWriter;
 use Augias\MoneyBundle\Calculator;
+use Augias\MoneyBundle\Currency\CurrencyScale;
 use Augias\QuoteBundle\DTO\QuoteFormDTO;
 use Augias\QuoteBundle\Entity\Quote;
 use Augias\QuoteBundle\Enum\QuoteClientMode;
@@ -30,12 +31,14 @@ use Augias\QuoteBundle\Form\Type\QuoteType;
 use Augias\QuoteBundle\Manager\QuoteFormManager;
 use Augias\QuoteBundle\Model\Graph;
 use Augias\SaasBundle\Feature\Feature;
+use Augias\SettingsBundle\SystemConfig;
 use Augias\TaxBundle\Entity\Tax;
 use Augias\TaxBundle\Repository\TaxRepository;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
+use Money\Currency;
 use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -85,6 +88,8 @@ final class CreateQuote extends AbstractController
         private readonly TotalCalculator $totalCalculator,
         private readonly TaxRepository $taxRepository,
         private readonly ProductRepository $productRepository,
+        private readonly CurrencyScale $currencyScale,
+        private readonly SystemConfig $systemConfig,
         private readonly EntityManagerInterface $entityManager,
         private readonly WorkflowInterface $quoteStateMachine,
         private readonly RouterInterface $router,
@@ -225,7 +230,7 @@ final class CreateQuote extends AbstractController
 
         $line = [
             'description' => $this->catalogLineDescription($product),
-            'price' => (string) ($product->getSalePrice() ?? BigInteger::zero()),
+            'price' => $this->catalogLinePrice($product),
             'qty' => '1',
         ];
 
@@ -236,6 +241,40 @@ final class CreateQuote extends AbstractController
         }
 
         $propertyAccessor->setValue($this->formValues, sprintf('[lines][%d]', $index), $line);
+    }
+
+    /**
+     * The catalogue stores prices in minor units; this feeds a form value, and
+     * the money field's view data is in major units. Handing over the stored
+     * integer put every catalogue line out by a factor of a hundred.
+     *
+     * The currency is resolved the same way instantiateForm() does, so the
+     * conversion uses the same scale the field will apply in reverse - and the
+     * factor follows the currency's own decimal count rather than a flat 100,
+     * which is what keeps JPY and BHD right.
+     */
+    private function catalogLinePrice(Product $product): string
+    {
+        $price = $product->getSalePrice() ?? BigInteger::zero();
+
+        return (string) $this->currencyScale->toMajorUnit($price, $this->currentCurrency());
+    }
+
+    private function currentCurrency(): Currency
+    {
+        if ($this->dto->client instanceof Client) {
+            return $this->dto->client->getCurrency();
+        }
+
+        if (($this->formValues['client'] ?? '') !== '') {
+            $currency = $this->clientRepository->find($this->formValues['client'])?->getCurrency();
+
+            if ($currency instanceof Currency) {
+                return $currency;
+            }
+        }
+
+        return $this->systemConfig->getCurrency();
     }
 
     /**

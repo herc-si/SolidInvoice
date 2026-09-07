@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of Augias project.
  *
- * (c) Pierre du Plessis <open-source@solidworx.co>
+ * (c) HERC SI <opensource@herc-si.fr>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Augias\BillBundle\Tests\Entity;
 
 use Augias\BillBundle\Entity\Bill;
-use Augias\BillBundle\Entity\BillCategory;
 use Augias\BillBundle\Entity\BillPayment;
 use Augias\BillBundle\Enum\BillPaymentMethod;
 use Augias\BillBundle\Enum\BillStatus;
 use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Entity\Category;
 use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
 use Brick\Math\BigInteger;
 use DateTimeImmutable;
@@ -31,7 +31,7 @@ final class BillTest extends TestCase
     public function testGettersAndSetters(): void
     {
         $supplier = new Client();
-        $category = new BillCategory();
+        $category = new Category();
         $receipt = new ElectronicInvoiceReceipt();
         $issueDate = new DateTimeImmutable('2026-01-01');
         $dueDate = new DateTimeImmutable('2026-01-31');

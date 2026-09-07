@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of Augias project.
  *
- * (c) Pierre du Plessis <open-source@solidworx.co>
+ * (c) HERC SI <opensource@herc-si.fr>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -17,6 +17,7 @@ use Augias\BillBundle\Enum\BillStatus;
 use Augias\BillBundle\Repository\BillRepository;
 use Augias\ClientBundle\Entity\Client;
 use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Entity\Category;
 use Augias\CoreBundle\Traits\Entity\CompanyAware;
 use Augias\CoreBundle\Traits\Entity\TimeStampable;
 use Augias\ElectronicInvoicingBundle\Entity\ElectronicInvoiceReceipt;
@@ -83,9 +84,9 @@ class Bill
     #[ORM\Column(name: 'currency_code', type: Types::STRING, length: 3)]
     private string $currencyCode;
 
-    #[ORM\ManyToOne(targetEntity: BillCategory::class)]
+    #[ORM\ManyToOne(targetEntity: Category::class)]
     #[ORM\JoinColumn(name: 'category_id', nullable: true, onDelete: 'SET NULL')]
-    private ?BillCategory $category = null;
+    private ?Category $category = null;
 
     #[ORM\Column(name: 'notes', type: Types::TEXT, nullable: true)]
     private ?string $notes = null;
@@ -271,12 +272,12 @@ class Bill
         return new Money((string) $balance, new Currency($this->currencyCode));
     }
 
-    public function getCategory(): ?BillCategory
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?BillCategory $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 

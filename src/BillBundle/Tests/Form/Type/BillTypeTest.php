@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of Augias project.
  *
- * (c) Pierre du Plessis <open-source@solidworx.co>
+ * (c) HERC SI <opensource@herc-si.fr>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -18,7 +18,9 @@ use Augias\BillBundle\Form\Type\BillType;
 use Augias\ClientBundle\Test\Factory\ClientFactory;
 use Augias\CoreBundle\Tests\FormTestCase;
 use Augias\InstallBundle\Test\EnsureApplicationInstalled;
+use Augias\SettingsBundle\SystemConfig;
 use Money\Currency;
+use Symfony\Component\Form\FormTypeInterface;
 
 /**
  * @see \Augias\BillBundle\Form\Type\BillType
@@ -83,5 +85,16 @@ final class BillTypeTest extends FormTestCase
         self::assertCount(0, $form->get('supplier')->getErrors());
         self::assertSame('Brand New Supplier Inc.', $form->get('newSupplierName')->getData());
         self::assertNull($form->get('supplier')->getData());
+    }
+
+    /**
+     * BillType takes SystemConfig now (for the currency default), so the bare form
+     * factory used here can no longer build it from its class name alone.
+     *
+     * @return list<FormTypeInterface<Bill>>
+     */
+    protected function getTypes(): array
+    {
+        return [...parent::getTypes(), new BillType(self::getContainer()->get(SystemConfig::class))];
     }
 }

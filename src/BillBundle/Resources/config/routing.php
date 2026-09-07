@@ -5,16 +5,13 @@ declare(strict_types=1);
 /*
  * This file is part of Augias project.
  *
- * (c) Pierre du Plessis <open-source@solidworx.co>
+ * (c) HERC SI <opensource@herc-si.fr>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
 use Augias\BillBundle\Action\Add;
-use Augias\BillBundle\Action\Category\Add as CategoryAdd;
-use Augias\BillBundle\Action\Category\Edit as CategoryEdit;
-use Augias\BillBundle\Action\Category\Index as CategoryIndex;
 use Augias\BillBundle\Action\CreateFromReceipt;
 use Augias\BillBundle\Action\Delete;
 use Augias\BillBundle\Action\Edit;
@@ -59,16 +56,4 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     $routingConfigurator
         ->add('_bills_create_from_receipt', '/create-from-receipt/{id}')
         ->controller(CreateFromReceipt::class);
-
-    $routingConfigurator
-        ->add('_bill_categories_index', '/categories')
-        ->controller(CategoryIndex::class);
-
-    $routingConfigurator
-        ->add('_bill_categories_add', '/categories/add')
-        ->controller(CategoryAdd::class);
-
-    $routingConfigurator
-        ->add('_bill_categories_edit', '/categories/edit/{id}')
-        ->controller(CategoryEdit::class);
 };

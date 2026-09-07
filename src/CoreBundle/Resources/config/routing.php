@@ -11,6 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
+use Augias\CoreBundle\Action\Category\Add as CategoryAdd;
+use Augias\CoreBundle\Action\Category\Edit as CategoryEdit;
+use Augias\CoreBundle\Action\Category\Index as CategoryIndex;
 use Augias\CoreBundle\Action\CreateCompany;
 use Augias\CoreBundle\Action\DeleteCompany;
 use Augias\CoreBundle\Action\Search;
@@ -88,4 +91,18 @@ return static function (RoutingConfigurator $routingConfigurator): void {
         ->add('_export_download', '/profile/exports/{id}/download')
         ->controller(DownloadExport::class)
         ->methods(['GET']);
+
+    // One list of categories for purchases and the catalogue alike; the two
+    // used to have a settings screen each. See CoreBundle\Entity\Category.
+    $routingConfigurator
+        ->add('_categories_index', '/categories')
+        ->controller(CategoryIndex::class);
+
+    $routingConfigurator
+        ->add('_categories_add', '/categories/add')
+        ->controller(CategoryAdd::class);
+
+    $routingConfigurator
+        ->add('_categories_edit', '/categories/edit/{id}')
+        ->controller(CategoryEdit::class);
 };

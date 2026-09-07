@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of Augias project.
  *
- * (c) Pierre du Plessis <open-source@solidworx.co>
+ * (c) HERC SI <opensource@herc-si.fr>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Augias\CatalogBundle\DummyData;
 
 use Augias\CatalogBundle\Entity\Product;
-use Augias\CatalogBundle\Entity\ProductCategory;
 use Augias\CatalogBundle\Enum\ProductType;
 use Augias\CatalogBundle\Enum\ProductUnit;
 use Augias\CoreBundle\DummyData\DummyDataLoaderInterface;
+use Augias\CoreBundle\Entity\Category;
 use Augias\CoreBundle\Entity\Company;
 use Augias\TaxBundle\Entity\Tax;
 use Brick\Math\BigInteger;
@@ -55,8 +55,8 @@ final readonly class CatalogDummyDataLoader implements DummyDataLoaderInterface
         $categories = [];
 
         foreach (['Prestations', 'Infogérance', 'Licences', 'Matériel'] as $name) {
-            $category = new ProductCategory();
-            $category->setCompany($company)->setName($name);
+            $category = new Category();
+            $category->setCompany($company)->setName($name)->setUsedForCatalog(true);
             $entityManager->persist($category);
             $categories[$name] = $category;
         }

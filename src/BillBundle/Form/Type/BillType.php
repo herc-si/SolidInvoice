@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of Augias project.
  *
- * (c) Pierre du Plessis <open-source@solidworx.co>
+ * (c) HERC SI <opensource@herc-si.fr>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -14,9 +14,12 @@ declare(strict_types=1);
 namespace Augias\BillBundle\Form\Type;
 
 use Augias\BillBundle\Entity\Bill;
-use Augias\BillBundle\Entity\BillCategory;
 use Augias\ClientBundle\Entity\Client;
+use Augias\CoreBundle\Entity\Category;
+use Augias\CoreBundle\Enum\CategoryUsage;
+use Augias\CoreBundle\Repository\CategoryRepository;
 use Augias\MoneyBundle\Form\Type\CurrencyType;
+use Augias\SettingsBundle\SystemConfig;
 use Doctrine\ORM\EntityRepository;
 use Money\Currency;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -37,6 +40,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class BillType extends AbstractType
 {
+    public function __construct(
+        private readonly SystemConfig $systemConfig,
+    ) {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $bill = $options['data'] ?? null;
@@ -85,11 +93,15 @@ final class BillType extends AbstractType
                 'currency' => $options['currency'],
             ])
             ->add('category', EntityType::class, [
-                'class' => BillCategory::class,
+                'class' => Category::class,
                 'label' => 'bill.form.category.label',
                 'required' => false,
                 'placeholder' => 'bill.form.category.placeholder',
                 'choice_label' => 'name',
+                // Categories are one shared list now, so this has to ask for
+                // the purchase side only — otherwise the dropdown would offer
+                // the things you sell.
+                'query_builder' => static fn (CategoryRepository $repository) => $repository->forUsage(CategoryUsage::Purchase),
             ])
             ->add('notes', TextareaType::class, ['label' => 'bill.form.notes.label', 'required' => false]);
 
@@ -110,7 +122,10 @@ final class BillType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Bill::class,
-            'currency' => new Currency('EUR'),
+            // The company's currency, not a hardcoded EUR: the money field
+            // scales by the currency's own decimal count, so a wrong one
+            // silently misplaces the decimal point for JPY and BHD.
+            'currency' => $this->systemConfig->getCurrency(),
         ]);
 
         $resolver->setAllowedTypes('currency', Currency::class);

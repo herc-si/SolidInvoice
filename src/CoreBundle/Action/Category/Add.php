@@ -11,10 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Augias\CatalogBundle\Action\Category;
+namespace Augias\CoreBundle\Action\Category;
 
-use Augias\CatalogBundle\Entity\ProductCategory;
-use Augias\CatalogBundle\Form\Type\ProductCategoryFormType;
+use Augias\CoreBundle\Entity\Category;
+use Augias\CoreBundle\Enum\CategoryUsage;
+use Augias\CoreBundle\Form\Type\CategoryType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Twig\Attribute\Template;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -26,7 +27,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\RouterInterface;
 use function assert;
 
-final readonly class Edit
+final readonly class Add
 {
     public function __construct(
         private FormFactoryInterface $formFactory,
@@ -36,27 +37,39 @@ final readonly class Edit
     }
 
     /**
-     * @return array{form: FormView, category?: ProductCategory}|Response
+     * @return array{form: FormView}|Response
      */
-    #[Template('@AugiasCatalog/Category/form.html.twig')]
-    public function __invoke(Request $request, ProductCategory $category): array | Response
+    #[Template('@AugiasCore/Category/form.html.twig')]
+    public function __invoke(Request $request): array | Response
     {
+        $category = new Category();
 
-        $form = $this->formFactory->create(ProductCategoryFormType::class, $category);
+        // Pre-tick the usage the user came from, so adding a category while
+        // filling in a supplier invoice does not silently create one that the
+        // purchase dropdown will not offer.
+        $usage = CategoryUsage::tryFrom((string) $request->query->get('usage', ''));
+
+        if ($usage instanceof CategoryUsage) {
+            $category->setUsage($usage, true);
+        }
+
+        $form = $this->formFactory->create(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->doctrine->getManager();
-
+            $entityManager->persist($category);
             $entityManager->flush();
 
             $session = $request->getSession();
             assert($session instanceof Session);
-            $session->getFlashBag()->add('success', 'catalog.category.action.updated');
+            $session->getFlashBag()->add('success', 'category.create.success');
 
-            return new RedirectResponse($this->router->generate('_catalog_categories_index'));
+            return new RedirectResponse($this->router->generate('_categories_index'));
         }
 
-        return ['form' => $form->createView(), 'category' => $category];
+        return [
+            'form' => $form->createView(),
+        ];
     }
 }

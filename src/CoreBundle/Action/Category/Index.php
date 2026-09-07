@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Augias\CatalogBundle\Action\Category;
+namespace Augias\CoreBundle\Action\Category;
 
 use Symfony\Bridge\Twig\Attribute\Template;
 
@@ -20,7 +20,7 @@ final class Index
     /**
      * @return array{}
      */
-    #[Template('@AugiasCatalog/Category/index.html.twig')]
+    #[Template('@AugiasCore/Category/index.html.twig')]
     public function __invoke(): array
     {
         return [];

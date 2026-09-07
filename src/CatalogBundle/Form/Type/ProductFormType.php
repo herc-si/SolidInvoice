@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of Augias project.
  *
- * (c) Pierre du Plessis <open-source@solidworx.co>
+ * (c) HERC SI <opensource@herc-si.fr>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -14,9 +14,12 @@ declare(strict_types=1);
 namespace Augias\CatalogBundle\Form\Type;
 
 use Augias\CatalogBundle\Entity\Product;
-use Augias\CatalogBundle\Entity\ProductCategory;
 use Augias\CatalogBundle\Enum\ProductType;
 use Augias\CatalogBundle\Enum\ProductUnit;
+use Augias\CoreBundle\Entity\Category;
+use Augias\CoreBundle\Enum\CategoryUsage;
+use Augias\CoreBundle\Repository\CategoryRepository;
+use Augias\SettingsBundle\SystemConfig;
 use Augias\TaxBundle\Entity\Tax;
 use Money\Currency;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -33,6 +36,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class ProductFormType extends AbstractType
 {
+    public function __construct(
+        private readonly SystemConfig $systemConfig,
+    ) {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -79,10 +87,13 @@ final class ProductFormType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'label' => 'catalog.form.category.label',
-                'class' => ProductCategory::class,
+                'class' => Category::class,
                 'choice_label' => 'name',
                 'placeholder' => 'catalog.form.category.placeholder',
                 'required' => false,
+                // The catalogue side of the shared category list — see the
+                // matching filter in BillType.
+                'query_builder' => static fn (CategoryRepository $repository) => $repository->forUsage(CategoryUsage::Catalog),
             ])
             ->add('active', CheckboxType::class, [
                 'label' => 'catalog.form.active.label',
@@ -95,7 +106,10 @@ final class ProductFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Product::class,
-            'currency' => new Currency('EUR'),
+            // The company's currency, not a hardcoded EUR: the money field
+            // scales by the currency's own decimal count, so a wrong one
+            // silently misplaces the decimal point for JPY and BHD.
+            'currency' => $this->systemConfig->getCurrency(),
         ]);
 
         $resolver->setAllowedTypes('currency', Currency::class);

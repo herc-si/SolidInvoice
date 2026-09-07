@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of Augias project.
  *
- * (c) Pierre du Plessis <open-source@solidworx.co>
+ * (c) HERC SI <opensource@herc-si.fr>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -17,10 +17,12 @@ use Augias\CatalogBundle\Enum\ProductType;
 use Augias\CatalogBundle\Enum\ProductUnit;
 use Augias\CatalogBundle\Repository\ProductRepository;
 use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
+use Augias\CoreBundle\Entity\Category;
 use Augias\CoreBundle\Traits\Entity\CompanyAware;
 use Augias\CoreBundle\Traits\Entity\TimeStampable;
 use Augias\TaxBundle\Entity\Tax;
 use Brick\Math\BigInteger;
+use Brick\Math\BigNumber;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Stringable;
@@ -82,24 +84,32 @@ class Product implements Stringable
     #[ORM\Column(name: 'unit', type: Types::STRING, length: 16, enumType: ProductUnit::class)]
     private ProductUnit $unit = ProductUnit::Unit;
 
+    /**
+     * Minor units, and typed BigNumber rather than BigInteger on purpose: the
+     * money form field hands back a BigDecimal (see MoneyBundle's
+     * ViewTransformer), and BigIntegerType scales whatever BigNumber it is
+     * given down to an integer on the way to the database. Narrowing this to
+     * BigInteger made every save of this form fail type validation before it
+     * ever reached Doctrine. Bill::$totalAmount has the same shape.
+     */
     #[ORM\Column(name: 'sale_price', type: BigIntegerType::NAME)]
     #[Assert\NotNull]
-    private ?BigInteger $salePrice = null;
+    private ?BigNumber $salePrice = null;
 
     /**
      * What the entry costs this company, used to show a margin. Null when it
      * isn't bought in — a service billed at a day rate usually has none.
      */
     #[ORM\Column(name: 'purchase_price', type: BigIntegerType::NAME, nullable: true)]
-    private ?BigInteger $purchasePrice = null;
+    private ?BigNumber $purchasePrice = null;
 
     #[ORM\ManyToOne(targetEntity: Tax::class)]
     #[ORM\JoinColumn(name: 'tax_id', nullable: true, onDelete: 'SET NULL')]
     private ?Tax $tax = null;
 
-    #[ORM\ManyToOne(targetEntity: ProductCategory::class)]
+    #[ORM\ManyToOne(targetEntity: Category::class)]
     #[ORM\JoinColumn(name: 'category_id', nullable: true, onDelete: 'SET NULL')]
-    private ?ProductCategory $category = null;
+    private ?Category $category = null;
 
     /**
      * Retired entries stay for the documents that already reference them but
@@ -173,24 +183,24 @@ class Product implements Stringable
         return $this;
     }
 
-    public function getSalePrice(): ?BigInteger
+    public function getSalePrice(): ?BigNumber
     {
         return $this->salePrice;
     }
 
-    public function setSalePrice(?BigInteger $salePrice): self
+    public function setSalePrice(?BigNumber $salePrice): self
     {
         $this->salePrice = $salePrice;
 
         return $this;
     }
 
-    public function getPurchasePrice(): ?BigInteger
+    public function getPurchasePrice(): ?BigNumber
     {
         return $this->purchasePrice;
     }
 
-    public function setPurchasePrice(?BigInteger $purchasePrice): self
+    public function setPurchasePrice(?BigNumber $purchasePrice): self
     {
         $this->purchasePrice = $purchasePrice;
 
@@ -209,12 +219,12 @@ class Product implements Stringable
         return $this;
     }
 
-    public function getCategory(): ?ProductCategory
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?ProductCategory $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 
@@ -236,13 +246,16 @@ class Product implements Stringable
     /**
      * Sale minus purchase price, or null when there is nothing to compare.
      */
-    public function getMargin(): ?BigInteger
+    public function getMargin(): ?BigNumber
     {
-        if (! $this->salePrice instanceof BigInteger || ! $this->purchasePrice instanceof BigInteger) {
+        if (! $this->salePrice instanceof BigNumber || ! $this->purchasePrice instanceof BigNumber) {
             return null;
         }
 
-        return $this->salePrice->minus($this->purchasePrice);
+        // Through BigDecimal because the two sides may be a BigInteger read
+        // back from the database and a BigDecimal straight off the form, and
+        // BigInteger::minus() rejects a decimal operand.
+        return $this->salePrice->toBigDecimal()->minus($this->purchasePrice->toBigDecimal());
     }
 
     public function __toString(): string

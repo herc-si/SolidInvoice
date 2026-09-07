@@ -5,7 +5,7 @@ declare(strict_types=1);
 /*
  * This file is part of Augias project.
  *
- * (c) Pierre du Plessis <open-source@solidworx.co>
+ * (c) HERC SI <opensource@herc-si.fr>
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -15,6 +15,7 @@ namespace Augias\BillBundle\Form\Type;
 
 use Augias\BillBundle\Entity\BillPayment;
 use Augias\BillBundle\Enum\BillPaymentMethod;
+use Augias\SettingsBundle\SystemConfig;
 use Brick\Math\BigNumber;
 use Money\Currency;
 use Symfony\Component\Form\AbstractType;
@@ -32,6 +33,11 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 final class BillPaymentType extends AbstractType
 {
+    public function __construct(
+        private readonly SystemConfig $systemConfig,
+    ) {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -67,7 +73,10 @@ final class BillPaymentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => BillPayment::class,
-            'currency' => new Currency('EUR'),
+            // The company's currency, not a hardcoded EUR: the money field
+            // scales by the currency's own decimal count, so a wrong one
+            // silently misplaces the decimal point for JPY and BHD.
+            'currency' => $this->systemConfig->getCurrency(),
         ]);
 
         $resolver->setAllowedTypes('currency', Currency::class);

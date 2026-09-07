@@ -44,8 +44,7 @@ class MainMenu
         self::integrations($section);
         self::tax($section);
         self::paymentMethods($section);
-        self::billCategories($section);
-        self::catalogCategories($section);
+        self::categories($section);
         self::einvoicing($section);
         self::api($section);
         self::users($section);
@@ -157,23 +156,17 @@ class MainMenu
         );
     }
 
-    public static function billCategories(ItemInterface $item): ItemInterface
+    /**
+     * Purchases and the catalogue used to have a category screen each, sitting
+     * side by side here with the same icon and near-identical labels. They are
+     * one list now - see CoreBundle\\Entity\\Category.
+     */
+    public static function categories(ItemInterface $item): ItemInterface
     {
         return $item->addChild(
-            'menu.top.bill_categories',
+            'menu.top.categories',
             [
-                'route' => '_bill_categories_index',
-                'extras' => ['icon' => 'category'],
-            ],
-        );
-    }
-
-    public static function catalogCategories(ItemInterface $item): ItemInterface
-    {
-        return $item->addChild(
-            'menu.top.catalog_categories',
-            [
-                'route' => '_catalog_categories_index',
+                'route' => '_categories_index',
                 'extras' => ['icon' => 'category'],
             ],
         );

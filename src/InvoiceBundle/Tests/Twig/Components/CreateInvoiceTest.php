@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Augias\InvoiceBundle\Tests\Twig\Components;
 
+use Augias\CatalogBundle\Entity\Product;
+use Augias\CatalogBundle\Enum\ProductType;
+use Augias\CatalogBundle\Enum\ProductUnit;
 use Augias\ClientBundle\Test\Factory\ClientFactory;
 use Augias\ClientBundle\Test\Factory\ContactFactory;
 use Augias\CoreBundle\Test\LiveComponentTest;
@@ -24,6 +27,7 @@ use Augias\InvoiceBundle\Manager\InvoiceFormManager;
 use Augias\InvoiceBundle\Model\Graph;
 use Augias\InvoiceBundle\Twig\Components\CreateInvoice;
 use Augias\TaxBundle\Entity\Tax;
+use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use Carbon\CarbonImmutable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -42,6 +46,41 @@ final class CreateInvoiceTest extends LiveComponentTest
         )->actingAs($this->getUser());
 
         $this->assertMatchesHtmlSnapshot($this->replaceChecksum($component->render()->toString()));
+    }
+
+    /**
+     * The catalogue stores prices in minor units and the money field reads
+     * major units, so handing the stored integer straight to the form value
+     * multiplied every catalogue line by the currency's factor — 700 EUR came
+     * out as 70 000.
+     */
+    public function testAddFromCatalogFillsThePriceInMajorUnits(): void
+    {
+        $product = new Product()
+            ->setName('Journée de développement')
+            ->setSalePrice(BigInteger::of(70_000))
+            ->setType(ProductType::Service)
+            ->setUnit(ProductUnit::Day);
+        $product->setCompany($this->company);
+
+        $entityManager = self::getContainer()->get('doctrine')->getManager();
+        $entityManager->persist($product);
+        $entityManager->flush();
+
+        $component = $this->createLiveComponent(
+            name: CreateInvoice::class,
+            data: ['dto' => new InvoiceFormDTO()],
+        )->actingAs($this->getUser());
+
+        $component->set('catalogProductId', (string) $product->getId());
+        $component->call('addFromCatalog');
+
+        $formValues = $component->component()->formValues;
+
+        // Compared numerically: the field re-renders the value through its own
+        // formatting, so "700.00" and "700" are both correct answers and only
+        // the magnitude is being asserted here.
+        self::assertSame(700.0, (float) $formValues['lines'][0]['price']);
     }
 
     /**
