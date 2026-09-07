@@ -27,6 +27,7 @@ use Doctrine\Persistence\ObjectManager;
 use JsonException;
 use RuntimeException;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use function get_debug_type;
 
 /**
@@ -43,6 +44,7 @@ final readonly class DefaultData
         ManagerRegistry $registry,
         #[AutowireIterator(ProviderInterface::class)]
         private iterable $configProviders,
+        private TranslatorInterface $translator,
     ) {
         $this->em = $registry->getManager();
     }
@@ -53,31 +55,61 @@ final readonly class DefaultData
      */
     public function __invoke(Company $company, array $data): void
     {
+        // The company's own language, not the request's: a company is created
+        // during install and from the company switcher, and in neither case is
+        // the acting user's locale necessarily the one this company will be
+        // run in.
+        //
+        // Normalised to null when blank, because the caller reads it off the
+        // request and Request::getLocale() can hand back an empty string. A
+        // `?? 'en'` further down does not catch that — it is not null — so an
+        // empty locale used to be stored verbatim as the company's language
+        // setting, leaving it blank rather than defaulting to English.
+        $locale = $data['locale'] ?? null;
+
+        if ('' === $locale) {
+            $locale = null;
+        }
+
+        $data['locale'] = $locale;
+
         $this->createAppConfig($company, $data);
-        $this->createDefaultCustomFields($company);
-        $this->createPaymentMethods();
+        $this->createDefaultCustomFields($company, $locale);
+        $this->createPaymentMethods($locale);
 
         $this->em->flush();
     }
 
-    private function createDefaultCustomFields(Company $company): void
+    private function createDefaultCustomFields(Company $company, ?string $locale): void
     {
         $defaults = [
-            ['additional_email', 'Additional Email', CustomFieldType::EMAIL, 0],
-            ['phone', 'Phone', CustomFieldType::TEXT, 1],
-            ['mobile', 'Mobile', CustomFieldType::TEXT, 2],
+            ['additional_email', 'custom_field.default.additional_email', CustomFieldType::EMAIL, 0],
+            ['phone', 'custom_field.default.phone', CustomFieldType::TEXT, 1],
+            ['mobile', 'custom_field.default.mobile', CustomFieldType::TEXT, 2],
         ];
 
-        foreach ($defaults as [$key, $label, $type, $position]) {
+        foreach ($defaults as [$key, $labelKey, $type, $position]) {
             $field = new CustomField()
                 ->setTarget(CustomFieldTarget::CONTACT)
-                ->setLabel($label)
+                ->setLabel($this->translate($labelKey, $locale))
                 ->setFieldKey($key)
                 ->setType($type)
                 ->setPosition($position)
                 ->setCompany($company);
             $this->em->persist($field);
         }
+    }
+
+    /**
+     * Seeded labels are ordinary user-editable data, not translation keys — the
+     * user can rename them, and nothing resolves them again afterwards. So they
+     * are translated once, here, into the language the company was created in,
+     * and stored as plain text. Translating them on display instead would
+     * silently overwrite whatever the user renamed them to.
+     */
+    private function translate(string $key, ?string $locale): string
+    {
+        return $this->translator->trans($key, [], null, $locale);
     }
 
     /**
@@ -106,11 +138,11 @@ final readonly class DefaultData
         }
     }
 
-    private function createPaymentMethods(): void
+    private function createPaymentMethods(?string $locale): void
     {
         $paymentMethods = [
             [
-                'name' => 'Cash',
+                'name' => 'payment.method.default.cash',
                 'gateway_name' => 'cash',
                 'config' => [],
                 'internal' => true,
@@ -118,7 +150,7 @@ final readonly class DefaultData
                 'factory' => 'offline',
             ],
             [
-                'name' => 'Bank Transfer',
+                'name' => 'payment.method.default.bank_transfer',
                 'gateway_name' => 'bank_transfer',
                 'config' => [],
                 'internal' => true,
@@ -126,7 +158,7 @@ final readonly class DefaultData
                 'factory' => 'offline',
             ],
             [
-                'name' => 'Credit',
+                'name' => 'payment.method.default.credit',
                 'gateway_name' => 'credit',
                 'config' => [],
                 'internal' => true,
@@ -137,7 +169,7 @@ final readonly class DefaultData
 
         foreach ($paymentMethods as $paymentMethod) {
             $paymentMethodEntity = new PaymentMethod();
-            $paymentMethodEntity->setName($paymentMethod['name']);
+            $paymentMethodEntity->setName($this->translate($paymentMethod['name'], $locale));
             $paymentMethodEntity->setGatewayName($paymentMethod['gateway_name']);
             $paymentMethodEntity->setConfig($paymentMethod['config']);
             $paymentMethodEntity->setInternal($paymentMethod['internal']);
