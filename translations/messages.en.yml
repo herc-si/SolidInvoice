@@ -1,3 +1,95 @@
+accounting:
+    activity_nature:
+        sale_of_goods: 'Sale of goods'
+        services_bic: 'Services (BIC)'
+        services_bnc: 'Services (BNC)'
+    book:
+        purchase: 'Purchase register'
+        revenue: 'Revenue book'
+    declaration:
+        line:
+            income_tax: 'Flat-rate income tax'
+            social: 'Social contributions'
+            social_acre: 'Social contributions (ACRE relief applied)'
+            training: 'Professional training levy'
+        warning:
+            foreign_currency: 'Some entries are booked in another currency and are not included in these totals.'
+            mixed_activity: 'You have turnover in more than one activity. Mixed activities are also capped by a combined ceiling, which is not checked here.'
+            rates_unverified: 'These rates have not been verified against an official source. Check them before filing.'
+    declaration_status:
+        draft: Draft
+        ready: 'Ready to file'
+        submitted: Filed
+    entry:
+        source:
+            bill_payment: 'Supplier payment'
+            invoice_payment: 'Invoice payment'
+            manual: 'Manual entry'
+    menu:
+        main: Accounting
+    pension_fund:
+        cipav: CIPAV
+        ssi: SSI
+    period_status:
+        closed: Closed
+        open: Open
+    period_type:
+        month: Monthly
+        quarter: Quarterly
+        year: Yearly
+    regime:
+        fr_micro:
+            description: 'Cash-basis bookkeeping: a revenue book, a purchase register for resale activities, and turnover declared to URSSAF.'
+            label: 'France — Micro-entreprise'
+    settings:
+        acre:
+            description: 'Reduces the social contribution rate for the first months of activity. Requires a start date.'
+            label: 'ACRE relief'
+        activity_start_date:
+            description: 'Used to scale a first, partial year''s limits down pro rata, and to work out how long ACRE runs.'
+            label: 'Start of activity'
+        declaration_periodicity:
+            description: 'How often you declare turnover. Your books are closed on the same rhythm.'
+            label: 'Declaration frequency'
+        income_tax_option:
+            description: 'Pay income tax as a percentage of turnover alongside your contributions, instead of on your annual return.'
+            label: 'Flat-rate income tax option'
+        pension_fund:
+            description: 'Which body collects your pension contributions. The two charge different rates on the same BNC turnover.'
+            label: 'Pension fund'
+        primary_activity:
+            description: 'Used as the default for entries created automatically. You can change it on any individual entry.'
+            label: 'Main activity'
+        regime:
+            description: 'Decides which books you keep, which limits apply and how your contributions are worked out.'
+            label: 'Tax regime'
+            placeholder: 'Choose a regime'
+        vat_exempt:
+            description: 'Suppresses VAT on invoices and quotes, and prints the legal wording below on them.'
+            label: 'Not liable for VAT'
+        vat_exempt_mention:
+            description: 'Printed on every invoice and quote while you are not liable for VAT.'
+            label: 'VAT exemption wording'
+    settlement_method:
+        bank_transfer: 'Bank transfer'
+        cash: Cash
+        check: Cheque
+        credit_card: 'Credit card'
+        direct_debit: 'Direct debit'
+        online: 'Online payment'
+        other: Other
+    setup:
+        action: 'Go to settings'
+        description: 'Choose a tax regime in the settings to start keeping your books.'
+        edit: 'Change settings'
+        title: 'Accounting is not set up yet'
+    threshold:
+        micro_ceiling: 'Regime ceiling'
+        vat_franchise_base: 'VAT threshold'
+        vat_franchise_tolerance: 'VAT threshold (upper limit)'
+    vat_exempt:
+        'no': 'Liable for VAT'
+        'yes': 'Not liable for VAT'
 action:
     add: Add
     archive: Archive
@@ -18,21 +110,6 @@ add_info: 'Add Info'
 address: Address
 all_clients: 'All Clients'
 bill:
-    category:
-        create:
-            success: 'Bill category created successfully'
-        edit:
-            success: 'Bill category updated successfully'
-        form:
-            add_title: 'Add Bill Category'
-            edit_title: 'Edit Bill Category'
-            name:
-                label: Name
-        grid:
-            create: 'Add Category'
-            name: "Name"
-        menu:
-            list: 'Bill Categories'
     create:
         success: 'Bill created successfully'
     delete_success: 'Bill deleted successfully'
@@ -132,21 +209,6 @@ catalog:
         add: "Add an item"
         created: "Item successfully created"
         updated: "Item successfully updated"
-    category:
-        action:
-            add: "Add a category"
-            created: "Category successfully created"
-            updated: "Category successfully updated"
-        form:
-            add_title: "Add a category"
-            edit_title: "Edit category"
-            name:
-                label: "Name"
-        grid:
-            name: "Name"
-            title: "Catalogue categories"
-        list:
-            title: "Catalogue categories"
     form:
         active:
             help: "An inactive item drops out of the picker without erasing document history."
@@ -211,6 +273,36 @@ catalog:
         metre: "Metre"
         month: "Month"
         unit: "Unit"
+category:
+    constraint:
+        at_least_one_usage: 'Choose at least one place this category can be used.'
+    create:
+        success: 'Category created successfully'
+    edit:
+        success: 'Category updated successfully'
+    filter:
+        'no': 'No'
+        'yes': 'Yes'
+    form:
+        add_title: 'Add a category'
+        edit_title: 'Edit category'
+        name:
+            label: Name
+        usage:
+            catalog:
+                help: 'The category is offered when organising items in your catalogue.'
+            purchase:
+                help: 'The category is offered when classifying your supplier invoices.'
+            subtitle: 'A category can serve both sides — "Hardware" that you buy and also resell is written once.'
+            title: 'Where does this category apply?'
+    grid:
+        create: 'Add a category'
+        name: Name
+    menu:
+        list: Categories
+    usage:
+        catalog: Catalogue
+        purchase: Purchases
 change: Change
 change_password:
     form:
@@ -458,6 +550,10 @@ custom_field:
     badge:
         client_visible: Client-visible
         internal: Internal
+    default:
+        additional_email: 'Additional Email'
+        mobile: Mobile
+        phone: Phone
     delete_confirm: 'Delete %label%? %count% records have a value for this field. These values will be permanently deleted.'
     empty: 'No custom fields yet — click Add field to create one.'
     flash:
@@ -611,6 +707,7 @@ dashboard:
         invoice: Invoice
         new: 'Create New'
         quote: Quote
+        supplier: Supplier
     distribution:
         status:
             cancelled: Cancelled
@@ -722,9 +819,9 @@ datagrid:
         bill:
             title: 'No bills yet'
             description: 'Add a bill you received from a supplier, or create one from an imported electronic invoice, to start tracking what you owe.'
-        bill_category:
+        category:
             title: 'No categories yet'
-            description: 'Add categories to group your bills by expense type.'
+            description: 'Create categories to classify your purchases and organise your catalogue.'
         client:
             title: 'No clients yet'
             description: 'Add the people and companies you bill. Once a client exists, you can send them an invoice or quote in seconds.'
@@ -1540,10 +1637,10 @@ mcp:
 menu:
     button:
         create: Create
+    prestation: Services
     top:
         api: 'API Tokens'
-        bill_categories: "Purchase Categories"
-        catalog_categories: "Catalogue categories"
+        categories: Categories
         custom_fields: 'Custom Fields'
         dashboard: Dashboard
         einvoicing: 'Electronic Invoicing'
@@ -1963,6 +2060,10 @@ payment:
         add: 'Add Payment Method'
         added: 'Payment Method Successfully Added!'
         credit: Credit
+        default:
+            bank_transfer: 'Bank Transfer'
+            cash: Cash
+            credit: Credit
         label: 'Payment Method'
         offline: Offline
         online: Online
@@ -2747,6 +2848,7 @@ settings:
             title: 'Payment Reminders'
         save: 'Save Settings'
         tab:
+            accounting: Accounting
             design: Design
             email: Email
             invoice: Invoices

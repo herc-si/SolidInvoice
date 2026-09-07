@@ -1,0 +1,62 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) HERC SI <opensource@herc-si.fr>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@AugiasCore/Layout/default.html.twig" %}
+
+{% block title %}
+    {{ ux_icon('tabler:calculator', {width: 24, height: 24, class: 'me-2'}) }}{{ 'accounting.menu.main'|trans }}
+{% endblock title %}
+
+{% block content %}
+    {% if regime is null %}
+        <twig:Ui:Card title="{{ 'accounting.setup.title'|trans }}">
+            <p class="text-secondary mb-4">{{ 'accounting.setup.description'|trans }}</p>
+
+            <a class="btn btn-primary" href="{{ path('_settings') }}">
+                {{ ux_icon('tabler:settings', {width: 18, height: 18}) }}
+                {{ 'accounting.setup.action'|trans }}
+            </a>
+        </twig:Ui:Card>
+    {% else %}
+        <twig:Ui:Card
+            title="{{ regime.labelKey|trans }}"
+            subtitle="{{ regime.descriptionKey|trans }}"
+        >
+            <dl class="row mb-0">
+                <dt class="col-sm-5">{{ 'accounting.settings.primary_activity.label'|trans }}</dt>
+                <dd class="col-sm-7">{{ profile.primaryActivity.translationKey|trans }}</dd>
+
+                <dt class="col-sm-5">{{ 'accounting.settings.declaration_periodicity.label'|trans }}</dt>
+                <dd class="col-sm-7">{{ profile.declarationPeriodicity.translationKey|trans }}</dd>
+
+                <dt class="col-sm-5">{{ 'accounting.settings.vat_exempt.label'|trans }}</dt>
+                <dd class="col-sm-7">
+                    {% if profile.vatExempt %}
+                        <span class="badge bg-green-lt">{{ 'accounting.vat_exempt.yes'|trans }}</span>
+                        <div class="text-secondary mt-1">{{ profile.vatExemptMention }}</div>
+                    {% else %}
+                        <span class="badge bg-gray-lt">{{ 'accounting.vat_exempt.no'|trans }}</span>
+                    {% endif %}
+                </dd>
+
+                {% if profile.activityStartDate is not null %}
+                    <dt class="col-sm-5">{{ 'accounting.settings.activity_start_date.label'|trans }}</dt>
+                    <dd class="col-sm-7">{{ profile.activityStartDate|date('d F Y') }}</dd>
+                {% endif %}
+            </dl>
+
+            <twig:block name="footer">
+                <a class="btn btn-ghost" href="{{ path('_settings') }}">
+                    {{ ux_icon('tabler:settings', {width: 18, height: 18}) }}
+                    {{ 'accounting.setup.edit'|trans }}
+                </a>
+            </twig:block>
+        </twig:Ui:Card>
+    {% endif %}
+{% endblock %}

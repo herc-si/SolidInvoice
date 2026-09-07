@@ -47,6 +47,15 @@ final class SystemConfigTest extends KernelTestCase
         $config = new SystemConfig(date(DATE_ATOM), $this->em->getRepository(Setting::class));
 
         self::assertSame([
+            'accounting/activity_start_date' => null,
+            'accounting/declaration_periodicity' => 'quarter',
+            'accounting/fr_micro/acre' => '0',
+            'accounting/fr_micro/income_tax_option' => '0',
+            'accounting/fr_micro/pension_fund' => null,
+            'accounting/primary_activity' => 'services_bnc',
+            'accounting/regime' => null,
+            'accounting/vat_exempt' => '0',
+            'accounting/vat_exempt_mention' => 'TVA non applicable, article 293 B du CGI',
             'email/from_address' => 'no-reply@solidinvoice.co',
             'email/from_name' => 'Augias',
             'email/sending_options/provider' => null,

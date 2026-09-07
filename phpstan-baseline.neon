@@ -67,16 +67,58 @@ parameters:
 			path: src/ApiBundle/Tests/ApiTokenManagerTest.php
 
 		-
-			message: '#^Method Augias\\BillBundle\\DataGrid\\BillCategoryGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
-			identifier: return.unusedType
+			message: '#^Property Augias\\CoreBundle\\Entity\\Category\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
+			identifier: doctrine.columnType
 			count: 1
-			path: src/BillBundle/DataGrid/BillCategoryGrid.php
+			path: src/CoreBundle/Entity/Category.php
 
 		-
-			message: '#^Method Augias\\BillBundle\\DataGrid\\BillCategoryGrid\:\:getCreateRoute\(\) never returns null so it can be removed from the return type\.$#'
-			identifier: return.unusedType
+			message: '#^Property Augias\\AccountingBundle\\Entity\\AccountingPeriod\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
 			count: 1
-			path: src/BillBundle/DataGrid/BillCategoryGrid.php
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
+			message: '#^Property Augias\\AccountingBundle\\Entity\\AccountingPeriod\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
+			message: '#^Property Augias\\AccountingBundle\\Entity\\Declaration\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
+			message: '#^Property Augias\\AccountingBundle\\Entity\\Declaration\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
+			message: '#^Property Augias\\AccountingBundle\\Entity\\LedgerEntry\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
+			message: '#^Property Augias\\AccountingBundle\\Entity\\LedgerEntry\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
+			message: '#^Property Augias\\AccountingBundle\\Entity\\ThresholdAlert\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
+
+		-
+			message: '#^Property Augias\\AccountingBundle\\Entity\\ThresholdAlert\:\:\$updated type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
+			identifier: doctrine.columnType
+			count: 1
+			path: src/CoreBundle/Traits/Entity/TimeStampable.php
 
 		-
 			message: '#^Method Augias\\BillBundle\\DataGrid\\BillGrid\:\:getCreateLabel\(\) never returns null so it can be removed from the return type\.$#'
@@ -101,12 +143,6 @@ parameters:
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CoreBundle/Traits/Entity/TimeStampable.php
-
-		-
-			message: '#^Property Augias\\BillBundle\\Entity\\BillCategory\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/BillBundle/Entity/BillCategory.php
 
 		-
 			message: '#^Property Augias\\BillBundle\\Entity\\BillPayment\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'
@@ -411,7 +447,7 @@ parameters:
 		-
 			message: '#^Cannot unset property Augias\\CoreBundle\\Tests\\FormTestCase\:\:\$company because it might have hooks in a subclass\.$#'
 			identifier: unset.possiblyHookedProperty
-			count: 1
+			count: 2
 			path: src/InstallBundle/Test/EnsureApplicationInstalled.php
 
 		-
@@ -1505,12 +1541,6 @@ parameters:
 			identifier: doctrine.columnType
 			count: 1
 			path: src/CatalogBundle/Entity/Product.php
-
-		-
-			message: '#^Property Augias\\CatalogBundle\\Entity\\ProductCategory\:\:\$name type mapping mismatch\: property can contain string\|null but database expects string\.$#'
-			identifier: doctrine.columnType
-			count: 1
-			path: src/CatalogBundle/Entity/ProductCategory.php
 
 		-
 			message: '#^Property Augias\\CatalogBundle\\Entity\\Product\:\:\$created type mapping mismatch\: property can contain DateTimeImmutable\|null but database expects DateTimeImmutable\.$#'

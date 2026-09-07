@@ -58,6 +58,9 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     $routingConfigurator->import('@AugiasCatalogBundle/Resources/config/routing.php')
         ->prefix('/catalog');
 
+    $routingConfigurator->import('@AugiasAccountingBundle/Resources/config/routing.php')
+        ->prefix('/accounting');
+
     $routingConfigurator->import('@AugiasMcpBundle/Resources/config/routing.php')
         ->prefix('/');
 

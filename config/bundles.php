@@ -12,6 +12,7 @@ declare(strict_types=1);
  */
 
 use ApiPlatform\Symfony\Bundle\ApiPlatformBundle;
+use Augias\AccountingBundle\AugiasAccountingBundle;
 use Augias\ApiBundle\AugiasApiBundle;
 use Augias\BillBundle\AugiasBillBundle;
 use Augias\CatalogBundle\AugiasCatalogBundle;
@@ -79,6 +80,7 @@ return [
     PayumBundle::class => ['all' => true],
     StofDoctrineExtensionsBundle::class => ['all' => true],
     ApiPlatformBundle::class => ['all' => true],
+    AugiasAccountingBundle::class => ['all' => true],
     AugiasApiBundle::class => ['all' => true],
     AugiasBillBundle::class => ['all' => true],
     AugiasCatalogBundle::class => ['all' => true],

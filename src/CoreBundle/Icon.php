@@ -42,4 +42,16 @@ class Icon
     final public const string BILL = 'receipt';
 
     final public const string BILL_ADD = 'receipt';
+
+    final public const string PRESTATION = 'briefcase';
+
+    final public const string ACCOUNTING = 'calculator';
+
+    final public const string LEDGER_REVENUE = 'book';
+
+    final public const string LEDGER_PURCHASE = 'notebook';
+
+    final public const string ACCOUNTING_PERIOD = 'lock';
+
+    final public const string DECLARATION = 'file-certificate';
 }

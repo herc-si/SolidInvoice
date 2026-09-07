@@ -1,3 +1,95 @@
+accounting:
+    activity_nature:
+        sale_of_goods: 'Vente de marchandises'
+        services_bic: 'Prestations de services (BIC)'
+        services_bnc: 'Prestations de services (BNC)'
+    book:
+        purchase: 'Registre des achats'
+        revenue: 'Livre des recettes'
+    declaration:
+        line:
+            income_tax: 'Versement libératoire de l''impôt sur le revenu'
+            social: 'Cotisations sociales'
+            social_acre: 'Cotisations sociales (exonération ACRE appliquée)'
+            training: 'Contribution à la formation professionnelle'
+        warning:
+            foreign_currency: 'Certaines écritures sont enregistrées dans une autre devise et ne sont pas comprises dans ces totaux.'
+            mixed_activity: 'Vous avez du chiffre d''affaires sur plusieurs activités. Une activité mixte est aussi plafonnée globalement, ce qui n''est pas vérifié ici.'
+            rates_unverified: 'Ces taux n''ont pas été vérifiés auprès d''une source officielle. Contrôlez-les avant de déclarer.'
+    declaration_status:
+        draft: Brouillon
+        ready: 'Prête à déclarer'
+        submitted: Déclarée
+    entry:
+        source:
+            bill_payment: 'Paiement fournisseur'
+            invoice_payment: 'Encaissement de facture'
+            manual: 'Saisie manuelle'
+    menu:
+        main: Comptabilité
+    pension_fund:
+        cipav: CIPAV
+        ssi: SSI
+    period_status:
+        closed: Clôturée
+        open: Ouverte
+    period_type:
+        month: Mensuelle
+        quarter: Trimestrielle
+        year: Annuelle
+    regime:
+        fr_micro:
+            description: 'Comptabilité de trésorerie : livre des recettes, registre des achats pour les activités de revente, et déclaration du chiffre d''affaires à l''URSSAF.'
+            label: 'France — Micro-entreprise'
+    settings:
+        acre:
+            description: 'Réduit le taux de cotisations sociales les premiers mois d''activité. Nécessite une date de début.'
+            label: 'Exonération ACRE'
+        activity_start_date:
+            description: 'Sert à calculer le prorata des plafonds la première année, et la durée de l''ACRE.'
+            label: 'Début d''activité'
+        declaration_periodicity:
+            description: 'À quelle fréquence vous déclarez votre chiffre d''affaires. Vos livres sont clôturés au même rythme.'
+            label: 'Périodicité de déclaration'
+        income_tax_option:
+            description: 'Payer l''impôt sur le revenu en pourcentage du chiffre d''affaires en même temps que les cotisations, plutôt qu''à la déclaration annuelle.'
+            label: 'Option pour le versement libératoire'
+        pension_fund:
+            description: 'L''organisme qui collecte vos cotisations retraite. Les deux appliquent des taux différents au même chiffre d''affaires BNC.'
+            label: 'Caisse de retraite'
+        primary_activity:
+            description: 'Valeur par défaut des écritures créées automatiquement. Vous pouvez la changer sur chaque écriture.'
+            label: 'Activité principale'
+        regime:
+            description: 'Détermine les livres à tenir, les plafonds applicables et le calcul de vos cotisations.'
+            label: 'Régime fiscal'
+            placeholder: 'Choisissez un régime'
+        vat_exempt:
+            description: 'Supprime la TVA sur les factures et les devis, et y imprime la mention légale ci-dessous.'
+            label: 'Non assujetti à la TVA'
+        vat_exempt_mention:
+            description: 'Imprimée sur chaque facture et chaque devis tant que vous n''êtes pas assujetti à la TVA.'
+            label: 'Mention d''exonération de TVA'
+    settlement_method:
+        bank_transfer: Virement
+        cash: Espèces
+        check: Chèque
+        credit_card: 'Carte bancaire'
+        direct_debit: Prélèvement
+        online: 'Paiement en ligne'
+        other: Autre
+    setup:
+        action: 'Aller aux réglages'
+        description: 'Choisissez un régime fiscal dans les réglages pour commencer à tenir vos livres.'
+        edit: 'Modifier les réglages'
+        title: 'La comptabilité n''est pas encore configurée'
+    threshold:
+        micro_ceiling: 'Plafond du régime'
+        vat_franchise_base: 'Seuil de TVA'
+        vat_franchise_tolerance: 'Seuil de TVA (majoré)'
+    vat_exempt:
+        'no': 'Assujetti à la TVA'
+        'yes': 'Non assujetti à la TVA'
 action:
     add: Ajouter
     archive: Archiver
@@ -18,21 +110,6 @@ add_info: 'Ajouter des informations'
 address: Adresse
 all_clients: 'Tous les clients'
 bill:
-    category:
-        create:
-            success: 'Catégorie de facture créée avec succès'
-        edit:
-            success: 'Catégorie de facture mise à jour avec succès'
-        form:
-            add_title: 'Ajouter une catégorie'
-            edit_title: 'Modifier la catégorie'
-            name:
-                label: Nom
-        grid:
-            create: 'Ajouter une catégorie'
-            name: "Nom"
-        menu:
-            list: 'Catégories de factures'
     create:
         success: 'Facture créée avec succès'
     delete_success: 'Facture supprimée avec succès'
@@ -132,21 +209,6 @@ catalog:
         add: "Ajouter une prestation"
         created: "Fiche créée avec succès"
         updated: "Fiche mise à jour avec succès"
-    category:
-        action:
-            add: "Ajouter une catégorie"
-            created: "Catégorie créée avec succès"
-            updated: "Catégorie mise à jour avec succès"
-        form:
-            add_title: "Ajouter une catégorie"
-            edit_title: "Modifier la catégorie"
-            name:
-                label: "Nom"
-        grid:
-            name: "Nom"
-            title: "Catégories du catalogue"
-        list:
-            title: "Catégories du catalogue"
     form:
         active:
             help: "Une fiche inactive disparaît du sélecteur sans effacer l'historique des documents."
@@ -211,6 +273,36 @@ catalog:
         metre: "Mètre"
         month: "Mois"
         unit: "Unité"
+category:
+    constraint:
+        at_least_one_usage: 'Choisissez au moins un endroit où cette catégorie peut servir.'
+    create:
+        success: 'Catégorie créée avec succès'
+    edit:
+        success: 'Catégorie mise à jour avec succès'
+    filter:
+        'no': Non
+        'yes': Oui
+    form:
+        add_title: 'Ajouter une catégorie'
+        edit_title: 'Modifier la catégorie'
+        name:
+            label: Nom
+        usage:
+            catalog:
+                help: 'La catégorie est proposée pour ranger les articles de votre catalogue.'
+            purchase:
+                help: "La catégorie est proposée pour ventiler vos factures d'achat."
+            subtitle: "Une catégorie peut servir des deux côtés — « Matériel » que vous achetez et revendez ne s'écrit qu'une fois."
+            title: "Où cette catégorie s'applique-t-elle ?"
+    grid:
+        create: 'Ajouter une catégorie'
+        name: Nom
+    menu:
+        list: Catégories
+    usage:
+        catalog: Catalogue
+        purchase: Achats
 change: Modifier
 change_password:
     form:
@@ -458,6 +550,10 @@ custom_field:
     badge:
         client_visible: 'Visible client'
         internal: Interne
+    default:
+        additional_email: 'E-mail secondaire'
+        mobile: 'Téléphone mobile'
+        phone: Téléphone
     delete_confirm: 'Supprimer %label% ? %count% enregistrements ont une valeur pour ce champ. Ces valeurs seront définitivement supprimées.'
     empty: 'Aucun champ personnalisé pour le moment — cliquez sur Ajouter un champ pour en créer un.'
     flash:
@@ -611,6 +707,7 @@ dashboard:
         invoice: Facture
         new: 'Créer nouveau'
         quote: Devis
+        supplier: Fournisseur
     distribution:
         status:
             cancelled: Annulée
@@ -722,9 +819,9 @@ datagrid:
         bill:
             title: 'Aucune facture fournisseur pour le moment'
             description: 'Ajoutez une facture reçue d''un fournisseur, ou créez-en une à partir d''une facture électronique importée, pour commencer à suivre ce que vous devez.'
-        bill_category:
+        category:
             title: 'Aucune catégorie pour le moment'
-            description: 'Ajoutez des catégories pour regrouper vos factures par type de dépense.'
+            description: 'Créez des catégories pour ventiler vos achats et ranger votre catalogue.'
         client:
             title: 'Aucun client pour le moment'
             description: 'Ajoutez les personnes et sociétés que vous facturez. Une fois un client créé, vous pouvez lui envoyer une facture ou un devis en quelques secondes.'
@@ -1540,10 +1637,10 @@ mcp:
 menu:
     button:
         create: Créer
+    prestation: Prestation
     top:
         api: 'Jetons API'
-        bill_categories: "Catégories d'achat"
-        catalog_categories: "Catégories du catalogue"
+        categories: Catégories
         custom_fields: 'Champs personnalisés'
         dashboard: 'Tableau de bord'
         einvoicing: 'Facturation électronique'
@@ -1963,6 +2060,10 @@ payment:
         add: 'Ajouter un moyen de paiement'
         added: 'Moyen de paiement ajouté avec succès !'
         credit: Crédit
+        default:
+            bank_transfer: 'Virement bancaire'
+            cash: Espèces
+            credit: Crédit
         label: 'Moyen de paiement'
         offline: 'Hors ligne'
         online: 'En ligne'
@@ -2747,6 +2848,7 @@ settings:
             title: 'Rappels de paiement'
         save: 'Enregistrer les paramètres'
         tab:
+            accounting: Comptabilité
             design: Design
             email: E-mail
             invoice: Factures
