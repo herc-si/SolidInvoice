@@ -454,6 +454,13 @@ final class CreateQuote extends AbstractController
         try {
             $tempQuote = $this->formManager->createQuoteFromDTO($this->dto);
 
+            // Recalculated from the lines rather than trusted from the DTO: a
+            // percentage discount is worked out against baseTotal + tax, and
+            // those two arrive here as hidden form fields maintained by the
+            // browser. While a line is being edited they lag, and a discount
+            // read against a stale zero shows as no discount at all.
+            $this->totalCalculator->calculateTotals($tempQuote);
+
             return (string) $this->calculator->calculateDiscount($tempQuote);
         } catch (InvalidArgumentException) {
             // Client data incomplete during mode switching

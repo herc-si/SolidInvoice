@@ -68,14 +68,20 @@ class TotalCalculator
         $total = $result->total;
         $withholding = $result->totalWithholding;
 
+        // Both of these go on the entity before the discount is worked out:
+        // Calculator::calculateDiscount() reads them back off it to build the
+        // base a percentage applies to. Setting the tax afterwards, as this
+        // used to, meant a percentage discount was calculated against the
+        // previous tax figure — zero on a new invoice — so it came out short by
+        // the tax portion on every taxed document.
         $entity->setBaseTotal($subTotal);
+        $entity->setTax($tax);
 
         if ($entity->getDiscount()->getValue()) {
             $total = $this->applyDiscount($entity, $total);
         }
 
         $entity->setTotal($total);
-        $entity->setTax($tax);
         $entity->setWithholdingAmount($withholding);
         $entity->setPayableAmount(BigDecimal::of($total)->minus($withholding));
     }
