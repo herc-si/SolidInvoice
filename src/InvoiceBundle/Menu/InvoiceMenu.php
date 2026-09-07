@@ -15,6 +15,7 @@ namespace Augias\InvoiceBundle\Menu;
 
 use Augias\CoreBundle\Enum\Menu\MenuPriority;
 use Augias\CoreBundle\Icon;
+use Augias\CoreBundle\Menu\PrestationMenu;
 use Knp\Menu\ItemInterface;
 use SolidWorx\Platform\PlatformBundle\Attributes\Menu\MenuBuilder;
 
@@ -23,10 +24,11 @@ final class InvoiceMenu
     #[MenuBuilder(name: 'sidebar', priority: MenuPriority::PRIORITY_INVOICE->value)]
     public function sidebar(ItemInterface $menu): void
     {
-        // Flat link rather than a dropdown: the list page already carries a
-        // primary "create" button, so a submenu only added a click to reach
-        // the list, which is the far more frequent destination.
-        $menu->addChild(
+        // Flat link rather than a dropdown of its own: the list page already
+        // carries a primary "create" button, so a submenu only added a click to
+        // reach the list, which is the far more frequent destination. It sits
+        // under Prestation alongside quotes and purchase invoices.
+        PrestationMenu::section($menu)->addChild(
             'invoice.menu.main',
             [
                 'route' => '_invoices_index',

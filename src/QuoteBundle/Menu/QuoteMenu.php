@@ -16,6 +16,7 @@ namespace Augias\QuoteBundle\Menu;
 use Augias\CoreBundle\Enum\Menu\MenuPriority;
 use Augias\CoreBundle\Feature\UpgradePromptProvider;
 use Augias\CoreBundle\Icon;
+use Augias\CoreBundle\Menu\PrestationMenu;
 use Augias\SaasBundle\Feature\Feature;
 use Knp\Menu\ItemInterface;
 use SolidWorx\Platform\PlatformBundle\Attributes\Menu\MenuBuilder;
@@ -42,7 +43,7 @@ final readonly class QuoteMenu
             }
         }
 
-        $menu->addChild(
+        PrestationMenu::section($menu)->addChild(
             'quote.menu.main',
             [
                 'route' => '_quotes_index',
