@@ -1,8 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 348 320" role="img" aria-label="Augias">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="Augias">
   <title>Augias</title>
-  <!-- The same confluence on a filled tile: the silhouette survives favicon sizes. -->
-  <rect x="8" y="8" width="332" height="304" rx="72" fill="#1e4976"/>
-  <path d="M 66 104 C 130 104 148 152 194 156" fill="none" stroke="#c9713f" stroke-width="24" stroke-linecap="round"/>
-  <path d="M 66 226 C 130 226 150 162 194 156" fill="none" stroke="#e4edf6" stroke-width="32" stroke-linecap="round"/>
-  <path d="M 184 156 C 232 156 244 200 292 196" fill="none" stroke="#e4edf6" stroke-width="42" stroke-linecap="round"/>
+  <!--
+    The monogram on a filled tile: an A with a channel cut straight through both
+    legs. The bar overshoots the legs on purpose — flush inside, it is just a
+    letter's crossbar; running past them it reads as something driven through
+    the letter, which is the whole story of the name, and lands close enough to
+    a currency mark to suit an invoicing application.
+
+    This tile is the small-size carrier. Below roughly 20px an outline mark
+    thins out and disappears, so favicons and app icons use this silhouette
+    rather than the horizontal lockup in logo.svg — which reuses these exact
+    coordinates through a transform, so the two can never drift apart.
+  -->
+  <rect x="0" y="0" width="320" height="320" rx="72" fill="#1e4976"/>
+  <path d="M 78 250 L 160 68 L 242 250" fill="none" stroke="#e4edf6" stroke-width="32" stroke-linejoin="miter" stroke-miterlimit="6"/>
+  <path d="M 80 198 L 240 198" fill="none" stroke="#c9713f" stroke-width="24"/>
 </svg>

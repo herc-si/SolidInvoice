@@ -2,8 +2,9 @@ Augias logo and icon
 ====================
 
 Files: logo.svg, icon.svg, logo.png, and every raster derived from them
-(public/apple-touch-icon.png, docs/static/img/logo.png,
-docs/static/img/favicon.ico, docs/static/img/augias-social-card.png).
+(public/favicon.ico, public/apple-touch-icon.png, docs/static/img/logo.png,
+docs/static/img/favicon.ico, docs/static/img/augias-social-card.png), plus the
+base64 copy embedded in GlobalExtension::DEFAULT_LOGO.
 
 These files are licensed under the Creative Commons Attribution 4.0
 International licence (CC BY 4.0). You may copy, modify and distribute them,

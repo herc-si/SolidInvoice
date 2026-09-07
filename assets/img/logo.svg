@@ -1,13 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" role="img" aria-label="Augias">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 160" role="img" aria-label="Augias">
   <title>Augias</title>
+
   <!--
-    Two tributaries joining into a single wider stream: the two rivers Heracles
-    diverted through the stables of Augeas. The tributaries run at markedly
-    different weights and meet at a visible junction, and the trunk is wider than
-    either of them — without that widening the mark reads as one line changing
-    colour rather than as a confluence.
+    The horizontal lockup: monogram plus wordmark, sharing one baseline at
+    y=134.
+
+    The monogram is not redrawn here. It is the icon.svg artwork placed through
+    a transform, so the tile and the lockup are the same shape by construction
+    rather than by two sets of coordinates that agree today and drift later. The
+    scale factor sets the monogram's height to 116 units; the translation puts
+    its feet on the shared baseline and centres it at x=80.
+
+    The wordmark is drawn as paths rather than set as <text>. A logo that
+    depends on a font renders differently on every machine that lacks it, and
+    the rasterised assets derived from this file have to be reproducible.
   -->
-  <path d="M 22 44 C 78 44 96 88 140 96" fill="none" stroke="#a94e28" stroke-width="26" stroke-linecap="round"/>
-  <path d="M 22 156 C 78 156 98 106 140 100" fill="none" stroke="#1e4976" stroke-width="34" stroke-linecap="round"/>
-  <path d="M 132 98 C 196 98 214 128 298 122" fill="none" stroke="#1e4976" stroke-width="48" stroke-linecap="round"/>
+
+  <g transform="translate(-22 -25.35) scale(0.6374)">
+    <path d="M 78 250 L 160 68 L 242 250" fill="none" stroke="#1e4976" stroke-width="32" stroke-linejoin="miter" stroke-miterlimit="6"/>
+    <path d="M 80 198 L 240 198" fill="none" stroke="#a94e28" stroke-width="24"/>
+  </g>
+
+  <g fill="none" stroke="#1e4976" stroke-width="13" stroke-linejoin="miter" stroke-miterlimit="6">
+    <!-- A -->
+    <path d="M 186 134 L 209 62 L 232 134"/>
+    <path d="M 194 110 L 224 110"/>
+    <!-- U -->
+    <path d="M 251.5 62 L 251.5 117.5 A 16.5 16.5 0 0 0 284.5 117.5 L 284.5 62"/>
+    <!-- G -->
+    <path d="M 340.4 76.1 A 18.5 29.5 0 1 0 346.5 98 L 334 98"/>
+    <!-- I -->
+    <path d="M 369.5 62 L 369.5 134"/>
+    <!-- A -->
+    <path d="M 389 134 L 412 62 L 435 134"/>
+    <path d="M 397 110 L 427 110"/>
+    <!-- S -->
+    <path d="M 491 76 C 491 62 454 62 454 80 C 454 96 491 100 491 116 C 491 134 454 134 454 120"/>
+  </g>
 </svg>
