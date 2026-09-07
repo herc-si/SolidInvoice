@@ -91,6 +91,16 @@ return ECSConfig::configure()
         ],
         HeaderCommentFixer::class => [
             __DIR__ . '/config/reference.php',
+            // Bundles written for Augias rather than inherited from
+            // SolidInvoice. They carry HERC SI's copyright, stamped by
+            // ecs-herc.php — HeaderCommentFixer takes one header string, so a
+            // second config is the only way to have two. Every other rule here
+            // still applies to these paths. Keep the two lists in step.
+            __DIR__ . '/src/AccountingBundle',
+            __DIR__ . '/src/BillBundle',
+            __DIR__ . '/src/CatalogBundle',
+            __DIR__ . '/src/ElectronicInvoicingBundle',
+            __DIR__ . '/src/SupplierBundle',
         ],
         TypeToVarTagFixer::class => [
             __DIR__ . '/config/reference.php',

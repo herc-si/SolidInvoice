@@ -2,11 +2,31 @@
 
 ## Required File Header
 
+Augias forks SolidInvoice, so the tree carries two copyrights. **Which one a file
+gets depends on which bundle it is in, not on who typed it.**
+
+Bundles written for Augias — `AccountingBundle`, `BillBundle`, `CatalogBundle`,
+`ElectronicInvoicingBundle`, `SupplierBundle`:
+
 ```php
 <?php
 
 declare(strict_types=1);
 
+/*
+ * This file is part of Augias project.
+ *
+ * (c) HERC SI <opensource@herc-si.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+```
+
+Everywhere else — bundles inherited from upstream, including new files added to
+them, and `migrations/`:
+
+```php
 /*
  * This file is part of Augias project.
  *
@@ -17,16 +37,24 @@ declare(strict_types=1);
  */
 ```
 
+Do not hand-edit headers — both are stamped automatically. A new file simply
+needs `declare(strict_types=1);`, and the fix command adds the right one.
+
 ## ECS (Easy Coding Standard)
 
-Config: `ecs.php`
+Configs: `ecs.php` (everything) and `ecs-herc.php` (headers for the bundles
+above). Two are needed because `HeaderCommentFixer` takes a single header
+string. **Always run both** — the composer scripts do:
+
+```bash
+composer cs        # Check
+composer cs-fix    # Fix
+```
 
 Standards: PSR-12, Symfony, PHPUnit, clean code principles
 
-```bash
-bin/ecs check           # Check
-bin/ecs check --fix     # Fix
-```
+Running `bin/ecs check --fix` alone still works, but skips the header check on
+those five bundles.
 
 ## PHPStan (Static Analysis)
 
@@ -52,7 +80,7 @@ bin/rector process            # Apply
 
 ## Pre-commit Checklist
 
-1. `bin/ecs check --fix`
+1. `composer cs-fix`
 2. `bin/phpstan analyse`
 3. `bin/phpunit`
 4. File header present

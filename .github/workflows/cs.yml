@@ -40,8 +40,11 @@ jobs:
 
       - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # v3
 
+      # Two configs: ecs.php for everything, ecs-herc.php for the file headers
+      # of the bundles HERC SI wrote. See ecs-herc.php for why one run cannot
+      # do both.
       - name: Run EasyCodingStandard
-        run: bin/ecs check
+        run: composer cs
 
   composer-normalize:
     name: Composer Normalize

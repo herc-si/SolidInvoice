@@ -113,6 +113,7 @@ jobs:
       - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda
       - run: bin/rector --ansi
       - run: bin/ecs --fix --ansi
+      - run: bin/ecs --fix --ansi -c ecs-herc.php
 
       - uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403 # v5.2.0
         with:

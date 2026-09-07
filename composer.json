@@ -302,6 +302,14 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "requirements-checker": "script"
-        }
+        },
+        "cs": [
+            "bin/ecs check",
+            "bin/ecs check -c ecs-herc.php"
+        ],
+        "cs-fix": [
+            "bin/ecs check --fix",
+            "bin/ecs check --fix -c ecs-herc.php"
+        ]
     }
 }

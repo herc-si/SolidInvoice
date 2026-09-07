@@ -107,7 +107,7 @@ bin/console cache:clear
 bin/console doctrine:migrations:migrate
 
 # Quality (see .claude/skills/code-quality.md)
-bin/ecs check --fix
+composer cs-fix              # ECS — runs both configs; two file headers, see the skill
 bin/phpstan analyse
 bin/phpunit
 bin/rector process --dry-run  # Preview refactoring suggestions
@@ -206,7 +206,7 @@ Currencies come from Client entity. Never use default currency.
 2. Follow bundle structure (Action, Entity, Repository, etc.)
 3. Add type hints, strict types, file header
 4. Write tests
-5. Run `bin/ecs check --fix && bin/phpstan analyse && bin/phpunit`
+5. Run `composer cs-fix && bin/phpstan analyse && bin/phpunit`
 6. Generate migrations if DB changes
 
 ### Fixing Bugs
