@@ -313,8 +313,14 @@
                     {# Nothing above renders the collection when the company has no tax
                        rates, and form_end() below would then dump its raw "Add" button
                        at the very bottom of the page, outside the layout. The tags trim
-                       their own whitespace so this branch adds nothing to the output. #}
-                    {%- do form.invoiceTaxes.setRendered() -%}
+                       their own whitespace so this branch adds nothing to the output.
+
+                       The field is absent entirely for a company outside the scope of
+                       VAT - the form type does not add it - so this has to check before
+                       reaching for it. #}
+                    {%- if form.invoiceTaxes is defined -%}
+                        {%- do form.invoiceTaxes.setRendered() -%}
+                    {%- endif -%}
                 {% endif %}
             </div>
 

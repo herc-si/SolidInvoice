@@ -15,6 +15,8 @@ namespace Augias\TaxBundle\Tests\Calculator;
 
 use Augias\InvoiceBundle\Entity\Invoice;
 use Augias\InvoiceBundle\Entity\Line;
+use Augias\SettingsBundle\Repository\SettingsRepository;
+use Augias\SettingsBundle\SystemConfig;
 use Augias\TaxBundle\Calculator\InvoiceTaxCalculator;
 use Augias\TaxBundle\Calculator\LineTaxCalculator;
 use Augias\TaxBundle\Calculator\TaxCalculator;
@@ -25,6 +27,7 @@ use Augias\TaxBundle\Enum\TaxCategory;
 use Augias\TaxBundle\Enum\TaxDirection;
 use Augias\TaxBundle\Enum\TaxType;
 use Brick\Math\BigDecimal;
+use Mockery as M;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -38,7 +41,7 @@ final class InvoiceLevelOrchestrationTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->calculator = new TaxCalculator(new LineTaxCalculator(), new InvoiceTaxCalculator());
+        $this->calculator = new TaxCalculator(new LineTaxCalculator(), new InvoiceTaxCalculator(), self::notInstalledConfig());
     }
 
     public function testTdsScenarioFromAcceptanceCriteria(): void
@@ -165,5 +168,16 @@ final class InvoiceLevelOrchestrationTest extends TestCase
         $invoiceTax->setDirection($direction);
 
         return $invoiceTax;
+    }
+
+    /**
+     * A SystemConfig with no install marker: every get() returns null before it
+     * reaches the repository, so the company reads as liable for VAT. That is
+     * the state these scenarios are about, and it avoids a mock for a class
+     * that already has a no-op mode.
+     */
+    private static function notInstalledConfig(): SystemConfig
+    {
+        return new SystemConfig(null, M::mock(SettingsRepository::class));
     }
 }

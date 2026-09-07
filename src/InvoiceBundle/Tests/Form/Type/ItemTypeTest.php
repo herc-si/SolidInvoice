@@ -16,6 +16,7 @@ namespace Augias\InvoiceBundle\Tests\Form\Type;
 use Augias\CoreBundle\Tests\FormTestCase;
 use Augias\InvoiceBundle\Entity\Line;
 use Augias\InvoiceBundle\Form\Type\ItemType;
+use Augias\TaxBundle\Service\TaxAvailability;
 use Brick\Math\BigDecimal;
 use Money\Currency;
 use Override;
@@ -74,11 +75,24 @@ final class ItemTypeTest extends FormTestCase
     #[Override]
     protected function getExtensions(): array
     {
-        $itemType = new ItemType($this->registry);
+        $itemType = new ItemType($this->taxAvailability());
 
         return [
             // register the type instances with the PreloadedExtension
             new PreloadedExtension([$itemType], []),
         ];
+    }
+
+    /**
+     * Whether the tax field is offered is a service now, joining "any rates
+     * configured" with "the company is liable for VAT". These tests are about
+     * the liable case, so it comes from the container rather than a stub.
+     */
+    private function taxAvailability(): TaxAvailability
+    {
+        $availability = self::getContainer()->get(TaxAvailability::class);
+        self::assertInstanceOf(TaxAvailability::class, $availability);
+
+        return $availability;
     }
 }

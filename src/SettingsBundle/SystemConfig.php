@@ -18,6 +18,7 @@ use Augias\SettingsBundle\Repository\SettingsRepository;
 use Money\Currency;
 use RuntimeException;
 use Throwable;
+use function trim;
 
 /**
  * @see \Augias\SettingsBundle\Tests\SystemConfigTest
@@ -29,6 +30,27 @@ class SystemConfig
     final public const string LOCALE_CONFIG_PATH = 'system/company/locale';
 
     final public const string ELECTRONIC_INVOICING_CONFIG_PATH = 'system/company/electronic_invoicing_enabled';
+
+    /**
+     * Whether the company is outside the scope of VAT — franchise en base for a
+     * French micro-entreprise.
+     *
+     * The path sits under `accounting/` because that is the tab it is edited
+     * on, and AccountingBundle's config provider is what seeds it. The constant
+     * lives here rather than there because the billing side asks this question
+     * on every document it renders, and a foundational bundle should not have
+     * to depend on a feature bundle to find out. Same split as
+     * {@see self::ELECTRONIC_INVOICING_CONFIG_PATH}, which CoreBundle seeds.
+     */
+    final public const string VAT_EXEMPT_CONFIG_PATH = 'accounting/vat_exempt';
+
+    final public const string VAT_EXEMPT_MENTION_CONFIG_PATH = 'accounting/vat_exempt_mention';
+
+    /**
+     * Printed when no wording has been set. The article reference is mandatory
+     * on the invoice, so it is spelled out rather than left to be remembered.
+     */
+    final public const string DEFAULT_VAT_EXEMPT_MENTION = 'TVA non applicable, article 293 B du CGI';
 
     /**
      * @var array<string, string>
@@ -91,6 +113,24 @@ class SystemConfig
     {
         $this->repository->delete($key);
         self::$settings = [];
+    }
+
+    /**
+     * A cleared checkbox is stored as the string '0', which is truthy as a
+     * non-empty string — hence the explicit comparison rather than a cast.
+     */
+    public function isVatExempt(?Company $company = null): bool
+    {
+        $value = trim((string) $this->get(self::VAT_EXEMPT_CONFIG_PATH, $company));
+
+        return '1' === $value || 'true' === $value;
+    }
+
+    public function vatExemptMention(?Company $company = null): string
+    {
+        $mention = trim((string) $this->get(self::VAT_EXEMPT_MENTION_CONFIG_PATH, $company));
+
+        return '' === $mention ? self::DEFAULT_VAT_EXEMPT_MENTION : $mention;
     }
 
     public function getCurrency(): Currency

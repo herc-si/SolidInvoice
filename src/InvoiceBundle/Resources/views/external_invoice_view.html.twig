@@ -281,6 +281,11 @@
                     </div>
 
                     {# Terms & Notes #}
+                    {% set vatMention = vat_exempt_mention() %}
+                    {% if vatMention %}
+                        <div class="opacity-75 mb-3">{{ vatMention }}</div>
+                    {% endif %}
+
                     {% if invoice.terms is not empty or invoice.notes is not empty %}
                         <hr class="my-4">
                         {% if invoice.terms is not empty %}

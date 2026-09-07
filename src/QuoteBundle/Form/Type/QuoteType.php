@@ -27,6 +27,7 @@ use Augias\QuoteBundle\Enum\QuoteClientMode;
 use Augias\SaasBundle\Feature\Feature;
 use Augias\SettingsBundle\SystemConfig;
 use Augias\TaxBundle\Form\Type\InvoiceTaxType;
+use Augias\TaxBundle\Service\TaxAvailability;
 use Doctrine\ORM\EntityRepository;
 use JsonException;
 use Money\Currency;
@@ -58,6 +59,7 @@ class QuoteType extends AbstractType
         private readonly SystemConfig $systemConfig,
         private readonly BillingIdGenerator $billingIdGenerator,
         private readonly FeatureGate $featureGate,
+        private readonly TaxAvailability $taxAvailability,
     ) {
     }
 
@@ -169,21 +171,25 @@ class QuoteType extends AbstractType
             ]
         );
 
-        $builder->add(
-            'invoiceTaxes',
-            LiveCollectionType::class,
-            [
-                'entry_type' => InvoiceTaxType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'required' => false,
-                'by_reference' => false,
-                'label' => 'billing.withholding',
-                'attr' => [
-                    'data-controller' => 'invoice-tax',
-                ],
-            ]
-        );
+        // Withholding and invoice-level adjustments are a VAT-side concern;
+        // a company outside the scope of VAT is not shown them.
+        if ($this->taxAvailability->isOffered()) {
+            $builder->add(
+                'invoiceTaxes',
+                LiveCollectionType::class,
+                [
+                    'entry_type' => InvoiceTaxType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'required' => false,
+                    'by_reference' => false,
+                    'label' => 'billing.withholding',
+                    'attr' => [
+                        'data-controller' => 'invoice-tax',
+                    ],
+                ]
+            );
+        }
 
         $dto = $options['data'] ?? new QuoteFormDTO();
 

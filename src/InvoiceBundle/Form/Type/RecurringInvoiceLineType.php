@@ -15,9 +15,8 @@ namespace Augias\InvoiceBundle\Form\Type;
 
 use Augias\CoreBundle\Form\Transformer\QuantityTransformer;
 use Augias\InvoiceBundle\Entity\RecurringInvoiceLine;
-use Augias\TaxBundle\Entity\Tax;
 use Augias\TaxBundle\Form\Type\LineTaxType;
-use Doctrine\Persistence\ManagerRegistry;
+use Augias\TaxBundle\Service\TaxAvailability;
 use Money\Currency;
 use Override;
 use Symfony\Component\Form\AbstractType;
@@ -35,7 +34,7 @@ use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 class RecurringInvoiceLineType extends AbstractType
 {
     public function __construct(
-        private readonly ManagerRegistry $registry
+        private readonly TaxAvailability $taxAvailability
     ) {
     }
 
@@ -82,7 +81,7 @@ class RecurringInvoiceLineType extends AbstractType
             ->resetViewTransformers()
             ->addViewTransformer(new QuantityTransformer());
 
-        if ($this->registry->getManager()->getRepository(Tax::class)->taxRatesConfigured()) {
+        if ($this->taxAvailability->isOffered()) {
             $builder->add(
                 'taxes',
                 LiveCollectionType::class,

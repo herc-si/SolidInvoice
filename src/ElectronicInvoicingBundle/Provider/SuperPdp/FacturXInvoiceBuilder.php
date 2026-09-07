@@ -422,11 +422,24 @@ final readonly class FacturXInvoiceBuilder
      * it doesn't require an exemption reason and doesn't forbid a seller/buyer VAT
      * number elsewhere on the invoice (BR-O-02), so it's the safer unknown-case default.
      */
+    /**
+     * Read from the line's own snapshot rather than the calculator, deliberately,
+     * because LineTaxCalculator drops Exempt rows entirely.
+     *
+     * A line with no tax at all used to fall back to ZeroRated — code "Z", which
+     * claims a 0% rate was applied. For a company in franchise en base that is
+     * simply wrong: no rate applies, which is code "E". The fallback now follows
+     * the company's VAT status.
+     */
     private function lineVatCategory(Line $line): TaxCategory
     {
         $firstTax = $line->getTaxes()->first();
 
-        return $firstTax instanceof LineTax ? $firstTax->getCategorySnapshot() : TaxCategory::ZeroRated;
+        if ($firstTax instanceof LineTax) {
+            return $firstTax->getCategorySnapshot();
+        }
+
+        return $this->systemConfig->isVatExempt() ? TaxCategory::Exempt : TaxCategory::ZeroRated;
     }
 
     private function categoryRate(TaxCategory $category, ?TaxSummaryRow $taxRow): ?float
@@ -441,6 +454,17 @@ final readonly class FacturXInvoiceBuilder
     }
 
     /**
+     * The configured exemption wording, falling back to a generic phrase for a
+     * company that is liable overall but has an exempt line.
+     */
+    private function exemptionText(): string
+    {
+        return $this->systemConfig->isVatExempt()
+            ? $this->systemConfig->vatExemptMention()
+            : 'Exonération de TVA';
+    }
+
+    /**
      * @return array{0: ?string, 1: ?string}
      */
     private function exemptionReasonFor(TaxCategory $category): array
@@ -450,7 +474,11 @@ final readonly class FacturXInvoiceBuilder
             TaxCategory::OutOfScope => ['Non soumis à la TVA', ZugferdVATExemptionReasonCode::VATEX_EU_O],
             // The equivalent rule for "E": no single EU code fits every possible
             // national exemption basis, so free text is used instead of a code.
-            TaxCategory::Exempt => ['Exonération de TVA', null],
+            // The company's own wording when it has one — for a French
+            // micro-entreprise that is the article 293 B mention it is required
+            // to carry, and the receiving platform should see the same reason
+            // the printed invoice does.
+            TaxCategory::Exempt => [$this->exemptionText(), null],
             default => [null, null],
         };
     }

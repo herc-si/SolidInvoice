@@ -16,6 +16,7 @@ namespace Augias\CoreBundle\Menu;
 use Augias\CoreBundle\Enum\Menu\MenuPriority;
 use Augias\CoreBundle\Feature\UpgradePromptProvider;
 use Augias\SaasBundle\Feature\Feature;
+use Augias\SettingsBundle\SystemConfig;
 use Augias\UserBundle\Entity\User;
 use Knp\Menu\ItemInterface;
 use SolidWorx\Platform\PlatformBundle\Attributes\Menu\MenuBuilder;
@@ -24,6 +25,7 @@ use SolidWorx\Platform\PlatformBundle\Feature\FeatureGate;
 class MainMenu
 {
     public function __construct(
+        private readonly SystemConfig $systemConfig,
         private readonly FeatureGate $featureGate,
         private readonly UpgradePromptProvider $upgradePromptProvider,
     ) {
@@ -42,7 +44,7 @@ class MainMenu
         );
 
         self::integrations($section);
-        self::tax($section);
+        $this->tax($section);
         self::paymentMethods($section);
         self::categories($section);
         self::einvoicing($section);
@@ -145,8 +147,17 @@ class MainMenu
         );
     }
 
-    public static function tax(ItemInterface $item): ItemInterface
+    /**
+     * Skipped entirely for a company outside the scope of VAT: a
+     * micro-entrepreneur in franchise en base has no rates to manage, and the
+     * screen only invites confusion.
+     */
+    public function tax(ItemInterface $item): ?ItemInterface
     {
+        if ($this->systemConfig->isVatExempt()) {
+            return null;
+        }
+
         return $item->addChild(
             'menu.top.tax',
             [

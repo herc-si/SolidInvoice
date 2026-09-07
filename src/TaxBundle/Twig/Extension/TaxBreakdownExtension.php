@@ -18,6 +18,7 @@ use Augias\CoreBundle\Company\CompanySelector;
 use Augias\CoreBundle\Entity\Company;
 use Augias\InvoiceBundle\Entity\BaseInvoice;
 use Augias\QuoteBundle\Entity\Quote;
+use Augias\SettingsBundle\SystemConfig;
 use Augias\TaxBundle\Calculator\Result\CalculationResult;
 use Augias\TaxBundle\Calculator\Result\TaxSummaryRow;
 use Augias\TaxBundle\Calculator\TaxCalculatorInterface;
@@ -41,8 +42,27 @@ final class TaxBreakdownExtension
         private readonly TaxIdentifierRepository $taxIdentifierRepository,
         private readonly CompanySelector $companySelector,
         private readonly TaxCalculatorInterface $taxCalculator,
+        private readonly SystemConfig $systemConfig,
     ) {
         $this->cache = new WeakMap();
+    }
+
+    /**
+     * The legal wording a company outside the scope of VAT must print on every
+     * invoice and quote, or null when it is liable and there is nothing to say.
+     *
+     * Exposed as one function so the eight billing designs, the default PDF and
+     * the client portal all ask the same question, instead of each deciding for
+     * itself whether to print something and what.
+     */
+    #[AsTwigFunction(name: 'vat_exempt_mention')]
+    public function vatExemptMention(): ?string
+    {
+        if (! $this->systemConfig->isVatExempt()) {
+            return null;
+        }
+
+        return $this->systemConfig->vatExemptMention();
     }
 
     /**

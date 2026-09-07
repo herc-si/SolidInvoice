@@ -35,7 +35,7 @@ use Augias\MoneyBundle\Currency\CurrencyScale;
 use Augias\SaasBundle\Feature\Feature;
 use Augias\SettingsBundle\SystemConfig;
 use Augias\TaxBundle\Entity\Tax;
-use Augias\TaxBundle\Repository\TaxRepository;
+use Augias\TaxBundle\Service\TaxAvailability;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -87,9 +87,9 @@ final class CreateInvoice extends AbstractController
     public ?string $catalogProductId = null;
 
     public function __construct(
+        private readonly TaxAvailability $taxAvailability,
         private readonly ClientRepository $clientRepository,
         private readonly TotalCalculator $totalCalculator,
-        private readonly TaxRepository $taxRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly WorkflowInterface $invoiceStateMachine,
         private readonly MailerInterface $mailer,
@@ -101,7 +101,7 @@ final class CreateInvoice extends AbstractController
         private readonly FeatureGate $featureGate,
         private readonly ProductRepository $productRepository,
         private readonly CurrencyScale $currencyScale,
-        private readonly SystemConfig $systemConfig,
+        private readonly SystemConfig $systemConfig
     ) {
         $this->dto = new InvoiceFormDTO();
     }
@@ -431,7 +431,7 @@ final class CreateInvoice extends AbstractController
     #[ExposeInTemplate]
     public function hasTax(): bool
     {
-        return $this->taxRepository->taxRatesConfigured();
+        return $this->taxAvailability->isOffered();
     }
 
     #[ExposeInTemplate]
@@ -465,6 +465,7 @@ final class CreateInvoice extends AbstractController
         // Create temporary invoice to leverage Calculator
         try {
             $tempInvoice = $this->formManager->createInvoiceFromDTO($this->dto);
+
             return (string) $this->calculator->calculateDiscount($tempInvoice);
         } catch (InvalidArgumentException) {
             // Client data incomplete during mode switching

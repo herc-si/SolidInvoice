@@ -277,6 +277,10 @@
             {% endblock %}
 
             {% block footer %}
+                {% set vatMention = vat_exempt_mention() %}
+                {% if vatMention %}
+                    <p class="text-muted">{{ vatMention }}</p>
+                {% endif %}
                 {% if invoice.terms is not empty %}
                     <div class="col-6">
                         <strong>{{ 'invoice.terms'|trans }}</strong>

@@ -245,6 +245,11 @@
                             </div>
                         </div>
 
+                        {% set vatMention = vat_exempt_mention() %}
+                        {% if vatMention %}
+                            <div class="mb-3 text-muted">{{ vatMention }}</div>
+                        {% endif %}
+
                         {# Terms #}
                         {% if quote.terms is not empty %}
                             <hr class="my-4">

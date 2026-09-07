@@ -33,7 +33,7 @@ use Augias\QuoteBundle\Model\Graph;
 use Augias\SaasBundle\Feature\Feature;
 use Augias\SettingsBundle\SystemConfig;
 use Augias\TaxBundle\Entity\Tax;
-use Augias\TaxBundle\Repository\TaxRepository;
+use Augias\TaxBundle\Service\TaxAvailability;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -84,9 +84,9 @@ final class CreateQuote extends AbstractController
     public ?string $catalogProductId = null;
 
     public function __construct(
+        private readonly TaxAvailability $taxAvailability,
         private readonly ClientRepository $clientRepository,
         private readonly TotalCalculator $totalCalculator,
-        private readonly TaxRepository $taxRepository,
         private readonly ProductRepository $productRepository,
         private readonly CurrencyScale $currencyScale,
         private readonly SystemConfig $systemConfig,
@@ -97,7 +97,7 @@ final class CreateQuote extends AbstractController
         private readonly Calculator $calculator,
         private readonly EmailVerificationGateInterface $emailVerificationGate,
         private readonly CustomFieldFormWriter $customFieldFormWriter,
-        private readonly FeatureGate $featureGate,
+        private readonly FeatureGate $featureGate
     ) {
         $this->dto = new QuoteFormDTO();
     }
@@ -419,7 +419,7 @@ final class CreateQuote extends AbstractController
     #[ExposeInTemplate]
     public function hasTax(): bool
     {
-        return $this->taxRepository->taxRatesConfigured();
+        return $this->taxAvailability->isOffered();
     }
 
     #[ExposeInTemplate]
@@ -453,6 +453,7 @@ final class CreateQuote extends AbstractController
         // Create temporary quote to leverage Calculator
         try {
             $tempQuote = $this->formManager->createQuoteFromDTO($this->dto);
+
             return (string) $this->calculator->calculateDiscount($tempQuote);
         } catch (InvalidArgumentException) {
             // Client data incomplete during mode switching

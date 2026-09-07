@@ -27,6 +27,7 @@ use Augias\QuoteBundle\Enum\QuoteClientMode;
 use Augias\QuoteBundle\Form\Type\ItemType;
 use Augias\QuoteBundle\Form\Type\QuoteType;
 use Augias\SettingsBundle\SystemConfig;
+use Augias\TaxBundle\Service\TaxAvailability;
 use Brick\Math\BigDecimal;
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery as M;
@@ -160,8 +161,8 @@ final class QuoteTypeTest extends FormTestCase
             {
                 return '10';
             }
-        }]), $systemConfig), $featureGate);
-        $itemType = new ItemType($this->registry);
+        }]), $systemConfig), $featureGate, $this->taxAvailability());
+        $itemType = new ItemType($this->taxAvailability());
 
         $customFieldsType = new CustomFieldValueCollectionType(
             M::mock(CustomFieldRepository::class, ['findByTargetOrdered' => []]),
@@ -177,5 +178,18 @@ final class QuoteTypeTest extends FormTestCase
                 ],
             ]),
         ];
+    }
+
+    /**
+     * Whether the tax field is offered is a service now, joining "any rates
+     * configured" with "the company is liable for VAT". These tests are about
+     * the liable case, so it comes from the container rather than a stub.
+     */
+    private function taxAvailability(): TaxAvailability
+    {
+        $availability = self::getContainer()->get(TaxAvailability::class);
+        self::assertInstanceOf(TaxAvailability::class, $availability);
+
+        return $availability;
     }
 }

@@ -15,9 +15,12 @@ namespace Augias\TaxBundle\Calculator;
 
 use Augias\InvoiceBundle\Entity\BaseInvoice;
 use Augias\QuoteBundle\Entity\Quote;
+use Augias\SettingsBundle\SystemConfig;
 use Augias\TaxBundle\Calculator\Result\CalculationResult;
+use Augias\TaxBundle\Calculator\Result\InvoiceLevelBreakdown;
 use Augias\TaxBundle\Calculator\Result\TaxSummaryRow;
 use Brick\Math\BigDecimal;
+use Brick\Math\BigNumber;
 use Brick\Math\Exception\MathException;
 
 /**
@@ -30,6 +33,7 @@ final readonly class TaxCalculator implements TaxCalculatorInterface
     public function __construct(
         private LineTaxCalculator $lineTaxCalculator,
         private InvoiceTaxCalculator $invoiceTaxCalculator,
+        private SystemConfig $systemConfig,
     ) {
     }
 
@@ -39,6 +43,16 @@ final readonly class TaxCalculator implements TaxCalculatorInterface
     public function calculate(BaseInvoice | Quote $document, ?CalculationOptions $options = null): CalculationResult
     {
         $options ??= CalculationOptions::defaults();
+
+        // A company outside the scope of VAT charges none, whatever rates
+        // happen to be configured or still attached to an old line. Answering
+        // here rather than at each caller is deliberate: this is the single
+        // place both the stored totals and the rendered breakdown come from, so
+        // there is no way for the two to disagree.
+        if ($this->systemConfig->isVatExempt()) {
+            return $this->withoutTax($document);
+        }
+
         $rounder = new Rounder($options->rounding);
 
         $subTotal = BigDecimal::zero();
@@ -128,5 +142,30 @@ final readonly class TaxCalculator implements TaxCalculatorInterface
         }
 
         return array_values($merged);
+    }
+
+    /**
+     * Subtotals and totals still have to be right — only the tax is gone, and
+     * with it every summary row, so no template prints an empty tax block.
+     *
+     * @throws MathException
+     */
+    private function withoutTax(BaseInvoice | Quote $document): CalculationResult
+    {
+        $subTotal = BigDecimal::zero();
+
+        foreach ($document->getLines() as $line) {
+            $line->updateTotal();
+            $subTotal = $subTotal->plus(BigNumber::of($line->getTotal())->toBigDecimal());
+        }
+
+        return new CalculationResult(
+            subTotal: $subTotal,
+            totalLineTax: BigDecimal::zero(),
+            total: $subTotal,
+            lineBreakdowns: [],
+            invoiceLevelBreakdown: InvoiceLevelBreakdown::empty(),
+            summaryRows: [],
+        );
     }
 }

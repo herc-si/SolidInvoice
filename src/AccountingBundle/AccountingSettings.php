@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Augias\AccountingBundle;
 
+use Augias\SettingsBundle\SystemConfig;
+
 /**
  * The setting paths this bundle owns.
  *
@@ -35,11 +37,17 @@ final class AccountingSettings
     /** Which regime the company is on; empty until the user picks one. */
     final public const string REGIME = 'accounting/regime';
 
-    /** Outside the scope of VAT — franchise en base for a French micro-entreprise. */
-    final public const string VAT_EXEMPT = 'accounting/vat_exempt';
+    /**
+     * Outside the scope of VAT — franchise en base for a French micro-entreprise.
+     *
+     * Aliases the constant on SystemConfig rather than repeating the literal:
+     * the billing side reads this on every document it renders and cannot
+     * depend on this bundle to find the path.
+     */
+    final public const string VAT_EXEMPT = SystemConfig::VAT_EXEMPT_CONFIG_PATH;
 
     /** The legal wording printed on invoices and quotes when VAT-exempt. */
-    final public const string VAT_EXEMPT_MENTION = 'accounting/vat_exempt_mention';
+    final public const string VAT_EXEMPT_MENTION = SystemConfig::VAT_EXEMPT_MENTION_CONFIG_PATH;
 
     /** Needed to scale a first, partial year's limits down pro rata. */
     final public const string ACTIVITY_START_DATE = 'accounting/activity_start_date';
@@ -64,7 +72,7 @@ final class AccountingSettings
      * article reference is mandatory on the invoice, which is why it is spelled
      * out rather than left to the user to remember.
      */
-    final public const string DEFAULT_VAT_EXEMPT_MENTION = 'TVA non applicable, article 293 B du CGI';
+    final public const string DEFAULT_VAT_EXEMPT_MENTION = SystemConfig::DEFAULT_VAT_EXEMPT_MENTION;
 
     /**
      * The regime-specific paths, mapped to the short keys

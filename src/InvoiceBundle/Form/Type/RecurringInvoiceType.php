@@ -23,6 +23,7 @@ use Augias\MoneyBundle\Form\Type\HiddenMoneyType;
 use Augias\SaasBundle\Feature\Feature;
 use Augias\SettingsBundle\SystemConfig;
 use Augias\TaxBundle\Form\Type\InvoiceTaxType;
+use Augias\TaxBundle\Service\TaxAvailability;
 use Carbon\CarbonImmutable;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -49,6 +50,7 @@ class RecurringInvoiceType extends AbstractType
         private readonly SystemConfig $systemConfig,
         private readonly ManagerRegistry $registry,
         private readonly FeatureGate $featureGate,
+        private readonly TaxAvailability $taxAvailability,
     ) {
     }
 
@@ -85,21 +87,25 @@ class RecurringInvoiceType extends AbstractType
             ]
         );
 
-        $builder->add(
-            'invoiceTaxes',
-            LiveCollectionType::class,
-            [
-                'entry_type' => InvoiceTaxType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'required' => false,
-                'by_reference' => false,
-                'label' => 'billing.withholding',
-                'attr' => [
-                    'data-controller' => 'invoice-tax',
-                ],
-            ]
-        );
+        // Withholding and invoice-level adjustments are a VAT-side concern;
+        // a company outside the scope of VAT is not shown them.
+        if ($this->taxAvailability->isOffered()) {
+            $builder->add(
+                'invoiceTaxes',
+                LiveCollectionType::class,
+                [
+                    'entry_type' => InvoiceTaxType::class,
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'required' => false,
+                    'by_reference' => false,
+                    'label' => 'billing.withholding',
+                    'attr' => [
+                        'data-controller' => 'invoice-tax',
+                    ],
+                ]
+            );
+        }
 
         $builder->add('terms', null, ['label' => 'form.field.terms']);
         $builder->add('notes', null, ['help' => 'billing.notes_help']);

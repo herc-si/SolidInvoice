@@ -17,7 +17,7 @@ use Augias\ClientBundle\Repository\ClientRepository;
 use Augias\CoreBundle\Billing\TotalCalculator;
 use Augias\InvoiceBundle\Entity\RecurringInvoice;
 use Augias\InvoiceBundle\Form\Type\RecurringInvoiceType;
-use Augias\TaxBundle\Repository\TaxRepository;
+use Augias\TaxBundle\Service\TaxAvailability;
 use Brick\Math\Exception\MathException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -42,9 +42,9 @@ final class CreateRecurringInvoice extends AbstractController
     public bool $isEdit = false;
 
     public function __construct(
+        private readonly TaxAvailability $taxAvailability,
         private readonly ClientRepository $clientRepository,
-        private readonly TotalCalculator $totalCalculator,
-        private readonly TaxRepository $taxRepository,
+        private readonly TotalCalculator $totalCalculator
     ) {
     }
 
@@ -81,6 +81,6 @@ final class CreateRecurringInvoice extends AbstractController
     #[ExposeInTemplate]
     public function hasTax(): bool
     {
-        return $this->taxRepository->taxRatesConfigured();
+        return $this->taxAvailability->isOffered();
     }
 }
