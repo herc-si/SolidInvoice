@@ -20,6 +20,7 @@ use Augias\CoreBundle\Entity\Company;
 use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
+use Symfony\Bridge\Doctrine\Types\UlidType;
 
 /**
  * @extends EntityRepository<AccountingPeriod>
@@ -38,7 +39,7 @@ class AccountingPeriodRepository extends EntityRepository
             ->andWhere('p.type = :type')
             ->andWhere('p.year = :year')
             ->andWhere('p.ordinal = :ordinal')
-            ->setParameter('company', $company)
+            ->setParameter('company', $company->getId(), UlidType::NAME)
             ->setParameter('type', $type->value)
             ->setParameter('year', (int) $date->format('Y'))
             ->setParameter('ordinal', $type->ordinalOf($date))
@@ -60,7 +61,7 @@ class AccountingPeriodRepository extends EntityRepository
             ->andWhere('p.type = :type')
             ->andWhere('p.status = :status')
             ->andWhere('p.endDate < :start')
-            ->setParameter('company', $period->getCompany())
+            ->setParameter('company', $period->getCompany()->getId(), UlidType::NAME)
             ->setParameter('type', $period->getType()->value)
             ->setParameter('status', PeriodStatus::Open->value)
             ->setParameter('start', $period->getStartDate())
@@ -81,7 +82,7 @@ class AccountingPeriodRepository extends EntityRepository
             ->andWhere('p.company = :company')
             ->andWhere('p.type = :type')
             ->andWhere('p.status = :status')
-            ->setParameter('company', $company)
+            ->setParameter('company', $company->getId(), UlidType::NAME)
             ->setParameter('type', $type->value)
             ->setParameter('status', PeriodStatus::Open->value)
             ->orderBy('p.startDate', 'ASC')
@@ -99,7 +100,7 @@ class AccountingPeriodRepository extends EntityRepository
             ->andWhere('p.company = :company')
             ->andWhere('p.type = :type')
             ->andWhere('p.year = :year')
-            ->setParameter('company', $company)
+            ->setParameter('company', $company->getId(), UlidType::NAME)
             ->setParameter('type', $type->value)
             ->setParameter('year', $year)
             ->orderBy('p.ordinal', 'ASC')
@@ -125,7 +126,7 @@ class AccountingPeriodRepository extends EntityRepository
             ->andWhere('p.company = :company')
             ->andWhere('p.status = :status')
             ->andWhere('d.id IS NULL')
-            ->setParameter('company', $company)
+            ->setParameter('company', $company->getId(), UlidType::NAME)
             ->setParameter('status', PeriodStatus::Closed->value)
             ->orderBy('p.startDate', 'ASC')
             ->getQuery()

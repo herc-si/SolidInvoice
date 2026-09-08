@@ -21,6 +21,9 @@ accounting:
         ready: 'Prête à déclarer'
         submitted: Déclarée
     entry:
+        label:
+            bill_payment: 'Règlement fournisseur'
+            invoice_payment: 'Encaissement de facture'
         source:
             bill_payment: 'Paiement fournisseur'
             invoice_payment: 'Encaissement de facture'

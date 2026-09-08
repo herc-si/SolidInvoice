@@ -21,6 +21,9 @@ accounting:
         ready: 'Ready to file'
         submitted: Filed
     entry:
+        label:
+            bill_payment: 'Supplier payment'
+            invoice_payment: 'Invoice payment'
         source:
             bill_payment: 'Supplier payment'
             invoice_payment: 'Invoice payment'

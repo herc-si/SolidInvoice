@@ -17,6 +17,7 @@ use Augias\AccountingBundle\Entity\ThresholdAlert;
 use Augias\CoreBundle\Entity\Company;
 use Doctrine\Persistence\ManagerRegistry;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
+use Symfony\Bridge\Doctrine\Types\UlidType;
 
 /**
  * @extends EntityRepository<ThresholdAlert>
@@ -41,7 +42,7 @@ class ThresholdAlertRepository extends EntityRepository
             ->andWhere('a.thresholdKey = :key')
             ->andWhere('a.year = :year')
             ->andWhere('a.step = :step')
-            ->setParameter('company', $company)
+            ->setParameter('company', $company->getId(), UlidType::NAME)
             ->setParameter('key', $thresholdKey)
             ->setParameter('year', $year)
             ->setParameter('step', $step)
@@ -59,7 +60,7 @@ class ThresholdAlertRepository extends EntityRepository
         return $this->createQueryBuilder('a')
             ->andWhere('a.company = :company')
             ->andWhere('a.year = :year')
-            ->setParameter('company', $company)
+            ->setParameter('company', $company->getId(), UlidType::NAME)
             ->setParameter('year', $year)
             ->orderBy('a.triggeredAt', 'DESC')
             ->getQuery()
