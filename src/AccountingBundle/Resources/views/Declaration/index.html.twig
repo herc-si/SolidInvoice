@@ -16,11 +16,11 @@
 {% block content %}
     {% if regime is null %}
         <twig:Ui:Card title="{{ 'accounting.setup.title'|trans }}">
-            <p class="text-secondary mb-0">{{ 'accounting.setup.description'|trans }}</p>
+            <p class="text-muted mb-0">{{ 'accounting.setup.description'|trans }}</p>
         </twig:Ui:Card>
     {% elseif rows is empty %}
         <twig:Ui:Card title="{{ 'accounting.declaration.empty_title'|trans }}">
-            <p class="text-secondary mb-0">{{ 'accounting.declaration.empty'|trans }}</p>
+            <p class="text-muted mb-0">{{ 'accounting.declaration.empty'|trans }}</p>
         </twig:Ui:Card>
     {% else %}
         <twig:Ui:Card>
@@ -46,7 +46,7 @@
                                 </td>
                                 <td>
                                     {% if row.declaration is null %}
-                                        <span class="text-secondary">{{ 'accounting.declaration.not_computed'|trans }}</span>
+                                        <span class="text-muted">{{ 'accounting.declaration.not_computed'|trans }}</span>
                                     {% else %}
                                         <span class="badge bg-{{ row.declaration.status.color }}-lt">
                                             {{ row.declaration.status.translationKey|trans }}

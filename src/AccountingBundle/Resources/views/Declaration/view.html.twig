@@ -23,7 +23,7 @@
                 </dl>
 
                 {% if lines is empty %}
-                    <p class="text-secondary mb-0">{{ 'accounting.declaration.nothing_due'|trans }}</p>
+                    <p class="text-muted mb-0">{{ 'accounting.declaration.nothing_due'|trans }}</p>
                 {% else %}
                     <div class="table-responsive">
                         <table class="table card-table table-vcenter">
@@ -41,7 +41,7 @@
                                         <td>
                                             {{ line.labelKey|trans }}
                                             {% if line.nature is not null %}
-                                                <div class="text-secondary small">{{ line.nature.translationKey|trans }}</div>
+                                                <div class="text-muted small">{{ line.nature.translationKey|trans }}</div>
                                             {% endif %}
                                         </td>
                                         <td class="text-end">{{ line.base|formatCurrency(declaration.currencyCode) }}</td>
@@ -82,7 +82,7 @@
                 </div>
 
                 {% if declaration.isSubmitted %}
-                    <p class="text-secondary">
+                    <p class="text-muted">
                         {{ 'accounting.declaration.submitted_on'|trans({'%date%': declaration.submittedAt|date('d F Y')}) }}
                     </p>
                     {% if declaration.reference is not null %}
@@ -92,10 +92,10 @@
                         </dl>
                     {% endif %}
                     {% if declaration.notes is not null %}
-                        <p class="text-secondary mb-0">{{ declaration.notes }}</p>
+                        <p class="text-muted mb-0">{{ declaration.notes }}</p>
                     {% endif %}
                 {% elseif period.isClosed %}
-                    <p class="text-secondary">{{ 'accounting.declaration.record_help'|trans }}</p>
+                    <p class="text-muted">{{ 'accounting.declaration.record_help'|trans }}</p>
 
                     <form method="post" action="{{ path('_accounting_declaration_submit', {'id': period.id}) }}">
                         <input type="hidden" name="_token" value="{{ csrf_token('submit' ~ period.id) }}">
@@ -116,7 +116,7 @@
                         </button>
                     </form>
                 {% else %}
-                    <p class="text-secondary mb-0">{{ 'accounting.declaration.period_still_open'|trans }}</p>
+                    <p class="text-muted mb-0">{{ 'accounting.declaration.period_still_open'|trans }}</p>
                 {% endif %}
             </twig:Ui:Card>
         </div>

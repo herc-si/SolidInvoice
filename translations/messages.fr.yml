@@ -82,6 +82,8 @@ accounting:
             label: 'Nature de l''opération'
             notes: Notes
             save: Enregistrer
+            section_description: 'Les colonnes que le livre doit porter : la date du mouvement, sa nature, le tiers et la pièce justificative.'
+            section_title: 'Détail de l''écriture'
             settlement_method: Mode de règlement
         grid:
             amount: Montant

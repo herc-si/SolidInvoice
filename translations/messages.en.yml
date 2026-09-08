@@ -82,6 +82,8 @@ accounting:
             label: Nature of the operation
             notes: Notes
             save: Save
+            section_description: 'The columns the book has to carry: the date the money moved, what it was for, the counterparty and the supporting document.'
+            section_title: Entry details
             settlement_method: Settlement method
         grid:
             amount: Amount

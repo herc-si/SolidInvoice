@@ -29,35 +29,54 @@
                 </div>
             </div>
 
-            {% if entry.source.isAutomatic %}
-                <twig:Ui:Alert type="info" icon="tabler:link">
-                    {{ 'accounting.entry.form.automatic_notice'|trans }}
-                </twig:Ui:Alert>
-            {% endif %}
-
             <div class="form-page-sections">
                 <section class="form-page-section">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            {{ ux_icon('tabler:pencil', {width: 20, height: 20}) }}
+                        </div>
+                        <div class="section-header-text">
+                            <h2 class="section-title">{{ 'accounting.entry.form.section_title'|trans }}</h2>
+                            <p class="section-description">
+                                {% if entry.source.isAutomatic %}
+                                    {{ 'accounting.entry.form.automatic_notice'|trans }}
+                                {% else %}
+                                    {{ 'accounting.entry.form.section_description'|trans }}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+
                     <div class="section-content">
                         <div class="form-grid">
-                            {% for field in form %}
-                                {% if field.vars.name != '_token' %}
-                                    <div class="form-field">
-                                        {{ form_row(field) }}
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
+                            <div class="form-field">{{ form_row(form.entryDate) }}</div>
+                            <div class="form-field">{{ form_row(form.amount) }}</div>
+                            <div class="form-field form-field-wide">{{ form_row(form.label) }}</div>
+                            <div class="form-field">{{ form_row(form.counterpartyName) }}</div>
+                            <div class="form-field">{{ form_row(form.documentReference) }}</div>
+                            <div class="form-field">{{ form_row(form.settlementMethod) }}</div>
+                            {% if form.activityNature is defined %}
+                                <div class="form-field">{{ form_row(form.activityNature) }}</div>
+                            {% endif %}
+                            <div class="form-field form-field-wide">{{ form_row(form.notes) }}</div>
                         </div>
                     </div>
                 </section>
             </div>
 
-            <div class="card-footer">
-                <div class="form-actions form-actions-spread">
-                    <a class="btn btn-ghost" href="{{ path('_accounting_book', {'book': book.value}) }}">
+            {{ form_rest(form) }}
+
+            <div class="form-page-actions">
+                <div class="form-page-actions-inner">
+                    <a href="{{ path('_accounting_book', {'book': book.value}) }}" class="btn btn-ghost">
+                        {{ ux_icon('tabler:arrow-left', {width: 18, height: 18}) }}
                         {{ 'accounting.entry.form.cancel'|trans }}
                     </a>
 
-                    <div class="d-flex gap-2">
+                    {# The actions bar spreads its children, so the two that
+                       act on this entry are grouped to keep Cancel alone on the
+                       left, where every other form page puts it. #}
+                    <div class="d-flex align-items-center gap-2">
                         {% if entry.id is not null and entry.isEditable %}
                             <button
                                 type="submit"
@@ -72,7 +91,7 @@
                             </button>
                         {% endif %}
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary btn-save">
                             {{ ux_icon('tabler:device-floppy', {width: 18, height: 18}) }}
                             {{ 'accounting.entry.form.save'|trans }}
                         </button>
