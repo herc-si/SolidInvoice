@@ -3,9 +3,14 @@ accounting:
         sale_of_goods: 'Vente de marchandises'
         services_bic: 'Prestations de services (BIC)'
         services_bnc: 'Prestations de services (BNC)'
+    alerts:
+        line: 'Seuil atteint à %percent%% (limite : %amount%)'
+        title: 'Alertes de seuil %year%'
     book:
         purchase: 'Registre des achats'
         revenue: 'Livre des recettes'
+    books:
+        title: Livres comptables
     declaration:
         line:
             income_tax: 'Versement libératoire de l''impôt sur le revenu'
@@ -21,6 +26,39 @@ accounting:
         ready: 'Prête à déclarer'
         submitted: Déclarée
     entry:
+        add: Nouvelle écriture
+        flash:
+            automatic: 'Cette écriture reflète un paiement enregistré dans l''application et ne peut pas être supprimée ici.'
+            created: 'L''écriture a été enregistrée.'
+            deleted: 'L''écriture a été supprimée.'
+            invalid_token: Jeton CSRF invalide.
+            locked: 'Cette écriture appartient à une période clôturée : elle ne peut plus être modifiée. Passez une écriture d''extourne dans une période ouverte.'
+            updated: 'L''écriture a été modifiée.'
+        form:
+            activity_nature: Activité
+            activity_nature_help: Détermine le plafond et le taux de cotisations appliqués à cette recette.
+            add_title: Nouvelle écriture
+            amount: Montant
+            automatic_notice: 'Cette écriture reflète un paiement enregistré dans l''application. Seules l''activité et les notes sont modifiables ici ; le reste suit le paiement.'
+            cancel: Annuler
+            counterparty: Tiers
+            delete: Supprimer
+            document_reference: Pièce justificative
+            document_reference_help: Numéro de la facture ou du reçu.
+            edit_title: 'Modifier l''écriture'
+            entry_date: Date
+            entry_date_help: 'Date à laquelle l''argent a circulé, et non la date de la facture.'
+            label: 'Nature de l''opération'
+            notes: Notes
+            save: Enregistrer
+            settlement_method: Mode de règlement
+        grid:
+            amount: Montant
+            counterparty: Tiers
+            date: Date
+            document_reference: Pièce
+            label: Nature
+            number: N°
         label:
             bill_payment: 'Règlement fournisseur'
             invoice_payment: 'Encaissement de facture'
@@ -33,6 +71,16 @@ accounting:
     pension_fund:
         cipav: CIPAV
         ssi: SSI
+    period:
+        close: 'Clôturer %period%'
+        close_help: 'La clôture numérote les écritures, les scelle et fige les totaux. C''est définitif.'
+        closed_on: 'Clôturée le %date%.'
+        flash:
+            cannot_close: 'Cette période ne peut pas être clôturée : elle l''est déjà, ou une période antérieure est encore ouverte.'
+            closed: La période a été clôturée.
+        none: 'Aucune période ouverte : elle sera créée par la première écriture.'
+        sealed_notice: 'La période %period% est clôturée : ses écritures ne sont plus modifiables.'
+        title: Période en cours
     period_status:
         closed: Clôturée
         open: Ouverte
@@ -88,8 +136,14 @@ accounting:
         title: 'La comptabilité n''est pas encore configurée'
     threshold:
         micro_ceiling: 'Plafond du régime'
+        of: de
+        prorated: proratisé
         vat_franchise_base: 'Seuil de TVA'
         vat_franchise_tolerance: 'Seuil de TVA (majoré)'
+    turnover:
+        empty: Aucun encaissement enregistré cette année.
+        subtitle: 'Encaissements depuis le 1er janvier — c''est ce que mesurent les plafonds.'
+        title: 'Chiffre d''affaires %year%'
     vat_exempt:
         'no': 'Assujetti à la TVA'
         'yes': 'Non assujetti à la TVA'

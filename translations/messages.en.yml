@@ -3,9 +3,14 @@ accounting:
         sale_of_goods: 'Sale of goods'
         services_bic: 'Services (BIC)'
         services_bnc: 'Services (BNC)'
+    alerts:
+        line: 'Threshold reached at %percent%% (limit: %amount%)'
+        title: '%year% threshold alerts'
     book:
         purchase: 'Purchase register'
         revenue: 'Revenue book'
+    books:
+        title: Books
     declaration:
         line:
             income_tax: 'Flat-rate income tax'
@@ -21,6 +26,39 @@ accounting:
         ready: 'Ready to file'
         submitted: Filed
     entry:
+        add: New entry
+        flash:
+            automatic: This entry mirrors a payment recorded in the application and cannot be deleted here.
+            created: The entry has been recorded.
+            deleted: The entry has been deleted.
+            invalid_token: Invalid CSRF token.
+            locked: This entry belongs to a closed period and can no longer be changed. Record a reversing entry in an open period instead.
+            updated: The entry has been updated.
+        form:
+            activity_nature: Activity
+            activity_nature_help: Decides which ceiling and contribution rate this receipt counts towards.
+            add_title: New entry
+            amount: Amount
+            automatic_notice: This entry mirrors a payment recorded in the application. Only the activity and the notes can be changed here; the rest follows the payment.
+            cancel: Cancel
+            counterparty: Counterparty
+            delete: Delete
+            document_reference: Supporting document
+            document_reference_help: The invoice or receipt number.
+            edit_title: Edit entry
+            entry_date: Date
+            entry_date_help: 'The date the money moved, not the invoice date.'
+            label: Nature of the operation
+            notes: Notes
+            save: Save
+            settlement_method: Settlement method
+        grid:
+            amount: Amount
+            counterparty: Counterparty
+            date: Date
+            document_reference: Document
+            label: Nature
+            number: No.
         label:
             bill_payment: 'Supplier payment'
             invoice_payment: 'Invoice payment'
@@ -33,6 +71,16 @@ accounting:
     pension_fund:
         cipav: CIPAV
         ssi: SSI
+    period:
+        close: 'Close %period%'
+        close_help: 'Closing numbers the entries, seals them and freezes the totals. It cannot be undone.'
+        closed_on: 'Closed on %date%.'
+        flash:
+            cannot_close: 'This period cannot be closed: it already is, or an earlier one is still open.'
+            closed: The period has been closed.
+        none: No period is open yet — the first entry creates one.
+        sealed_notice: 'Period %period% is closed: its entries can no longer be changed.'
+        title: Current period
     period_status:
         closed: Closed
         open: Open
@@ -88,8 +136,14 @@ accounting:
         title: 'Accounting is not set up yet'
     threshold:
         micro_ceiling: 'Regime ceiling'
+        of: of
+        prorated: pro rata
         vat_franchise_base: 'VAT threshold'
         vat_franchise_tolerance: 'VAT threshold (upper limit)'
+    turnover:
+        empty: Nothing received yet this year.
+        subtitle: Received since 1 January — what the limits are measured against.
+        title: '%year% turnover'
     vat_exempt:
         'no': 'Liable for VAT'
         'yes': 'Not liable for VAT'

@@ -11,6 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
+use Augias\AccountingBundle\Action\Book;
+use Augias\AccountingBundle\Action\ClosePeriod;
+use Augias\AccountingBundle\Action\Entry\Add;
+use Augias\AccountingBundle\Action\Entry\Delete;
+use Augias\AccountingBundle\Action\Entry\Edit;
 use Augias\AccountingBundle\Action\Index;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
@@ -19,4 +24,30 @@ return static function (RoutingConfigurator $routingConfigurator): void {
         ->add('_accounting_index', '/')
         ->controller(Index::class)
         ->methods(['GET']);
+
+    $routingConfigurator
+        ->add('_accounting_book', '/book/{book}')
+        ->controller(Book::class)
+        ->methods(['GET']);
+
+    $routingConfigurator
+        ->add('_accounting_entry_add', '/book/{book}/entry/add')
+        ->controller(Add::class)
+        ->methods(['GET', 'POST']);
+
+    $routingConfigurator
+        ->add('_accounting_entry_edit', '/entry/{id}/edit')
+        ->controller(Edit::class)
+        ->methods(['GET', 'POST']);
+
+    $routingConfigurator
+        ->add('_accounting_entry_delete', '/entry/{id}/delete')
+        ->controller(Delete::class)
+        ->methods(['DELETE', 'POST']);
+
+    // POST only, and behind a token: closing is one-way.
+    $routingConfigurator
+        ->add('_accounting_period_close', '/period/{id}/close')
+        ->controller(ClosePeriod::class)
+        ->methods(['POST']);
 };

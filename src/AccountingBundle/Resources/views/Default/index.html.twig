@@ -24,39 +24,169 @@
             </a>
         </twig:Ui:Card>
     {% else %}
-        <twig:Ui:Card
-            title="{{ regime.labelKey|trans }}"
-            subtitle="{{ regime.descriptionKey|trans }}"
-        >
-            <dl class="row mb-0">
-                <dt class="col-sm-5">{{ 'accounting.settings.primary_activity.label'|trans }}</dt>
-                <dd class="col-sm-7">{{ profile.primaryActivity.translationKey|trans }}</dd>
-
-                <dt class="col-sm-5">{{ 'accounting.settings.declaration_periodicity.label'|trans }}</dt>
-                <dd class="col-sm-7">{{ profile.declarationPeriodicity.translationKey|trans }}</dd>
-
-                <dt class="col-sm-5">{{ 'accounting.settings.vat_exempt.label'|trans }}</dt>
-                <dd class="col-sm-7">
-                    {% if profile.vatExempt %}
-                        <span class="badge bg-green-lt">{{ 'accounting.vat_exempt.yes'|trans }}</span>
-                        <div class="text-secondary mt-1">{{ profile.vatExemptMention }}</div>
+        <div class="row row-cards">
+            <div class="col-lg-8">
+                <twig:Ui:Card
+                    title="{{ 'accounting.turnover.title'|trans({'%year%': year}) }}"
+                    subtitle="{{ 'accounting.turnover.subtitle'|trans }}"
+                >
+                    {% if turnover is null or turnover.isEmpty %}
+                        <p class="text-secondary mb-0">{{ 'accounting.turnover.empty'|trans }}</p>
                     {% else %}
-                        <span class="badge bg-gray-lt">{{ 'accounting.vat_exempt.no'|trans }}</span>
+                        <div class="h1 mb-3">{{ turnover.total|formatCurrency(turnover.currencyCode) }}</div>
+
+                        {% if turnover.activeNatures|length > 1 %}
+                            <dl class="row mb-3">
+                                {% for nature in turnover.activeNatures %}
+                                    <dt class="col-sm-6">{{ nature.translationKey|trans }}</dt>
+                                    <dd class="col-sm-6">{{ turnover.forNature(nature)|formatCurrency(turnover.currencyCode) }}</dd>
+                                {% endfor %}
+                            </dl>
+                        {% endif %}
+
+                        {% if turnover.hasForeignCurrencies %}
+                            <twig:Ui:Alert type="warning" icon="tabler:currency-exchange">
+                                {{ 'accounting.declaration.warning.foreign_currency'|trans }}
+                            </twig:Ui:Alert>
+                        {% endif %}
+
+                        {% for limit in limits %}
+                            {% set used = limit.used %}
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-baseline">
+                                    <span>
+                                        {{ limit.threshold.labelKey|trans }}
+                                        {% if limit.threshold.nature is not null %}
+                                            <span class="text-secondary">— {{ limit.threshold.nature.translationKey|trans }}</span>
+                                        {% endif %}
+                                        {% if limit.threshold.prorated %}
+                                            <span class="badge bg-blue-lt ms-1">{{ 'accounting.threshold.prorated'|trans }}</span>
+                                        {% endif %}
+                                    </span>
+                                    <span class="text-secondary">
+                                        {{ used }}% {{ 'accounting.threshold.of'|trans }}
+                                        {{ limit.threshold.amount|formatCurrency(turnover.currencyCode) }}
+                                    </span>
+                                </div>
+                                <div class="progress progress-sm">
+                                    <div
+                                        class="progress-bar {{ used >= 100 ? 'bg-danger' : (used >= 80 ? 'bg-warning' : 'bg-primary') }}"
+                                        style="width: {{ min(used, 100) }}%"
+                                        role="progressbar"
+                                        aria-valuenow="{{ used }}"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                        aria-label="{{ limit.threshold.labelKey|trans }}"
+                                    ></div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <p class="text-secondary small mb-0">{{ 'accounting.declaration.warning.rates_unverified'|trans }}</p>
                     {% endif %}
-                </dd>
+                </twig:Ui:Card>
+            </div>
 
-                {% if profile.activityStartDate is not null %}
-                    <dt class="col-sm-5">{{ 'accounting.settings.activity_start_date.label'|trans }}</dt>
-                    <dd class="col-sm-7">{{ profile.activityStartDate|date('d F Y') }}</dd>
-                {% endif %}
-            </dl>
+            <div class="col-lg-4">
+                <twig:Ui:Card title="{{ 'accounting.period.title'|trans }}">
+                    {% if period is null %}
+                        <p class="text-secondary mb-0">{{ 'accounting.period.none'|trans }}</p>
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="h2 mb-0">{{ period.label }}</span>
+                            <span class="badge bg-{{ period.status.color }}-lt">{{ period.status.translationKey|trans }}</span>
+                        </div>
 
-            <twig:block name="footer">
-                <a class="btn btn-ghost" href="{{ path('_settings') }}">
-                    {{ ux_icon('tabler:settings', {width: 18, height: 18}) }}
-                    {{ 'accounting.setup.edit'|trans }}
-                </a>
-            </twig:block>
-        </twig:Ui:Card>
+                        {% if period.isOpen %}
+                            <p class="text-secondary">{{ 'accounting.period.close_help'|trans }}</p>
+
+                            <form method="post" action="{{ path('_accounting_period_close', {'id': period.id}) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token('close' ~ period.id) }}">
+                                <button type="submit" class="btn btn-outline-primary w-100">
+                                    {{ ux_icon('tabler:lock', {width: 18, height: 18}) }}
+                                    {{ 'accounting.period.close'|trans({'%period%': period.label}) }}
+                                </button>
+                            </form>
+                        {% else %}
+                            <p class="text-secondary mb-0">
+                                {{ 'accounting.period.closed_on'|trans({'%date%': period.closedAt|date('d F Y')}) }}
+                            </p>
+                        {% endif %}
+                    {% endif %}
+                </twig:Ui:Card>
+
+                <twig:Ui:Card title="{{ 'accounting.books.title'|trans }}" class="mt-3">
+                    <div class="list-group list-group-flush">
+                        {% for book in books %}
+                            <a class="list-group-item list-group-item-action d-flex align-items-center"
+                               href="{{ path('_accounting_book', {'book': book.value}) }}">
+                                {{ ux_icon('tabler:book', {width: 18, height: 18, class: 'me-2'}) }}
+                                {{ book.translationKey|trans }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </twig:Ui:Card>
+            </div>
+
+            {% if alerts is not empty %}
+                <div class="col-12">
+                    <twig:Ui:Card title="{{ 'accounting.alerts.title'|trans({'%year%': year}) }}">
+                        <div class="list-group list-group-flush">
+                            {% for alert in alerts %}
+                                <div class="list-group-item">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <span>
+                                            {{ ux_icon('tabler:alert-triangle', {width: 18, height: 18, class: 'me-2 text-' ~ (alert.step >= 100 ? 'danger' : 'warning')}) }}
+                                            {{ 'accounting.alerts.line'|trans({
+                                                '%percent%': alert.step,
+                                                '%amount%': alert.thresholdMoney|formatCurrency(alert.currencyCode),
+                                            }) }}
+                                        </span>
+                                        <span class="text-secondary">{{ alert.triggeredAt|date('d F Y') }}</span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </twig:Ui:Card>
+                </div>
+            {% endif %}
+
+            <div class="col-12">
+                <twig:Ui:Card
+                    title="{{ regime.labelKey|trans }}"
+                    subtitle="{{ regime.descriptionKey|trans }}"
+                >
+                    <dl class="row mb-0">
+                        <dt class="col-sm-5">{{ 'accounting.settings.primary_activity.label'|trans }}</dt>
+                        <dd class="col-sm-7">{{ profile.primaryActivity.translationKey|trans }}</dd>
+
+                        <dt class="col-sm-5">{{ 'accounting.settings.declaration_periodicity.label'|trans }}</dt>
+                        <dd class="col-sm-7">{{ profile.declarationPeriodicity.translationKey|trans }}</dd>
+
+                        <dt class="col-sm-5">{{ 'accounting.settings.vat_exempt.label'|trans }}</dt>
+                        <dd class="col-sm-7">
+                            {% if profile.vatExempt %}
+                                <span class="badge bg-green-lt">{{ 'accounting.vat_exempt.yes'|trans }}</span>
+                                <div class="text-secondary mt-1">{{ profile.vatExemptMention }}</div>
+                            {% else %}
+                                <span class="badge bg-gray-lt">{{ 'accounting.vat_exempt.no'|trans }}</span>
+                            {% endif %}
+                        </dd>
+
+                        {% if profile.activityStartDate is not null %}
+                            <dt class="col-sm-5">{{ 'accounting.settings.activity_start_date.label'|trans }}</dt>
+                            <dd class="col-sm-7">{{ profile.activityStartDate|date('d F Y') }}</dd>
+                        {% endif %}
+                    </dl>
+
+                    <twig:block name="footer">
+                        <a class="btn btn-ghost" href="{{ path('_settings') }}">
+                            {{ ux_icon('tabler:settings', {width: 18, height: 18}) }}
+                            {{ 'accounting.setup.edit'|trans }}
+                        </a>
+                    </twig:block>
+                </twig:Ui:Card>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}
