@@ -1,0 +1,59 @@
+---
+title: Setting up accounting
+description: Choose your tax regime so Augias can keep your books and work out what you owe.
+sidebar_position: 1
+---
+
+# Setting up accounting
+
+Accounting is off until you pick a tax regime. The regime decides which books you have to keep, which turnover limits apply to you, and how your contributions are worked out — so nothing else in this section does anything until it is set.
+
+Click `Accounting` in the sidebar. Until a regime is chosen the page shows `Accounting is not set up yet` and a `Go to settings` button.
+
+## Choose a regime
+
+In the sidebar, expand `System`, click `Settings`, and open the `Accounting` tab.
+
+`Tax regime` is the only field that matters to begin with. One regime ships today:
+
+- `France — Micro-entreprise` — cash-basis bookkeeping: a revenue book, a purchase register for resale activities, and turnover declared to URSSAF.
+
+The remaining fields have working defaults, so you can save after picking a regime and come back to the rest.
+
+## Fields on the Accounting tab
+
+| Field | What it does |
+|---|---|
+| `Tax regime` | Decides which books you keep, which limits apply and how your contributions are worked out. |
+| `Main activity` | Used as the default for entries created automatically: `Sale of goods`, `Services (BIC)` or `Services (BNC)`. You can change it on any individual entry. |
+| `Start of activity` | Used to scale a first, partial year's limits down pro rata, and to work out how long ACRE runs. |
+| `Declaration frequency` | `Monthly` or `Quarterly`. Also the rhythm your books are closed on. |
+| `Not liable for VAT` | Suppresses VAT on invoices and quotes, and prints the legal wording below on them. |
+| `VAT exemption wording` | Printed on every invoice and quote while you are not liable for VAT. |
+| `Flat-rate income tax option` | Pay income tax as a percentage of turnover alongside your contributions, instead of on your annual return. |
+| `ACRE relief` | Reduces the social contribution rate for the first months of activity. |
+| `Pension fund` | `SSI` or `CIPAV`. The two charge different rates on the same BNC turnover. |
+
+:::info
+`Main activity` is a default, not a constraint. A business that sells goods *and* bills for services records the activity per entry, and each is measured against its own ceiling.
+:::
+
+:::warning
+`ACRE relief` needs a `Start of activity` date to work out how long the relief runs. Leave the date blank and the relief cannot be applied.
+:::
+
+## What changes once a regime is set
+
+- `Accounting` in the sidebar shows your turnover for the year, your books, and the period you are currently in.
+- Every payment you record from now on writes itself into the right book. See [Your books](./your-books.md).
+- Turnover is compared with the limits of your regime once a day, and you are told the first time you approach or pass one. See [Declaring your turnover](./declaring-your-turnover.md).
+
+:::note
+Payments recorded *before* you set a regime are not written into the books retroactively. If you are switching to Augias part-way through a year, add the earlier receipts by hand — see [Adding an entry by hand](./your-books.md#adding-an-entry-by-hand).
+:::
+
+## Related
+
+- [Your books](./your-books.md)
+- [Closing a period](./closing-a-period.md)
+- [Setting up tax rates](../taxes/tax-rates.md)
