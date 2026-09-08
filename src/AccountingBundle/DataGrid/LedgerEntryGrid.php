@@ -39,7 +39,7 @@ use function array_key_exists;
  * every route that renders it sets. Without one the grid would mix receipts and
  * purchases into a single list that is neither register.
  *
- * @see \Augias\AccountingBundle\Tests\DataGrid\LedgerEntryGridTest
+ * @see \Augias\AccountingBundle\Tests\Functional\AccountingPagesTest
  */
 #[AsDataGrid(name: 'ledger_entry_grid', title: 'Ledger')]
 final class LedgerEntryGrid extends Grid

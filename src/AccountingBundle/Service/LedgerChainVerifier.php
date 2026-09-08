@@ -34,7 +34,7 @@ use function count;
  * Only sealed entries take part: an open period is meant to be editable, so
  * hashing it would be checking a promise nobody made.
  *
- * @see \Augias\AccountingBundle\Tests\Service\LedgerChainVerifierTest
+ * @see \Augias\AccountingBundle\Tests\Command\VerifyLedgerCommandTest
  */
 final readonly class LedgerChainVerifier
 {

@@ -37,7 +37,7 @@ use function array_keys;
  * converted. An exchange rate invented here would end up inside a declaration,
  * and the books never recorded one.
  *
- * @see \Augias\AccountingBundle\Tests\Service\TurnoverCalculatorTest
+ * @see \Augias\AccountingBundle\Tests\Functional\ThresholdMonitorTest
  */
 final readonly class TurnoverCalculator
 {

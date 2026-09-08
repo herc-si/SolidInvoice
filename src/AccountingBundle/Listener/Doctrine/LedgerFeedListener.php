@@ -37,7 +37,7 @@ use function array_merge;
  * their source's id, which for a newly inserted payment does not exist until
  * the insert has run.
  *
- * @see \Augias\AccountingBundle\Tests\Listener\Doctrine\LedgerFeedListenerTest
+ * @see \Augias\AccountingBundle\Tests\Functional\LedgerBookkeepingTest
  */
 #[AsDoctrineListener(Events::onFlush)]
 #[AsDoctrineListener(Events::postFlush)]

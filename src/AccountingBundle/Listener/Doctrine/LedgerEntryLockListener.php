@@ -33,7 +33,7 @@ use Doctrine\ORM\Events;
  * lock on entries that were open when the update began — {@see $lockedAt} was
  * null before, so it does not match a locked entry being changed.
  *
- * @see \Augias\AccountingBundle\Tests\Listener\Doctrine\LedgerEntryLockListenerTest
+ * @see \Augias\AccountingBundle\Tests\Functional\LedgerBookkeepingTest
  */
 #[AsEntityListener(event: Events::preUpdate, entity: LedgerEntry::class)]
 #[AsEntityListener(event: Events::preRemove, entity: LedgerEntry::class)]

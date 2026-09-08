@@ -38,7 +38,7 @@ use Doctrine\ORM\EntityManagerInterface;
  * move. A draft, by contrast, is refreshed each time it is looked at, since
  * its period may still be taking entries.
  *
- * @see \Augias\AccountingBundle\Tests\Service\DeclarationBuilderTest
+ * @see \Augias\AccountingBundle\Tests\Functional\DeclarationTest
  */
 final readonly class DeclarationBuilder
 {

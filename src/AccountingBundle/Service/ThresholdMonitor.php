@@ -42,7 +42,7 @@ use Doctrine\ORM\EntityManagerInterface;
  * a limit clears nothing — annual cumulative turnover does not go down, and the
  * crossing happened.
  *
- * @see \Augias\AccountingBundle\Tests\Service\ThresholdMonitorTest
+ * @see \Augias\AccountingBundle\Tests\Functional\ThresholdMonitorTest
  */
 final readonly class ThresholdMonitor
 {

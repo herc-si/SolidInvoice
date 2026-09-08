@@ -43,7 +43,7 @@ use function strval;
  * them, and freezes the totals — after which a correction can only be a
  * reversing entry in a later, open period.
  *
- * @see \Augias\AccountingBundle\Tests\Service\AccountingPeriodManagerTest
+ * @see \Augias\AccountingBundle\Tests\Functional\LedgerBookkeepingTest
  */
 final readonly class AccountingPeriodManager
 {

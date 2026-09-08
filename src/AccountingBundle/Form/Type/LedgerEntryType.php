@@ -43,7 +43,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * never reaches this form, and would be refused by the Doctrine listener even
  * if it did.
  *
- * @see \Augias\AccountingBundle\Tests\Form\Type\LedgerEntryTypeTest
+ * @see \Augias\AccountingBundle\Tests\Functional\AccountingPagesTest
  * @extends AbstractType<LedgerEntry>
  */
 final class LedgerEntryType extends AbstractType

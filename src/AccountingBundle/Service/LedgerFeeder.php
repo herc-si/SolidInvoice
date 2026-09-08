@@ -48,7 +48,7 @@ use function trim;
  * behind it as the backstop, since a retried payment webhook and a user
  * clicking twice both end up here.
  *
- * @see \Augias\AccountingBundle\Tests\Service\LedgerFeederTest
+ * @see \Augias\AccountingBundle\Tests\Functional\LedgerBookkeepingTest
  */
 final readonly class LedgerFeeder
 {
