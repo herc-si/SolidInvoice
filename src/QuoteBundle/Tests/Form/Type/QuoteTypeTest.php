@@ -77,7 +77,8 @@ final class QuoteTypeTest extends FormTestCase
 
         $discount = new Discount();
         $discount->setType(Discount::TYPE_PERCENTAGE);
-        $discount->setValue(BigDecimal::of($discountValue)->multipliedBy(100));
+        // A percentage is stored as typed: the form scales the money side only.
+        $discount->setValue(BigDecimal::of($discountValue));
 
         $dto->discount = $discount;
         $dto->total = '0';
@@ -124,7 +125,8 @@ final class QuoteTypeTest extends FormTestCase
 
         $discount = new Discount();
         $discount->setType(Discount::TYPE_PERCENTAGE);
-        $discount->setValue(BigDecimal::of($discountValue)->multipliedBy(100));
+        // A percentage is stored as typed: the form scales the money side only.
+        $discount->setValue(BigDecimal::of($discountValue));
 
         $dto->discount = $discount;
         $dto->total = '0';

@@ -14,17 +14,22 @@ declare(strict_types=1);
 namespace Augias\CoreBundle\Form\Type;
 
 use Augias\CoreBundle\Entity\Discount;
-use Augias\CoreBundle\Form\Transformer\DiscountTransformer;
 use Augias\SettingsBundle\SystemConfig;
+use Brick\Math\BigNumber;
+use Brick\Math\RoundingMode;
 use Money\Currency;
 use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use function is_array;
+use function is_float;
 
 /**
  * @see \Augias\CoreBundle\Tests\Form\Type\DiscountTypeTest
@@ -85,7 +90,57 @@ class DiscountType extends AbstractType
             ]
         );
 
-        $builder->get('value')->addViewTransformer(new DiscountTransformer());
+        // The single `value` field holds two different things depending on the
+        // type next to it: a money discount is stored in minor units, a
+        // percentage is stored as the percentage itself — 15 means 15%, which
+        // is what the API and the MCP tools have always written and read.
+        //
+        // Only the money side needs converting, and which side applies is only
+        // known per submission, so it is done here rather than by a view
+        // transformer on `value` alone: that transformer scaled both, filing a
+        // 15% discount as 1500 and leaving Calculator to guess from the
+        // magnitude which of the two conventions a stored figure followed.
+        $builder->addEventListener(
+            FormEvents::POST_SET_DATA,
+            static function (FormEvent $event): void {
+                $discount = $event->getData();
+
+                if (! $discount instanceof Discount || Discount::TYPE_MONEY !== $discount->getType()) {
+                    return;
+                }
+
+                $event->getForm()
+                    ->get('value')
+                    ->setData(
+                        (string) $discount->getValueMoney()
+                            ->toBigDecimal()
+                            ->dividedBy(100, 2, RoundingMode::HalfEven)
+                    );
+            }
+        );
+
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            static function (FormEvent $event): void {
+                $data = $event->getData();
+
+                if (! is_array($data) || Discount::TYPE_MONEY !== ($data['type'] ?? null)) {
+                    return;
+                }
+
+                $value = $data['value'] ?? null;
+
+                if ($value === null || $value === '') {
+                    return;
+                }
+
+                $data['value'] = (string) BigNumber::of(is_float($value) ? (string) $value : $value)
+                    ->toBigDecimal()
+                    ->multipliedBy(100);
+
+                $event->setData($data);
+            }
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -15,6 +15,7 @@ namespace Augias\QuoteBundle\Tests\Twig\Components;
 
 use Augias\ClientBundle\Test\Factory\ClientFactory;
 use Augias\ClientBundle\Test\Factory\ContactFactory;
+use Augias\CoreBundle\Entity\Discount;
 use Augias\CoreBundle\Test\LiveComponentTest;
 use Augias\QuoteBundle\DTO\QuoteFormDTO;
 use Augias\QuoteBundle\Entity\Line;
@@ -163,5 +164,66 @@ final class CreateQuoteTest extends LiveComponentTest
 
         self::assertInstanceOf(CreateQuote::class, $componentInstance);
         self::assertSame((string) $client->getId(), $componentInstance->previousClientId);
+    }
+
+    /**
+     * The quote side of the same chain the invoice component is tested on: the
+     * percentage reaches the DTO's Discount, is stored as the percentage
+     * itself, and is applied to the tax-inclusive total.
+     *
+     * 100.00 x 2 = 200.00, so 15% off is 30.00 and the total 170.00.
+     *
+     * Asserted on the rendered totals rather than on the component's own DTO:
+     * component() hands back an instance hydrated from the response props, and
+     * the DTO is not a LiveProp, so its discount there is a fresh one that was
+     * never bound to the submitted form.
+     */
+    public function testAPercentageDiscountSubmittedThroughTheFormIsApplied(): void
+    {
+        $client = ClientFactory::createOne(['company' => $this->company, 'currencyCode' => 'USD']);
+
+        $contact = ContactFactory::createOne([
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+            'email' => 'john@example.com',
+            'client' => $client,
+        ]);
+
+        $component = $this->createLiveComponent(
+            name: CreateQuote::class,
+            data: ['dto' => new QuoteFormDTO()],
+            client: $this->client,
+        )->actingAs($this->getUser());
+
+        $component->render();
+
+        $component->submitForm([
+            'quote' => [
+                'clientMode' => 'existing',
+                'client' => (string) $client->getId(),
+                'users' => [(string) $contact->getId()],
+                'quoteId' => 'QUO-DISCOUNT-001',
+                'lines' => [['description' => 'Consulting', 'price' => '100', 'qty' => '2']],
+                'discount' => ['type' => 'percentage', 'value' => '15'],
+                'total' => '0',
+                'baseTotal' => '0',
+                'tax' => '0',
+                'terms' => '',
+                'notes' => '',
+            ],
+        ]);
+
+        $componentInstance = $component->component();
+        self::assertInstanceOf(CreateQuote::class, $componentInstance);
+
+        // Stored and read back as typed, with no scaling in between.
+        self::assertSame(
+            ['type' => Discount::TYPE_PERCENTAGE, 'value' => '15'],
+            $componentInstance->formValues['discount'],
+        );
+
+        preg_match_all('#totals-value">([^<]*)<#', $component->render()->toString(), $totals);
+
+        self::assertSame(['$200.00', '$30.00', '$170.00'], $totals[1]);
     }
 }

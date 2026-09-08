@@ -239,7 +239,7 @@ final class TotalCalculatorTest extends KernelTestCase
         $invoice->addLine($item);
         $discount = new Discount();
         $discount->setType(Discount::TYPE_PERCENTAGE);
-        $discount->setValue(1500);
+        $discount->setValue(15);
 
         $invoice->setDiscount($discount);
 

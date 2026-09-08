@@ -18,6 +18,7 @@ use Augias\CatalogBundle\Enum\ProductType;
 use Augias\CatalogBundle\Enum\ProductUnit;
 use Augias\ClientBundle\Test\Factory\ClientFactory;
 use Augias\ClientBundle\Test\Factory\ContactFactory;
+use Augias\CoreBundle\Entity\Discount;
 use Augias\CoreBundle\Test\LiveComponentTest;
 use Augias\InvoiceBundle\DTO\InvoiceFormDTO;
 use Augias\InvoiceBundle\Entity\Invoice;
@@ -292,5 +293,73 @@ final class CreateInvoiceTest extends LiveComponentTest
 
         self::assertInstanceOf(CreateInvoice::class, $componentInstance);
         self::assertSame((string) $client->getId(), $componentInstance->previousClientId);
+    }
+
+    /**
+     * The whole chain a percentage discount travels: the select's value reaches
+     * the DTO's Discount, is stored as the percentage itself, and is applied to
+     * the tax-inclusive total.
+     *
+     * 100.00 x 2 = 200.00, so 15% off is 30.00 and the total 170.00. Two steps
+     * of that used to return zero on their own: a null discount on the DTO
+     * published an empty type in the live props, and Discount::setValue()
+     * dropped the amount for any type it did not recognise.
+     *
+     * Asserted on the rendered totals rather than on the component's own DTO:
+     * component() hands back an instance hydrated from the response props, and
+     * the DTO is not a LiveProp, so its discount there is a fresh one that was
+     * never bound to the submitted form.
+     */
+    public function testAPercentageDiscountSubmittedThroughTheFormIsApplied(): void
+    {
+        $client = ClientFactory::createOne(['company' => $this->company, 'currencyCode' => 'USD']);
+
+        $contact = ContactFactory::createOne([
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+            'email' => 'john@example.com',
+            'client' => $client,
+        ]);
+
+        $dto = new InvoiceFormDTO();
+        $dto->invoiceDate = CarbonImmutable::parse('2021-01-01');
+
+        $component = $this->createLiveComponent(
+            name: CreateInvoice::class,
+            data: ['dto' => $dto],
+            client: $this->client,
+        )->actingAs($this->getUser());
+
+        $component->render();
+
+        $component->submitForm([
+            'invoice' => [
+                'clientMode' => 'existing',
+                'client' => (string) $client->getId(),
+                'users' => [(string) $contact->getId()],
+                'invoiceId' => 'INV-DISCOUNT-001',
+                'invoiceDate' => '2021-01-01',
+                'lines' => [['description' => 'Consulting', 'price' => '100', 'qty' => '2']],
+                'discount' => ['type' => 'percentage', 'value' => '15'],
+                'total' => '0',
+                'baseTotal' => '0',
+                'tax' => '0',
+                'terms' => '',
+                'notes' => '',
+            ],
+        ]);
+
+        $componentInstance = $component->component();
+        self::assertInstanceOf(CreateInvoice::class, $componentInstance);
+
+        // Stored and read back as typed, with no scaling in between.
+        self::assertSame(
+            ['type' => Discount::TYPE_PERCENTAGE, 'value' => '15'],
+            $componentInstance->formValues['discount'],
+        );
+
+        preg_match_all('#totals-value">([^<]*)<#', $component->render()->toString(), $totals);
+
+        self::assertSame(['$200.00', '$30.00', '$170.00'], $totals[1]);
     }
 }

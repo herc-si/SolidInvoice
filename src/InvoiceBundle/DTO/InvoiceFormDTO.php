@@ -65,6 +65,15 @@ final class InvoiceFormDTO
     #[Assert\Type(DateTimeInterface::class)]
     public ?DateTimeInterface $due = null;
 
+    /**
+     * Assigned in the constructor rather than left null so the default type
+     * travels with the component's initial state. Left null, the form had
+     * nothing to read a type from and published `discount: {type: ""}` in the
+     * live props; the browser's select showed "%" because that is its first
+     * option, but the state sent back said empty, and Discount::setValue() had
+     * no branch for that — so the amount was dropped and every invoice discount
+     * came out zero.
+     */
     public ?Discount $discount = null;
 
     public ?string $terms = null;
@@ -98,6 +107,7 @@ final class InvoiceFormDTO
 
     public function __construct()
     {
+        $this->discount = new Discount();
         $this->lines = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->invoiceTaxes = new ArrayCollection();

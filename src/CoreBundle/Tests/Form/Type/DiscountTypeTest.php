@@ -53,9 +53,14 @@ final class DiscountTypeTest extends FormTestCase
                 'value' => $discountItem[1],
             ];
 
+            // A percentage is stored as typed — 15 means 15%. A money discount
+            // is typed in major units and stored in minor ones, which is the
+            // only reason this field scales anything at all.
+            $value = BigDecimal::of($discountItem[1]);
+
             $object = new Discount();
             $object->setType($discountItem[0]);
-            $object->setValue(BigDecimal::of($discountItem[1])->multipliedBy(100));
+            $object->setValue($discountItem[0] === Discount::TYPE_MONEY ? $value->multipliedBy(100) : $value);
 
             $this->assertFormData(DiscountType::class, $formData, $object);
         }
@@ -65,5 +70,39 @@ final class DiscountTypeTest extends FormTestCase
     {
         yield [Discount::TYPE_PERCENTAGE, $this->faker->numberBetween(0, 100)];
         yield [Discount::TYPE_MONEY, $this->faker->numberBetween(0, 100)];
+    }
+
+    /**
+     * The display half of the money scaling: stored in minor units, shown in
+     * major ones. It used to come from a view transformer on the value field,
+     * which had no way of telling a money discount from a percentage and so
+     * divided both.
+     */
+    public function testAMoneyDiscountIsShownInMajorUnits(): void
+    {
+        $discount = new Discount();
+        $discount->setType(Discount::TYPE_MONEY);
+        $discount->setValue(5000);
+
+        $view = $this->factory->create(DiscountType::class, $discount)
+            ->createView();
+
+        self::assertSame('50.00', $view->children['value']->vars['value']);
+    }
+
+    /**
+     * A percentage is shown exactly as it is stored — 15 means 15%, the same
+     * figure the API and the MCP tools exchange.
+     */
+    public function testAPercentageIsShownAsStored(): void
+    {
+        $discount = new Discount();
+        $discount->setType(Discount::TYPE_PERCENTAGE);
+        $discount->setValue(15);
+
+        $view = $this->factory->create(DiscountType::class, $discount)
+            ->createView();
+
+        self::assertSame('15', $view->children['value']->vars['value']);
     }
 }

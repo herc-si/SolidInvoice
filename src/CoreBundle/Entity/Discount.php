@@ -87,11 +87,11 @@ class Discount
 
     public function getValue(): float | BigNumber
     {
-        return match ($this->getType()) {
-            self::TYPE_PERCENTAGE => $this->getValuePercentage() ?? 0.0,
-            self::TYPE_MONEY => $this->getValueMoney(),
-            default => BigInteger::zero(),
-        };
+        // Mirrors setValue(): an unset type reads as a percentage rather than
+        // as no discount at all.
+        return self::TYPE_MONEY === $this->getType()
+            ? $this->getValueMoney()
+            : $this->getValuePercentage() ?? 0.0;
     }
 
     /**
@@ -99,17 +99,20 @@ class Discount
      */
     public function setValue(BigNumber | float | int | string $value): self
     {
-        switch ($this->getType()) {
-            case self::TYPE_PERCENTAGE:
-                $this->setValuePercentage(BigNumber::of(is_float($value) ? (string) $value : $value)->toBigDecimal()->toFloat());
-                $this->setValueMoney(BigDecimal::zero());
-                break;
+        // Anything that is not an explicit money discount is treated as a
+        // percentage, which is this class's own default type. The switch used
+        // to have no default branch, so an unset or unrecognised type silently
+        // discarded the amount and the discount read as zero — a failure with
+        // no error anywhere to explain it.
+        if (self::TYPE_MONEY === $this->getType()) {
+            $this->setValuePercentage(0.0);
+            $this->setValueMoney(BigNumber::of(is_float($value) ? (string) $value : $value));
 
-            case self::TYPE_MONEY:
-                $this->setValuePercentage(0.0);
-                $this->setValueMoney(BigNumber::of(is_float($value) ? (string) $value : $value));
-                break;
+            return $this;
         }
+
+        $this->setValuePercentage(BigNumber::of(is_float($value) ? (string) $value : $value)->toBigDecimal()->toFloat());
+        $this->setValueMoney(BigDecimal::zero());
 
         return $this;
     }

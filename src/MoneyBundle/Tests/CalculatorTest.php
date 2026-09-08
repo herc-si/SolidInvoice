@@ -41,6 +41,49 @@ final class CalculatorTest extends TestCase
     }
 
     /**
+     * A percentage is applied exactly as stored. The scale used to be guessed
+     * from the magnitude — anything above 100 was divided by a hundred — to
+     * absorb the form filing 15% as 1500. Nothing writes a scaled percentage
+     * any more, and the guess made a 150% discount read as 1.5%.
+     *
+     * @throws MathException
+     */
+    public function testCalculateDiscountAboveOneHundredPercent(): void
+    {
+        $calculator = new Calculator();
+        $entity = new Invoice();
+        $discount = new Discount();
+        $discount->setType(Discount::TYPE_PERCENTAGE);
+        $discount->setValue(150);
+
+        $entity->setDiscount($discount);
+        $entity->setBaseTotal(20000);
+
+        self::assertEquals(BigDecimal::of(30000), $calculator->calculateDiscount($entity));
+    }
+
+    /**
+     * The type is nullable and defaults to a percentage, so a discount that
+     * never had one set must still apply as one. It used to fall through to the
+     * money branch and read as zero.
+     *
+     * @throws MathException
+     */
+    public function testCalculateDiscountWithNoTypeSet(): void
+    {
+        $calculator = new Calculator();
+        $entity = new Invoice();
+        $discount = new Discount();
+        $discount->setType(null);
+        $discount->setValue(15);
+
+        $entity->setDiscount($discount);
+        $entity->setBaseTotal(20000);
+
+        self::assertEquals(BigDecimal::of(3000), $calculator->calculateDiscount($entity));
+    }
+
+    /**
      * @throws MathException
      */
     public function testCalculateDiscountPercentage(): void
