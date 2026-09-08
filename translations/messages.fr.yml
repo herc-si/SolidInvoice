@@ -12,11 +12,42 @@ accounting:
     books:
         title: Livres comptables
     declaration:
+        amount: Montant
+        base: Base
+        due: À payer
+        empty: 'Aucune période n''a encore été ouverte cette année : la première écriture en créera une.'
+        empty_title: Aucune période
+        figures: Montants à déclarer
+        file_there: Déclarer en ligne
+        filing: Déclaration
+        flash:
+            already_submitted: Cette déclaration est déjà enregistrée comme déclarée.
+            submitted: La déclaration a été enregistrée.
         line:
             income_tax: 'Versement libératoire de l''impôt sur le revenu'
             social: 'Cotisations sociales'
             social_acre: 'Cotisations sociales (exonération ACRE appliquée)'
             training: 'Contribution à la formation professionnelle'
+        line_label: Ligne
+        mark_submitted: Enregistrer la déclaration
+        menu: Déclarations
+        not_computed: Non calculée
+        notes: Notes
+        nothing_due: 'Aucun encaissement sur cette période : il n''y a rien à déclarer.'
+        open: Ouvrir
+        period: Période
+        period_status: Livres
+        period_still_open: 'La période est encore ouverte : clôturez-la pour figer les montants avant de déclarer.'
+        rate: Taux
+        rate_version: 'Barème du %version%.'
+        record_help: 'Augias ne déclare rien à votre place. Reportez ces montants sur le site de l''organisme, puis enregistrez ici la référence obtenue.'
+        reference: Référence
+        status: Déclaration
+        submitted_on: 'Déclarée le %date%.'
+        title: 'Déclarations %year%'
+        total_due: Total à payer
+        turnover: 'Chiffre d''affaires de la période'
+        view_title: 'Déclaration %period%'
         warning:
             foreign_currency: 'Certaines écritures sont enregistrées dans une autre devise et ne sont pas comprises dans ces totaux.'
             mixed_activity: 'Vous avez du chiffre d''affaires sur plusieurs activités. Une activité mixte est aussi plafonnée globalement, ce qui n''est pas vérifié ici.'

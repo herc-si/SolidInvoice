@@ -1,0 +1,68 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of Augias project.
+ *
+ * (c) HERC SI <opensource@herc-si.fr>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace Augias\AccountingBundle\Action\Declaration;
+
+use Augias\AccountingBundle\Entity\AccountingPeriod;
+use Augias\AccountingBundle\Entity\Declaration;
+use Augias\AccountingBundle\Model\DeclarationLine;
+use Augias\AccountingBundle\Regime\RegimeInterface;
+use Augias\AccountingBundle\Regime\RegimeRegistry;
+use Augias\AccountingBundle\Service\AccountingProfileProvider;
+use Augias\AccountingBundle\Service\DeclarationBuilder;
+use Symfony\Bridge\Twig\Attribute\Template;
+use function array_map;
+
+/**
+ * One period's declaration, itemised.
+ *
+ * The figures are shown the way they have to be typed into the collecting
+ * body's form — one line per charge, each with the base it was applied to and
+ * the rate that produced it — rather than as a single amount due. A user who
+ * cannot see which rate was used cannot check it, and these rates are not
+ * verified against any official source.
+ */
+final readonly class View
+{
+    public function __construct(
+        private DeclarationBuilder $builder,
+        private AccountingProfileProvider $profileProvider,
+        private RegimeRegistry $registry,
+    ) {
+    }
+
+    /**
+     * @return array{
+     *     period: AccountingPeriod,
+     *     declaration: Declaration,
+     *     lines: list<DeclarationLine>,
+     *     regime: RegimeInterface|null
+     * }
+     */
+    #[Template('@AugiasAccounting/Declaration/view.html.twig')]
+    public function __invoke(AccountingPeriod $period): array
+    {
+        $declaration = $this->builder->forPeriod($period);
+        $profile = $this->profileProvider->forCompany($period->getCompany());
+
+        return [
+            'period' => $period,
+            'declaration' => $declaration,
+            // Read back from what was stored rather than recomputed for
+            // display: a submitted declaration must show what was filed, and a
+            // draft must show the figures it was last saved with.
+            'lines' => array_map(DeclarationLine::fromArray(...), $declaration->getLines()),
+            'regime' => $this->registry->forProfile($profile),
+        ];
+    }
+}

@@ -1,0 +1,73 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) HERC SI <opensource@herc-si.fr>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@AugiasCore/Layout/default.html.twig" %}
+
+{% block title %}
+    {{ ux_icon('tabler:file-report', {width: 24, height: 24, class: 'me-2'}) }}{{ 'accounting.declaration.title'|trans({'%year%': year}) }}
+{% endblock title %}
+
+{% block content %}
+    {% if regime is null %}
+        <twig:Ui:Card title="{{ 'accounting.setup.title'|trans }}">
+            <p class="text-secondary mb-0">{{ 'accounting.setup.description'|trans }}</p>
+        </twig:Ui:Card>
+    {% elseif rows is empty %}
+        <twig:Ui:Card title="{{ 'accounting.declaration.empty_title'|trans }}">
+            <p class="text-secondary mb-0">{{ 'accounting.declaration.empty'|trans }}</p>
+        </twig:Ui:Card>
+    {% else %}
+        <twig:Ui:Card>
+            <div class="table-responsive">
+                <table class="table card-table table-vcenter">
+                    <thead>
+                        <tr>
+                            <th>{{ 'accounting.declaration.period'|trans }}</th>
+                            <th>{{ 'accounting.declaration.period_status'|trans }}</th>
+                            <th>{{ 'accounting.declaration.status'|trans }}</th>
+                            <th class="text-end">{{ 'accounting.declaration.due'|trans }}</th>
+                            <th class="w-1"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in rows %}
+                            <tr>
+                                <td>{{ row.period.label }}</td>
+                                <td>
+                                    <span class="badge bg-{{ row.period.status.color }}-lt">
+                                        {{ row.period.status.translationKey|trans }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if row.declaration is null %}
+                                        <span class="text-secondary">{{ 'accounting.declaration.not_computed'|trans }}</span>
+                                    {% else %}
+                                        <span class="badge bg-{{ row.declaration.status.color }}-lt">
+                                            {{ row.declaration.status.translationKey|trans }}
+                                        </span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-end">
+                                    {% if row.declaration is not null %}
+                                        {{ row.declaration.totalDue|formatCurrency(row.declaration.currencyCode) }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a class="btn btn-ghost btn-sm" href="{{ path('_accounting_declaration_view', {'id': row.period.id}) }}">
+                                        {{ 'accounting.declaration.open'|trans }}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </twig:Ui:Card>
+    {% endif %}
+{% endblock %}

@@ -12,11 +12,42 @@ accounting:
     books:
         title: Books
     declaration:
+        amount: Amount
+        base: Base
+        due: Due
+        empty: No period has been opened this year — the first entry creates one.
+        empty_title: No periods yet
+        figures: Figures to report
+        file_there: File online
+        filing: Filing
+        flash:
+            already_submitted: This declaration is already recorded as filed.
+            submitted: The declaration has been recorded as filed.
         line:
             income_tax: 'Flat-rate income tax'
             social: 'Social contributions'
             social_acre: 'Social contributions (ACRE relief applied)'
             training: 'Professional training levy'
+        line_label: Line
+        mark_submitted: Record as filed
+        menu: Declarations
+        not_computed: Not computed
+        notes: Notes
+        nothing_due: 'Nothing was received in this period, so there is nothing to declare.'
+        open: Open
+        period: Period
+        period_status: Books
+        period_still_open: The period is still open — close it to freeze the figures before filing.
+        rate: Rate
+        rate_version: 'Rates as of %version%.'
+        record_help: 'Augias files nothing on your behalf. Copy these figures onto the collecting body''s site, then record the reference you were given here.'
+        reference: Reference
+        status: Declaration
+        submitted_on: 'Filed on %date%.'
+        title: '%year% declarations'
+        total_due: Total due
+        turnover: Turnover for the period
+        view_title: '%period% declaration'
         warning:
             foreign_currency: 'Some entries are booked in another currency and are not included in these totals.'
             mixed_activity: 'You have turnover in more than one activity. Mixed activities are also capped by a combined ceiling, which is not checked here.'

@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 use Augias\AccountingBundle\Action\Book;
 use Augias\AccountingBundle\Action\ClosePeriod;
+use Augias\AccountingBundle\Action\Declaration\Index as DeclarationIndex;
+use Augias\AccountingBundle\Action\Declaration\Submit as DeclarationSubmit;
+use Augias\AccountingBundle\Action\Declaration\View as DeclarationView;
 use Augias\AccountingBundle\Action\Entry\Add;
 use Augias\AccountingBundle\Action\Entry\Delete;
 use Augias\AccountingBundle\Action\Entry\Edit;
@@ -44,6 +47,22 @@ return static function (RoutingConfigurator $routingConfigurator): void {
         ->add('_accounting_entry_delete', '/entry/{id}/delete')
         ->controller(Delete::class)
         ->methods(['DELETE', 'POST']);
+
+    $routingConfigurator
+        ->add('_accounting_declarations', '/declarations')
+        ->controller(DeclarationIndex::class)
+        ->methods(['GET']);
+
+    $routingConfigurator
+        ->add('_accounting_declaration_view', '/declarations/{id}')
+        ->controller(DeclarationView::class)
+        ->methods(['GET']);
+
+    // Recording a filing is one-way — see the action.
+    $routingConfigurator
+        ->add('_accounting_declaration_submit', '/declarations/{id}/submit')
+        ->controller(DeclarationSubmit::class)
+        ->methods(['POST']);
 
     // POST only, and behind a token: closing is one-way.
     $routingConfigurator

@@ -1,0 +1,124 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) HERC SI <opensource@herc-si.fr>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@AugiasCore/Layout/default.html.twig" %}
+
+{% block title %}
+    {{ ux_icon('tabler:file-report', {width: 24, height: 24, class: 'me-2'}) }}{{ 'accounting.declaration.view_title'|trans({'%period%': period.label}) }}
+{% endblock title %}
+
+{% block content %}
+    <div class="row row-cards">
+        <div class="col-lg-8">
+            <twig:Ui:Card title="{{ 'accounting.declaration.figures'|trans }}">
+                <dl class="row">
+                    <dt class="col-sm-6">{{ 'accounting.declaration.turnover'|trans }}</dt>
+                    <dd class="col-sm-6">{{ declaration.totalTurnover|formatCurrency(declaration.currencyCode) }}</dd>
+                </dl>
+
+                {% if lines is empty %}
+                    <p class="text-secondary mb-0">{{ 'accounting.declaration.nothing_due'|trans }}</p>
+                {% else %}
+                    <div class="table-responsive">
+                        <table class="table card-table table-vcenter">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'accounting.declaration.line_label'|trans }}</th>
+                                    <th class="text-end">{{ 'accounting.declaration.base'|trans }}</th>
+                                    <th class="text-end">{{ 'accounting.declaration.rate'|trans }}</th>
+                                    <th class="text-end">{{ 'accounting.declaration.amount'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for line in lines %}
+                                    <tr>
+                                        <td>
+                                            {{ line.labelKey|trans }}
+                                            {% if line.nature is not null %}
+                                                <div class="text-secondary small">{{ line.nature.translationKey|trans }}</div>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-end">{{ line.base|formatCurrency(declaration.currencyCode) }}</td>
+                                        <td class="text-end">{{ line.rate }}%</td>
+                                        <td class="text-end">{{ line.amount|formatCurrency(declaration.currencyCode) }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="3">{{ 'accounting.declaration.total_due'|trans }}</th>
+                                    <th class="text-end">{{ declaration.totalDue|formatCurrency(declaration.currencyCode) }}</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                {% endif %}
+
+                <twig:Ui:Alert type="warning" icon="tabler:alert-triangle">
+                    {{ 'accounting.declaration.warning.rates_unverified'|trans }}
+                    {% if declaration.rateVersion is not null %}
+                        {{ 'accounting.declaration.rate_version'|trans({'%version%': declaration.rateVersion}) }}
+                    {% endif %}
+                </twig:Ui:Alert>
+            </twig:Ui:Card>
+        </div>
+
+        <div class="col-lg-4">
+            <twig:Ui:Card title="{{ 'accounting.declaration.filing'|trans }}">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="badge bg-{{ declaration.status.color }}-lt">{{ declaration.status.translationKey|trans }}</span>
+                    {% if regime is not null and regime.filingUrl is not null %}
+                        <a class="btn btn-ghost btn-sm" href="{{ regime.filingUrl }}" target="_blank" rel="noopener noreferrer">
+                            {{ ux_icon('tabler:external-link', {width: 16, height: 16}) }}
+                            {{ 'accounting.declaration.file_there'|trans }}
+                        </a>
+                    {% endif %}
+                </div>
+
+                {% if declaration.isSubmitted %}
+                    <p class="text-secondary">
+                        {{ 'accounting.declaration.submitted_on'|trans({'%date%': declaration.submittedAt|date('d F Y')}) }}
+                    </p>
+                    {% if declaration.reference is not null %}
+                        <dl class="row mb-0">
+                            <dt class="col-sm-5">{{ 'accounting.declaration.reference'|trans }}</dt>
+                            <dd class="col-sm-7">{{ declaration.reference }}</dd>
+                        </dl>
+                    {% endif %}
+                    {% if declaration.notes is not null %}
+                        <p class="text-secondary mb-0">{{ declaration.notes }}</p>
+                    {% endif %}
+                {% elseif period.isClosed %}
+                    <p class="text-secondary">{{ 'accounting.declaration.record_help'|trans }}</p>
+
+                    <form method="post" action="{{ path('_accounting_declaration_submit', {'id': period.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('submit' ~ period.id) }}">
+
+                        <div class="mb-3">
+                            <label class="form-label" for="declaration-reference">{{ 'accounting.declaration.reference'|trans }}</label>
+                            <input class="form-control" type="text" id="declaration-reference" name="reference" maxlength="125">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="declaration-notes">{{ 'accounting.declaration.notes'|trans }}</label>
+                            <textarea class="form-control" id="declaration-notes" name="notes" rows="3"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            {{ ux_icon('tabler:check', {width: 18, height: 18}) }}
+                            {{ 'accounting.declaration.mark_submitted'|trans }}
+                        </button>
+                    </form>
+                {% else %}
+                    <p class="text-secondary mb-0">{{ 'accounting.declaration.period_still_open'|trans }}</p>
+                {% endif %}
+            </twig:Ui:Card>
+        </div>
+    </div>
+{% endblock %}
