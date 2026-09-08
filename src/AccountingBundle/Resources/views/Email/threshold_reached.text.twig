@@ -1,0 +1,25 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) HERC SI <opensource@herc-si.fr>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{{ 'accounting.threshold_reached.heading'|trans({}, 'email') }}
+{{ '='|repeat(60) }}
+
+{% if alert.step >= 100 %}
+{{ 'accounting.threshold_reached.crossed'|trans({'%threshold%': threshold|trans}, 'email') }}
+{% else %}
+{{ 'accounting.threshold_reached.approaching'|trans({'%percent%': alert.step, '%threshold%': threshold|trans}, 'email') }}
+{% endif %}
+
+{{ 'accounting.threshold_reached.turnover'|trans({'%year%': alert.year}, 'email') }}: {{ alert.amount|formatCurrency(alert.currencyCode) }}
+{{ 'accounting.threshold_reached.limit'|trans({}, 'email') }}: {{ alert.thresholdAmount|formatCurrency(alert.currencyCode) }}
+
+{{ 'accounting.threshold_reached.unverified'|trans({}, 'email') }}
+
+{{ '-'|repeat(60) }}
+{{ 'accounting.threshold_reached.view'|trans({}, 'email') }}: {{ url('_accounting_index') }}

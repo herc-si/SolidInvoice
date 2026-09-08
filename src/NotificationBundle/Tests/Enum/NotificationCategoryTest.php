@@ -42,7 +42,8 @@ final class NotificationCategoryTest extends TestCase
     {
         $cases = NotificationCategory::cases();
 
-        self::assertCount(5, $cases);
+        self::assertCount(6, $cases);
+        self::assertContains(NotificationCategory::ACCOUNTING, $cases);
         self::assertContains(NotificationCategory::CLIENT, $cases);
         self::assertContains(NotificationCategory::INVOICE, $cases);
         self::assertContains(NotificationCategory::PAYMENT, $cases);

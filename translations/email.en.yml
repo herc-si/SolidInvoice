@@ -1,3 +1,12 @@
+accounting:
+    threshold_reached:
+        approaching: 'Your turnover has reached %percent%%% of the %threshold%.'
+        crossed: 'Your turnover has passed the %threshold%.'
+        heading: 'Turnover Threshold Reached'
+        limit: 'Threshold'
+        turnover: 'Turnover for %year%'
+        unverified: 'This threshold has not been verified against an official source. Check it before acting on this alert.'
+        view: 'Open Accounting'
 client:
     create:
         contacts:

@@ -1,3 +1,12 @@
+accounting:
+    threshold_reached:
+        approaching: 'Votre chiffre d''affaires a atteint %percent%%% du %threshold%.'
+        crossed: 'Votre chiffre d''affaires a dépassé le %threshold%.'
+        heading: 'Seuil de chiffre d''affaires atteint'
+        limit: Seuil
+        turnover: 'Chiffre d''affaires %year%'
+        unverified: 'Ce seuil n''a pas été vérifié auprès d''une source officielle. Contrôlez-le avant d''agir sur cette alerte.'
+        view: 'Ouvrir la comptabilité'
 client:
     create:
         contacts:

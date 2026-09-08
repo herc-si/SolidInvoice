@@ -1,0 +1,51 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) HERC SI <opensource@herc-si.fr>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% extends "@AugiasCore/Layout/Email/notification.html.twig" %}
+{% import "@AugiasCore/Layout/Email/components.html.twig" as email %}
+
+{%- block title -%}
+    {{ 'accounting.threshold_reached.heading'|trans({}, 'email') }}
+{%- endblock -%}
+
+{%- block content -%}
+    {% apply inky_to_html %}
+        <row>
+            <columns>
+                <p style="color: #dc2626; font-size: 16px; font-weight: 600; line-height: 1.5; margin: 0 0 16px 0; Margin: 0 0 16px 0;">
+                    {% if alert.step >= 100 %}
+                        {{ 'accounting.threshold_reached.crossed'|trans({'%threshold%': threshold|trans}, 'email') }}
+                    {% else %}
+                        {{ 'accounting.threshold_reached.approaching'|trans({'%percent%': alert.step, '%threshold%': threshold|trans}, 'email') }}
+                    {% endif %}
+                </p>
+            </columns>
+        </row>
+    {% endapply %}
+
+    {{ email.spacer('sm') }}
+
+    {{ email.info_row('accounting.threshold_reached.turnover'|trans({'%year%': alert.year}, 'email'), alert.amount|formatCurrency(alert.currencyCode)) }}
+    {{ email.spacer('xs') }}
+    {{ email.info_row('accounting.threshold_reached.limit'|trans({}, 'email'), alert.thresholdAmount|formatCurrency(alert.currencyCode)) }}
+
+    {{ email.spacer('sm') }}
+
+    {% apply inky_to_html %}
+        <row>
+            <columns>
+                <p style="color: #64748b; font-size: 14px; line-height: 1.5; margin: 0 0 24px 0; Margin: 0 0 24px 0;">
+                    {{ 'accounting.threshold_reached.unverified'|trans({}, 'email') }}
+                </p>
+            </columns>
+        </row>
+    {% endapply %}
+
+    {{ email.button('accounting.threshold_reached.view'|trans({}, 'email'), url('_accounting_index')) }}
+{%- endblock -%}

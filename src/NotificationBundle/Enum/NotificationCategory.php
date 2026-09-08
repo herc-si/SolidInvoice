@@ -15,6 +15,7 @@ namespace Augias\NotificationBundle\Enum;
 
 enum NotificationCategory: string
 {
+    case ACCOUNTING = 'accounting';
     case CLIENT = 'client';
     case INVOICE = 'invoice';
     case PAYMENT = 'payment';
@@ -24,6 +25,7 @@ enum NotificationCategory: string
     public function getLabel(): string
     {
         return match ($this) {
+            self::ACCOUNTING => 'Accounting Notifications',
             self::CLIENT => 'Client Notifications',
             self::INVOICE => 'Invoice Notifications',
             self::PAYMENT => 'Payment Notifications',
@@ -35,6 +37,7 @@ enum NotificationCategory: string
     public function getIcon(): string
     {
         return match ($this) {
+            self::ACCOUNTING => 'tabler:calculator',
             self::CLIENT => 'tabler:users',
             self::INVOICE => 'tabler:file-invoice',
             self::PAYMENT => 'tabler:credit-card',

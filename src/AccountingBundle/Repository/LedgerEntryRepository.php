@@ -15,6 +15,7 @@ namespace Augias\AccountingBundle\Repository;
 
 use Augias\AccountingBundle\Entity\AccountingPeriod;
 use Augias\AccountingBundle\Entity\LedgerEntry;
+use Augias\AccountingBundle\Enum\ActivityNature;
 use Augias\AccountingBundle\Enum\LedgerBook;
 use Augias\AccountingBundle\Enum\LedgerEntrySource;
 use Augias\CoreBundle\Entity\Company;
@@ -141,7 +142,10 @@ class LedgerEntryRepository extends EntityRepository
      * is deliberate: converting silently would invent an exchange rate the
      * books never saw.
      *
-     * @return list<array{nature: string|null, currency: string, total: string}>
+     * Doctrine hydrates the enum column into an {@see ActivityNature} even in
+     * an array result, which is why the nature is not a plain string here.
+     *
+     * @return list<array{nature: ActivityNature|null, currency: string, total: string}>
      */
     public function sumByActivityNature(
         Company $company,
@@ -149,7 +153,7 @@ class LedgerEntryRepository extends EntityRepository
         DateTimeImmutable $from,
         DateTimeImmutable $to,
     ): array {
-        /** @var list<array{nature: string|null, currency: string, total: string}> $rows */
+        /** @var list<array{nature: ActivityNature|null, currency: string, total: string}> $rows */
         $rows = $this->createQueryBuilder('e')
             ->select('e.activityNature AS nature', 'e.currencyCode AS currency', 'SUM(e.amount) AS total')
             ->andWhere('e.company = :company')
