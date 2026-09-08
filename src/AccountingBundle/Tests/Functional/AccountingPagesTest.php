@@ -103,6 +103,25 @@ final class AccountingPagesTest extends WebTestCase
         self::assertStringContainsString('1,200.00', $crawler->filter('body')->text());
     }
 
+    /**
+     * `.card-header` is a flex row, so a title and a subtitle handed to it as
+     * two separate children end up side by side with nothing between them.
+     * They have to share one wrapper to stack.
+     */
+    public function testACardSubtitleSitsUnderItsTitleRatherThanBesideIt(): void
+    {
+        $this->configureRegime();
+        $this->entry(120_000);
+
+        $crawler = $this->client->request('GET', '/accounting/');
+
+        self::assertGreaterThan(
+            0,
+            $crawler->filter('.card-header > div > .card-title + .card-subtitle')->count(),
+            'A card subtitle must be wrapped with its title, not dropped straight into the flex header.',
+        );
+    }
+
     public function testTheRevenueBookListsItsEntries(): void
     {
         $this->configureRegime();

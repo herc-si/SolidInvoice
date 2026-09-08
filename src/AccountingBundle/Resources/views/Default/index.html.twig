@@ -35,10 +35,19 @@
     {% else %}
         <div class="row row-cards">
             <div class="col-lg-8">
-                <twig:Ui:Card
-                    title="{{ 'accounting.turnover.title'|trans({'%year%': year}) }}"
-                    subtitle="{{ 'accounting.turnover.subtitle'|trans }}"
-                >
+                {# Title and subtitle go through the header block rather than
+                   the component's own props: `.card-header` is a flex row, and
+                   the two props are rendered as two of its children, so they
+                   end up side by side. Wrapping them is what Tabler's own
+                   markup does. #}
+                <twig:Ui:Card>
+                    <twig:block name="header">
+                        <div>
+                            <h3 class="card-title">{{ 'accounting.turnover.title'|trans({'%year%': year}) }}</h3>
+                            <p class="card-subtitle text-card-subtitle">{{ 'accounting.turnover.subtitle'|trans }}</p>
+                        </div>
+                    </twig:block>
+
                     {% if turnover is null or turnover.isEmpty %}
                         <p class="text-muted mb-0">{{ 'accounting.turnover.empty'|trans }}</p>
                     {% else %}
@@ -161,10 +170,14 @@
             {% endif %}
 
             <div class="col-12">
-                <twig:Ui:Card
-                    title="{{ regime.labelKey|trans }}"
-                    subtitle="{{ regime.descriptionKey|trans }}"
-                >
+                <twig:Ui:Card>
+                    <twig:block name="header">
+                        <div>
+                            <h3 class="card-title">{{ regime.labelKey|trans }}</h3>
+                            <p class="card-subtitle text-card-subtitle">{{ regime.descriptionKey|trans }}</p>
+                        </div>
+                    </twig:block>
+
                     <dl class="row mb-0">
                         <dt class="col-sm-5">{{ 'accounting.settings.primary_activity.label'|trans }}</dt>
                         <dd class="col-sm-7">{{ profile.primaryActivity.translationKey|trans }}</dd>
