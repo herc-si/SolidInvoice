@@ -2916,7 +2916,7 @@ settings:
             prefix_help: 'Ajouté avant le numéro. Ex. « FACT- » donne FACT-001'
             strategy: 'Stratégie de numérotation'
             suffix: 'Suffixe de l''identifiant'
-            suffix_help: 'Ajouté après le numéro. Ex. « -2024 » donne 001-2024'
+            suffix_help: 'Ajouté après le numéro. Utilisez {year} pour l''année en cours, comme « -{year} »'
             title: 'Schéma de numérotation'
         reminder:
             enable: 'Activer les rappels automatiques'

@@ -17,16 +17,29 @@ use Augias\CoreBundle\Generator\BillingIdGenerator\IdGeneratorInterface;
 use Augias\InvoiceBundle\Entity\Invoice;
 use Augias\QuoteBundle\Entity\Quote;
 use Augias\SettingsBundle\SystemConfig;
+use DateTimeImmutable;
 use InvalidArgumentException;
 use Psr\Container\ContainerExceptionInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
 use Symfony\Component\DependencyInjection\ServiceLocator;
+use function str_replace;
 
 /**
  * @see \Augias\CoreBundle\Tests\Generator\BillingIdGeneratorTest
  */
 final readonly class BillingIdGenerator
 {
+    /**
+     * Placeholders a prefix or a suffix may carry, resolved every time an id is
+     * generated.
+     *
+     * A year has to be written this way rather than typed into the setting:
+     * a literal `-2026` would still be `-2026` next January, and every document
+     * of the new year would carry the old one. The convention matches the
+     * `{id}` placeholder the invoice email subject already uses.
+     */
+    private const string YEAR_PLACEHOLDER = '{year}';
+
     /**
      * @param ServiceLocator<IdGeneratorInterface> $generators
      */
@@ -52,8 +65,12 @@ final readonly class BillingIdGenerator
 
         $strategy = $strategy ?: $this->config->get($settingSection . '/id_generation/strategy');
 
-        $prefix = $this->config->get($settingSection . '/id_generation/id_prefix') ?? '';
-        $suffix = $this->config->get($settingSection . '/id_generation/id_suffix') ?? '';
+        // Resolved before anything else looks at them: the auto-increment
+        // strategy finds the previous number by cutting the prefix and suffix
+        // off by length, and it has to be given the lengths that were actually
+        // written onto the documents.
+        $prefix = $this->resolve($this->config->get($settingSection . '/id_generation/id_prefix') ?? '');
+        $suffix = $this->resolve($this->config->get($settingSection . '/id_generation/id_suffix') ?? '');
 
         // Pass prefix and suffix to the generator so it can handle them if needed
         $options['prefix'] = $prefix;
@@ -68,5 +85,15 @@ final readonly class BillingIdGenerator
             $invoiceId,
             $suffix
         );
+    }
+
+    /**
+     * The year is the current one rather than the document's own date: the id
+     * is handed to the form before the user has picked a date, so there is no
+     * document date to read at that point.
+     */
+    private function resolve(string $affix): string
+    {
+        return str_replace(self::YEAR_PLACEHOLDER, new DateTimeImmutable()->format('Y'), $affix);
     }
 }

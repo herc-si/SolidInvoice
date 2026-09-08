@@ -34,8 +34,11 @@ final class ConfigProvider implements ProviderInterface
             new Config('invoice/bcc_address', null, 'Send BCC copy of invoice to this address', EmailType::class),
             new Config('invoice/email_subject', 'New Invoice - #{id}', 'To include the id of the invoice in the subject, add the placeholder {id} where you want the id', TextType::class),
             new Config('invoice/id_generation/strategy', 'auto_increment', '', BillingIdConfigurationType::class),
-            new Config('invoice/id_generation/id_prefix', '', 'Example: INV-', TextType::class),
-            new Config('invoice/id_generation/id_suffix', '', 'Example: -INV', TextType::class),
+            new Config('invoice/id_generation/id_prefix', 'FACT-', 'Printed before the number. Example: FACT-', TextType::class),
+            // The year is a placeholder, not a literal: written out as -2026 it
+            // would still read 2026 next January. {year} is resolved every time
+            // an id is generated.
+            new Config('invoice/id_generation/id_suffix', '-{year}', 'Printed after the number. Use {year} for the current year, as in -{year}', TextType::class),
             new Config(
                 'invoice/reminder/enabled',
                 '1',

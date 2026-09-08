@@ -17,6 +17,7 @@ use Augias\CoreBundle\Generator\BillingIdGenerator;
 use Augias\CoreBundle\Generator\BillingIdGenerator\IdGeneratorInterface;
 use Augias\InvoiceBundle\Entity\Invoice;
 use Augias\SettingsBundle\SystemConfig;
+use DateTimeImmutable;
 use JsonException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -154,5 +155,74 @@ final class BillingIdGeneratorTest extends TestCase
         );
 
         self::assertSame('INV-10-00', $generator->generate(new Invoice()));
+    }
+
+    /**
+     * A year typed literally into the setting would still be last year's in
+     * January, so it is written as a placeholder and resolved on every call.
+     */
+    public function testTheYearPlaceholderIsResolved(): void
+    {
+        $autoIncrementGenerator = $this->createMock(IdGeneratorInterface::class);
+
+        $autoIncrementGenerator->expects(self::once())
+            ->method('generate')
+            ->willReturn('10');
+
+        $systemConfig = $this->createStub(SystemConfig::class);
+
+        $systemConfig->method('get')
+            ->willReturnMap([
+                ['invoice/id_generation/strategy', null, 'auto_increment'],
+                ['invoice/id_generation/id_prefix', null, 'FACT-'],
+                ['invoice/id_generation/id_suffix', null, '-{year}'],
+            ]);
+
+        $generator = new BillingIdGenerator(
+            new ServiceLocator(['auto_increment' => static fn () => $autoIncrementGenerator]),
+            $systemConfig,
+        );
+
+        self::assertSame(
+            'FACT-10-' . new DateTimeImmutable()->format('Y'),
+            $generator->generate(new Invoice()),
+        );
+    }
+
+    /**
+     * The auto-increment strategy finds the previous number by cutting the
+     * prefix and suffix off by length, so it has to be handed the resolved
+     * affixes — `-{year}` is seven characters and `-2026` is five, and the
+     * wrong one would slice the number itself.
+     */
+    public function testTheStrategyIsGivenTheResolvedAffixes(): void
+    {
+        $autoIncrementGenerator = $this->createMock(IdGeneratorInterface::class);
+        $year = new DateTimeImmutable()->format('Y');
+
+        $autoIncrementGenerator->expects(self::once())
+            ->method('generate')
+            ->with(
+                self::isInstanceOf(Invoice::class),
+                self::callback(static fn (array $options): bool => $options['prefix'] === 'FACT-'
+                    && $options['suffix'] === '-' . $year),
+            )
+            ->willReturn('10');
+
+        $systemConfig = $this->createStub(SystemConfig::class);
+
+        $systemConfig->method('get')
+            ->willReturnMap([
+                ['invoice/id_generation/strategy', null, 'auto_increment'],
+                ['invoice/id_generation/id_prefix', null, 'FACT-'],
+                ['invoice/id_generation/id_suffix', null, '-{year}'],
+            ]);
+
+        $generator = new BillingIdGenerator(
+            new ServiceLocator(['auto_increment' => static fn () => $autoIncrementGenerator]),
+            $systemConfig,
+        );
+
+        $generator->generate(new Invoice());
     }
 }

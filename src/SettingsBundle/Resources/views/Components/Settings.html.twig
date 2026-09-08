@@ -286,7 +286,7 @@
                                     {{ form_row(form.id_generation.id_suffix, {
                                         label: 'settings.page.numbering.suffix'|trans,
                                         help: 'settings.page.numbering.suffix_help'|trans,
-                                        attr: {placeholder: '-2024'}
+                                        attr: {placeholder: '-{year}'}
                                     }) }}
                                 </div>
                             {% endif %}
@@ -297,8 +297,12 @@
                             <div class="d-flex align-items-center gap-2">
                                 <span class="text-muted small">{{ 'settings.page.numbering.example'|trans }}</span>
                                 <code class="fs-6">
-                                    {% set prefix = form.id_generation.id_prefix.vars.value|default('') %}
-                                    {% set suffix = form.id_generation.id_suffix.vars.value|default('') %}
+                                    {# Resolved the way BillingIdGenerator resolves it, so the
+                                       example shows the number that will actually be issued
+                                       rather than the placeholder that produces it. #}
+                                    {% set year = 'now'|date('Y') %}
+                                    {% set prefix = form.id_generation.id_prefix.vars.value|default('')|replace({'{year}': year}) %}
+                                    {% set suffix = form.id_generation.id_suffix.vars.value|default('')|replace({'{year}': year}) %}
                                     {{ prefix }}001{{ suffix }}
                                 </code>
                             </div>

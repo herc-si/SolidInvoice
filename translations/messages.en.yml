@@ -2916,7 +2916,7 @@ settings:
             prefix_help: 'Added before the number. E.g., "INV-" results in INV-001'
             strategy: 'Numbering Strategy'
             suffix: 'ID Suffix'
-            suffix_help: 'Added after the number. E.g., "-2024" results in 001-2024'
+            suffix_help: 'Added after the number. Use {year} for the current year, as in "-{year}"'
             title: 'Numbering Scheme'
         reminder:
             enable: 'Enable Automatic Reminders'

@@ -27,6 +27,7 @@ use Augias\InvoiceBundle\Enum\InvoiceStatus;
 use Augias\InvoiceBundle\Manager\InvoiceFormManager;
 use Augias\InvoiceBundle\Model\Graph;
 use Augias\InvoiceBundle\Twig\Components\CreateInvoice;
+use Augias\SettingsBundle\SystemConfig;
 use Augias\TaxBundle\Entity\Tax;
 use Brick\Math\BigInteger;
 use Brick\Math\Exception\MathException;
@@ -36,6 +37,21 @@ use Symfony\Component\Workflow\WorkflowInterface;
 
 final class CreateInvoiceTest extends LiveComponentTest
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // The snapshots below are about the rendered component, not about the
+        // shipped numbering defaults — and one of those defaults is the current
+        // year, which would put an expiry date on every snapshot. The affixes
+        // are cleared so the generated id stays a bare number here; what the
+        // defaults produce is covered by
+        // {@see \Augias\InvoiceBundle\Tests\Config\ConfigProviderTest}.
+        $config = self::getContainer()->get(SystemConfig::class);
+        $config->set('invoice/id_generation/id_prefix', '');
+        $config->set('invoice/id_generation/id_suffix', '');
+    }
+
     public function testCreateInvoice(): void
     {
         $dto = new InvoiceFormDTO();

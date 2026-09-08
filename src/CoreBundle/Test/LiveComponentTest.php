@@ -112,6 +112,17 @@ abstract class LiveComponentTest extends KernelTestCase
         return preg_replace('#[0-9A-f]{26}#', '01JBYEQCR7DJ2YW4EXP6FYJZCR', (string) $content);
     }
 
+    /**
+     * Neutralises the year a numbering preview resolves `{year}` to.
+     *
+     * Without this the snapshot would hold whichever year it was written in and
+     * start failing on 1 January — a test that expires is worse than no test.
+     */
+    protected function replaceNumberingYear(string $content): string
+    {
+        return (string) preg_replace('#(<code[^>]*>[^<]*?)\d{4}#', '$1YEAR', $content);
+    }
+
     protected function replaceChecksum(string $content): string
     {
         $content = preg_replace('#@checksum&quot;:&quot;(.*)&quot;#', '@checksum&quot;:&quot;REPLACED_CHECKSUM&quot;', $content);

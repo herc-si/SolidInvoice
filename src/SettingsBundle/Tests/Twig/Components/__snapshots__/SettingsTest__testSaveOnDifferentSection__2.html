@@ -1,5 +1,5 @@
 <html><body>
-<div class="settings-page" id="in-a-real-scenario-it-would-already-have-one---provide-one-yourself-if-needed" data-controller="live" data-live-name-value="Settings" data-live-url-value="/_components/Settings" data-live-query-mapping-value='{"section":{"name":"section"}}' data-live-props-value='{"section":"invoice","formName":"settings","settings":{"watermark":"1","bcc_address":"","email_subject":"invoice subject","id_generation":{"strategy":"random_number","id_prefix":"","id_suffix":""},"reminder":{"enabled":"1","pre_due_enabled":"1","pre_due_days":"3"},"_token":""},"isValidated":false,"validatedFields":[],"@attributes":{"id":"in-a-real-scenario-it-would-already-have-one---provide-one-yourself-if-needed"},"@checksum":"REPLACED_CHECKSUM"}'>
+<div class="settings-page" id="in-a-real-scenario-it-would-already-have-one---provide-one-yourself-if-needed" data-controller="live" data-live-name-value="Settings" data-live-url-value="/_components/Settings" data-live-query-mapping-value='{"section":{"name":"section"}}' data-live-props-value='{"section":"invoice","formName":"settings","settings":{"watermark":"1","bcc_address":"","email_subject":"invoice subject","id_generation":{"strategy":"random_number","id_prefix":"FACT-","id_suffix":"-{year}"},"reminder":{"enabled":"1","pre_due_enabled":"1","pre_due_days":"3"},"_token":""},"isValidated":false,"validatedFields":[],"@attributes":{"id":"in-a-real-scenario-it-would-already-have-one---provide-one-yourself-if-needed"},"@checksum":"REPLACED_CHECKSUM"}'>
         <ul class="nav nav-underline mb-4" role="tablist">
                                 <li class="nav-item">
                 <a href="/settings?section=system" class="nav-link">
@@ -113,13 +113,13 @@
                                 </div>
                                                                                         <div class="col-md-6">
                                                     <div class="mb-3">    
-            <label class="control-label form-label" for="settings_id_generation_id_prefix">ID Prefix</label><input type="text" id="settings_id_generation_id_prefix" name="settings[id_generation][id_prefix]" placeholder="INV-" aria-describedby="settings_id_generation_id_prefix_help" class="form-control"><div class="form-text text-muted mb-0" id="settings_id_generation_id_prefix_help">Added before the number. E.g., "INV-" results in INV-001</div>
+            <label class="control-label form-label" for="settings_id_generation_id_prefix">ID Prefix</label><input type="text" id="settings_id_generation_id_prefix" name="settings[id_generation][id_prefix]" placeholder="INV-" aria-describedby="settings_id_generation_id_prefix_help" class="form-control" value="FACT-"><div class="form-text text-muted mb-0" id="settings_id_generation_id_prefix_help">Added before the number. E.g., "INV-" results in INV-001</div>
 </div>
     
                                 </div>
                                                                                         <div class="col-md-6">
                                                     <div class="mb-3">    
-            <label class="control-label form-label" for="settings_id_generation_id_suffix">ID Suffix</label><input type="text" id="settings_id_generation_id_suffix" name="settings[id_generation][id_suffix]" placeholder="-2024" aria-describedby="settings_id_generation_id_suffix_help" class="form-control"><div class="form-text text-muted mb-0" id="settings_id_generation_id_suffix_help">Added after the number. E.g., "-2024" results in 001-2024</div>
+            <label class="control-label form-label" for="settings_id_generation_id_suffix">ID Suffix</label><input type="text" id="settings_id_generation_id_suffix" name="settings[id_generation][id_suffix]" placeholder="-{year}" aria-describedby="settings_id_generation_id_suffix_help" class="form-control" value="-{year}"><div class="form-text text-muted mb-0" id="settings_id_generation_id_suffix_help">Added after the number. Use {year} for the current year, as in "-{year}"</div>
 </div>
     
                                 </div>
@@ -129,7 +129,7 @@
                             <div class="d-flex align-items-center gap-2">
                                 <span class="text-muted small">Example:</span>
                                 <code class="fs-6">
-                                                                                                            001
+                                                                                                                                                                                    FACT-001-YEAR
                                 </code>
                             </div>
                         </div>
