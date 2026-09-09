@@ -732,6 +732,20 @@
 // it cannot lose an unsaved arrangement - there is no such thing, each change is
 // persisted as it happens.
 
+// `hidden` only removes an element via the user-agent sheet's
+// `[hidden] { display: none }`, which loses to ANY author `display` declaration -
+// and `.dashboard-widget-controls` below sets `display: flex`. This project ships
+// no `[hidden]` reset of its own (Tabler does not add one), so without this rule
+// the controls bar shows on every card at all times and the Customise button
+// looks broken: it toggles an attribute that changes nothing.
+// -
+// Scoped to the dashboard rather than made global, and `!important` so that any
+// element hidden here later cannot be un-hidden by a more specific `display`.
+
+.dashboard-page [hidden] {
+    display: none !important;
+}
+
 .dashboard-toolbar {
     align-items: center;
     display: flex;
@@ -775,7 +789,7 @@
 
 .dashboard-picker-item {
     align-items: center;
-    background: var(--swp-surface-raised, transparent);
+    background: var(--swp-surface);
     border: 1px solid var(--swp-border);
     border-radius: var(--swp-radius-md, 0.5rem);
     cursor: pointer;
