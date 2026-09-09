@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\Widgets;
 
+use Augias\DashboardBundle\Attribute\AsDashboardWidget;
+use Augias\DashboardBundle\Enum\WidgetZone;
 use Augias\InvoiceBundle\Entity\Invoice;
 use Augias\InvoiceBundle\Enum\InvoiceStatus;
 use Augias\InvoiceBundle\Repository\InvoiceRepository;
@@ -26,6 +28,14 @@ use RuntimeException;
 /**
  * @see \Augias\DashboardBundle\Tests\Widgets\HeroStatsWidgetTest
  */
+#[AsDashboardWidget(
+    id: 'hero_stats',
+    label: 'dashboard.widget.hero_stats',
+    icon: 'tabler:layout-cards',
+    zone: WidgetZone::Top,
+    priority: 200,
+    removable: false,
+)]
 final readonly class HeroStatsWidget implements WidgetInterface
 {
     private ObjectManager $manager;
@@ -75,6 +85,14 @@ final readonly class HeroStatsWidget implements WidgetInterface
         } catch (RuntimeException) {
             return null;
         }
+    }
+
+    /**
+     * Nothing to gate on: every account has invoices and payments, even if the answer is zero.
+     */
+    public function supports(): bool
+    {
+        return true;
     }
 
     public function getTemplate(): string

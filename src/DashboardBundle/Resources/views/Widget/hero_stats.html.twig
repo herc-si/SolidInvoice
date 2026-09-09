@@ -49,83 +49,81 @@
 {% import _self as hero %}
 {% set defaultCurrency = defaultCurrency|default(null) %}
 
-<div class="col-12">
-    <div class="dashboard-hero-stats">
-        <div class="stat-card">
-            <div class="stat-card-content">
-                <div class="stat-icon stat-icon--primary">
-                    {{ ux_icon('tabler:file-invoice', {width: 24, height: 24}) }}
-                </div>
-                <div class="stat-info">
-                    <span class="stat-label">{{ 'dashboard.hero.outstanding'|trans }}</span>
-                    {# Neutral: outstanding is money not yet received. Green here would be a lie. #}
-                    {{ hero.statValue(totalOutstanding, defaultCurrency, ['total']) }}
-                </div>
+<div class="dashboard-hero-stats">
+    <div class="stat-card">
+        <div class="stat-card-content">
+            <div class="stat-icon stat-icon--primary">
+                {{ ux_icon('tabler:file-invoice', {width: 24, height: 24}) }}
+            </div>
+            <div class="stat-info">
+                <span class="stat-label">{{ 'dashboard.hero.outstanding'|trans }}</span>
+                {# Neutral: outstanding is money not yet received. Green here would be a lie. #}
+                {{ hero.statValue(totalOutstanding, defaultCurrency, ['total']) }}
             </div>
         </div>
+    </div>
 
-        {#
-         # `--urgent` is unconditional and load-bearing: it spans 3 of the 9 tracks and
-         # the other three tiles span 2 each. Dropping it leaves a dangling track.
-         # `--danger` is the semantic tint and is conditional, because a danger-tinted
-         # "0 overdue" congratulates a healthy account in the colour of a problem -
-         # the same mistake the old success-green "$0.00 revenue" made, mirrored.
-         # See the report: A1 must ungroup `&--danger, &--urgent` for this to take effect.
-         #}
-        <div class="stat-card stat-card--urgent{% if overdueCount > 0 %} stat-card--danger{% endif %}">
-            <div class="stat-card-content">
-                <div class="stat-icon stat-icon--danger">
-                    {{ ux_icon('tabler:alert-triangle', {width: 24, height: 24}) }}
-                </div>
-                <div class="stat-info">
-                    <span class="stat-label">{{ 'dashboard.hero.overdue'|trans }}</span>
-                    <span class="stat-value{% if overdueCount > 0 %} stat-value--danger{% endif %}">{{ overdueCount }}</span>
-                    {#
-                     # The count is this tile's headline, so the amount stays a subvalue
-                     # and takes no `--total`. `--overdue` is earned: the "Overdue" label
-                     # above is visible and explicit.
-                     #}
-                    {% if overdueAmount is not empty %}
-                        {{ hero.statValue(overdueAmount, defaultCurrency, ['overdue'], 'stat-subvalue') }}
-                    {% endif %}
-                </div>
+    {#
+     # `--urgent` is unconditional and load-bearing: it spans 3 of the 9 tracks and
+     # the other three tiles span 2 each. Dropping it leaves a dangling track.
+     # `--danger` is the semantic tint and is conditional, because a danger-tinted
+     # "0 overdue" congratulates a healthy account in the colour of a problem -
+     # the same mistake the old success-green "$0.00 revenue" made, mirrored.
+     # See the report: A1 must ungroup `&--danger, &--urgent` for this to take effect.
+     #}
+    <div class="stat-card stat-card--urgent{% if overdueCount > 0 %} stat-card--danger{% endif %}">
+        <div class="stat-card-content">
+            <div class="stat-icon stat-icon--danger">
+                {{ ux_icon('tabler:alert-triangle', {width: 24, height: 24}) }}
+            </div>
+            <div class="stat-info">
+                <span class="stat-label">{{ 'dashboard.hero.overdue'|trans }}</span>
+                <span class="stat-value{% if overdueCount > 0 %} stat-value--danger{% endif %}">{{ overdueCount }}</span>
+                {#
+                 # The count is this tile's headline, so the amount stays a subvalue
+                 # and takes no `--total`. `--overdue` is earned: the "Overdue" label
+                 # above is visible and explicit.
+                 #}
+                {% if overdueAmount is not empty %}
+                    {{ hero.statValue(overdueAmount, defaultCurrency, ['overdue'], 'stat-subvalue') }}
+                {% endif %}
             </div>
         </div>
+    </div>
 
-        <div class="stat-card">
-            <div class="stat-card-content">
-                <div class="stat-icon stat-icon--success">
-                    {{ ux_icon('tabler:calendar-stats', {width: 24, height: 24}) }}
-                </div>
-                <div class="stat-info">
-                    <span class="stat-label">{{ 'dashboard.hero.this_month'|trans }}</span>
-                    {#
-                     # Neutral, not `--paid`: the label reads "This Month", not "Paid". The
-                     # icon tint is success because these really are payments received; the
-                     # amount stays neutral because the Money-Color Rule wants the word,
-                     # not the hue, to carry that.
-                     #}
-                    {{ hero.statValue(paymentsThisMonth, defaultCurrency, ['total']) }}
-                </div>
+    <div class="stat-card">
+        <div class="stat-card-content">
+            <div class="stat-icon stat-icon--success">
+                {{ ux_icon('tabler:calendar-stats', {width: 24, height: 24}) }}
+            </div>
+            <div class="stat-info">
+                <span class="stat-label">{{ 'dashboard.hero.this_month'|trans }}</span>
+                {#
+                 # Neutral, not `--paid`: the label reads "This Month", not "Paid". The
+                 # icon tint is success because these really are payments received; the
+                 # amount stays neutral because the Money-Color Rule wants the word,
+                 # not the hue, to carry that.
+                 #}
+                {{ hero.statValue(paymentsThisMonth, defaultCurrency, ['total']) }}
             </div>
         </div>
+    </div>
 
-        {#
-         # Was `stat-card--success` (never defined in SCSS - a phantom class) with a
-         # `stat-value--success` amount (rule deleted by A1). Lifetime revenue mixes
-         # paid, part-paid and refunded; it is an aggregate, not a payment state. And a
-         # new account rendered $0.00 in the colour of money received.
-         # Icon demoted success -> info for the same reason, one layer down.
-         #}
-        <div class="stat-card">
-            <div class="stat-card-content">
-                <div class="stat-icon stat-icon--info">
-                    {{ ux_icon('tabler:trending-up', {width: 24, height: 24}) }}
-                </div>
-                <div class="stat-info">
-                    <span class="stat-label">{{ 'dashboard.hero.total_revenue'|trans }}</span>
-                    {{ hero.statValue(totalRevenue, defaultCurrency, ['total']) }}
-                </div>
+    {#
+     # Was `stat-card--success` (never defined in SCSS - a phantom class) with a
+     # `stat-value--success` amount (rule deleted by A1). Lifetime revenue mixes
+     # paid, part-paid and refunded; it is an aggregate, not a payment state. And a
+     # new account rendered $0.00 in the colour of money received.
+     # Icon demoted success -> info for the same reason, one layer down.
+     #}
+    <div class="stat-card">
+        <div class="stat-card-content">
+            <div class="stat-icon stat-icon--info">
+                {{ ux_icon('tabler:trending-up', {width: 24, height: 24}) }}
+            </div>
+            <div class="stat-info">
+                <span class="stat-label">{{ 'dashboard.hero.total_revenue'|trans }}</span>
+                {{ hero.statValue(totalRevenue, defaultCurrency, ['total']) }}
             </div>
         </div>
     </div>

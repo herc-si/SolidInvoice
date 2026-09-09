@@ -13,53 +13,98 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle;
 
+use Augias\DashboardBundle\Enum\WidgetZone;
+use Augias\DashboardBundle\Widgets\WidgetDefinition;
 use Augias\DashboardBundle\Widgets\WidgetInterface;
-use Exception;
-use SplPriorityQueue;
 
 /**
+ * Every widget the application knows how to render, keyed by its stable id.
+ *
+ * This used to hand out one SplPriorityQueue per zone, which was the whole
+ * design: the compiled priorities *were* the layout, and Twig pulled a zone and
+ * rendered whatever came out. That cannot survive per-user layouts, because the
+ * order now comes from the database. So the registry answers "what exists" and
+ * {@see \Augias\DashboardBundle\Layout\LayoutResolver} answers "what goes where"
+ * — the priorities below are only the default the resolver starts from.
+ *
  * @see \Augias\DashboardBundle\Tests\WidgetFactoryTest
  */
-class WidgetFactory
+final class WidgetFactory
 {
-    final public const string DEFAULT_LOCATION = 'top';
-
     /**
-     * @var SplPriorityQueue<int, WidgetInterface>[]
+     * @var array<string, WidgetDefinition>
      */
-    private array $queues = [];
+    private array $widgets = [];
 
-    /**
-     * @var string[]
-     */
-    private array $locations = ['top', 'left_column', 'right_column'];
+    public function add(
+        WidgetInterface $widget,
+        string $id,
+        string $label,
+        string $icon,
+        string $zone,
+        int $priority = 0,
+        bool $removable = true,
+        string $cssClass = '',
+    ): void {
+        $this->widgets[$id] = new WidgetDefinition(
+            $id,
+            $widget,
+            $label,
+            $icon,
+            WidgetZone::from($zone),
+            $priority,
+            $removable,
+            $cssClass,
+        );
+    }
 
-    public function __construct()
+    public function has(string $id): bool
     {
-        foreach ($this->locations as $location) {
-            $this->queues[$location] = new SplPriorityQueue();
-        }
+        return isset($this->widgets[$id]);
+    }
+
+    public function get(string $id): ?WidgetDefinition
+    {
+        return $this->widgets[$id] ?? null;
     }
 
     /**
-     * @throws Exception
+     * @return array<string, WidgetDefinition>
      */
-    public function add(WidgetInterface $widget, ?string $location = null, ?int $priority = null): void
+    public function all(): array
     {
-        $location = $location ?: self::DEFAULT_LOCATION;
-
-        if (! isset($this->queues[$location])) {
-            throw new Exception(sprintf('Invalid widget location: %s', $location));
-        }
-
-        $this->queues[$location]->insert($widget, $priority);
+        return $this->widgets;
     }
 
     /**
-     * @return SplPriorityQueue<int, WidgetInterface>
+     * The layout a user gets before they have ever touched anything: every
+     * widget in its declared zone, ordered by priority, highest first.
+     *
+     * Ties keep registration order. The container registers services in a stable
+     * order, so two widgets sharing a priority do not swap places between
+     * requests — but a widget that cares about its neighbour should say so with
+     * a priority rather than rely on that.
+     *
+     * @return list<WidgetDefinition>
      */
-    public function get(string $location): SplPriorityQueue
+    public function defaultLayout(): array
     {
-        return clone ($this->queues[$location] ?? new SplPriorityQueue());
+        $ordered = [];
+
+        foreach (WidgetZone::cases() as $zone) {
+            $inZone = array_values(array_filter(
+                $this->widgets,
+                static fn (WidgetDefinition $definition): bool => $definition->zone === $zone,
+            ));
+
+            usort(
+                $inZone,
+                static fn (WidgetDefinition $a, WidgetDefinition $b): int => $b->priority <=> $a->priority,
+            );
+
+            $ordered = [...$ordered, ...$inZone];
+        }
+
+        return $ordered;
     }
 }

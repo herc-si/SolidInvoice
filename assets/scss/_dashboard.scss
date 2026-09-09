@@ -721,3 +721,134 @@
     color: var(--swp-text-muted);
 }
 
+
+// =============================================================================
+// LAYOUT EDITING
+// =============================================================================
+
+// Edit mode is a CSS state, not a second page: every control below is already in
+// the DOM on a normal load, hidden with the `hidden` attribute so it is out of
+// the tab order too. Entering edit mode therefore costs no request, and leaving
+// it cannot lose an unsaved arrangement - there is no such thing, each change is
+// persisted as it happens.
+
+.dashboard-toolbar {
+    align-items: center;
+    display: flex;
+    gap: var(--swp-space-2);
+    justify-content: flex-end;
+    margin-bottom: var(--swp-space-3);
+}
+
+.dashboard-toolbar-status {
+    color: var(--swp-text-muted);
+    font-size: 0.8125rem;
+
+    // Reserve the line so a status appearing and clearing does not shunt the
+    // toolbar buttons sideways.
+    min-height: 1.25rem;
+
+    &--error {
+        color: var(--swp-danger, #ef4444);
+    }
+}
+
+.dashboard-picker {
+    background: var(--swp-surface);
+    border: 1px dashed var(--swp-border);
+    border-radius: var(--swp-radius-lg, 0.75rem);
+    margin-bottom: var(--swp-space-4);
+    padding: var(--swp-space-4);
+}
+
+.dashboard-picker-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: var(--swp-space-3);
+}
+
+.dashboard-picker-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--swp-space-2);
+}
+
+.dashboard-picker-item {
+    align-items: center;
+    background: var(--swp-surface-raised, transparent);
+    border: 1px solid var(--swp-border);
+    border-radius: var(--swp-radius-md, 0.5rem);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 0.8125rem;
+    gap: var(--swp-space-2);
+    padding: var(--swp-space-2) var(--swp-space-3);
+
+    &:hover {
+        border-color: var(--swp-primary);
+    }
+}
+
+.dashboard-picker-empty {
+    color: var(--swp-text-muted);
+    font-size: 0.8125rem;
+    margin: 0;
+}
+
+.dashboard-widget {
+    position: relative;
+}
+
+.dashboard-widget-controls {
+    align-items: center;
+    background: var(--swp-surface);
+    border: 1px solid var(--swp-border);
+    border-radius: var(--swp-radius-md, 0.5rem);
+    display: flex;
+    gap: var(--swp-space-1);
+    margin-bottom: var(--swp-space-2);
+    padding: var(--swp-space-1) var(--swp-space-2);
+}
+
+.dashboard-widget-name {
+    align-items: center;
+    color: var(--swp-text-muted);
+    display: inline-flex;
+    flex: 1;
+    font-size: 0.75rem;
+    font-weight: 600;
+    gap: var(--swp-space-2);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.dashboard-widget-handle {
+    color: var(--swp-text-muted);
+    cursor: grab;
+    display: inline-flex;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.dashboard-widget-pinned {
+    color: var(--swp-text-muted);
+    display: inline-flex;
+}
+
+// The card being dragged. Kept legible rather than reduced to an outline: the
+// user is placing this specific widget, so it has to stay recognisable while it
+// moves.
+
+.dashboard-widget--ghost {
+    opacity: 0.4;
+}
+
+.dashboard-page--editing {
+
+    .dashboard-widget {
+        outline: 1px dashed var(--swp-border);
+        outline-offset: var(--swp-space-2);
+    }
+}

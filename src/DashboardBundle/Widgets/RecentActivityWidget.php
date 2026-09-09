@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\Widgets;
 
+use Augias\DashboardBundle\Attribute\AsDashboardWidget;
+use Augias\DashboardBundle\Enum\WidgetZone;
 use Augias\InvoiceBundle\Entity\Invoice;
 use Augias\InvoiceBundle\Repository\InvoiceRepository;
 use Augias\PaymentBundle\Entity\Payment;
@@ -26,6 +28,13 @@ use Doctrine\Persistence\ObjectManager;
 /**
  * @see \Augias\DashboardBundle\Tests\Widgets\RecentActivityWidgetTest
  */
+#[AsDashboardWidget(
+    id: 'recent_activity',
+    label: 'dashboard.widget.recent_activity',
+    icon: 'tabler:history',
+    zone: WidgetZone::RightColumn,
+    priority: 50,
+)]
 final readonly class RecentActivityWidget implements WidgetInterface
 {
     private ObjectManager $manager;
@@ -145,6 +154,14 @@ final readonly class RecentActivityWidget implements WidgetInterface
             'activities' => $activities,
             'hasActivities' => $activities !== [],
         ];
+    }
+
+    /**
+     * Always applies; the empty feed is itself an answer.
+     */
+    public function supports(): bool
+    {
+        return true;
     }
 
     public function getTemplate(): string

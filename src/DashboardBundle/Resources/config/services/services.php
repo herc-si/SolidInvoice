@@ -14,13 +14,6 @@ declare(strict_types=1);
 use Augias\DashboardBundle\AugiasDashboardBundle;
 use Augias\DashboardBundle\Checklist\ChecklistItemInterface;
 use Augias\DashboardBundle\Checklist\ChecklistManager;
-use Augias\DashboardBundle\Widgets\AttentionRequiredWidget;
-use Augias\DashboardBundle\Widgets\HeroStatsWidget;
-use Augias\DashboardBundle\Widgets\InvoiceDistributionWidget;
-use Augias\DashboardBundle\Widgets\OnboardingChecklistWidget;
-use Augias\DashboardBundle\Widgets\QuickActionsWidget;
-use Augias\DashboardBundle\Widgets\RecentActivityWidget;
-use Augias\DashboardBundle\Widgets\RevenueChartWidget;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
@@ -41,7 +34,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services
         ->load(AugiasDashboardBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
-        ->exclude(dirname(__DIR__, 3) . '/{DependencyInjection,Entity,Resources,Tests}');
+        ->exclude(dirname(__DIR__, 3) . '/{Attribute,DependencyInjection,Entity,Enum,Layout/DashboardLayout.php,Layout/ResolvedLayout.php,Resources,Tests,Widgets/WidgetDefinition.php}');
 
     $services
         ->load(AugiasDashboardBundle::NAMESPACE . '\\Action\\', dirname(__DIR__, 3) . '/Action')
@@ -52,63 +45,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->set(ChecklistManager::class)
         ->arg('$items', tagged_iterator('dashboard.checklist_item'));
 
-    // Top row - Onboarding Checklist (highest priority)
-    $services
-        ->set(OnboardingChecklistWidget::class)
-        ->tag('dashboard.widget', [
-            'priority' => 300,
-            'location' => 'top',
-        ]);
-
-    // Top row - Hero Stats
-    $services
-        ->set(HeroStatsWidget::class)
-        ->tag('dashboard.widget', [
-            'priority' => 200,
-            'location' => 'top',
-        ]);
-
-    // Left column - Attention first, then reflection (charts and activity).
-    // AttentionRequired leads the wide column so the actionable widget is reached
-    // before the 12-month trend chart, both on desktop and in the stacked
-    // mobile order (top row, then left column, then right column).
-    $services
-        ->set(AttentionRequiredWidget::class)
-        ->tag('dashboard.widget', [
-            'priority' => 120,
-            'location' => 'left_column',
-        ]);
-
-    $services
-        ->set(RevenueChartWidget::class)
-        ->tag('dashboard.widget', [
-            'priority' => 100,
-            'location' => 'left_column',
-        ]);
-
-    // Right column - Actions, then Activity, then Distribution.
-    //
-    // Activity sits here rather than under the chart: the left column had grown
-    // long enough that the feed was being scrolled past and missed. Distribution
-    // stays last, and stays least actionable.
-    $services
-        ->set(QuickActionsWidget::class)
-        ->tag('dashboard.widget', [
-            'priority' => 110,
-            'location' => 'right_column',
-        ]);
-
-    $services
-        ->set(RecentActivityWidget::class)
-        ->tag('dashboard.widget', [
-            'priority' => 50,
-            'location' => 'right_column',
-        ]);
-
-    $services
-        ->set(InvoiceDistributionWidget::class)
-        ->tag('dashboard.widget', [
-            'priority' => 10,
-            'location' => 'right_column',
-        ]);
+    // Widget placement is no longer configured here. Each widget carries an
+    // #[AsDashboardWidget] attribute naming its id, label, icon, default zone
+    // and default priority, and DashboardWidgetCompilerPass feeds those into the
+    // registry. The zone and priority there are only the *default* arrangement:
+    // what a user actually sees comes from their stored layout, reconciled by
+    // LayoutResolver. Moving a widget by editing this file would have had no
+    // effect for anyone who had ever dragged a card.
 };

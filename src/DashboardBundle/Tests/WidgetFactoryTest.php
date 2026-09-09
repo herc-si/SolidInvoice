@@ -13,91 +13,81 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\Tests;
 
+use Augias\DashboardBundle\Enum\WidgetZone;
+use Augias\DashboardBundle\Tests\Fixtures\StubWidget;
 use Augias\DashboardBundle\WidgetFactory;
-use Augias\DashboardBundle\Widgets\WidgetInterface;
-use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use Mockery as M;
 use PHPUnit\Framework\TestCase;
-use SplPriorityQueue;
 
 final class WidgetFactoryTest extends TestCase
 {
-    use MockeryPHPUnitIntegration;
-
-    public function testAdd(): void
+    public function testAddAndGet(): void
     {
         $factory = new WidgetFactory();
+        $widget = new StubWidget();
 
-        $widget1 = M::mock(WidgetInterface::class);
-        $widget2 = M::mock(WidgetInterface::class);
-        $widget3 = M::mock(WidgetInterface::class);
-        $widget4 = M::mock(WidgetInterface::class);
-        $widget5 = M::mock(WidgetInterface::class);
+        $factory->add($widget, 'revenue_chart', 'label.revenue', 'tabler:chart-line', 'left_column', 100);
 
-        $factory->add($widget1, 'top', 100);
-        $factory->add($widget2, 'left_column', 200);
-        $factory->add($widget3, 'right_column', 300);
-        $factory->add($widget4, null, 400);
-        $factory->add($widget5, 'left_column');
+        $definition = $factory->get('revenue_chart');
 
-        self::assertInstanceOf(SplPriorityQueue::class, $factory->get('top'));
-        self::assertInstanceOf(SplPriorityQueue::class, $factory->get('left_column'));
-        self::assertInstanceOf(SplPriorityQueue::class, $factory->get('right_column'));
-
-        self::assertCount(2, $factory->get('top'));
-        self::assertCount(2, $factory->get('left_column'));
-        self::assertCount(1, $factory->get('right_column'));
+        self::assertNotNull($definition);
+        self::assertSame('revenue_chart', $definition->id);
+        self::assertSame($widget, $definition->widget);
+        self::assertSame('label.revenue', $definition->label);
+        self::assertSame('tabler:chart-line', $definition->icon);
+        self::assertSame(WidgetZone::LeftColumn, $definition->zone);
+        self::assertSame(100, $definition->priority);
+        self::assertTrue($definition->removable);
     }
 
-    public function testInvalidLocation(): void
+    public function testGetReturnsNullForAnUnknownId(): void
     {
         $factory = new WidgetFactory();
 
-        $widget = M::mock(WidgetInterface::class);
-
-        $this->expectException('Exception');
-        $this->expectExceptionMessageIsOrContains('Invalid widget location: bottom');
-
-        $factory->add($widget, 'bottom');
+        self::assertFalse($factory->has('nope'));
+        self::assertNull($factory->get('nope'));
     }
 
-    public function testGet(): void
+    public function testDefaultLayoutOrdersByZoneThenPriority(): void
     {
         $factory = new WidgetFactory();
 
-        $widget1 = M::mock(WidgetInterface::class);
-        $widget2 = M::mock(WidgetInterface::class);
-        $widget3 = M::mock(WidgetInterface::class);
-        $widget4 = M::mock(WidgetInterface::class);
-        $widget5 = M::mock(WidgetInterface::class);
+        $factory->add(new StubWidget(), 'low_left', 'l', 'i', 'left_column', 10);
+        $factory->add(new StubWidget(), 'right', 'l', 'i', 'right_column', 500);
+        $factory->add(new StubWidget(), 'high_left', 'l', 'i', 'left_column', 900);
+        $factory->add(new StubWidget(), 'top', 'l', 'i', 'top', 1);
 
-        $factory->add($widget1, 'top', 100);
-        $factory->add($widget2, 'left_column', 200);
-        $factory->add($widget3, 'right_column', 300);
-        $factory->add($widget4, null, 400);
-        $factory->add($widget5, 'left_column');
+        self::assertSame(
+            ['top', 'high_left', 'low_left', 'right'],
+            array_column($factory->defaultLayout(), 'id'),
+        );
+    }
 
-        $queue1 = $factory->get('top');
-        self::assertInstanceOf(SplPriorityQueue::class, $queue1);
-        self::assertCount(2, $queue1);
-        self::assertSame($widget4, $queue1->current());
-        $queue1->next();
-        self::assertSame($widget1, $queue1->current());
+    /**
+     * Zones come first whatever the priorities say: a top-zone widget with a
+     * priority of 1 still outranks a right-column widget with 500, because they
+     * are not competing for the same space.
+     */
+    public function testDefaultLayoutNeverMixesZones(): void
+    {
+        $factory = new WidgetFactory();
 
-        $queue2 = $factory->get('left_column');
-        self::assertInstanceOf(SplPriorityQueue::class, $queue2);
-        self::assertCount(2, $queue2);
-        self::assertSame($widget2, $queue2->current());
-        $queue2->next();
-        self::assertSame($widget5, $queue2->current());
+        $factory->add(new StubWidget(), 'right', 'l', 'i', 'right_column', 999);
+        $factory->add(new StubWidget(), 'top', 'l', 'i', 'top', 0);
 
-        $queue3 = $factory->get('right_column');
-        self::assertInstanceOf(SplPriorityQueue::class, $queue3);
-        self::assertCount(1, $queue3);
-        self::assertSame($widget3, $queue3->current());
+        $zones = array_map(
+            static fn (object $definition): string => $definition->zone->value,
+            $factory->defaultLayout(),
+        );
 
-        $queue4 = $factory->get('bottom');
-        self::assertInstanceOf(SplPriorityQueue::class, $queue4);
-        self::assertCount(0, $queue4);
+        self::assertSame(['top', 'right_column'], $zones);
+    }
+
+    public function testAllIsKeyedById(): void
+    {
+        $factory = new WidgetFactory();
+        $factory->add(new StubWidget(), 'a', 'l', 'i', 'top');
+        $factory->add(new StubWidget(), 'b', 'l', 'i', 'top');
+
+        self::assertSame(['a', 'b'], array_keys($factory->all()));
     }
 }

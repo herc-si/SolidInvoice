@@ -16,17 +16,111 @@
 {% endblock %}
 
 {% block content %}
-    <div class="dashboard-page">
-        <div class="row mb-4">
-            {{ render_dashboard_widget('top') }}
+    {#
+     # Every zone is a Sortable container in the same group, so a card can be
+     # dragged from the wide column to the narrow one and back. The zone name on
+     # `data-zone` is what gets written to the layout, so it has to match
+     # WidgetZone exactly — the server drops anything it does not recognise, which
+     # would look to the user like a card that refuses to stay where it was put.
+     #}
+    <div class="dashboard-page"
+         data-controller="dashboard-layout"
+         data-dashboard-layout-save-url-value="{{ path('_dashboard_layout_save') }}"
+         data-dashboard-layout-csrf-token-value="{{ csrf_token('dashboard_layout') }}"
+         data-dashboard-layout-editing-class="dashboard-page--editing">
+
+        <div class="dashboard-toolbar">
+            <button type="button"
+                    class="btn btn-ghost btn-sm"
+                    data-action="dashboard-layout#toggleEdit"
+                    data-dashboard-layout-target="editToggle">
+                {{ ux_icon('tabler:adjustments', {width: 16, height: 16}) }}
+                {#
+                 # Both labels are carried on the element so the controller can swap
+                 # them without a translation catalogue of its own in JavaScript.
+                 #}
+                <span data-dashboard-layout-target="editToggleLabel"
+                      data-customise-label="{{ 'dashboard.layout.customise'|trans }}"
+                      data-done-label="{{ 'dashboard.layout.done'|trans }}">{{ 'dashboard.layout.customise'|trans }}</span>
+            </button>
+
+            {#
+             # Saving is automatic on every change, so there is no save button. The
+             # status line is what tells the user that happened - without it the
+             # only feedback for a drag is the card moving, which is also exactly
+             # what a drag that failed to save looks like.
+             #}
+            <span class="dashboard-toolbar-status"
+                  role="status"
+                  aria-live="polite"
+                  data-saving-label="{{ 'dashboard.layout.saving'|trans }}"
+                  data-saved-label="{{ 'dashboard.layout.saved'|trans }}"
+                  data-error-label="{{ 'dashboard.layout.save_failed'|trans }}"
+                  data-dashboard-layout-target="status"></span>
+
+            <form method="post"
+                  action="{{ path('_dashboard_layout_reset') }}"
+                  class="dashboard-toolbar-reset"
+                  data-dashboard-layout-target="resetForm"
+                  hidden>
+                <input type="hidden" name="_token" value="{{ csrf_token('dashboard_layout_reset') }}">
+                <button type="submit" class="btn btn-ghost btn-sm">
+                    {{ ux_icon('tabler:rotate', {width: 16, height: 16}) }}
+                    {{ 'dashboard.layout.reset'|trans }}
+                </button>
+            </form>
         </div>
+
+        {#
+         # The picker holds two different kinds of entry, and the controller has to
+         # tell them apart: widgets hidden in an earlier session are rendered here
+         # by the server and have no markup anywhere on the page, so putting one
+         # back needs a reload to fetch its content. A widget removed a moment ago
+         # is only parked in the stash below and can be put straight back.
+         #}
+        <div class="dashboard-picker" data-dashboard-layout-target="picker" hidden>
+            <h2 class="dashboard-picker-title">{{ 'dashboard.layout.available'|trans }}</h2>
+
+            <div class="dashboard-picker-items" data-dashboard-layout-target="pickerItems">
+                {% for widget in dashboard_hidden_widgets() %}
+                    <button type="button"
+                            class="dashboard-picker-item"
+                            data-widget-id="{{ widget.id }}"
+                            data-widget-zone="{{ widget.zone.value }}"
+                            data-action="dashboard-layout#add">
+                        {{ ux_icon(widget.icon, {width: 16, height: 16}) }}
+                        {{ widget.label|trans }}
+                        {{ ux_icon('tabler:plus', {width: 14, height: 14}) }}
+                    </button>
+                {% endfor %}
+            </div>
+
+            <p class="dashboard-picker-empty" data-dashboard-layout-target="pickerEmpty">
+                {{ 'dashboard.layout.available_empty'|trans }}
+            </p>
+        </div>
+
+        <div class="row" data-dashboard-layout-target="zone" data-zone="top">
+            {{ render_dashboard_zone('top') }}
+        </div>
+
         <div class="row">
             <div class="col-lg-8">
-                {{ render_dashboard_widget('left_column') }}
+                <div class="row" data-dashboard-layout-target="zone" data-zone="left_column">
+                    {{ render_dashboard_zone('left_column') }}
+                </div>
             </div>
             <div class="col-lg-4">
-                {{ render_dashboard_widget('right_column') }}
+                <div class="row" data-dashboard-layout-target="zone" data-zone="right_column">
+                    {{ render_dashboard_zone('right_column') }}
+                </div>
             </div>
         </div>
+
+        {#
+         # Removed cards are parked here rather than destroyed, so putting one back
+         # is instant and costs no query. Nothing here is submitted or rendered.
+         #}
+        <div data-dashboard-layout-target="stash" hidden></div>
     </div>
 {% endblock content %}

@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\Widgets;
 
+use Augias\DashboardBundle\Attribute\AsDashboardWidget;
+use Augias\DashboardBundle\Enum\WidgetZone;
 use Augias\MoneyBundle\Currency\CurrencyScale;
 use Augias\PaymentBundle\Entity\Payment;
 use Augias\PaymentBundle\Repository\PaymentRepository;
@@ -34,6 +36,13 @@ use Symfony\UX\Chartjs\Model\Chart;
 /**
  * @see \Augias\DashboardBundle\Tests\Widgets\RevenueChartWidgetTest
  */
+#[AsDashboardWidget(
+    id: 'revenue_chart',
+    label: 'dashboard.widget.revenue_chart',
+    icon: 'tabler:chart-line',
+    zone: WidgetZone::LeftColumn,
+    priority: 100,
+)]
 final readonly class RevenueChartWidget implements WidgetInterface
 {
     private ObjectManager $manager;
@@ -129,6 +138,14 @@ final readonly class RevenueChartWidget implements WidgetInterface
             'hasError' => false,
             'hasData' => [] !== $revenueData,
         ];
+    }
+
+    /**
+     * Always applies; an account with no payments yet gets the empty state, not silence.
+     */
+    public function supports(): bool
+    {
+        return true;
     }
 
     public function getTemplate(): string

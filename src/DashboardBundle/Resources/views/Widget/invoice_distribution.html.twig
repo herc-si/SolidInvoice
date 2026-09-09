@@ -7,33 +7,31 @@
  # with this source code in the file LICENSE.
  #}
 
-<div class="col-12 mb-4">
-    <twig:Ui:Card>
-        <twig:block name="header">
-            <h3 class="card-title mb-0">{{ 'dashboard.charts.distribution_title'|trans }}</h3>
-        </twig:block>
+<twig:Ui:Card>
+    <twig:block name="header">
+        <h3 class="card-title mb-0">{{ 'dashboard.charts.distribution_title'|trans }}</h3>
+    </twig:block>
 
-        <div class="dashboard-donut-container">
-            {% if hasError %}
-                {% include '@AugiasDashboard/Widget/_error_state.html.twig' %}
-            {% elseif not hasData %}
-                <div class="dashboard-chart-empty">
-                    <div class="dashboard-chart-empty-icon">
-                        {{ ux_icon('tabler:chart-donut', {width: 48, height: 48}) }}
-                    </div>
-                    <p class="dashboard-chart-empty-text">{{ 'dashboard.charts.no_invoices'|trans }}</p>
-                    <a href="{{ path('_invoices_create') }}" class="btn btn-primary btn-sm">
-                        {{ ux_icon('tabler:plus', {width: 16, height: 16}) }}
-                        {{ 'dashboard.actions.create_invoice'|trans }}
-                    </a>
+    <div class="dashboard-donut-container">
+        {% if hasError %}
+            {% include '@AugiasDashboard/Widget/_error_state.html.twig' %}
+        {% elseif not hasData %}
+            <div class="dashboard-chart-empty">
+                <div class="dashboard-chart-empty-icon">
+                    {{ ux_icon('tabler:chart-donut', {width: 48, height: 48}) }}
                 </div>
-            {% else %}
-                <div class="dashboard-donut-center">
-                    <span class="dashboard-donut-total">{{ total }}</span>
-                    <span class="dashboard-donut-label">{{ 'dashboard.charts.invoices'|trans }}</span>
-                </div>
-                {{ render_chart(chart, {'class': 'dashboard-donut-chart'}) }}
-            {% endif %}
-        </div>
-    </twig:Ui:Card>
-</div>
+                <p class="dashboard-chart-empty-text">{{ 'dashboard.charts.no_invoices'|trans }}</p>
+                <a href="{{ path('_invoices_create') }}" class="btn btn-primary btn-sm">
+                    {{ ux_icon('tabler:plus', {width: 16, height: 16}) }}
+                    {{ 'dashboard.actions.create_invoice'|trans }}
+                </a>
+            </div>
+        {% else %}
+            <div class="dashboard-donut-center">
+                <span class="dashboard-donut-total">{{ total }}</span>
+                <span class="dashboard-donut-label">{{ 'dashboard.charts.invoices'|trans }}</span>
+            </div>
+            {{ render_chart(chart, {'class': 'dashboard-donut-chart'}) }}
+        {% endif %}
+    </div>
+</twig:Ui:Card>

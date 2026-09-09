@@ -14,11 +14,20 @@ declare(strict_types=1);
 namespace Augias\DashboardBundle\DependencyInjection\Compiler;
 
 use Augias\DashboardBundle\WidgetFactory;
+use LogicException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class DashboardWidgetCompilerPass implements CompilerPassInterface
+/**
+ * Feeds every `dashboard.widget` service into the registry.
+ *
+ * The tag is normally written by the #[AsDashboardWidget] attribute rather than
+ * by hand, but a hand-written tag is still honoured — it carries the same keys.
+ *
+ * @see \Augias\DashboardBundle\Tests\DependencyInjection\Compiler\DashboardWidgetCompilerPassTest
+ */
+final class DashboardWidgetCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
@@ -27,22 +36,38 @@ class DashboardWidgetCompilerPass implements CompilerPassInterface
         }
 
         $definition = $container->getDefinition(WidgetFactory::class);
-        $taggedServices = $container->findTaggedServiceIds('dashboard.widget');
+        $seen = [];
 
-        foreach ($taggedServices as $id => $tagAttributes) {
-            foreach ($tagAttributes as $attributes) {
-                if (! isset($attributes['location'])) {
-                    $attributes['location'] = null;
+        foreach ($container->findTaggedServiceIds('dashboard.widget') as $serviceId => $tags) {
+            foreach ($tags as $attributes) {
+                foreach (['id', 'label', 'icon', 'zone'] as $required) {
+                    if (! isset($attributes[$required]) || '' === $attributes[$required]) {
+                        throw new LogicException(sprintf('The "dashboard.widget" tag on service "%s" is missing the required "%s" attribute.', $serviceId, $required));
+                    }
                 }
 
-                if (! isset($attributes['priority'])) {
-                    $attributes['priority'] = null;
+                $id = (string) $attributes['id'];
+
+                // Two widgets sharing an id would silently overwrite each other in
+                // the registry, and every saved layout naming that id would then
+                // point at whichever one happened to be registered last. Fail at
+                // compile time instead: this is a bug, not a configuration choice.
+                if (isset($seen[$id])) {
+                    throw new LogicException(sprintf('Duplicate dashboard widget id "%s": declared by both "%s" and "%s".', $id, $seen[$id], $serviceId));
                 }
 
-                $definition->addMethodCall(
-                    'add',
-                    [new Reference($id), $attributes['location'], $attributes['priority']]
-                );
+                $seen[$id] = $serviceId;
+
+                $definition->addMethodCall('add', [
+                    new Reference($serviceId),
+                    $id,
+                    (string) $attributes['label'],
+                    (string) $attributes['icon'],
+                    (string) $attributes['zone'],
+                    (int) ($attributes['priority'] ?? 0),
+                    (bool) ($attributes['removable'] ?? true),
+                    (string) ($attributes['cssClass'] ?? ''),
+                ]);
             }
         }
     }

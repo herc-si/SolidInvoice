@@ -17,7 +17,7 @@
  #}
 {% if show|default(false) %}
 {% if error|default(false) %}
-<div class="col-12 mb-4 onboarding-widget">
+<div class="onboarding-widget">
     <div class="card">
         <div class="card-body">
             {% include '@AugiasDashboard/Widget/_error_state.html.twig' %}
@@ -27,7 +27,7 @@
 {% else %}
 {% if progress.allComplete %}
 {# Success State - All Complete #}
-<div class="col-12 mb-4 onboarding-widget">
+<div class="onboarding-widget">
     <div class="card card-active">
         <div class="card-stamp" aria-hidden="true">
             <div class="card-stamp-icon bg-success">
@@ -58,7 +58,7 @@
 </div>
 {% else %}
 {# In-Progress Onboarding Banner #}
-<div class="col-12 mb-4 onboarding-widget">
+<div class="onboarding-widget">
     <div class="card card-link card-link-pop"
          role="button"
          tabindex="0"

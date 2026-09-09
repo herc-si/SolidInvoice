@@ -826,6 +826,21 @@ dashboard:
         empty: 'There are no invoices available'
         recent: 'Recent Invoices'
         view_all: 'View All Invoices'
+    layout:
+        available: 'Available widgets'
+        available_empty: 'Every widget is on your dashboard.'
+        customise: Customise
+        done: Done
+        drag: 'Drag to move'
+        move_down: 'Move %widget% down'
+        move_up: 'Move %widget% up'
+        pinned: 'This widget is always shown'
+        remove: 'Remove %widget%'
+        reset: 'Reset layout'
+        reset_message: 'Dashboard layout reset to the default arrangement.'
+        save_failed: "Couldn't save - your changes are only on screen."
+        saved: Saved
+        saving: Saving...
     outstanding_invoices: 'Outstanding Invoices'
     payment:
         actions:
@@ -852,6 +867,14 @@ dashboard:
         recent: 'Recent Quotes'
         view_all: 'View All Quotes'
     title: Dashboard
+    widget:
+        attention_required: 'Attention Required'
+        hero_stats: 'Key Figures'
+        invoice_distribution: 'Invoice Status'
+        onboarding_checklist: 'Setup Checklist'
+        quick_actions: 'Quick Actions'
+        recent_activity: 'Recent Activity'
+        revenue_chart: 'Revenue Trend'
 datagrid:
     action:
         create_bill: "Create purchase invoice"

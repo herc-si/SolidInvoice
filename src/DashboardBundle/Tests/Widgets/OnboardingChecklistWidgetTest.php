@@ -26,7 +26,12 @@ final class OnboardingChecklistWidgetTest extends KernelTestCase
 {
     use EnsureApplicationInstalled;
 
-    public function testGetDataReturnsShowFalseWhenNoUserIsLoggedIn(): void
+    /**
+     * Applicability moved out of getData() and into supports(), so a dismissed or
+     * anonymous checklist is now settled before any of the items run their
+     * completion queries.
+     */
+    public function testDoesNotApplyWhenNoUserIsLoggedIn(): void
     {
         $security = $this->createStub(Security::class);
         $security->method('getUser')
@@ -35,13 +40,10 @@ final class OnboardingChecklistWidgetTest extends KernelTestCase
         $manager = self::getContainer()->get(ChecklistManager::class);
         $widget = new OnboardingChecklistWidget($manager, $security, new NullLogger());
 
-        $data = $widget->getData();
-
-        self::assertArrayHasKey('show', $data);
-        self::assertFalse($data['show']);
+        self::assertFalse($widget->supports());
     }
 
-    public function testGetDataReturnsShowFalseWhenChecklistIsDismissed(): void
+    public function testDoesNotApplyOnceTheChecklistIsDismissed(): void
     {
         $company = CompanyFactory::createOne();
         $user = UserFactory::createOne(['companies' => [$company]]);
@@ -54,10 +56,23 @@ final class OnboardingChecklistWidgetTest extends KernelTestCase
             ->willReturn($user);
 
         $widget = new OnboardingChecklistWidget($manager, $security, new NullLogger());
-        $data = $widget->getData();
 
-        self::assertArrayHasKey('show', $data);
-        self::assertFalse($data['show']);
+        self::assertFalse($widget->supports());
+    }
+
+    public function testAppliesForAUserWhoHasNotDismissedIt(): void
+    {
+        $company = CompanyFactory::createOne();
+        $user = UserFactory::createOne(['companies' => [$company]]);
+
+        $security = $this->createStub(Security::class);
+        $security->method('getUser')
+            ->willReturn($user);
+
+        $manager = self::getContainer()->get(ChecklistManager::class);
+        $widget = new OnboardingChecklistWidget($manager, $security, new NullLogger());
+
+        self::assertTrue($widget->supports());
     }
 
     public function testGetDataReturnsProgressWhenChecklistShouldBeShown(): void

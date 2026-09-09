@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\Widgets;
 
+use Augias\DashboardBundle\Attribute\AsDashboardWidget;
 use Augias\DashboardBundle\Checklist\ChecklistManager;
+use Augias\DashboardBundle\Enum\WidgetZone;
 use Augias\UserBundle\Entity\User;
 use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\ORM\Exception\ORMException;
@@ -23,6 +25,13 @@ use Symfony\Bundle\SecurityBundle\Security;
 /**
  * @see \Augias\DashboardBundle\Tests\Widgets\OnboardingChecklistWidgetTest
  */
+#[AsDashboardWidget(
+    id: 'onboarding_checklist',
+    label: 'dashboard.widget.onboarding_checklist',
+    icon: 'tabler:rocket',
+    zone: WidgetZone::Top,
+    priority: 300,
+)]
 final readonly class OnboardingChecklistWidget implements WidgetInterface
 {
     public function __construct(
@@ -33,24 +42,37 @@ final readonly class OnboardingChecklistWidget implements WidgetInterface
     }
 
     /**
-     * @return array<string, mixed>
+     * Dismissal is a per-user setting, so it belongs here rather than inside
+     * getData(): a dismissed checklist now costs one cheap settings read instead
+     * of running every item's isComplete() query only to throw the answer away.
+     *
+     * A failed read reports "supported" so the widget renders and shows its own
+     * error state. Returning false would make an outage look like a checklist
+     * the user had already finished.
      */
-    public function getData(): array
+    public function supports(): bool
     {
         $user = $this->security->getUser();
 
         if (! $user instanceof User) {
-            return ['show' => false];
+            return false;
         }
 
         try {
-            // Both calls read from the database, so both belong inside the guard:
-            // shouldShow() reads the user's dismissal setting, and getProgress()
-            // runs every item's isComplete() check.
-            if (! $this->checklistManager->shouldShow($user)) {
-                return ['show' => false];
-            }
+            return $this->checklistManager->shouldShow($user);
+        } catch (DBALException | ORMException $e) {
+            $this->logger->error('Unable to read the onboarding checklist visibility', ['exception' => $e]);
 
+            return true;
+        }
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getData(): array
+    {
+        try {
             $progress = $this->checklistManager->getProgress();
         } catch (DBALException | ORMException $e) {
             $this->logger->error('Unable to load the onboarding checklist progress', ['exception' => $e]);

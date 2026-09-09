@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 use Augias\DashboardBundle\Action\DismissOnboardingChecklist;
 use Augias\DashboardBundle\Action\Index;
+use Augias\DashboardBundle\Action\ResetDashboardLayout;
+use Augias\DashboardBundle\Action\SaveDashboardLayout;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {
@@ -22,6 +24,16 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     $routingConfigurator
         ->add('_dashboard_onboarding_dismiss', '/dashboard/onboarding/dismiss')
         ->controller(DismissOnboardingChecklist::class)
+        ->methods(['POST'])
+    ;
+    $routingConfigurator
+        ->add('_dashboard_layout_save', '/dashboard/layout')
+        ->controller(SaveDashboardLayout::class)
+        ->methods(['POST'])
+    ;
+    $routingConfigurator
+        ->add('_dashboard_layout_reset', '/dashboard/layout/reset')
+        ->controller(ResetDashboardLayout::class)
         ->methods(['POST'])
     ;
 };

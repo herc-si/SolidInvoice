@@ -1,0 +1,14 @@
+{#
+ # A widget whose rendering blew up, as opposed to one whose query failed.
+ #
+ # The widgets that catch their own database errors render _error_state inside
+ # their own card. This one is for failures the widget did not catch — a broken
+ # template, a missing service — where there is no card left standing, so it
+ # brings its own. Same wording either way: the user does not care which layer
+ # broke, only that this one card is not to be trusted.
+ #}
+<div class="card">
+    <div class="card-body">
+        {% include '@AugiasDashboard/Widget/_error_state.html.twig' %}
+    </div>
+</div>

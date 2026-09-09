@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\Widgets;
 
+use Augias\DashboardBundle\Attribute\AsDashboardWidget;
+use Augias\DashboardBundle\Enum\WidgetZone;
 use Augias\InvoiceBundle\Entity\Invoice;
 use Augias\InvoiceBundle\Entity\RecurringInvoice;
 use Augias\InvoiceBundle\Enum\InvoiceStatus;
@@ -27,6 +29,13 @@ use Doctrine\Persistence\ObjectManager;
 /**
  * @see \Augias\DashboardBundle\Tests\Widgets\AttentionRequiredWidgetTest
  */
+#[AsDashboardWidget(
+    id: 'attention_required',
+    label: 'dashboard.widget.attention_required',
+    icon: 'tabler:alert-triangle',
+    zone: WidgetZone::LeftColumn,
+    priority: 120,
+)]
 final readonly class AttentionRequiredWidget implements WidgetInterface
 {
     /**
@@ -85,6 +94,14 @@ final readonly class AttentionRequiredWidget implements WidgetInterface
             'upcomingRecurringTotal' => null,
             'hasItems' => [] !== $overdueInvoices || [] !== $draftInvoices || [] !== $pendingQuotes || [] !== $upcomingRecurring,
         ];
+    }
+
+    /**
+     * Always applies. An account with nothing overdue still wants to be told so.
+     */
+    public function supports(): bool
+    {
+        return true;
     }
 
     public function getTemplate(): string

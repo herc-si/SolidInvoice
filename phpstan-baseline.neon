@@ -487,22 +487,10 @@ parameters:
 			path: src/DashboardBundle/Tests/Action/DismissOnboardingChecklistTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''SplPriorityQueue'' and SplPriorityQueue will always evaluate to true\.$#'
-			identifier: staticMethod.alreadyNarrowedType
-			count: 7
-			path: src/DashboardBundle/Tests/WidgetFactoryTest.php
-
-		-
 			message: '#^Cannot unset property Augias\\DashboardBundle\\Tests\\Widgets\\WidgetTestCase\:\:\$company because it might have hooks in a subclass\.$#'
 			identifier: unset.possiblyHookedProperty
 			count: 1
 			path: src/DashboardBundle/Tests/Widgets/WidgetTestCase.php
-
-		-
-			message: '#^PHPDoc tag @var with type array\<Augias\\DashboardBundle\\Widgets\\WidgetInterface\> is not subtype of native type SplPriorityQueue\.$#'
-			identifier: varTag.nativeType
-			count: 1
-			path: src/DashboardBundle/Twig/Extension/WidgetExtension.php
 
 		-
 			message: '#^Strict comparison using \!\=\= between non\-falsy\-string and '''' will always evaluate to true\.$#'

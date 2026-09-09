@@ -21,4 +21,17 @@ interface WidgetInterface
     public function getData(): array;
 
     public function getTemplate(): string;
+
+    /**
+     * Whether this widget has anything to say in the current context.
+     *
+     * Checked before {@see getData()}, so a widget that cannot apply — no
+     * accounting regime chosen, a feature switched off — costs no queries. It
+     * also governs the picker: an unsupported widget is not offered, and is
+     * skipped even when an older saved layout still names it.
+     *
+     * This is not the place for "the user hid it". Hiding is the layout's job,
+     * and a widget that hides itself cannot be brought back.
+     */
+    public function supports(): bool;
 }
