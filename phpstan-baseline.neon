@@ -487,6 +487,12 @@ parameters:
 			path: src/DashboardBundle/Tests/Action/DismissOnboardingChecklistTest.php
 
 		-
+			message: '#^Cannot unset property Augias\\ElectronicInvoicingBundle\\Tests\\Dashboard\\EInvoicingWidgetTestCase\:\:\$company because it might have hooks in a subclass\.$#'
+			identifier: unset.possiblyHookedProperty
+			count: 1
+			path: src/InstallBundle/Test/EnsureApplicationInstalled.php
+
+		-
 			message: '#^Cannot unset property Augias\\AccountingBundle\\Tests\\Dashboard\\AccountingWidgetTestCase\:\:\$company because it might have hooks in a subclass\.$#'
 			identifier: unset.possiblyHookedProperty
 			count: 1

@@ -821,6 +821,16 @@ dashboard:
             overdue: 'En retard'
             paid: Payée
             pending: 'En attente'
+    einvoicing:
+        inbox_empty: "Rien en attente. Les factures arrivent ici toutes seules."
+        incoming_subtitle: 'Reçues, pas encore enregistrées en achats'
+        incoming_title: 'Boîte de réception électronique'
+        nothing_sent: "Aucune facture n'a encore été envoyée électroniquement."
+        outgoing_subtitle: 'Où en sont vos transmissions'
+        outgoing_title: 'Envoyées électroniquement'
+        rejected_count: '{1} 1 rejetée|]1,Inf] %count% rejetées'
+        unknown_seller: 'Émetteur non nommé'
+        view_all: Réception
     error:
         body: "Nous n'avons pas pu charger ces données, donc les chiffres affichés ici sont incomplets. Vos factures et paiements sont en sécurité. Réessayez dans un instant ; si le problème persiste, vos journaux serveur contiendront les détails."
         retry: 'Réessayer'
@@ -868,6 +878,13 @@ dashboard:
         recent: 'Paiements récents'
         view_all: 'Voir tous les paiements'
     pending_quotes: 'Devis en attente'
+    purchases:
+        nothing_owed: 'Rien à payer aux fournisseurs.'
+        outstanding: 'Reste à payer'
+        overdue: 'Échéance dépassée'
+        subtitle: 'Ce que vous devez à vos fournisseurs'
+        title: Achats
+        view_all: 'Tous les achats'
     quick_nav:
         clients: Clients
         invoices: Factures
@@ -889,11 +906,14 @@ dashboard:
         accounting_declarations: 'Déclarations en attente'
         accounting_turnover: "Chiffre d'affaires et seuils"
         attention_required: 'Points à traiter'
+        einvoicing_incoming: 'Réception électronique'
+        einvoicing_outgoing: 'Envois électroniques'
         invoice_distribution: 'Statut des factures'
         onboarding_checklist: 'Liste de configuration'
         outstanding_total: Impayé
         overdue_invoices: 'Factures en retard'
         payments_this_month: 'Encaissé ce mois-ci'
+        purchases: 'Achats'
         quick_actions: 'Actions rapides'
         recent_activity: 'Activité récente'
         revenue_chart: "Évolution du chiffre d'affaires"

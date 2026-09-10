@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Augias\BillBundle\Repository;
 
 use Augias\BillBundle\Entity\Bill;
+use Augias\BillBundle\Entity\BillPayment;
 use Augias\BillBundle\Enum\BillStatus;
+use Brick\Math\BigInteger;
 use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
@@ -52,5 +54,109 @@ class BillRepository extends EntityRepository
     {
         $this->getEntityManager()->remove($bill);
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * Bills still owed, oldest due date first.
+     *
+     * The supplier is joined and selected because the caller renders its name
+     * for every row, and a lazy proxy per bill would be one query each.
+     *
+     * @return list<Bill>
+     */
+    public function getUnpaidBills(int $limit = 5): array
+    {
+        return $this->createQueryBuilder('b')
+            ->innerJoin('b.supplier', 's')
+            ->addSelect('s')
+            ->andWhere('b.status IN (:statuses)')
+            ->setParameter('statuses', [BillStatus::Overdue->value, BillStatus::Pending->value])
+            // Nulls last: a bill with no due date is owed but not late, and it
+            // has no business sorting ahead of one that is.
+            ->orderBy('CASE WHEN b.dueDate IS NULL THEN 1 ELSE 0 END', 'ASC')
+            ->addOrderBy('b.dueDate', 'ASC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function countByStatus(BillStatus $status): int
+    {
+        return (int) $this->createQueryBuilder('b')
+            ->select('COUNT(b.id)')
+            ->andWhere('b.status = :status')
+            ->setParameter('status', $status->value)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * What is still owed to suppliers, per currency, in minor units.
+     *
+     * Two queries rather than one, and deliberately: a Bill has no balance
+     * column — what is left to pay is the total minus the payments recorded
+     * against it — and joining the payments in to subtract them would multiply
+     * each bill's row by its number of payments, inflating the total it was
+     * meant to reduce. Summing the two sides separately cannot fan out.
+     *
+     * Bills are counted in their own currency and never converted; an exchange
+     * rate invented here would be one the books never recorded.
+     *
+     * @return array<string, BigInteger>
+     */
+    public function getOutstandingByCurrency(): array
+    {
+        $statuses = [BillStatus::Overdue->value, BillStatus::Pending->value];
+
+        $billed = $this->createQueryBuilder('b')
+            ->select('b.currencyCode AS currencyCode', 'SUM(b.totalAmount) AS total')
+            ->andWhere('b.status IN (:statuses)')
+            ->setParameter('statuses', $statuses)
+            ->groupBy('b.currencyCode')
+            ->getQuery()
+            ->getArrayResult();
+
+        $paid = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('b.currencyCode AS currencyCode', 'SUM(p.amount) AS total')
+            ->from(BillPayment::class, 'p')
+            ->innerJoin('p.bill', 'b')
+            ->andWhere('b.status IN (:statuses)')
+            ->setParameter('statuses', $statuses)
+            ->groupBy('b.currencyCode')
+            ->getQuery()
+            ->getArrayResult();
+
+        $paidByCurrency = [];
+
+        foreach ($paid as $row) {
+            $paidByCurrency[(string) $row['currencyCode']] = BigInteger::of($row['total'] ?? 0);
+        }
+
+        $outstanding = [];
+
+        foreach ($billed as $row) {
+            $currency = (string) $row['currencyCode'];
+
+            if ('' === $currency || null === $row['total']) {
+                continue;
+            }
+
+            $balance = BigInteger::of($row['total'])
+                ->minus($paidByCurrency[$currency] ?? BigInteger::zero());
+
+            // Overpaid is not negative money owed. Bill::getBalance() takes the
+            // same view one bill at a time, and the total has to agree with the
+            // rows the user can see under it.
+            if ($balance->isNegative()) {
+                $balance = BigInteger::zero();
+            }
+
+            if (! $balance->isZero()) {
+                $outstanding[$currency] = $balance;
+            }
+        }
+
+        return $outstanding;
     }
 }

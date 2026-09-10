@@ -1,0 +1,107 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) HERC SI <opensource@herc-si.fr>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+<twig:Ui:Card>
+    <twig:block name="header">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <div>
+                <h3 class="card-title mb-0">{{ 'dashboard.purchases.title'|trans }}</h3>
+                <small class="text-muted">{{ 'dashboard.purchases.subtitle'|trans }}</small>
+            </div>
+            <a href="{{ path('_bills_index') }}" class="btn btn-sm btn-ghost">
+                {{ 'dashboard.purchases.view_all'|trans }}
+                {{ ux_icon('tabler:arrow-right', {width: 16, height: 16}) }}
+            </a>
+        </div>
+    </twig:block>
+
+    {#
+     # Imported inside the slot, not at the top of the file: the default slot of
+     # a twig:Ui:Card compiles as its own template, so a top-level import is out
+     # of scope by the time the rows below render.
+     #}
+    {% import '@AugiasDashboard/money.html.twig' as money %}
+
+    {% if not hasBills %}
+        <div class="attention-empty">
+            <div class="attention-empty-icon">
+                {{ ux_icon('tabler:check', {width: 32, height: 32}) }}
+            </div>
+            <p class="attention-empty-text">{{ 'dashboard.purchases.nothing_owed'|trans }}</p>
+        </div>
+    {% else %}
+        {#
+         # One total per currency, stacked and captioned rather than summed. A
+         # bill is paid in the currency it was issued in, so two currencies are
+         # two separate answers to "what do I owe", never one.
+         #}
+        <div class="d-flex justify-content-between align-items-baseline mb-3">
+            <span class="text-muted">{{ 'dashboard.purchases.outstanding'|trans }}</span>
+            <span class="d-flex flex-column align-items-end gap-1">
+                {% for currency, amount in outstanding %}
+                    {# Neutral: this is money not yet paid out. It is not a loss and not a gain. #}
+                    {{ money.money(amount, currency, ['total']) }}
+                {% else %}
+                    {{ money.money(0, null, ['total']) }}
+                {% endfor %}
+            </span>
+        </div>
+
+        {% if overdueTotal > 0 %}
+            <div class="attention-section-header attention-section-header--danger">
+                {{ ux_icon('tabler:alert-triangle', {width: 16, height: 16}) }}
+                <span>{{ 'dashboard.purchases.overdue'|trans }}</span>
+                <span class="attention-badge attention-badge--danger">{{ overdueTotal }}</span>
+            </div>
+        {% endif %}
+
+        <div class="attention-items">
+            {% for bill in bills %}
+                {% set isOverdue = bill.status.value == 'overdue' %}
+                <a href="{{ path('_bills_view', {id: bill.id}) }}"
+                   class="attention-item{{ isOverdue ? ' attention-item--danger' }}">
+                    <span class="attention-item-main">
+                        {% if bill.billNumber %}
+                            <span class="attention-item-id">{{ bill.billNumber }}</span>
+                        {% endif %}
+                        <span class="attention-item-client">{{ bill.supplier.name }}</span>
+                    </span>
+                    <span class="attention-item-meta">
+                        {#
+                         # The balance, not the total: what is still owed is the
+                         # number the user is deciding on, and a part-paid bill
+                         # showing its full amount would overstate it.
+                         # `--overdue` is earned only where the row says so.
+                         #}
+                        <span class="attention-item-amount">
+                            {{ money.money(bill.balance.amount, bill.currencyCode, isOverdue ? ['overdue'] : []) }}
+                        </span>
+                        {% if bill.dueDate %}
+                            <span class="attention-item-date{{ isOverdue ? ' text-danger' }}">
+                                {{ bill.dueDate|date('M j') }}
+                            </span>
+                        {% endif %}
+                    </span>
+                </a>
+            {% endfor %}
+        </div>
+
+        {% if unpaidTotal > bills|length %}
+            <div class="d-flex align-items-center justify-content-between gap-2 px-3 py-2">
+                <span class="text-secondary small">
+                    {{ 'dashboard.attention.showing'|trans({'%shown%': bills|length, '%total%': unpaidTotal}) }}
+                </span>
+                <a href="{{ path('_bills_index') }}" class="btn btn-sm btn-ghost">
+                    {{ 'dashboard.attention.view_all'|trans }}
+                    {{ ux_icon('tabler:arrow-right', {width: 14, height: 14}) }}
+                </a>
+            </div>
+        {% endif %}
+    {% endif %}
+</twig:Ui:Card>

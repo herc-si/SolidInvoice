@@ -1,0 +1,73 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) HERC SI <opensource@herc-si.fr>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{#
+ # How the invoices sent electronically are getting on.
+ #
+ # The status badge takes its colour from the status enum rather than from a
+ # table here, so this card cannot disagree with the invoice's own page about
+ # what Accepted looks like. Rejections are also counted in the header: they are
+ # the only outcome that needs a person, and unlike a pending one they do not
+ # resolve themselves.
+ #}
+<twig:Ui:Card>
+    <twig:block name="header">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <div>
+                <h3 class="card-title mb-0">{{ 'dashboard.einvoicing.outgoing_title'|trans }}</h3>
+                <small class="text-muted">{{ 'dashboard.einvoicing.outgoing_subtitle'|trans }}</small>
+            </div>
+            {% if failedTotal > 0 %}
+                <span class="attention-badge attention-badge--danger">
+                    {{ 'dashboard.einvoicing.rejected_count'|trans({'%count%': failedTotal}) }}
+                </span>
+            {% endif %}
+        </div>
+    </twig:block>
+
+    {% if not hasSubmissions %}
+        <div class="attention-empty">
+            <div class="attention-empty-icon">
+                {{ ux_icon('tabler:send', {width: 32, height: 32}) }}
+            </div>
+            <p class="attention-empty-text">{{ 'dashboard.einvoicing.nothing_sent'|trans }}</p>
+        </div>
+    {% else %}
+        <div class="attention-items">
+            {% for submission in submissions %}
+                {% set status = statuses[submission.id] %}
+                <a href="{{ path('_invoices_view', {id: submission.invoice.id}) }}"
+                   class="attention-item{{ status.value == 'rejected' ? ' attention-item--danger' }}">
+                    <span class="attention-item-main">
+                        {#
+                         # An invoice only gets its number when it is issued, and
+                         # in practice nothing is transmitted before that — but a
+                         # bare "#" is worse than no number at all if it happens.
+                         #}
+                        {% if submission.invoice.invoiceId %}
+                            <span class="attention-item-id">#{{ submission.invoice.invoiceId }}</span>
+                        {% endif %}
+                        {#
+                         # The provider's own message, when it left one. A rejection
+                         # without its reason sends the user to the platform to find
+                         # out what this card already knows.
+                         #}
+                        {% if submission.message %}
+                            <span class="attention-item-client">{{ submission.message }}</span>
+                        {% endif %}
+                    </span>
+                    <span class="attention-item-meta">
+                        <span class="badge bg-{{ status.color }}-lt">{{ status.label }}</span>
+                        <span class="attention-item-date">{{ submission.created|date('M j') }}</span>
+                    </span>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+</twig:Ui:Card>
