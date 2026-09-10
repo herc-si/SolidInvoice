@@ -17,7 +17,7 @@ use Augias\AccountingBundle\Entity\AccountingPeriod;
 use Augias\AccountingBundle\Entity\ThresholdAlert;
 use Augias\AccountingBundle\Enum\LedgerBook;
 use Augias\AccountingBundle\Model\AccountingProfile;
-use Augias\AccountingBundle\Model\Threshold;
+use Augias\AccountingBundle\Model\LimitUsage;
 use Augias\AccountingBundle\Model\TurnoverSummary;
 use Augias\AccountingBundle\Regime\RegimeInterface;
 use Augias\AccountingBundle\Regime\RegimeRegistry;
@@ -25,9 +25,9 @@ use Augias\AccountingBundle\Repository\AccountingPeriodRepository;
 use Augias\AccountingBundle\Repository\ThresholdAlertRepository;
 use Augias\AccountingBundle\Service\AccountingProfileProvider;
 use Augias\AccountingBundle\Service\CurrentCompany;
+use Augias\AccountingBundle\Service\LimitUsageCalculator;
 use Augias\AccountingBundle\Service\TurnoverCalculator;
 use Augias\CoreBundle\Entity\Company;
-use Brick\Math\RoundingMode;
 use DateTimeImmutable;
 use Symfony\Bridge\Twig\Attribute\Template;
 
@@ -50,6 +50,7 @@ final readonly class Index
         private RegimeRegistry $registry,
         private CurrentCompany $currentCompany,
         private TurnoverCalculator $turnoverCalculator,
+        private LimitUsageCalculator $limitUsageCalculator,
         private AccountingPeriodRepository $periodRepository,
         private ThresholdAlertRepository $alertRepository,
     ) {
@@ -61,7 +62,7 @@ final readonly class Index
      *     regime: RegimeInterface|null,
      *     books: list<LedgerBook>,
      *     turnover: TurnoverSummary|null,
-     *     limits: list<array{threshold: Threshold, used: int}>,
+     *     limits: list<LimitUsage>,
      *     period: AccountingPeriod|null,
      *     alerts: list<ThresholdAlert>,
      *     year: int
@@ -96,50 +97,10 @@ final readonly class Index
             'regime' => $regime,
             'books' => $regime->books($profile),
             'turnover' => $turnover,
-            'limits' => $this->limits($regime, $profile, $turnover, $today),
+            'limits' => $this->limitUsageCalculator->forTurnover($regime, $profile, $turnover, $today),
             'period' => $this->periodRepository->findForDate($company, $profile->declarationPeriodicity, $today),
             'alerts' => $this->alertRepository->findForYear($company, $year),
             'year' => $year,
         ];
-    }
-
-    /**
-     * Every limit that has anything to measure, with how much of it is used.
-     *
-     * Limits on an activity the company has no turnover in are left out: a
-     * services business does not need a row telling it that it has used 0% of
-     * the ceiling for selling goods.
-     *
-     * @return list<array{threshold: Threshold, used: int}>
-     */
-    private function limits(
-        RegimeInterface $regime,
-        AccountingProfile $profile,
-        TurnoverSummary $turnover,
-        DateTimeImmutable $on,
-    ): array {
-        $limits = [];
-
-        foreach ($regime->thresholds($profile, $on) as $threshold) {
-            $amount = null === $threshold->nature
-                ? $turnover->total()
-                : $turnover->forNature($threshold->nature);
-
-            if ($amount->isZero()) {
-                continue;
-            }
-
-            $limits[] = [
-                'threshold' => $threshold,
-                // A whole percent is as fine as this reads; handed over as an
-                // int so the template can compare and size a bar with it
-                // instead of unwrapping a BigDecimal in Twig.
-                'used' => $threshold->usageRatio($amount)
-                    ->toScale(0, RoundingMode::HalfUp)
-                    ->toInt(),
-            ];
-        }
-
-        return $limits;
     }
 }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Augias\AccountingBundle\Service;
 
 use Augias\AccountingBundle\Entity\ThresholdAlert;
+use Augias\AccountingBundle\Enum\LimitSeverity;
 use Augias\AccountingBundle\Model\AccountingProfile;
 use Augias\AccountingBundle\Model\RaisedThreshold;
 use Augias\AccountingBundle\Model\Threshold;
@@ -51,9 +52,13 @@ final readonly class ThresholdMonitor
      * highest down so that a company that leaps past both in one day is told
      * about the crossing rather than about approaching it.
      *
+     * Taken from {@see LimitSeverity} rather than written out again: an email
+     * saying the company is nearing a limit and a bar that turns amber on the
+     * dashboard must not be able to disagree about where "nearing" starts.
+     *
      * @var list<int>
      */
-    public const array STEPS = [100, 80];
+    public const array STEPS = [LimitSeverity::EXCEEDED_AT, LimitSeverity::NEARING_AT];
 
     public function __construct(
         private EntityManagerInterface $entityManager,

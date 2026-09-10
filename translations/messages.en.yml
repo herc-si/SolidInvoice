@@ -692,6 +692,13 @@ dashboard:
         create_quote: 'New Quote'
         title: 'Quick Actions'
         view_payments: Payments
+    accounting:
+        collected: 'Collected so far'
+        more_limits: '{1} 1 further limit is not shown|]1,Inf] %count% further limits are not shown'
+        no_limits: 'No limit applies to the activities you have taken money in this year.'
+        no_turnover: 'Nothing recorded in the revenue book for %year% yet.'
+        turnover_title: 'Turnover %year%'
+        view_books: 'The books'
     active_clients: 'Active Clients'
     activity:
         generated_from_recurring: 'generated automatically'
@@ -870,6 +877,7 @@ dashboard:
         view_all: 'View All Quotes'
     title: Dashboard
     widget:
+        accounting_turnover: 'Turnover vs Limits'
         attention_required: 'Attention Required'
         invoice_distribution: 'Invoice Status'
         onboarding_checklist: 'Setup Checklist'

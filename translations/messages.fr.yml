@@ -692,6 +692,13 @@ dashboard:
         create_quote: 'Nouveau devis'
         title: 'Actions rapides'
         view_payments: Paiements
+    accounting:
+        collected: 'Encaissé à ce jour'
+        more_limits: "{1} 1 autre limite n'est pas affichée|]1,Inf] %count% autres limites ne sont pas affichées"
+        no_limits: "Aucune limite ne s'applique aux activités dans lesquelles vous avez encaissé cette année."
+        no_turnover: 'Rien enregistré au livre des recettes pour %year% pour le moment.'
+        turnover_title: "Chiffre d'affaires %year%"
+        view_books: 'Les livres'
     active_clients: 'Clients actifs'
     activity:
         generated_from_recurring: 'générée automatiquement'
@@ -870,6 +877,7 @@ dashboard:
         view_all: 'Voir tous les devis'
     title: 'Tableau de bord'
     widget:
+        accounting_turnover: "Chiffre d'affaires et seuils"
         attention_required: 'Points à traiter'
         invoice_distribution: 'Statut des factures'
         onboarding_checklist: 'Liste de configuration'
