@@ -108,10 +108,15 @@ accounting:
         close: 'Clôturer %period%'
         close_help: 'La clôture numérote les écritures, les scelle et fige les totaux. C''est définitif.'
         closed_on: 'Clôturée le %date%.'
+        create: 'La créer'
         flash:
+            bad_date: "Cette période n'a pas pu être lue, rien n'a été créé."
             cannot_close: 'Cette période ne peut pas être clôturée : elle l''est déjà, ou une période antérieure est encore ouverte.'
             closed: La période a été clôturée.
+            created: 'La période a été créée. Clôturez-la quand vous serez prêt à la déclarer.'
+            not_configured: 'Choisissez un régime fiscal avant de créer des périodes.'
         none: 'Aucune période ouverte : elle sera créée par la première écriture.'
+        not_created: 'Non créée'
         sealed_notice: 'La période %period% est clôturée : ses écritures ne sont plus modifiables.'
         title: Période en cours
     period_status:
@@ -695,6 +700,7 @@ dashboard:
     accounting:
         action:
             close: 'Clôturer les livres de cette période'
+            create: 'Créer cette période, puis la déclarer à néant'
             file: 'Déclarer cette période'
         all_periods: 'Toutes les périodes'
         collected: 'Encaissé à ce jour'

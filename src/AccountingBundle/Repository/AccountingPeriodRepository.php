@@ -174,4 +174,32 @@ class AccountingPeriodRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Every period of one type whose span overlaps the given range.
+     *
+     * Used to work out which periods a company is missing, so it is the rows
+     * that exist that matter, not their status.
+     *
+     * @return list<AccountingPeriod>
+     */
+    public function findBetween(
+        Company $company,
+        PeriodType $type,
+        DateTimeImmutable $from,
+        DateTimeImmutable $to,
+    ): array {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.company = :company')
+            ->andWhere('p.type = :type')
+            ->andWhere('p.endDate >= :from')
+            ->andWhere('p.startDate <= :to')
+            ->setParameter('company', $company->getId(), UlidType::NAME)
+            ->setParameter('type', $type->value)
+            ->setParameter('from', $from)
+            ->setParameter('to', $to)
+            ->orderBy('p.startDate', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

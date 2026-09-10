@@ -108,10 +108,15 @@ accounting:
         close: 'Close %period%'
         close_help: 'Closing numbers the entries, seals them and freezes the totals. It cannot be undone.'
         closed_on: 'Closed on %date%.'
+        create: 'Create it'
         flash:
+            bad_date: 'That period could not be read, so nothing was created.'
             cannot_close: 'This period cannot be closed: it already is, or an earlier one is still open.'
             closed: The period has been closed.
+            created: 'The period has been created. Close it when you are ready to declare it.'
+            not_configured: 'Choose a tax regime before creating periods.'
         none: No period is open yet — the first entry creates one.
+        not_created: 'Not created'
         sealed_notice: 'Period %period% is closed: its entries can no longer be changed.'
         title: Current period
     period_status:
@@ -695,6 +700,7 @@ dashboard:
     accounting:
         action:
             close: 'Close the books for this period'
+            create: 'Create this period, then declare it as nil'
             file: 'File this declaration'
         all_periods: 'All periods'
         collected: 'Collected so far'

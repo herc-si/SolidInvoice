@@ -16,8 +16,8 @@ namespace Augias\AccountingBundle\Enum;
 /**
  * What still has to happen before a period that has ended is declared.
  *
- * Two steps, in order, and the user has to be told which one they are on:
- * "close the quarter" and "file the quarter" are different jobs, on different
+ * Three steps, in order, and the user has to be told which one they are on:
+ * creating the period, closing it and filing it are different jobs on different
  * screens, and a card that lumps them into "declaration outstanding" leaves the
  * user to work out which. Augias never files anything itself — {@see self::File}
  * means copying the figures onto the collecting body's own site and coming back
@@ -25,6 +25,13 @@ namespace Augias\AccountingBundle\Enum;
  */
 enum DeclarationAction: string
 {
+    /**
+     * Nothing was booked in that period, so it has no row — and a nil return
+     * needs something to attach itself to. Creating it is a decision, not
+     * something a background job takes on the user's behalf.
+     */
+    case Create = 'create';
+
     /** The period has ended but its entries are still editable. */
     case Close = 'close';
 

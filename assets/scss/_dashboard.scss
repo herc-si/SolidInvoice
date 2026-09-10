@@ -416,6 +416,24 @@
     }
 }
 
+// One of the Attention rows writes instead of navigating — creating an
+// accounting period — so it is a submit button inside a form rather than an
+// anchor. These two rules are what stop the browser's own button chrome from
+// making it look like a different kind of thing to the rows above it.
+
+.attention-item-form {
+    display: contents;
+}
+
+.attention-item--button {
+    background: none;
+    border: none;
+    font: inherit;
+    text-align: inherit;
+    width: 100%;
+    cursor: pointer;
+}
+
 .attention-item-main {
     display: flex;
     align-items: center;
