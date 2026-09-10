@@ -20,6 +20,7 @@ use Augias\AccountingBundle\Regime\RegimeInterface;
 use Augias\AccountingBundle\Regime\RegimeRegistry;
 use Augias\AccountingBundle\Service\AccountingProfileProvider;
 use Augias\AccountingBundle\Service\DeclarationBuilder;
+use DateTimeImmutable;
 use Symfony\Bridge\Twig\Attribute\Template;
 use function array_map;
 
@@ -46,7 +47,8 @@ final readonly class View
      *     period: AccountingPeriod,
      *     declaration: Declaration,
      *     lines: list<DeclarationLine>,
-     *     regime: RegimeInterface|null
+     *     regime: RegimeInterface|null,
+     *     periodHasEnded: bool
      * }
      */
     #[Template('@AugiasAccounting/Declaration/view.html.twig')]
@@ -63,6 +65,12 @@ final readonly class View
             // draft must show the figures it was last saved with.
             'lines' => array_map(DeclarationLine::fromArray(...), $declaration->getLines()),
             'regime' => $this->registry->forProfile($profile),
+            // Closing lives on this page rather than the home page: the home
+            // page only ever shows the period today falls in, which by the rule
+            // in AccountingPeriodManager::close() can never be sealed yet. This
+            // is the page that is reached per period, and the one already
+            // explaining why the figures are not final.
+            'periodHasEnded' => $period->getEndDate() < new DateTimeImmutable('today'),
         ];
     }
 }

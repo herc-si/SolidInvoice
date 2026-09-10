@@ -117,6 +117,7 @@ accounting:
             not_configured: 'Choose a tax regime before creating periods.'
         none: No period is open yet — the first entry creates one.
         not_created: 'Not created'
+        still_running: 'This period runs until %date%. It can be closed once it has ended — money received before then still belongs in it.'
         sealed_notice: 'Period %period% is closed: its entries can no longer be changed.'
         title: Current period
     period_status:

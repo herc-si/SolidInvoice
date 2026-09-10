@@ -72,7 +72,12 @@ final readonly class ClosePeriod
 
         $session->getFlashBag()->add('success', 'accounting.period.flash.closed');
 
-        return $this->back();
+        // To the declaration rather than back where they came from: the figures
+        // are final now, and filing them is the only thing left to do with this
+        // period.
+        return new RedirectResponse(
+            $this->router->generate('_accounting_declaration_view', ['id' => $period->getId()]),
+        );
     }
 
     private function back(): RedirectResponse

@@ -115,8 +115,25 @@
                             {{ 'accounting.declaration.mark_submitted'|trans }}
                         </button>
                     </form>
+                {% elseif periodHasEnded %}
+                    {#
+                     # The books are still open but the period is over, so the
+                     # figures above are final in all but name. Sealing them is
+                     # the step before filing, and this is the page that says so.
+                     #}
+                    <p class="text-muted">{{ 'accounting.declaration.period_still_open'|trans }}</p>
+
+                    <form method="post" action="{{ path('_accounting_period_close', {'id': period.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('close' ~ period.id) }}">
+                        <button type="submit" class="btn btn-outline-primary w-100">
+                            {{ ux_icon('tabler:lock', {width: 18, height: 18}) }}
+                            {{ 'accounting.period.close'|trans({'%period%': period.label}) }}
+                        </button>
+                    </form>
                 {% else %}
-                    <p class="text-muted mb-0">{{ 'accounting.declaration.period_still_open'|trans }}</p>
+                    <p class="text-muted mb-0">
+                        {{ 'accounting.period.still_running'|trans({'%date%': period.endDate|date('d F Y')}) }}
+                    </p>
                 {% endif %}
             </twig:Ui:Card>
         </div>
