@@ -18,46 +18,15 @@ use Augias\AccountingBundle\Dashboard\TurnoverAgainstLimitsWidget;
 use Augias\AccountingBundle\Entity\LedgerEntry;
 use Augias\AccountingBundle\Enum\ActivityNature;
 use Augias\AccountingBundle\Enum\LedgerBook;
-use Augias\AccountingBundle\Enum\PeriodType;
 use Augias\AccountingBundle\Model\LimitUsage;
 use Augias\AccountingBundle\Model\TurnoverSummary;
-use Augias\AccountingBundle\Regime\Fr\MicroEntrepriseRegime;
-use Augias\CoreBundle\Entity\Company;
-use Augias\InstallBundle\Test\EnsureApplicationInstalled;
-use Augias\SettingsBundle\SystemConfig;
 use Brick\Math\BigInteger;
 use DateTimeImmutable;
-use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
-use Spatie\Snapshots\MatchesSnapshots;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Twig\Environment;
 
 #[CoversClass(TurnoverAgainstLimitsWidget::class)]
-final class TurnoverAgainstLimitsWidgetTest extends KernelTestCase
+final class TurnoverAgainstLimitsWidgetTest extends AccountingWidgetTestCase
 {
-    use EnsureApplicationInstalled;
-    use MatchesSnapshots;
-
-    private EntityManagerInterface $entityManager;
-
-    private SystemConfig $config;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $entityManager = self::getContainer()->get('doctrine')->getManager();
-        self::assertInstanceOf(EntityManagerInterface::class, $entityManager);
-        $this->entityManager = $entityManager;
-
-        $config = self::getContainer()->get(SystemConfig::class);
-        self::assertInstanceOf(SystemConfig::class, $config);
-        $this->config = $config;
-
-        $this->config->set(SystemConfig::CURRENCY_CONFIG_PATH, 'EUR');
-    }
-
     /**
      * A company that has not chosen a regime has no business being told its
      * turnover is within a limit it never picked. supports() runs before
@@ -141,7 +110,7 @@ final class TurnoverAgainstLimitsWidgetTest extends KernelTestCase
     {
         $this->configureMicroEntreprise();
 
-        $this->assertMatchesHtmlSnapshot($this->render());
+        $this->assertMatchesHtmlSnapshot($this->render($this->widget()));
     }
 
     public function testRendersTurnoverAgainstItsLimits(): void
@@ -151,7 +120,7 @@ final class TurnoverAgainstLimitsWidgetTest extends KernelTestCase
 
         // 6,500,000 of a 7,770,000 BNC ceiling: past the 80% mark, so the bar is
         // the amber one and the snapshot is what holds that.
-        $this->assertMatchesHtmlSnapshot($this->render());
+        $this->assertMatchesHtmlSnapshot($this->render($this->widget()));
     }
 
     public function testGetTemplate(): void
@@ -162,18 +131,8 @@ final class TurnoverAgainstLimitsWidgetTest extends KernelTestCase
         );
     }
 
-    private function configureMicroEntreprise(): void
-    {
-        $this->config->set(AccountingSettings::REGIME, MicroEntrepriseRegime::CODE);
-        $this->config->set(AccountingSettings::PRIMARY_ACTIVITY, ActivityNature::ServicesBnc->value);
-        $this->config->set(AccountingSettings::DECLARATION_PERIODICITY, PeriodType::Quarter->value);
-    }
-
     private function revenue(int $amount, DateTimeImmutable $on): void
     {
-        $company = $this->entityManager->find(Company::class, $this->company->getId());
-        self::assertInstanceOf(Company::class, $company);
-
         $entry = new LedgerEntry()
             ->setBook(LedgerBook::Revenue)
             ->setEntryDate($on)
@@ -183,20 +142,10 @@ final class TurnoverAgainstLimitsWidgetTest extends KernelTestCase
             ->setCurrencyCode('EUR')
             ->setActivityNature(ActivityNature::ServicesBnc);
 
-        $entry->setCompany($company);
+        $entry->setCompany($this->companyReference());
 
         $this->entityManager->persist($entry);
         $this->entityManager->flush();
-    }
-
-    private function render(): string
-    {
-        $twig = self::getContainer()->get('twig');
-        self::assertInstanceOf(Environment::class, $twig);
-
-        $widget = $this->widget();
-
-        return trim($twig->render($widget->getTemplate(), $widget->getData()));
     }
 
     private function widget(): TurnoverAgainstLimitsWidget

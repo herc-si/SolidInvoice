@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Augias\AccountingBundle\Repository;
 
 use Augias\AccountingBundle\Entity\AccountingPeriod;
+use Augias\AccountingBundle\Enum\DeclarationStatus;
 use Augias\AccountingBundle\Enum\PeriodStatus;
 use Augias\AccountingBundle\Enum\PeriodType;
 use Augias\CoreBundle\Entity\Company;
@@ -129,6 +130,47 @@ class AccountingPeriodRepository extends EntityRepository
             ->setParameter('company', $company->getId(), UlidType::NAME)
             ->setParameter('status', PeriodStatus::Closed->value)
             ->orderBy('p.startDate', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Periods that have finished and have not been filed, oldest first.
+     *
+     * "Not filed" covers three shapes, and the join is what lets one query see
+     * all of them: a period still open, a period closed that nobody has opened
+     * the declaration screen for — {@see \Augias\AccountingBundle\Service\DeclarationBuilder}
+     * computes the row lazily, so its absence means undeclared, not broken —
+     * and a declaration sitting in draft or ready.
+     *
+     * Oldest first because the one that has been waiting longest is the one
+     * with the most consequence attached, not the one that just ended.
+     *
+     * @return list<AccountingPeriod>
+     */
+    public function findEndedAndUndeclared(
+        Company $company,
+        PeriodType $type,
+        DateTimeImmutable $on,
+        int $limit,
+    ): array {
+        return $this->createQueryBuilder('p')
+            ->leftJoin(
+                'Augias\AccountingBundle\Entity\Declaration',
+                'd',
+                'WITH',
+                'd.period = p',
+            )
+            ->andWhere('p.company = :company')
+            ->andWhere('p.type = :type')
+            ->andWhere('p.endDate < :on')
+            ->andWhere('d.id IS NULL OR d.status != :submitted')
+            ->setParameter('company', $company->getId(), UlidType::NAME)
+            ->setParameter('type', $type->value)
+            ->setParameter('on', $on)
+            ->setParameter('submitted', DeclarationStatus::Submitted->value)
+            ->orderBy('p.endDate', 'ASC')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }

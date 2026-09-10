@@ -693,7 +693,15 @@ dashboard:
         title: 'Quick Actions'
         view_payments: Payments
     accounting:
+        action:
+            close: 'Close the books for this period'
+            file: 'File this declaration'
+        all_periods: 'All periods'
         collected: 'Collected so far'
+        declarations_title: 'Declarations outstanding'
+        ended_days_ago: '{0} ended today|{1} ended 1 day ago|]1,Inf] ended %count% days ago'
+        file_at: 'File these figures at'
+        nothing_to_declare: 'Every period that has ended is filed.'
         more_limits: '{1} 1 further limit is not shown|]1,Inf] %count% further limits are not shown'
         no_limits: 'No limit applies to the activities you have taken money in this year.'
         no_turnover: 'Nothing recorded in the revenue book for %year% yet.'
@@ -877,6 +885,7 @@ dashboard:
         view_all: 'View All Quotes'
     title: Dashboard
     widget:
+        accounting_declarations: 'Declarations Outstanding'
         accounting_turnover: 'Turnover vs Limits'
         attention_required: 'Attention Required'
         invoice_distribution: 'Invoice Status'

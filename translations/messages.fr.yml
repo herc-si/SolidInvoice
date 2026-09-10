@@ -693,7 +693,15 @@ dashboard:
         title: 'Actions rapides'
         view_payments: Paiements
     accounting:
+        action:
+            close: 'Clôturer les livres de cette période'
+            file: 'Déclarer cette période'
+        all_periods: 'Toutes les périodes'
         collected: 'Encaissé à ce jour'
+        declarations_title: 'Déclarations en attente'
+        ended_days_ago: "{0} terminée aujourd'hui|{1} terminée depuis 1 jour|]1,Inf] terminée depuis %count% jours"
+        file_at: 'À déclarer sur'
+        nothing_to_declare: 'Toutes les périodes terminées sont déclarées.'
         more_limits: "{1} 1 autre limite n'est pas affichée|]1,Inf] %count% autres limites ne sont pas affichées"
         no_limits: "Aucune limite ne s'applique aux activités dans lesquelles vous avez encaissé cette année."
         no_turnover: 'Rien enregistré au livre des recettes pour %year% pour le moment.'
@@ -877,6 +885,7 @@ dashboard:
         view_all: 'Voir tous les devis'
     title: 'Tableau de bord'
     widget:
+        accounting_declarations: 'Déclarations en attente'
         accounting_turnover: "Chiffre d'affaires et seuils"
         attention_required: 'Points à traiter'
         invoice_distribution: 'Statut des factures'

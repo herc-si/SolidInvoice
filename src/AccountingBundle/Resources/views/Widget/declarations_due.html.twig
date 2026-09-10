@@ -1,0 +1,84 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) HERC SI <opensource@herc-si.fr>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{#
+ # Periods that have ended and have not been filed.
+ #
+ # Each row says which of the two steps the user is on. "Close the quarter" and
+ # "file the quarter" are different jobs on different screens, so the row links
+ # to the one it names: closing is a sealing action that lives on the accounting
+ # home page, filing starts from the declaration itself.
+ #
+ # The age is how long the period has been waiting, never a deadline — see
+ # DeclarationsDueWidget for why there is no date here.
+ #}
+{% if regime is not null %}
+    <twig:Ui:Card>
+        <twig:block name="header">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <h3 class="card-title mb-0">{{ 'dashboard.accounting.declarations_title'|trans }}</h3>
+                <a href="{{ path('_accounting_declarations') }}" class="btn btn-sm btn-ghost">
+                    {{ 'dashboard.accounting.all_periods'|trans }}
+                    {{ ux_icon('tabler:arrow-right', {width: 16, height: 16}) }}
+                </a>
+            </div>
+        </twig:block>
+
+        {% if pending is empty %}
+            {#
+             # Nothing outstanding is worth saying rather than showing an empty
+             # card: it confirms the books are being watched, which is the only
+             # reason to keep the widget on the dashboard between filings.
+             #}
+            <div class="attention-empty">
+                <div class="attention-empty-icon">
+                    {{ ux_icon('tabler:check', {width: 32, height: 32}) }}
+                </div>
+                <p class="attention-empty-text">{{ 'dashboard.accounting.nothing_to_declare'|trans }}</p>
+            </div>
+        {% else %}
+            <div class="attention-items">
+                {% for item in pending %}
+                    {% set days = item.daysSincePeriodEnded %}
+                    <a href="{{ item.action.value == 'close'
+                        ? path('_accounting_index')
+                        : path('_accounting_declaration_view', {id: item.period.id}) }}"
+                       class="attention-item{{ item.action.value == 'file' ? ' attention-item--danger' }}">
+                        <span class="attention-item-main">
+                            <span class="attention-item-id">{{ item.period.label }}</span>
+                            <span class="attention-item-client">{{ item.action.translationKey|trans }}</span>
+                        </span>
+                        <span class="attention-item-meta">
+                            {% if item.declaration is not null and not item.declaration.isSubmitted %}
+                                <span class="attention-item-amount">
+                                    {{ item.declaration.totalDue|formatCurrency(item.declaration.currencyCode) }}
+                                </span>
+                            {% endif %}
+                            <span class="attention-item-date">
+                                {{ 'dashboard.accounting.ended_days_ago'|trans({'%count%': days}) }}
+                            </span>
+                        </span>
+                    </a>
+                {% endfor %}
+            </div>
+
+            {% if filingUrl is not null %}
+                {#
+                 # Augias computes these figures and files nothing. Saying where
+                 # they actually have to be typed is the difference between a
+                 # useful card and one that implies the job is done.
+                 #}
+                <p class="text-muted small mb-0 mt-3">
+                    {{ 'dashboard.accounting.file_at'|trans }}
+                    <a href="{{ filingUrl }}" target="_blank" rel="noopener noreferrer">{{ filingUrl }}</a>
+                </p>
+            {% endif %}
+        {% endif %}
+    </twig:Ui:Card>
+{% endif %}
