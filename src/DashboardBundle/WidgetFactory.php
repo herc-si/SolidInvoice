@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle;
 
+use Augias\DashboardBundle\Enum\WidgetWidth;
 use Augias\DashboardBundle\Enum\WidgetZone;
 use Augias\DashboardBundle\Widgets\WidgetDefinition;
 use Augias\DashboardBundle\Widgets\WidgetInterface;
@@ -43,6 +44,7 @@ final class WidgetFactory
         string $icon,
         string $zone,
         int $priority = 0,
+        string $width = WidgetWidth::Full->value,
         bool $removable = true,
         string $cssClass = '',
     ): void {
@@ -53,6 +55,7 @@ final class WidgetFactory
             $icon,
             WidgetZone::from($zone),
             $priority,
+            WidgetWidth::from($width),
             $removable,
             $cssClass,
         );

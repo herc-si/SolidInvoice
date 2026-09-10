@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\Layout;
 
+use Augias\DashboardBundle\Enum\WidgetWidth;
 use Augias\DashboardBundle\Enum\WidgetZone;
 
 /**
@@ -30,14 +31,22 @@ use Augias\DashboardBundle\Enum\WidgetZone;
 final readonly class DashboardLayout
 {
     /**
-     * Bumped only for a change the reader cannot absorb. Adding an optional key
-     * (a per-widget width, say) is not one: an old payload simply lacks it.
+     * Bumped only for a change the reader cannot absorb. The per-widget width
+     * added here is not one: a payload written before widths existed simply
+     * lacks the key, and a missing key already means "whatever the widget
+     * declares".
      */
     public const int VERSION = 1;
 
     /**
-     * @param list<array{id: string, zone: WidgetZone}> $visible ordered, first rendered first
-     * @param list<string>                              $hidden  ids the user removed
+     * The width key is optional. Both an absent key and a null value mean "the
+     * widget's declared default stands", and {@see fromArray()} only ever
+     * produces the absent form, so a document that came from one has a single
+     * spelling for it. Null is tolerated for the benefit of layouts built by
+     * hand — a test, a fixture, a future default arrangement.
+     *
+     * @param list<array{id: string, zone: WidgetZone, width?: ?WidgetWidth}> $visible ordered, first rendered first
+     * @param list<string>                                                    $hidden  ids the user removed
      */
     public function __construct(
         public array $visible = [],
@@ -74,7 +83,19 @@ final readonly class DashboardLayout
             }
 
             $seen[$entry['id']] = true;
-            $visible[] = ['id' => $entry['id'], 'zone' => $zone];
+            $placement = ['id' => $entry['id'], 'zone' => $zone];
+            $width = WidgetWidth::tryFromName(is_string($entry['width'] ?? null) ? $entry['width'] : null);
+
+            // An unreadable width is dropped rather than recorded as null, so
+            // that "the widget knows best" has exactly one spelling: the absence
+            // of the key. A payload written before widths existed and one whose
+            // width came back as nonsense then produce the same entry, which is
+            // what makes toArray() the inverse of this.
+            if ($width instanceof WidgetWidth) {
+                $placement['width'] = $width;
+            }
+
+            $visible[] = $placement;
         }
 
         $hidden = [];
@@ -91,14 +112,25 @@ final readonly class DashboardLayout
     }
 
     /**
-     * @return array{v: int, widgets: list<array{id: string, zone: string}>, hidden: list<string>}
+     * @return array{v: int, widgets: list<array{id: string, zone: string, width?: string}>, hidden: list<string>}
      */
     public function toArray(): array
     {
         return [
             'v' => self::VERSION,
             'widgets' => array_map(
-                static fn (array $entry): array => ['id' => $entry['id'], 'zone' => $entry['zone']->value],
+                static function (array $entry): array {
+                    $widget = ['id' => $entry['id'], 'zone' => $entry['zone']->value];
+
+                    // Omitted rather than written as null: a widget the user has
+                    // never resized should keep following the declared default,
+                    // including after that default changes.
+                    if (($entry['width'] ?? null) instanceof WidgetWidth) {
+                        $widget['width'] = $entry['width']->value;
+                    }
+
+                    return $widget;
+                },
                 $this->visible,
             ),
             'hidden' => $this->hidden,

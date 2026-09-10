@@ -38,6 +38,7 @@ final class AugiasDashboardBundle extends Bundle
                     // the enum is flattened here rather than shipped as an object.
                     'zone' => $attribute->zone->value,
                     'priority' => $attribute->priority,
+                    'width' => $attribute->width->value,
                     'removable' => $attribute->removable,
                     'cssClass' => $attribute->cssClass,
                 ]);

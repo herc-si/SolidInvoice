@@ -22,11 +22,16 @@
      # `data-zone` is what gets written to the layout, so it has to match
      # WidgetZone exactly — the server drops anything it does not recognise, which
      # would look to the user like a card that refuses to stay where it was put.
+     #
+     # The width vocabulary is handed to the controller rather than repeated in
+     # it: WidgetWidth is the one place the list and its order are declared, and
+     # the widen/narrow buttons simply step along whatever arrives here.
      #}
     <div class="dashboard-page"
          data-controller="dashboard-layout"
          data-dashboard-layout-save-url-value="{{ path('_dashboard_layout_save') }}"
          data-dashboard-layout-csrf-token-value="{{ csrf_token('dashboard_layout') }}"
+         data-dashboard-layout-widths-value="{{ dashboard_widget_widths()|json_encode }}"
          data-dashboard-layout-editing-class="dashboard-page--editing">
 
         <div class="dashboard-toolbar">
@@ -100,18 +105,24 @@
             </p>
         </div>
 
-        <div class="row" data-dashboard-layout-target="zone" data-zone="top">
+        {#
+         # Each zone is its own grid, so a width is a share of the zone the card
+         # sits in and not of the page: a half-width card in the narrow column is
+         # half of that column. The columns themselves stay Bootstrap's, because
+         # the page-level split is not something the user drags.
+         #}
+        <div class="dashboard-zone" data-dashboard-layout-target="zone" data-zone="top">
             {{ render_dashboard_zone('top') }}
         </div>
 
         <div class="row">
             <div class="col-lg-8">
-                <div class="row" data-dashboard-layout-target="zone" data-zone="left_column">
+                <div class="dashboard-zone" data-dashboard-layout-target="zone" data-zone="left_column">
                     {{ render_dashboard_zone('left_column') }}
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="row" data-dashboard-layout-target="zone" data-zone="right_column">
+                <div class="dashboard-zone" data-dashboard-layout-target="zone" data-zone="right_column">
                     {{ render_dashboard_zone('right_column') }}
                 </div>
             </div>

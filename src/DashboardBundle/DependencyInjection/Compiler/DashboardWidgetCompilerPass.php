@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\DependencyInjection\Compiler;
 
+use Augias\DashboardBundle\Enum\WidgetWidth;
 use Augias\DashboardBundle\WidgetFactory;
 use LogicException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -65,6 +66,7 @@ final class DashboardWidgetCompilerPass implements CompilerPassInterface
                     (string) $attributes['icon'],
                     (string) $attributes['zone'],
                     (int) ($attributes['priority'] ?? 0),
+                    (string) ($attributes['width'] ?? WidgetWidth::Full->value),
                     (bool) ($attributes['removable'] ?? true),
                     (string) ($attributes['cssClass'] ?? ''),
                 ]);

@@ -4,7 +4,7 @@ import Sortable from 'sortablejs';
 type ZoneName = 'top' | 'left_column' | 'right_column';
 
 interface LayoutPayload {
-    widgets: { id: string; zone: ZoneName }[];
+    widgets: { id: string; zone: ZoneName; width?: string }[];
     hidden: string[];
 }
 
@@ -31,7 +31,7 @@ export default class extends Controller<HTMLElement> {
         'resetForm',
     ];
 
-    static values = { saveUrl: String, csrfToken: String };
+    static values = { saveUrl: String, csrfToken: String, widths: Array };
     static classes = ['editing'];
 
     declare readonly zoneTargets: HTMLElement[];
@@ -46,6 +46,11 @@ export default class extends Controller<HTMLElement> {
     declare readonly resetFormTarget: HTMLElement;
     declare readonly saveUrlValue: string;
     declare readonly csrfTokenValue: string;
+
+    // Narrow to wide, straight from WidgetWidth. Widening is a step along this
+    // list, so the server owns both the vocabulary and its order and this file
+    // never has to be edited to add a width.
+    declare readonly widthsValue: string[];
     declare readonly editingClass: string;
 
     private sortables: Sortable[] = [];
@@ -132,6 +137,14 @@ export default class extends Controller<HTMLElement> {
         void this.save().then(() => window.location.reload());
     }
 
+    widen(event: Event): void {
+        this.resize(event, 1);
+    }
+
+    narrow(event: Event): void {
+        this.resize(event, -1);
+    }
+
     moveUp(event: Event): void {
         const widget = this.widgetFrom(event);
         const previous = widget?.previousElementSibling;
@@ -150,6 +163,40 @@ export default class extends Controller<HTMLElement> {
             next.after(widget);
             this.scheduleSave();
         }
+    }
+
+    /**
+     * Step a card one place along the width vocabulary.
+     *
+     * Clamped rather than wrapped: a user holding down "wider" wants the widest
+     * card, not the narrowest one again. Only the attribute is written — the
+     * stylesheet owns what each width means, so there is no class list here to
+     * fall out of step with it.
+     */
+    private resize(event: Event, direction: 1 | -1): void {
+        const widget = this.widgetFrom(event);
+
+        // No vocabulary means the page did not send one, and there is nothing to
+        // step along. Resizing quietly does nothing rather than writing a width
+        // no stylesheet has a rule for.
+        if (!widget || this.widthsValue.length === 0) {
+            return;
+        }
+
+        const current = this.widthsValue.indexOf(widget.dataset.widgetWidth ?? '');
+
+        // A width this page does not know is treated as sitting just past the end
+        // the user is moving away from, so the first click lands on the narrowest
+        // or the widest rather than doing nothing.
+        const from = current === -1 ? (direction === 1 ? -1 : this.widthsValue.length) : current;
+        const next = Math.min(Math.max(from + direction, 0), this.widthsValue.length - 1);
+
+        if (this.widthsValue[next] === widget.dataset.widgetWidth) {
+            return;
+        }
+
+        widget.dataset.widgetWidth = this.widthsValue[next];
+        this.scheduleSave();
     }
 
     private setupSortables(): void {
@@ -269,7 +316,11 @@ export default class extends Controller<HTMLElement> {
             const name = (zone.dataset.zone ?? '') as ZoneName;
 
             zone.querySelectorAll<HTMLElement>('.dashboard-widget').forEach((widget) => {
-                widgets.push({ id: widget.dataset.widgetId ?? '', zone: name });
+                widgets.push({
+                    id: widget.dataset.widgetId ?? '',
+                    zone: name,
+                    width: widget.dataset.widgetWidth,
+                });
             });
         });
 

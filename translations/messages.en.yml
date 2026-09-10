@@ -834,6 +834,7 @@ dashboard:
         drag: 'Drag to move'
         move_down: 'Move %widget% down'
         move_up: 'Move %widget% up'
+        narrow: 'Make %widget% narrower'
         pinned: 'This widget is always shown'
         remove: 'Remove %widget%'
         reset: 'Reset layout'
@@ -841,6 +842,7 @@ dashboard:
         save_failed: "Couldn't save - your changes are only on screen."
         saved: Saved
         saving: Saving...
+        widen: 'Make %widget% wider'
     outstanding_invoices: 'Outstanding Invoices'
     payment:
         actions:
@@ -869,12 +871,15 @@ dashboard:
     title: Dashboard
     widget:
         attention_required: 'Attention Required'
-        hero_stats: 'Key Figures'
         invoice_distribution: 'Invoice Status'
         onboarding_checklist: 'Setup Checklist'
+        outstanding_total: Outstanding
+        overdue_invoices: 'Overdue Invoices'
+        payments_this_month: 'Received This Month'
         quick_actions: 'Quick Actions'
         recent_activity: 'Recent Activity'
         revenue_chart: 'Revenue Trend'
+        total_revenue: 'Total Revenue'
 datagrid:
     action:
         create_bill: "Create purchase invoice"

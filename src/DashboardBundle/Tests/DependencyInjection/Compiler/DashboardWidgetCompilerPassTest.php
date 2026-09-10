@@ -42,7 +42,7 @@ final class DashboardWidgetCompilerPassTest extends TestCase
         self::assertCount(1, $calls);
         self::assertSame('add', $calls[0][0]);
         self::assertSame(
-            ['revenue_chart', 'label.revenue', 'tabler:chart-line', 'left_column', 100, true, ''],
+            ['revenue_chart', 'label.revenue', 'tabler:chart-line', 'left_column', 100, 'full', true, ''],
             array_slice($calls[0][1], 1),
         );
     }

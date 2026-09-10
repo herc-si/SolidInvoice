@@ -40,10 +40,10 @@ final class WidgetExtensionTest extends TestCase
         $extension = $this->extension(new ResolvedLayout([]));
         $functions = $extension->getFunctions();
 
-        self::assertCount(2, $functions);
+        self::assertCount(3, $functions);
         self::assertContainsOnlyInstancesOf(TwigFunction::class, $functions);
         self::assertSame(
-            ['render_dashboard_zone', 'dashboard_hidden_widgets'],
+            ['render_dashboard_zone', 'dashboard_hidden_widgets', 'dashboard_widget_widths'],
             array_map(static fn (TwigFunction $function): string => $function->getName(), $functions),
         );
     }

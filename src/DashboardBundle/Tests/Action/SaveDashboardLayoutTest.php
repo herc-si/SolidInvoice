@@ -78,20 +78,42 @@ final class SaveDashboardLayoutTest extends KernelTestCase
     {
         $response = $this->post($this->action(), [
             'widgets' => [
-                ['id' => 'hero_stats', 'zone' => 'top'],
+                ['id' => 'outstanding_total', 'zone' => 'top', 'width' => 'half'],
                 ['id' => 'revenue_chart', 'zone' => 'right_column'],
             ],
             'hidden' => ['recent_activity'],
         ]);
 
         self::assertSame(Response::HTTP_OK, $response->getStatusCode());
+
+        // The second widget was sent without a width and comes back without one:
+        // a card the user never resized keeps following the width its widget
+        // declares, including after that default changes.
         self::assertSame([
             'v' => 1,
             'widgets' => [
-                ['id' => 'hero_stats', 'zone' => 'top'],
+                ['id' => 'outstanding_total', 'zone' => 'top', 'width' => 'half'],
                 ['id' => 'revenue_chart', 'zone' => 'right_column'],
             ],
             'hidden' => ['recent_activity'],
+        ], $this->storedLayout());
+    }
+
+    /**
+     * A width the application does not have a name for is dropped, and the rest
+     * of the entry survives: the user's arrangement is not worth losing over a
+     * value that only decides how wide one card is.
+     */
+    public function testDropsAWidthItCannotRead(): void
+    {
+        $this->post($this->action(), [
+            'widgets' => [['id' => 'outstanding_total', 'zone' => 'top', 'width' => 'enormous']],
+        ]);
+
+        self::assertSame([
+            'v' => 1,
+            'widgets' => [['id' => 'outstanding_total', 'zone' => 'top']],
+            'hidden' => [],
         ], $this->storedLayout());
     }
 
@@ -101,7 +123,7 @@ final class SaveDashboardLayoutTest extends KernelTestCase
      */
     public function testRejectsAnInvalidCsrfToken(): void
     {
-        $response = $this->post($this->action(validToken: false), ['widgets' => [['id' => 'hero_stats', 'zone' => 'top']]]);
+        $response = $this->post($this->action(validToken: false), ['widgets' => [['id' => 'outstanding_total', 'zone' => 'top']]]);
 
         self::assertSame(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
         self::assertNull($this->storedLayout());
@@ -132,7 +154,7 @@ final class SaveDashboardLayoutTest extends KernelTestCase
     {
         $this->post($this->action(), [
             'widgets' => [
-                ['id' => 'hero_stats', 'zone' => 'top'],
+                ['id' => 'outstanding_total', 'zone' => 'top'],
                 ['id' => 'widget_from_a_future_release', 'zone' => 'top'],
             ],
             'hidden' => ['also_not_a_widget'],
@@ -141,25 +163,7 @@ final class SaveDashboardLayoutTest extends KernelTestCase
         $stored = $this->storedLayout();
 
         self::assertNotNull($stored);
-        self::assertSame(['hero_stats'], array_column($stored['widgets'], 'id'));
-        self::assertSame([], $stored['hidden']);
-    }
-
-    /**
-     * hero_stats ships as non-removable. A payload hiding it is not honoured, and
-     * the widget is put back rather than quietly dropped from both lists.
-     */
-    public function testRefusesToHideAPinnedWidget(): void
-    {
-        $this->post($this->action(), [
-            'widgets' => [['id' => 'revenue_chart', 'zone' => 'left_column']],
-            'hidden' => ['hero_stats'],
-        ]);
-
-        $stored = $this->storedLayout();
-
-        self::assertNotNull($stored);
-        self::assertSame(['revenue_chart', 'hero_stats'], array_column($stored['widgets'], 'id'));
+        self::assertSame(['outstanding_total'], array_column($stored['widgets'], 'id'));
         self::assertSame([], $stored['hidden']);
     }
 

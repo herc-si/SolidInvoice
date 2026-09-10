@@ -62,7 +62,7 @@ final readonly class LayoutResolver
             }
 
             $placed[$entry['id']] = true;
-            $zones[$entry['zone']->value][] = $definition->inZone($entry['zone']);
+            $zones[$entry['zone']->value][] = $definition->placedAt($entry['zone'], $entry['width'] ?? null);
         }
 
         $hidden = [];

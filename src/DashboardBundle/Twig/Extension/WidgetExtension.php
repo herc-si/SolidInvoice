@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\Twig\Extension;
 
+use Augias\DashboardBundle\Enum\WidgetWidth;
 use Augias\DashboardBundle\Enum\WidgetZone;
 use Augias\DashboardBundle\Layout\LayoutProviderInterface;
 use Augias\DashboardBundle\Widgets\WidgetDefinition;
@@ -55,6 +56,10 @@ final class WidgetExtension extends AbstractExtension
             new TwigFunction(
                 'dashboard_hidden_widgets',
                 fn (): array => $this->hiddenWidgets(),
+            ),
+            new TwigFunction(
+                'dashboard_widget_widths',
+                static fn (): array => WidgetWidth::vocabulary(),
             ),
         ];
     }

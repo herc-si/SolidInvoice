@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Augias\DashboardBundle\Tests\Functional;
 
 use Augias\CoreBundle\Test\Traits\DoctrineTestTrait;
+use Augias\DashboardBundle\Enum\WidgetWidth;
 use Augias\DashboardBundle\Enum\WidgetZone;
 use Augias\DashboardBundle\Layout\DashboardLayout;
 use Augias\InstallBundle\Test\EnsureApplicationInstalled;
@@ -60,14 +61,45 @@ final class DashboardLayoutFlowTest extends WebTestCase
             ->assertSeeIn('title', 'Dashboard')
             // The wrapper carries the registry id, which is the contract the
             // layout controller writes back against.
-            ->assertSeeElement('[data-widget-id="hero_stats"]')
+            ->assertSeeElement('[data-widget-id="outstanding_total"]')
             ->assertSeeElement('[data-widget-id="revenue_chart"]')
             ->assertSeeElement('[data-widget-id="quick_actions"]')
             // Each zone is a Sortable container.
             ->assertSeeElement('[data-zone="top"]')
             ->assertSeeElement('[data-zone="left_column"]')
             ->assertSeeElement('[data-zone="right_column"]')
-            ->assertSeeElement('[data-controller="dashboard-layout"]');
+            ->assertSeeElement('[data-controller="dashboard-layout"]')
+            // The declared width reaches the markup, where the stylesheet turns
+            // it into a span. The four stat tiles ship a quarter each, so the top
+            // band fills exactly once across.
+            ->assertSeeElement('[data-widget-id="outstanding_total"][data-widget-width="quarter"]')
+            ->assertSeeElement('[data-widget-id="revenue_chart"][data-widget-width="full"]');
+    }
+
+    /**
+     * A width the user chose beats the one the widget declares, and it survives
+     * the trip through `user_settings` — which is the whole point of storing it
+     * next to the zone rather than deriving it from the widget every time.
+     */
+    public function testAStoredWidthOverridesTheDeclaredDefault(): void
+    {
+        $user = $this->createUser();
+
+        $this->userSettingRepository->saveSetting(
+            $user,
+            UserSettingType::DashboardLayout,
+            json_encode((new DashboardLayout(
+                [['id' => 'outstanding_total', 'zone' => WidgetZone::Top, 'width' => WidgetWidth::Half]],
+            ))->toArray(), JSON_THROW_ON_ERROR),
+        );
+
+        $this->browser()
+            ->actingAs($user)
+            ->visit('/dashboard')
+            ->assertSuccessful()
+            ->assertSeeElement('[data-widget-id="outstanding_total"][data-widget-width="half"]')
+            // Untouched neighbours keep the width their widget declares.
+            ->assertSeeElement('[data-widget-id="total_revenue"][data-widget-width="quarter"]');
     }
 
     public function testAStoredArrangementIsHonouredAndHiddenWidgetsAreOffered(): void
@@ -101,7 +133,7 @@ final class DashboardLayoutFlowTest extends WebTestCase
         $this->browser()
             ->actingAs($user)
             ->post('/dashboard/layout', [
-                'json' => ['widgets' => [['id' => 'hero_stats', 'zone' => 'top']]],
+                'json' => ['widgets' => [['id' => 'outstanding_total', 'zone' => 'top']]],
             ])
             ->assertStatus(400);
     }

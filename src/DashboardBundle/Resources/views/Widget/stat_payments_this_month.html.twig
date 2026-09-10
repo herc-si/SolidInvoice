@@ -1,0 +1,28 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% import '@AugiasDashboard/Widget/_stat_value.html.twig' as stat %}
+
+<div class="stat-card">
+    <div class="stat-card-content">
+        <div class="stat-icon stat-icon--success">
+            {{ ux_icon('tabler:calendar-stats', {width: 24, height: 24}) }}
+        </div>
+        <div class="stat-info">
+            <span class="stat-label">{{ 'dashboard.hero.this_month'|trans }}</span>
+            {#
+             # Neutral, not `--paid`: the label reads "This Month", not "Paid". The
+             # icon tint is success because these really are payments received; the
+             # amount stays neutral because the Money-Color Rule wants the word,
+             # not the hue, to carry that.
+             #}
+            {{ stat.statValue(paymentsThisMonth, defaultCurrency, ['total']) }}
+        </div>
+    </div>
+</div>

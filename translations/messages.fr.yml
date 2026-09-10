@@ -826,6 +826,23 @@ dashboard:
         empty: 'Aucune facture disponible'
         recent: 'Factures récentes'
         view_all: 'Voir toutes les factures'
+    layout:
+        available: 'Widgets disponibles'
+        available_empty: 'Tous les widgets sont sur votre tableau de bord.'
+        customise: Personnaliser
+        done: Terminé
+        drag: 'Faire glisser pour déplacer'
+        move_down: 'Descendre %widget%'
+        move_up: 'Monter %widget%'
+        narrow: 'Rétrécir %widget%'
+        pinned: 'Ce widget est toujours affiché'
+        remove: 'Retirer %widget%'
+        reset: 'Réinitialiser la disposition'
+        reset_message: 'Disposition du tableau de bord réinitialisée.'
+        save_failed: "Enregistrement impossible - vos changements ne sont qu'à l'écran."
+        saved: Enregistré
+        saving: 'Enregistrement...'
+        widen: 'Élargir %widget%'
     outstanding_invoices: 'Factures impayées'
     payment:
         actions:
@@ -852,6 +869,17 @@ dashboard:
         recent: 'Devis récents'
         view_all: 'Voir tous les devis'
     title: 'Tableau de bord'
+    widget:
+        attention_required: 'Points à traiter'
+        invoice_distribution: 'Statut des factures'
+        onboarding_checklist: 'Liste de configuration'
+        outstanding_total: Impayé
+        overdue_invoices: 'Factures en retard'
+        payments_this_month: 'Encaissé ce mois-ci'
+        quick_actions: 'Actions rapides'
+        recent_activity: 'Activité récente'
+        revenue_chart: "Évolution du chiffre d'affaires"
+        total_revenue: 'Revenu total'
 datagrid:
     action:
         create_bill: "Créer la facture d'achat"

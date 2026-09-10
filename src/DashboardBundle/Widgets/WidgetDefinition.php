@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\Widgets;
 
+use Augias\DashboardBundle\Enum\WidgetWidth;
 use Augias\DashboardBundle\Enum\WidgetZone;
 
 /**
@@ -32,18 +33,24 @@ final readonly class WidgetDefinition
         public string $icon,
         public WidgetZone $zone,
         public int $priority = 0,
+        public WidgetWidth $width = WidgetWidth::Full,
         public bool $removable = true,
         public string $cssClass = '',
     ) {
     }
 
     /**
-     * The same definition placed in a different zone.
+     * The same definition as the user arranged it.
      *
-     * A user moving a card between columns changes only where it sits, so the
-     * resolver rebuilds the definition rather than making {@see $zone} mutable.
+     * Placement is the only thing a layout may override, so it is the only thing
+     * this takes: the resolver rebuilds the definition rather than making
+     * {@see $zone} or {@see $width} mutable.
+     *
+     * A null width means the layout has nothing to say about it — a widget the
+     * user has never resized, or one saved before widths existed — and the
+     * declared default stands.
      */
-    public function inZone(WidgetZone $zone): self
+    public function placedAt(WidgetZone $zone, ?WidgetWidth $width = null): self
     {
         return new self(
             $this->id,
@@ -52,6 +59,7 @@ final readonly class WidgetDefinition
             $this->icon,
             $zone,
             $this->priority,
+            $width ?? $this->width,
             $this->removable,
             $this->cssClass,
         );

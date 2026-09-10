@@ -1,0 +1,40 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% import '@AugiasDashboard/Widget/_stat_value.html.twig' as stat %}
+
+{#
+ # `--urgent` is the type step and nothing else now. It used to be load-bearing
+ # for the layout as well - it spanned three of nine tracks while its neighbours
+ # spanned two - but the tiles are separate widgets on the zone's grid, so how
+ # much room this one gets is the user's to set.
+ #
+ # `--danger` stays conditional, because a danger-tinted "0 overdue" congratulates
+ # a healthy account in the colour of a problem - the same mistake the old
+ # success-green "$0.00 revenue" made, mirrored.
+ #}
+<div class="stat-card stat-card--urgent{% if overdueCount > 0 %} stat-card--danger{% endif %}">
+    <div class="stat-card-content">
+        <div class="stat-icon stat-icon--danger">
+            {{ ux_icon('tabler:alert-triangle', {width: 24, height: 24}) }}
+        </div>
+        <div class="stat-info">
+            <span class="stat-label">{{ 'dashboard.hero.overdue'|trans }}</span>
+            <span class="stat-value{% if overdueCount > 0 %} stat-value--danger{% endif %}">{{ overdueCount }}</span>
+            {#
+             # The count is this tile's headline, so the amount stays a subvalue
+             # and takes no `--total`. `--overdue` is earned: the "Overdue" label
+             # above is visible and explicit.
+             #}
+            {% if overdueAmount is not empty %}
+                {{ stat.statValue(overdueAmount, defaultCurrency, ['overdue'], 'stat-subvalue') }}
+            {% endif %}
+        </div>
+    </div>
+</div>

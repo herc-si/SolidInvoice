@@ -28,13 +28,13 @@ final class DashboardLayoutTest extends TestCase
     public function testRoundTripsThroughAnArray(): void
     {
         $layout = new DashboardLayout(
-            [['id' => 'hero_stats', 'zone' => WidgetZone::Top]],
+            [['id' => 'outstanding_total', 'zone' => WidgetZone::Top]],
             ['revenue_chart'],
         );
 
         self::assertSame([
             'v' => 1,
-            'widgets' => [['id' => 'hero_stats', 'zone' => 'top']],
+            'widgets' => [['id' => 'outstanding_total', 'zone' => 'top']],
             'hidden' => ['revenue_chart'],
         ], $layout->toArray());
 

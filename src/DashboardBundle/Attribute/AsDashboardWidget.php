@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Augias\DashboardBundle\Attribute;
 
 use Attribute;
+use Augias\DashboardBundle\Enum\WidgetWidth;
 use Augias\DashboardBundle\Enum\WidgetZone;
 
 /**
@@ -34,6 +35,9 @@ final readonly class AsDashboardWidget
      * @param string $label      Translation key naming the widget in the picker.
      * @param string $icon       Tabler icon name, e.g. 'tabler:chart-line'.
      * @param int    $priority   Default ordering within the zone, highest first.
+     * @param WidgetWidth $width Default share of the zone. A user can widen or
+     *                           narrow it afterwards, and that choice is stored
+     *                           per widget, so this is a starting point only.
      * @param bool   $removable  False pins the widget: it renders always and the
      *                           picker offers no way to hide it.
      * @param string $cssClass   Extra classes for the wrapper the renderer emits.
@@ -44,6 +48,7 @@ final readonly class AsDashboardWidget
         public string $icon,
         public WidgetZone $zone = WidgetZone::LeftColumn,
         public int $priority = 0,
+        public WidgetWidth $width = WidgetWidth::Full,
         public bool $removable = true,
         public string $cssClass = '',
     ) {

@@ -171,7 +171,7 @@ final class LayoutResolverTest extends TestCase
     private function factory(): WidgetFactory
     {
         $factory = new WidgetFactory();
-        $factory->add(new StubWidget(), 'pinned', 'l', 'i', 'top', 300, false);
+        $factory->add(new StubWidget(), 'pinned', 'l', 'i', 'top', 300, removable: false);
         $factory->add(new StubWidget(), 'attention', 'l', 'i', 'left_column', 120);
         $factory->add(new StubWidget(), 'revenue', 'l', 'i', 'left_column', 100);
         $factory->add(new StubWidget(), 'activity', 'l', 'i', 'right_column', 50);

@@ -78,7 +78,7 @@ final class ResetDashboardLayoutTest extends KernelTestCase
         self::assertInstanceOf(WidgetFactory::class, $factory);
 
         $this->manager = new DashboardLayoutManager($this->repository, $factory, $security, new NullLogger());
-        $this->manager->save(new DashboardLayout([['id' => 'hero_stats', 'zone' => WidgetZone::RightColumn]]));
+        $this->manager->save(new DashboardLayout([['id' => 'outstanding_total', 'zone' => WidgetZone::RightColumn]]));
     }
 
     protected function tearDown(): void
