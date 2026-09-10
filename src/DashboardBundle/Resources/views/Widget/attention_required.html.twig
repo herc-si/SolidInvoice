@@ -159,6 +159,17 @@
                     {{ section.truncationNotice(upcomingRecurring, upcomingRecurringTotal, '_invoices_index') }}
                 </div>
             {% endif %}
+
+            {#
+             # Sections other bundles contributed, last: the four above are this
+             # week's work and are what the card is opened for. A contributor
+             # renders its own markup — the dashboard knows nothing about what is
+             # in it — but uses the same `.attention-section` classes, so it reads
+             # as part of the card rather than as something bolted underneath.
+             #}
+            {% for contributed in sections %}
+                {{ include(contributed.template, contributed.data) }}
+            {% endfor %}
         </div>
     {% endif %}
 </twig:Ui:Card>

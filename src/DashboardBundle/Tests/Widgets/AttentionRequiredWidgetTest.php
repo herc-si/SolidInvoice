@@ -15,6 +15,7 @@ namespace Augias\DashboardBundle\Tests\Widgets;
 
 use Augias\ClientBundle\Test\Factory\ClientFactory;
 use Augias\CoreBundle\Entity\Discount;
+use Augias\DashboardBundle\Tests\Fixtures\StubAttentionSource;
 use Augias\DashboardBundle\Widgets\AttentionRequiredWidget;
 use Augias\InvoiceBundle\Enum\InvoiceStatus;
 use Augias\InvoiceBundle\Enum\RecurringInvoiceStatus;
@@ -25,15 +26,77 @@ use Augias\QuoteBundle\Test\Factory\QuoteFactory;
 use Brick\Math\BigInteger;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
+use Doctrine\Persistence\ManagerRegistry;
+use Psr\Log\NullLogger;
+use RuntimeException;
 
 final class AttentionRequiredWidgetTest extends WidgetTestCase
 {
+    private function widgetWith(StubAttentionSource ...$sources): AttentionRequiredWidget
+    {
+        $registry = self::getContainer()->get(ManagerRegistry::class);
+        self::assertInstanceOf(ManagerRegistry::class, $registry);
+
+        return new AttentionRequiredWidget($registry, $sources, new NullLogger());
+    }
+
     private function createZeroDiscount(): Discount
     {
         return new Discount()
             ->setType('percentage')
             ->setValueMoney(BigInteger::zero())
             ->setValuePercentage(0);
+    }
+
+    /**
+     * Another bundle's section is folded into this card rather than given a card
+     * of its own, and it decides its own markup: the dashboard only carries the
+     * template name and the data across.
+     */
+    public function testFoldsInASectionAnotherBundleContributed(): void
+    {
+        $data = $this->widgetWith(new StubAttentionSource(
+            template: 'accounting_section.html.twig',
+            data: ['crossed' => 2],
+        ))->getData();
+
+        self::assertSame(
+            [['template' => 'accounting_section.html.twig', 'data' => ['crossed' => 2]]],
+            $data['sections'],
+        );
+
+        // The card is no longer "All caught up" just because the invoices are.
+        self::assertTrue($data['hasItems']);
+    }
+
+    public function testASourceThatDoesNotApplyContributesNothing(): void
+    {
+        $data = $this->widgetWith(new StubAttentionSource(supported: false))->getData();
+
+        self::assertSame([], $data['sections']);
+        self::assertFalse($data['hasItems']);
+    }
+
+    public function testASourceWithNothingToSayContributesNoEmptyHeader(): void
+    {
+        $data = $this->widgetWith(new StubAttentionSource(hasItems: false))->getData();
+
+        self::assertSame([], $data['sections']);
+        self::assertFalse($data['hasItems']);
+    }
+
+    /**
+     * This card is the invoices one first. A contributor that falls over is
+     * skipped, because an outage in somebody else's bundle has no business
+     * emptying the list of what is overdue.
+     */
+    public function testAFailingSourceDoesNotTakeTheCardDownWithIt(): void
+    {
+        $data = $this->widgetWith(new StubAttentionSource(failure: new RuntimeException('accounting is down')))
+            ->getData();
+
+        self::assertSame([], $data['sections']);
+        self::assertArrayHasKey('overdueInvoices', $data);
     }
 
     public function testGetDataReturnsCorrectStructure(): void

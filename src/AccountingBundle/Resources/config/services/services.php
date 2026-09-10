@@ -15,6 +15,7 @@ use Augias\AccountingBundle\AugiasAccountingBundle;
 use Augias\AccountingBundle\Config\AccountingConfigProvider;
 use Augias\AccountingBundle\DependencyInjection\AugiasAccountingExtension;
 use Augias\AccountingBundle\Regime\Fr\FrenchRateTable;
+use Augias\DashboardBundle\Attention\AttentionSourceInterface;
 use Augias\SettingsBundle\Config\ProviderInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
@@ -28,6 +29,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire()
         ->private()
     ;
+
+    // `instanceof` only applies to services loaded by this configurator, so the
+    // tag DashboardBundle declares for its own has to be repeated here — the
+    // same way SaasBundle repeats it for its checklist item.
+    $services
+        ->instanceof(AttentionSourceInterface::class)
+        ->tag('dashboard.attention_source');
 
     $services
         ->load(AugiasAccountingBundle::NAMESPACE . '\\', dirname(__DIR__, 3))

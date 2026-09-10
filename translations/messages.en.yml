@@ -701,6 +701,7 @@ dashboard:
         declarations_title: 'Declarations outstanding'
         ended_days_ago: '{0} ended today|{1} ended 1 day ago|]1,Inf] ended %count% days ago'
         file_at: 'File these figures at'
+        limits_crossed: 'Limits crossed'
         nothing_to_declare: 'Every period that has ended is filed.'
         more_limits: '{1} 1 further limit is not shown|]1,Inf] %count% further limits are not shown'
         no_limits: 'No limit applies to the activities you have taken money in this year.'

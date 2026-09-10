@@ -1,0 +1,57 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) HERC SI <opensource@herc-si.fr>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{#
+ # Limits already crossed this year, as a section of the Attention Required card.
+ #
+ # It uses that card's own classes rather than bringing its own: a contributed
+ # section has to read as part of the card, not as something bolted underneath
+ # it. The dashboard renders this file without knowing what is in it — see
+ # AttentionSourceInterface.
+ #
+ # A crossing at 100% is a fact with consequences attached and is painted as one;
+ # 80% is a warning there is still time to act on. Colour amplifies that, the
+ # words carry it.
+ #}
+<div class="attention-section">
+    <div class="attention-section-header attention-section-header--danger">
+        {{ ux_icon('tabler:scale', {width: 16, height: 16}) }}
+        <span>{{ 'dashboard.accounting.limits_crossed'|trans }}</span>
+        <span class="attention-badge attention-badge--danger">{{ alertsTotal }}</span>
+    </div>
+    <div class="attention-items">
+        {% for alert in alerts %}
+            <a href="{{ path('_accounting_index') }}"
+               class="attention-item{{ alert.step >= 100 ? ' attention-item--danger' }}">
+                <span class="attention-item-main">
+                    {#
+                     # A threshold key the regime no longer defines has no label.
+                     # The row still shows what was crossed and by how much, which
+                     # is the part that matters, rather than vanishing.
+                     #}
+                    {% if thresholdLabels[alert.thresholdKey] is defined %}
+                        <span class="attention-item-id">{{ thresholdLabels[alert.thresholdKey]|trans }}</span>
+                    {% endif %}
+                    <span class="attention-item-client">
+                        {{ 'accounting.alerts.line'|trans({
+                            '%percent%': alert.step,
+                            '%amount%': alert.thresholdAmount|formatCurrency(alert.currencyCode),
+                        }) }}
+                    </span>
+                </span>
+                <span class="attention-item-meta">
+                    <span class="attention-item-amount">
+                        {{ alert.amount|formatCurrency(alert.currencyCode) }}
+                    </span>
+                    <span class="attention-item-date">{{ alert.triggeredAt|date('M j') }}</span>
+                </span>
+            </a>
+        {% endfor %}
+    </div>
+</div>

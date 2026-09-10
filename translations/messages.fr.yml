@@ -701,6 +701,7 @@ dashboard:
         declarations_title: 'Déclarations en attente'
         ended_days_ago: "{0} terminée aujourd'hui|{1} terminée depuis 1 jour|]1,Inf] terminée depuis %count% jours"
         file_at: 'À déclarer sur'
+        limits_crossed: 'Seuils franchis'
         nothing_to_declare: 'Toutes les périodes terminées sont déclarées.'
         more_limits: "{1} 1 autre limite n'est pas affichée|]1,Inf] %count% autres limites ne sont pas affichées"
         no_limits: "Aucune limite ne s'applique aux activités dans lesquelles vous avez encaissé cette année."

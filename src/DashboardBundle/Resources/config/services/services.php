@@ -11,9 +11,11 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
+use Augias\DashboardBundle\Attention\AttentionSourceInterface;
 use Augias\DashboardBundle\AugiasDashboardBundle;
 use Augias\DashboardBundle\Checklist\ChecklistItemInterface;
 use Augias\DashboardBundle\Checklist\ChecklistManager;
+use Augias\DashboardBundle\Widgets\AttentionRequiredWidget;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
@@ -32,6 +34,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->instanceof(ChecklistItemInterface::class)
         ->tag('dashboard.checklist_item');
 
+    // Same for the sections other bundles contribute to "Attention Required".
+    $services
+        ->instanceof(AttentionSourceInterface::class)
+        ->tag('dashboard.attention_source');
+
     $services
         ->load(AugiasDashboardBundle::NAMESPACE . '\\', dirname(__DIR__, 3))
         ->exclude(dirname(__DIR__, 3) . '/{Attribute,DependencyInjection,Entity,Enum,Layout/DashboardLayout.php,Layout/ResolvedLayout.php,Resources,Tests,Widgets/WidgetDefinition.php}');
@@ -44,6 +51,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services
         ->set(ChecklistManager::class)
         ->arg('$items', tagged_iterator('dashboard.checklist_item'));
+
+    $services
+        ->set(AttentionRequiredWidget::class)
+        ->arg('$sources', tagged_iterator('dashboard.attention_source'));
 
     // Widget placement is no longer configured here. Each widget carries an
     // #[AsDashboardWidget] attribute naming its id, label, icon, default zone
