@@ -48,4 +48,43 @@ final class ElectronicInvoiceSubmissionRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * The most recent transmissions for the current company, newest first.
+     *
+     * Scoped by the company filter like any request-time query, unlike
+     * {@see findPendingByProvider()} which the polling command runs with that
+     * filter switched off.
+     *
+     * The invoice is joined and selected because the caller names it on every
+     * row, and a lazy proxy per submission would be one query each.
+     *
+     * @return list<ElectronicInvoiceSubmission>
+     */
+    public function findRecent(int $limit): array
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.invoice', 'i')
+            ->addSelect('i')
+            ->orderBy('s.created', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Transmissions the platform refused outright.
+     *
+     * A rejection is the only outcome here the user has to do something about,
+     * and unlike a pending one it does not resolve itself — so it is counted
+     * separately rather than left to be spotted in a list.
+     */
+    public function countFailed(): int
+    {
+        return (int) $this->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->andWhere('s.success = false')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

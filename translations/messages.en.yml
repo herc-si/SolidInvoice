@@ -821,6 +821,16 @@ dashboard:
             overdue: Overdue
             paid: Paid
             pending: Pending
+    einvoicing:
+        inbox_empty: 'Nothing waiting. Invoices arrive here on their own.'
+        incoming_subtitle: 'Received, not yet recorded as purchases'
+        incoming_title: 'Electronic inbox'
+        nothing_sent: 'No invoice has been sent electronically yet.'
+        outgoing_subtitle: 'How your transmissions are getting on'
+        outgoing_title: 'Sent electronically'
+        rejected_count: '{1} 1 rejected|]1,Inf] %count% rejected'
+        unknown_seller: 'Seller not named'
+        view_all: Inbox
     error:
         body: "We couldn't load this data, so the numbers here aren't complete. Your invoices and payments are safe. Try again in a moment; if it keeps failing, your server logs will have the details."
         retry: 'Try again'
@@ -868,6 +878,13 @@ dashboard:
         recent: 'Recent Payments'
         view_all: 'View All Payments'
     pending_quotes: 'Pending Quotes'
+    purchases:
+        nothing_owed: 'Nothing owed to suppliers.'
+        outstanding: 'Still to pay'
+        overdue: 'Past their due date'
+        subtitle: 'What you owe your suppliers'
+        title: Purchases
+        view_all: 'All purchases'
     quick_nav:
         clients: Clients
         invoices: Invoices
@@ -889,11 +906,14 @@ dashboard:
         accounting_declarations: 'Declarations Outstanding'
         accounting_turnover: 'Turnover vs Limits'
         attention_required: 'Attention Required'
+        einvoicing_incoming: 'Electronic Inbox'
+        einvoicing_outgoing: 'Sent Electronically'
         invoice_distribution: 'Invoice Status'
         onboarding_checklist: 'Setup Checklist'
         outstanding_total: Outstanding
         overdue_invoices: 'Overdue Invoices'
         payments_this_month: 'Received This Month'
+        purchases: 'Purchases'
         quick_actions: 'Quick Actions'
         recent_activity: 'Recent Activity'
         revenue_chart: 'Revenue Trend'

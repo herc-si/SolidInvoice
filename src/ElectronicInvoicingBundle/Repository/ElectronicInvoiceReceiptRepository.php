@@ -54,6 +54,38 @@ final class ElectronicInvoiceReceiptRepository extends EntityRepository
     }
 
     /**
+     * The receipts still needing a user to act, newest first.
+     *
+     * Same rule as {@see countAwaitingBill()} and for the same reason: there is
+     * no flag on the receipt, so "not dealt with" is the absence of a Bill
+     * pointing at it. The two must agree — a card that lists three rows under a
+     * badge saying five is worse than no badge.
+     *
+     * @return list<ElectronicInvoiceReceipt>
+     */
+    public function findAwaitingBill(int $limit): array
+    {
+        $subQuery = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('1')
+            ->from(Bill::class, 'b')
+            ->where('b.electronicInvoiceReceipt = r')
+            ->getDQL();
+
+        return $this->createQueryBuilder('r')
+            ->where(sprintf('NOT EXISTS (%s)', $subQuery))
+            ->orderBy('r.created', 'DESC')
+            // A poll imports a batch in one go, so `created` ties routinely and
+            // the order would otherwise be whatever the database felt like. A
+            // ULID is generated in time order and sorts lexicographically, so it
+            // breaks the tie the same way a finer timestamp would.
+            ->addOrderBy('r.id', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * The most recent external_reference already imported for $provider/$companyId,
      * used as the cursor for {@see \Augias\ElectronicInvoicingBundle\Provider\ElectronicInvoiceReceiverInterface::fetchIncoming()}
      * so each poll only asks the provider for invoices newer than what's already
