@@ -1,0 +1,23 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% import '@AugiasDashboard/Widget/_stat_value.html.twig' as stat %}
+
+<div class="stat-card">
+    <div class="stat-card-content">
+        <div class="stat-icon stat-icon--primary">
+            {{ ux_icon('tabler:file-invoice', {width: 24, height: 24}) }}
+        </div>
+        <div class="stat-info">
+            <span class="stat-label">{{ 'dashboard.hero.outstanding'|trans }}</span>
+            {# Neutral: outstanding is money not yet received. Green here would be a lie. #}
+            {{ stat.statValue(totalOutstanding, defaultCurrency, ['total']) }}
+        </div>
+    </div>
+</div>

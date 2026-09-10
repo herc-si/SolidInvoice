@@ -692,6 +692,22 @@ dashboard:
         create_quote: 'Nouveau devis'
         title: 'Actions rapides'
         view_payments: Paiements
+    accounting:
+        action:
+            close: 'Clôturer les livres de cette période'
+            file: 'Déclarer cette période'
+        all_periods: 'Toutes les périodes'
+        collected: 'Encaissé à ce jour'
+        declarations_title: 'Déclarations en attente'
+        ended_days_ago: "{0} terminée aujourd'hui|{1} terminée depuis 1 jour|]1,Inf] terminée depuis %count% jours"
+        file_at: 'À déclarer sur'
+        limits_crossed: 'Seuils franchis'
+        nothing_to_declare: 'Toutes les périodes terminées sont déclarées.'
+        more_limits: "{1} 1 autre limite n'est pas affichée|]1,Inf] %count% autres limites ne sont pas affichées"
+        no_limits: "Aucune limite ne s'applique aux activités dans lesquelles vous avez encaissé cette année."
+        no_turnover: 'Rien enregistré au livre des recettes pour %year% pour le moment.'
+        turnover_title: "Chiffre d'affaires %year%"
+        view_books: 'Les livres'
     active_clients: 'Clients actifs'
     activity:
         generated_from_recurring: 'générée automatiquement'
@@ -826,6 +842,23 @@ dashboard:
         empty: 'Aucune facture disponible'
         recent: 'Factures récentes'
         view_all: 'Voir toutes les factures'
+    layout:
+        available: 'Widgets disponibles'
+        available_empty: 'Tous les widgets sont sur votre tableau de bord.'
+        customise: Personnaliser
+        done: Terminé
+        drag: 'Faire glisser pour déplacer'
+        move_down: 'Descendre %widget%'
+        move_up: 'Monter %widget%'
+        narrow: 'Rétrécir %widget%'
+        pinned: 'Ce widget est toujours affiché'
+        remove: 'Retirer %widget%'
+        reset: 'Réinitialiser la disposition'
+        reset_message: 'Disposition du tableau de bord réinitialisée.'
+        save_failed: "Enregistrement impossible - vos changements ne sont qu'à l'écran."
+        saved: Enregistré
+        saving: 'Enregistrement...'
+        widen: 'Élargir %widget%'
     outstanding_invoices: 'Factures impayées'
     payment:
         actions:
@@ -852,6 +885,19 @@ dashboard:
         recent: 'Devis récents'
         view_all: 'Voir tous les devis'
     title: 'Tableau de bord'
+    widget:
+        accounting_declarations: 'Déclarations en attente'
+        accounting_turnover: "Chiffre d'affaires et seuils"
+        attention_required: 'Points à traiter'
+        invoice_distribution: 'Statut des factures'
+        onboarding_checklist: 'Liste de configuration'
+        outstanding_total: Impayé
+        overdue_invoices: 'Factures en retard'
+        payments_this_month: 'Encaissé ce mois-ci'
+        quick_actions: 'Actions rapides'
+        recent_activity: 'Activité récente'
+        revenue_chart: "Évolution du chiffre d'affaires"
+        total_revenue: 'Revenu total'
 datagrid:
     action:
         create_bill: "Créer la facture d'achat"

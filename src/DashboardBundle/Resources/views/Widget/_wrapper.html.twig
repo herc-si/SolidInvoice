@@ -1,0 +1,98 @@
+{#
+ # The wrapper every dashboard widget is rendered into.
+ #
+ # Width lives here rather than in each widget template, and that is what makes
+ # the dashboard rearrangeable at all: a widget that sizes itself has decided how
+ # much room it gets, and no amount of dragging or resizing can overrule it.
+ # Widget templates start at their card.
+ #
+ # The width is written as a value, never as a column class: `_dashboard.scss`
+ # turns `data-widget-width` into a span at each breakpoint. That is what lets
+ # the controller resize a card by writing one attribute, with no table of
+ # class names of its own to drift out of step with the stylesheet's.
+ #
+ # `data-widget-id` is the contract with dashboard-layout_controller: it is the
+ # id written back to the server, so it must be the registry id and nothing else.
+ #
+ # The controls are always in the DOM but `hidden` until edit mode, so entering
+ # edit mode is not a page load. `hidden` rather than a CSS class because it also
+ # takes them out of the tab order — a screen reader user should not meet half
+ # a dozen buttons per card that do nothing.
+ #}
+<div class="dashboard-widget{{ widget.cssClass ? ' ' ~ widget.cssClass }}"
+     data-widget-id="{{ widget.id }}"
+     data-widget-zone="{{ zone }}"
+     data-widget-width="{{ widget.width.value }}"
+     data-widget-removable="{{ widget.removable ? 'true' : 'false' }}"
+     data-dashboard-layout-target="widget">
+
+    <div class="dashboard-widget-controls" data-dashboard-layout-target="controls" hidden>
+        <span class="dashboard-widget-name">
+            {{ ux_icon(widget.icon, {width: 16, height: 16}) }}
+            {{ widget.label|trans }}
+        </span>
+
+        {#
+         # The handle is the only part Sortable listens to, so a click inside a
+         # card in edit mode still behaves like a click.
+         #}
+        <span class="dashboard-widget-handle" data-handle aria-hidden="true" title="{{ 'dashboard.layout.drag'|trans }}">
+            {{ ux_icon('tabler:grip-vertical', {width: 16, height: 16}) }}
+        </span>
+
+        {#
+         # Drag is a mouse gesture and nothing else, so the same two moves are
+         # offered as buttons. Without these the whole feature is unusable from a
+         # keyboard.
+         #}
+        <button type="button"
+                class="btn btn-ghost btn-sm dashboard-widget-move"
+                data-action="dashboard-layout#moveUp"
+                aria-label="{{ 'dashboard.layout.move_up'|trans({'%widget%': widget.label|trans}) }}">
+            {{ ux_icon('tabler:chevron-up', {width: 16, height: 16}) }}
+        </button>
+
+        <button type="button"
+                class="btn btn-ghost btn-sm dashboard-widget-move"
+                data-action="dashboard-layout#moveDown"
+                aria-label="{{ 'dashboard.layout.move_down'|trans({'%widget%': widget.label|trans}) }}">
+            {{ ux_icon('tabler:chevron-down', {width: 16, height: 16}) }}
+        </button>
+
+        {#
+         # Width is the one property of a card the user can change without moving
+         # it. The buttons clamp at the ends of the vocabulary rather than
+         # wrapping around, so holding one down settles on the widest or the
+         # narrowest instead of cycling past it.
+         #}
+        <button type="button"
+                class="btn btn-ghost btn-sm dashboard-widget-resize"
+                data-action="dashboard-layout#narrow"
+                aria-label="{{ 'dashboard.layout.narrow'|trans({'%widget%': widget.label|trans}) }}">
+            {{ ux_icon('tabler:arrows-diagonal-minimize-2', {width: 16, height: 16}) }}
+        </button>
+
+        <button type="button"
+                class="btn btn-ghost btn-sm dashboard-widget-resize"
+                data-action="dashboard-layout#widen"
+                aria-label="{{ 'dashboard.layout.widen'|trans({'%widget%': widget.label|trans}) }}">
+            {{ ux_icon('tabler:arrows-diagonal', {width: 16, height: 16}) }}
+        </button>
+
+        {% if widget.removable %}
+            <button type="button"
+                    class="btn btn-ghost btn-sm dashboard-widget-remove"
+                    data-action="dashboard-layout#remove"
+                    aria-label="{{ 'dashboard.layout.remove'|trans({'%widget%': widget.label|trans}) }}">
+                {{ ux_icon('tabler:x', {width: 16, height: 16}) }}
+            </button>
+        {% else %}
+            {# Pinned widgets say so instead of offering a button that would be refused server-side. #}
+            <span class="dashboard-widget-pinned" title="{{ 'dashboard.layout.pinned'|trans }}">
+                {{ ux_icon('tabler:pin', {width: 16, height: 16}) }}
+            </span>
+        {% endif %}
+    </div>
+
+    {{ content|raw }}
+</div>

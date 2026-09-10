@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\Widgets;
 
+use Augias\DashboardBundle\Attention\AttentionSourceInterface;
+use Augias\DashboardBundle\Attribute\AsDashboardWidget;
+use Augias\DashboardBundle\Enum\WidgetZone;
 use Augias\InvoiceBundle\Entity\Invoice;
 use Augias\InvoiceBundle\Entity\RecurringInvoice;
 use Augias\InvoiceBundle\Enum\InvoiceStatus;
@@ -23,10 +26,19 @@ use Augias\QuoteBundle\Enum\QuoteStatus;
 use Augias\QuoteBundle\Repository\QuoteRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
+use Psr\Log\LoggerInterface;
+use Throwable;
 
 /**
  * @see \Augias\DashboardBundle\Tests\Widgets\AttentionRequiredWidgetTest
  */
+#[AsDashboardWidget(
+    id: 'attention_required',
+    label: 'dashboard.widget.attention_required',
+    icon: 'tabler:alert-triangle',
+    zone: WidgetZone::LeftColumn,
+    priority: 120,
+)]
 final readonly class AttentionRequiredWidget implements WidgetInterface
 {
     /**
@@ -40,8 +52,14 @@ final readonly class AttentionRequiredWidget implements WidgetInterface
 
     private ObjectManager $manager;
 
-    public function __construct(ManagerRegistry $registry)
-    {
+    /**
+     * @param iterable<AttentionSourceInterface> $sources sections other bundles contribute
+     */
+    public function __construct(
+        ManagerRegistry $registry,
+        private iterable $sources = [],
+        private ?LoggerInterface $logger = null,
+    ) {
         $this->manager = $registry->getManager();
     }
 
@@ -69,7 +87,10 @@ final readonly class AttentionRequiredWidget implements WidgetInterface
             self::UPCOMING_RECURRING_LIMIT
         );
 
+        $sections = $this->contributedSections();
+
         return [
+            'sections' => $sections,
             'overdueInvoices' => $overdueInvoices,
             'overdueInvoicesTotal' => $invoiceRepository->getCountByStatus(InvoiceStatus::Overdue),
             'draftInvoices' => $draftInvoices,
@@ -83,8 +104,46 @@ final readonly class AttentionRequiredWidget implements WidgetInterface
             // counts a different thing (actual next run date). Null means "total
             // unknown" so the template omits the count rather than inventing one.
             'upcomingRecurringTotal' => null,
-            'hasItems' => [] !== $overdueInvoices || [] !== $draftInvoices || [] !== $pendingQuotes || [] !== $upcomingRecurring,
+            'hasItems' => [] !== $overdueInvoices || [] !== $draftInvoices || [] !== $pendingQuotes || [] !== $upcomingRecurring || [] !== $sections,
         ];
+    }
+
+    /**
+     * The extra sections, rendered by whoever contributed them.
+     *
+     * A source is resolved to a template and its data here rather than in Twig,
+     * so getData() is called once and the failure of one contributor cannot take
+     * the invoices down with it: this card is the invoice one first, and an
+     * accounting outage has no business emptying it.
+     *
+     * @return list<array{template: string, data: array<string, mixed>}>
+     */
+    private function contributedSections(): array
+    {
+        $sections = [];
+
+        foreach ($this->sources as $source) {
+            try {
+                if ($source->supports() && $source->hasItems()) {
+                    $sections[] = ['template' => $source->getTemplate(), 'data' => $source->getData()];
+                }
+            } catch (Throwable $e) {
+                $this->logger?->error('Unable to build a dashboard attention section', [
+                    'source' => $source::class,
+                    'exception' => $e,
+                ]);
+            }
+        }
+
+        return $sections;
+    }
+
+    /**
+     * Always applies. An account with nothing overdue still wants to be told so.
+     */
+    public function supports(): bool
+    {
+        return true;
     }
 
     public function getTemplate(): string

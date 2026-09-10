@@ -1,0 +1,88 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) HERC SI <opensource@herc-si.fr>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{#
+ # Year-to-date turnover against the regime's limits.
+ #
+ # Year-to-date rather than the current period's, because every limit on the
+ # card is annual and cumulative — a quarterly figure measured against an annual
+ # ceiling would be reassuring and wrong.
+ #
+ # The card renders nothing at all when there is no regime. That case is already
+ # excluded by supports(), so reaching it means the company was switched
+ # mid-request; an empty string tells the renderer to drop the wrapper rather
+ # than leave a titled card with nothing in it.
+ #}
+{% if regime is not null %}
+    <twig:Ui:Card>
+        <twig:block name="header">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <div>
+                    <h3 class="card-title mb-0">{{ 'dashboard.accounting.turnover_title'|trans({'%year%': year}) }}</h3>
+                    <small class="text-muted">{{ regime.labelKey|trans }}</small>
+                </div>
+                <a href="{{ path('_accounting_index') }}" class="btn btn-sm btn-ghost">
+                    {{ 'dashboard.accounting.view_books'|trans }}
+                    {{ ux_icon('tabler:arrow-right', {width: 16, height: 16}) }}
+                </a>
+            </div>
+        </twig:block>
+
+        {% if turnover.isEmpty %}
+            {#
+             # A configured regime with an empty revenue book is a normal state,
+             # not a failure: the company has chosen how it is taxed and has not
+             # been paid yet this year. It says so, and points at the book rather
+             # than drawing ceilings against zero.
+             #}
+            <div class="empty">
+                <div class="empty-icon">
+                    {{ ux_icon('tabler:book', {width: 40, height: 40}) }}
+                </div>
+                <p class="empty-subtitle text-secondary">{{ 'dashboard.accounting.no_turnover'|trans({'%year%': year}) }}</p>
+            </div>
+        {% else %}
+            <div class="d-flex justify-content-between align-items-baseline mb-3">
+                <span class="text-muted">{{ 'dashboard.accounting.collected'|trans }}</span>
+                <span class="h2 mb-0">{{ turnover.total|formatCurrency(turnover.currencyCode) }}</span>
+            </div>
+
+            {% if turnover.hasForeignCurrencies %}
+                {#
+                 # Entries in another currency are counted and named, never
+                 # converted: an exchange rate invented on a dashboard would be
+                 # measured against a ceiling and end up in a declaration.
+                 #}
+                <twig:Ui:Alert type="warning" icon="tabler:currency-exchange">
+                    {{ 'accounting.declaration.warning.foreign_currency'|trans }}
+                </twig:Ui:Alert>
+            {% endif %}
+
+            {% for limit in limits %}
+                {{ include('@AugiasAccounting/Widget/_limit_bar.html.twig', {
+                    limit: limit,
+                    currencyCode: turnover.currencyCode,
+                }) }}
+            {% else %}
+                {#
+                 # Turnover exists but no limit measures it — every ceiling this
+                 # regime defines is tied to an activity the company has taken no
+                 # money in. Saying so beats an empty stretch of card.
+                 #}
+                <p class="text-muted mb-0">{{ 'dashboard.accounting.no_limits'|trans }}</p>
+            {% endfor %}
+
+            {% if hiddenLimits > 0 %}
+                <p class="text-muted small mb-0">
+                    {{ 'dashboard.accounting.more_limits'|trans({'%count%': hiddenLimits}) }}
+                </p>
+            {% endif %}
+        {% endif %}
+    </twig:Ui:Card>
+{% endif %}

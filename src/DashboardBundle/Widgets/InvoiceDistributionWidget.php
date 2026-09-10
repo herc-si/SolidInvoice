@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\Widgets;
 
+use Augias\DashboardBundle\Attribute\AsDashboardWidget;
+use Augias\DashboardBundle\Enum\WidgetZone;
 use Augias\InvoiceBundle\Entity\Invoice;
 use Augias\InvoiceBundle\Enum\InvoiceStatus;
 use Augias\InvoiceBundle\Repository\InvoiceRepository;
@@ -28,6 +30,13 @@ use Symfony\UX\Chartjs\Model\Chart;
 /**
  * @see \Augias\DashboardBundle\Tests\Widgets\InvoiceDistributionWidgetTest
  */
+#[AsDashboardWidget(
+    id: 'invoice_distribution',
+    label: 'dashboard.widget.invoice_distribution',
+    icon: 'tabler:chart-donut',
+    zone: WidgetZone::RightColumn,
+    priority: 10,
+)]
 final readonly class InvoiceDistributionWidget implements WidgetInterface
 {
     private ObjectManager $manager;
@@ -147,6 +156,14 @@ final readonly class InvoiceDistributionWidget implements WidgetInterface
             'hasData' => $hasData,
             'total' => array_sum($data),
         ];
+    }
+
+    /**
+     * Always applies; an account with no invoices gets the empty state.
+     */
+    public function supports(): bool
+    {
+        return true;
     }
 
     public function getTemplate(): string

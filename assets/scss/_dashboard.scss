@@ -9,24 +9,11 @@
 // HERO STATS
 // =============================================================================
 
-// Four tiles, but deliberately not four equal tiles. The row is laid out on a
-// nine-track grid: ordinary tiles span two tracks, the urgent one spans three.
-// Spans are used instead of positional column sizes so the emphasis follows the
-// `--urgent` class rather than the tile's position in the markup.
-
-.dashboard-hero-stats {
-    display: grid;
-    gap: var(--swp-space-4);
-    grid-template-columns: 1fr;
-
-    @media (width >= 577px) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (width >= 1201px) {
-        grid-template-columns: repeat(9, 1fr);
-    }
-}
+// The four figures used to be one widget on a private nine-track grid, where an
+// ordinary tile spanned two tracks and the urgent one three. They are four
+// widgets now, so they sit on the zone's grid like everything else and their
+// widths come from the layout: the asymmetry that grid existed to produce is
+// something the user arranges, not something this file decides.
 
 .stat-card {
     background: var(--swp-surface);
@@ -37,10 +24,6 @@
 
     // No hover treatment: the tile is an inert div with no link and no handler.
     // Nothing here transitions, so there is nothing for reduced-motion to undo.
-
-    @media (width >= 1201px) {
-        grid-column: span 2;
-    }
 
     // State is carried by the icon tint, the value colour and the surface tint.
     // Never a side stripe, never a glow.
@@ -55,13 +38,11 @@
     }
 
     // "Overdue" is the only actionable number in the row, so it must not read as
-    // interchangeable with the totals beside it: half again as wide where there
-    // is room for an asymmetric row, and a full type step larger at every width.
+    // interchangeable with the totals beside it: a full type step larger at
+    // every width. It used to be half again as wide as well, which is now the
+    // tile's stored width and therefore the user's to keep or undo.
 
     &--urgent {
-        @media (width >= 1201px) {
-            grid-column: span 3;
-        }
 
         .stat-value {
             font-size: var(--swp-text-3xl);
@@ -721,3 +702,212 @@
     color: var(--swp-text-muted);
 }
 
+
+// =============================================================================
+// LAYOUT EDITING
+// =============================================================================
+
+// Edit mode is a CSS state, not a second page: every control below is already in
+// the DOM on a normal load, hidden with the `hidden` attribute so it is out of
+// the tab order too. Entering edit mode therefore costs no request, and leaving
+// it cannot lose an unsaved arrangement - there is no such thing, each change is
+// persisted as it happens.
+
+// `hidden` only removes an element via the user-agent sheet's
+// `[hidden] { display: none }`, which loses to ANY author `display` declaration -
+// and `.dashboard-widget-controls` below sets `display: flex`. This project ships
+// no `[hidden]` reset of its own (Tabler does not add one), so without this rule
+// the controls bar shows on every card at all times and the Customise button
+// looks broken: it toggles an attribute that changes nothing.
+// -
+// Scoped to the dashboard rather than made global, and `!important` so that any
+// element hidden here later cannot be un-hidden by a more specific `display`.
+
+.dashboard-page [hidden] {
+    display: none !important;
+}
+
+.dashboard-toolbar {
+    align-items: center;
+    display: flex;
+    gap: var(--swp-space-2);
+    justify-content: flex-end;
+    margin-bottom: var(--swp-space-3);
+}
+
+.dashboard-toolbar-status {
+    color: var(--swp-text-muted);
+    font-size: 0.8125rem;
+
+    // Reserve the line so a status appearing and clearing does not shunt the
+    // toolbar buttons sideways.
+    min-height: 1.25rem;
+
+    &--error {
+        color: var(--swp-danger, #ef4444);
+    }
+}
+
+.dashboard-picker {
+    background: var(--swp-surface);
+    border: 1px dashed var(--swp-border);
+    border-radius: var(--swp-radius-lg, 0.75rem);
+    margin-bottom: var(--swp-space-4);
+    padding: var(--swp-space-4);
+}
+
+.dashboard-picker-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: var(--swp-space-3);
+}
+
+.dashboard-picker-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--swp-space-2);
+}
+
+.dashboard-picker-item {
+    align-items: center;
+    background: var(--swp-surface);
+    border: 1px solid var(--swp-border);
+    border-radius: var(--swp-radius-md, 0.5rem);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 0.8125rem;
+    gap: var(--swp-space-2);
+    padding: var(--swp-space-2) var(--swp-space-3);
+
+    &:hover {
+        border-color: var(--swp-primary);
+    }
+}
+
+.dashboard-picker-empty {
+    color: var(--swp-text-muted);
+    font-size: 0.8125rem;
+    margin: 0;
+}
+
+// A zone is a twelve-track grid and a widget spans some of it. Everything about
+// how wide a width *is* lives here and nowhere else: PHP names the width, the
+// stored layout carries that name, the controller writes it to an attribute, and
+// this is the only file that turns it into geometry. Adding a breakpoint below
+// changes the dashboard for every widget without a line of PHP or TypeScript.
+
+.dashboard-zone {
+    display: grid;
+    gap: var(--swp-space-4);
+    grid-template-columns: 1fr;
+    margin-bottom: var(--swp-space-4);
+
+    @media (width >= 768px) {
+        grid-template-columns: repeat(12, 1fr);
+    }
+}
+
+.dashboard-widget {
+    position: relative;
+
+    // Cards in the same row end level with each other: the controls bar sits on
+    // top at its own height and the widget's content takes the rest, so a short
+    // card next to a tall chart stretches instead of leaving a ragged edge.
+    display: flex;
+    flex-direction: column;
+
+    // Grid items are min-content wide by default, so without this a long money
+    // string or a chart canvas would push its track wider than its share.
+    min-width: 0;
+
+    // Full width until there is a grid to span. Below the first breakpoint every
+    // card is the width of the zone whatever the layout says, which is the only
+    // arrangement that reads on a phone.
+    grid-column: 1 / -1;
+
+    > :last-child {
+        flex: 1 1 auto;
+    }
+
+    @media (width >= 768px) {
+
+        &[data-widget-width='quarter'],
+        &[data-widget-width='third'],
+        &[data-widget-width='half'] {
+            grid-column: span 6;
+        }
+    }
+
+    @media (width >= 1200px) {
+
+        &[data-widget-width='quarter'] {
+            grid-column: span 3;
+        }
+
+        &[data-widget-width='third'] {
+            grid-column: span 4;
+        }
+
+        &[data-widget-width='half'] {
+            grid-column: span 6;
+        }
+
+        &[data-widget-width='two_thirds'] {
+            grid-column: span 8;
+        }
+    }
+}
+
+.dashboard-widget-controls {
+    align-items: center;
+    background: var(--swp-surface);
+    border: 1px solid var(--swp-border);
+    border-radius: var(--swp-radius-md, 0.5rem);
+    display: flex;
+    gap: var(--swp-space-1);
+    margin-bottom: var(--swp-space-2);
+    padding: var(--swp-space-1) var(--swp-space-2);
+}
+
+.dashboard-widget-name {
+    align-items: center;
+    color: var(--swp-text-muted);
+    display: inline-flex;
+    flex: 1;
+    font-size: 0.75rem;
+    font-weight: 600;
+    gap: var(--swp-space-2);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.dashboard-widget-handle {
+    color: var(--swp-text-muted);
+    cursor: grab;
+    display: inline-flex;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.dashboard-widget-pinned {
+    color: var(--swp-text-muted);
+    display: inline-flex;
+}
+
+// The card being dragged. Kept legible rather than reduced to an outline: the
+// user is placing this specific widget, so it has to stay recognisable while it
+// moves.
+
+.dashboard-widget--ghost {
+    opacity: 0.4;
+}
+
+.dashboard-page--editing {
+
+    .dashboard-widget {
+        outline: 1px dashed var(--swp-border);
+        outline-offset: var(--swp-space-2);
+    }
+}

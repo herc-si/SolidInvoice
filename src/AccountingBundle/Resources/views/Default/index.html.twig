@@ -69,35 +69,10 @@
                         {% endif %}
 
                         {% for limit in limits %}
-                            {% set used = limit.used %}
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between align-items-baseline">
-                                    <span>
-                                        {{ limit.threshold.labelKey|trans }}
-                                        {% if limit.threshold.nature is not null %}
-                                            <span class="text-muted">— {{ limit.threshold.nature.translationKey|trans }}</span>
-                                        {% endif %}
-                                        {% if limit.threshold.prorated %}
-                                            <span class="badge bg-blue-lt ms-1">{{ 'accounting.threshold.prorated'|trans }}</span>
-                                        {% endif %}
-                                    </span>
-                                    <span class="text-muted">
-                                        {{ used }}% {{ 'accounting.threshold.of'|trans }}
-                                        {{ limit.threshold.amount|formatCurrency(turnover.currencyCode) }}
-                                    </span>
-                                </div>
-                                <div class="progress progress-sm">
-                                    <div
-                                        class="progress-bar {{ used >= 100 ? 'bg-danger' : (used >= 80 ? 'bg-warning' : 'bg-primary') }}"
-                                        style="width: {{ min(used, 100) }}%"
-                                        role="progressbar"
-                                        aria-valuenow="{{ used }}"
-                                        aria-valuemin="0"
-                                        aria-valuemax="100"
-                                        aria-label="{{ limit.threshold.labelKey|trans }}"
-                                    ></div>
-                                </div>
-                            </div>
+                            {{ include('@AugiasAccounting/Widget/_limit_bar.html.twig', {
+                                limit: limit,
+                                currencyCode: turnover.currencyCode,
+                            }) }}
                         {% endfor %}
 
                         <p class="text-muted small mb-0">{{ 'accounting.declaration.warning.rates_unverified'|trans }}</p>

@@ -13,9 +13,19 @@ declare(strict_types=1);
 
 namespace Augias\DashboardBundle\Widgets;
 
+use Augias\DashboardBundle\Attribute\AsDashboardWidget;
+use Augias\DashboardBundle\Enum\WidgetZone;
+
 /**
  * @see \Augias\DashboardBundle\Tests\Widgets\QuickActionsWidgetTest
  */
+#[AsDashboardWidget(
+    id: 'quick_actions',
+    label: 'dashboard.widget.quick_actions',
+    icon: 'tabler:bolt',
+    zone: WidgetZone::RightColumn,
+    priority: 110,
+)]
 final class QuickActionsWidget implements WidgetInterface
 {
     /**
@@ -24,6 +34,14 @@ final class QuickActionsWidget implements WidgetInterface
     public function getData(): array
     {
         return [];
+    }
+
+    /**
+     * Pure links, nothing to check.
+     */
+    public function supports(): bool
+    {
+        return true;
     }
 
     public function getTemplate(): string

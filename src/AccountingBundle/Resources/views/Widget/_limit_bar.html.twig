@@ -1,0 +1,54 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) HERC SI <opensource@herc-si.fr>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{#
+ # One turnover limit, named and drawn.
+ #
+ # Shared by the accounting home page and the dashboard widget, which is the
+ # point: the two used to be one copy each of the same bar, and a limit that
+ # reads amber on one screen and red on the other is worse than not showing it.
+ #
+ # The colour maps a severity, never a raw percentage. Where "nearing" starts is
+ # LimitSeverity's business, and it holds the same boundaries the threshold
+ # alerts are raised at.
+ #}
+{% set severity = {
+    'exceeded': 'bg-danger',
+    'nearing': 'bg-warning',
+    'ok': 'bg-primary',
+} %}
+
+<div class="mb-3">
+    <div class="d-flex justify-content-between align-items-baseline">
+        <span>
+            {{ limit.threshold.labelKey|trans }}
+            {% if limit.threshold.nature is not null %}
+                <span class="text-muted">— {{ limit.threshold.nature.translationKey|trans }}</span>
+            {% endif %}
+            {% if limit.threshold.prorated %}
+                <span class="badge bg-blue-lt ms-1">{{ 'accounting.threshold.prorated'|trans }}</span>
+            {% endif %}
+        </span>
+        <span class="text-muted">
+            {{ limit.used }}% {{ 'accounting.threshold.of'|trans }}
+            {{ limit.threshold.amount|formatCurrency(currencyCode) }}
+        </span>
+    </div>
+    <div class="progress progress-sm">
+        <div
+            class="progress-bar {{ severity[limit.severity.value] }}"
+            style="width: {{ limit.barWidth }}%"
+            role="progressbar"
+            aria-valuenow="{{ limit.used }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-label="{{ limit.threshold.labelKey|trans }}"
+        ></div>
+    </div>
+</div>

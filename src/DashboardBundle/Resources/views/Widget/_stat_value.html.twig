@@ -1,0 +1,50 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{#
+ # Renders a per-currency map of amounts as a single stat value.
+ #
+ # One currency (the overwhelmingly common case) gets one total, and that is the
+ # whole point: the question "how much am I owed?" must be answerable by reading,
+ # never by adding. Several currencies cannot be summed, so they are stacked and
+ # captioned as separate figures rather than silently listed - the caption is what
+ # stops the stack from reading like addends of a total that was left off.
+ #
+ # Shared by the four stat tiles. It used to live inside the one widget that held
+ # all four, and the two branches of that widget disagreed with each other about
+ # how to separate currencies - one used `<br>`, the other `, `. Four separate
+ # widgets make that failure mode cheap to repeat, so the macro moved here before
+ # they could.
+ #}
+{% macro statValue(values, defaultCurrency, modifiers = [], wrapper = 'stat-value') %}
+    {% import '@AugiasDashboard/money.html.twig' as money %}
+
+    {% if values|length > 1 %}
+        <span class="{{ wrapper }} d-flex flex-column gap-1">
+            {% for currency, amount in values %}
+                {{ money.money(amount, currency, modifiers) }}
+            {% endfor %}
+        </span>
+        <span class="stat-subvalue">{{ 'dashboard.hero.currency_breakdown'|trans({'%count%': values|length}) }}</span>
+    {% else %}
+        <span class="{{ wrapper }}">
+            {% for currency, amount in values %}
+                {{ money.money(amount, currency, modifiers) }}
+            {% else %}
+                {#
+                 # No invoices yet. There is no client to take a currency from, so this
+                 # falls back to the company's own currency - the same basis the
+                 # populated branch would use for a single-currency account, rather
+                 # than the different one `0|formatCurrency` used to silently pick.
+                 #}
+                {{ money.money(0, defaultCurrency, modifiers) }}
+            {% endfor %}
+        </span>
+    {% endif %}
+{% endmacro %}

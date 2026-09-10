@@ -1,0 +1,28 @@
+{#
+ # This file is part of Augias package.
+ #
+ # (c) Pierre du Plessis <open-source@solidworx.co>
+ #
+ # This source file is subject to the MIT license that is bundled
+ # with this source code in the file LICENSE.
+ #}
+
+{% import '@AugiasDashboard/Widget/_stat_value.html.twig' as stat %}
+
+{#
+ # Lifetime revenue mixes paid, part-paid and refunded; it is an aggregate, not a
+ # payment state, so nothing here is painted in the colour of money received - a
+ # new account would otherwise render $0.00 in success green. The icon is `info`
+ # for the same reason, one layer down.
+ #}
+<div class="stat-card">
+    <div class="stat-card-content">
+        <div class="stat-icon stat-icon--info">
+            {{ ux_icon('tabler:trending-up', {width: 24, height: 24}) }}
+        </div>
+        <div class="stat-info">
+            <span class="stat-label">{{ 'dashboard.hero.total_revenue'|trans }}</span>
+            {{ stat.statValue(totalRevenue, defaultCurrency, ['total']) }}
+        </div>
+    </div>
+</div>
