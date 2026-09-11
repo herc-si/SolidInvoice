@@ -26,7 +26,11 @@ use Augias\CoreBundle\Entity\Company;
 use Augias\PaymentBundle\Entity\Payment;
 use Augias\PaymentBundle\Enum\PaymentStatus;
 use Augias\SettingsBundle\SystemConfig;
+use Brick\Math\BigDecimal;
 use Brick\Math\BigInteger;
+use Brick\Math\BigNumber;
+use Brick\Math\Exception\MathException;
+use Brick\Math\RoundingMode;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Uid\Ulid;
@@ -206,6 +210,16 @@ final readonly class LedgerFeeder
         $entry->setCompany($company)
             ->setCounterparty($bill->getSupplier());
 
+        // The supplier's tax, in the share of the bill this payment settles.
+        // No breakdown by rate: deductible VAT is declared as one figure, and
+        // a supplier's bill is recorded as one too.
+        $billTax = $bill->getTaxAmount();
+
+        if ($billTax instanceof BigNumber) {
+            $tax = $this->shareOf($billTax, $payment->getAmount(), $bill->getTotalAmount());
+            $entry->setTax($entry->getAmount()->toBigInteger()->minus($tax), $tax, []);
+        }
+
         return $this->persist($entry, $profile);
     }
 
@@ -247,5 +261,29 @@ final readonly class LedgerFeeder
         $locale = trim((string) $this->systemConfig->get(SystemConfig::LOCALE_CONFIG_PATH, $company));
 
         return $this->translator->trans($key, [], null, '' === $locale ? null : $locale);
+    }
+
+    /**
+     * A payment's share of a figure on the document it settles.
+     *
+     * Cash accounting again: pay half a bill and half its tax is deductible,
+     * not all of it. Paying more than was asked for deducts no more than the
+     * supplier charged.
+     *
+     * @throws MathException
+     */
+    private function shareOf(BigNumber $amount, BigNumber $paid, BigNumber $total): BigInteger
+    {
+        $paid = BigDecimal::of($paid);
+        $total = BigDecimal::of($total);
+
+        if (! $total->isPositive() || $paid->isGreaterThanOrEqualTo($total)) {
+            return BigDecimal::of($amount)->toScale(0, RoundingMode::HalfEven)->toBigInteger();
+        }
+
+        return BigDecimal::of($amount)
+            ->multipliedBy($paid->dividedBy($total, 10, RoundingMode::HalfEven))
+            ->toScale(0, RoundingMode::HalfEven)
+            ->toBigInteger();
     }
 }

@@ -82,13 +82,11 @@ final class LedgerEntryGrid extends Grid
                 ->sortableField('amount'),
         ];
 
-        // Only in the revenue book, and only for a company that charges tax.
-        // A micro-entreprise in franchise en base would read two permanently
-        // empty columns in the register it is required to produce; and the
-        // purchase register would read a column of zeroes claiming no VAT was
-        // paid, when the truth is that a supplier bill records none for it to
-        // know about.
-        if ($this->book() === LedgerBook::Revenue && ! $this->profileProvider->forCompany()->vatExempt) {
+        // Only for a company that is in the scope of VAT: one in franchise en
+        // base would read two permanently empty columns in the register it is
+        // required to produce. Both books carry them — tax collected on one
+        // side, tax paid to suppliers on the other.
+        if (! $this->profileProvider->forCompany()->vatExempt) {
             $columns[] = MoneyColumn::new('netMoney')
                 ->label('accounting.entry.grid.net')
                 ->searchable(false)

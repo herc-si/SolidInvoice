@@ -81,6 +81,25 @@ class Bill
     #[ORM\Column(name: 'total_amount', type: BigIntegerType::NAME)]
     private BigNumber $totalAmount;
 
+    /**
+     * The VAT the supplier charged, as their document states it.
+     *
+     * Typed in rather than worked out: a supplier's bill is a document that
+     * arrives, not a total the application computed, and its tax is whatever is
+     * printed on it — several rates, rounding of their own, a partial
+     * exemption. Asking for the figure is both simpler and truer than deriving
+     * it from a rate.
+     *
+     * Null when tax does not apply, which is not the same as a bill that bore
+     * none: a company outside the scope of VAT deducts nothing either way, and
+     * a zero here would claim the supplier charged none.
+     *
+     * One figure, not a breakdown by rate, because that is how deductible VAT
+     * is declared — a single box, unlike the tax collected on sales.
+     */
+    #[ORM\Column(name: 'tax_amount', type: BigIntegerType::NAME, nullable: true)]
+    private ?BigNumber $taxAmount = null;
+
     #[ORM\Column(name: 'currency_code', type: Types::STRING, length: 3)]
     private string $currencyCode;
 
@@ -223,6 +242,29 @@ class Bill
         $this->totalAmount = $totalAmount;
 
         return $this;
+    }
+
+    public function getTaxAmount(): ?BigNumber
+    {
+        return $this->taxAmount;
+    }
+
+    public function setTaxAmount(?BigNumber $taxAmount): self
+    {
+        $this->taxAmount = $taxAmount;
+
+        return $this;
+    }
+
+    /**
+     * What the bill came to before the supplier's tax — the whole of it when no
+     * tax was recorded.
+     */
+    public function getNetAmount(): BigNumber
+    {
+        return $this->taxAmount instanceof BigNumber
+            ? $this->totalAmount->toBigInteger()->minus($this->taxAmount)
+            : $this->totalAmount;
     }
 
     public function getCurrencyCode(): string
