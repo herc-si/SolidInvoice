@@ -15,6 +15,7 @@ namespace Augias\AccountingBundle\Action\Entry;
 
 use Augias\AccountingBundle\Entity\LedgerEntry;
 use Augias\AccountingBundle\Enum\LedgerEntrySource;
+use Augias\AccountingBundle\Service\LedgerLockDate;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,9 +31,10 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
  * Only ever a manual one. An automatic entry mirrors a payment that still
  * exists, so deleting it would leave the book disagreeing with the record it
  * was drawn from — and the next flush of that payment would write it back
- * anyway. A sealed entry cannot be removed at all; the Doctrine listener
- * refuses it, and this refuses it first so the user gets an explanation rather
- * than an error page.
+ * anyway. An entry the books have been shut on — sealed, or in a period before
+ * the lock date — cannot be removed at all; the Doctrine listener refuses it,
+ * and this refuses it first so the user gets an explanation rather than an
+ * error page.
  */
 final readonly class Delete
 {
@@ -40,6 +42,7 @@ final readonly class Delete
         private ManagerRegistry $doctrine,
         private CsrfTokenManagerInterface $csrfTokenManager,
         private RouterInterface $router,
+        private LedgerLockDate $lockDate,
     ) {
     }
 
@@ -54,7 +57,7 @@ final readonly class Delete
             return new RedirectResponse($this->router->generate('_accounting_book', ['book' => $book]));
         }
 
-        if ($entry->isLocked()) {
+        if ($entry->isLocked() || $this->lockDate->shuts($entry)) {
             $session->getFlashBag()->add('warning', 'accounting.entry.flash.locked');
 
             return new RedirectResponse($this->router->generate('_accounting_book', ['book' => $book]));

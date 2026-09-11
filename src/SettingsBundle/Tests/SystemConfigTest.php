@@ -52,6 +52,7 @@ final class SystemConfigTest extends KernelTestCase
             'accounting/fr_micro/acre' => '0',
             'accounting/fr_micro/income_tax_option' => '0',
             'accounting/fr_micro/pension_fund' => null,
+            'accounting/lock_date' => null,
             'accounting/primary_activity' => 'services_bnc',
             'accounting/regime' => null,
             'accounting/vat_exempt' => '0',

@@ -93,6 +93,29 @@ class AccountingPeriodRepository extends EntityRepository
     }
 
     /**
+     * The end date of the most recently sealed period, or null if none is.
+     *
+     * The floor under the lock date: what has been sealed is final, so the user
+     * cannot set the books back to before it.
+     */
+    public function latestClosedPeriodEnd(Company $company, PeriodType $type): ?DateTimeImmutable
+    {
+        $period = $this->createQueryBuilder('p')
+            ->andWhere('p.company = :company')
+            ->andWhere('p.type = :type')
+            ->andWhere('p.status = :status')
+            ->setParameter('company', $company->getId(), UlidType::NAME)
+            ->setParameter('type', $type->value)
+            ->setParameter('status', PeriodStatus::Closed->value)
+            ->orderBy('p.endDate', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $period instanceof AccountingPeriod ? $period->getEndDate() : null;
+    }
+
+    /**
      * @return list<AccountingPeriod>
      */
     public function findForYear(Company $company, PeriodType $type, int $year): array

@@ -105,6 +105,7 @@ accounting:
         cipav: CIPAV
         ssi: SSI
     period:
+        books_shut_until: "Livres arrêtés jusqu'au %date%."
         close: 'Clôturer %period%'
         close_help: 'La clôture numérote les écritures, les scelle et fige les totaux. C''est définitif.'
         closed_on: 'Clôturée le %date%.'
@@ -141,6 +142,9 @@ accounting:
         declaration_periodicity:
             description: 'À quelle fréquence vous déclarez votre chiffre d''affaires. Vos livres sont clôturés au même rythme.'
             label: 'Périodicité de déclaration'
+        lock_date:
+            description: "Les écritures des périodes terminées à cette date ne peuvent plus être modifiées ni supprimées. Avancez-la une fois une période déclarée ; vous pouvez la reculer, mais jamais avant une période déjà clôturée."
+            label: "Livres arrêtés jusqu'au"
         income_tax_option:
             description: 'Payer l''impôt sur le revenu en pourcentage du chiffre d''affaires en même temps que les cotisations, plutôt qu''à la déclaration annuelle.'
             label: 'Option pour le versement libératoire'

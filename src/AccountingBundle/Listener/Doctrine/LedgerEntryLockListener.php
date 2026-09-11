@@ -15,6 +15,7 @@ namespace Augias\AccountingBundle\Listener\Doctrine;
 
 use Augias\AccountingBundle\Entity\LedgerEntry;
 use Augias\AccountingBundle\Exception\LedgerLockedException;
+use Augias\AccountingBundle\Service\LedgerLockDate;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PreRemoveEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -33,30 +34,56 @@ use Doctrine\ORM\Events;
  * lock on entries that were open when the update began — {@see $lockedAt} was
  * null before, so it does not match a locked entry being changed.
  *
+ * Sealing is not the only thing that shuts a book, though. An entry whose
+ * period ended before the lock date is refused too, which covers the span a
+ * seal cannot: the weeks between a period ending and someone closing it, during
+ * which its figures have often already been declared.
+ *
  * @see \Augias\AccountingBundle\Tests\Functional\LedgerBookkeepingTest
  */
 #[AsEntityListener(event: Events::preUpdate, entity: LedgerEntry::class)]
 #[AsEntityListener(event: Events::preRemove, entity: LedgerEntry::class)]
 final class LedgerEntryLockListener
 {
+    public function __construct(
+        private readonly LedgerLockDate $lockDate,
+    ) {
+    }
+
     public function preUpdate(LedgerEntry $entry, PreUpdateEventArgs $args): void
     {
         // The pre-update value is what matters: an entry being sealed right now
         // reads as locked already, since the new value is set by then.
-        if (! $this->wasLockedBeforeThisChange($args)) {
+        if ($this->wasLockedBeforeThisChange($args)) {
+            throw LedgerLockedException::forEntry($entry);
+        }
+
+        // Sealing writes to entries whose period is about to be shut, and runs
+        // before the lock date moves; reading it here would refuse the seal
+        // itself on the pass that closes the period after this one.
+        if ($args->hasChangedField('lockedAt')) {
             return;
         }
 
-        throw LedgerLockedException::forEntry($entry);
+        $this->refuseIfShut($entry);
     }
 
     public function preRemove(LedgerEntry $entry, PreRemoveEventArgs $args): void
     {
-        if (! $entry->isLocked()) {
+        if ($entry->isLocked()) {
+            throw LedgerLockedException::forEntry($entry);
+        }
+
+        $this->refuseIfShut($entry);
+    }
+
+    private function refuseIfShut(LedgerEntry $entry): void
+    {
+        if (! $this->lockDate->shuts($entry)) {
             return;
         }
 
-        throw LedgerLockedException::forEntry($entry);
+        throw LedgerLockedException::beforeLockDate($entry);
     }
 
     /**

@@ -35,6 +35,16 @@ final class LedgerLockedException extends RuntimeException
         ));
     }
 
+    public static function beforeLockDate(LedgerEntry $entry): self
+    {
+        return new self(sprintf(
+            'Ledger entry %s sits in a period the books have been shut on and can no longer be '
+            . 'modified or removed. Move the lock date back, or record a reversing entry in an '
+            . 'open period.',
+            $entry->getId()?->toBase58() ?? '(unsaved)',
+        ));
+    }
+
     public static function forPeriod(AccountingPeriod $period): self
     {
         return new self(sprintf(
