@@ -84,6 +84,19 @@ final class AccountingConfigProvider implements ProviderInterface
                 ['label' => 'accounting.settings.declaration_periodicity.label'],
             ),
             new Config(
+                AccountingSettings::LOCK_DATE,
+                null,
+                'accounting.settings.lock_date.description',
+                DateType::class,
+                [
+                    'label' => 'accounting.settings.lock_date.label',
+                    // Settings round-trip as plain strings, so the field has to
+                    // read and write one rather than a DateTime object.
+                    'input' => 'string',
+                    'widget' => 'single_text',
+                ],
+            ),
+            new Config(
                 AccountingSettings::VAT_EXEMPT,
                 '0',
                 'accounting.settings.vat_exempt.description',

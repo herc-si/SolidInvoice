@@ -249,6 +249,44 @@ final class AccountingPagesTest extends WebTestCase
         self::assertSame('/accounting/book/revenue', $this->client->getResponse()->headers->get('Location'));
     }
 
+    /**
+     * The card a user opens to ask what state the books are in has to say how
+     * far they are shut — a lock that is invisible is a lock that surprises.
+     */
+    public function testTheHomePageSaysHowFarTheBooksAreShut(): void
+    {
+        $this->configureRegime();
+        $this->entry(120_000, 'today');
+
+        self::getContainer()->get(SystemConfig::class)->set(AccountingSettings::LOCK_DATE, '2026-03-31');
+
+        $text = $this->client->request('GET', '/accounting/')->filter('body')->text();
+
+        self::assertStringContainsString('Books shut up to 31 March 2026', $text);
+    }
+
+    /**
+     * Shut is not only sealed. An entry in a period that ended before the lock
+     * date is sent back from the form too, though nothing has been closed.
+     */
+    public function testAnEntryShutByTheLockDateIsSentBackInsteadOfOpeningTheForm(): void
+    {
+        $this->configureRegime();
+        // Q1 2026, long over by the time anything runs this.
+        $this->entry(120_000);
+
+        self::getContainer()->get(SystemConfig::class)->set(AccountingSettings::LOCK_DATE, '2026-03-31');
+
+        $entry = $this->entries()[0];
+
+        self::assertFalse($entry->isLocked(), 'Nothing was sealed — the lock date alone sends this back.');
+
+        $this->client->request('GET', '/accounting/entry/' . $entry->getId() . '/edit');
+
+        self::assertSame(302, $this->client->getResponse()->getStatusCode());
+        self::assertSame('/accounting/book/revenue', $this->client->getResponse()->headers->get('Location'));
+    }
+
     private function configureRegime(): void
     {
         $config = self::getContainer()->get(SystemConfig::class);

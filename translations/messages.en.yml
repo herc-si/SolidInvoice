@@ -105,6 +105,7 @@ accounting:
         cipav: CIPAV
         ssi: SSI
     period:
+        books_shut_until: 'Books shut up to %date%.'
         close: 'Close %period%'
         close_help: 'Closing numbers the entries, seals them and freezes the totals. It cannot be undone.'
         closed_on: 'Closed on %date%.'
@@ -141,6 +142,9 @@ accounting:
         declaration_periodicity:
             description: 'How often you declare turnover. Your books are closed on the same rhythm.'
             label: 'Declaration frequency'
+        lock_date:
+            description: 'Entries in periods that ended by this date can no longer be changed or removed. Move it forward once you have declared a period; you can move it back, but never before a period you have already closed.'
+            label: 'Books shut up to'
         income_tax_option:
             description: 'Pay income tax as a percentage of turnover alongside your contributions, instead of on your annual return.'
             label: 'Flat-rate income tax option'

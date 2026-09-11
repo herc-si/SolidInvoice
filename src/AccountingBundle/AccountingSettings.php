@@ -58,6 +58,22 @@ final class AccountingSettings
     /** Monthly or quarterly — also the granularity the books are closed at. */
     final public const string DECLARATION_PERIODICITY = 'accounting/declaration_periodicity';
 
+    /**
+     * Books up to and including this date are shut: entries filed into a period
+     * that ended by then can no longer be changed or removed.
+     *
+     * The cran between "still being kept" and "sealed for good". Sealing is
+     * one-way and happens per period; this is the reversible control for the
+     * span in between — the weeks between a period ending and anyone getting
+     * round to closing it, and the ordinary "I have declared that month, leave
+     * it alone" of a company that files VAT.
+     *
+     * Never read on its own: {@see \Augias\AccountingBundle\Service\LedgerLockDate}
+     * takes it as a floor and raises it to the end of the last sealed period,
+     * so it cannot be set back to before what is already final.
+     */
+    final public const string LOCK_DATE = 'accounting/lock_date';
+
     /** Versement libératoire de l'impôt sur le revenu. */
     final public const string FR_INCOME_TAX_OPTION = 'accounting/fr_micro/income_tax_option';
 
