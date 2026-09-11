@@ -404,10 +404,17 @@ final class LedgerBookkeepingTest extends KernelTestCase
         self::assertTrue($entry->hasTax());
         self::assertSame('20000', (string) $entry->getTaxAmount());
         self::assertSame('100000', (string) $entry->getNetAmount());
-        self::assertSame(
-            [['rate' => '20.0000', 'category' => 'Standard', 'base' => '100000', 'tax' => '20000']],
-            $entry->getTaxBreakdown(),
-        );
+        // Compared key by key rather than whole: a JSON column is a document,
+        // and MySQL reorders an object's keys when it stores one. Asserting the
+        // array as written passed on SQLite and failed on MySQL, which says
+        // more about the assertion than about the data.
+        $breakdown = $entry->getTaxBreakdown() ?? [];
+
+        self::assertCount(1, $breakdown);
+        self::assertSame('20.0000', $breakdown[0]['rate']);
+        self::assertSame('Standard', $breakdown[0]['category']);
+        self::assertSame('100000', $breakdown[0]['base']);
+        self::assertSame('20000', $breakdown[0]['tax']);
     }
 
     /**

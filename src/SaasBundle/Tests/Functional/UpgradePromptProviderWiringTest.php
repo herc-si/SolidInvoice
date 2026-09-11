@@ -17,6 +17,7 @@ use Augias\CoreBundle\Feature\UpgradePromptProvider;
 use Augias\SaasBundle\Feature\UpgradePromptRenderer;
 use Augias\Test\SaasKernel;
 use Override;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
@@ -25,6 +26,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  * binding (`NullUpgradePromptProvider`) is exercised by the gate tests'
  * self-hosted assertions.
  */
+#[Group('saas-kernel')]
 final class UpgradePromptProviderWiringTest extends KernelTestCase
 {
     #[Override]

@@ -18,6 +18,7 @@ use Augias\SaasBundle\Feature\UpgradePromptRenderer;
 use Augias\SaasBundle\Form\Extension\FeatureRestrictedExtension;
 use Augias\Test\SaasKernel;
 use Override;
+use PHPUnit\Framework\Attributes\Group;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
@@ -29,6 +30,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  * existing form-test infrastructure; both sides must be present so the
  * `feature_gated` form option is accepted in every deployment.
  */
+#[Group('saas-kernel')]
 final class FeatureRestrictedExtensionWiringTest extends KernelTestCase
 {
     #[Override]

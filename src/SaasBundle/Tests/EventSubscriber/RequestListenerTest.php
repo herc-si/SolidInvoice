@@ -48,6 +48,7 @@ use Twig\Environment;
 
 #[CoversClass(RequestListener::class)]
 #[Group('functional')]
+#[Group('saas-kernel')]
 final class RequestListenerTest extends KernelTestCase
 {
     use M\Adapter\Phpunit\MockeryPHPUnitIntegration;

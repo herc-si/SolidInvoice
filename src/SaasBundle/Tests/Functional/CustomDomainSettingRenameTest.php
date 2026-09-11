@@ -29,6 +29,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  * `system/domain/custom_domain` key after the rename migration runs.
  */
 #[Group('functional')]
+#[Group('saas-kernel')]
 final class CustomDomainSettingRenameTest extends KernelTestCase
 {
     use EnsureApplicationInstalled;

@@ -30,6 +30,7 @@ use Augias\Test\SaasKernel;
 use Augias\UserBundle\Entity\User;
 use DateTimeImmutable;
 use Override;
+use PHPUnit\Framework\Attributes\Group;
 use ReflectionProperty;
 use SolidWorx\Platform\SaasBundle\Entity\Plan;
 use SolidWorx\Platform\SaasBundle\Entity\Subscription;
@@ -40,6 +41,7 @@ use Symfony\Component\Uid\Ulid;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
+#[Group('saas-kernel')]
 final class OnboardingEmailSnapshotTest extends KernelTestCase
 {
     use EnsureApplicationInstalled;

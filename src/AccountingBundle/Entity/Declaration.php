@@ -112,7 +112,12 @@ class Declaration
      *
      * @var array<int, array<string, mixed>>
      */
-    #[ORM\Column(name: 'lines', type: Types::JSON)]
+    // Backticks on purpose: LINES is a reserved word in MySQL, and Doctrine only
+    // quotes an identifier in the SQL it generates when the mapping says it is
+    // quoted. Without them the schema builds fine and every INSERT into this
+    // table is a syntax error — on MySQL and MariaDB only, which is exactly the
+    // kind of breakage a SQLite-only test run never sees.
+    #[ORM\Column(name: '`lines`', type: Types::JSON)]
     private array $lines = [];
 
     #[ORM\Column(name: 'submitted_at', type: Types::DATETIME_IMMUTABLE, nullable: true)]
