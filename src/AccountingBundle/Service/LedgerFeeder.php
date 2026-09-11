@@ -18,6 +18,7 @@ use Augias\AccountingBundle\Enum\LedgerBook;
 use Augias\AccountingBundle\Enum\LedgerEntrySource;
 use Augias\AccountingBundle\Enum\SettlementMethod;
 use Augias\AccountingBundle\Model\AccountingProfile;
+use Augias\AccountingBundle\Model\LedgerTaxSplit;
 use Augias\AccountingBundle\Regime\RegimeRegistry;
 use Augias\AccountingBundle\Repository\LedgerEntryRepository;
 use Augias\BillBundle\Entity\BillPayment;
@@ -75,6 +76,7 @@ final readonly class LedgerFeeder
         private LedgerEntryRepository $entryRepository,
         private SystemConfig $systemConfig,
         private TranslatorInterface $translator,
+        private LedgerTaxSplitter $taxSplitter,
     ) {
     }
 
@@ -142,6 +144,15 @@ final readonly class LedgerFeeder
 
         if ('' === $entry->getCounterpartyName()) {
             $entry->setCounterpartyName((string) $invoice->getClient()?->getName());
+        }
+
+        // The tax contained in what was received, split by rate. Worked out
+        // here because an entry is immutable once its period is sealed, and
+        // because a single amount cannot be taken apart afterwards.
+        $split = $this->taxSplitter->forInvoicePayment($invoice, BigInteger::of($money->getAmount()));
+
+        if ($split instanceof LedgerTaxSplit) {
+            $entry->setTax($split->net, $split->tax, $split->toArray());
         }
 
         return $this->persist($entry, $profile);

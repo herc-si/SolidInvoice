@@ -128,6 +128,37 @@ class LedgerEntry
     private string $currencyCode;
 
     /**
+     * The net share of {@see $amount} — what was received before tax.
+     *
+     * Null, not zero, when tax does not apply: a company in franchise en base
+     * has no VAT to separate out, and a zero there would claim the sale was
+     * taxable at nothing. Set together with {@see $taxAmount}, and always
+     * exactly {@see $amount} minus it, so the two can be summed independently
+     * without drifting apart.
+     */
+    #[ORM\Column(name: 'net_amount', type: BigIntegerType::NAME, nullable: true)]
+    private ?BigNumber $netAmount = null;
+
+    /**
+     * The tax share of {@see $amount} — collected on a sale, paid on a
+     * purchase. Zero is meaningful here and means a taxable operation that bore
+     * no tax, such as a zero-rated or reverse-charge sale.
+     */
+    #[ORM\Column(name: 'tax_amount', type: BigIntegerType::NAME, nullable: true)]
+    private ?BigNumber $taxAmount = null;
+
+    /**
+     * The same tax, split by rate: a VAT return declares a base and a tax per
+     * rate, never one lump, so the split has to be recorded when the entry is
+     * written. Entries become immutable once sealed, which is why this is
+     * stored rather than derived later.
+     *
+     * @var list<array{rate: string, category: string, base: string, tax: string}>|null
+     */
+    #[ORM\Column(name: 'tax_breakdown', type: Types::JSON, nullable: true)]
+    private ?array $taxBreakdown = null;
+
+    /**
      * Only meaningful on the revenue side, where ceilings and contribution
      * rates depend on it. Always null for a purchase.
      */
@@ -301,6 +332,50 @@ class LedgerEntry
         return $this;
     }
 
+    public function getNetAmount(): ?BigNumber
+    {
+        return $this->netAmount;
+    }
+
+    public function getTaxAmount(): ?BigNumber
+    {
+        return $this->taxAmount;
+    }
+
+    /**
+     * @return list<array{rate: string, category: string, base: string, tax: string}>|null
+     */
+    public function getTaxBreakdown(): ?array
+    {
+        return $this->taxBreakdown;
+    }
+
+    /**
+     * Whether tax was worked out for this entry at all. False for a company
+     * outside the scope of VAT, and for a purchase, whose supplier bill records
+     * no tax to split.
+     */
+    public function hasTax(): bool
+    {
+        return $this->taxAmount instanceof BigNumber;
+    }
+
+    /**
+     * Written as one move because the three are one fact. Passing them
+     * separately would allow a net without its tax, which no reader could make
+     * sense of.
+     *
+     * @param list<array{rate: string, category: string, base: string, tax: string}> $breakdown
+     */
+    public function setTax(BigNumber $net, BigNumber $tax, array $breakdown): self
+    {
+        $this->netAmount = $net;
+        $this->taxAmount = $tax;
+        $this->taxBreakdown = $breakdown;
+
+        return $this;
+    }
+
     public function getCurrencyCode(): string
     {
         return $this->currencyCode;
@@ -316,6 +391,28 @@ class LedgerEntry
     public function getMoney(): Money
     {
         return new Money((string) $this->amount, new Currency($this->currencyCode));
+    }
+
+    /**
+     * The tax separated out of {@see $amount}, as money — zero when none was.
+     *
+     * For display only, which is why it flattens the distinction {@see hasTax}
+     * keeps: a register has to show a figure in every cell of a column it
+     * carries. Read the stored amount, not this, to tell a sale that bore no
+     * tax from one where tax never applied.
+     */
+    public function getTaxMoney(): Money
+    {
+        return new Money((string) ($this->taxAmount ?? BigInteger::zero()), new Currency($this->currencyCode));
+    }
+
+    /**
+     * What was received before tax — the whole amount when no tax was
+     * separated out of it.
+     */
+    public function getNetMoney(): Money
+    {
+        return new Money((string) ($this->netAmount ?? $this->amount), new Currency($this->currencyCode));
     }
 
     public function getActivityNature(): ?ActivityNature
