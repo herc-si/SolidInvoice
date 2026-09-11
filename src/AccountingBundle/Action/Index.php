@@ -25,6 +25,7 @@ use Augias\AccountingBundle\Repository\AccountingPeriodRepository;
 use Augias\AccountingBundle\Repository\ThresholdAlertRepository;
 use Augias\AccountingBundle\Service\AccountingProfileProvider;
 use Augias\AccountingBundle\Service\CurrentCompany;
+use Augias\AccountingBundle\Service\LedgerLockDate;
 use Augias\AccountingBundle\Service\LimitUsageCalculator;
 use Augias\AccountingBundle\Service\TurnoverCalculator;
 use Augias\CoreBundle\Entity\Company;
@@ -53,6 +54,7 @@ final readonly class Index
         private LimitUsageCalculator $limitUsageCalculator,
         private AccountingPeriodRepository $periodRepository,
         private ThresholdAlertRepository $alertRepository,
+        private LedgerLockDate $lockDate,
     ) {
     }
 
@@ -66,7 +68,8 @@ final readonly class Index
      *     period: AccountingPeriod|null,
      *     periodHasEnded: bool,
      *     alerts: list<ThresholdAlert>,
-     *     year: int
+     *     year: int,
+     *     lockDate: DateTimeImmutable|null
      * }
      */
     #[Template('@AugiasAccounting/Default/index.html.twig')]
@@ -89,6 +92,7 @@ final readonly class Index
                 'periodHasEnded' => false,
                 'alerts' => [],
                 'year' => $year,
+                'lockDate' => null,
             ];
         }
 
@@ -107,6 +111,9 @@ final readonly class Index
             'periodHasEnded' => $period instanceof AccountingPeriod && $period->getEndDate() < $today,
             'alerts' => $this->alertRepository->findForYear($company, $year),
             'year' => $year,
+            // What the books are shut up to: the date the user set, or the end
+            // of the last period sealed, whichever is later.
+            'lockDate' => $this->lockDate->forCompany($company),
         ];
     }
 }

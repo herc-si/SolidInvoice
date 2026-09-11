@@ -16,6 +16,7 @@ namespace Augias\AccountingBundle\Action\Entry;
 use Augias\AccountingBundle\Entity\LedgerEntry;
 use Augias\AccountingBundle\Enum\LedgerBook;
 use Augias\AccountingBundle\Form\Type\LedgerEntryType;
+use Augias\AccountingBundle\Service\LedgerLockDate;
 use Augias\SettingsBundle\SystemConfig;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Twig\Attribute\Template;
@@ -31,9 +32,10 @@ use function assert;
 /**
  * Corrects an entry while its period is still open.
  *
- * A sealed entry is not editable and never reaches the form: it is sent back to
- * its book with a word about why. This is the one place a user meets the rule
- * that closing is final, so it says so rather than hiding the button and
+ * An entry the books have been shut on is not editable and never reaches the
+ * form: it is sent back to its book with a word about why. Shut means sealed,
+ * or sitting in a period that ended before the lock date. This is the one place
+ * a user meets that rule, so it says so rather than hiding the button and
  * leaving them to guess.
  *
  * An automatic entry opens in a form where only the bookkeeping-side fields are
@@ -46,6 +48,7 @@ final readonly class Edit
         private RouterInterface $router,
         private ManagerRegistry $doctrine,
         private SystemConfig $systemConfig,
+        private LedgerLockDate $lockDate,
     ) {
     }
 
@@ -58,7 +61,7 @@ final readonly class Edit
         $session = $request->getSession();
         assert($session instanceof Session);
 
-        if ($entry->isLocked()) {
+        if ($entry->isLocked() || $this->lockDate->shuts($entry)) {
             $session->getFlashBag()->add('warning', 'accounting.entry.flash.locked');
 
             return new RedirectResponse(

@@ -90,6 +90,20 @@
                             <span class="badge bg-{{ period.status.color }}-lt">{{ period.status.translationKey|trans }}</span>
                         </div>
 
+                        {% if lockDate is not null %}
+                            {#
+                             # The cran between "still being kept" and "sealed":
+                             # entries in periods that ended by this date cannot
+                             # be changed any more, whether or not they have been
+                             # sealed. Shown here because this card is where a
+                             # user comes to ask what state the books are in.
+                             #}
+                            <p class="text-muted small">
+                                {{ ux_icon('tabler:lock', {width: 14, height: 14, class: 'me-1'}) }}
+                                {{ 'accounting.period.books_shut_until'|trans({'%date%': lockDate|date('d F Y')}) }}
+                            </p>
+                        {% endif %}
+
                         {% if period.isOpen and periodHasEnded %}
                             <p class="text-muted">{{ 'accounting.period.close_help'|trans }}</p>
 

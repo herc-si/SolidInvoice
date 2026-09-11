@@ -22,6 +22,7 @@ use Augias\AccountingBundle\Enum\LedgerEntrySource;
 use Augias\AccountingBundle\Enum\PeriodStatus;
 use Augias\AccountingBundle\Enum\PeriodType;
 use Augias\AccountingBundle\Exception\LedgerLockedException;
+use Augias\AccountingBundle\Listener\Doctrine\LedgerEntryLockListener;
 use Augias\AccountingBundle\Listener\Doctrine\LedgerFeedListener;
 use Augias\AccountingBundle\Model\ChainVerification;
 use Augias\AccountingBundle\Regime\Fr\MicroEntrepriseRegime;
@@ -31,6 +32,7 @@ use Augias\AccountingBundle\Service\AccountingProfileProvider;
 use Augias\AccountingBundle\Service\LedgerChainVerifier;
 use Augias\AccountingBundle\Service\LedgerEntryHasher;
 use Augias\AccountingBundle\Service\LedgerFeeder;
+use Augias\AccountingBundle\Service\LedgerLockDate;
 use Augias\ClientBundle\Entity\Client;
 use Augias\ClientBundle\Test\Factory\ClientFactory;
 use Augias\CoreBundle\Entity\Company;
@@ -62,6 +64,8 @@ use function uniqid;
 #[CoversClass(AccountingPeriodManager::class)]
 #[CoversClass(LedgerChainVerifier::class)]
 #[CoversClass(LedgerEntryHasher::class)]
+#[CoversClass(LedgerEntryLockListener::class)]
+#[CoversClass(LedgerLockDate::class)]
 final class LedgerBookkeepingTest extends KernelTestCase
 {
     use EnsureApplicationInstalled;
@@ -213,6 +217,90 @@ final class LedgerBookkeepingTest extends KernelTestCase
         $this->expectException(LedgerLockedException::class);
 
         $this->entityManager->flush();
+    }
+
+    /**
+     * The span a seal cannot cover: a period that has ended but that nobody has
+     * closed yet, whose figures have often already been declared. The lock date
+     * shuts it without sealing it.
+     */
+    public function testAnEntryInAPeriodShutByTheLockDateCannotBeChanged(): void
+    {
+        $this->capturedPayment(120_000, new DateTimeImmutable('2026-01-15'));
+
+        self::getContainer()->get(SystemConfig::class)->set(AccountingSettings::LOCK_DATE, '2026-03-31');
+
+        $entry = $this->entries()[0];
+
+        self::assertFalse($entry->isLocked(), 'Nothing has been sealed — this is the lock date alone.');
+
+        $entry->setLabel('Something else entirely');
+
+        $this->expectException(LedgerLockedException::class);
+
+        $this->entityManager->flush();
+    }
+
+    public function testAnEntryInAPeriodShutByTheLockDateCannotBeRemoved(): void
+    {
+        $this->capturedPayment(120_000, new DateTimeImmutable('2026-01-15'));
+
+        self::getContainer()->get(SystemConfig::class)->set(AccountingSettings::LOCK_DATE, '2026-03-31');
+
+        $entry = $this->entries()[0];
+
+        // preRemove fires on remove(), not on the flush that follows it.
+        $this->expectException(LedgerLockedException::class);
+
+        $this->entityManager->remove($entry);
+    }
+
+    /**
+     * Sealing writes the numbers, the hashes and the lock onto entries whose
+     * period the lock date already shuts. Refusing that would make a locked
+     * book impossible to close — the guard has to let the seal through.
+     */
+    public function testTheLockDateDoesNotStopAPeriodFromBeingSealed(): void
+    {
+        $this->capturedPayment(120_000, new DateTimeImmutable('2026-01-15'));
+
+        self::getContainer()->get(SystemConfig::class)->set(AccountingSettings::LOCK_DATE, '2026-03-31');
+
+        $period = $this->entries()[0]->getPeriod();
+        self::assertInstanceOf(AccountingPeriod::class, $period);
+
+        self::getContainer()->get(AccountingPeriodManager::class)->close($period);
+
+        self::assertSame(PeriodStatus::Closed, $period->getStatus());
+        self::assertTrue($this->entries()[0]->isLocked());
+    }
+
+    /**
+     * Money that turns up late keeps the date it moved on, but is filed into the
+     * period still open — so it stays correctable. Reading the entry's own date
+     * rather than its period's would wrongly freeze it.
+     */
+    public function testALateEntryDatedBeforeTheLockDateStaysCorrectable(): void
+    {
+        // An earlier quarter, shut, and a payment dated inside it arriving now.
+        $this->capturedPayment(120_000, new DateTimeImmutable('2026-01-15'));
+
+        $period = $this->entries()[0]->getPeriod();
+        self::assertInstanceOf(AccountingPeriod::class, $period);
+        self::getContainer()->get(AccountingPeriodManager::class)->close($period);
+
+        $this->capturedPayment(50_000, new DateTimeImmutable('2026-02-20'));
+
+        $late = $this->entries()[1];
+
+        self::assertTrue($late->isLateEntry());
+        self::assertFalse($late->isLocked());
+
+        $late->setLabel('Corrected after the fact');
+
+        $this->entityManager->flush();
+
+        self::assertSame('Corrected after the fact', $this->entries()[1]->getLabel());
     }
 
     public function testAClosedPeriodCannotBeClosedTwice(): void
