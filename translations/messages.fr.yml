@@ -142,6 +142,10 @@ accounting:
             description: 'Comptabilité de trésorerie : livre des recettes, registre des achats pour les activités de revente, et déclaration du chiffre d''affaires à l''URSSAF.'
             label: 'France — Micro-entreprise'
     settings:
+        vat_periodicity:
+            description: "Laissez vide sauf si la TVA se déclare sur un autre rythme que vos livres — le régime réel simplifié demande une déclaration par an alors que les cotisations restent trimestrielles."
+            label: 'Périodicité de TVA'
+            same_as_books: 'Comme les livres'
         acre:
             description: 'Réduit le taux de cotisations sociales les premiers mois d''activité. Nécessite une date de début.'
             label: 'Exonération ACRE'

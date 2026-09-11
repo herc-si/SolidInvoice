@@ -283,6 +283,7 @@ final class MicroContributionCalculatorTest extends TestCase
             activityStartDate: $startDate,
             primaryActivity: ActivityNature::ServicesBic,
             declarationPeriodicity: PeriodType::Quarter,
+            vatPeriodicity: null,
             currencyCode: 'EUR',
             regimeOptions: $options,
         );

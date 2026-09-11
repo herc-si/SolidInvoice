@@ -20,6 +20,7 @@ use Augias\AccountingBundle\Form\Type\ActivityNatureChoiceType;
 use Augias\AccountingBundle\Form\Type\DeclarationPeriodicityChoiceType;
 use Augias\AccountingBundle\Form\Type\PensionFundChoiceType;
 use Augias\AccountingBundle\Form\Type\RegimeChoiceType;
+use Augias\AccountingBundle\Form\Type\VatPeriodicityChoiceType;
 use Augias\SettingsBundle\Config\ProviderInterface;
 use Augias\SettingsBundle\DTO\Config;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -82,6 +83,13 @@ final class AccountingConfigProvider implements ProviderInterface
                 'accounting.settings.declaration_periodicity.description',
                 DeclarationPeriodicityChoiceType::class,
                 ['label' => 'accounting.settings.declaration_periodicity.label'],
+            ),
+            new Config(
+                AccountingSettings::VAT_PERIODICITY,
+                null,
+                'accounting.settings.vat_periodicity.description',
+                VatPeriodicityChoiceType::class,
+                ['label' => 'accounting.settings.vat_periodicity.label'],
             ),
             new Config(
                 AccountingSettings::LOCK_DATE,

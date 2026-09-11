@@ -39,6 +39,8 @@ final readonly class AccountingProfile
         public ?DateTimeImmutable $activityStartDate,
         public ActivityNature $primaryActivity,
         public PeriodType $declarationPeriodicity,
+        /** Null when VAT runs on the same rhythm as the books. */
+        public ?PeriodType $vatPeriodicity,
         public string $currencyCode,
         public array $regimeOptions = [],
     ) {
@@ -49,6 +51,25 @@ final readonly class AccountingProfile
      * a setup prompt rather than empty books — an unconfigured company has no
      * business being told its turnover is within a limit it never picked.
      */
+    /**
+     * The rhythm VAT is declared on: its own when one is set, the books' rhythm
+     * otherwise.
+     */
+    public function vatPeriodicity(): PeriodType
+    {
+        return $this->vatPeriodicity ?? $this->declarationPeriodicity;
+    }
+
+    /**
+     * Whether VAT is declared on a different rhythm from the books, which is
+     * what makes a second set of declaration periods necessary.
+     */
+    public function hasOwnVatCycle(): bool
+    {
+        return $this->vatPeriodicity instanceof PeriodType
+            && $this->vatPeriodicity !== $this->declarationPeriodicity;
+    }
+
     public function isConfigured(): bool
     {
         return null !== $this->regimeCode && '' !== $this->regimeCode;

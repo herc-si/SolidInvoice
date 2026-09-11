@@ -59,6 +59,19 @@ final class AccountingSettings
     final public const string DECLARATION_PERIODICITY = 'accounting/declaration_periodicity';
 
     /**
+     * How often VAT is declared, when it differs from the rhythm above.
+     *
+     * They often do differ, and not as an edge case: a micro-entrepreneur past
+     * the franchise threshold lands on the régime réel simplifié, which wants
+     * one VAT return a year, while URSSAF still wants turnover every quarter.
+     *
+     * Empty means "the same as the books", which is the common case for
+     * everyone else. The books are still sealed on one rhythm and one only —
+     * this is a declaration cycle, not a second set of registers.
+     */
+    final public const string VAT_PERIODICITY = 'accounting/vat_periodicity';
+
+    /**
      * Books up to and including this date are shut: entries filed into a period
      * that ended by then can no longer be changed or removed.
      *
