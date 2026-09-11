@@ -28,6 +28,9 @@ services:
     command: >
       sh -c "until [ -d vendor/solidworx/platform/assets ]; do sleep 1; done &&
              bun install --frozen-lockfile && bun run watch"
+    # Same reasoning as `app`: a watcher that has quietly died is a watcher
+    # whose absence is discovered by a stylesheet that will not update.
+    restart: unless-stopped
 
   app:
     build:
@@ -58,6 +61,15 @@ services:
     command: >
       sh -c "composer install --no-interaction --optimize-autoloader &&
              frankenphp run --config /app/Caddyfile"
+    # The server dies on its own occasionally: PHP here is a threaded build
+    # (ZTS, as FrankenPHP requires) and has been seen aborting with
+    # `zend_mm_heap corrupted` under heavy local load — twice while running the
+    # test suite, with no memory pressure and no kernel OOM kill. The cause is
+    # not understood. What is understood is that without a restart policy the
+    # container stays dead until someone notices, which turns a five-second blip
+    # into a stopped afternoon. `worker` and `cron` below already say this; the
+    # two that a developer actually interacts with did not.
+    restart: unless-stopped
     # depends_on:
     #   - db
 
