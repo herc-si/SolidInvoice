@@ -57,6 +57,7 @@ final class SystemConfigTest extends KernelTestCase
             'accounting/regime' => null,
             'accounting/vat_exempt' => '0',
             'accounting/vat_exempt_mention' => 'TVA non applicable, article 293 B du CGI',
+            'accounting/vat_periodicity' => null,
             'email/from_address' => 'no-reply@solidinvoice.co',
             'email/from_name' => 'Augias',
             'email/sending_options/provider' => null,

@@ -84,19 +84,26 @@ final readonly class DeclarationBuilder
     }
 
     /**
-     * Which returns a period owes.
+     * Which returns a given period owes.
      *
-     * Turnover always, since a regime is what makes the module work at all. VAT
-     * on top whenever the company is in its scope — the two are not rivals, and
-     * a micro-entrepreneur past the franchise threshold files both.
+     * A period's own type decides. When the two cycles coincide — the usual
+     * case — one quarter owes both returns, which is how a micro-entrepreneur
+     * past the franchise threshold files turnover and VAT for the same three
+     * months. When they differ, each period serves the cycle it belongs to: a
+     * company sealing quarterly and declaring VAT once a year has four periods
+     * owing turnover and one, covering the same twelve months, owing VAT.
      *
      * @return list<DeclarationKind>
      */
-    public function kindsOwed(AccountingProfile $profile): array
+    public function kindsOwed(AccountingProfile $profile, AccountingPeriod $period): array
     {
-        $kinds = [DeclarationKind::SocialContributions];
+        $kinds = [];
 
-        if (! $profile->vatExempt) {
+        if ($period->getType() === $profile->declarationPeriodicity) {
+            $kinds[] = DeclarationKind::SocialContributions;
+        }
+
+        if (! $profile->vatExempt && $period->getType() === $profile->vatPeriodicity()) {
             $kinds[] = DeclarationKind::Vat;
         }
 

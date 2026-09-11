@@ -142,6 +142,10 @@ accounting:
             description: 'Cash-basis bookkeeping: a revenue book, a purchase register for resale activities, and turnover declared to URSSAF.'
             label: 'France — Micro-entreprise'
     settings:
+        vat_periodicity:
+            description: 'Leave empty unless VAT is declared on a different rhythm from your books — the régime réel simplifié wants one return a year while contributions stay quarterly.'
+            label: 'VAT frequency'
+            same_as_books: 'Same as the books'
         acre:
             description: 'Reduces the social contribution rate for the first months of activity. Requires a start date.'
             label: 'ACRE relief'

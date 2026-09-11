@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Augias\AccountingBundle\Action;
 
+use Augias\AccountingBundle\Enum\PeriodType;
 use Augias\AccountingBundle\Regime\RegimeInterface;
 use Augias\AccountingBundle\Regime\RegimeRegistry;
 use Augias\AccountingBundle\Service\AccountingPeriodManager;
@@ -94,9 +95,15 @@ final readonly class CreatePeriod
             return $this->back();
         }
 
+        // The cycle the button belongs to. VAT can run on its own, and a
+        // quarter created where a year was asked for would be a period nobody
+        // can declare.
+        $type = PeriodType::tryFrom((string) $request->request->get('type'))
+            ?? $profile->declarationPeriodicity;
+
         // periodFor() returns the existing row when there is one, so a double
         // submit or a stale button creates nothing and says the same thing.
-        $this->periodManager->periodFor($company, $profile->declarationPeriodicity, $date);
+        $this->periodManager->periodFor($company, $type, $date);
         $this->entityManager->flush();
 
         $session->getFlashBag()->add('success', 'accounting.period.flash.created');

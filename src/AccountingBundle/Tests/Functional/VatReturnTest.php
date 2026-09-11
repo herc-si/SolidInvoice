@@ -23,6 +23,7 @@ use Augias\AccountingBundle\Enum\PeriodType;
 use Augias\AccountingBundle\Model\DeclarationLine;
 use Augias\AccountingBundle\Regime\Fr\MicroEntrepriseRegime;
 use Augias\AccountingBundle\Service\AccountingPeriodManager;
+use Augias\AccountingBundle\Service\AccountingProfileProvider;
 use Augias\AccountingBundle\Service\DeclarationBuilder;
 use Augias\AccountingBundle\Service\VatReturnCalculator;
 use Augias\CoreBundle\Entity\Company;
@@ -79,8 +80,9 @@ final class VatReturnTest extends KernelTestCase
      */
     public function testAPeriodInTheScopeOfVatOwesTwoReturns(): void
     {
-        $kinds = self::getContainer()->get(DeclarationBuilder::class)
-            ->kindsOwed(self::getContainer()->get('Augias\AccountingBundle\Service\AccountingProfileProvider')->forCompany($this->companyReference()));
+        $profile = self::getContainer()->get(AccountingProfileProvider::class)->forCompany($this->companyReference());
+
+        $kinds = self::getContainer()->get(DeclarationBuilder::class)->kindsOwed($profile, $this->period);
 
         self::assertSame([DeclarationKind::SocialContributions, DeclarationKind::Vat], $kinds);
     }
@@ -150,6 +152,46 @@ final class VatReturnTest extends KernelTestCase
         self::assertSame(DeclarationKind::Vat, $vat->getKind());
         self::assertSame('20000', (string) $vat->getTotalDue());
         self::assertNull($vat->getRateVersion(), 'VAT comes from the documents, not from a rate table that can go stale.');
+    }
+
+    /**
+     * The case this was built for: a micro-entrepreneur past the franchise
+     * threshold lands on the régime réel simplifié, which wants one VAT return
+     * a year, while URSSAF still wants turnover every quarter. The books are
+     * still sealed quarterly — a VAT cycle groups figures for a return, it does
+     * not open a second set of registers.
+     */
+    public function testVatCanBeDeclaredYearlyWhileTheBooksAreSealedQuarterly(): void
+    {
+        self::getContainer()->get(SystemConfig::class)
+            ->set(AccountingSettings::VAT_PERIODICITY, PeriodType::Year->value);
+
+        // One sale in Q1 and one in Q3, each filed into its own quarter.
+        $this->sale(120_000, [['rate' => '20.0000', 'category' => 'Standard', 'base' => '100000', 'tax' => '20000']]);
+        $q3 = self::getContainer()->get(AccountingPeriodManager::class)
+            ->periodFor($this->companyReference(), PeriodType::Quarter, new DateTimeImmutable('2026-08-10'));
+        $this->entityManager->flush();
+
+        $this->period = $q3;
+        $this->sale(60_000, [['rate' => '20.0000', 'category' => 'Standard', 'base' => '50000', 'tax' => '10000']]);
+
+        $year = self::getContainer()->get(AccountingPeriodManager::class)
+            ->periodFor($this->companyReference(), PeriodType::Year, new DateTimeImmutable('2026-06-15'));
+        $this->entityManager->flush();
+
+        $profile = self::getContainer()->get(AccountingProfileProvider::class)->forCompany($this->companyReference());
+        $builder = self::getContainer()->get(DeclarationBuilder::class);
+
+        // Each period serves the cycle it belongs to, and only that one.
+        self::assertSame([DeclarationKind::SocialContributions], $builder->kindsOwed($profile, $q3));
+        self::assertSame([DeclarationKind::Vat], $builder->kindsOwed($profile, $year));
+
+        // The yearly return gathers both quarters, because it goes by the date
+        // the money moved and not by the period each entry was filed into.
+        $result = self::getContainer()->get(VatReturnCalculator::class)->calculate($year, 'EUR');
+
+        self::assertSame('30000', (string) $result->totalDue());
+        self::assertSame('150000', (string) $result->turnover);
     }
 
     /**

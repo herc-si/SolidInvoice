@@ -126,6 +126,7 @@ final class LimitUsageCalculatorTest extends TestCase
             activityStartDate: null,
             primaryActivity: ActivityNature::ServicesBnc,
             declarationPeriodicity: PeriodType::Quarter,
+            vatPeriodicity: null,
             currencyCode: 'EUR',
         );
     }

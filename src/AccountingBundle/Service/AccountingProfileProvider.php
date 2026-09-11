@@ -56,6 +56,7 @@ final readonly class AccountingProfileProvider
             activityStartDate: $this->date(AccountingSettings::ACTIVITY_START_DATE, $company),
             primaryActivity: $this->activityNature($company),
             declarationPeriodicity: $this->periodicity($company),
+            vatPeriodicity: $this->vatPeriodicity($company),
             currencyCode: $this->currencyCode(),
             regimeOptions: $this->regimeOptions($company),
         );
@@ -138,6 +139,29 @@ final readonly class AccountingProfileProvider
         return match ($periodicity) {
             PeriodType::Month, PeriodType::Quarter => $periodicity,
             default => PeriodType::Quarter,
+        };
+    }
+
+    /**
+     * The rhythm VAT is declared on, when it is not the books' own.
+     *
+     * A year is allowed here and nowhere else: the régime réel simplifié wants
+     * one VAT return a year, while no social regime declares turnover annually.
+     * Null means the two rhythms are the same.
+     */
+    private function vatPeriodicity(?Company $company): ?PeriodType
+    {
+        $value = $this->trimmed(AccountingSettings::VAT_PERIODICITY, $company);
+
+        if (null === $value) {
+            return null;
+        }
+
+        return match (PeriodType::tryFrom($value)) {
+            PeriodType::Month => PeriodType::Month,
+            PeriodType::Quarter => PeriodType::Quarter,
+            PeriodType::Year => PeriodType::Year,
+            default => null,
         };
     }
 

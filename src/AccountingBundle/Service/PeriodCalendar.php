@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Augias\AccountingBundle\Service;
 
+use Augias\AccountingBundle\Enum\PeriodType;
 use Augias\AccountingBundle\Model\AccountingProfile;
 use Augias\AccountingBundle\Model\MissingPeriod;
 use Augias\AccountingBundle\Repository\AccountingPeriodRepository;
@@ -57,10 +58,17 @@ final readonly class PeriodCalendar
      *
      * @return list<MissingPeriod>
      */
-    public function missing(Company $company, AccountingProfile $profile, ?DateTimeImmutable $on = null): array
-    {
+    public function missing(
+        Company $company,
+        AccountingProfile $profile,
+        ?DateTimeImmutable $on = null,
+        ?PeriodType $type = null,
+    ): array {
         $on = ($on ?? new DateTimeImmutable('today'))->setTime(0, 0);
-        $type = $profile->declarationPeriodicity;
+        // The books' own rhythm unless asked otherwise: VAT can run on a cycle
+        // of its own, and its periods are missing or not independently of the
+        // ones the books are sealed on.
+        $type ??= $profile->declarationPeriodicity;
         $from = $this->firstDayOfTrading($company, $profile, $on);
 
         $existing = [];

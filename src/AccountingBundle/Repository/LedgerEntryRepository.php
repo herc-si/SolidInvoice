@@ -217,10 +217,39 @@ class LedgerEntryRepository extends EntityRepository
      */
     public function taxForPeriod(AccountingPeriod $period): array
     {
+        $company = $period->getCompany();
+
+        // By date, not by the period an entry is filed into. A VAT return can
+        // run on its own cycle — a company can seal its books quarterly and
+        // declare VAT once a year — and then the entries it covers belong to
+        // other periods entirely. The date the money moved is the one thing
+        // both calendars agree on.
+        return $this->taxForRange($company, $period->getStartDate(), $period->getEndDate());
+    }
+
+    /**
+     * The tax carried by everything booked between two dates, inclusive.
+     *
+     * @return array{collected: array<string, array{rate: string, category: string, base: BigInteger, tax: BigInteger}>, deducted: BigInteger}
+     */
+    public function taxForRange(Company $company, DateTimeImmutable $from, DateTimeImmutable $to): array
+    {
         $collected = [];
         $deducted = BigInteger::zero();
 
-        foreach ($this->findForPeriod($period) as $entry) {
+        $entries = $this->createQueryBuilder('e')
+            ->andWhere('e.company = :company')
+            ->andWhere('e.entryDate >= :from')
+            ->andWhere('e.entryDate <= :to')
+            ->andWhere('e.taxAmount IS NOT NULL')
+            ->setParameter('company', $company->getId(), UlidType::NAME)
+            ->setParameter('from', $from->setTime(0, 0))
+            ->setParameter('to', $to->setTime(0, 0))
+            ->orderBy('e.entryDate', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($entries as $entry) {
             $tax = $entry->getTaxAmount();
 
             if (! $tax instanceof BigNumber) {

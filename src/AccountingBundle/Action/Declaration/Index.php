@@ -81,18 +81,27 @@ final readonly class Index
 
         $periods = $this->periodRepository->findForYear($company, $profile->declarationPeriodicity, $year);
 
+        // A VAT cycle of its own has periods of its own: a company sealing its
+        // books quarterly and declaring VAT once a year has four periods owing
+        // turnover and one, covering the same twelve months, owing VAT.
+        if (! $profile->vatExempt && $profile->hasOwnVatCycle()) {
+            $periods = [
+                ...$periods,
+                ...$this->periodRepository->findForYear($company, $profile->vatPeriodicity(), $year),
+            ];
+        }
+
         // Most recent first: the one a user comes here to deal with is the one
         // that just ended.
         usort($periods, static fn (AccountingPeriod $a, AccountingPeriod $b): int => $b->getOrdinal() <=> $a->getOrdinal());
 
         $rows = [];
-        $kinds = $this->builder->kindsOwed($profile);
 
         // One row per return, not per period: a quarter that owes turnover and
         // VAT is two filings with two references and two deadlines, and a list
         // that showed it once would hide whichever of them is late.
         foreach ($periods as $period) {
-            foreach ($kinds as $kind) {
+            foreach ($this->builder->kindsOwed($profile, $period) as $kind) {
                 $rows[] = [
                     'period' => $period,
                     'kind' => $kind,
@@ -103,6 +112,13 @@ final readonly class Index
 
         // Newest first, to match the rows above them.
         $missing = array_reverse($this->calendar->missing($company, $profile));
+
+        if (! $profile->vatExempt && $profile->hasOwnVatCycle()) {
+            $missing = [
+                ...$missing,
+                ...array_reverse($this->calendar->missing($company, $profile, null, $profile->vatPeriodicity())),
+            ];
+        }
 
         return [
             'regime' => $regime,

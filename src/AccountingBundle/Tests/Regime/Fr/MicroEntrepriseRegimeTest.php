@@ -118,6 +118,7 @@ final class MicroEntrepriseRegimeTest extends TestCase
             activityStartDate: null === $start ? null : new DateTimeImmutable($start),
             primaryActivity: $activity,
             declarationPeriodicity: PeriodType::Quarter,
+            vatPeriodicity: null,
             currencyCode: 'EUR',
         );
     }

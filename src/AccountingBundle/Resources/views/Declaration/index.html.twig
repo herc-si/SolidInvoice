@@ -103,6 +103,8 @@
                                          # an entry into it.
                                          #}
                                         <input type="hidden" name="date" value="{{ period.startDate|date('Y-m-d') }}">
+                                        {# Which cycle: VAT can run on its own. #}
+                                        <input type="hidden" name="type" value="{{ period.type.value }}">
                                         <button type="submit" class="btn btn-ghost btn-sm">
                                             {{ ux_icon('tabler:plus', {width: 16, height: 16}) }}
                                             {{ 'accounting.period.create'|trans }}

@@ -59,7 +59,7 @@ final readonly class View
         // Every return the period owes, on one page. A quarter is a quarter
         // whichever form it is being declared on, and splitting them across two
         // URLs would make the user hunt for the second.
-        foreach ($this->builder->kindsOwed($profile) as $kind) {
+        foreach ($this->builder->kindsOwed($profile, $period) as $kind) {
             $declaration = $this->builder->forPeriod($period, $kind);
 
             $returns[] = [
