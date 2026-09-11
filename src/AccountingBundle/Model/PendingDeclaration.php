@@ -17,10 +17,17 @@ use Augias\AccountingBundle\Entity\AccountingPeriod;
 use Augias\AccountingBundle\Entity\Declaration;
 use Augias\AccountingBundle\Enum\DeclarationAction;
 use DateTimeImmutable;
+use LogicException;
 
 /**
  * A period that has ended and has not been declared, and what is left to do
  * about it.
+ *
+ * It stands for one of two things, and never both: a period that exists, or a
+ * gap in the calendar where one should. The second is the quarter in which
+ * nothing was received — periods are created when an entry is filed into one,
+ * so it has no row, and a nil return has nothing to attach itself to until
+ * somebody creates it.
  *
  * The declaration may be null, and that is not the same as a missing row being
  * an error: {@see \Augias\AccountingBundle\Service\DeclarationBuilder} computes
@@ -33,13 +40,58 @@ final readonly class PendingDeclaration
 {
     public DeclarationAction $action;
 
-    public function __construct(
-        public AccountingPeriod $period,
-        public ?Declaration $declaration = null,
+    private function __construct(
+        public ?AccountingPeriod $period,
+        public ?MissingPeriod $missing,
+        public ?Declaration $declaration,
+        DeclarationAction $action,
     ) {
-        // An open period has to be sealed before its figures mean anything, so
-        // that is the step the user is on whatever the declaration says.
-        $this->action = $period->isOpen() ? DeclarationAction::Close : DeclarationAction::File;
+        $this->action = $action;
+    }
+
+    public static function forPeriod(AccountingPeriod $period, ?Declaration $declaration = null): self
+    {
+        return new self(
+            $period,
+            null,
+            $declaration,
+            // An open period has to be sealed before its figures mean anything,
+            // so that is the step the user is on whatever the declaration says.
+            $period->isOpen() ? DeclarationAction::Close : DeclarationAction::File,
+        );
+    }
+
+    /**
+     * A period the calendar says should exist and that nothing brought into
+     * being — a quarter in which no money was received.
+     *
+     * It is still outstanding: a regime may want a nil return for it, and the
+     * user cannot file one against a period that does not exist. The step they
+     * are on is creating it.
+     */
+    public static function forMissing(MissingPeriod $missing): self
+    {
+        return new self(null, $missing, null, DeclarationAction::Create);
+    }
+
+    /**
+     * "2026-Q1" and friends, whichever of the two this stands for.
+     */
+    public function getLabel(): string
+    {
+        return $this->period instanceof AccountingPeriod
+            ? $this->period->getLabel()
+            : $this->requireMissing()->getLabel();
+    }
+
+    /**
+     * Any date inside the period, for the form that creates it.
+     */
+    public function getStartDate(): DateTimeImmutable
+    {
+        return $this->period instanceof AccountingPeriod
+            ? $this->period->getStartDate()
+            : $this->requireMissing()->startDate;
     }
 
     /**
@@ -54,7 +106,24 @@ final readonly class PendingDeclaration
     public function daysSincePeriodEnded(?DateTimeImmutable $on = null): int
     {
         $on ??= new DateTimeImmutable('today');
+        $endDate = $this->period instanceof AccountingPeriod
+            ? $this->period->getEndDate()
+            : $this->requireMissing()->endDate;
 
-        return (int) $this->period->getEndDate()->diff($on->setTime(0, 0))->format('%r%a');
+        return (int) $endDate->diff($on->setTime(0, 0))->format('%r%a');
+    }
+
+    /**
+     * Exactly one of the two is always set — the constructor is private and both
+     * factories set one. This is the assertion that says so to a reader and to
+     * the analyser.
+     */
+    private function requireMissing(): MissingPeriod
+    {
+        if (! $this->missing instanceof MissingPeriod) {
+            throw new LogicException('A pending declaration stands for either a period or a gap, and this one stands for neither.');
+        }
+
+        return $this->missing;
     }
 }

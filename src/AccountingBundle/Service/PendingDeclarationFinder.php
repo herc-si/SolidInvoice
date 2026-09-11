@@ -14,12 +14,15 @@ declare(strict_types=1);
 namespace Augias\AccountingBundle\Service;
 
 use Augias\AccountingBundle\Entity\AccountingPeriod;
-use Augias\AccountingBundle\Enum\PeriodType;
+use Augias\AccountingBundle\Model\AccountingProfile;
 use Augias\AccountingBundle\Model\PendingDeclaration;
 use Augias\AccountingBundle\Repository\AccountingPeriodRepository;
 use Augias\AccountingBundle\Repository\DeclarationRepository;
 use Augias\CoreBundle\Entity\Company;
 use DateTimeImmutable;
+use function array_map;
+use function array_slice;
+use function usort;
 
 /**
  * Periods that have ended and have not been declared.
@@ -29,11 +32,11 @@ use DateTimeImmutable;
  * that quietly wrote rows every time it was rendered would be creating
  * accounting records as a side effect of looking at a page.
  *
- * One thing it cannot see: periods are created on demand, when an entry is
- * assigned to one. A quarter with no revenue at all therefore has no period row
- * and is not reported here, even though a regime may still require a nil
- * return for it. Creating those is the period manager's job, on a schedule,
- * not a widget's.
+ * Periods are created on demand, when an entry is assigned to one, so a quarter
+ * with no revenue at all has no row. Those are reported too — as gaps, from
+ * {@see PeriodCalendar} — because a regime may still want a nil return for one
+ * and the user cannot file it against a period that does not exist. Creating it
+ * stays their decision; nothing here writes.
  *
  * @see \Augias\AccountingBundle\Tests\Dashboard\DeclarationsDueWidgetTest
  */
@@ -42,6 +45,7 @@ final readonly class PendingDeclarationFinder
     public function __construct(
         private AccountingPeriodRepository $periodRepository,
         private DeclarationRepository $declarationRepository,
+        private PeriodCalendar $calendar,
     ) {
     }
 
@@ -51,18 +55,37 @@ final readonly class PendingDeclarationFinder
      */
     public function find(
         Company $company,
-        PeriodType $type,
+        AccountingProfile $profile,
         int $limit,
         ?DateTimeImmutable $on = null,
     ): array {
         $on ??= new DateTimeImmutable('today');
 
-        return array_map(
-            fn (AccountingPeriod $period): PendingDeclaration => new PendingDeclaration(
+        $pending = array_map(
+            fn (AccountingPeriod $period): PendingDeclaration => PendingDeclaration::forPeriod(
                 $period,
                 $this->declarationRepository->findForPeriod($period),
             ),
-            $this->periodRepository->findEndedAndUndeclared($company, $type, $on, $limit),
+            $this->periodRepository->findEndedAndUndeclared($company, $profile->declarationPeriodicity, $on, $limit),
         );
+
+        // Only the gaps that have finished. A period still running has nothing
+        // to declare yet, and offering to create it would be asking the user to
+        // act on something that is not over.
+        foreach ($this->calendar->missing($company, $profile, $on) as $gap) {
+            if ($gap->hasEnded($on)) {
+                $pending[] = PendingDeclaration::forMissing($gap);
+            }
+        }
+
+        // Oldest first across both kinds: what has waited longest carries the
+        // most consequence, whether or not it happens to have a row.
+        usort(
+            $pending,
+            static fn (PendingDeclaration $a, PendingDeclaration $b): int
+                => $b->daysSincePeriodEnded($on) <=> $a->daysSincePeriodEnded($on),
+        );
+
+        return array_slice($pending, 0, $limit);
     }
 }

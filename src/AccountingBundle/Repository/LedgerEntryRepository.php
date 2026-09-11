@@ -26,6 +26,7 @@ use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid\Ulid;
 use function array_column;
+use function is_string;
 
 /**
  * @extends EntityRepository<LedgerEntry>
@@ -217,5 +218,24 @@ class LedgerEntryRepository extends EntityRepository
             ->getArrayResult();
 
         return array_column($rows, 'currencyCode');
+    }
+
+    /**
+     * The date of the oldest entry in the books, or null when there are none.
+     *
+     * Used as the fallback lower bound when working out which periods a company
+     * should have: it is the earliest date Augias has evidence the business was
+     * trading on.
+     */
+    public function earliestEntryDate(Company $company): ?DateTimeImmutable
+    {
+        $date = $this->createQueryBuilder('e')
+            ->select('MIN(e.entryDate)')
+            ->andWhere('e.company = :company')
+            ->setParameter('company', $company->getId(), UlidType::NAME)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return is_string($date) && '' !== $date ? new DateTimeImmutable($date) : null;
     }
 }

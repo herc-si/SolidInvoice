@@ -18,7 +18,7 @@
         <twig:Ui:Card title="{{ 'accounting.setup.title'|trans }}">
             <p class="text-muted mb-0">{{ 'accounting.setup.description'|trans }}</p>
         </twig:Ui:Card>
-    {% elseif rows is empty %}
+    {% elseif rows is empty and missing is empty %}
         <twig:Ui:Card title="{{ 'accounting.declaration.empty_title'|trans }}">
             <p class="text-muted mb-0">{{ 'accounting.declaration.empty'|trans }}</p>
         </twig:Ui:Card>
@@ -62,6 +62,46 @@
                                     <a class="btn btn-ghost btn-sm" href="{{ path('_accounting_declaration_view', {'id': row.period.id}) }}">
                                         {{ 'accounting.declaration.open'|trans }}
                                     </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        {#
+                         # Periods with no row at all. Nothing has been written for
+                         # these — they are what the calendar says should exist —
+                         # so they carry no status, no figures and no link, only
+                         # the button that brings one into being.
+                         #
+                         # Muted rather than alarming: a quarter with nothing in it
+                         # is an ordinary thing for a small business, and the point
+                         # is to make it visible, not to imply it is late.
+                         #}
+                        {% for period in missing %}
+                            <tr class="text-muted">
+                                <td>{{ period.label }}</td>
+                                <td>
+                                    <span class="badge bg-gray-lt">{{ 'accounting.period.not_created'|trans }}</span>
+                                </td>
+                                <td>
+                                    <span class="text-muted">{{ 'accounting.declaration.not_computed'|trans }}</span>
+                                </td>
+                                <td class="text-end"></td>
+                                <td>
+                                    <form method="post" action="{{ path('_accounting_period_create') }}">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('accounting_period_create') }}">
+                                        {#
+                                         # Any date inside the period: the manager
+                                         # derives the ordinal and the boundaries
+                                         # from the periodicity, so this cannot
+                                         # disagree with a period created by filing
+                                         # an entry into it.
+                                         #}
+                                        <input type="hidden" name="date" value="{{ period.startDate|date('Y-m-d') }}">
+                                        <button type="submit" class="btn btn-ghost btn-sm">
+                                            {{ ux_icon('tabler:plus', {width: 16, height: 16}) }}
+                                            {{ 'accounting.period.create'|trans }}
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         {% endfor %}

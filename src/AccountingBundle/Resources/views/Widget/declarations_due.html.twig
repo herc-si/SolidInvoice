@@ -46,25 +46,49 @@
             <div class="attention-items">
                 {% for item in pending %}
                     {% set days = item.daysSincePeriodEnded %}
-                    <a href="{{ item.action.value == 'close'
-                        ? path('_accounting_index')
-                        : path('_accounting_declaration_view', {id: item.period.id}) }}"
-                       class="attention-item{{ item.action.value == 'file' ? ' attention-item--danger' }}">
-                        <span class="attention-item-main">
-                            <span class="attention-item-id">{{ item.period.label }}</span>
-                            <span class="attention-item-client">{{ item.action.translationKey|trans }}</span>
-                        </span>
-                        <span class="attention-item-meta">
-                            {% if item.declaration is not null and not item.declaration.isSubmitted %}
-                                <span class="attention-item-amount">
-                                    {{ item.declaration.totalDue|formatCurrency(item.declaration.currencyCode) }}
+
+                    {#
+                     # A period with no row is a form, not a link: creating it
+                     # writes, and a GET that writes is a GET a browser is free
+                     # to make on its own. The other two steps only navigate.
+                     #}
+                    {% if item.action.value == 'create' %}
+                        <form method="post" action="{{ path('_accounting_period_create') }}" class="attention-item-form">
+                            <input type="hidden" name="_token" value="{{ csrf_token('accounting_period_create') }}">
+                            <input type="hidden" name="date" value="{{ item.startDate|date('Y-m-d') }}">
+                            <button type="submit" class="attention-item attention-item--button">
+                                <span class="attention-item-main">
+                                    <span class="attention-item-id">{{ item.label }}</span>
+                                    <span class="attention-item-client">{{ item.action.translationKey|trans }}</span>
                                 </span>
-                            {% endif %}
-                            <span class="attention-item-date">
-                                {{ 'dashboard.accounting.ended_days_ago'|trans({'%count%': days}) }}
+                                <span class="attention-item-meta">
+                                    <span class="attention-item-date">
+                                        {{ 'dashboard.accounting.ended_days_ago'|trans({'%count%': days}) }}
+                                    </span>
+                                </span>
+                            </button>
+                        </form>
+                    {% else %}
+                        <a href="{{ item.action.value == 'close'
+                            ? path('_accounting_index')
+                            : path('_accounting_declaration_view', {id: item.period.id}) }}"
+                           class="attention-item{{ item.action.value == 'file' ? ' attention-item--danger' }}">
+                            <span class="attention-item-main">
+                                <span class="attention-item-id">{{ item.label }}</span>
+                                <span class="attention-item-client">{{ item.action.translationKey|trans }}</span>
                             </span>
-                        </span>
-                    </a>
+                            <span class="attention-item-meta">
+                                {% if item.declaration is not null and not item.declaration.isSubmitted %}
+                                    <span class="attention-item-amount">
+                                        {{ item.declaration.totalDue|formatCurrency(item.declaration.currencyCode) }}
+                                    </span>
+                                {% endif %}
+                                <span class="attention-item-date">
+                                    {{ 'dashboard.accounting.ended_days_ago'|trans({'%count%': days}) }}
+                                </span>
+                            </span>
+                        </a>
+                    {% endif %}
                 {% endfor %}
             </div>
 

@@ -121,6 +121,36 @@ final class DeclarationsDueWidgetTest extends AccountingWidgetTestCase
         self::assertSame(40, $pending[1]->daysSincePeriodEnded());
     }
 
+    /**
+     * The quarter nothing was received in has no period row at all, and is the
+     * one most easily forgotten. It is reported as one to create, because a nil
+     * return cannot be filed against a period that does not exist.
+     */
+    public function testAQuarterThatWasNeverCreatedIsStillOutstanding(): void
+    {
+        $this->configureMicroEntreprise();
+        $this->config->set(AccountingSettings::ACTIVITY_START_DATE, '2026-01-15');
+
+        $pending = $this->widget()->getData()['pending'];
+
+        self::assertNotSame([], $pending);
+        self::assertSame(DeclarationAction::Create, $pending[0]->action);
+        self::assertNull($pending[0]->period);
+        self::assertSame('2026-Q1', $pending[0]->getLabel());
+    }
+
+    /**
+     * A period still running has nothing to declare yet, so offering to create
+     * it would be asking the user to act on something that is not over.
+     */
+    public function testTheQuarterStillRunningIsNotOfferedForCreation(): void
+    {
+        $this->configureMicroEntreprise();
+        $this->config->set(AccountingSettings::ACTIVITY_START_DATE, new DateTimeImmutable('today')->format('Y-m-d'));
+
+        self::assertSame([], $this->widget()->getData()['pending']);
+    }
+
     public function testNamesWhereTheFiguresActuallyHaveToBeTyped(): void
     {
         $this->configureMicroEntreprise();

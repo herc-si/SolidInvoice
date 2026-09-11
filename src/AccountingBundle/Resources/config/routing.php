@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 use Augias\AccountingBundle\Action\Book;
 use Augias\AccountingBundle\Action\ClosePeriod;
+use Augias\AccountingBundle\Action\CreatePeriod;
 use Augias\AccountingBundle\Action\Declaration\Index as DeclarationIndex;
 use Augias\AccountingBundle\Action\Declaration\Submit as DeclarationSubmit;
 use Augias\AccountingBundle\Action\Declaration\View as DeclarationView;
@@ -62,6 +63,13 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     $routingConfigurator
         ->add('_accounting_declaration_submit', '/declarations/{id}/submit')
         ->controller(DeclarationSubmit::class)
+        ->methods(['POST']);
+
+    // POST only, and behind a token: it writes a period that nothing booked
+    // into brought into being.
+    $routingConfigurator
+        ->add('_accounting_period_create', '/period/create')
+        ->controller(CreatePeriod::class)
         ->methods(['POST']);
 
     // POST only, and behind a token: closing is one-way.

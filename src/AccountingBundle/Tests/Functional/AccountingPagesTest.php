@@ -180,24 +180,47 @@ final class AccountingPagesTest extends WebTestCase
         self::assertSame('2026-Q1', $entries[0]->getPeriod()?->getLabel());
     }
 
-    public function testAPeriodIsClosedFromTheHomePage(): void
+    /**
+     * The home page shows the period today falls in, and that one is by
+     * definition still running — money received tomorrow still belongs in it.
+     * Offering to seal it would offer a button the manager refuses.
+     */
+    public function testTheHomePageDoesNotOfferToSealTheRunningPeriod(): void
     {
         $this->configureRegime();
-        // Dated today: the home page offers to close the period today falls in,
-        // and a period only exists once something has been booked into it.
         $this->entry(120_000, 'today');
+
+        $crawler = $this->client->request('GET', '/accounting/');
+
+        self::assertSame(200, $this->client->getResponse()->getStatusCode());
+        self::assertCount(0, $crawler->filter('form[action*="/close"]'));
+    }
+
+    /**
+     * A period that has ended is sealed from its declaration — the page that is
+     * reached per period, and the one that explains why the figures are not
+     * final until it is.
+     */
+    public function testAnEndedPeriodIsClosedFromItsDeclaration(): void
+    {
+        $this->configureRegime();
+        // Q1 2026, long over by the time anything runs this.
+        $this->entry(120_000);
 
         $period = $this->entries()[0]->getPeriod();
         self::assertInstanceOf(AccountingPeriod::class, $period);
 
-        $crawler = $this->client->request('GET', '/accounting/');
+        $crawler = $this->client->request('GET', '/accounting/declarations/' . $period->getId());
 
         self::assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $this->client->submit($crawler->filter('form[action*="/close"]')->form());
 
         self::assertSame(302, $this->client->getResponse()->getStatusCode());
-        self::assertSame('/accounting/', $this->client->getResponse()->headers->get('Location'));
+        self::assertSame(
+            '/accounting/declarations/' . $period->getId(),
+            $this->client->getResponse()->headers->get('Location'),
+        );
 
         $entry = $this->entries()[0];
 

@@ -43,6 +43,17 @@ final class LedgerLockedException extends RuntimeException
         ));
     }
 
+    public static function periodHasNotEnded(AccountingPeriod $period): self
+    {
+        return new self(sprintf(
+            'Accounting period %s cannot be closed before it has ended on %s — '
+            . 'money received before that date still belongs in it, and a sealed '
+            . 'period cannot take it.',
+            $period->getLabel(),
+            $period->getEndDate()->format('Y-m-d'),
+        ));
+    }
+
     public static function earlierPeriodStillOpen(AccountingPeriod $period): self
     {
         return new self(sprintf(

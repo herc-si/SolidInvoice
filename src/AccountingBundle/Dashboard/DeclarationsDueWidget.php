@@ -38,6 +38,10 @@ use RuntimeException;
  * of which is modelled or verified here; a date on this card would be one the
  * user might plan around. "Ended 47 days ago" is something Augias knows.
  *
+ * A quarter in which nothing was received has no period row at all, and is
+ * listed here as one to create — that is the quarter most easily forgotten, and
+ * a regime may still want a nil return for it.
+ *
  * @see \Augias\AccountingBundle\Tests\Dashboard\DeclarationsDueWidgetTest
  */
 #[AsDashboardWidget(
@@ -92,7 +96,7 @@ final readonly class DeclarationsDueWidget implements WidgetInterface
 
         return [
             'regime' => $regime,
-            'pending' => $this->finder->find($company, $profile->declarationPeriodicity, self::PERIODS_SHOWN),
+            'pending' => $this->finder->find($company, $profile, self::PERIODS_SHOWN),
             // Named on the card so it is unambiguous that Augias computed the
             // figures and filed nothing.
             'filingUrl' => $regime->filingUrl(),

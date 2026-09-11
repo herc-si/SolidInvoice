@@ -124,15 +124,27 @@ final readonly class AccountingPeriodManager
     /**
      * Seals a period.
      *
-     * @throws LedgerLockedException when the period is already closed, or an
-     *                               earlier one is still open — closing out of
-     *                               order would tear a hole in the numbering
-     *                               and break the chain
+     * @throws LedgerLockedException when the period is already closed, has not
+     *                               ended yet, or an earlier one is still open —
+     *                               closing out of order would tear a hole in
+     *                               the numbering and break the chain
      */
-    public function close(AccountingPeriod $period, ?User $closedBy = null): void
+    public function close(AccountingPeriod $period, ?User $closedBy = null, ?DateTimeImmutable $on = null): void
     {
         if ($period->isClosed()) {
             throw LedgerLockedException::forPeriod($period);
+        }
+
+        // A period still running cannot be sealed. Money received before its end
+        // date still belongs in it, and a sealed period cannot take it: the
+        // entry would be filed into a closed period as a late one, without a
+        // sequence number and outside the hash chain the seal just computed.
+        //
+        // assignPeriod() already assumes this cannot happen — "it is open by
+        // construction, since closing runs in date order" — and until now
+        // nothing made that true.
+        if ($period->getEndDate() >= ($on ?? new DateTimeImmutable('today'))->setTime(0, 0)) {
+            throw LedgerLockedException::periodHasNotEnded($period);
         }
 
         if ($this->periodRepository->hasOpenPeriodBefore($period)) {

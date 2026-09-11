@@ -90,7 +90,7 @@
                             <span class="badge bg-{{ period.status.color }}-lt">{{ period.status.translationKey|trans }}</span>
                         </div>
 
-                        {% if period.isOpen %}
+                        {% if period.isOpen and periodHasEnded %}
                             <p class="text-muted">{{ 'accounting.period.close_help'|trans }}</p>
 
                             <form method="post" action="{{ path('_accounting_period_close', {'id': period.id}) }}">
@@ -100,6 +100,18 @@
                                     {{ 'accounting.period.close'|trans({'%period%': period.label}) }}
                                 </button>
                             </form>
+                        {% elseif period.isOpen %}
+                            {#
+                             # No close button while the period is still running.
+                             # Money received before its end date still belongs in
+                             # it, and a sealed period cannot take it — the entry
+                             # would land in a closed period, outside the hash
+                             # chain the seal had just computed. Saying when it can
+                             # be closed beats offering a button that is refused.
+                             #}
+                            <p class="text-muted mb-0">
+                                {{ 'accounting.period.still_running'|trans({'%date%': period.endDate|date('d F Y')}) }}
+                            </p>
                         {% else %}
                             <p class="text-muted mb-0">
                                 {{ 'accounting.period.closed_on'|trans({'%date%': period.closedAt|date('d F Y')}) }}

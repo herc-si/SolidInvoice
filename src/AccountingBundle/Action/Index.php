@@ -64,6 +64,7 @@ final readonly class Index
      *     turnover: TurnoverSummary|null,
      *     limits: list<LimitUsage>,
      *     period: AccountingPeriod|null,
+     *     periodHasEnded: bool,
      *     alerts: list<ThresholdAlert>,
      *     year: int
      * }
@@ -85,6 +86,7 @@ final readonly class Index
                 'turnover' => null,
                 'limits' => [],
                 'period' => null,
+                'periodHasEnded' => false,
                 'alerts' => [],
                 'year' => $year,
             ];
@@ -98,7 +100,11 @@ final readonly class Index
             'books' => $regime->books($profile),
             'turnover' => $turnover,
             'limits' => $this->limitUsageCalculator->forTurnover($regime, $profile, $turnover, $today),
-            'period' => $this->periodRepository->findForDate($company, $profile->declarationPeriodicity, $today),
+            'period' => $period = $this->periodRepository->findForDate($company, $profile->declarationPeriodicity, $today),
+            // Whether the page may offer to seal it. A period still running
+            // cannot be closed — see AccountingPeriodManager::close() — so
+            // offering the button would only produce a refusal.
+            'periodHasEnded' => $period instanceof AccountingPeriod && $period->getEndDate() < $today,
             'alerts' => $this->alertRepository->findForYear($company, $year),
             'year' => $year,
         ];

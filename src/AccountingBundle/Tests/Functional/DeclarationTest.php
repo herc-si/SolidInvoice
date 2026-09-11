@@ -139,7 +139,11 @@ final class DeclarationTest extends WebTestCase
         $this->entry();
         $period = $this->period();
 
-        self::getContainer()->get(AccountingPeriodManager::class)->close($period);
+        // Closed as of the day after it ends: a period still running cannot be
+        // sealed, and the injectable clock is what lets this test say "later"
+        // without waiting for the quarter to be over.
+        self::getContainer()->get(AccountingPeriodManager::class)
+            ->close($period, null, $period->getEndDate()->modify('+1 day'));
 
         $this->client->request('GET', '/accounting/declarations/' . $period->getId());
 
@@ -155,7 +159,11 @@ final class DeclarationTest extends WebTestCase
     {
         $this->entry();
         $period = $this->period();
-        self::getContainer()->get(AccountingPeriodManager::class)->close($period);
+        // Closed as of the day after it ends: a period still running cannot be
+        // sealed, and the injectable clock is what lets this test say "later"
+        // without waiting for the quarter to be over.
+        self::getContainer()->get(AccountingPeriodManager::class)
+            ->close($period, null, $period->getEndDate()->modify('+1 day'));
 
         $crawler = $this->client->request('GET', '/accounting/declarations/' . $period->getId());
 
