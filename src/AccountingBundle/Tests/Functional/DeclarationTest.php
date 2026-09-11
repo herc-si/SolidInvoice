@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Augias\AccountingBundle\Tests\Functional;
 
 use Augias\AccountingBundle\AccountingSettings;
+use Augias\AccountingBundle\Action\ClosePeriod;
+use Augias\AccountingBundle\Action\CreatePeriod;
 use Augias\AccountingBundle\Action\Declaration\Index;
 use Augias\AccountingBundle\Action\Declaration\Submit;
 use Augias\AccountingBundle\Action\Declaration\View;
@@ -23,7 +25,9 @@ use Augias\AccountingBundle\Entity\LedgerEntry;
 use Augias\AccountingBundle\Enum\ActivityNature;
 use Augias\AccountingBundle\Enum\DeclarationStatus;
 use Augias\AccountingBundle\Enum\LedgerBook;
+use Augias\AccountingBundle\Enum\PeriodStatus;
 use Augias\AccountingBundle\Enum\PeriodType;
+use Augias\AccountingBundle\Repository\AccountingPeriodRepository;
 use Augias\AccountingBundle\Repository\DeclarationRepository;
 use Augias\AccountingBundle\Repository\LedgerEntryRepository;
 use Augias\AccountingBundle\Service\AccountingPeriodManager;
@@ -49,6 +53,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 #[CoversClass(Index::class)]
 #[CoversClass(View::class)]
 #[CoversClass(Submit::class)]
+#[CoversClass(CreatePeriod::class)]
+#[CoversClass(ClosePeriod::class)]
 #[Group('functional')]
 final class DeclarationTest extends WebTestCase
 {
@@ -187,6 +193,72 @@ final class DeclarationTest extends WebTestCase
         self::assertSame((string) self::TURNOVER, (string) $this->declaration()->getTotalTurnover());
     }
 
+    /**
+     * The nil return, end to end: a quarter nothing was booked into does not
+     * exist, so it is created, closed and recorded as filed like any other —
+     * and what it leaves behind is a declaration at zero with the reference the
+     * authority gave back. A nil return that left no trace would be
+     * indistinguishable from one nobody filed.
+     */
+    public function testAQuarterWithNothingInItCanBeCreatedClosedAndRecordedAsFiled(): void
+    {
+        // Trading since the start of the previous quarter, with the only entry
+        // in the current one: the quarter in between has no row at all, which
+        // is the whole situation being tested.
+        $previousQuarter = PeriodType::Quarter->startOf(
+            PeriodType::Quarter->startOf(new DateTimeImmutable('today'))->modify('-1 day'),
+        );
+
+        self::getContainer()->get(SystemConfig::class)
+            ->set(AccountingSettings::ACTIVITY_START_DATE, $previousQuarter->format('Y-m-d'));
+
+        $this->entry();
+
+        // The gap, and the button that brings it into being.
+        $crawler = $this->client->request('GET', '/accounting/declarations');
+        $create = $crawler->filter('form[action*="/period/create"]');
+
+        self::assertCount(1, $create, 'The quarter with nothing in it has to be offered.');
+
+        $this->client->submit($create->form());
+        $this->client->followRedirect();
+
+        $period = $this->quarterStartingOn($previousQuarter);
+
+        self::assertSame(PeriodStatus::Open, $period->getStatus());
+        self::assertSame(0, $period->getEntryCount());
+
+        // Closed through the page, with no clock injected: the quarter is over,
+        // so the ordinary rule already allows it.
+        $crawler = $this->client->request('GET', '/accounting/declarations/' . $period->getId());
+        $this->client->submit($crawler->filter('form[action*="/close"]')->form());
+
+        $crawler = $this->client->followRedirect();
+
+        // Filed, with the reference the authority handed back.
+        $this->client->submit($crawler->filter('form[action*="/submit"]')->form([
+            'reference' => 'URSSAF-2026-NIL',
+            'notes' => 'Nothing received this quarter',
+        ]));
+
+        self::assertSame(302, $this->client->getResponse()->getStatusCode());
+
+        $declaration = $this->declarationFor($this->quarterStartingOn($previousQuarter));
+
+        self::assertSame(DeclarationStatus::Submitted, $declaration->getStatus());
+        self::assertSame('0', (string) $declaration->getTotalTurnover());
+        self::assertSame('0', (string) $declaration->getTotalDue());
+        self::assertSame('URSSAF-2026-NIL', $declaration->getReference());
+        self::assertInstanceOf(DateTimeImmutable::class, $declaration->getSubmittedAt());
+        self::assertFalse($declaration->isRecomputable());
+
+        // And the page stops asking: the gap is a row now, and a filed one.
+        $text = $this->client->request('GET', '/accounting/declarations')->filter('body')->text();
+
+        self::assertCount(0, $this->client->getCrawler()->filter('form[action*="/period/create"]'));
+        self::assertStringContainsString('Filed', $text, 'The nil quarter is a filed row now, not a gap.');
+    }
+
     private function entry(): void
     {
         $entry = new LedgerEntry()
@@ -216,6 +288,28 @@ final class DeclarationTest extends WebTestCase
         self::assertInstanceOf(AccountingPeriod::class, $period);
 
         return $period;
+    }
+
+    private function quarterStartingOn(DateTimeImmutable $start): AccountingPeriod
+    {
+        $this->entityManager->clear();
+
+        foreach (self::getContainer()->get(AccountingPeriodRepository::class)->findAll() as $period) {
+            if ($period->getStartDate()->format('Y-m-d') === $start->format('Y-m-d')) {
+                return $period;
+            }
+        }
+
+        self::fail('No period starting on ' . $start->format('Y-m-d') . ' was created.');
+    }
+
+    private function declarationFor(AccountingPeriod $period): Declaration
+    {
+        $declaration = self::getContainer()->get(DeclarationRepository::class)->findForPeriod($period);
+
+        self::assertInstanceOf(Declaration::class, $declaration);
+
+        return $declaration;
     }
 
     private function declaration(): Declaration
