@@ -88,6 +88,7 @@ final readonly class Book
             $company,
             $profile->declarationPeriodicity,
             new DateTimeImmutable('today'),
+            $profile->fiscalYearStartMonth,
         );
     }
 }

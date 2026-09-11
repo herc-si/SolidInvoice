@@ -59,6 +59,20 @@ final class AccountingSettings
     final public const string DECLARATION_PERIODICITY = 'accounting/declaration_periodicity';
 
     /**
+     * The month the company's financial year opens on, 1 to 12.
+     *
+     * January for most, and always for a French micro-entrepreneur, whose
+     * exercice is the calendar year by law. It matters wherever a period covers
+     * a year: an exercice running April to March declares its VAT over those
+     * twelve months, not over a calendar year it straddles.
+     *
+     * Deliberately not used for the turnover ceilings. Those are a calendar-year
+     * measure whatever the exercice does — see
+     * {@see \Augias\AccountingBundle\Service\TurnoverCalculator::yearToDate()}.
+     */
+    final public const string FISCAL_YEAR_START_MONTH = 'accounting/fiscal_year_start_month';
+
+    /**
      * How often VAT is declared, when it differs from the rhythm above.
      *
      * They often do differ, and not as an edge case: a micro-entrepreneur past

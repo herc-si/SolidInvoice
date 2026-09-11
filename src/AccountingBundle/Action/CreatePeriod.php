@@ -103,7 +103,7 @@ final readonly class CreatePeriod
 
         // periodFor() returns the existing row when there is one, so a double
         // submit or a stale button creates nothing and says the same thing.
-        $this->periodManager->periodFor($company, $type, $date);
+        $this->periodManager->periodFor($company, $type, $date, $profile->fiscalYearStartMonth);
         $this->entityManager->flush();
 
         $session->getFlashBag()->add('success', 'accounting.period.flash.created');

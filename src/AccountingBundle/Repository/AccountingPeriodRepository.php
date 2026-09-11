@@ -33,8 +33,12 @@ class AccountingPeriodRepository extends EntityRepository
         parent::__construct($registry, AccountingPeriod::class);
     }
 
-    public function findForDate(Company $company, PeriodType $type, DateTimeImmutable $date): ?AccountingPeriod
-    {
+    public function findForDate(
+        Company $company,
+        PeriodType $type,
+        DateTimeImmutable $date,
+        int $fiscalYearStartMonth = 1,
+    ): ?AccountingPeriod {
         return $this->createQueryBuilder('p')
             ->andWhere('p.company = :company')
             ->andWhere('p.type = :type')
@@ -42,7 +46,11 @@ class AccountingPeriodRepository extends EntityRepository
             ->andWhere('p.ordinal = :ordinal')
             ->setParameter('company', $company->getId(), UlidType::NAME)
             ->setParameter('type', $type->value)
-            ->setParameter('year', (int) $date->format('Y'))
+            // The year a financial year is filed under is the one it opened in,
+            // so March 2027 inside an April-to-March exercice is 2026's. Asked
+            // of the type rather than read off the date, or the same exercice
+            // would be looked up under two different years.
+            ->setParameter('year', $type->yearOf($date, $fiscalYearStartMonth))
             ->setParameter('ordinal', $type->ordinalOf($date))
             ->getQuery()
             ->getOneOrNullResult();

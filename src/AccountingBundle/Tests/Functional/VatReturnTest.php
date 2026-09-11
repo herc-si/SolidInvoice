@@ -195,9 +195,58 @@ final class VatReturnTest extends KernelTestCase
     }
 
     /**
+     * What the financial year setting is actually for. A company whose exercice
+     * opens in April and declares VAT yearly declares April to March — not a
+     * calendar year it straddles, and not two half-returns.
+     */
+    public function testAYearlyReturnFollowsTheFinancialYearRatherThanTheCalendar(): void
+    {
+        $config = self::getContainer()->get(SystemConfig::class);
+        $config->set(AccountingSettings::VAT_PERIODICITY, PeriodType::Year->value);
+        $config->set(AccountingSettings::FISCAL_YEAR_START_MONTH, '4');
+
+        $manager = self::getContainer()->get(AccountingPeriodManager::class);
+        $profile = self::getContainer()->get(AccountingProfileProvider::class)->forCompany($this->companyReference());
+
+        // A sale in March 2027 — inside the exercice that opened in April 2026,
+        // and outside the calendar year the date belongs to.
+        $this->period = $manager->periodFor(
+            $this->companyReference(),
+            PeriodType::Quarter,
+            new DateTimeImmutable('2027-03-15'),
+        );
+        $this->entityManager->flush();
+        $this->saleOn('2027-03-15', 60_000, [['rate' => '20.0000', 'category' => 'Standard', 'base' => '50000', 'tax' => '10000']]);
+
+        $exercice = $manager->periodFor(
+            $this->companyReference(),
+            PeriodType::Year,
+            new DateTimeImmutable('2026-09-01'),
+            $profile->fiscalYearStartMonth,
+        );
+        $this->entityManager->flush();
+
+        self::assertSame('2026-04-01', $exercice->getStartDate()->format('Y-m-d'));
+        self::assertSame('2027-03-31', $exercice->getEndDate()->format('Y-m-d'));
+        self::assertSame('2026-2027', $exercice->getLabel());
+
+        $result = self::getContainer()->get(VatReturnCalculator::class)->calculate($exercice, 'EUR');
+
+        self::assertSame('10000', (string) $result->totalDue(), 'The March sale falls inside the exercice.');
+    }
+
+    /**
      * @param list<array{rate: string, category: string, base: string, tax: string}> $breakdown
      */
     private function sale(int $amount, array $breakdown): void
+    {
+        $this->saleOn('2026-02-10', $amount, $breakdown);
+    }
+
+    /**
+     * @param list<array{rate: string, category: string, base: string, tax: string}> $breakdown
+     */
+    private function saleOn(string $on, int $amount, array $breakdown): void
     {
         $tax = BigInteger::zero();
 
@@ -205,7 +254,7 @@ final class VatReturnTest extends KernelTestCase
             $tax = $tax->plus($share['tax']);
         }
 
-        $entry = $this->entry(LedgerBook::Revenue, $amount);
+        $entry = $this->entry(LedgerBook::Revenue, $amount, $on);
         $entry->setActivityNature(ActivityNature::SaleOfGoods)
             ->setTax(BigInteger::of($amount)->minus($tax), $tax, $breakdown);
 
@@ -220,11 +269,11 @@ final class VatReturnTest extends KernelTestCase
         $this->entityManager->flush();
     }
 
-    private function entry(LedgerBook $book, int $amount): LedgerEntry
+    private function entry(LedgerBook $book, int $amount, string $on = '2026-02-10'): LedgerEntry
     {
         $entry = new LedgerEntry()
             ->setBook($book)
-            ->setEntryDate(new DateTimeImmutable('2026-02-10'))
+            ->setEntryDate(new DateTimeImmutable($on))
             ->setLabel('Operation')
             ->setCounterpartyName('Someone')
             ->setAmount(BigInteger::of($amount))

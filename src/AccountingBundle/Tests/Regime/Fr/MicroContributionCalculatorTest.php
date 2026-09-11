@@ -284,6 +284,7 @@ final class MicroContributionCalculatorTest extends TestCase
             primaryActivity: ActivityNature::ServicesBic,
             declarationPeriodicity: PeriodType::Quarter,
             vatPeriodicity: null,
+            fiscalYearStartMonth: 1,
             currencyCode: 'EUR',
             regimeOptions: $options,
         );

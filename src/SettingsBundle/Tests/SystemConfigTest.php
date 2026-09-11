@@ -49,6 +49,7 @@ final class SystemConfigTest extends KernelTestCase
         self::assertSame([
             'accounting/activity_start_date' => null,
             'accounting/declaration_periodicity' => 'quarter',
+            'accounting/fiscal_year_start_month' => '1',
             'accounting/fr_micro/acre' => '0',
             'accounting/fr_micro/income_tax_option' => '0',
             'accounting/fr_micro/pension_fund' => null,
