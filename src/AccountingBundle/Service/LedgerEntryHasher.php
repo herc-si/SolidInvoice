@@ -16,6 +16,7 @@ namespace Augias\AccountingBundle\Service;
 use Augias\AccountingBundle\Entity\LedgerEntry;
 use Augias\AccountingBundle\Enum\ActivityNature;
 use Augias\AccountingBundle\Enum\SettlementMethod;
+use function array_map;
 use function hash;
 use function implode;
 
@@ -35,6 +36,10 @@ use function implode;
 final readonly class LedgerEntryHasher
 {
     private const string SEPARATOR = '|';
+
+    private const string SHARE_SEPARATOR = ';';
+
+    private const string FIELD_SEPARATOR = ':';
 
     /**
      * The hash of an entry, given the hash of the entry before it in its book.
@@ -57,7 +62,7 @@ final readonly class LedgerEntryHasher
         $nature = $entry->getActivityNature();
         $settlement = $entry->getSettlementMethod();
 
-        return implode(self::SEPARATOR, [
+        $fields = [
             $previousHash ?? '',
             (string) $entry->getSequenceNumber(),
             $entry->getBook()->value,
@@ -71,6 +76,44 @@ final readonly class LedgerEntryHasher
             $settlement instanceof SettlementMethod ? $settlement->value : '',
             $entry->getSource()->value,
             $entry->getSourceId()?->toRfc4122() ?? '',
-        ]);
+        ];
+
+        // Appended, and only when there is tax to commit to. An entry without
+        // it produces exactly the string it produced before these fields
+        // existed, so every book sealed before the upgrade still verifies —
+        // which a trailing empty separator would have broken for all of them.
+        //
+        // The tax has to be in the hash once it is there: a VAT return is filed
+        // from these figures, and a sealed entry whose tax could be altered
+        // without breaking the chain would make the seal worth less than it
+        // claims.
+        if ($entry->hasTax()) {
+            $fields[] = (string) $entry->getNetAmount();
+            $fields[] = (string) $entry->getTaxAmount();
+            $fields[] = $this->breakdown($entry);
+        }
+
+        return implode(self::SEPARATOR, $fields);
+    }
+
+    /**
+     * The per-rate split, flattened into one field.
+     *
+     * Spelled out here rather than json_encode()d: the hash must not change
+     * because PHP changed how it escapes a slash, and the order the shares are
+     * written in is the order the splitter produced them, which is the
+     * document's own.
+     */
+    private function breakdown(LedgerEntry $entry): string
+    {
+        return implode(self::SHARE_SEPARATOR, array_map(
+            static fn (array $share): string => implode(self::FIELD_SEPARATOR, [
+                $share['rate'],
+                $share['category'],
+                $share['base'],
+                $share['tax'],
+            ]),
+            $entry->getTaxBreakdown() ?? [],
+        ));
     }
 }

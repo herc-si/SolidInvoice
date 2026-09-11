@@ -91,7 +91,9 @@ accounting:
             date: Date
             document_reference: Pièce
             label: Nature
+            net: HT
             number: N°
+            tax: TVA
         label:
             bill_payment: 'Règlement fournisseur'
             invoice_payment: 'Encaissement de facture'

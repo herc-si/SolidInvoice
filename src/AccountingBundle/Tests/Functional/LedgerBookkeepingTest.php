@@ -30,6 +30,7 @@ use Augias\AccountingBundle\Repository\LedgerEntryRepository;
 use Augias\AccountingBundle\Service\AccountingPeriodManager;
 use Augias\AccountingBundle\Service\AccountingProfileProvider;
 use Augias\AccountingBundle\Service\LedgerChainVerifier;
+use Augias\AccountingBundle\Service\LedgerEntryHasher;
 use Augias\AccountingBundle\Service\LedgerFeeder;
 use Augias\AccountingBundle\Service\LedgerLockDate;
 use Augias\ClientBundle\Entity\Client;
@@ -42,6 +43,10 @@ use Augias\InvoiceBundle\Enum\InvoiceStatus;
 use Augias\PaymentBundle\Entity\Payment;
 use Augias\PaymentBundle\Enum\PaymentStatus;
 use Augias\SettingsBundle\SystemConfig;
+use Augias\TaxBundle\Entity\LineTax;
+use Augias\TaxBundle\Enum\TaxCategory;
+use Augias\TaxBundle\Enum\TaxType;
+use Brick\Math\BigInteger;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -58,6 +63,7 @@ use function uniqid;
 #[CoversClass(LedgerFeedListener::class)]
 #[CoversClass(AccountingPeriodManager::class)]
 #[CoversClass(LedgerChainVerifier::class)]
+#[CoversClass(LedgerEntryHasher::class)]
 #[CoversClass(LedgerEntryLockListener::class)]
 #[CoversClass(LedgerLockDate::class)]
 final class LedgerBookkeepingTest extends KernelTestCase
@@ -384,6 +390,69 @@ final class LedgerBookkeepingTest extends KernelTestCase
         self::assertSame(1, $verification->firstFailure()['sequenceNumber'] ?? null);
     }
 
+    /**
+     * The whole point of the split, seen from the books: a payment against a
+     * taxed invoice lands with its tax separated out, by rate, ready for a
+     * return to be filed from it.
+     */
+    public function testAPaymentAgainstATaxedInvoiceRecordsTheTaxItCarried(): void
+    {
+        $this->capturedPayment(120_000, new DateTimeImmutable('2026-01-15'), invoiceTax: '20.0000');
+
+        $entry = $this->entries()[0];
+
+        self::assertTrue($entry->hasTax());
+        self::assertSame('20000', (string) $entry->getTaxAmount());
+        self::assertSame('100000', (string) $entry->getNetAmount());
+        self::assertSame(
+            [['rate' => '20.0000', 'category' => 'Standard', 'base' => '100000', 'tax' => '20000']],
+            $entry->getTaxBreakdown(),
+        );
+    }
+
+    /**
+     * A company in franchise en base raises invoices with no tax rows at all.
+     * Nothing is recorded rather than a zero, which would claim the sale was
+     * taxable and bore none.
+     */
+    public function testAPaymentAgainstAnUntaxedInvoiceRecordsNoTaxAtAll(): void
+    {
+        $this->capturedPayment(120_000, new DateTimeImmutable('2026-01-15'));
+
+        $entry = $this->entries()[0];
+
+        self::assertFalse($entry->hasTax());
+        self::assertNull($entry->getTaxAmount());
+        self::assertNull($entry->getTaxBreakdown());
+    }
+
+    /**
+     * Sealing an entry that carries tax has to commit to that tax as well: a
+     * return is filed from these figures, and a sealed entry whose tax could be
+     * changed without breaking the chain would be a seal worth less than it
+     * claims. An entry without tax hashes exactly as it did before the fields
+     * existed, which is what keeps books sealed before the upgrade verifying.
+     */
+    public function testTheSealCommitsToTheTaxWithoutDisturbingBooksThatCarryNone(): void
+    {
+        $this->capturedPayment(120_000, new DateTimeImmutable('2026-01-15'), invoiceTax: '20.0000');
+
+        $hasher = self::getContainer()->get(LedgerEntryHasher::class);
+        $entry = $this->entries()[0];
+
+        self::assertStringContainsString('|20000|20.0000:Standard:100000:20000', $hasher->canonicalForm($entry, null));
+
+        $untaxed = new LedgerEntry()
+            ->setBook(LedgerBook::Revenue)
+            ->setEntryDate(new DateTimeImmutable('2026-01-15'))
+            ->setLabel('Consulting work')
+            ->setCounterpartyName('Johnston PLC')
+            ->setAmount(BigInteger::of(120_000))
+            ->setCurrencyCode('EUR');
+
+        self::assertStringEndsWith('|manual|', $hasher->canonicalForm($untaxed, null));
+    }
+
     private function configureRegime(): void
     {
         $config = self::getContainer()->get(SystemConfig::class);
@@ -397,8 +466,9 @@ final class LedgerBookkeepingTest extends KernelTestCase
         int $amount,
         DateTimeImmutable $completed,
         PaymentStatus $status = PaymentStatus::Captured,
+        ?string $invoiceTax = null,
     ): Payment {
-        $invoice = $this->invoice();
+        $invoice = $this->invoice($invoiceTax);
 
         $payment = new Payment();
         $payment->setTotalAmount($amount);
@@ -417,14 +487,32 @@ final class LedgerBookkeepingTest extends KernelTestCase
         return $payment;
     }
 
-    private function invoice(): Invoice
+    private function invoice(?string $taxRate = null): Invoice
     {
         $invoice = new Invoice();
         $invoice->setClient($this->entityManager->find(Client::class, $this->client->getId()));
         $invoice->setStatus(InvoiceStatus::Paid);
         $invoice->setInvoiceId('INV-' . uniqid());
         $invoice->setInvoiceDate(new DateTimeImmutable('2026-01-05'));
-        $invoice->addLine(new Line()->setDescription('Consulting')->setPrice(120_000)->setQty(1));
+
+        // 100 000 net at 20% is the 120 000 that gets paid, so the taxed and
+        // untaxed cases are the same money either way.
+        $line = new Line()
+            ->setDescription('Consulting')
+            ->setPrice(null === $taxRate ? 120_000 : 100_000)
+            ->setQty(1);
+
+        if (null !== $taxRate) {
+            $line->addTax(
+                new LineTax()
+                    ->setNameSnapshot('VAT')
+                    ->setRateSnapshot($taxRate)
+                    ->setTypeSnapshot(TaxType::Exclusive)
+                    ->setCategorySnapshot(TaxCategory::Standard),
+            );
+        }
+
+        $invoice->addLine($line);
 
         $this->entityManager->persist($invoice);
         $this->entityManager->flush();

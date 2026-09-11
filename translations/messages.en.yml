@@ -91,7 +91,9 @@ accounting:
             date: Date
             document_reference: Document
             label: Nature
+            net: Net
             number: No.
+            tax: Tax
         label:
             bill_payment: 'Supplier payment'
             invoice_payment: 'Invoice payment'

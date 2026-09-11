@@ -207,9 +207,23 @@ final readonly class AccountingPeriodManager
         $revenue = [];
         $purchase = BigInteger::zero();
         $currencies = [];
+        $taxByRate = [];
+        $tax = null;
 
         foreach ($entries as $entry) {
             $currencies[$entry->getCurrencyCode()] = true;
+
+            // Frozen per rate, because that is how a return is filed. Left out
+            // entirely for a period whose entries carried no tax, so a company
+            // outside the scope of VAT gets no zero to explain.
+            foreach ($entry->getTaxBreakdown() ?? [] as $share) {
+                $tax ??= BigInteger::zero();
+                $key = $share['rate'] . '|' . $share['category'];
+                $taxByRate[$key] ??= ['base' => BigInteger::zero(), 'tax' => BigInteger::zero()];
+                $taxByRate[$key]['base'] = $taxByRate[$key]['base']->plus($share['base']);
+                $taxByRate[$key]['tax'] = $taxByRate[$key]['tax']->plus($share['tax']);
+                $tax = $tax->plus($share['tax']);
+            }
 
             if ($entry->getBook() === LedgerBook::Purchase) {
                 $purchase = $purchase->plus($entry->getAmount());
@@ -222,7 +236,7 @@ final readonly class AccountingPeriodManager
             $revenue[$nature] = ($revenue[$nature] ?? BigInteger::zero())->plus($entry->getAmount());
         }
 
-        return [
+        $totals = [
             'currency' => array_key_first($currencies) ?? '',
             // More than one means the totals above are a mix of currencies and
             // cannot be read as a single figure. Recorded rather than resolved:
@@ -233,5 +247,15 @@ final readonly class AccountingPeriodManager
             'purchase' => (string) $purchase,
             'label' => $period->getLabel(),
         ];
+
+        if ($tax instanceof BigInteger) {
+            $totals['tax'] = (string) $tax;
+            $totals['tax_by_rate'] = array_map(
+                static fn (array $share): array => ['base' => (string) $share['base'], 'tax' => (string) $share['tax']],
+                $taxByRate,
+            );
+        }
+
+        return $totals;
     }
 }

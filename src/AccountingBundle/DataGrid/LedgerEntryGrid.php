@@ -15,6 +15,7 @@ namespace Augias\AccountingBundle\DataGrid;
 
 use Augias\AccountingBundle\Entity\LedgerEntry;
 use Augias\AccountingBundle\Enum\LedgerBook;
+use Augias\AccountingBundle\Service\AccountingProfileProvider;
 use Augias\DataGridBundle\Attributes\AsDataGrid;
 use Augias\DataGridBundle\Grid;
 use Augias\DataGridBundle\GridBuilder\Action\Action;
@@ -29,6 +30,7 @@ use Augias\DataGridBundle\Source\ORMSource;
 use Doctrine\ORM\EntityManagerInterface;
 use Override;
 use function array_key_exists;
+use function is_string;
 
 /**
  * One statutory book, shown as it has to read: chronological, with the
@@ -44,6 +46,11 @@ use function array_key_exists;
 #[AsDataGrid(name: 'ledger_entry_grid', title: 'Ledger')]
 final class LedgerEntryGrid extends Grid
 {
+    public function __construct(
+        private readonly AccountingProfileProvider $profileProvider,
+    ) {
+    }
+
     public function entityFQCN(): string
     {
         return LedgerEntry::class;
@@ -55,7 +62,7 @@ final class LedgerEntryGrid extends Grid
     #[Override]
     public function columns(): array
     {
-        return [
+        $columns = [
             StringColumn::new('sequenceNumber')
                 ->label('accounting.entry.grid.number')
                 ->searchable(false),
@@ -74,6 +81,26 @@ final class LedgerEntryGrid extends Grid
                 ->searchable(false)
                 ->sortableField('amount'),
         ];
+
+        // Only in the revenue book, and only for a company that charges tax.
+        // A micro-entreprise in franchise en base would read two permanently
+        // empty columns in the register it is required to produce; and the
+        // purchase register would read a column of zeroes claiming no VAT was
+        // paid, when the truth is that a supplier bill records none for it to
+        // know about.
+        if ($this->book() === LedgerBook::Revenue && ! $this->profileProvider->forCompany()->vatExempt) {
+            $columns[] = MoneyColumn::new('netMoney')
+                ->label('accounting.entry.grid.net')
+                ->searchable(false)
+                ->sortableField('netAmount');
+
+            $columns[] = MoneyColumn::new('taxMoney')
+                ->label('accounting.entry.grid.tax')
+                ->searchable(false)
+                ->sortableField('taxAmount');
+        }
+
+        return $columns;
     }
 
     /**
@@ -92,11 +119,9 @@ final class LedgerEntryGrid extends Grid
     {
         $query = parent::query($entityManager, $query);
 
-        $book = array_key_exists('book', $this->context) ? $this->context['book'] : LedgerBook::Revenue->value;
-
         $query->getQueryBuilder()
             ->andWhere(ORMSource::ALIAS . '.book = :book')
-            ->setParameter('book', $book)
+            ->setParameter('book', $this->book()->value)
             // The order the register is read and numbered in. Created is the
             // tie-break so two entries on the same day keep the order they were
             // written, which is the order they will be sealed in.
@@ -104,5 +129,17 @@ final class LedgerEntryGrid extends Grid
             ->addOrderBy(ORMSource::ALIAS . '.created', 'DESC');
 
         return $query;
+    }
+
+    /**
+     * Which of the two registers is being rendered. Every route that shows the
+     * grid sets it; without one the grid would mix receipts and purchases into
+     * a list that is neither register.
+     */
+    private function book(): LedgerBook
+    {
+        $book = array_key_exists('book', $this->context) ? $this->context['book'] : null;
+
+        return (is_string($book) ? LedgerBook::tryFrom($book) : null) ?? LedgerBook::Revenue;
     }
 }
