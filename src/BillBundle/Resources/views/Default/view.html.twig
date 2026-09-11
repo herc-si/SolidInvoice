@@ -95,6 +95,21 @@
                                 <span class="summary-value">{{ bill.category.name }}</span>
                             </div>
                         {% endif %}
+                        {#
+                         # Only when the supplier's tax was recorded. A bill
+                         # with none shows a total and nothing else, as it did
+                         # before there was anywhere to put the figure.
+                         #}
+                        {% if bill.taxAmount is not null %}
+                            <div class="summary-item">
+                                <span class="summary-label">{{ 'bill.view.net'|trans }}</span>
+                                <span class="summary-value">{{ bill.netAmount|formatCurrency(bill.currencyCode) }}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">{{ 'bill.view.tax'|trans }}</span>
+                                <span class="summary-value">{{ bill.taxAmount|formatCurrency(bill.currencyCode) }}</span>
+                            </div>
+                        {% endif %}
                         <div class="summary-item">
                             <span class="summary-label">{{ 'bill.view.total'|trans }}</span>
                             <span class="summary-value">{{ bill.totalAmount|formatCurrency(bill.currencyCode) }}</span>

@@ -105,6 +105,20 @@ final class BillType extends AbstractType
             ])
             ->add('notes', TextareaType::class, ['label' => 'bill.form.notes.label', 'required' => false]);
 
+        // Only for a company that is in the scope of VAT. One in franchise en
+        // base deducts nothing, and would be asked for a figure it can do
+        // nothing with. Read from the shared setting rather than from the
+        // accounting profile: bills are kept whether or not the accounting
+        // module is configured.
+        if (! $this->systemConfig->isVatExempt()) {
+            $builder->add('taxAmount', MoneyType::class, [
+                'label' => 'bill.form.tax_amount.label',
+                'help' => 'bill.form.tax_amount.help',
+                'currency' => $options['currency'],
+                'required' => false,
+            ]);
+        }
+
         // `supplier` was made optional so a brand new supplier can be typed
         // into `newSupplierName` instead of picked from the list (handled by
         // the Action once the form is valid) — but exactly one of the two is

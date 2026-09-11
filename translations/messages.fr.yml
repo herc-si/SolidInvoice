@@ -242,6 +242,9 @@ bill:
             placeholder: 'Choisir un fournisseur existant'
         total_amount:
             label: 'Montant total'
+        tax_amount:
+            help: "La TVA facturée par le fournisseur, telle qu'elle figure sur sa facture. Laissez vide s'il n'y en a pas."
+            label: 'TVA'
     grid:
         balance: "Solde"
         bill_number: "N° de facture"
@@ -297,6 +300,8 @@ bill:
     view:
         balance: Solde
         details: 'Détails de la facture'
+        net: 'HT'
+        tax: 'TVA'
         total: Total
 billing:
     discount: Remise

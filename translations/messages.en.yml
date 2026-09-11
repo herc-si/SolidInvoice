@@ -242,6 +242,9 @@ bill:
             placeholder: 'Choose an existing supplier'
         total_amount:
             label: 'Total Amount'
+        tax_amount:
+            help: 'The VAT the supplier charged, as printed on their bill. Leave empty if there is none.'
+            label: 'VAT'
     grid:
         balance: "Balance"
         bill_number: "Bill #"
@@ -297,6 +300,8 @@ bill:
     view:
         balance: Balance
         details: 'Bill Details'
+        net: 'Net'
+        tax: 'VAT'
         total: Total
 billing:
     discount: Discount

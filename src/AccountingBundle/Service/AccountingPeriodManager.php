@@ -25,6 +25,7 @@ use Augias\AccountingBundle\Repository\LedgerEntryRepository;
 use Augias\CoreBundle\Entity\Company;
 use Augias\UserBundle\Entity\User;
 use Brick\Math\BigInteger;
+use Brick\Math\BigNumber;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use function array_key_first;
@@ -208,27 +209,39 @@ final readonly class AccountingPeriodManager
         $purchase = BigInteger::zero();
         $currencies = [];
         $taxByRate = [];
-        $tax = null;
+        $collected = null;
+        $deductible = null;
 
         foreach ($entries as $entry) {
             $currencies[$entry->getCurrencyCode()] = true;
-
-            // Frozen per rate, because that is how a return is filed. Left out
-            // entirely for a period whose entries carried no tax, so a company
-            // outside the scope of VAT gets no zero to explain.
-            foreach ($entry->getTaxBreakdown() ?? [] as $share) {
-                $tax ??= BigInteger::zero();
-                $key = $share['rate'] . '|' . $share['category'];
-                $taxByRate[$key] ??= ['base' => BigInteger::zero(), 'tax' => BigInteger::zero()];
-                $taxByRate[$key]['base'] = $taxByRate[$key]['base']->plus($share['base']);
-                $taxByRate[$key]['tax'] = $taxByRate[$key]['tax']->plus($share['tax']);
-                $tax = $tax->plus($share['tax']);
-            }
+            $tax = $entry->getTaxAmount();
 
             if ($entry->getBook() === LedgerBook::Purchase) {
                 $purchase = $purchase->plus($entry->getAmount());
 
+                // Kept apart from the tax collected, and never added to it: on
+                // a return the two are opposite signs, and one figure standing
+                // for both would be the difference between them, which is what
+                // the return is for computing.
+                if ($tax instanceof BigNumber) {
+                    $deductible = ($deductible ?? BigInteger::zero())->plus($tax);
+                }
+
                 continue;
+            }
+
+            if ($tax instanceof BigNumber) {
+                $collected = ($collected ?? BigInteger::zero())->plus($tax);
+            }
+
+            // Frozen per rate, because that is how tax collected is declared.
+            // Left out entirely for a period whose entries carried none, so a
+            // company outside the scope of VAT gets no zero to explain.
+            foreach ($entry->getTaxBreakdown() ?? [] as $share) {
+                $key = $share['rate'] . '|' . $share['category'];
+                $taxByRate[$key] ??= ['base' => BigInteger::zero(), 'tax' => BigInteger::zero()];
+                $taxByRate[$key]['base'] = $taxByRate[$key]['base']->plus($share['base']);
+                $taxByRate[$key]['tax'] = $taxByRate[$key]['tax']->plus($share['tax']);
             }
 
             $nature = $entry->getActivityNature();
@@ -248,12 +261,16 @@ final readonly class AccountingPeriodManager
             'label' => $period->getLabel(),
         ];
 
-        if ($tax instanceof BigInteger) {
-            $totals['tax'] = (string) $tax;
+        if ($collected instanceof BigInteger) {
+            $totals['tax_collected'] = (string) $collected;
             $totals['tax_by_rate'] = array_map(
                 static fn (array $share): array => ['base' => (string) $share['base'], 'tax' => (string) $share['tax']],
                 $taxByRate,
             );
+        }
+
+        if ($deductible instanceof BigInteger) {
+            $totals['tax_deductible'] = (string) $deductible;
         }
 
         return $totals;
