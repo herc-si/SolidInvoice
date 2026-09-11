@@ -26,6 +26,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Twig\Environment;
 
 #[Group('functional')]
+#[Group('saas-kernel')]
 final class TemplatePreviewActionTest extends KernelTestCase
 {
     use EnsureApplicationInstalled;

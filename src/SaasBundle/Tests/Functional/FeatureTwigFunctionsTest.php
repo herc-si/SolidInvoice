@@ -33,6 +33,7 @@ use Twig\Environment;
  * real PlanFeatureGate, proving the wiring took effect.
  */
 #[Group('functional')]
+#[Group('saas-kernel')]
 final class FeatureTwigFunctionsTest extends KernelTestCase
 {
     #[Override]

@@ -31,6 +31,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  * leak through unit tests because the registry is never consulted there.
  */
 #[Group('functional')]
+#[Group('saas-kernel')]
 final class FeatureCatalogTest extends KernelTestCase
 {
     #[Override]

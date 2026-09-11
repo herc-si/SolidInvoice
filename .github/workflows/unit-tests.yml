@@ -145,6 +145,13 @@ jobs:
       - name: Run installation tests
         run: bin/phpunit --group=installation
 
+      # Excluded by default too, and for a related reason: these boot a second kernel with
+      # its own cache directory and therefore its own database. Two kernels in one process
+      # do not survive each other — each set passes alone and mixing them empties one of
+      # the two databases. bin/phpunit rather than bin/paratest: the point is one process.
+      - name: Run SaaS kernel tests
+        run: bin/phpunit --group=saas-kernel
+
       - name: Upload coverage results to Codecov
         uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f
         if: matrix.coverage
