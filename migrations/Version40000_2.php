@@ -86,7 +86,10 @@ final class Version40000_2 extends AbstractMigration
                     'setting_value' => $setting['value'],
                     'description' => $setting['description'],
                     'field_type' => $setting['type'],
-                    'form_options' => json_encode(['label' => $setting['label']]),
+                    // Every option the provider passes, not just the label: a
+                    // DateType that is not told `input: string` cannot read
+                    // back the plain string a setting round-trips as.
+                    'form_options' => json_encode($setting['options']),
                     'default_value' => $setting['value'],
                 ]);
             }
@@ -107,7 +110,7 @@ final class Version40000_2 extends AbstractMigration
      * Order matters: settings are read back ordered by their ULID, so this is
      * the order the fields appear on the settings tab.
      *
-     * @return list<array{key: string, value: string|null, description: string, type: string, label: string}>
+     * @return list<array{key: string, value: string|null, description: string, type: string, options: array<string, string>}>
      */
     private function settings(): array
     {
@@ -117,63 +120,69 @@ final class Version40000_2 extends AbstractMigration
                 'value' => null,
                 'description' => 'accounting.settings.regime.description',
                 'type' => RegimeChoiceType::class,
-                'label' => 'accounting.settings.regime.label',
+                'options' => ['label' => 'accounting.settings.regime.label'],
             ],
             [
                 'key' => AccountingSettings::PRIMARY_ACTIVITY,
                 'value' => ActivityNature::ServicesBnc->value,
                 'description' => 'accounting.settings.primary_activity.description',
                 'type' => ActivityNatureChoiceType::class,
-                'label' => 'accounting.settings.primary_activity.label',
+                'options' => ['label' => 'accounting.settings.primary_activity.label'],
             ],
             [
                 'key' => AccountingSettings::ACTIVITY_START_DATE,
                 'value' => null,
                 'description' => 'accounting.settings.activity_start_date.description',
                 'type' => DateType::class,
-                'label' => 'accounting.settings.activity_start_date.label',
+                'options' => [
+                    'label' => 'accounting.settings.activity_start_date.label',
+                    // Settings round-trip as plain strings, so the field has to
+                    // read and write one rather than a DateTime object.
+                    'input' => 'string',
+                    'widget' => 'single_text',
+                ],
             ],
             [
                 'key' => AccountingSettings::DECLARATION_PERIODICITY,
                 'value' => PeriodType::Quarter->value,
                 'description' => 'accounting.settings.declaration_periodicity.description',
                 'type' => DeclarationPeriodicityChoiceType::class,
-                'label' => 'accounting.settings.declaration_periodicity.label',
+                'options' => ['label' => 'accounting.settings.declaration_periodicity.label'],
             ],
             [
                 'key' => AccountingSettings::VAT_EXEMPT,
                 'value' => '0',
                 'description' => 'accounting.settings.vat_exempt.description',
                 'type' => CheckboxType::class,
-                'label' => 'accounting.settings.vat_exempt.label',
+                'options' => ['label' => 'accounting.settings.vat_exempt.label'],
             ],
             [
                 'key' => AccountingSettings::VAT_EXEMPT_MENTION,
                 'value' => AccountingSettings::DEFAULT_VAT_EXEMPT_MENTION,
                 'description' => 'accounting.settings.vat_exempt_mention.description',
                 'type' => TextType::class,
-                'label' => 'accounting.settings.vat_exempt_mention.label',
+                'options' => ['label' => 'accounting.settings.vat_exempt_mention.label'],
             ],
             [
                 'key' => AccountingSettings::FR_INCOME_TAX_OPTION,
                 'value' => '0',
                 'description' => 'accounting.settings.income_tax_option.description',
                 'type' => CheckboxType::class,
-                'label' => 'accounting.settings.income_tax_option.label',
+                'options' => ['label' => 'accounting.settings.income_tax_option.label'],
             ],
             [
                 'key' => AccountingSettings::FR_ACRE,
                 'value' => '0',
                 'description' => 'accounting.settings.acre.description',
                 'type' => CheckboxType::class,
-                'label' => 'accounting.settings.acre.label',
+                'options' => ['label' => 'accounting.settings.acre.label'],
             ],
             [
                 'key' => AccountingSettings::FR_PENSION_FUND,
                 'value' => null,
                 'description' => 'accounting.settings.pension_fund.description',
                 'type' => PensionFundChoiceType::class,
-                'label' => 'accounting.settings.pension_fund.label',
+                'options' => ['label' => 'accounting.settings.pension_fund.label'],
             ],
         ];
     }
