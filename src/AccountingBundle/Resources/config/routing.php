@@ -61,7 +61,7 @@ return static function (RoutingConfigurator $routingConfigurator): void {
 
     // Recording a filing is one-way — see the action.
     $routingConfigurator
-        ->add('_accounting_declaration_submit', '/declarations/{id}/submit')
+        ->add('_accounting_declaration_submit', '/declarations/{id}/submit/{kind}')
         ->controller(DeclarationSubmit::class)
         ->methods(['POST']);
 

@@ -45,8 +45,7 @@ final readonly class View
     /**
      * @return array{
      *     period: AccountingPeriod,
-     *     declaration: Declaration,
-     *     lines: list<DeclarationLine>,
+     *     returns: list<array{declaration: Declaration, lines: list<DeclarationLine>}>,
      *     regime: RegimeInterface|null,
      *     periodHasEnded: bool
      * }
@@ -54,16 +53,27 @@ final readonly class View
     #[Template('@AugiasAccounting/Declaration/view.html.twig')]
     public function __invoke(AccountingPeriod $period): array
     {
-        $declaration = $this->builder->forPeriod($period);
         $profile = $this->profileProvider->forCompany($period->getCompany());
+        $returns = [];
+
+        // Every return the period owes, on one page. A quarter is a quarter
+        // whichever form it is being declared on, and splitting them across two
+        // URLs would make the user hunt for the second.
+        foreach ($this->builder->kindsOwed($profile) as $kind) {
+            $declaration = $this->builder->forPeriod($period, $kind);
+
+            $returns[] = [
+                'declaration' => $declaration,
+                // Read back from what was stored rather than recomputed for
+                // display: a submitted declaration must show what was filed, and
+                // a draft must show the figures it was last saved with.
+                'lines' => array_map(DeclarationLine::fromArray(...), $declaration->getLines()),
+            ];
+        }
 
         return [
             'period' => $period,
-            'declaration' => $declaration,
-            // Read back from what was stored rather than recomputed for
-            // display: a submitted declaration must show what was filed, and a
-            // draft must show the figures it was last saved with.
-            'lines' => array_map(DeclarationLine::fromArray(...), $declaration->getLines()),
+            'returns' => $returns,
             'regime' => $this->registry->forProfile($profile),
             // Closing lives on this page rather than the home page: the home
             // page only ever shows the period today falls in, which by the rule

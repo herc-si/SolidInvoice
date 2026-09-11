@@ -15,6 +15,7 @@ namespace Augias\AccountingBundle\Repository;
 
 use Augias\AccountingBundle\Entity\AccountingPeriod;
 use Augias\AccountingBundle\Entity\Declaration;
+use Augias\AccountingBundle\Enum\DeclarationKind;
 use Doctrine\Persistence\ManagerRegistry;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
 
@@ -28,8 +29,18 @@ class DeclarationRepository extends EntityRepository
         parent::__construct($registry, Declaration::class);
     }
 
-    public function findForPeriod(AccountingPeriod $period): ?Declaration
+    public function findForPeriod(AccountingPeriod $period, DeclarationKind $kind = DeclarationKind::SocialContributions): ?Declaration
     {
-        return $this->findOneBy(['period' => $period]);
+        return $this->findOneBy(['period' => $period, 'kind' => $kind]);
+    }
+
+    /**
+     * Every return a period has a declaration for, whatever kind.
+     *
+     * @return list<Declaration>
+     */
+    public function findAllForPeriod(AccountingPeriod $period): array
+    {
+        return $this->findBy(['period' => $period], ['kind' => 'ASC']);
     }
 }

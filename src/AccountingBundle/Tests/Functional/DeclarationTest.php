@@ -23,6 +23,7 @@ use Augias\AccountingBundle\Entity\AccountingPeriod;
 use Augias\AccountingBundle\Entity\Declaration;
 use Augias\AccountingBundle\Entity\LedgerEntry;
 use Augias\AccountingBundle\Enum\ActivityNature;
+use Augias\AccountingBundle\Enum\DeclarationKind;
 use Augias\AccountingBundle\Enum\DeclarationStatus;
 use Augias\AccountingBundle\Enum\LedgerBook;
 use Augias\AccountingBundle\Enum\PeriodStatus;
@@ -137,7 +138,7 @@ final class DeclarationTest extends WebTestCase
         $crawler = $this->client->request('GET', '/accounting/declarations/' . $period->getId());
 
         self::assertSame(DeclarationStatus::Draft, $this->declaration()->getStatus());
-        self::assertCount(0, $crawler->filter('form[action*="/submit"]'));
+        self::assertCount(0, $crawler->filter('form[action*="/submit"]'), 'Neither return can be filed while the period is open.');
     }
 
     public function testClosingThePeriodMakesTheDeclarationReadyToFile(): void
@@ -173,7 +174,7 @@ final class DeclarationTest extends WebTestCase
 
         $crawler = $this->client->request('GET', '/accounting/declarations/' . $period->getId());
 
-        $this->client->submit($crawler->filter('form[action*="/submit"]')->form([
+        $this->client->submit($crawler->filter('form[action*="/submit/social_contributions"]')->form([
             'reference' => 'URSSAF-2026-001',
             'notes' => 'Paid by direct debit',
         ]));
@@ -312,11 +313,16 @@ final class DeclarationTest extends WebTestCase
         return $declaration;
     }
 
+    /**
+     * The turnover declaration specifically. A period in the scope of VAT owes
+     * a second one, and these tests are about the first.
+     */
     private function declaration(): Declaration
     {
         $this->entityManager->clear();
 
-        $declarations = self::getContainer()->get(DeclarationRepository::class)->findAll();
+        $declarations = self::getContainer()->get(DeclarationRepository::class)
+            ->findBy(['kind' => DeclarationKind::SocialContributions]);
 
         self::assertCount(1, $declarations);
 

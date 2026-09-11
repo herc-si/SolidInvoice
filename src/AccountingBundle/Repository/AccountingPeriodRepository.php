@@ -141,6 +141,10 @@ class AccountingPeriodRepository extends EntityRepository
     public function findClosedWithoutDeclaration(Company $company): array
     {
         return $this->createQueryBuilder('p')
+            // A period can owe several returns, so the join can match twice.
+            // Without this a quarter with two outstanding declarations would be
+            // reported as two quarters.
+            ->distinct()
             ->leftJoin(
                 'Augias\AccountingBundle\Entity\Declaration',
                 'd',

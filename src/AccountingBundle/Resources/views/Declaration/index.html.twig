@@ -38,7 +38,13 @@
                     <tbody>
                         {% for row in rows %}
                             <tr>
-                                <td>{{ row.period.label }}</td>
+                                <td>
+                                    {{ row.period.label }}
+                                    <div class="text-muted small">
+                                        {{ ux_icon(row.kind.icon, {width: 14, height: 14, class: 'me-1'}) }}
+                                        {{ row.kind.translationKey|trans }}
+                                    </div>
+                                </td>
                                 <td>
                                     <span class="badge bg-{{ row.period.status.color }}-lt">
                                         {{ row.period.status.translationKey|trans }}
