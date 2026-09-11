@@ -57,6 +57,7 @@ final readonly class AccountingProfileProvider
             primaryActivity: $this->activityNature($company),
             declarationPeriodicity: $this->periodicity($company),
             vatPeriodicity: $this->vatPeriodicity($company),
+            fiscalYearStartMonth: $this->fiscalYearStartMonth($company),
             currencyCode: $this->currencyCode(),
             regimeOptions: $this->regimeOptions($company),
         );
@@ -140,6 +141,19 @@ final readonly class AccountingProfileProvider
             PeriodType::Month, PeriodType::Quarter => $periodicity,
             default => PeriodType::Quarter,
         };
+    }
+
+    /**
+     * The month the financial year opens on.
+     *
+     * January unless told otherwise, and January again for anything that is not
+     * a month number — a financial year cannot start on the thirteenth.
+     */
+    private function fiscalYearStartMonth(?Company $company): int
+    {
+        $value = (int) ($this->trimmed(AccountingSettings::FISCAL_YEAR_START_MONTH, $company) ?? 1);
+
+        return $value >= 1 && $value <= 12 ? $value : 1;
     }
 
     /**

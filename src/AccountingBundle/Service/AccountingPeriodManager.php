@@ -67,9 +67,13 @@ final readonly class AccountingPeriodManager
      * The new period is persisted but not flushed — the caller is inside a
      * flush of its own more often than not.
      */
-    public function periodFor(Company $company, PeriodType $type, DateTimeImmutable $date): AccountingPeriod
-    {
-        $existing = $this->periodRepository->findForDate($company, $type, $date);
+    public function periodFor(
+        Company $company,
+        PeriodType $type,
+        DateTimeImmutable $date,
+        int $fiscalYearStartMonth = 1,
+    ): AccountingPeriod {
+        $existing = $this->periodRepository->findForDate($company, $type, $date, $fiscalYearStartMonth);
 
         if ($existing instanceof AccountingPeriod) {
             return $existing;
@@ -77,10 +81,10 @@ final readonly class AccountingPeriodManager
 
         $period = new AccountingPeriod()
             ->setType($type)
-            ->setYear((int) $date->format('Y'))
+            ->setYear($type->yearOf($date, $fiscalYearStartMonth))
             ->setOrdinal($type->ordinalOf($date))
-            ->setStartDate($type->startOf($date))
-            ->setEndDate($type->endOf($date));
+            ->setStartDate($type->startOf($date, $fiscalYearStartMonth))
+            ->setEndDate($type->endOf($date, $fiscalYearStartMonth));
 
         $period->setCompany($company);
 
@@ -100,10 +104,10 @@ final readonly class AccountingPeriodManager
      * {@see LedgerEntry::isLateEntry()}. The date stays truthful and the
      * discrepancy stays visible, which is the only honest way to handle it.
      */
-    public function assignPeriod(LedgerEntry $entry, PeriodType $type): void
+    public function assignPeriod(LedgerEntry $entry, PeriodType $type, int $fiscalYearStartMonth = 1): void
     {
         $company = $entry->getCompany();
-        $period = $this->periodFor($company, $type, $entry->getEntryDate());
+        $period = $this->periodFor($company, $type, $entry->getEntryDate(), $fiscalYearStartMonth);
 
         if ($period->isOpen()) {
             $entry->setPeriod($period)
@@ -116,7 +120,7 @@ final readonly class AccountingPeriodManager
         // belongs; if every existing period is closed, today's is created — it
         // is open by construction, since closing runs in date order.
         $fallback = $this->periodRepository->findEarliestOpenPeriod($company, $type)
-            ?? $this->periodFor($company, $type, new DateTimeImmutable('today'));
+            ?? $this->periodFor($company, $type, new DateTimeImmutable('today'), $fiscalYearStartMonth);
 
         $entry->setPeriod($fallback)
             ->setLateEntry(true);

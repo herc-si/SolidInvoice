@@ -242,7 +242,7 @@ final readonly class LedgerFeeder
 
     private function persist(LedgerEntry $entry, AccountingProfile $profile): LedgerEntry
     {
-        $this->periodManager->assignPeriod($entry, $profile->declarationPeriodicity);
+        $this->periodManager->assignPeriod($entry, $profile->declarationPeriodicity, $profile->fiscalYearStartMonth);
 
         $this->entityManager->persist($entry);
 

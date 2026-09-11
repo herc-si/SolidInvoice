@@ -301,7 +301,11 @@ class AccountingPeriod implements Stringable
      */
     public function getLabel(): string
     {
-        return $this->type->formatLabel($this->year, $this->ordinal);
+        // The month it opened on comes from its own start date rather than from
+        // a setting: the setting can change, and a period already created says
+        // what it covers. A financial year that straddles two calendar ones is
+        // named after both.
+        return $this->type->formatLabel($this->year, $this->ordinal, (int) $this->startDate->format('n'));
     }
 
     public function __toString(): string

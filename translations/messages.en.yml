@@ -1,4 +1,17 @@
 accounting:
+    month:
+        1: 'January'
+        2: 'February'
+        3: 'March'
+        4: 'April'
+        5: 'May'
+        6: 'June'
+        7: 'July'
+        8: 'August'
+        9: 'September'
+        10: 'October'
+        11: 'November'
+        12: 'December'
     activity_nature:
         sale_of_goods: 'Sale of goods'
         services_bic: 'Services (BIC)'
@@ -142,6 +155,9 @@ accounting:
             description: 'Cash-basis bookkeeping: a revenue book, a purchase register for resale activities, and turnover declared to URSSAF.'
             label: 'France — Micro-entreprise'
     settings:
+        fiscal_year_start_month:
+            description: 'The month your financial year opens on. January for most, and always for a French micro-entrepreneur. It decides what a yearly period covers — an exercice opening in April runs to the following March.'
+            label: 'Financial year starts in'
         vat_periodicity:
             description: 'Leave empty unless VAT is declared on a different rhythm from your books — the régime réel simplifié wants one return a year while contributions stay quarterly.'
             label: 'VAT frequency'

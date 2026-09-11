@@ -119,6 +119,7 @@ final class MicroEntrepriseRegimeTest extends TestCase
             primaryActivity: $activity,
             declarationPeriodicity: PeriodType::Quarter,
             vatPeriodicity: null,
+            fiscalYearStartMonth: 1,
             currencyCode: 'EUR',
         );
     }

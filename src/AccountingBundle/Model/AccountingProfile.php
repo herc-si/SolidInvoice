@@ -41,6 +41,8 @@ final readonly class AccountingProfile
         public PeriodType $declarationPeriodicity,
         /** Null when VAT runs on the same rhythm as the books. */
         public ?PeriodType $vatPeriodicity,
+        /** The month the financial year opens on, 1 to 12. */
+        public int $fiscalYearStartMonth,
         public string $currencyCode,
         public array $regimeOptions = [],
     ) {

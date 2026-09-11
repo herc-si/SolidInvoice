@@ -51,15 +51,18 @@ enum PeriodType: string
     /**
      * First day of the period the given date falls in, at midnight.
      */
-    public function startOf(DateTimeImmutable $date): DateTimeImmutable
+    public function startOf(DateTimeImmutable $date, int $fiscalYearStartMonth = 1): DateTimeImmutable
     {
         $date = $date->setTime(0, 0);
 
         return match ($this) {
+            // Months and quarters are calendar ones whatever the company's
+            // financial year does. A VAT quarter is January to March for
+            // everybody; only the year moves.
             self::Month => $date->modify('first day of this month'),
             self::Quarter => $date
                 ->setDate((int) $date->format('Y'), (self::quarterOf($date) - 1) * 3 + 1, 1),
-            self::Year => $date->setDate((int) $date->format('Y'), 1, 1),
+            self::Year => $date->setDate(self::yearOf($date, $fiscalYearStartMonth), $fiscalYearStartMonth, 1),
         };
     }
 
@@ -68,13 +71,37 @@ enum PeriodType: string
      * ledger entries are dated, not timestamped, so a closed-interval
      * comparison is the honest one here.
      */
-    public function endOf(DateTimeImmutable $date): DateTimeImmutable
+    public function endOf(DateTimeImmutable $date, int $fiscalYearStartMonth = 1): DateTimeImmutable
     {
         return match ($this) {
             self::Month => $this->startOf($date)->modify('last day of this month'),
             self::Quarter => $this->startOf($date)->modify('+2 months')->modify('last day of this month'),
-            self::Year => $this->startOf($date)->setDate((int) $date->format('Y'), 12, 31),
+            // Twelve months from the day it opened, minus a day. Derived rather
+            // than written as "31 December", which is only right for a
+            // financial year that happens to start in January.
+            self::Year => $this->startOf($date, $fiscalYearStartMonth)
+                ->modify('+1 year')
+                ->modify('-1 day'),
         };
+    }
+
+    /**
+     * The year a period is filed under.
+     *
+     * For a financial year that does not start in January, that is the year it
+     * *opened* in: an exercice running April 2026 to March 2027 is 2026's, and
+     * every date inside it has to agree on that or the same exercice would be
+     * created twice.
+     */
+    public function yearOf(DateTimeImmutable $date, int $fiscalYearStartMonth = 1): int
+    {
+        $year = (int) $date->format('Y');
+
+        if ($this !== self::Year || 1 === $fiscalYearStartMonth) {
+            return $year;
+        }
+
+        return (int) $date->format('n') < $fiscalYearStartMonth ? $year - 1 : $year;
     }
 
     /**
@@ -96,12 +123,17 @@ enum PeriodType: string
      * Used as the period's stable identifier in exports and declarations, where
      * a translated month name would be a liability.
      */
-    public function formatLabel(int $year, int $ordinal): string
+    public function formatLabel(int $year, int $ordinal, int $fiscalYearStartMonth = 1): string
     {
         return match ($this) {
             self::Month => sprintf('%d-%02d', $year, $ordinal),
             self::Quarter => sprintf('%d-Q%d', $year, $ordinal),
-            self::Year => (string) $year,
+            // A financial year that straddles two calendar ones is named after
+            // both, the way every accountant writes it. Calling it "2026" alone
+            // would leave the reader to guess which twelve months are meant.
+            self::Year => 1 === $fiscalYearStartMonth
+                ? (string) $year
+                : sprintf('%d-%d', $year, $year + 1),
         };
     }
 

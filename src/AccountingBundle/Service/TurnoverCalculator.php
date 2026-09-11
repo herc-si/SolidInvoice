@@ -105,6 +105,15 @@ final readonly class TurnoverCalculator
      * The ceilings and the VAT thresholds are annual and cumulative, so this —
      * not the period's own figure — is what they are measured against.
      */
+    /**
+     * Turnover since 1 January, whatever month the financial year opens on.
+     *
+     * Deliberately the calendar year and not the exercice: the ceilings this
+     * feeds are a calendar-year measure in law, so a company that moved its
+     * financial year would otherwise be told it was within a limit it had
+     * crossed. The exercice decides what a yearly *period* covers; it does not
+     * decide when a ceiling resets.
+     */
     public function yearToDate(Company $company, string $currencyCode, DateTimeImmutable $on): TurnoverSummary
     {
         return $this->forRange(

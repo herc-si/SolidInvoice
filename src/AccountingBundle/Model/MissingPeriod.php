@@ -46,14 +46,14 @@ final readonly class MissingPeriod
      * Built from any date inside the period, so callers never have to work out
      * an ordinal or a month boundary themselves.
      */
-    public static function covering(PeriodType $type, DateTimeImmutable $date): self
+    public static function covering(PeriodType $type, DateTimeImmutable $date, int $fiscalYearStartMonth = 1): self
     {
         return new self(
             $type,
-            (int) $date->format('Y'),
+            $type->yearOf($date, $fiscalYearStartMonth),
             $type->ordinalOf($date),
-            $type->startOf($date),
-            $type->endOf($date),
+            $type->startOf($date, $fiscalYearStartMonth),
+            $type->endOf($date, $fiscalYearStartMonth),
         );
     }
 
@@ -63,11 +63,21 @@ final readonly class MissingPeriod
      */
     public function getLabel(): string
     {
-        return $this->type->formatLabel($this->year, $this->ordinal);
+        return $this->type->formatLabel($this->year, $this->ordinal, $this->fiscalYearStartMonth());
     }
 
     public function hasEnded(?DateTimeImmutable $on = null): bool
     {
         return $this->endDate < ($on ?? new DateTimeImmutable('today'))->setTime(0, 0);
+    }
+
+    /**
+     * Read back off the dates rather than carried around: a period that opens
+     * in April is an April-to-March financial year and says so in its label,
+     * and the two can never disagree if only one of them is stored.
+     */
+    private function fiscalYearStartMonth(): int
+    {
+        return (int) $this->startDate->format('n');
     }
 }

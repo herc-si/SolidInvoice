@@ -18,6 +18,7 @@ use Augias\AccountingBundle\Enum\ActivityNature;
 use Augias\AccountingBundle\Enum\PeriodType;
 use Augias\AccountingBundle\Form\Type\ActivityNatureChoiceType;
 use Augias\AccountingBundle\Form\Type\DeclarationPeriodicityChoiceType;
+use Augias\AccountingBundle\Form\Type\FiscalYearStartMonthChoiceType;
 use Augias\AccountingBundle\Form\Type\PensionFundChoiceType;
 use Augias\AccountingBundle\Form\Type\RegimeChoiceType;
 use Augias\AccountingBundle\Form\Type\VatPeriodicityChoiceType;
@@ -83,6 +84,13 @@ final class AccountingConfigProvider implements ProviderInterface
                 'accounting.settings.declaration_periodicity.description',
                 DeclarationPeriodicityChoiceType::class,
                 ['label' => 'accounting.settings.declaration_periodicity.label'],
+            ),
+            new Config(
+                AccountingSettings::FISCAL_YEAR_START_MONTH,
+                '1',
+                'accounting.settings.fiscal_year_start_month.description',
+                FiscalYearStartMonthChoiceType::class,
+                ['label' => 'accounting.settings.fiscal_year_start_month.label'],
             ),
             new Config(
                 AccountingSettings::VAT_PERIODICITY,

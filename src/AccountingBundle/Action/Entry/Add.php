@@ -96,7 +96,7 @@ final readonly class Add
             // the company — before then.
             $entry->setCompany($this->currentCompany->require());
 
-            $this->periodManager->assignPeriod($entry, $profile->declarationPeriodicity);
+            $this->periodManager->assignPeriod($entry, $profile->declarationPeriodicity, $profile->fiscalYearStartMonth);
 
             $entityManager->persist($entry);
             $entityManager->flush();

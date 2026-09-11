@@ -1,4 +1,17 @@
 accounting:
+    month:
+        1: 'Janvier'
+        2: 'Février'
+        3: 'Mars'
+        4: 'Avril'
+        5: 'Mai'
+        6: 'Juin'
+        7: 'Juillet'
+        8: 'Août'
+        9: 'Septembre'
+        10: 'Octobre'
+        11: 'Novembre'
+        12: 'Décembre'
     activity_nature:
         sale_of_goods: 'Vente de marchandises'
         services_bic: 'Prestations de services (BIC)'
@@ -142,6 +155,9 @@ accounting:
             description: 'Comptabilité de trésorerie : livre des recettes, registre des achats pour les activités de revente, et déclaration du chiffre d''affaires à l''URSSAF.'
             label: 'France — Micro-entreprise'
     settings:
+        fiscal_year_start_month:
+            description: "Le mois d'ouverture de votre exercice. Janvier pour la plupart, et toujours pour un micro-entrepreneur. Il décide de ce que couvre une période annuelle : un exercice ouvert en avril court jusqu'au mois de mars suivant."
+            label: "L'exercice ouvre en"
         vat_periodicity:
             description: "Laissez vide sauf si la TVA se déclare sur un autre rythme que vos livres — le régime réel simplifié demande une déclaration par an alors que les cotisations restent trimestrielles."
             label: 'Périodicité de TVA'

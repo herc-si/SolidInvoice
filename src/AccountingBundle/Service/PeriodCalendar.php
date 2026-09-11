@@ -78,14 +78,15 @@ final readonly class PeriodCalendar
         }
 
         $missing = [];
-        $cursor = $type->startOf($from);
+        $month = $profile->fiscalYearStartMonth;
+        $cursor = $type->startOf($from, $month);
         $guard = 0;
 
         // Walked forward one period at a time rather than derived arithmetically:
         // the step differs per type and months are not all the same length, and
         // startOf()/endOf() already know all of that.
         while ($cursor <= $on && $guard++ < self::MAX_PERIODS) {
-            $candidate = MissingPeriod::covering($type, $cursor);
+            $candidate = MissingPeriod::covering($type, $cursor, $month);
 
             if (! isset($existing[$candidate->year . ':' . $candidate->ordinal])) {
                 $missing[] = $candidate;
