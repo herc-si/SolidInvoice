@@ -15,6 +15,7 @@ namespace Augias\AccountingBundle\Action\Declaration;
 
 use Augias\AccountingBundle\Entity\AccountingPeriod;
 use Augias\AccountingBundle\Entity\Declaration;
+use Augias\AccountingBundle\Enum\DeclarationKind;
 use Augias\AccountingBundle\Model\MissingPeriod;
 use Augias\AccountingBundle\Regime\RegimeInterface;
 use Augias\AccountingBundle\Regime\RegimeRegistry;
@@ -22,6 +23,7 @@ use Augias\AccountingBundle\Repository\AccountingPeriodRepository;
 use Augias\AccountingBundle\Repository\DeclarationRepository;
 use Augias\AccountingBundle\Service\AccountingProfileProvider;
 use Augias\AccountingBundle\Service\CurrentCompany;
+use Augias\AccountingBundle\Service\DeclarationBuilder;
 use Augias\AccountingBundle\Service\PeriodCalendar;
 use Augias\CoreBundle\Entity\Company;
 use DateTimeImmutable;
@@ -53,6 +55,7 @@ final readonly class Index
         private AccountingPeriodRepository $periodRepository,
         private DeclarationRepository $declarationRepository,
         private PeriodCalendar $calendar,
+        private DeclarationBuilder $builder,
     ) {
     }
 
@@ -60,7 +63,7 @@ final readonly class Index
      * @return array{
      *     regime: RegimeInterface|null,
      *     year: int,
-     *     rows: list<array{period: AccountingPeriod, declaration: Declaration|null}>,
+     *     rows: list<array{period: AccountingPeriod, kind: DeclarationKind, declaration: Declaration|null}>,
      *     missing: list<MissingPeriod>
      * }
      */
@@ -83,12 +86,19 @@ final readonly class Index
         usort($periods, static fn (AccountingPeriod $a, AccountingPeriod $b): int => $b->getOrdinal() <=> $a->getOrdinal());
 
         $rows = [];
+        $kinds = $this->builder->kindsOwed($profile);
 
+        // One row per return, not per period: a quarter that owes turnover and
+        // VAT is two filings with two references and two deadlines, and a list
+        // that showed it once would hide whichever of them is late.
         foreach ($periods as $period) {
-            $rows[] = [
-                'period' => $period,
-                'declaration' => $this->declarationRepository->findForPeriod($period),
-            ];
+            foreach ($kinds as $kind) {
+                $rows[] = [
+                    'period' => $period,
+                    'kind' => $kind,
+                    'declaration' => $this->declarationRepository->findForPeriod($period, $kind),
+                ];
+            }
         }
 
         // Newest first, to match the rows above them.

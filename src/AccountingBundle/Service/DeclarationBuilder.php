@@ -15,6 +15,7 @@ namespace Augias\AccountingBundle\Service;
 
 use Augias\AccountingBundle\Entity\AccountingPeriod;
 use Augias\AccountingBundle\Entity\Declaration;
+use Augias\AccountingBundle\Enum\DeclarationKind;
 use Augias\AccountingBundle\Enum\DeclarationStatus;
 use Augias\AccountingBundle\Exception\UnknownRegimeException;
 use Augias\AccountingBundle\Model\AccountingProfile;
@@ -48,6 +49,7 @@ final readonly class DeclarationBuilder
         private RegimeRegistry $registry,
         private TurnoverCalculator $turnoverCalculator,
         private DeclarationRepository $declarationRepository,
+        private VatReturnCalculator $vatCalculator,
     ) {
     }
 
@@ -57,9 +59,17 @@ final readonly class DeclarationBuilder
      * @throws UnknownRegimeException when the company is on no regime, or on
      *                                one this deployment no longer has
      */
-    public function compute(AccountingPeriod $period): DeclarationResult
+    public function compute(AccountingPeriod $period, DeclarationKind $kind = DeclarationKind::SocialContributions): DeclarationResult
     {
         $profile = $this->profileProvider->forCompany($period->getCompany());
+
+        // VAT is not computed from a rate table and does not go through the
+        // regime: it was collected and paid as the books were kept, and is
+        // gathered rather than worked out.
+        if ($kind === DeclarationKind::Vat) {
+            return $this->vatCalculator->calculate($period, $profile->currencyCode);
+        }
+
         $regime = $this->registry->forProfile($profile);
 
         if (! $regime instanceof RegimeInterface) {
@@ -74,24 +84,44 @@ final readonly class DeclarationBuilder
     }
 
     /**
+     * Which returns a period owes.
+     *
+     * Turnover always, since a regime is what makes the module work at all. VAT
+     * on top whenever the company is in its scope — the two are not rivals, and
+     * a micro-entrepreneur past the franchise threshold files both.
+     *
+     * @return list<DeclarationKind>
+     */
+    public function kindsOwed(AccountingProfile $profile): array
+    {
+        $kinds = [DeclarationKind::SocialContributions];
+
+        if (! $profile->vatExempt) {
+            $kinds[] = DeclarationKind::Vat;
+        }
+
+        return $kinds;
+    }
+
+    /**
      * The stored declaration for a period, created or refreshed as needed.
      *
      * A period that is closed produces a declaration that is ready to file; one
      * still open produces a draft, so the user can see what the quarter is
      * shaping up to cost before it ends.
      */
-    public function forPeriod(AccountingPeriod $period): Declaration
+    public function forPeriod(AccountingPeriod $period, DeclarationKind $kind = DeclarationKind::SocialContributions): Declaration
     {
-        $existing = $this->declarationRepository->findForPeriod($period);
+        $existing = $this->declarationRepository->findForPeriod($period, $kind);
 
         if ($existing instanceof Declaration && ! $existing->isRecomputable()) {
             return $existing;
         }
 
         $profile = $this->profileProvider->forCompany($period->getCompany());
-        $result = $this->compute($period);
+        $result = $this->compute($period, $kind);
 
-        $declaration = $existing ?? $this->create($period, $profile);
+        $declaration = $existing ?? $this->create($period, $profile, $kind);
 
         $declaration->setRegimeCode((string) $profile->regimeCode)
             ->setRateVersion($result->rateVersion)
@@ -123,10 +153,11 @@ final readonly class DeclarationBuilder
         $this->entityManager->flush();
     }
 
-    private function create(AccountingPeriod $period, AccountingProfile $profile): Declaration
+    private function create(AccountingPeriod $period, AccountingProfile $profile, DeclarationKind $kind): Declaration
     {
         $declaration = new Declaration()
             ->setPeriod($period)
+            ->setKind($kind)
             ->setRegimeCode((string) $profile->regimeCode)
             ->setCurrencyCode($profile->currencyCode);
 

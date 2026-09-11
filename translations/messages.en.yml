@@ -12,6 +12,11 @@ accounting:
     books:
         title: Books
     declaration:
+        vat_credit: 'VAT credit carried forward'
+        taxable_base: 'Taxable base'
+        kind:
+            social_contributions: 'Turnover and contributions'
+            vat: VAT
         amount: Amount
         base: Base
         due: Due
@@ -28,6 +33,8 @@ accounting:
             social: 'Social contributions'
             social_acre: 'Social contributions (ACRE relief applied)'
             training: 'Professional training levy'
+            vat_collected: 'VAT collected'
+            vat_deductible: 'VAT paid to suppliers'
         line_label: Line
         mark_submitted: Record as filed
         menu: Declarations

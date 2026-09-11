@@ -20,6 +20,7 @@ use Augias\AccountingBundle\Enum\LedgerBook;
 use Augias\AccountingBundle\Enum\LedgerEntrySource;
 use Augias\CoreBundle\Entity\Company;
 use Brick\Math\BigInteger;
+use Brick\Math\BigNumber;
 use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use SolidWorx\Platform\PlatformBundle\Repository\EntityRepository;
@@ -199,6 +200,53 @@ class LedgerEntryRepository extends EntityRepository
             ->getSingleScalarResult();
 
         return null === $total ? BigInteger::zero() : BigInteger::of((string) $total);
+    }
+
+    /**
+     * The tax a period's entries carried, ready to be declared.
+     *
+     * Read from the entries rather than from the period's frozen totals,
+     * because a period that is still open has none — and the figures have to be
+     * visible before the books are shut, or the user cannot see what the
+     * quarter is shaping up to cost.
+     *
+     * Collected comes back per rate, because that is how it is declared;
+     * deducted comes back as one figure, because that is how it is declared.
+     *
+     * @return array{collected: array<string, array{rate: string, category: string, base: BigInteger, tax: BigInteger}>, deducted: BigInteger}
+     */
+    public function taxForPeriod(AccountingPeriod $period): array
+    {
+        $collected = [];
+        $deducted = BigInteger::zero();
+
+        foreach ($this->findForPeriod($period) as $entry) {
+            $tax = $entry->getTaxAmount();
+
+            if (! $tax instanceof BigNumber) {
+                continue;
+            }
+
+            if ($entry->getBook() === LedgerBook::Purchase) {
+                $deducted = $deducted->plus($tax);
+
+                continue;
+            }
+
+            foreach ($entry->getTaxBreakdown() ?? [] as $share) {
+                $key = $share['rate'] . '|' . $share['category'];
+                $collected[$key] ??= [
+                    'rate' => $share['rate'],
+                    'category' => $share['category'],
+                    'base' => BigInteger::zero(),
+                    'tax' => BigInteger::zero(),
+                ];
+                $collected[$key]['base'] = $collected[$key]['base']->plus($share['base']);
+                $collected[$key]['tax'] = $collected[$key]['tax']->plus($share['tax']);
+            }
+        }
+
+        return ['collected' => $collected, 'deducted' => $deducted];
     }
 
     /**

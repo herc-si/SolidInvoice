@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Augias\AccountingBundle\Service;
 
 use Augias\AccountingBundle\Entity\AccountingPeriod;
+use Augias\AccountingBundle\Entity\Declaration;
 use Augias\AccountingBundle\Model\AccountingProfile;
 use Augias\AccountingBundle\Model\PendingDeclaration;
 use Augias\AccountingBundle\Repository\AccountingPeriodRepository;
@@ -64,7 +65,10 @@ final readonly class PendingDeclarationFinder
         $pending = array_map(
             fn (AccountingPeriod $period): PendingDeclaration => PendingDeclaration::forPeriod(
                 $period,
-                $this->declarationRepository->findForPeriod($period),
+                // The one still owed, rather than whichever exists: a quarter
+                // whose turnover was declared and whose VAT was not is still a
+                // quarter with something to do.
+                $this->stillOwed($period),
             ),
             $this->periodRepository->findEndedAndUndeclared($company, $profile->declarationPeriodicity, $on, $limit),
         );
@@ -87,5 +91,16 @@ final readonly class PendingDeclarationFinder
         );
 
         return array_slice($pending, 0, $limit);
+    }
+
+    private function stillOwed(AccountingPeriod $period): ?Declaration
+    {
+        foreach ($this->declarationRepository->findAllForPeriod($period) as $declaration) {
+            if (! $declaration->isSubmitted()) {
+                return $declaration;
+            }
+        }
+
+        return null;
     }
 }

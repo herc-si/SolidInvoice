@@ -14,11 +14,13 @@ declare(strict_types=1);
 namespace Augias\AccountingBundle\Action\Declaration;
 
 use Augias\AccountingBundle\Entity\AccountingPeriod;
+use Augias\AccountingBundle\Enum\DeclarationKind;
 use Augias\AccountingBundle\Service\DeclarationBuilder;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -42,19 +44,25 @@ final readonly class Submit
     ) {
     }
 
-    public function __invoke(AccountingPeriod $period, Request $request, Session $session): Response
+    public function __invoke(AccountingPeriod $period, string $kind, Request $request, Session $session): Response
     {
         $redirect = new RedirectResponse(
             $this->router->generate('_accounting_declaration_view', ['id' => $period->getId()]),
         );
 
-        if (! $this->csrfTokenManager->isTokenValid(new CsrfToken('submit' . $period->getId(), $request->request->get('_token')))) {
+        $declarationKind = DeclarationKind::tryFrom($kind);
+
+        if (! $declarationKind instanceof DeclarationKind) {
+            throw new NotFoundHttpException('No such declaration.');
+        }
+
+        if (! $this->csrfTokenManager->isTokenValid(new CsrfToken('submit' . $period->getId() . $kind, $request->request->get('_token')))) {
             $session->getFlashBag()->add('danger', 'accounting.entry.flash.invalid_token');
 
             return $redirect;
         }
 
-        $declaration = $this->builder->forPeriod($period);
+        $declaration = $this->builder->forPeriod($period, $declarationKind);
 
         if ($declaration->isSubmitted()) {
             $session->getFlashBag()->add('warning', 'accounting.declaration.flash.already_submitted');

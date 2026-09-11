@@ -37,6 +37,12 @@ final readonly class DeclarationLine
 
     public const string KIND_INCOME_TAX = 'income_tax';
 
+    /** VAT collected on sales, one line per rate. */
+    public const string KIND_VAT_COLLECTED = 'vat_collected';
+
+    /** VAT paid to suppliers, one line, negative: it is deducted. */
+    public const string KIND_VAT_DEDUCTIBLE = 'vat_deductible';
+
     /**
      * @param string     $key      stable identifier, e.g. `social.services_bic`
      * @param string     $labelKey translation key

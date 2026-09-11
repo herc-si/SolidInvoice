@@ -14,128 +14,171 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="row row-cards">
-        <div class="col-lg-8">
-            <twig:Ui:Card title="{{ 'accounting.declaration.figures'|trans }}">
-                <dl class="row">
-                    <dt class="col-sm-6">{{ 'accounting.declaration.turnover'|trans }}</dt>
-                    <dd class="col-sm-6">{{ declaration.totalTurnover|formatCurrency(declaration.currencyCode) }}</dd>
-                </dl>
+    {#
+     # One card per return the period owes. A quarter is a quarter whichever
+     # form it is being declared on, so they share a page rather than hiding
+     # behind two URLs — but each is filed separately, with its own reference.
+     #}
+    {% for item in returns %}
+        {% set declaration = item.declaration %}
+        {% set lines = item.lines %}
+        {% set is_vat = declaration.kind.value == 'vat' %}
 
-                {% if lines is empty %}
-                    <p class="text-muted mb-0">{{ 'accounting.declaration.nothing_due'|trans }}</p>
-                {% else %}
-                    <div class="table-responsive">
-                        <table class="table card-table table-vcenter">
-                            <thead>
-                                <tr>
-                                    <th>{{ 'accounting.declaration.line_label'|trans }}</th>
-                                    <th class="text-end">{{ 'accounting.declaration.base'|trans }}</th>
-                                    <th class="text-end">{{ 'accounting.declaration.rate'|trans }}</th>
-                                    <th class="text-end">{{ 'accounting.declaration.amount'|trans }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for line in lines %}
+        <div class="row row-cards{{ loop.first ? '' : ' mt-3' }}">
+            <div class="col-lg-8">
+                <twig:Ui:Card title="{{ declaration.kind.translationKey|trans }}">
+                    <dl class="row">
+                        <dt class="col-sm-6">
+                            {{ (is_vat ? 'accounting.declaration.taxable_base' : 'accounting.declaration.turnover')|trans }}
+                        </dt>
+                        <dd class="col-sm-6">{{ declaration.totalTurnover|formatCurrency(declaration.currencyCode) }}</dd>
+                    </dl>
+
+                    {% if lines is empty %}
+                        <p class="text-muted mb-0">{{ 'accounting.declaration.nothing_due'|trans }}</p>
+                    {% else %}
+                        <div class="table-responsive">
+                            <table class="table card-table table-vcenter">
+                                <thead>
                                     <tr>
-                                        <td>
-                                            {{ line.labelKey|trans }}
-                                            {% if line.nature is not null %}
-                                                <div class="text-muted small">{{ line.nature.translationKey|trans }}</div>
-                                            {% endif %}
-                                        </td>
-                                        <td class="text-end">{{ line.base|formatCurrency(declaration.currencyCode) }}</td>
-                                        <td class="text-end">{{ line.rate }}%</td>
-                                        <td class="text-end">{{ line.amount|formatCurrency(declaration.currencyCode) }}</td>
+                                        <th>{{ 'accounting.declaration.line_label'|trans }}</th>
+                                        <th class="text-end">{{ 'accounting.declaration.base'|trans }}</th>
+                                        <th class="text-end">{{ 'accounting.declaration.rate'|trans }}</th>
+                                        <th class="text-end">{{ 'accounting.declaration.amount'|trans }}</th>
                                     </tr>
-                                {% endfor %}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th colspan="3">{{ 'accounting.declaration.total_due'|trans }}</th>
-                                    <th class="text-end">{{ declaration.totalDue|formatCurrency(declaration.currencyCode) }}</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                {% endif %}
-
-                <twig:Ui:Alert type="warning" icon="tabler:alert-triangle">
-                    {{ 'accounting.declaration.warning.rates_unverified'|trans }}
-                    {% if declaration.rateVersion is not null %}
-                        {{ 'accounting.declaration.rate_version'|trans({'%version%': declaration.rateVersion}) }}
-                    {% endif %}
-                </twig:Ui:Alert>
-            </twig:Ui:Card>
-        </div>
-
-        <div class="col-lg-4">
-            <twig:Ui:Card title="{{ 'accounting.declaration.filing'|trans }}">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <span class="badge bg-{{ declaration.status.color }}-lt">{{ declaration.status.translationKey|trans }}</span>
-                    {% if regime is not null and regime.filingUrl is not null %}
-                        <a class="btn btn-ghost btn-sm" href="{{ regime.filingUrl }}" target="_blank" rel="noopener noreferrer">
-                            {{ ux_icon('tabler:external-link', {width: 16, height: 16}) }}
-                            {{ 'accounting.declaration.file_there'|trans }}
-                        </a>
-                    {% endif %}
-                </div>
-
-                {% if declaration.isSubmitted %}
-                    <p class="text-muted">
-                        {{ 'accounting.declaration.submitted_on'|trans({'%date%': declaration.submittedAt|date('d F Y')}) }}
-                    </p>
-                    {% if declaration.reference is not null %}
-                        <dl class="row mb-0">
-                            <dt class="col-sm-5">{{ 'accounting.declaration.reference'|trans }}</dt>
-                            <dd class="col-sm-7">{{ declaration.reference }}</dd>
-                        </dl>
-                    {% endif %}
-                    {% if declaration.notes is not null %}
-                        <p class="text-muted mb-0">{{ declaration.notes }}</p>
-                    {% endif %}
-                {% elseif period.isClosed %}
-                    <p class="text-muted">{{ 'accounting.declaration.record_help'|trans }}</p>
-
-                    <form method="post" action="{{ path('_accounting_declaration_submit', {'id': period.id}) }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token('submit' ~ period.id) }}">
-
-                        <div class="mb-3">
-                            <label class="form-label" for="declaration-reference">{{ 'accounting.declaration.reference'|trans }}</label>
-                            <input class="form-control" type="text" id="declaration-reference" name="reference" maxlength="125">
+                                </thead>
+                                <tbody>
+                                    {% for line in lines %}
+                                        <tr>
+                                            <td>
+                                                {{ line.labelKey|trans }}
+                                                {% if line.nature is not null %}
+                                                    <div class="text-muted small">{{ line.nature.translationKey|trans }}</div>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-end">
+                                                {#
+                                                 # Deducted VAT has no base of its
+                                                 # own: it is one box, whatever it
+                                                 # was charged on.
+                                                 #}
+                                                {{ line.kind == 'vat_deductible' ? '—' : line.base|formatCurrency(declaration.currencyCode) }}
+                                            </td>
+                                            <td class="text-end">{{ line.kind == 'vat_deductible' ? '—' : line.rate ~ '%' }}</td>
+                                            <td class="text-end">{{ line.amount|formatCurrency(declaration.currencyCode) }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="3">
+                                            {#
+                                             # A VAT return can come out negative,
+                                             # and that is not a debt owed backwards:
+                                             # it is a credit carried to the next one.
+                                             #}
+                                            {{ (is_vat and declaration.totalDue.isNegative ? 'accounting.declaration.vat_credit' : 'accounting.declaration.total_due')|trans }}
+                                        </th>
+                                        {#
+                                         # Shown unsigned: the label above says
+                                         # which way it goes, and a minus sign
+                                         # next to "credit" reads as a double
+                                         # negative.
+                                         #}
+                                        <th class="text-end">{{ declaration.totalDue.abs|formatCurrency(declaration.currencyCode) }}</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
+                    {% endif %}
 
-                        <div class="mb-3">
-                            <label class="form-label" for="declaration-notes">{{ 'accounting.declaration.notes'|trans }}</label>
-                            <textarea class="form-control" id="declaration-notes" name="notes" rows="3"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100">
-                            {{ ux_icon('tabler:check', {width: 18, height: 18}) }}
-                            {{ 'accounting.declaration.mark_submitted'|trans }}
-                        </button>
-                    </form>
-                {% elseif periodHasEnded %}
                     {#
-                     # The books are still open but the period is over, so the
-                     # figures above are final in all but name. Sealing them is
-                     # the step before filing, and this is the page that says so.
+                     # Only where a published rate was used. VAT is gathered from
+                     # what the documents said, so there is no rate table behind
+                     # it that could be out of date.
                      #}
-                    <p class="text-muted">{{ 'accounting.declaration.period_still_open'|trans }}</p>
+                    {% if not is_vat %}
+                        <twig:Ui:Alert type="warning" icon="tabler:alert-triangle">
+                            {{ 'accounting.declaration.warning.rates_unverified'|trans }}
+                            {% if declaration.rateVersion is not null %}
+                                {{ 'accounting.declaration.rate_version'|trans({'%version%': declaration.rateVersion}) }}
+                            {% endif %}
+                        </twig:Ui:Alert>
+                    {% endif %}
+                </twig:Ui:Card>
+            </div>
 
-                    <form method="post" action="{{ path('_accounting_period_close', {'id': period.id}) }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token('close' ~ period.id) }}">
-                        <button type="submit" class="btn btn-outline-primary w-100">
-                            {{ ux_icon('tabler:lock', {width: 18, height: 18}) }}
-                            {{ 'accounting.period.close'|trans({'%period%': period.label}) }}
-                        </button>
-                    </form>
-                {% else %}
-                    <p class="text-muted mb-0">
-                        {{ 'accounting.period.still_running'|trans({'%date%': period.endDate|date('d F Y')}) }}
-                    </p>
-                {% endif %}
-            </twig:Ui:Card>
+            <div class="col-lg-4">
+                <twig:Ui:Card title="{{ 'accounting.declaration.filing'|trans }}">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <span class="badge bg-{{ declaration.status.color }}-lt">{{ declaration.status.translationKey|trans }}</span>
+                        {% if not is_vat and regime is not null and regime.filingUrl is not null %}
+                            <a class="btn btn-ghost btn-sm" href="{{ regime.filingUrl }}" target="_blank" rel="noopener noreferrer">
+                                {{ ux_icon('tabler:external-link', {width: 16, height: 16}) }}
+                                {{ 'accounting.declaration.file_there'|trans }}
+                            </a>
+                        {% endif %}
+                    </div>
+
+                    {% if declaration.isSubmitted %}
+                        <p class="text-muted">
+                            {{ 'accounting.declaration.submitted_on'|trans({'%date%': declaration.submittedAt|date('d F Y')}) }}
+                        </p>
+                        {% if declaration.reference is not null %}
+                            <dl class="row mb-0">
+                                <dt class="col-sm-5">{{ 'accounting.declaration.reference'|trans }}</dt>
+                                <dd class="col-sm-7">{{ declaration.reference }}</dd>
+                            </dl>
+                        {% endif %}
+                        {% if declaration.notes is not null %}
+                            <p class="text-muted mb-0">{{ declaration.notes }}</p>
+                        {% endif %}
+                    {% elseif period.isClosed %}
+                        <p class="text-muted">{{ 'accounting.declaration.record_help'|trans }}</p>
+
+                        <form method="post" action="{{ path('_accounting_declaration_submit', {'id': period.id, 'kind': declaration.kind.value}) }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('submit' ~ period.id ~ declaration.kind.value) }}">
+
+                            <div class="mb-3">
+                                <label class="form-label" for="reference-{{ declaration.kind.value }}">{{ 'accounting.declaration.reference'|trans }}</label>
+                                <input class="form-control" type="text" id="reference-{{ declaration.kind.value }}" name="reference" maxlength="125">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="notes-{{ declaration.kind.value }}">{{ 'accounting.declaration.notes'|trans }}</label>
+                                <textarea class="form-control" id="notes-{{ declaration.kind.value }}" name="notes" rows="3"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">
+                                {{ ux_icon('tabler:check', {width: 18, height: 18}) }}
+                                {{ 'accounting.declaration.mark_submitted'|trans }}
+                            </button>
+                        </form>
+                    {% elseif periodHasEnded %}
+                        {#
+                         # The books are still open but the period is over, so the
+                         # figures above are final in all but name. Sealing them is
+                         # the step before filing, and it is one act for the period
+                         # however many returns it owes — hence only on the first.
+                         #}
+                        <p class="text-muted">{{ 'accounting.declaration.period_still_open'|trans }}</p>
+
+                        {% if loop.first %}
+                            <form method="post" action="{{ path('_accounting_period_close', {'id': period.id}) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token('close' ~ period.id) }}">
+                                <button type="submit" class="btn btn-outline-primary w-100">
+                                    {{ ux_icon('tabler:lock', {width: 18, height: 18}) }}
+                                    {{ 'accounting.period.close'|trans({'%period%': period.label}) }}
+                                </button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <p class="text-muted mb-0">
+                            {{ 'accounting.period.still_running'|trans({'%date%': period.endDate|date('d F Y')}) }}
+                        </p>
+                    {% endif %}
+                </twig:Ui:Card>
+            </div>
         </div>
-    </div>
+    {% endfor %}
 {% endblock %}

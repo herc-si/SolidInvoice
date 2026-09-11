@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Augias\AccountingBundle\Entity;
 
+use Augias\AccountingBundle\Enum\DeclarationKind;
 use Augias\AccountingBundle\Enum\DeclarationStatus;
 use Augias\AccountingBundle\Repository\DeclarationRepository;
 use Augias\CoreBundle\Doctrine\Type\BigIntegerType;
@@ -46,7 +47,10 @@ use Symfony\Component\Uid\Ulid;
  * @see \Augias\AccountingBundle\Tests\Entity\DeclarationTest
  */
 #[ORM\Table(name: Declaration::TABLE_NAME)]
-#[ORM\UniqueConstraint(name: 'unique_declaration_period', columns: ['period_id'])]
+// Per period AND per return. A period can owe more than one — turnover to
+// URSSAF and VAT to the tax office are the same quarter and two different
+// forms — but never two of the same.
+#[ORM\UniqueConstraint(name: 'unique_declaration_period_kind', columns: ['period_id', 'kind'])]
 #[ORM\Entity(repositoryClass: DeclarationRepository::class)]
 class Declaration
 {
@@ -69,6 +73,9 @@ class Declaration
      * Which regime computed this, kept as a plain string so a declaration
      * survives the regime being renamed or removed from the registry.
      */
+    #[ORM\Column(name: 'kind', type: Types::STRING, length: 30, enumType: DeclarationKind::class, options: ['default' => DeclarationKind::SocialContributions->value])]
+    private DeclarationKind $kind = DeclarationKind::SocialContributions;
+
     #[ORM\Column(name: 'regime_code', type: Types::STRING, length: 50)]
     private string $regimeCode;
 
@@ -140,6 +147,18 @@ class Declaration
     public function setPeriod(AccountingPeriod $period): self
     {
         $this->period = $period;
+
+        return $this;
+    }
+
+    public function getKind(): DeclarationKind
+    {
+        return $this->kind;
+    }
+
+    public function setKind(DeclarationKind $kind): self
+    {
+        $this->kind = $kind;
 
         return $this;
     }
