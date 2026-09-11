@@ -11,6 +11,14 @@ parameters:
         - vendor/autoload.php
     excludePaths:
         - src/CoreBundle/Tests/Fixtures/file.php
+    # PHPStan forks one worker per CPU core by default. On a 20-core machine
+    # analysing this codebase that peaks around 3 GB, which is most of a
+    # default 8 GB Docker VM — and the FrankenPHP server sharing that VM dies
+    # with SIGABRT when the memory runs out, taking the app container with it.
+    # Four workers cost a little wall time and bound the damage.
+    parallel:
+        maximumNumberOfProcesses: 4
+
     symfony:
         containerXmlPath: var/cache/dev/Augias_KernelDevDebugContainer.xml
     treatPhpDocTypesAsCertain: false
